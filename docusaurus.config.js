@@ -10,23 +10,34 @@ module.exports = {
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'docs/favicon.ico',
-  organizationName: 'tremor-rs', // Usually your GitHub org/user name.
-  projectName: 'tremor-new-website', // Usually your repo name.
+  organizationName: 'tremor-rs', 
+  projectName: 'tremor-new-website', 
   themeConfig: {
     navbar: {
-      title: 'Tremor',
       logo: {
         alt: 'Tremor Logo',
         src: 'https://www.tremor.rs/img/common/logo.png',
       },
       items: [
-        {
+          {
+            href: 'https://www.tremor.rs/getting-started/starting/',
+            label: 'Getting Started',
+            position: 'left',
+          },
+     /*   {
           type: 'doc',
           docId: 'index',
           position: 'left',
-          label: 'Getting Started',
+          label: 'Getting Started', */
+        {to: 'docs', label: 'Docs', position: 'left'},
+        {to: 'blog', label: 'Blog', position: 'left'},
+        {to: 'workshop', label: 'Usage Guide', position: 'left'},
+        {to: 'api', label: 'API', position: 'left'},
+        {
+          href: 'https://www.tremor.rs/faq/',
+          label: 'FAQs',
+          position: 'right',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/tremor-rs',
           label: 'GitHub',
@@ -70,20 +81,20 @@ module.exports = {
           ],
         },
         {
-          title: 'Blog',
+          title: 'More',
           items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
             {
               label: 'GitHub',
               href: 'https://github.com/tremor-rs',
             },
+            {
+              label: 'CNCF',
+              href: 'https://www.cncf.io/',
+            }
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Tremor.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Tremor`,
     },
     prism: {
       theme: lightCodeTheme,
@@ -97,15 +108,13 @@ module.exports = {
         docs: {
 	  path: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
+            'https://github.com/skoech/tremor-new-website/tree/main/docs',
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
+            'https://github.com/skoech/tremor-new-website/tree/main/docs',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
