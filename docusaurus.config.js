@@ -24,12 +24,12 @@ module.exports = {
             label: 'Getting Started',
             position: 'left',
           },
-     /*   {
+       {
           type: 'doc',
           docId: 'index',
           position: 'left',
-          label: 'Getting Started', */
-        {to: 'docs', label: 'Docs', position: 'left'},
+          label: 'Docs', 
+        },
         {to: 'blog', label: 'Blog', position: 'left'},
         {to: 'workshop', label: 'Usage Guide', position: 'left'},
         {to: 'api', label: 'API', position: 'left'},
