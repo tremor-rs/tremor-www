@@ -1,7 +1,3 @@
----
-id: api.md
-title: API
----
 
 ## Document Status
 

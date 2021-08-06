@@ -1,4 +1,4 @@
-TREMOR_VSN=v0.11.4
+TREMOR_VSN=main
 
 all: docs/tremor-script/stdlib docs/operations/cli.md docs/api.md
 
