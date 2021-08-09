@@ -1,14 +1,16 @@
 ### Prerequisites
 
-Node v16
-Rust
-Cmake
-libssl-dev
-libclang-dev
+* Node v16
+* Rust
+* Cmake
+* libssl-dev
+* libclang-dev
 
 ### Development
 
-+ run `make`
-+ run `npm install`
-+ run `npm run start`
+Run `make`
+
+Run `npm install`
+
+Run `npm run start`
 
