@@ -1,14 +1,12 @@
 ---
 title: To async or Not to async
-slug: to-async-or-not-to-async
 author: The Tremor Team
 author_image_url: https://avatars.githubusercontent.com/u/60009416?s=200&v=4
 tags: [dev, rust]
-categories: [general]
 draft: false
+image: https://www.google.com/imgres?imgurl=https%3A%2F%2Fraw.githubusercontent.com%2Fwill-wow%2Fresult-async%2FHEAD%2Fassets%2Fimages%2Flogo.png&imgrefurl=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fresult-async&tbnid=YNViaemYW6WxgM&vet=10CA0QxiAoBWoXChMI-Pibqsup8gIVAAAAAB0AAAAAEAw..i&docid=avW8MHRaIq6BMM&w=1000&h=1000&itg=1&q=to%20async%20or%20not%20to%20async&client=firefox-b-d&ved=0CA0QxiAoBWoXChMI-Pibqsup8gIVAAAAAB0AAAAAEAw
 hide_table_of_contents: false
 description: Moving from threads to async tasks.
-weight: -20200806
 ---
 
 With the upcoming Tremor release, 0.9.0, we're moving from threads as a basis for ramps and pipelines to async tasks.
@@ -31,6 +29,8 @@ This design can degenerate badly if there are more ramps and pipelines than core
 However, this places a burden on operators having to think about concurrency and parallelism to tune tremor for optimal performance and capacity.
 
 In SMP systems, we observe other undesireable effects: The moment two communicating threads don't share the same underlying cache, performance plummets. This scenario exists when threads reside on two different CPUs or CCXs ([thank you AMD for making me learn so much about CPU caches](https://blog.licenser.net/2020/01/multithreaded-rust-on-threadripper/)). As long as two communicating threads share the same cache, data shared between them can avoid trips to main memory and cache coherency protocol overheads. When two threads communicate across different caches, reads/writes may catastrophically collide and introduce overheads that drastically reduce overall performance.
+
+<!--truncate-->
 
 ## Async/Futures
 
