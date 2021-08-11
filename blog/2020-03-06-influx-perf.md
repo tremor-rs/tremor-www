@@ -1,15 +1,11 @@
 ---
 title: Improving our Influx Parser- A Story in Four Acts
-slug: influx-perf
 author: The Tremor Team
 author_image_url: https://avatars.githubusercontent.com/u/60009416?s=200&v=4
-
 tags: [perf]
-categories: [general]
 draft: false
 hide_table_of_contents: false
 description: The process of improving the performance of our influx line protocol parser.
-weight: -20200306
 ---
  
 # Influx Parsing Performance
@@ -25,6 +21,8 @@ There are two tools worth introducing here that we used during this performance 
 One is [perf](http://brendangregg.com/perf.html), which we used with a minimal setup of `perf record` and `perf report`. We use this to get a glance at where code is spending time. This is not perfect, but it is quick and easy for decent results.
  
 The other one is [criterion](https://docs.rs/criterion/0.3.1/criterion/), an excellent Rust framework for microbenchmarks based on the [haskell framework](https://hackage.haskell.org/package/criterion) with the same name. It is so helpful since it allows us to show changes in performance between changes. That makes it perfect for the kind of incremental improvements our process favors.
+
+<!--truncate-->
  
 ## [Act 1 - Allocation](https://github.com/tremor-rs/tremor-runtime/pull/87/commits/42ee11637bc5cd3a215cce1cb841afe791b944b4)
  
