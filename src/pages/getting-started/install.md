@@ -1,8 +1,5 @@
 ---
 title: Quick Developer Install
-id: quickstart
-date: 2020-02-04T14:01:00+01:00
-draft: false
 description: Notes about tremor installation for developers.
 hide_table_of_contents: true
 ---

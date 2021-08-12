@@ -33,11 +33,10 @@ module.exports = {
 	{to: 'blog', label: 'Blog', position: 'left'},
         {to: 'workshop', label: 'Usage Guide', position: 'left'},
         {to: 'api', label: 'API', position: 'left'},
-        {
-          href: 'https://www.tremor.rs/faq/',
-          label: 'FAQs',
-          position: 'right',
-        },
+	{to: 'rfcs', label: 'RFCs', position: 'left'},
+	{to: 'community', label: 'Community', position: 'left'},
+	{to: 'governance', label: 'Governance', position: 'left'},
+	{to: 'faqs', label: 'FAQs', position: 'left' },
         {
           href: 'https://github.com/tremor-rs',
           label: 'GitHub',
@@ -48,26 +47,7 @@ module.exports = {
     footer: {
       style: 'dark',
       links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Getting Started',
-              to: '/docs/index',
-            },
-	          {
-	            label: 'Tremor API',
-	            to: 'docs/api.md',
-	          },
-	          {
-		          label: 'Governance',
-		          to: 'docs/Governance.md',
-	          },
-	          {
-		          label: 'Overview',
-	          	to: 'docs/overview.md',
-	          }, 
-              ],
+           {       
           title: 'Community',
           items: [
             {
