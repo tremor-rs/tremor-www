@@ -19,18 +19,18 @@ module.exports = {
         src: 'https://www.tremor.rs/img/common/logo.png',
       },
       items: [
+	{
+	  href:' https://www.tremor.rs/getting-started/',
+	  label: 'Getting Started',
+	  position: 'left',
+	},
           {
-            href: 'https://www.tremor.rs/getting-started/starting/',
-            label: 'Getting Started',
+	    type: 'doc',
+            docId: 'index',
+            label: 'Docs',
             position: 'left',
           },
-       {
-          type: 'doc',
-          docId: 'index',
-          position: 'left',
-          label: 'Docs', 
-        },
-        {to: 'blog', label: 'Blog', position: 'left'},
+	{to: 'blog', label: 'Blog', position: 'left'},
         {to: 'workshop', label: 'Usage Guide', position: 'left'},
         {to: 'api', label: 'API', position: 'left'},
         {
