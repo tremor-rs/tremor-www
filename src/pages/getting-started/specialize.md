@@ -1,12 +1,8 @@
-+++
-title = "Specialize Tremor Pipelines"
-date = "2020-02-05T10:01:00+01:00"
-draft = false
-weight = 300
-description = "Operators"
-bref= "Operators allow for highly custom behaviour"
-toc= true
-+++
+---
+title: Operators
+description: Operators specialise Tremor pipelines; allow for highly custom behaviour.
+hide_table_of_contents: true
+---
 
 ### Concept
 

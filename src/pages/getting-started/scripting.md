@@ -1,64 +1,39 @@
-+++
-
-title = "Tremor Applications"
-date = "2020-02-05T13:11:00+01:00"
-draft = false
-weight = 200
-description = "Scripting"
-bref= "Tremor's application logic is scriptable"
-toc= true
-
-+++
+---
+title: Scripting
+description: Tremor Applications- Tremor's application logic is scriptable.
+hide_table_of_contents: true
+---
 
 ### Concept
 
-Tremor supports data processing through a directed acyclic graph based pipeline or
-workflow. Pipelines can be configured via a YAML syntax or via a structured query
-language.
+Tremor supports data processing through a directed acyclic graph based pipeline or workflow. Pipelines can be configured via a YAML syntax or via a structured query language.
 
 Pipelines are a graph of operations through which events are routed depth first.
-Operations in tremor pipelines are pluggable and extensible.
+Operations in Tremor pipelines are pluggable and extensible.
 
-For applications or algorithms that process one event at a time, such as data cleansing,
-enrichment, normalization, validation and transformation an ETL focused scripting language
-can be used to program the application logic.
+For applications or algorithms that process one event at a time, such as data cleansing, enrichment, normalization, validation and transformation an ETL-focused scripting language can be used to program the application logic.
 
-Qualities of service such as batching, bucketing and flushing semantics can be configured
-into pipelines and data shared between oeprators through metadata exposed to the scripting
-language.
+Qualities of service such as batching, bucketing and flushing semantics can be configured into pipelines and data shared between oeprators through metadata exposed to the scripting language.
 
-The tremor query language replaces the YAML pipeline format with a more intuitive and easier
-to program SQL-like language. The query language adds support for processing windows of events
-over time to support near real-time grouping and aggregation.
+The Tremor query language replaces the YAML pipeline format with a more intuitive and easier-to-program SQL-like language. The query language adds support for processing windows of events over time to support near real-time grouping and aggregation.
 
-For applications or algorithms that process events over time, such as those calculating summary
-statistics, aggregating or projecting alternate views or other complex data processing and
-routing logic the tremor query language is a better fit.
+For applications or algorithms that process events over time, such as those calculating summary statistics, aggregating or projecting alternate views or other complex data processing and routing logic the Tremor query language is a better fit.
 
-The query language embeds the scripting language allowing data-flow or query-oriented logic
-to co-exist with ETL oriented logic.
+The query language embeds the scripting language allowing data-flow or query-oriented logic to co-exist with ETL-oriented logic.
 
-Both the query and scripting language are evolving as tremor is applied to broader production
-use cases.
+Both the query and scripting language are evolving as tremor is applied to broader production use cases.
 
 ### Tremor Script
 
 The scripting language supports JSON-like values. A valid JSON value is a valid tremor-script value.
 
-Tremor-script adds an expression language that supports unary, binary, comparison and predicate
-operations with higher level expressions supporting `match` expressions, `for` comprehensions and
-`patch` and `merge` expressions.
+Tremor-script adds an expression language that supports unary, binary, comparison and predicate operations with higher level expressions supporting `match` expressions, `for` comprehensions and `patch` and `merge` expressions.
 
-Features relatively unique to tremor-script are structural pattern matching and the recognition
-of and ability to extract data from microformats typically embedded in event data.
+Features relatively unique to tremor-script are structural pattern matching and the recognition of and ability to extract data from microformats typically embedded in event data.
 
-[Structural pattern matching](https://docs.tremor.rs/tremor-script/#match) allows patterns over
-arbitrarily nested values to be concisely declared with an intuitive syntax.
+[Structural pattern matching](https://docs.tremor.rs/tremor-script/#match) allows patterns over arbitrarily nested values to be concisely declared with an intuitive syntax.
 
-[Micro-format Extractors](https://docs.tremor.rs/tremor-script/#extractors) allows embedded data
-conforming to orthogonal formats such as regular expressions in Strings, date/time variants to
-be conditionally transformed to tremor internal form and for embedded data to be extracted upon
-matching.
+[Micro-format Extractors](https://docs.tremor.rs/tremor-script/#extractors) allows embedded data conforming to orthogonal formats such as regular expressions in Strings, date/time variants to be conditionally transformed to Tremor internal form and for embedded data to be extracted upon matching.
 
 ```tremor
 define script extract                                # define the script that parses our apache logs
@@ -73,7 +48,7 @@ script
 end;
 ```
 
-The full documentation  [of the language](https://docs.tremor.rs/tremor-script) and its [standard library](https://docs.tremor.rs/tremor-script/functions) can be found in the [docs](https://docs.tremor.rs).
+The full documentation [of the language](https://docs.tremor.rs/tremor-script) and its [standard library](https://docs.tremor.rs/tremor-script/functions) can be found in the [Docs](https://docs.tremor.rs).
 
 ### Tremor Query
 

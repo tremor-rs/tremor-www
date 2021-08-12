@@ -1,12 +1,8 @@
-+++
-title = "Understanding Data"
-date = "2020-02-05T10:01:00+01:00"
-draft = false
-weight = 110
-description = "Codecs"
-bref= "De- and encode data from wire formats"
-toc= true
-+++
+---
+title: Codecs
+description: Understanding data. De- and encode data from wire formats.
+hide_table_of_contents: true
+---
 
 ### Concept
 
