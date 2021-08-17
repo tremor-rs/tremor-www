@@ -30,6 +30,8 @@ My project's aim was to enable tremor to receive and send [Syslog Protocol Messa
 system log or event messages. It was desired to support both the standard IETF format and the old BSD format via UDP and TCP/TLS. More detailed description
 can be found [here](https://github.com/tremor-rs/tremor-runtime/issues/12).
 
+<!--truncate-->
+
 ## Work-Summary
 
 ### Syslog codec (support via UDP)

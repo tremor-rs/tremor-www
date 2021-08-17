@@ -1,11 +1,9 @@
 ---
 title: Property Based Testing of Tremor Script
-slug: Blog-Rohit-Property-Based-Testing
 author: Rohit Dandamudi
 author_title: Tremor 2021 Spring Mentee
 author_url: https://www.linkedin.com/in/kurious-diru/
 tags: [testing, mentorship, cncf, tremorscript]
-categories: [general]
 draft: false
 hide_table_of_contents: false
 description: Rohit's Experience working with Tremor as a LFX Spring 2021 Mentee.
@@ -28,6 +26,9 @@ My work involved writing "Property-based tests for tremor-script" and some of th
 - Erlang and Rust
     - My work mostly revolved around Erlang and a little Rust and I was completely new to this ecosystem, it didn't help to not find much resources or actively accessible community for Erlang.
     - I took this as a challenge and went through [various resources to learn Erlang](https://github.com/diru1100/learn_erlang), functional programming in general and I was able to see why this Language was involved to do the task at hand, [my mentor](https://twitter.com/heinz_gies) is very passionate about Erlang and shared his thought-process, experience which helped me broaden my knowledge and how to approach any concept while learning something completely new.
+
+<!--truncate-->
+
 - Tremor-script
     - It is an interpreted expression-oriented language designed for the filtering, extraction, transformation and streaming of structured data in a stream or event-based processing system which is explicitly turing incomplete used to easily write programs specific to Tremor use-cases.
     - It is written using Rust but tested using Erlang

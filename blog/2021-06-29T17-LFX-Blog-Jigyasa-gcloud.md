@@ -11,12 +11,10 @@ description: Jigyasa's LFX spring Mentorship experience report.
 ### Introduction
 
 Hello folks! I'm Jigyasa, a final-year computer science engineering student at Indira Gandhi Delhi Technical University for Women pursuing my bachelor's in Technology. This blog is about my experience contributing to [Tremor](https://www.tremor.rs/) as part of the LFX Mentorship program.
-
+i
 ### Learning about Tremor
 
 Tremor is an event processing system for unstructured data with rich support for structural pattern matching, filtering, and transformation. It is built for users that have a high message volume to deal with and want to build pipelines to process, route, or limit this event stream. It has a scripting language called tremor-script and a query language as well called tremor-query or trickle.
-
-<!--truncate-->
 
 I had never worked on an event processing system before this internship. In fact, my first major contribution to open-source was through this mentorship program. To get started with it, my mentor [Darach Ennis](https://www.linkedin.com/in/darach-ennis-789866?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BnRZIYeLfRAWJpWsDNlzweA%3D%3D), suggested me some documents that helped me learn more about it:
 
@@ -27,6 +25,8 @@ I had never worked on an event processing system before this internship. In fact
 Apart from that, learning more about the tremor-query, tremor-script, and going through the workshops in the docs can be really helpful.
 
 The codebase of Tremor is in Rust, and since I had no prior experience with Rust, I started learning the language.
+
+<!--truncate-->
 
 ### Learning Rust
 
