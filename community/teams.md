@@ -1,9 +1,7 @@
 ---
 title: Tremor Teams
 draft: false
-weight: 200
 description: Teams.
-bref: We have a number of teams with different responsibilities.
 hide_table-of_contents: false
 ---
 
