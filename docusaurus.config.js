@@ -88,9 +88,8 @@ module.exports = {
               href: 'https://github.com/tremor-rs',
             },
             {
-              label: 'CNCF',
-              href: 'https://www.cncf.io/',
-            }
+              html: `<a href="https://www.cncf.io/" target="_blank" rel="noreferrer noopener" aria-label="CNCF"><img src="static/img/cncf-color.svg" alt="CNCF" /></a>`,
+            },
           ],
         },
       ],
