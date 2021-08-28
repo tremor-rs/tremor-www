@@ -54,9 +54,17 @@ module.exports = {
           type: 'localeDropdown',
           position: 'right',
         },
+	{
+	  type: 'search',
+	  position: 'right',
+	},
       ],
     },
     footer: {
+      logo: {
+	alt: 'Tremor Logo',
+	src: 'static/logo-minimalism.png',
+      },
       style: 'dark',
       links: [
            {       
