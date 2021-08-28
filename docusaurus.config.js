@@ -54,10 +54,10 @@ module.exports = {
           type: 'localeDropdown',
           position: 'right',
         },
-	{
-	  type: 'search',
-	  position: 'right',
-	},
+      	{
+	        type: 'search',
+	        position: 'right',
+      	},
       ],
     },
     footer: {
