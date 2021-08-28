@@ -1,7 +1,7 @@
 ---
 title: Community
 description: Tremor's greatest strength is the community of people who come together to make working with Tremor a rewarding experience.
-hide_table_of_contents: true
+hide_table_of_contents: false
 ---
 
 The Tremor project is an early-stage project, with a small supporting community.
