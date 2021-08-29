@@ -63,7 +63,7 @@ module.exports = {
     footer: {
       logo: {
 	alt: 'Tremor Logo',
-	src: 'static/logo-minimalism.png',
+	src: 'static/favicon.ico',
       },
       style: 'dark',
       links: [
@@ -88,7 +88,7 @@ module.exports = {
               href: 'https://github.com/tremor-rs',
             },
             {
-              html: `<a href="https://www.cncf.io/" target="_blank" rel="noreferrer noopener" aria-label="CNCF"><img src="static/img/cncf-color.svg" alt="CNCF" /></a>`,
+              html: `<a href="https://www.cncf.io/" target="_blank" rel="noreferrer noopener" aria-label="CNCF"><img src="static/img/cncf-color-minimalism.png" alt="CNCF" /></a>`,
             },
           ],
         },
