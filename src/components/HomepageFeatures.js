@@ -5,7 +5,7 @@ import styles from './HomepageFeatures.module.css';
 const FeatureList = [
   {
     title: 'Connectivity',
-    Svg: require('../../static/img/cncf-color.svg').default,
+    Svg: require('../../static/img/connectivity.svg').default,
     description: (
       <>
         Connecting different systems is an integral part of Tremor. Tremor connects to the external systems using connectors.
@@ -14,7 +14,7 @@ const FeatureList = [
   },
   {
     title: 'Tooling',
-    Svg: require('../../static/img/cncf-color.svg').default,
+    Svg: require('../../static/img/tooling.svg').default,
     description: (
       <>
         Tooling is a first class concern for tremor. From the very beginning, effort went into making errors and warning informative and not leaving users with stack traces, or cryptic output; developer and operator friendliness are front and center. 
@@ -23,7 +23,7 @@ const FeatureList = [
   },
   {
     title: 'Customisation',
-    Svg: require('../../static/img/cncf-color.svg').default,
+    Svg: require('../../static/img/customisation.svg').default,
     description: (
       <>
         Operators allow for highly custom behaviour.
@@ -32,7 +32,7 @@ const FeatureList = [
   },
   {
     title: 'Scriptable',
-    Svg: require('../../static/img/cncf-color.svg').default,
+    Svg: require('../../static/img/scriptable.svg').default,
     description: (
       <>
       Tremor's application logic is scriptable.
