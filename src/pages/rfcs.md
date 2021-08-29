@@ -40,7 +40,7 @@ direction the project is evolving in.
   - [Origins]
 
 
-## When you need to follow this process:
+## When You Need to Follow this Process:
 [When you need to follow this process]: #when-you-need-to-follow-this-process
 
 You need to follow this process if you intend to make "substantial" changes to
@@ -69,19 +69,19 @@ If you submit a pull request to implement a new feature without going through
 the RFC process, it may be closed with a polite request to submit an RFC first.
 
 
-### Sub-team specific guidelines
+### Sub-team-specific Guidelines
 [Sub-team specific guidelines]: #sub-team-specific-guidelines
 
 For more details on when an RFC is required for the following areas, please see
 the Tremor community's [sub-team] specific guidelines for:
 
-  - [Language changes](lang_changes.md)
-  - [Library changes](../../rfcs/libs_changes.md)
-  - [API changes](../../rfcs/api_changes.md)
-  - [Architecture changes](../../rfcs/arch_changes.md)
+ ### - [Language Changes](lang_changes/)
+ ### - [Library Changes](libs_changes/)
+ ### - [API Changes](api_changes/)
+ ### - [Architecture Changes](arch_changes/)
 
 
-## Before creating an RFC:
+## Before Creating an RFC:
 [Before creating an RFC]: #before-creating-an-rfc
 
 A hastily-proposed RFC can hurt its chances of acceptance. Low quality
@@ -105,7 +105,7 @@ developers, and particularly members of the relevant [sub-team] is a good
 indication that the RFC is worth pursuing.
 
 
-## What the process is
+## What the Process Is
 [What the process is]: #what-the-process-is
 
 In short, to get a major feature added to Tremor, one must first get the RFC
@@ -162,7 +162,7 @@ merged into the RFC repository as a markdown file. At that point the RFC is
     closed. However, sometimes substantial new arguments or ideas are raised,
     the FCP is cancelled, and the RFC goes back into development mode.
 
-## The RFC life-cycle
+## The RFC Life-cycle
 [The RFC life-cycle]: #the-rfc-life-cycle
 
 Once an RFC becomes "active", then authors may implement it and submit the
@@ -244,7 +244,7 @@ or some semi-obvious variation of it." (When the answer to the latter question
 is "no", then the appropriate response is to close the RFC, not postpone it.)
 
 
-### Help, this is all too informal!
+### Help, This is All Too Informal!
 [Help this is all too informal!]: #help-this-is-all-too-informal
 
 The process is intended to be as lightweight as reasonable for the present
@@ -272,3 +272,23 @@ Unless you explicitly state otherwise, any contribution intentionally submitted 
 [Origins]: #origins
 
 This process derives from, and is based on, the Rust language community RFC process [from here](https://github.com/rust-lang/rfcs).
+
+## [RFC Template](0000-template/)
+
+This is the template you should use when making an RFC.
+
+## RFCs
+
+#### -[0001-remove-actix-from-tremor-runtime](0001-remove-actix-from-tremor-runtime/)
+#### -[0002-pipeline-state-mechanism](0002-pipeline-state-mechanism/)
+#### -[0003-linked-transports](0003-linked-transports/)
+#### -[0004-sliding-window-mechanism](0004-sliding-window-mechanism/)
+#### -[0005-circuit-breaker-mechanism](0005-circuit-breaker-mechanism/)
+#### -[0006-plugin-development-kit](0006-plugin-development-kit/)
+#### -[0007-pipeline-optimizations](0007-pipeline-optimizations/)
+#### -[0008-onramp-postgres](0008-onramp-postgres/)
+#### -[0009-ramp-interface](0009-ramp-interface/)
+#### -[0010-modularity](0010-modularity/)
+#### -[0011-string-interpolation](0011-string-interpolation/)
+#### -[0012-correlation](0012-correlation/)
+
