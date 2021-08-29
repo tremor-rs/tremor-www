@@ -32,7 +32,7 @@ module.exports = {
             position: 'left',
           },
 	       {to: 'blog', label: 'Blog', position: 'left'},
-         {to: 'workshop', label: 'Usage Guide', position: 'left'},
+         {to: 'quick-start', label: 'Usage Guide', position: 'left'},
          {to: 'api', label: 'API', position: 'left'},
 	       {to: 'rfcs', label: 'RFCs', position: 'left', docId: 'rfc'},
 	       {to: 'community', label: 'Community', position: 'left'},
