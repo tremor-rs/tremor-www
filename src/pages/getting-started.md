@@ -53,5 +53,5 @@ docker run -v host/path/to/etc/tremor:/etc/tremor tremor-runtime
 
 We have use case examples that come with a full set of configuration files and a `docker-compose.yaml`. To get a whole use case set up with a single command, you can look at the following cases:
 
-* [apache log](https://docs.tremor.rs/workshop/examples/10_logstash) - storing apache logs in elastic search
-* [influx aggregation](https://docs.tremor.rs/workshop/examples/11_influx) - aggregating metrics for InfluxDB
+* [apache log](https://docs.tremor.rs/workshop/examples/10_logstash) - storing apache logs in elastic search.
+* [influx aggregation](https://docs.tremor.rs/workshop/examples/11_influx) - aggregating metrics for InfluxDB.
