@@ -34,7 +34,7 @@ module.exports = {
 	       {to: 'blog', label: 'Blog', position: 'left'},
          {to: 'workshop', label: 'Usage Guide', position: 'left'},
          {to: 'api', label: 'API', position: 'left'},
-	       {to: 'rfcs', label: 'RFCs', position: 'left'},
+	       {to: 'rfcs', label: 'RFCs', position: 'left', docId: 'rfc'},
 	       {to: 'community', label: 'Community', position: 'left'},
 	       {to: 'governance', label: 'Governance', position: 'left'},
          {to: 'faqs', label: 'FAQs', position: 'left' },
