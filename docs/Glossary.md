@@ -1,6 +1,6 @@
 ---
 id: Glossary
-title: Glossary of Terms
+title: Glossary
 ---
 
 # Glossary of Terms
