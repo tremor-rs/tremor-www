@@ -251,11 +251,9 @@ The process is intended to be as lightweight as reasonable for the present
 circumstances. As usual, we are trying to let the process be driven by
 consensus and community norms, not impose more structure than necessary.
 
-
-[Tremor chat]:
-[Discord](https://discord.com/invite/Wjqu5H9rhQ)
+- Tremor chat: [Discord](https://discord.com/invite/Wjqu5H9rhQ)
  
-[RFC repository]: http://github.com/tremor-rs/tremor-rfcs
+- [RFC repository](http://github.com/tremor-rs/tremor-rfcs)
 
 ## License
 [License]: #license
@@ -277,7 +275,7 @@ This process derives from, and is based on, the Rust language community RFC proc
 
 This is the template you should use when making an RFC.
 
-## RFCs
+## RFC List
 
 #### -[0001-remove-actix-from-tremor-runtime](0001-remove-actix-from-tremor-runtime/)
 #### -[0002-pipeline-state-mechanism](0002-pipeline-state-mechanism/)

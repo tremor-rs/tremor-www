@@ -67,6 +67,27 @@ module.exports = {
       },
       style: 'dark',
       links: [
+	   {
+	     title:'Docs',
+	     items: [
+	       {
+		 label: 'Docs',
+		 to: 'docs/',
+	       },
+	       {
+	         label: 'Usage Guide',
+		 to: 'quick-start/',
+	       },
+	       {
+	         label: 'FAQs',
+		 to: 'faqs/',
+	       },
+	       {
+	         label: 'Tremor API',
+		 to: 'api/',
+	       },
+	     ],
+	   },
            {       
           title: 'Community',
           items: [
