@@ -5,7 +5,7 @@ description: Teams.
 hide_table-of_contents: false
 ---
 
-Tremors team structure is heavily inspired and influenced by [Rust's governance model](https://www.rust-lang.org/governance).
+Tremor's team structure is heavily inspired and influenced by [Rust's governance model](https://www.rust-lang.org/governance).
 
 ### Moderation (mod)
 
@@ -63,7 +63,7 @@ Operators, On and Offramps, Codecs, Functions, and Aggregates.
 
 ### API (api)
 
-API's and endpoints
+APIs and endpoints.
 
 #### Members
 

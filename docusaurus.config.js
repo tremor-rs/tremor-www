@@ -109,6 +109,10 @@ module.exports = {
               href: 'https://github.com/tremor-rs',
             },
             {
+              label: 'The Team',
+              href: 'community/teams.md/',
+            },
+            {
               html: `<a href="https://www.cncf.io/" target="_blank" rel="noreferrer noopener" aria-label="CNCF"><img src="static/img/cncf-color-minimalism.png" alt="CNCF" /></a>`,
             },
           ],
