@@ -3,28 +3,28 @@
 - Tremor Issue: [tremor-rs/tremor-runtime#0033](https://github.com/tremor-rs/tremor-runtime/issues/0033)
 - RFC PR: [tremor-rs/tremor-rfcs#0011](https://github.com/tremor-rs/tremor-rfcs/pull/0011)
 
-# Summary
+## Summary
 [summary]: #summary
 
-As part of tremors execution engine, we transform the logic described in trickle query scripts into Directed Acyclic Graph (DAG) based pipelines. Each operation, operator, or action inside the query gets represented as a node in this graph. Every event passed through tremor traverses this graph of operators depth first. When an event arrives at an operator, this operator can alter, discard, or route the event to influence which following subgraph ( or subgraphs ) the event traverses afterward.
+As part of Tremor's execution engine, we transform the logic described in trickle query scripts into Directed Acyclic Graph (DAG)-based pipelines. Each operation, operator, or action inside the query gets represented as a node in this graph. Every event passed through Tremor traverses this graph of operators depth-first. When an event arrives at an operator, this operator can alter, discard, or route the event to influence which following subgraph (or subgraphs) the event traverses afterward.
 
-The initial construction of the pipeline DAGs is naive and done in the most simplistic way possible to make extending/evolving it relatively painless during development. After the construction of the initial graph, it may undergo one or more transformations to optimize execution; for example, it may apply constant folding to migrate some runtime calculations to compile time where possible.
+The initial construction of the pipeline DAGs is naive and done in the most simplistic way possible to make extending/evolving it relatively painless during development. After the construction of the initial graph, it may undergo one or more transformations to optimise execution; for example, it may apply constant folding to migrate some runtime calculations to compile time, where possible.
 
 This RFC aims to discuss these transformations and more complex transformations.
 
-As transformations may involve more than a single pass, and as tremors evolution may open new avenues for optimization, may introduce new domain languages, this RFC is not meant to be exhaustive but to refect the current and near-future state of optimizations.
+As transformations may involve more than a single pass, and as Tremor's evolution may open new avenues for optimisation, may introduce new domain languages, this RFC is not meant to be exhaustive but to refect the current and near-future state of optimisations.
 
-# Motivation
+## Motivation
 [motivation]: #motivation
 
-The executable pipeline is an integral part of tremor, quite literally every event that passes through it. This makes it a prime target for optimization as even small improvements, when gained on every event, sum up to significant gains. It is worth revisiting this topic regularly to see if additional cases present themselves.
+The executable pipeline is an integral part of Tremor; quite literally, every event that passes through it. This makes it a prime target for optimisation as even small improvements, when gained on every event, sum up to significant gains. It is worth revisiting this topic regularly to see if additional cases present themselves.
 
-## Problem case 1
+### Problem Case 1
 [case-1]: #case-1
 
-As part of constructing the initial DAG we insert what we call pass through operators. They allow us to simplify the trickle language by not requiring all operators to have a connection logic or addressable name as well as form the edges of our DAG.
+As part of constructing the initial DAG, we insert what we call passthrough operators. They allow us to simplify the trickle language by not requiring all operators to have a connection logic or addressable name as well as form the edges of our DAG.
 
-Let us look at the following trickle script taken from the influx example in the docs and annotate it with passthrough operators and graph connections.
+Let us look at the following trickle script taken from the influx example in the docs and annotate it with passthrough operators and graph connections:
 
 ```trickle
 
@@ -116,7 +116,7 @@ select event from batch into out;
 select event from in into out;
 ```
 
-To visualize the above, we can draw the graph as following where items in square brackets are passthrough operators, items in round brackets are 'active' operators and arrows are connections between them, double arrows represent the edges.
+To visualize the above, we can draw the graph as following, where items in square brackets are passthrough operators, items in round brackets are 'active' operators, and arrows are connections between them. Double arrows represent the edges.
 
 ```text
 => [in] -> (select 1) -> [aggregate] -> (select 2) -> [normalize] -> (select 3) -> (batch) -> [select 4] -> [out] =>
@@ -132,26 +132,26 @@ As Passthrough operators do not modify the event, nor do they affect how the eve
  `---------------------------------------------------'
 ```
 
-# Drawbacks
+## Drawbacks
 [drawbacks]: #drawbacks
 
-Concerning [Problem case 1](#case-1), we lose a one to one mapping between the script and the executable graph. It presents no further drawbacks.
+Concerning [Problem Case 1](#case-1), we lose a one-to-one mapping between the script and the executable graph. It presents no further drawbacks.
 
-# Rationale and alternatives
+## Rationale and Alternatives
 [rationale-and-alternatives]: #rationale-and-alternatives
 
-Concerning [Problem case 1](#case-1), an alternative approach for this would be not to introduce some of the pass-throughs in the first place. While in the short term this would yield the same results, there is a benefit to create a first a more verbose and general form and then reduce it down. This additional step makes it easier to apply other optimizations in later iterations.
+Concerning [Problem Case 1](#case-1), an alternative approach for this would be not to introduce some of the pass-throughs in the first place. While in the short term, this would yield the same results, there is a benefit to first create a more verbose and general form, and then reduce it down. This additional step makes it easier to apply other optimisations in later iterations.
 
-# Prior art
+## Prior Art
 [prior-art]: #prior-art
 
-- [Graph rewriting](https://en.wikipedia.org/wiki/Graph_rewriting)
-- [Compiler optimizations](https://en.wikipedia.org/wiki/Optimizing_compiler)
-- Internally we are using similar techniques of rewriting parts of the tremor-script AST as part of the optimization step.
+- [Graph Rewriting](https://en.wikipedia.org/wiki/Graph_rewriting).
+- [Compiler Optimizations](https://en.wikipedia.org/wiki/Optimizing_compiler).
+- Internally, we are using similar techniques of rewriting parts of the tremor-script AST as part of the optimisation step.
 
-# Future possibilities
+## Future Possibilities
 [future-possibilities]: #future-possibilities
 
-The topic of pipeline optimization is never-ending endeavour as there are always further optimizations to be done. In the future, this could take the form of integration and interaction between different operators, extending pipeline level optimizations or go all the way to introducing a compiler.
+The topic of pipeline optimisation is a  never-ending endeavour, as there are always further optimisations to be done. In the future, this could take the form of integration and interaction between different operators, extending pipeline level optimizations, or go all the way to introducing a compiler.
 
-While those future possibilities might not be of direct concern for any case, it is important to keep them in mind to ensure optimizations done today do not block off possibilities in the future.
+While those future possibilities might not be of direct concern for any case, it is important to keep them in mind to ensure optimisations done today do not block off possibilities in the future.
