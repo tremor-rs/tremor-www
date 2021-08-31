@@ -141,12 +141,12 @@ module.exports = {
           path: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
-            'https://github.com/skoech/tremor-new-website/tree/main/docs',
+            'https://github.com/tremor-rs/tremor-new-website/tree/main/docs',
         },
         blog: {
           showReadingTime: true,
           editUrl:
-            'https://github.com/skoech/tremor-new-website/tree/main/docs',
+            'https://github.com/tremor-rs/tremor-new-website/tree/main/docs',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
