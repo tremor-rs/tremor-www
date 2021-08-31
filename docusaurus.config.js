@@ -5,13 +5,13 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 module.exports = {
   title: 'Tremor',
   tagline: 'An early-stage event processing system for unstructured data with rich support for structural pattern-matching, filtering and transformation.',
-  url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
+  url: 'https://tremor-rs.github.io/',
+  baseUrl: '/tremor-new-website',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'docs/favicon.ico',
-  organizationName: 'tremor-rs', 
-  projectName: 'tremor-new-website', 
+  organizationName: 'tremor-rs',
+  projectName: 'tremor-new-website',
   themeConfig: {
     navbar: {
       logo: {
@@ -21,23 +21,24 @@ module.exports = {
         target: '_self',
       },
       items: [
-        { to: 'getting-started/',
+        {
+          to: 'getting-started/',
           label: 'Getting Started',
           position: 'left',
-    	},
-          {
-	          type: 'doc',
-            docId: 'index',
-            label: 'Docs',
-            position: 'left',
-          },
-	       {to: 'blog', label: 'Blog', position: 'left'},
-         {to: 'quick-start', label: 'Usage Guide', position: 'left'},
-         {to: 'api', label: 'API', position: 'left'},
-	       {to: 'rfcs', label: 'RFCs', position: 'left', docId: 'rfc'},
-	       {to: 'community', label: 'Community', position: 'left'},
-	       {to: 'governance', label: 'Governance', position: 'left'},
-         {to: 'faqs', label: 'FAQs', position: 'left' },
+        },
+        {
+          type: 'doc',
+          docId: 'index',
+          label: 'Docs',
+          position: 'left',
+        },
+        { to: 'blog', label: 'Blog', position: 'left' },
+        { to: 'quick-start', label: 'Usage Guide', position: 'left' },
+        { to: 'api', label: 'API', position: 'left' },
+        { to: 'rfcs', label: 'RFCs', position: 'left', docId: 'rfc' },
+        { to: 'community', label: 'Community', position: 'left' },
+        { to: 'governance', label: 'Governance', position: 'left' },
+        { to: 'faqs', label: 'FAQs', position: 'left' },
         {
           href: 'https://github.com/tremor-rs',
           label: 'GitHub',
@@ -48,54 +49,54 @@ module.exports = {
         {
           type: 'docsVersionDropdown',
           position: 'left',
-          dropdownItemsAfter: [{to: 'docs/', label: 'All versions'}],
+          dropdownItemsAfter: [{ to: 'docs/', label: 'All versions' }],
         },
         {
           type: 'localeDropdown',
           position: 'right',
         },
-      	{
-	        type: 'search',
-	        position: 'right',
-      	},
+        {
+          type: 'search',
+          position: 'right',
+        },
       ],
     },
     footer: {
       logo: {
-	alt: 'Tremor Logo',
-	src: 'static/favicon.ico',
+        alt: 'Tremor Logo',
+        src: 'static/favicon.ico',
       },
       style: 'dark',
       links: [
-	   {
-	     title:'Documentation',
-	     items: [
-         {
-           to: 'docs/',
-           type: 'doc',
-           docId: 'index',
-           label: 'Docs',
-           position: 'left',
-         },
-	       {
-	         label: 'Usage Guide',
-		       to: 'quick-start/',
-	       },
-	       {
-	         label: 'FAQs',
-		       to: 'faqs/',
-	       },
-	       {
-	         label: 'Tremor API',
-		       to: 'api/',
-	       },
-         {
-          label: 'Code of Conduct',
-          to: 'docs/Governance/CodeOfConduct/',
-         },
-	     ],
-	   },
-           {       
+        {
+          title: 'Documentation',
+          items: [
+            {
+              to: 'docs/',
+              type: 'doc',
+              docId: 'index',
+              label: 'Docs',
+              position: 'left',
+            },
+            {
+              label: 'Usage Guide',
+              to: 'quick-start/',
+            },
+            {
+              label: 'FAQs',
+              to: 'faqs/',
+            },
+            {
+              label: 'Tremor API',
+              to: 'api/',
+            },
+            {
+              label: 'Code of Conduct',
+              to: 'docs/Governance/CodeOfConduct/',
+            },
+          ],
+        },
+        {
           title: 'Community',
           items: [
             {
@@ -137,7 +138,7 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-	  path: 'docs',
+          path: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
             'https://github.com/skoech/tremor-new-website/tree/main/docs',
