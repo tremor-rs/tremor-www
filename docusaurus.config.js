@@ -68,24 +68,31 @@ module.exports = {
       style: 'dark',
       links: [
 	   {
-	     title:'Docs',
+	     title:'Documentation',
 	     items: [
-	       {
-		 label: 'Docs',
-		 to: 'docs/',
-	       },
+         {
+           to: 'docs/',
+           type: 'doc',
+           docId: 'index',
+           label: 'Docs',
+           position: 'left',
+         },
 	       {
 	         label: 'Usage Guide',
-		 to: 'quick-start/',
+		       to: 'quick-start/',
 	       },
 	       {
 	         label: 'FAQs',
-		 to: 'faqs/',
+		       to: 'faqs/',
 	       },
 	       {
 	         label: 'Tremor API',
-		 to: 'api/',
+		       to: 'api/',
 	       },
+         {
+          label: 'Code of Conduct',
+          to: 'docs/Governance/CodeOfConduct/',
+         },
 	     ],
 	   },
            {       
@@ -110,7 +117,7 @@ module.exports = {
             },
             {
               label: 'The Team',
-              href: 'community/teams.md/',
+              to: 'community/teams/',
             },
             {
               html: `<a href="https://www.cncf.io/" target="_blank" rel="noreferrer noopener" aria-label="CNCF"><img src="static/img/cncf-color-minimalism.png" alt="CNCF" /></a>`,
