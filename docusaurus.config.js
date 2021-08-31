@@ -6,7 +6,7 @@ module.exports = {
   title: 'Tremor',
   tagline: 'An early-stage event processing system for unstructured data with rich support for structural pattern-matching, filtering and transformation.',
   url: 'https://tremor-rs.github.io/',
-  baseUrl: 'tremor-new-website/',
+  baseUrl: '/tremor-new-website/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'docs/favicon.ico',
@@ -17,7 +17,7 @@ module.exports = {
       logo: {
         alt: 'Tremor Logo',
         src: 'https://www.tremor.rs/img/common/logo.png',
-        href: 'https://your-docusaurus-test-site.com',
+        href: 'https://tremor-rs.github.io/tremor-new-website/',
         target: '_self',
       },
       items: [
