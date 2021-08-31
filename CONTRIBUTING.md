@@ -59,7 +59,7 @@ This can be the language or compiler feature used, the conditions that trigger t
 or part of the error message if there is any.
 An example could be: **"impossible case reached" on match expression in tremor scripting language**.
 
-Opening an issue is as easy as following [this
+Opening an issue is can be done by following [this
 link](https://github.com/tremor-rs/tremor-runtime/issues/new) and filling out the fields.
 Here's a template that you can use to file a bug, though it's not necessary to
 use it exactly:
