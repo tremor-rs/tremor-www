@@ -1,9 +1,11 @@
 name: Publish
 
 on:
+  pull_request:
+    branches: [main]
   push:
-    branches:
-      - main
+    branches: [main]
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -25,6 +27,7 @@ jobs:
           fi
           npm run build        
       - name: Deploy docs
+        if: github.event_name == 'push'
         uses: peaceiris/actions-gh-pages@v2
         env:
           PUBLISH_BRANCH: gh-pages
