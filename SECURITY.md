@@ -72,4 +72,4 @@ Contact the back-up contact (Heinz Gies) directly [pgp key](https://keys.openpgp
 Post a friendly reminder on the community slack.
 
 Please note that discussion forums are public areas. When escalating in these venues, please do not
-discuss your issue. Simply say that you’re trying to get a hold of someone from the security team.
+discuss your issue. Say that you’re trying to get a hold of someone from the security team.
