@@ -20,4 +20,4 @@ jobs:
           no_binary: false
           profanity_sureness: 2
           pr_only: false
-          glob_pattern: "*.md"
+          glob_pattern: "."
