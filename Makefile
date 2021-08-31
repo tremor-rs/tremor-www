@@ -13,6 +13,7 @@ docs/tremor-script/stdlib: tremor-runtime
 	cp -r tremor-runtime/docs docs/tremor-script/stdlib
 
 docs/operations/cli.md: tremor-runtime
+	-mkdir docs/operations
 	python3 ./python_scripts/cli2md.py tremor-runtime/tremor-cli/src/cli.yaml > docs/operations/cli.md
 
 docs/api.md: tremor-runtime
@@ -20,4 +21,5 @@ docs/api.md: tremor-runtime
 
 clean:
 	rm -rf mkdocs.yml docs/operations/cli.md docs/api.md docs/tremor-script/stdlib
+	rmdir docs/operations
 
