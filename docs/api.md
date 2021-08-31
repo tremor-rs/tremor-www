@@ -1,36 +1,32 @@
----
-title: Tremor API
-description: Tremor REST API.
-draft: false
-hide_table_of_contents: false
----
 
 ## Document Status
 
 Work in Progress
 
-## Well-known API Endpoints
+## Well known API endpoints
 
-This document summarises the Tremor REST API.
+This document summarises the Tremor REST API
 
 |Url|Description|
 |---|---|
 |http://localhost:9898/|The default ( development ) endpoint on a local ( development ) host|
 
+
+
 ## Paths
 
-The endpoint paths supported by the Tremor REST API.
+The endpoint paths supported by the Tremor REST API
 
     
 ### __GET__ /onramp
 
-Lists onramps.
+Lists onramps
 
 *Description:*
 
-Returns a list of identifiers for each onramp stored in the repository.
+Returns a list of identifiers for each onramp stored in the repository
 
-Response data may be either JSON or YAML formatted (defaults to JSON).
+Response data may be either JSON or YAML formatted ( defaults to JSON ).
 
 
 *OperationId:*
@@ -47,18 +43,18 @@ find_onramps
 
 ### __POST__ /onramp
 
-Publish a new onramp to the Tremor artefact repository.
+Publish a new onramp to the tremor artefact repository
 
 *Description:*
 
-Publishes a new onramp to the Tremor artefact repository if the artefact id
+Publishes a new onramp to the tremor artefact repository if the artefact id
 is unique.
 
 Returns artefact data, on success.
 
 If an onramp of the same name already exists, a conflict error is returned.
 
-Response data may be either JSON or YAML formatted (defaults to JSON).
+Response data may be either JSON or YAML formatted ( defaults to JSON ).
 
 
 *OperationId:*
@@ -76,11 +72,11 @@ publish_onramp
 
 ### __GET__ /onramp/{artefact-id}
 
-Finds onramp data from tremor artefact repository.
+Finds onramp data from tremor artefact repository
 
 *Description:*
 
-Given a valid artefact identifier of an artefact stored in the Tremor artefact repository.
+Given a valid artefact identifier of an artefact stored in the tremor artefact repository
 
 Returns artefact data, on success.
 
@@ -102,16 +98,16 @@ get_onramp_by_id
 
 ### __DELETE__ /onramp/{artefact-id}
 
-Remove an onramp from Tremor artefact repository.
+Remove an onramp from tremor artefact repository
 
 *Description:*
 
 
-Given a valid artefact identifier of an artefact stored in the Tremor artefact repository.
+Given a valid artefact identifier of an artefact stored in the tremor artefact repository
 
-Returns old artefact data on success.
+Returns old artefact data, on success.
 
-Response data may be either JSON or YAML formatted (defaults to JSON).
+Response data may be either JSON or YAML formatted ( defaults to JSON ).
 
 
 *OperationId:*
@@ -130,13 +126,13 @@ delete_onramp_by_id
 
 ### __GET__ /offramp
 
-Lists oframps.
+Lists oframps
 
 *Description:*
 
-Returns a list of identifiers for each offramp stored in the repository.
+Returns a list of identifiers for each offramp stored in the repository
 
-Response data may be either JSON or YAML formatted (defaults to JSON).
+Response data may be either JSON or YAML formatted ( defaults to JSON ).
 
 
 *OperationId:*
@@ -153,18 +149,18 @@ find_offramps
 
 ### __POST__ /offramp
 
-Publish a new offramp to the Tremor artefact repository.
+Publish a new offramp to the tremor artefact repository
 
 *Description:*
 
-Publishes a new offramp to the Tremor artefact repository if the artefact id
+Publishes a new offramp to the tremor artefact repository if the artefact id
 is unique.
 
-Returns artefact data on success.
+Returns artefact data, on success.
 
 If an arterfact of the same name already exists, a conflict error is returned.
 
-Response data may be either JSON or YAML formatted (defaults to JSON).
+Response data may be either JSON or YAML formatted ( defaults to JSON ).
 
 
 *OperationId:*
@@ -182,15 +178,15 @@ publish_offramp
 
 ### __GET__ /offramp/{artefact-id}
 
-Get offramp data from Tremor artefact repository.
+Get offramp data from tremor artefact repository
 
 *Description:*
 
-Given a valid artefact identifier of an artefact stored in the Tremor artefact repository.
+Given a valid artefact identifier of an artefact stored in the tremor artefact repository
 
 Returns artefact data, on success.
 
-Response data may be either JSON or YAML formatted (defaults to JSON).
+Response data may be either JSON or YAML formatted ( defaults to JSON ).
 
 
 *OperationId:*
@@ -208,15 +204,15 @@ get_offramp_by_id
 
 ### __DELETE__ /offramp/{artefact-id}
 
-Remove artefact from Tremor artefact repository.
+Remove artefact from tremor artefact repository
 
 *Description:*
 
-Given a valid artefact identifier of an artefact stored in the Tremor artefact repository.
+Given a valid artefact identifier of an artefact stored in the tremor artefact repository
 
-Returns old artefact data on success.
+Returns old artefact data, on success.
 
-Response data may be either JSON or YAML formatted (defaults to JSON).
+Response data may be either JSON or YAML formatted ( defaults to JSON ).
 
 
 *OperationId:*
@@ -239,7 +235,7 @@ Lists pipelines
 
 *Description:*
 
-Returns a list of identifiers for each pipeline stored in the repository.
+Returns a list of identifiers for each pipeline stored in the repository
 
 Response data is a trickle source code string.
 
@@ -258,20 +254,20 @@ find_pipelines
 
 ### __POST__ /pipeline
 
-Publish a new pipeline to the Tremor artefact repository.
+Publish a new pipeline to the tremor artefact repository
 
 *Description:*
 
-Publishes a new pipeline to the Tremor artefact repository if the artefact id
+Publishes a new pipeline to the tremor artefact repository if the artefact id
 is unique.
 
 The request body need to be valid trickle.
 
-Returns artefact data on success.
+Returns artefact data, on success.
 
 If an pipeline of the same name already exists, a conflict error is returned.
 
-Response data may be either JSON or YAML formatted (defaults to JSON).
+Response data may be either JSON or YAML formatted ( defaults to JSON ).
 
 
 *OperationId:*
@@ -290,15 +286,15 @@ publish_pipeline
 
 ### __GET__ /pipeline/{artefact-id}
 
-Get pipeline data from Tremor artefact repository.
+Get pipeline data from tremor artefact repository
 
 *Description:*
 
-Given a valid pipeline artefact identifier of a pipeline artefact stored in the Tremor artefact repository.
+Given a valid pipeline artefact identifier of a pipeline artefact stored in the tremor artefact repository
 
-Returns pipeline source code string on success.
+Returns pipeline source code string, on success.
 
-Response data may be either JSON or YAML formatted (defaults to JSON),
+Response data may be either JSON or YAML formatted ( defaults to JSON ),
 but is essentially a trickle source code string.
 
 
@@ -318,15 +314,15 @@ get_pipeline_by_id
 
 ### __DELETE__ /pipeline/{artefact-id}
 
-Remove pipeline from Tremor artefact repository.
+Remove pipeline from tremor artefact repository
 
 *Description:*
 
-Given a valid artefact identifier of an artefact stored in the Tremor artefact repository.
+Given a valid artefact identifier of an artefact stored in the tremor artefact repository
 
-Returns old artefact data on success.
+Returns old artefact data, on success.
 
-Response data may be either JSON or YAML formatted (defaults to JSON).
+Response data may be either JSON or YAML formatted ( defaults to JSON ).
 
 
 *OperationId:*
@@ -346,13 +342,13 @@ delete_pipeline_by_id
 
 ### __GET__ /binding
 
-Lists bindings.
+Lists bindings
 
 *Description:*
 
-Returns a list of identifiers for each binding stored in the repository.
+Returns a list of identifiers for each binding stored in the repository
 
-Response data may be either JSON or YAML formatted (defaults to JSON).
+Response data may be either JSON or YAML formatted ( defaults to JSON ).
 
 
 *OperationId:*
@@ -369,18 +365,18 @@ find_bindings
 
 ### __POST__ /binding
 
-Publish a new binding to the Tremor artefact repository.
+Publish a new binding to the tremor artefact repository
 
 *Description:*
 
-Publishes a new binding to the Tremor artefact repository if the artefact id
+Publishes a new binding to the tremor artefact repository if the artefact id
 is unique.
 
-Returns artefact data on success.
+Returns artefact data, on success.
 
 If an arterfact of the same name already exists, a conflict error is returned.
 
-Response data may be either JSON or YAML formatted (defaults to JSON).
+Response data may be either JSON or YAML formatted ( defaults to JSON ).
 
 
 *OperationId:*
@@ -398,15 +394,15 @@ publish_binding
 
 ### __GET__ /binding/{artefact-id}
 
-Get binding data from Tremor artefact repository.
+Get binding data from tremor artefact repository
 
 *Description:*
 
-Given a valid artefact identifier of an artefact stored in the Tremor artefact repository.
+Given a valid artefact identifier of an artefact stored in the tremor artefact repository
 
-Returns artefact data on success.
+Returns artefact data, on success.
 
-Response data may be either JSON or YAML formatted (defaults to JSON).
+Response data may be either JSON or YAML formatted ( defaults to JSON ).
 
 
 *OperationId:*
@@ -424,15 +420,15 @@ get_binding_by_id
 
 ### __DELETE__ /binding/{artefact-id}
 
-Remove binding from Tremor artefact repository.
+Remove binding from tremor artefact repository
 
 *Description:*
 
-Given a valid artefact identifier of an artefact stored in the Tremor artefact repository.
+Given a valid artefact identifier of an artefact stored in the tremor artefact repository
 
-Returns old artefact data on success.
+Returns old artefact data, on success.
 
-Response data may be either JSON or YAML formatted (defaults to JSON).
+Response data may be either JSON or YAML formatted ( defaults to JSON ).
 
 
 *OperationId:*
@@ -450,17 +446,18 @@ delete_binding_by_id
 
 ### __GET__ /binding/{artefact-id}/{instance-id}
 
-Get deployed artefact servant data from Tremor artefact registry.
+Get deployed artefact servant data from tremor artefact registry
 
 *Description:*
 
-Given a valid identifier of a binding artefact stored in the Tremor artefact repository.
+Given a valid identifier of a binding artefact stored in the tremor artefact repository
 
-Given a valid binding instance identifier for a deployed and running instance of the binding deployed and accesible via the Tremor instance registry.
+Given a valid binding instance identifier for a deployed and running instance of the binding deployed
+and accesible via the tremor instance registry
 
 Returns binding instance data on success.
 
-Response data may be either JSON or YAML formatted (defaults to JSON).
+Response data may be either JSON or YAML formatted ( defaults to JSON ).
 
 
 *OperationId:*
@@ -478,23 +475,24 @@ get_binding_instance_by_id
 
 ### __POST__ /binding/{artefact-id}/{instance-id}
 
-Publish, deploy and activate a binding.
+Publish, deploy and activate a binding
 
 *Description:*
 
-Given a valid binding artefact identifier of a binding artefact stored in the Tremor artefact repository.
+Given a valid binding artefact identifier of a binding artefact stored in the tremor artefact repository
 
-Given a valid binding instance identifier for a deployed and running instance of the binding deployed and accesible via the Tremor instance registry.
+Given a valid binding instance identifier for a deployed and running instance of the binding deployed
+and accesible via the tremor instance registry
 
-Creates new instances of artefacts (if required), publishes instances
-to the Tremor instance registry. If instances are onramps, offramps or
-pipelines, new registry values will be created. In the case of onramps
-and offramps, these are deployed *after* any dependant pipeline instances,
+Creates new instances of artefacts ( if required ), publishes instances
+to the tremor instance registry. If instances are onramps, offramps or
+pipelines new registry values will be created. In the case of onramps
+and offramps these are deployed *after* any dependant pipeline instances
 and then they are interconnected.
 
-Returns the binding instance data on success.
+Returns the binding instance data, on success.
 
-Response data may be either JSON or YAML formatted (defaults to JSON).
+Response data may be either JSON or YAML formatted ( defaults to JSON ).
 
 
 *OperationId:*
@@ -512,20 +510,21 @@ activate-binding
 
 ### __DELETE__ /binding/{artefact-id}/{instance-id}
 
-Deactivate and unpublish deployed bindings.
+Deactivate and unpublish deployed bindings
 
 *Description:*
 
-Given a valid binding artefact identifier of a binding artefact stored in the Tremor artefact repository.
+Given a valid binding artefact identifier of a binding artefact stored in the tremor artefact repository
 
-Given a valid binding instance identifier for a deployed and running instance of the binding deployed and accesible via the Tremor instance registry.
+Given a valid binding instance identifier for a deployed and running instance of the binding deployed
+and accesible via the tremor instance registry
 
 Deactivates, stops and unpublishes the target instances and any
 dependant instances that are no longer referenced by the runtime.
 
-Returns old instance data on success.
+Returns old instance data, on success.
 
-Response data may be either JSON or YAML formatted (defaults to JSON).
+Response data may be either JSON or YAML formatted ( defaults to JSON ).
 
 
 *OperationId:*
@@ -543,13 +542,13 @@ deactivate-binding
 
 ### __GET__ /version
 
-Gets the current version.
+Get's the current version
 
 *Description:*
 
 
 This endpoint returns version information for the current
-version of Tremor. Versioning policy follows [Semantic Versioning](https://semver.org/).
+version of tremor. Versioning policy follows [Semantic Versioning](https://semver.org/)
 
 
 *OperationId:*
@@ -565,12 +564,12 @@ get_version
 
 ## Schemas
 
-JSON Schema for types defioned in the Tremor REST API.
+JSON Schema for types defioned in the Tremor REST API
     
 ### Schema for type: __version__
 <a name="schema-version"></a>
 
-Version information:
+Version information
 
 ```json
 {
@@ -595,7 +594,7 @@ Version information:
 ### Schema for type: __registry_set__
 <a name="schema-registry_set"></a>
 
-A list of registry artefacts:
+A list of registry artefacts
 
 ```json
 {
@@ -610,7 +609,7 @@ A list of registry artefacts:
 ### Schema for type: __instance_set__
 <a name="schema-instance_set"></a>
 
-A list of artefact instances:
+A list of artefact instances
 
 ```json
 {
@@ -698,7 +697,7 @@ No description.
 ### Schema for type: __publish_ok__
 <a name="schema-publish_ok"></a>
 
-Response when a registry publish was succesful:
+Response when a registry publish was succesful
 
 ```json
 {
@@ -718,7 +717,7 @@ Response when a registry publish was succesful:
 ### Schema for type: __pipeline__
 <a name="schema-pipeline"></a>
 
-State of a pipeline, expressed as trickle source code:
+State of an pipeline, expressed as trickle source code.
 
 ```json
 {
@@ -730,7 +729,7 @@ State of a pipeline, expressed as trickle source code:
 ### Schema for type: __onramp_state__
 <a name="schema-onramp_state"></a>
 
-State of an onramp, including specification and instances:
+State of an onramp, including specification and instances
 
 ```json
 {
@@ -751,7 +750,7 @@ State of an onramp, including specification and instances:
 ### Schema for type: __onramp__
 <a name="schema-onramp"></a>
 
-A Tremor onramp specification:
+A tremor onramp specification
 
 ```json
 {
@@ -817,7 +816,7 @@ A Tremor onramp specification:
 ### Schema for type: __offramp_state__
 <a name="schema-offramp_state"></a>
 
-State of an offramp, including specification and instances:
+State of an offramp, including specification and instances
 
 ```json
 {
@@ -838,7 +837,7 @@ State of an offramp, including specification and instances:
 ### Schema for type: __offramp__
 <a name="schema-offramp"></a>
 
-A Tremor offramp specification:
+A tremor offramp specification
 
 ```json
 {
@@ -900,7 +899,7 @@ A Tremor offramp specification:
 ### Schema for type: __binding_state__
 <a name="schema-binding_state"></a>
 
-State of a binding, including specification and instances:
+State of an binding, including specification and instances
 
 ```json
 {
@@ -921,7 +920,7 @@ State of a binding, including specification and instances:
 ### Schema for type: __binding__
 <a name="schema-binding"></a>
 
-A Tremor binding specification:
+A tremor binding specification
 
 ```json
 {
@@ -949,7 +948,7 @@ A Tremor binding specification:
 ### Schema for type: __binding_map__
 <a name="schema-binding_map"></a>
 
-A map of binding specification links:
+A map of binding specification links
 
 ```json
 {
@@ -983,7 +982,7 @@ No description.
 ### Schema for type: __mapping__
 <a name="schema-mapping"></a>
 
-A Tremor mapping specification.
+A tremor mapping specification
 
 ```json
 {
@@ -995,7 +994,7 @@ A Tremor mapping specification.
 ### Schema for type: __offramp_type__
 <a name="schema-offramp_type"></a>
 
-Supported offramp types:
+supported offramp types
 
 ```json
 {
@@ -1023,7 +1022,7 @@ Supported offramp types:
 ### Schema for type: __onramp_type__
 <a name="schema-onramp_type"></a>
 
-Supported onramp types:
+supported onramp types
 
 ```json
 {
@@ -1047,7 +1046,7 @@ Supported onramp types:
 ### Schema for type: __codec__
 <a name="schema-codec"></a>
 
-The data format supported for encoding/decoding to/from Tremor types:
+The data format supported for encoding/decoding to/from tremor types
 
 ```json
 {
@@ -1069,7 +1068,7 @@ The data format supported for encoding/decoding to/from Tremor types:
 ### Schema for type: __codec_map__
 <a name="schema-codec_map"></a>
 
-A map from mime-type to codec:
+A map from mime-type to codec
 
 ```json
 {
@@ -1084,7 +1083,7 @@ A map from mime-type to codec:
 ### Schema for type: __preprocessor__
 <a name="schema-preprocessor"></a>
 
-Supported preprocessors:
+Supported preprocessors
 
 ```json
 {
@@ -1114,7 +1113,7 @@ Supported preprocessors:
 ### Schema for type: __postprocessor__
 <a name="schema-postprocessor"></a>
 
-Supported postprocessors:
+Supported postprocessors
 
 ```json
 {
