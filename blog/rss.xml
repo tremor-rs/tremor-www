@@ -2,70 +2,70 @@
 <rss version="2.0">
     <channel>
         <title>Tremor Blog</title>
-        <link>https://your-docusaurus-test-site.com/blog</link>
+        <link>https://tremor-rs.github.io/tremor-new-website/blog</link>
         <description>Tremor Blog</description>
         <lastBuildDate>Wed, 14 Jul 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <item>
             <title><![CDATA[Continuous Benchmarking in Tremor]]></title>
-            <link>https://your-docusaurus-test-site.com/blog/continuous-benchmarking</link>
+            <link>https://tremor-rs.github.io/tremor-new-website/blog/continuous-benchmarking</link>
             <guid>continuous-benchmarking</guid>
             <pubDate>Wed, 14 Jul 2021 00:00:00 GMT</pubDate>
             <description><![CDATA[How we implemented a continuous benchmarking pipeline in Tremor.]]></description>
         </item>
         <item>
             <title><![CDATA[Property Based Testing of Tremor Script]]></title>
-            <link>https://your-docusaurus-test-site.com/blog/2021/07/06/Blog-Rohit-Property-Based-Testing</link>
+            <link>https://tremor-rs.github.io/tremor-new-website/blog/2021/07/06/Blog-Rohit-Property-Based-Testing</link>
             <guid>Property Based Testing of Tremor Script</guid>
             <pubDate>Tue, 06 Jul 2021 00:00:00 GMT</pubDate>
             <description><![CDATA[Rohit's Experience working with Tremor as a LFX Spring 2021 Mentee.]]></description>
         </item>
         <item>
             <title><![CDATA[Support for the Syslog Protocol]]></title>
-            <link>https://your-docusaurus-test-site.com/blog/LFX-Blog-Nupur</link>
+            <link>https://tremor-rs.github.io/tremor-new-website/blog/LFX-Blog-Nupur</link>
             <guid>LFX-Blog-Nupur</guid>
             <pubDate>Mon, 05 Jul 2021 00:00:00 GMT</pubDate>
             <description><![CDATA[Nupur's experience contributing to Tremor and work overview.]]></description>
         </item>
         <item>
             <title><![CDATA[Google Cloud Storage and Pub/Sub Connectors]]></title>
-            <link>https://your-docusaurus-test-site.com/blog/2021/06/29/T17-LFX-Blog-Jigyasa-gcloud</link>
+            <link>https://tremor-rs.github.io/tremor-new-website/blog/2021/06/29/T17-LFX-Blog-Jigyasa-gcloud</link>
             <guid>Google Cloud Storage and Pub/Sub Connectors</guid>
             <pubDate>Tue, 29 Jun 2021 00:00:00 GMT</pubDate>
             <description><![CDATA[Jigyasa's LFX spring Mentorship experience report.]]></description>
         </item>
         <item>
             <title><![CDATA[Releasing Tremor v0.9!]]></title>
-            <link>https://your-docusaurus-test-site.com/blog/2020/10/16/v09-release</link>
+            <link>https://tremor-rs.github.io/tremor-new-website/blog/2020/10/16/v09-release</link>
             <guid>Releasing Tremor v0.9!</guid>
             <pubDate>Fri, 16 Oct 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[Releasing Tremor v0.9]]></description>
         </item>
         <item>
             <title><![CDATA[To async or Not to async]]></title>
-            <link>https://your-docusaurus-test-site.com/blog/2020/08/06/to-async-or-not-to-async</link>
+            <link>https://tremor-rs.github.io/tremor-new-website/blog/2020/08/06/to-async-or-not-to-async</link>
             <guid>To async or Not to async</guid>
             <pubDate>Thu, 06 Aug 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[Moving from threads to async tasks.]]></description>
         </item>
         <item>
             <title><![CDATA[Rust & Tell Berlin- March 2020]]></title>
-            <link>https://your-docusaurus-test-site.com/blog/2020/03/31/rust-and-tell</link>
+            <link>https://tremor-rs.github.io/tremor-new-website/blog/2020/03/31/rust-and-tell</link>
             <guid>Rust &amp; Tell Berlin- March 2020</guid>
             <pubDate>Tue, 31 Mar 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[Presenting Tremor at Rust & Tell Berlin- March 2020.]]></description>
         </item>
         <item>
             <title><![CDATA[Improving our Influx Parser- A Story in Four Acts]]></title>
-            <link>https://your-docusaurus-test-site.com/blog/2020/03/06/influx-perf</link>
+            <link>https://tremor-rs.github.io/tremor-new-website/blog/2020/03/06/influx-perf</link>
             <guid>Improving our Influx Parser- A Story in Four Acts</guid>
             <pubDate>Fri, 06 Mar 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[The process of improving the performance of our influx line protocol parser.]]></description>
         </item>
         <item>
             <title><![CDATA[Tremor is now Open Source!]]></title>
-            <link>https://your-docusaurus-test-site.com/blog/2020/02/22/welcome</link>
+            <link>https://tremor-rs.github.io/tremor-new-website/blog/2020/02/22/welcome</link>
             <guid>Tremor is now Open Source!</guid>
             <pubDate>Sat, 22 Feb 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[Announcement of Tremor as an OSS project.]]></description>

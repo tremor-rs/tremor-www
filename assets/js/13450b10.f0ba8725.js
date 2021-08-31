@@ -1,0 +1,1 @@
+(self.webpackChunknew_tremor_website=self.webpackChunknew_tremor_website||[]).push([[1531],{2458:function(e){"use strict";e.exports=JSON.parse('{"allTagsPath":"tremor-new-website/blog/tags","slug":"codecs","name":"codecs","count":1,"permalink":"tremor-new-website/blog/tags/codecs"}')}}]);

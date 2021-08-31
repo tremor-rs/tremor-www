@@ -1,1 +1,0 @@
-(self.webpackChunknew_tremor_website=self.webpackChunknew_tremor_website||[]).push([[7690],{2045:function(e){"use strict";e.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"rust","name":"rust","count":1,"permalink":"/blog/tags/rust"}')}}]);
