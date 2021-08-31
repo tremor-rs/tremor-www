@@ -1,0 +1,1 @@
+(self.webpackChunknew_tremor_website=self.webpackChunknew_tremor_website||[]).push([[8334],{2454:function(e){"use strict";e.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"benchmarking","name":"benchmarking","count":1,"permalink":"/blog/tags/benchmarking"}')}}]);

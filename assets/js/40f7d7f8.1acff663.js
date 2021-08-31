@@ -1,0 +1,1 @@
+(self.webpackChunknew_tremor_website=self.webpackChunknew_tremor_website||[]).push([[5321],{7282:function(e){"use strict";e.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"gpc","name":"gpc","count":1,"permalink":"/blog/tags/gpc"}')}}]);
