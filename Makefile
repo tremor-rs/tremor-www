@@ -20,6 +20,6 @@ docs/api.md: tremor-runtime
 	python3 ./python_scripts/api2md.py tremor-runtime/static/openapi.yaml > docs/api.md
 
 clean:
-	rm -rf mkdocs.yml docs/operations/cli.md docs/api.md docs/tremor-script/stdlib
-	rmdir docs/operations
+	-rm -rf docs/operations/cli.md docs/api.md docs/tremor-script/stdlib
+	-rmdir docs/operations
 
