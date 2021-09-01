@@ -63,7 +63,7 @@ Implementation for the `pass_incoming` (as well as `pass_outgoing`) pipeline:
 select event from in into out;
 ```
 
-This example is intentionally light on the processing but you can imagine doing arbitrary processing based on the event data here (as well as dynamically changing the confiuration for the [websocket offramp](../../../artefacts/offramps.md#ws) via its metadata variables --  eg: things like the server url).
+This example is intentionally light on the processing but you can imagine doing arbitrary processing based on the event data here (as well as dynamically changing the confiuration for the [websocket offramp](../../../Artefacts/offramps.md#ws) via its metadata variables --  eg: things like the server url).
 
 ## Testing
 
