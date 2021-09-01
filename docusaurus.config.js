@@ -23,7 +23,7 @@ module.exports = {
       items: [
         {
           to: 'getting-started/',
-          label: 'Getting Started',
+          label: 'About Us',
           position: 'left',
         },
         {
