@@ -13,6 +13,10 @@
         <link href="https://tremor-rs.github.io/tremor-new-website/blog/continuous-benchmarking"/>
         <updated>2021-07-14T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[How we implemented a continuous benchmarking pipeline in Tremor.]]></summary>
+        <author>
+            <name>Akshat Agarwal</name>
+            <uri>https://twitter.com/humancalico</uri>
+        </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Property Based Testing of Tremor Script]]></title>
@@ -20,6 +24,10 @@
         <link href="https://tremor-rs.github.io/tremor-new-website/blog/2021/07/06/Blog-Rohit-Property-Based-Testing"/>
         <updated>2021-07-06T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Rohit's Experience working with Tremor as a LFX Spring 2021 Mentee.]]></summary>
+        <author>
+            <name>Rohit Dandamudi</name>
+            <uri>https://www.linkedin.com/in/kurious-diru/</uri>
+        </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Support for the Syslog Protocol]]></title>
@@ -27,6 +35,9 @@
         <link href="https://tremor-rs.github.io/tremor-new-website/blog/LFX-Blog-Nupur"/>
         <updated>2021-07-05T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Nupur's experience contributing to Tremor and work overview.]]></summary>
+        <author>
+            <name>Nupur Agrawal</name>
+        </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Google Cloud Storage and Pub/Sub Connectors]]></title>
@@ -34,6 +45,9 @@
         <link href="https://tremor-rs.github.io/tremor-new-website/blog/2021/06/29/T17-LFX-Blog-Jigyasa-gcloud"/>
         <updated>2021-06-29T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Jigyasa's LFX spring Mentorship experience report.]]></summary>
+        <author>
+            <name>Jigyasa Khaneja</name>
+        </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Releasing Tremor v0.9!]]></title>
@@ -41,6 +55,9 @@
         <link href="https://tremor-rs.github.io/tremor-new-website/blog/2020/10/16/v09-release"/>
         <updated>2020-10-16T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Releasing Tremor v0.9]]></summary>
+        <author>
+            <name>The Tremor Team</name>
+        </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[To async or Not to async]]></title>
@@ -48,6 +65,9 @@
         <link href="https://tremor-rs.github.io/tremor-new-website/blog/2020/08/06/to-async-or-not-to-async"/>
         <updated>2020-08-06T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Moving from threads to async tasks.]]></summary>
+        <author>
+            <name>The Tremor Team</name>
+        </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Rust & Tell Berlin- March 2020]]></title>
@@ -55,6 +75,9 @@
         <link href="https://tremor-rs.github.io/tremor-new-website/blog/2020/03/31/rust-and-tell"/>
         <updated>2020-03-31T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Presenting Tremor at Rust & Tell Berlin- March 2020.]]></summary>
+        <author>
+            <name>The Tremor Team</name>
+        </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Improving our Influx Parser- A Story in Four Acts]]></title>
@@ -62,6 +85,9 @@
         <link href="https://tremor-rs.github.io/tremor-new-website/blog/2020/03/06/influx-perf"/>
         <updated>2020-03-06T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[The process of improving the performance of our influx line protocol parser.]]></summary>
+        <author>
+            <name>The Tremor Team</name>
+        </author>
     </entry>
     <entry>
         <title type="html"><![CDATA[Tremor is now Open Source!]]></title>
@@ -69,5 +95,9 @@
         <link href="https://tremor-rs.github.io/tremor-new-website/blog/2020/02/22/welcome"/>
         <updated>2020-02-22T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Announcement of Tremor as an OSS project.]]></summary>
+        <author>
+            <name>The Tremor Team</name>
+            <uri>https://github.com/tremor-rs</uri>
+        </author>
     </entry>
 </feed>

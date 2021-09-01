@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknew_tremor_website=self.webpackChunknew_tremor_website||[]).push([[2391],{7656:function(e){e.exports=JSON.parse('{"allTagsPath":"/tremor-new-website/blog/tags","slug":"/tremor-new-website/blog/tags/open-source","name":"open-source","count":1,"permalink":"/tremor-new-website/blog/tags/open-source"}')}}]);
