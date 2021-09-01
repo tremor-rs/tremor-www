@@ -106,7 +106,7 @@ For info on how to configure and build the project, please see [the tremor build
 This guide contains info for contributions to the project and the standard facilities. It also lists some
 really useful commands to the build system, which could save you a lot of time.
 
-[tremor-build-guide]: /docs/development/quick-start/
+[tremor-build-guide]: /docs/Development/quick-start/
 
 ## Pull Requests
 
@@ -158,7 +158,7 @@ Once your merge request is approved it will enter the merge queue
 [darach]: https://github.com/darach
 
 Speaking of tests, Rust has a comprehensive test suite. More information about
-it can be found [here][https://github.com/tremor-rs/tremor-runtime/blob/main/docs/development/testing.md].
+it can be found [here][https://github.com/tremor-rs/tremor-runtime/blob/main/docs/Development/testing.md].
 
 ### External Dependencies
 

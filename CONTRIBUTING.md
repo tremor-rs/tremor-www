@@ -101,7 +101,7 @@ For info on how to configure and build the project, please see [the tremor build
 This guide contains info for contributions to the project and the standard facilities. It also lists some
 really useful commands to the build system, which could save you a lot of time.
 
-[tremor-build-guide]: https://docs.tremor.rs/development/quick-start/
+[tremor-build-guide]: https://docs.tremor.rs/Development/quick-start/
 
 ## Pull Requests
 
@@ -162,7 +162,7 @@ Once your merge request is approved it will enter the merge queue
 [darach]: https://github.com/darach
 
 Speaking of tests, tremor has a comprehensive test suite. More information about
-it can be found [here][https://github.com/tremor-rs/tremor-www-docs/blob/main/docs/development/testing.md].
+it can be found [here][https://github.com/tremor-rs/tremor-www-docs/blob/main/docs/Development/testing.md].
 
 ### External Dependencies
 
