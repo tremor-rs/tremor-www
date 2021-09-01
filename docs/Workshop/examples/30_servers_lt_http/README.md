@@ -40,7 +40,7 @@ binding:
 
 ### Processing logic
 
-In the `request_processing` pipeline, we are free to process the incoming request using tremor-script/tremor-query, and leveraging the various request and response metadata variables for the [rest onramp](../../../artefacts/onramps.md#rest). The event flow within the pipeline is captured below:
+In the `request_processing` pipeline, we are free to process the incoming request using tremor-script/tremor-query, and leveraging the various request and response metadata variables for the [rest onramp](../../../Artefacts/onramps.md#rest). The event flow within the pipeline is captured below:
 
 ```trickle
 create script process;

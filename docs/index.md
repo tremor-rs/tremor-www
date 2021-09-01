@@ -24,10 +24,10 @@ Other interesting topics are:
 * [The tremor-script language](tremor-script/index.md)
 * [The tremor-query language](tremor-query/index.md)
 * Artefacts namely:
-    * [Onramps](artefacts/onramps.md)
-    * [Offramps](artefacts/offramps.md)
-    * [Codecs](artefacts/codecs.md)
-    * [Pre-](artefacts/preprocessors.md) and [Postprocessors](artefacts/postprocessors.md)
+    * [Onramps](Artefacts/onramps.md)
+    * [Offramps](Artefacts/offramps.md)
+    * [Codecs](Artefacts/codecs.md)
+    * [Pre-](Artefacts/preprocessors.md) and [Postprocessors](Artefacts/postprocessors.md)
 * Operational information about
     * [Monitoring](Operations/monitoring.md)
     * [Configuration](Operations/configuration.md) and the [Configuration Walkthrough](Operations/configuration-walkthrough.md)

@@ -18,7 +18,7 @@ Three httpbin servers are set up in the accompagnying `docker-compose.yml`.
 
 
 To issue incoming HTTP requests to an upstream HTTP server
-a [REST onramp](../../../artefacts/onramps.md#rest) needs to be configured in `config.yaml` to listen on a port of our choice:
+a [REST onramp](../../../Artefacts/onramps.md#rest) needs to be configured in `config.yaml` to listen on a port of our choice:
 
 ```yaml
 onramp:
@@ -31,7 +31,7 @@ onramp:
         port: 65535
 ```
 
-To forward received requests to the httpbin upstream servers a [REST offramp](../../../artefacts/offramps.md#rest) needs to be configured in `config.yaml` to point at each of it:
+To forward received requests to the httpbin upstream servers a [REST offramp](../../../Artefacts/offramps.md#rest) needs to be configured in `config.yaml` to point at each of it:
 
 ```yaml
 offramp:
@@ -153,7 +153,7 @@ select event from response_handling/err into err;
 
 Here we only set the `Via` response header.
 
-Now the single bits need to be connected in order to complete the flow back and forth between client and upstream. When linking [REST offramps](../../../artefacts/offramps.md#rest) and [onramps](../../../artefacts/onramps.md#rest) together it is important to take care that any error that might happen on the way is reported back to the REST onramp `http_in` as otherwise clients would not receive any response. Luckily with Linked Transports we can connect all error outputs easily in our binding and thus will receive proper error messages as HTTP responses.
+Now the single bits need to be connected in order to complete the flow back and forth between client and upstream. When linking [REST offramps](../../../Artefacts/offramps.md#rest) and [onramps](../../../Artefacts/onramps.md#rest) together it is important to take care that any error that might happen on the way is reported back to the REST onramp `http_in` as otherwise clients would not receive any response. Luckily with Linked Transports we can connect all error outputs easily in our binding and thus will receive proper error messages as HTTP responses.
 Again, we do it in `config.yaml`:
 
 ```yaml

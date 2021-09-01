@@ -209,7 +209,7 @@ Tremor does not ( yet ) have an out-of-the-box network protocol. A native Tremor
 
 As such, the distribution model for Tremor is currently limited to the set of available onramp and offramp connectors.
 
-However the websocket [onramp](artefacts/onramps.md#ws) and [offramp](artefacts/offramps.md#ws) can be used for Tremor to Tremor communication.
+However the websocket [onramp](Artefacts/onramps.md#ws) and [offramp](Artefacts/offramps.md#ws) can be used for Tremor to Tremor communication.
 
 ### Client/Server
 
