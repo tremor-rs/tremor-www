@@ -42,7 +42,7 @@ const FeatureList = [
   {
     title: 'Scripting',
     link: 'scripting/',
-    Svg: require('../../static/img/scriptable.svg').default,
+    Svg: require('../../static/img/scripting.svg').default,
     description: (
       <>
       Tremor's application logic is scriptable. Tremor supports data processing through a directed acyclic graph-based pipeline
@@ -56,7 +56,7 @@ const FeatureList = [
   {
     title: 'Codecs',
     link: 'codecs/',
-    Svg: require('../../static/img/scriptable.svg').default,
+    Svg: require('../../static/img/codecs.svg').default,
     description: (
       <>
       Tremor connects to the external systems using connectors - either Onramps or Offramps- which use Codecs
@@ -68,12 +68,12 @@ const FeatureList = [
   {
     title: 'Install',
     link: 'install/',
-    Svg: require('../../static/img/scriptable.svg').default,
+    Svg: require('../../static/img/install.svg').default,
     description: (
       <>
       Quick developer install.<br/>
 
-      But first, <a href="">set up</a> your Tremor installation.
+      But first, <a href="getting-started/">set up</a> your Tremor installation.
       </>
     ),
   },
