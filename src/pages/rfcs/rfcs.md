@@ -271,9 +271,9 @@ Unless you explicitly state otherwise, any contribution intentionally submitted 
 
 This process derives from, and is based on, the Rust language community RFC process [from here](https://github.com/rust-lang/rfcs).
 
-## [RFC Template](0000-template/)
+## RFC Template
 
-This is the template you should use when making an RFC.
+This is the [template](0000-template/) you should use when making an RFC.
 
 ## RFC List
 
