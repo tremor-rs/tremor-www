@@ -51,11 +51,11 @@ Met. https://github.com/tremor-rs/tremor-runtime/issues
 
 **The information on how to contribute MUST explain the contribution process (e.g., are pull requests used?) (URL required)**
 
-Met. https://docs.tremor.rs/Contributing
+Met. /docs/Contributing
 
 **The information on how to contribute SHOULD include the requirements for acceptable contributions (e.g., a reference to any required coding standard). (URL required)**
 
-Met. https://docs.tremor.rs/Contributing
+Met. /docs/Contributing
 
 ### FLOSS license
 
@@ -79,11 +79,11 @@ Met. The license (ASL-2.0) in in the file LICENSE, see https://github.com/tremor
 
 **The project MUST provide basic documentation for the software produced by the project.**
 
-Met. https://docs.tremor.rs/
+Met. /docs/
 
 **The project MUST provide reference documentation that describes the external interface (both input and output) of the software produced by the project.**
 
-Met. https://docs.tremor.rs/api/
+Met. /docs/api/
 
 ### Other
 
@@ -143,7 +143,7 @@ Met.
 
 **The project MUST provide a process for users to submit bug reports (e.g., using an issue tracker or a mailing list). (URL required)**
 
-Met. https://docs.tremor.rs/Contributing
+Met. /docs/Contributing
 
 **The project SHOULD use an issue tracker for tracking individual issues.**
 
@@ -165,11 +165,11 @@ Met. All requests, reports and responses are gated via the issue tracking system
 
 **The project MUST publish the process for reporting vulnerabilities on the project site. (URL required)**
 
-Met. https://docs.tremor.rs/Security
+Met. /docs/Security
 
 **If private vulnerability reports are supported, the project MUST include how to send the information in a way that is kept private. (URL required)**
 
-Met. https://docs.tremor.rs/Security
+Met. /docs/Security
 
 **The project's initial response time for any vulnerability report received in the last 6 months MUST be less than or equal to 14 days.**
 
@@ -199,7 +199,7 @@ Met. https://github.com/tremor-rs/tremor-runtime/actions
 
 **A test suite SHOULD be invocable in a standard way for that language.**
 
-Met. https://docs.tremor.rs/development/testing
+Met. /docs/development/testing
 
 **It is SUGGESTED that the test suite cover most (or ideally all) the code branches, input fields, and functionality.**
 

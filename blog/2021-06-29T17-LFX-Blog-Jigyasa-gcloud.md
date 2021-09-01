@@ -18,9 +18,9 @@ Tremor is an event processing system for unstructured data with rich support for
 
 I had never worked on an event processing system before this internship. In fact, my first major contribution to open-source was through this mentorship program. To get started with it, my mentor [Darach Ennis](https://www.linkedin.com/in/darach-ennis-789866?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BnRZIYeLfRAWJpWsDNlzweA%3D%3D), suggested me some documents that helped me learn more about it:
 
-[https://docs.tremor.rs/overview/](https://docs.tremor.rs/overview/)
+[/docs/overview/](/docs/overview/)
 
-[https://docs.tremor.rs/course](https://docs.tremor.rs/course/#/2)
+[/docs/course](/docs/course/#/2)
 
 Apart from that, learning more about the tremor-query, tremor-script, and going through the workshops in the docs can be really helpful.
 
@@ -66,12 +66,12 @@ Connectors serve the purpose of sending events to and receiving events from the 
 
 #### Google Cloud Storage connector:
 
-I wrote a GCS sink that can issue the basic GCS operations such as list buckets and objects, create, insert and delete objects from the Google Cloud Platform cloud storage service. The docs can be found here: [GCS offramp docs](https://docs.tremor.rs/artefacts/offramps/#gcs)
+I wrote a GCS sink that can issue the basic GCS operations such as list buckets and objects, create, insert and delete objects from the Google Cloud Platform cloud storage service. The docs can be found here: [GCS offramp docs](/docs/artefacts/offramps/#gcs)
 
 #### Google Cloud Pub/Sub connector:
 
 The gpub sink can issue the operation of sending a message to a Google Cloud Pub/Sub topic. It also allows creating a subscription to a topic to receive messages in it, with the option to enable/disable message ordering. The gsub source allows receiving messages via a subscription in batches as well as one after another. The docs can be found here:
-[gpub offramp](https://docs.tremor.rs/artefacts/offramps/#gpub) and [gsub onramp](https://docs.tremor.rs/artefacts/onramps/#gsub)
+[gpub offramp](/docs/artefacts/offramps/#gpub) and [gsub onramp](/docs/artefacts/onramps/#gsub)
 
 ## Walk-Through Guide
 
@@ -146,8 +146,8 @@ mapping:
 The above config receives `json` on stdin, sends it to Google Cloud Storage service (and stdout) and writes the response received from GCS (since `linked: true`) to stdout.
 
 The instance variable (in the binding) is replaced by the value passthrough in the mapping upon deployment, so it is possible to define multiple bindings (deployments) for a single mapping (template).
-Supported preprocessors, that can be configured in yaml file can be found here: [preprocessors](https://docs.tremor.rs/artefacts/preprocessors/). Supported postprocessors and more about it: [postprocessors](https://docs.tremor.rs/artefacts/postprocessors/).
-Supported codecs, that can be configured in yaml file can be found here: [codecs](https://docs.tremor.rs/artefacts/codecs/)
+Supported preprocessors, that can be configured in yaml file can be found here: [preprocessors](/docs/artefacts/preprocessors/). Supported postprocessors and more about it: [postprocessors](/docs/artefacts/postprocessors/).
+Supported codecs, that can be configured in yaml file can be found here: [codecs](/docs/artefacts/codecs/)
 
 - Set the env variable
 
@@ -160,7 +160,7 @@ export GOOGLE_APPLICATION_CREDENTIALS="<path-to-service-token-json-file>"
 ```bash
 tremor server run -f outbound.trickle inbound.trickle test.yaml | jq .
 ```
-For a detailed guide on the operations that can be performed, refer the [docs](https://docs.tremor.rs/artefacts/offramps/#gcs).
+For a detailed guide on the operations that can be performed, refer the [docs](/docs/artefacts/offramps/#gcs).
 
 ### Google Cloud Pub/sub
 
@@ -232,9 +232,9 @@ mapping:
 ```
 The above config receives `json` on stdin, sends it to Google Pub/sub service (and stdout) and writes the response received from Google Pub/sub (since `linked` is set to true) to stdout. At the same time, it also receives the messages for the configured subscription from Google pub/sub and writes those messages to stdout.
 
-Supported preprocessors, that can be configured in yaml file can be found here: [preprocessors](https://docs.tremor.rs/artefacts/preprocessors/).
-Supported postprocessors and more about it: [postprocessors](https://docs.tremor.rs/artefacts/postprocessors/). 
-Supported codecs, that can be configured in yaml file can be found here: [codecs](https://docs.tremor.rs/artefacts/codecs/)
+Supported preprocessors, that can be configured in yaml file can be found here: [preprocessors](/docs/artefacts/preprocessors/).
+Supported postprocessors and more about it: [postprocessors](/docs/artefacts/postprocessors/). 
+Supported codecs, that can be configured in yaml file can be found here: [codecs](/docs/artefacts/codecs/)
 
 ![Tremor Dot Diagram](../static/img/blog-images/LFX-blog-jigyasa/dot-diagram.png)
 
@@ -256,7 +256,7 @@ export GOOGLE_APPLICATION_CREDENTIALS="<path-to-service-token-json-file>"
 tremor server run -f outbound.trickle inbound.trickle test.yaml | jq .
 ```
 
-Refer to the [gpub](https://docs.tremor.rs/artefacts/offramps/#gpub) and [gsub](https://docs.tremor.rs/artefacts/onramps/#gsub) docs to perform opertaions.
+Refer to the [gpub](/docs/artefacts/offramps/#gpub) and [gsub](/docs/artefacts/onramps/#gsub) docs to perform opertaions.
 <!-- docs on the website are not updated rn! -->
 <!-- REMOVING IT BECAUSE IT'S IN THE DOCS
 - After running tremor, create a subscription:
@@ -293,7 +293,7 @@ However, we wish to test the property of guranteed delivery and message-ordering
 
 For this purpose, we also use a write-ahead log or `wal` that builds on circuit breaker and acknowledgement mechanisms to provide guaranteed delivery. The write-ahead log is useful in situations where sources/onramps do not offer guaranteed delivery themselves, but the data being distributed downstream can benefit from protection against loss and duplication.
 
-We have 3 different configurations for the outbound trickle file - using a [transient wal](https://docs.tremor.rs/workshop/examples/20_transient_gd/), [persistent wal](https://docs.tremor.rs/workshop/examples/21_persistent_gd/) and no wal. The cofigurations are as follows:
+We have 3 different configurations for the outbound trickle file - using a [transient wal](/docs/workshop/examples/20_transient_gd/), [persistent wal](/docs/workshop/examples/21_persistent_gd/) and no wal. The cofigurations are as follows:
 
 **No wal**
 

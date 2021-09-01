@@ -32,7 +32,7 @@ Tremor is and what problem is it trying to solve.
 > that have a high message volume to deal with and want to build pipelines to
 > process, route, or limit this event stream. [^1]
 
-[^1]: See https://docs.tremor.rs/
+[^1]: See /docs/
 
 Tremor emerged at Wayfair because the existing data distribution tools weren’t
 performant enough for their needs. So for

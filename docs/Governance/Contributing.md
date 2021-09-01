@@ -30,7 +30,7 @@ If this is your first time contributing, we would like to thank you for spending
 on the project! Please reach out directly to any core project member if you would like
 any guidance or assistance.
 
-[code-of-conduct]: https://docs.tremor.rs/CodeOfConduct
+[code-of-conduct]: /docs/CodeOfConduct
 
 ## Feature Requests
 
@@ -50,7 +50,7 @@ don't know about, so please report liberally. If you're not sure if something
 is a bug or not, feel free to file a bug anyway.
 
 **If you believe reporting your bug publicly represents a security risk to Tremor users,
-please follow our [instructions for reporting security vulnerabilities](https://docs.tremor.rs/policies/security)**.
+please follow our [instructions for reporting security vulnerabilities](/docs/policies/security)**.
 
 If you have the chance, before reporting a bug, please [search existing
 issues](https://github.com/tremor-rs/tremor-runtime/search?q=&type=Issues&utf8=%E2%9C%93),
@@ -106,7 +106,7 @@ For info on how to configure and build the project, please see [the tremor build
 This guide contains info for contributions to the project and the standard facilities. It also lists some
 really useful commands to the build system, which could save you a lot of time.
 
-[tremor-build-guide]: http://docs.tremor.rs/development/quick-start/
+[tremor-build-guide]: /docs/development/quick-start/
 
 ## Pull Requests
 

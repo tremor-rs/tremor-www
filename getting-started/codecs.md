@@ -25,7 +25,7 @@ data into tremor internal form. Preprocessors are configured as a chain of trans
 are applied to values leaving tremor after a codec transform them from tremor internal form to wire
 form. Postprocessors are configured as a chain of transformations.
 
-Codecs share similar concepts to [extractors](https://docs.tremor.rs/tremor-script/#extractors) but differ in their
+Codecs share similar concepts to [extractors](/docs/tremor-script/#extractors) but differ in their
 application. Codecs are applied to external data as they are ingested by or egressed from a running tremor process.
 Extractors, on the other hand, are tremor internal and convert data from and to tremor's internal value type.
 
@@ -50,35 +50,35 @@ For specific components their documentation should be consulted for correct usag
 
 Tremor supports the encoding and decoding of the following formats:
 
-* [json](https://docs.tremor.rs/artefacts/codecs#json)
-* [msgpack](https://docs.tremor.rs/artefacts/codecs#msgpack)
-* [influx](https://docs.tremor.rs/artefacts/codecs#influx)
-* [binflux](https://docs.tremor.rs/artefacts/codecs#binflux) - (binary representation of the influx wire protocol)
-* [statsd](https://docs.tremor.rs/artefacts/codecs#statsd)
-* [yaml](https://docs.tremor.rs/artefacts/codecs#yaml)
-* [string](https://docs.tremor.rs/artefacts/codecs#string) - any valid UTF-8 string sequence
+* [json](/docs/artefacts/codecs#json)
+* [msgpack](/docs/artefacts/codecs#msgpack)
+* [influx](/docs/artefacts/codecs#influx)
+* [binflux](/docs/artefacts/codecs#binflux) - (binary representation of the influx wire protocol)
+* [statsd](/docs/artefacts/codecs#statsd)
+* [yaml](/docs/artefacts/codecs#yaml)
+* [string](/docs/artefacts/codecs#string) - any valid UTF-8 string sequence
 
 <h3 class="section-head" id="h-concept"><a href="#h-codecs"></a>Pre- and Postprocessors</h3>
 
 Tremor supports the following preprocessing transformations in `Onramp` configurations:
 
-* [lines](https://docs.tremor.rs/artefacts/preprocessors/#lines) - split by newline
-* [lines-null](https://docs.tremor.rs/artefacts/preprocessors/#lines-null) - split by null byte
-* [lines-pipe](https://docs.tremor.rs/artefacts/preprocessors/#lines-pipe) - split by `|`
-* [base64](https://docs.tremor.rs/artefacts/preprocessors/#base64) - base64 decoding
-* [decompress](https://docs.tremor.rs/artefacts/preprocessors/#decompress) - auto detecting decompress
-* [gzip](https://docs.tremor.rs/artefacts/preprocessors/#gzip) - gzip decompress
-* [zlib](https://docs.tremor.rs/artefacts/preprocessors/#zlib) - zlib decompress
-* [xz](https://docs.tremor.rs/artefacts/preprocessors/#xz) - xz decompress
-* [snappy](https://docs.tremor.rs/artefacts/preprocessors/#snappy) - snappy decompress
-* [lz4](https://docs.tremor.rs/artefacts/preprocessors/#lz4) - zl4 decompress
-* [gelf-chunking](https://docs.tremor.rs/artefacts/preprocessors/#gelf-chunking) - GELF chunking support
-* [remove-empty](https://docs.tremor.rs/artefacts/preprocessors/#remove-empty) - remove emtpy (0 len) messages
-* [length-prefixerd](https://docs.tremor.rs/artefacts/preprocessors/#length-prefixerd) - length prefixed splitting for streams
+* [lines](/docs/artefacts/preprocessors/#lines) - split by newline
+* [lines-null](/docs/artefacts/preprocessors/#lines-null) - split by null byte
+* [lines-pipe](/docs/artefacts/preprocessors/#lines-pipe) - split by `|`
+* [base64](/docs/artefacts/preprocessors/#base64) - base64 decoding
+* [decompress](/docs/artefacts/preprocessors/#decompress) - auto detecting decompress
+* [gzip](/docs/artefacts/preprocessors/#gzip) - gzip decompress
+* [zlib](/docs/artefacts/preprocessors/#zlib) - zlib decompress
+* [xz](/docs/artefacts/preprocessors/#xz) - xz decompress
+* [snappy](/docs/artefacts/preprocessors/#snappy) - snappy decompress
+* [lz4](/docs/artefacts/preprocessors/#lz4) - zl4 decompress
+* [gelf-chunking](/docs/artefacts/preprocessors/#gelf-chunking) - GELF chunking support
+* [remove-empty](/docs/artefacts/preprocessors/#remove-empty) - remove emtpy (0 len) messages
+* [length-prefixerd](/docs/artefacts/preprocessors/#length-prefixerd) - length prefixed splitting for streams
 
 Tremor supports the following postprocessing transformations in `Offramp` configurations:
 
-* [lines](https://docs.tremor.rs/artefacts/postprocessors/#lines)
-* [base64](https://docs.tremor.rs/artefacts/postprocessors/#base64)
-* [length-prefixerd](https://docs.tremor.rs/artefacts/postprocessors/#length-prefixerd)
-* [compression](https://docs.tremor.rs/artefacts/postprocessors/#compression)
+* [lines](/docs/artefacts/postprocessors/#lines)
+* [base64](/docs/artefacts/postprocessors/#base64)
+* [length-prefixerd](/docs/artefacts/postprocessors/#length-prefixerd)
+* [compression](/docs/artefacts/postprocessors/#compression)
