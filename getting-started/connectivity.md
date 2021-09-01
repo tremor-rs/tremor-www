@@ -1,12 +1,12 @@
 ---
 title: Connectivity
 description: Talking to other systems- Connecting different systems is an integral part of Tremor.
-hide_table_of_contents: true
+hide_table_of_contents: false
 ---
 
 ### Concept
 
-In order to provide a general purpose event processing facility to a broad base
+In order to provide a general-purpose event processing facility to a broad base
 of applications, Tremor separates processing from connectivity and distribution.
 
 Tremor further separates the syntax of external formats from the implied value type semantics that are useful for filtering, processing, transforming, aggregating or otherwise deriving synthetic events from streams of data ingested by Tremor processes.
@@ -27,6 +27,7 @@ Tremor has built-in support for metrics capture of data ingested and distributed
 
 Tremor supports a number of stable general purpose onramps:
 
+<<<<<<< HEAD
 * [Kafka](/docs/Artefacts/onramps/#kafka)
 * [TCP](/docs/Artefacts/onramps/#TCP)
 * [UDP](/docs/Artefacts/onramps/#udp)
@@ -35,6 +36,16 @@ Tremor supports a number of stable general purpose onramps:
 * [Metronome](/docs/Artefacts/onramps/#metronome) - periodic tick events
 * [Crononome](/docs/Artefacts/onramps/#crononome) - cron based tick events
 * [Blaster](/docs/Artefacts/onramps/#blaster) - Benchmarking onramp
+=======
+* [Kafka](https://docs.tremor.rs/artefacts/onramps/#kafka)
+* [TCP](https://docs.tremor.rs/artefacts/onramps/#TCP)
+* [UDP](https://docs.tremor.rs/artefacts/onramps/#udp)
+* [WS](https://docs.tremor.rs/artefacts/onramps/#WS)
+* [File](https://docs.tremor.rs/artefacts/onramps/#File)- reads a singular file.
+* [Metronome](https://docs.tremor.rs/artefacts/onramps/#metronome)- periodic tick events.
+* [Crononome](https://docs.tremor.rs/artefacts/onramps/#crononome)- cron based tick events.
+* [Blaster](https://docs.tremor.rs/artefacts/onramps/#blaster)- Benchmarking onramp.
+>>>>>>> 22a80a7 (Make homepage feature headers links)
 
 And some early-access evolving production-grade onramps:
 
@@ -42,8 +53,9 @@ And some early-access evolving production-grade onramps:
 
 ### Offramps
 
-Tremor supports a numbre of stable general purpose offramps:
+Tremor supports a number of stable general purpose offramps:
 
+<<<<<<< HEAD
 * [File](/docs/Artefacts/offramps/#File)
 * [Kafka](/docs/Artefacts/offramps/#Kafka)
 * [REST](/docs/Artefacts/offramps/#REST)
@@ -54,3 +66,15 @@ Tremor supports a numbre of stable general purpose offramps:
 * [elastic](/docs/Artefacts/offramps/#elastic) - ElasticSearch client
 * [debug](/docs/Artefacts/offramps/#REST) - tremor internal use for debugging
 * [stdout](/docs/Artefacts/offramps/#stdout)
+=======
+* [File](https://docs.tremor.rs/artefacts/offramps/#File)
+* [Kafka](https://docs.tremor.rs/artefacts/offramps/#Kafka)
+* [REST](https://docs.tremor.rs/artefacts/offramps/#REST)
+* [TCP](https://docs.tremor.rs/artefacts/offramps/#TCP)
+* [UDP](https://docs.tremor.rs/artefacts/offramps/#UDP)
+* [WS](https://docs.tremor.rs/artefacts/offramps/#WS)
+* [BlackHole](https://docs.tremor.rs/artefacts/offramps/#REST)- benchmarking offramp.
+* [elastic](https://docs.tremor.rs/artefacts/offramps/#elastic)- ElasticSearch client
+* [debug](https://docs.tremor.rs/artefacts/offramps/#REST)- tremor internal use for debugging.
+* [stdout](https://docs.tremor.rs/artefacts/offramps/#stdout)
+>>>>>>> 22a80a7 (Make homepage feature headers links)
