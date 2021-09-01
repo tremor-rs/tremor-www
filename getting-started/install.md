@@ -1,7 +1,7 @@
 ---
 title: Quick Developer Install
-description: Notes about tremor installation for developers.
-hide_table_of_contents: true
+description: Notes about Tremor installation for developers.
+hide_table_of_contents: false
 ---
 
 <h3 class="section-head" id="h-platforms"><a href="#h-platforms"></a>Supported Platforms</h3>
@@ -66,8 +66,8 @@ Select the operating system your are developing on.
 
 
 <div id="ide-vim">
-  Follow the instructions in the <a href="https://github.com/tremor-rs/tremor-vim">tremor-vim</a> git repository, and
-  ensure your `.vimrc` is updated and that you have the <a href="https://github.com/dense-analysis/ale">vim ALE</a> asynchronous
+  Follow the instructions in the <a href="https://github.com/tremor-rs/tremor-vim">tremor-vim</a> Git repository;
+  ensure your `.vimrc` is updated, and that you have the <a href="https://github.com/dense-analysis/ale">vim ALE</a> asynchronous
   lint engine.
 
   <pre>
@@ -78,16 +78,16 @@ Select the operating system your are developing on.
 </div>
 
 <div id="ide-vscode">
-  Follow the instructions in the <a href="https://github.com/tremor-rs/tremor-vscode">tremor-vscode</a> git repository.
+  Follow the instructions in the <a href="https://github.com/tremor-rs/tremor-vscode">tremor-vscode</a> Git repository.
 </div>
 
 <div id="ide-other">
   We are accepting contributions to support other IDEs.
 </div>
 
-<h3 class="section-head" id="h-trill"><a href="#h-trill"></a>Setup the tremor language server</h3>
+<h3 class="section-head" id="h-trill"><a href="#h-trill"></a>Set Up the Tremor Language Server</h3>
 
-  Clone the tremor-langauge-server git repository, build and install the server and place the binary on your path.
+  Clone the tremor-langauge-server Git repository; build and install the server, and place the binary on your path.
 
   > ```bash
   > cd $HOME/git
@@ -106,4 +106,8 @@ Select the operating system your are developing on.
   > cargo build --release --all # go get a nice cup of tea
   > ```
 
+<<<<<<< HEAD
 For more details on building tremor, please refer to the [tremor development docs](/docs/Development/quick-start/).
+=======
+For more details on building Tremor, please refer to the [Tremor development docs](https://docs.tremor.rs/development/quick-start/).
+>>>>>>> 22a80a7 (Make homepage feature headers links)

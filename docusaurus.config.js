@@ -35,7 +35,7 @@ module.exports = {
         { to: 'blog', label: 'Blog', position: 'left' },
         { to: 'quick-start', label: 'Usage Guide', position: 'left' },
         { to: 'api', label: 'API', position: 'left' },
-        { to: 'rfcs/rfcs', label: 'RFCs', position: 'left', docId: 'rfc' },
+        { to: 'rfcs/rfcs', label: 'RFCs', position: 'left'},
         { to: 'community', label: 'Community', position: 'left' },
         { to: 'governance', label: 'Governance', position: 'left' },
         { to: 'faqs', label: 'FAQs', position: 'left' },
@@ -69,14 +69,11 @@ module.exports = {
       style: 'dark',
       links: [
         {
-          title: 'Documentation',
+          title: 'Docs',
           items: [
             {
+              label: 'Quick Start',
               to: 'docs/',
-              type: 'doc',
-              docId: 'index',
-              label: 'Docs',
-              position: 'left',
             },
             {
               label: 'Usage Guide',
