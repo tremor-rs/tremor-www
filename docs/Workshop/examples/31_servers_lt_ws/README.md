@@ -1,6 +1,6 @@
 # Websocket Server
 
-Example Websocket server application built on top of Tremor and meant to be a demonstration of [linked transports](../../../operations/linked-transports.md).
+Example Websocket server application built on top of Tremor and meant to be a demonstration of [linked transports](../../../Operations/linked-transports.md).
 
 ## Setup
 

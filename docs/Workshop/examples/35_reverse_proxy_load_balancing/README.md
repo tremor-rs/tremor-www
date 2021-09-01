@@ -3,7 +3,7 @@
 This example shows how to setup tremor as a reverse proxy for HTTP/1.1 that
 load balances between multiple upstream servers in a round-robin fashion.
 
-We are going to make use of the new [linked transport](../../../operations/linked-transports.md) and *Quality of Service* features in tremor *0.9*.
+We are going to make use of the new [linked transport](../../../Operations/linked-transports.md) and *Quality of Service* features in tremor *0.9*.
 
 ## Setting up multiple web-servers for testing purposes
 
@@ -126,7 +126,7 @@ select event from request_handling/err into err; # report error to its own port
 With the `qos::roundrobin` and `qos::backpressure` we distribute the load evenly and
 back off if a server is overloaded or events continue to fail (result in HTTP status coded >= 400 or are unable to establish a connection etc.).
 
-But this is only half a proxy without response handling getting back from the offramp, which is only now possible with the dawn of [linked transports](../../../operations/linked-transports.md). Handling the responses coming back from the upstreams is implemented in the following pipeline:
+But this is only half a proxy without response handling getting back from the offramp, which is only now possible with the dawn of [linked transports](../../../Operations/linked-transports.md). Handling the responses coming back from the upstreams is implemented in the following pipeline:
 
 ```trickle
 define script response_handling

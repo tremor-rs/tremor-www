@@ -29,9 +29,9 @@ Other interesting topics are:
     * [Codecs](artefacts/codecs.md)
     * [Pre-](artefacts/preprocessors.md) and [Postprocessors](artefacts/postprocessors.md)
 * Operational information about
-    * [Monitoring](operations/monitoring.md)
-    * [Configuration](operations/configuration.md) and the [Configuration Walkthrough](operations/configuration-walkthrough.md)
-    * [The tremor CLI](operations/cli.md)
+    * [Monitoring](Operations/monitoring.md)
+    * [Configuration](Operations/configuration.md) and the [Configuration Walkthrough](Operations/configuration-walkthrough.md)
+    * [The tremor CLI](Operations/cli.md)
 * [The tremor API](api.md)
 * [Workshop](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/) and various use case [examples](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples)
 * Development related information

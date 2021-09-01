@@ -1,6 +1,6 @@
 # HTTP -> Websocket Bridge
 
-Example HTTP -> Websocket bridge application built on top of Tremor and meant to be a demonstration of [linked transports](../../../operations/linked-transports.md).
+Example HTTP -> Websocket bridge application built on top of Tremor and meant to be a demonstration of [linked transports](../../../Operations/linked-transports.md).
 
 ## Setup
 

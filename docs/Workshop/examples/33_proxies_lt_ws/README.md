@@ -1,6 +1,6 @@
 # Websocket Proxy
 
-Example Websocket proxy application built on top of Tremor and meant to be a demonstration of [linked transports](../../../operations/linked-transports.md).
+Example Websocket proxy application built on top of Tremor and meant to be a demonstration of [linked transports](../../../Operations/linked-transports.md).
 
 ## Setup
 
