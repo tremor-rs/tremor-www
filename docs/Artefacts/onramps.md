@@ -657,7 +657,7 @@ Set metadata variables:
 
 Used metadata variables:
 
-> These variables can be used to dynamically change how responses are handled when using this onramp as [linked transport](../operations/linked-transports.md):
+> These variables can be used to dynamically change how responses are handled when using this onramp as [linked transport](../Operations/linked-transports.md):
 
 - `$response` - A record capturing the HTTP response attributes. Available fields within:
   - `status` - Numeric HTTP status code. (optional. status code defaults to `200` when not set).
@@ -872,7 +872,7 @@ Set metadata variables:
 
 - `$binary` - `true` if the incoming WebSocket message came as binary (`false` otherwise).
 
-Used metadata variables (for reply with [linked transports](../operations/linked-transports.md)):
+Used metadata variables (for reply with [linked transports](../Operations/linked-transports.md)):
 
 - `$binary` - If reply data should be sent as binary instead of text (optional. data format defaults to text when not set).
 

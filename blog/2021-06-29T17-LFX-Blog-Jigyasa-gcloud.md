@@ -66,7 +66,7 @@ Connectors serve the purpose of sending events to and receiving events from the 
 
 #### Google Cloud Storage connector:
 
-I wrote a GCS sink that can issue the basic GCS operations such as list buckets and objects, create, insert and delete objects from the Google Cloud Platform cloud storage service. The docs can be found here: [GCS offramp docs](/docs/artefacts/offramps/#gcs)
+I wrote a GCS sink that can issue the basic GCS Operations such as list buckets and objects, create, insert and delete objects from the Google Cloud Platform cloud storage service. The docs can be found here: [GCS offramp docs](/docs/artefacts/offramps/#gcs)
 
 #### Google Cloud Pub/Sub connector:
 
@@ -160,7 +160,7 @@ export GOOGLE_APPLICATION_CREDENTIALS="<path-to-service-token-json-file>"
 ```bash
 tremor server run -f outbound.trickle inbound.trickle test.yaml | jq .
 ```
-For a detailed guide on the operations that can be performed, refer the [docs](/docs/artefacts/offramps/#gcs).
+For a detailed guide on the Operations that can be performed, refer the [docs](/docs/artefacts/offramps/#gcs).
 
 ### Google Cloud Pub/sub
 
