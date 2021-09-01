@@ -5,7 +5,7 @@ title: Code of Conduct
 
 # The Tremor Code of Conduct
 
-A version of this document [can be found online](https://docs.tremor.rs/CodeOfConduct).
+A version of this document [can be found online](/docs/CodeOfConduct).
 
 ## Conduct
 
