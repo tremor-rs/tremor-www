@@ -127,7 +127,7 @@ Met. The project follows [Semantic Versioning](https://semver.org/) (SemVer) for
 
 **It is SUGGESTED that projects identify each release within their version control system. For example, it is SUGGESTED that those using git identify each release using git tags.**
 
-Met. https://github.com/tremor-rs/tremor-runtime/tree/main/docs/development/process/release.md
+Met. https://github.com/tremor-rs/tremor-runtime/tree/main/docs/Development/process/release.md
 
 **The project MUST provide, in each release, release notes that are a human-readable summary of major changes in that release to help users determine if they should upgrade and what the upgrade impact will be. The release notes MUST NOT be the raw output of a version control log (e.g., the "git log" command results are not release notes). Projects whose results are not intended for reuse in multiple locations (such as the software for a single website or service) AND employ continuous delivery MAY select "N/A". (URL required)**
 
@@ -199,7 +199,7 @@ Met. https://github.com/tremor-rs/tremor-runtime/actions
 
 **A test suite SHOULD be invocable in a standard way for that language.**
 
-Met. /docs/development/testing
+Met. /docs/Development/testing
 
 **It is SUGGESTED that the test suite cover most (or ideally all) the code branches, input fields, and functionality.**
 
