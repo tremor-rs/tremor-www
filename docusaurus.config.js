@@ -16,13 +16,13 @@ module.exports = {
     navbar: {
       logo: {
         alt: 'Tremor Logo',
-        src: 'https://www.tremor.rs/img/common/logo.png',
+        src: 'static/img/tremor-logo.png',
         href: 'https://tremor-rs.github.io/tremor-new-website/',
         target: '_self',
       },
       items: [
         {
-          to: 'getting-started/',
+          to: 'about/',
           label: 'About Us',
           position: 'left',
         },
