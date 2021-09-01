@@ -73,10 +73,6 @@ module.exports = {
           items: [
             {
               label: 'Quick Start',
-              to: 'docs/',
-            },
-            {
-              label: 'Usage Guide',
               to: 'quick-start/',
             },
             {
@@ -114,8 +110,8 @@ module.exports = {
               href: 'https://github.com/tremor-rs',
             },
             {
-              label: 'The Team',
-              to: 'community/teams/',
+              label: 'Download',
+              href: 'https://github.com/tremor-rs/tremor-runtime/releases',
             },
             {
               html: `<a href="https://www.cncf.io/" target="_blank" rel="noreferrer noopener" aria-label="CNCF"><img src="static/img/cncf-color-minimalism.png" alt="CNCF" /></a>`,
