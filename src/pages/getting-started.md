@@ -39,7 +39,7 @@ The structure is as follows:
 * `config/*.trickle` One or more trickle files loaded in lexigraphical order to provide pipelines.
 * `config/*.yaml` One or more YAML files with configurations for Onramps, Offramps and Bindings and Mappings.
 
-For details on the files please consult the [documentation](/docs/operations/configuration).
+For details on the files please consult the [documentation](/docs/Operations/configuration).
 
 ### Running
 

@@ -21,6 +21,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # Generated
-docs/operations/cli.md
+docs/Operations/cli.md
 docs/api.md
 docs/tremor-script/stdlib/
