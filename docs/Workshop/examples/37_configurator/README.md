@@ -1,6 +1,6 @@
 # Configurator
 
-An application built using tremor using the [linked transports](../../../operations/linked-transports.md) feature and the [qos::wal](https://docs.tremor.rs/tremor-query/operators/#qoswal) operator introduced in 0.9 and the [`$correlation`](https://docs.tremor.rs/operations/linked-transports/#correlation) feature introduced in 0.11, allowing for centralized configuration across services and their component nodes.
+An application built using tremor using the [linked transports](../../../operations/linked-transports.md) feature and the [qos::wal](/docs/tremor-query/operators/#qoswal) operator introduced in 0.9 and the [`$correlation`](/docs/operations/linked-transports/#correlation) feature introduced in 0.11, allowing for centralized configuration across services and their component nodes.
 
 The main task of the Configurator is to distribute config changes to a group of upstream tremor nodes running the [_Quota Service_](../36_quota_service/README.md).
 The config changes do not happen in an atomic or transactional fashion across all upstream nodes, but all valid configuration updates are persisted and retried until they succeed.

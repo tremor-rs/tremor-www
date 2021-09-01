@@ -14,14 +14,14 @@ The solution to this is custom operators. Unlike tremor script that is interpret
 
 Currently tremor supports the following Operators:
 
-* [runtime::tremor](https://docs.tremor.rs/artefacts/operators#runtimetremor)
-* [grouper::bucket](https://docs.tremor.rs/artefacts/operators#grouperbucket)
-* [generic::backpressure](https://docs.tremor.rs/artefacts/operators#generic::backpressure)
-* [generic::batch](https://docs.tremor.rs/artefacts/operators#generic::batch)
+* [runtime::tremor](/docs/artefacts/operators#runtimetremor)
+* [grouper::bucket](/docs/artefacts/operators#grouperbucket)
+* [generic::backpressure](/docs/artefacts/operators#generic::backpressure)
+* [generic::batch](/docs/artefacts/operators#generic::batch)
 
 Some special Operators also exist
 
-* [passthrough](https://docs.tremor.rs/artefacts/operators#passthrough) - internal use
-* [debug::history](https://docs.tremor.rs/artefacts/operators#debughistory) - development
+* [passthrough](/docs/artefacts/operators#passthrough) - internal use
+* [debug::history](/docs/artefacts/operators#debughistory) - development
 
-Additional information can be found in the [docs](https://docs.tremor.rs/artefacts/).
+Additional information can be found in the [docs](/docs/artefacts/).

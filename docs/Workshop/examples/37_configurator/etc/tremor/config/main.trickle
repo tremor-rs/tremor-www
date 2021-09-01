@@ -136,7 +136,7 @@ script
   end;
 end;
 
-# https://docs.tremor.rs/tremor-query/operators/#qoswal
+# /docs/tremor-query/operators/#qoswal
 define qos::wal operator on_disk_wal with
   dir = "store",
   read_count = 20,
