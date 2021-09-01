@@ -1,13 +1,13 @@
 ---
 title: Setup
 id: setup
-description: Starting Tremor for the first time- set up your first tremor installation.
-hide_table_of_contents: true
+description: Starting Tremor for the first time- set up your first Tremor installation.
+hide_table_of_contents: false
 ---
 
 ### Requirements
 
-While there are many ways to install Tremor, be it as a package or compiling it from source, this quickstart guide will use a Docker image to make it as painless as possible to get a first instance of tremor running.
+While there are many ways to install Tremor, be it as a package or compiling it from source, this quickstart guide will use a Docker Image to make it as painless as possible to get a first instance of Tremor running.
 
 With that, a running version of [Docker](https://docker.io) on a system with an internet connection is required.
 
@@ -21,7 +21,7 @@ docker pull tremorproject/tremor:latest
 
 ### Configuring Tremor
 
-If you just want to see Tremor start, you can skip this step, but lets be real, you probably want to make tremor do something more interesting than printing a few numbers on the screen.
+If you just want to see Tremor start, you can skip this step, but lets be real, you probably want to make Tremor do something more interesting than printing a few numbers on the screen.
 
 The Tremor Docker image is configured by mounting a configuration folder to `/etc/tremor`.
 
@@ -43,7 +43,7 @@ For details on the files please consult the [documentation](/docs/Operations/con
 
 ### Running
 
-Once downloaded and configured, starting the Tremor Docker image can be done with:
+Once downloaded and configured, starting the Tremor Docker Image can be done with:
 
 ```bash
 docker run -v host/path/to/etc/tremor:/etc/tremor tremor-runtime
@@ -53,5 +53,10 @@ docker run -v host/path/to/etc/tremor:/etc/tremor tremor-runtime
 
 We have use case examples that come with a full set of configuration files and a `docker-compose.yaml`. To get a whole use case set up with a single command, you can look at the following cases:
 
+<<<<<<< HEAD
 * [apache log](/docs/workshop/examples/10_logstash) - storing apache logs in elastic search
 * [influx aggregation](/docs/workshop/examples/11_influx) - aggregating metrics for InfluxDB
+=======
+* [Apache log](https://docs.tremor.rs/workshop/examples/10_logstash)- storing apache logs in elastic search.
+* [Influx Aggregation](https://docs.tremor.rs/workshop/examples/11_influx)- aggregating metrics for InfluxDB.
+>>>>>>> 22a80a7 (Make homepage feature headers links)
