@@ -3,31 +3,26 @@
 - Issue: [tremor-rs/tremor-rfcs#0005](https://github.com/tremor-rs/tremor-rfcs/issues/5)
 - RFC PR: [tremor-rs/tremor-rfcs#0006](https://github.com/tremor-rs/tremor-rfcs/pull/6)
 
-# Summary
+## Summary
 [summary]: #summary
 
 The tremor-runtime supports ingress from and egress to external data sources and
 sinks through adapters called `Onramps` and `Offramps` accordingly.
 
-There is no mechanism currently that allows the underlying transport encapsulated
-by `Onramps` or `Offramps` to share their respective underlying connections.
+There is no mechanism currently that allows the underlying transport encapsulated by `Onramps` or `Offramps` to share their respective underlying connections.
 
-This RFC addresses these limitations by introducing `linked transports` notionally
-and allowing `Onramp` and `Offramp` specifications to reference a common shared
-underlying transport instance by reference.
+This RFC addresses these limitations by introducing `linked transports` notionally and allowing `Onramp` and `Offramp` specifications to reference a common shared underlying transport instance by reference.
 
-# Motivation
+## Motivation
 [motivation]: #motivation
 
-The absence of linked transports prohibits authors of tremor-script / tremor-query
+The absence of linked transports prohibits authors of tremor-script/tremor-query
 from writing proxy applications where request/response style interactions can be
-routed from a client request back to a client response in the same synchronous blocking
-RPC transport connection context back to the originating ephemeral client.
+routed from a client request back to a client response in the same synchronous blocking RPC transport connection context back to the originating ephemeral client.
 
-This limitation also requires having multiple messaging endpoint connections
-for asynchronous communications when a single connection may be sufficient.
+This limitation also requires having multiple messaging endpoint connections for asynchronous communications when a single connection may be sufficient.
 
-# Guide-level explanation
+## Guide-level Explanation
 [guide-level-explanation]: #guide-level-explanation
 
 Given a linked transport configuration:
@@ -62,8 +57,7 @@ offramp:
     ref: rest
 ```
 
-Then, user defined logic in the script or query language can fully proxy or
-implement services for the underlying transport:
+Then, user defined logic in the script or query language can fully proxy or implement services for the underlying transport:
 
 ```tremor
 match event of
@@ -86,47 +80,38 @@ binding:
       '/pipeline/api/{instance}/out': [ '/offramp/rest_outbound/{instance}/in'  ]
 ```
 
-There is no facility in the current tremor-runtime to describe transport services that
-effectively implement or proxy an underlying protocol fully as there is no mechanism
-to intercept a request, process it through a pipeline, and route the response such that
-it consummates a single transport level request/response or messaging interaction.
+There is no facility in the current tremor-runtime to describe transport services that effectively implement or proxy an underlying protocol fully as there is no mechanism to intercept a request, process it through a pipeline, and route the response such that it consummates a single transport level request/response or messaging interaction.
 
-A shared transport fills this gap and allows the tremor-runtime to implement API gateways,
-to act as a HTTP router, proxy, reverse proxy and to implement similar capabilities for
-other transports.
+A shared transport fills this gap and allows the tremor-runtime to implement API gateways, to act as a HTTP router, proxy, reverse proxy and to implement similar capabilities for other transports.
 
 
-# Reference-level explanation
+## Reference-level Explanation
 [reference-level-explanation]: #reference-level-explanation
 
 None.
 
-# Drawbacks
+## Drawbacks
 [drawbacks]: #drawbacks
 
 None.
 
-# Rationale and alternatives
+## Rationale and Alternatives
 [rationale-and-alternatives]: #rationale-and-alternatives
 
 The introduction of transports coupled with adding optional transport references
-to onramp and offramp specifications enables the tremor-runtime to act as a
-proxy or reverse proxy endpoint with logic implemented in the scripting or
-query language.
+to onramp and offramp specifications enables the tremor-runtime to act as a proxy or reverse proxy endpoint with logic implemented in the scripting or query language.
 
-# Prior art
+## Prior Art
 [prior-art]: #prior-art
 
 None.
 
-# Unresolved questions
+## Unresolved Questions
 [unresolved-questions]: #unresolved-questions
 
-This RFC does not specify internals or implementation which is left to the
-implementor. The motiviating example should be sufficient to drive a suitable
-implementation.
+This RFC does not specify internals or implementation which is left to the implementor. The motiviating example should be sufficient to drive a suitable implementation.
 
-# Future possibilities
+## Future Possibilities
 [future-possibilities]: #future-possibilities
 
 None known at this time.
