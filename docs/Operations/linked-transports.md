@@ -3,7 +3,7 @@
 !!! attention
     Linked transports are in alpha status as of v0.9.0 and we recommend its use only for exploratory projects. Details around it (including any on this page) are likely to change, as the feature set matures.
 
-Tremor supports ingestion of events from external sources ([onramps](../artefacts/onramps.md)) and after processing them from pipelines, they can be written to external sinks ([offramps](../artefacts/offramps.md)). Since v0.9, Tremor also supports Linked Transports (LT): a mechanism that allows linking of source and sink nature into one ramp artefact.
+Tremor supports ingestion of events from external sources ([onramps](../Artefacts/onramps.md)) and after processing them from pipelines, they can be written to external sinks ([offramps](../Artefacts/offramps.md)). Since v0.9, Tremor also supports Linked Transports (LT): a mechanism that allows linking of source and sink nature into one ramp artefact.
 
 In other words -- once this mechanism is turned on -- a Tremor onramp can behave as an *offramp* (i.e. send events to the outside world) and similarly, a Tremor offramp can behave as an *onramp* (i.e. receive events from the outside world). This is specifically useful for onramps and offramps like REST and websocket, where the protocol already provides facility for responding to events, and as such, the mechanism is currently supported for those onramps and offramps only.
 
@@ -64,12 +64,12 @@ The offramp linking works similarly, with the offramp `out` port capturing the e
 
 Ramp artefacts that support linked transports are listed here:
 
-* [REST Onramp](../artefacts/onramps.md#rest)
-* [REST Offramp](../artefacts/offramps.md#rest)
-* [Websocket Onramp](../artefacts/onramps.md#ws)
-* [Websocket Offramp](../artefacts/onramps.md#ws)
-* [Discord onramp](../artefacts/onramps.md#discord)
-* [KV offramp](../artefacts/offramps.md#kv)
+* [REST Onramp](../Artefacts/onramps.md#rest)
+* [REST Offramp](../Artefacts/offramps.md#rest)
+* [Websocket Onramp](../Artefacts/onramps.md#ws)
+* [Websocket Offramp](../Artefacts/onramps.md#ws)
+* [Discord onramp](../Artefacts/onramps.md#discord)
+* [KV offramp](../Artefacts/offramps.md#kv)
 
 As part of the above docs, you will also find event metadata variables that these onramps/offramps set (and use), which can be utilized as part of the wider application built using these aretefacts.
 

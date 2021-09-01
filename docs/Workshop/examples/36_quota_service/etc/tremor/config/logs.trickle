@@ -102,7 +102,7 @@ script
   # --------------------------------------------------------------------------
 
   # for elasticsearch offramp
-  # https://docs.tremor.rs/artefacts/offramps/#elastic
+  # https://docs.tremor.rs/Artefacts/offramps/#elastic
   let $elastic = {
     "_index": "test_logs",
     "_type": "_doc"
