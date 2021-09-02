@@ -3,6 +3,8 @@ title: RFC Template
 id: 0000-template
 ---
 
+# RFC Template (RFC Title goes here)
+
 - Feature Name: (fill me in with a unique ident, `my_awesome_feature`)
 - Start Date: (fill me in with today's date, YYYY-MM-DD)
 - Tremor Issue: [tremor-rs/tremor-runtime#0000](https://github.com/tremor-rs/tremor-runtime/issues/0000)
