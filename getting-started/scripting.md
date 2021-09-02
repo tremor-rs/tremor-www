@@ -125,8 +125,4 @@ filter {
 
 </div>
 
-<<<<<<< HEAD
-The full documentation  [of the language](/docs/tremor-query), the [special operators](/docs/Artefacts/operators), and [aggregation functions](/docs/tremor-query/functions) can be found in the [docs](/docs) .
-=======
-The full documentation [of the language](https://docs.tremor.rs/tremor-query), the [special operators](https://docs.tremor.rs/artefacts/operators), and [aggregation functions](https://docs.tremor.rs/tremor-query/functions) can be found in the [docs](https://docs.tremor.rs) .
->>>>>>> 22a80a7 (Make homepage feature headers links)
+full documentation [of the language](/docs/tremor-query), the [special operators](/docs/Artefacts/operators), and [aggregation functions](/docs/tremor-query/functions) can be found in the [docs](/docs).
