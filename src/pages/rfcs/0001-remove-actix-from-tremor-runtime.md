@@ -3,6 +3,8 @@
 - Issue: [tremor-rs/tremor-rfcs#0001](https://github.com/tremor-rs/tremor-rfcs/issues/1)
 - RFC PR: [tremor-rs/tremor-rfcs#0002](https://github.com/tremor-rs/tremor-rfcs/pull/2)
 
+# Remove Actix
+
 ## Summary
 [summary]: #summary
 
