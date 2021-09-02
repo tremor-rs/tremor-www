@@ -106,8 +106,4 @@ Select the operating system your are developing on.
   > cargo build --release --all # go get a nice cup of tea
   > ```
 
-<<<<<<< HEAD
-For more details on building tremor, please refer to the [tremor development docs](/docs/Development/quick-start/).
-=======
-For more details on building Tremor, please refer to the [Tremor development docs](https://docs.tremor.rs/development/quick-start/).
->>>>>>> 22a80a7 (Make homepage feature headers links)
+For more details on building Tremor, please refer to the [Tremor development docs](/docs/Development/quick-start/).
