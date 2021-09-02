@@ -21,12 +21,7 @@ Currently Tremor supports the following operators:
 
 Some special operators also exist:
 
-<<<<<<< HEAD
-* [passthrough](/docs/Artefacts/operators#passthrough) - internal use
-* [debug::history](/docs/Artefacts/operators#debughistory) - development
-=======
-* [passthrough](https://docs.tremor.rs/artefacts/operators#passthrough)- internal use.
-* [debug::history](https://docs.tremor.rs/artefacts/operators#debughistory)- development.
->>>>>>> 22a80a7 (Make homepage feature headers links)
+* [passthrough](/docs/Artefacts/operators#passthrough)- internal use.
+* [debug::history](/docs/Artefacts/operators#debughistory)- development.
 
 Additional information can be found in the [docs](/docs/Artefacts/).
