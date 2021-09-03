@@ -17,7 +17,7 @@ Note that this is not a comprehensive treatise on threads or async tasks.
 
 ## The Tremor That Was (threads)
 
-Threads are a basic building block of programs that execute multiple pieces of code concurrently.
+Threads are a basic building block of programs that run multiple pieces of code concurrently.
 The operating system is responsible for coordinating across competing resource demands.
 
 The OS can preempt, pause, and resume threads. We can leverage infinite or tight loops without the risk of completely blocking execution. These guarantees make concurrent code more accessible, with tools like`crossbeam-channels` to build upon.
@@ -44,7 +44,7 @@ The cooperative model is not without issues: If we select the wrong time to let 
 
 In rust, calling `.await` is effectively, not a guarantee. We cannot know if an async function ever yields. We can ensure that we yield control via yield_now. However, this comes at a cost: namely, that we might yield in situations where it is not strictly necessary.
 
-With regards to performance, tasks are typically cheaper from a context switching perspective, and we have finer grained control. On the other hand, we lose control over where a task runs, while we can pin threads to cores to schedule affinity on SMP systems, tasks may migrate across cores or executers move freely.
+With regards to performance, tasks are typically cheaper from a context switching perspective, and we have finer grained control. On the other hand, we lose control over where a task runs, while we can pin threads to cores to schedule affinity on SMP systems, tasks may migrate across cores or runners move freely.
 
 In Tremor, we have adopted the `smol` small and fast async runtime. When two tasks can run consecutively on the same executor, `smol` will schedule them in different executors. A significant improvement over the thread-based tremor runtime is that `smol` does not aggressively steal work from other schedulers if they are not overloaded. This avoids the runtime trashing CPU caches based on [micro-benchmarking results](https://github.com/async-rs/async-std/issues/848).
 
