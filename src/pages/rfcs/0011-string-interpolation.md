@@ -3,6 +3,8 @@
 - Tremor Issue: [tremor-rs/tremor-runtime#726](https://github.com/tremor-rs/tremor-runtime/issues/726)
 - RFC PR: [tremor-rs/tremor-rfcs#34](https://github.com/tremor-rs/tremor-rfcs/pull/34)
 
+# String Interpolation
+
 ## Summary
 [summary]: #summary
 
