@@ -1,7 +1,9 @@
-- Feature Name: pipeline-optimizations
+- Feature Name: pipeline-optimisations
 - Start Date: 2020-01-29
 - Tremor Issue: [tremor-rs/tremor-runtime#0033](https://github.com/tremor-rs/tremor-runtime/issues/0033)
 - RFC PR: [tremor-rs/tremor-rfcs#0011](https://github.com/tremor-rs/tremor-rfcs/pull/0011)
+
+# Pipeline Optimisations
 
 ## Summary
 [summary]: #summary
