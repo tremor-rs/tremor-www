@@ -5,7 +5,7 @@ Example Websocket server application built on top of Tremor and meant to be a de
 ## Setup
 
 !!! tip
-    All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples/31_servers_lt_ws) as well.
+    All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/31_servers_lt_ws) as well.
 
 ### Sources
 
@@ -61,7 +61,7 @@ select event from process/err into err;
 
 ## Testing
 
-Assuming you have all the code from the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples/31_servers_lt_ws), run the following to start our application:
+Assuming you have all the code from the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/31_servers_lt_ws), run the following to start our application:
 
 ```sh
 docker-compose up

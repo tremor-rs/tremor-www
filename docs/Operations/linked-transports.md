@@ -77,13 +77,13 @@ As part of the above docs, you will also find event metadata variables that thes
 
 In the above example, instead of using a passthrough pipeline, you can imagine processing the incoming event from a custom trickle pipeline, with the various [operators](../tremor-query/operators.md) we have at our disposal. In this vein, more elaborate server examples based on onramp linking (and supporting request/response style interactions) are linked below:
 
-* [HTTP server](../workshop/examples/30_servers_lt_http/README.md)
-* [Websocket server](../workshop/examples/31_servers_lt_ws/README.md)
+* [HTTP server](../Workshop/examples/30_servers_lt_http/README.md)
+* [Websocket server](../Workshop/examples/31_servers_lt_ws/README.md)
 
 When linked onramps of this sort are coupled with linked offramps, we have proxy applications, where incoming requests from clients can be forwarded to upstream servers and the resulting response can then be returned back to the client which initiated the request. Custom proxying logic (eg: deciding the upstream based on incoming request attributes) can be coded up as part of the [runtime script](../tremor-query/operators.md#runtimetremor). Some concrete examples demonstrating this pattern:
 
-* [HTTP Proxy](../workshop/examples/32_proxies_lt_http/README.md)
-* [Websocket Proxy](../workshop/examples/33_proxies_lt_ws/README.md)
+* [HTTP Proxy](../Workshop/examples/32_proxies_lt_http/README.md)
+* [Websocket Proxy](../Workshop/examples/33_proxies_lt_ws/README.md)
 
 ??? example "Example binding for a HTTP proxy"
     ```yaml
@@ -110,18 +110,18 @@ When linked onramps of this sort are coupled with linked offramps, we have proxy
 
 And when proxying, if we configure linked onramps and offramps of different types, we have bridges:
 
-* [HTTP -> WS Bridge](../workshop/examples/34_bridges_lt_http_ws/README.md)
+* [HTTP -> WS Bridge](../Workshop/examples/34_bridges_lt_http_ws/README.md)
 
 Or when the proxying use case is combined with some qos operators ([roundrobin](../tremor-query/operators.md#qosroundrobin) and [backpressure](../tremor-query/operators.md#qosbackpressure)), we get a working load-balancer:
 
-* [HTTP Load Balancing](../workshop/examples/35_reverse_proxy_load_balancing/README.md)
+* [HTTP Load Balancing](../Workshop/examples/35_reverse_proxy_load_balancing/README.md)
 
 These are some example use cases now possible with linked transports at the center, but with the amount of flexibility and composability that Tremor supports for its various capabilities, we can get very creative with what we can do here -- our imagination is the limit.
 
 Examples of even more advanced Tremor applications:
 
-* [Quota Service](../workshop/examples/36_quota_service/README.md)
-* [Configurator](../workshop/examples/37_configurator/README.md)
+* [Quota Service](../Workshop/examples/36_quota_service/README.md)
+* [Configurator](../Workshop/examples/37_configurator/README.md)
 
 ## Error handling
 

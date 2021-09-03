@@ -7,7 +7,7 @@ We will only discuss the newly introduced components, for the rest pleas refer t
 ## Setup
 
 !!! tip
-All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples/14_syslog_udp) as well and can be run with `docker compose up`.
+All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/14_syslog_udp) as well and can be run with `docker compose up`.
 
 ## Environment
 

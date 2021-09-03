@@ -5,7 +5,7 @@ Example HTTP proxy application built on top of Tremor and meant to be a demonstr
 ## Setup
 
 !!! tip
-All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples/32_proxies_lt_http) as well.
+All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/32_proxies_lt_http) as well.
 
 ### Sources and sinks
 
@@ -91,7 +91,7 @@ The [response_processing](etc/tremor/config/response_processing.trickle) pipelin
 
 ## Testing
 
-Assuming you have all the code from the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples/32_proxies_lt_http), run the following to start our application (along with the tremor http server example that is the upstream for our proxy):
+Assuming you have all the code from the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/32_proxies_lt_http), run the following to start our application (along with the tremor http server example that is the upstream for our proxy):
 
 ```sh
 docker-compose up

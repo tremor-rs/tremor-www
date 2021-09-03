@@ -1,7 +1,7 @@
 # CNCF OpenTelemetry Prometheus Interworking
 
 !! note
-    All the application code here is available from the docs [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples/43_otel_prometheus).
+    All the application code here is available from the docs [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/43_otel_prometheus).
 
 This example builds on the simple passthrough CNCF OpenTelemetry
 configuration but configures Prometheus as a receiver and exporter in the
