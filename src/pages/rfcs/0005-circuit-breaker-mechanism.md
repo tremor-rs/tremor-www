@@ -3,6 +3,8 @@
 - Issue: [tremor-rs/tremor-rfcs#0008](https://github.com/tremor-rs/tremor-rfcs/issues/8)
 - RFC PR: [tremor-rs/tremor-rfcs#0009](https://github.com/tremor-rs/tremor-rfcs/pull/9)
 
+# Circuit Breaker Mechanism
+
 ## Summary
 [summary]: #summary
 
