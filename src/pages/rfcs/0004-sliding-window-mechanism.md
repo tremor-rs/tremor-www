@@ -3,6 +3,8 @@
 - Issue: [tremor-rs/tremor-rfcs#0007](https://github.com/tremor-rs/tremor-rfcs/issues/7)
 - RFC PR: [tremor-rs/tremor-rfcs#0008](https://github.com/tremor-rs/tremor-rfcs/pull/8)
 
+# Sliding Window Mechanism
+
 ## Summary
 [summary]: #summary
 
