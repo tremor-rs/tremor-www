@@ -9,7 +9,7 @@ hide_table_of_contents: false
 Tremor is an early-stage event processing system for unstructured data, with rich support for structural pattern matching, filtering and transformation.
 
 
-![Tremor Stats](../../static/img/tremor/stats.png)
+![Tremor Stats](/img/tremor/stats.png)
 
 Tremor is particularly well suited for log and metrics shipping, resulting in 10x fewer hosts, 10x fewer CPUs and 10x less memory footprint than alternatives such as Logstash.
 
