@@ -3,6 +3,8 @@
 - Tremor Issue: [tremor-rs/tremor-runtime#0174](https://github.com/tremor-rs/tremor-runtime/pull/174)
 - RFC PR: [tremor-rs/tremor-rfcs#0021](https://github.com/tremor-rs/tremor-rfcs/pull/0021)
 
+# Modularity
+
 ## Summary
 
 [summary]: #summary
