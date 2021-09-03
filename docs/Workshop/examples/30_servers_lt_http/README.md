@@ -5,7 +5,7 @@ Example HTTP server application built on top of Tremor and meant to be a demonst
 ## Setup
 
 !!! tip
-    All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples/30_servers_lt_http) as well.
+    All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/30_servers_lt_http) as well.
 
 ### Sources
 
@@ -115,7 +115,7 @@ Of special interest is the binding specific for error handling -- we make sure t
 
 ## Testing
 
-Assuming you have all the code from the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples/30_servers_lt_http), run the following to start our application:
+Assuming you have all the code from the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/30_servers_lt_http), run the following to start our application:
 
 ```sh
 docker-compose up

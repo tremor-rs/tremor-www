@@ -33,7 +33,7 @@ Other interesting topics are:
     * [Configuration](Operations/configuration.md) and the [Configuration Walkthrough](Operations/configuration-walkthrough.md)
     * [The tremor CLI](Operations/cli.md)
 * [The tremor API](api.md)
-* [Workshop](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/) and various use case [examples](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples)
+* [Workshop](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/) and various use case [examples](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples)
 * Development related information
     * [Benchmarks](Development/benchmarking.md)
     * [A Quickstart Guide](Development/quick-start.md)
