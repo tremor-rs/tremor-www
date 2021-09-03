@@ -19,7 +19,7 @@ For example, the Kafka onramp subscribes to topics in a Kafka cluster and consum
 
 Application logic in Tremor can be connected to multiple onramps and/or offramps originating from or contributing to disparate systems. A simple passthrough application could enable bridging a Kafka system with websockets. It could preserve or transform the external wire-form. It could filter and partition event data using content based routing.
 
-The application logic is always based on Tremor internal representation of the data, never on the external wire-format. This is by design.
+The application logic is always based on Tremor-internal representation of the data, never on the external wire-format. This is by design.
 
 Tremor has built-in support for metrics capture of data ingested and distributed (metrics) and also for communicating back-pressure events to application logic so that quality-of-service can be tuned adaptively.
 
@@ -38,7 +38,7 @@ Tremor supports a number of stable general purpose onramps:
 
 And some early-access evolving production-grade onramps:
 
-* [REST](https://docs.tremor.rs/artefacts/onramps/#REST)
+* [REST](/docs/Artefacts/onramps/#REST)
 
 ### Offramps
 
