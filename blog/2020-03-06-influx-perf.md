@@ -12,13 +12,13 @@ description: The process of improving the performance of our influx line protoco
  
 Yesterday, we spent the day on a report [that our influx parser was slow](https://github.com/tremor-rs/tremor-runtime/issues/82), and it turns out it was indeed.
  
-This is an exciting topic as just a few days ago, we [gave a talk at BoBKonf 2020](https://bobkonf.de/2020/ennis-gies.html) on this topic, so this is a great opportunity to show some of the topics and our process in action.
+This is an exciting topic as a few days ago, we [gave a talk at BoBKonf 2020](https://bobkonf.de/2020/ennis-gies.html) on this topic, so this is a great opportunity to show some of the topics and our process in action.
  
 All the topics in this blog are links; the main one above this text is to the pull request, the titles of each section link to the commit that implements the topic discussed. Go ahead, click on some, and take a look!
  
 There are two tools worth introducing here that we used during this performance session.
  
-One is [perf](http://brendangregg.com/perf.html), which we used with a minimal setup of `perf record` and `perf report`. We use this to get a glance at where code is spending time. This is not perfect, but it is quick and easy for decent results.
+One is [perf](http://brendangregg.com/perf.html), which we used with a minimal setup of `perf record` and `perf report`. We use this to get a glance at where code is spending time. This is not perfect, but it is quick for decent results.
  
 The other one is [criterion](https://docs.rs/criterion/0.3.1/criterion/), an excellent Rust framework for microbenchmarks based on the [haskell framework](https://hackage.haskell.org/package/criterion) with the same name. It is so helpful since it allows us to show changes in performance between changes. That makes it perfect for the kind of incremental improvements our process favors.
 
@@ -34,10 +34,10 @@ Second, we found a few places where we used `String::new()` and then push to thi
  
 From prior experience, we know that tag names, values, and field names rarely, if ever, are larger than `256` characters, so we preallocate with this to eliminate almost all string relocations during parsing.
  
-As you can see, this simple change already had a decent impact on performance.
+As you can see, this change already had a decent impact on performance.
  
 ```
-simple-value            time:   [540.03 ns 540.27 ns 540.53 ns]
+base-value            time:   [540.03 ns 540.27 ns 540.53 ns]
                        change: [-14.017% -13.948% -13.884%] (p = 0.00 < 0.05)
                        Performance has improved.
  
@@ -73,7 +73,7 @@ So we split this function into its three cases and implemented each on its own, 
  
  
 ```
-simple-value            time:   [533.13 ns 534.49 ns 536.02 ns]
+base-value            time:   [533.13 ns 534.49 ns 536.02 ns]
                        change: [-1.5482% -1.3801% -1.1996%] (p = 0.00 < 0.05)
                        Performance has improved.
 Found 3 outliers among 100 measurements (3.00%)
@@ -108,7 +108,7 @@ Not all performance improvements have to be written in code, sometimes asking th
 The changes are minimal, and as you can see, the impact isn't that huge, but every percentage point counts.
  
 ```
-simple-value            time:   [522.24 ns 522.45 ns 522.69 ns]
+base-value            time:   [522.24 ns 522.45 ns 522.69 ns]
                        change: [-0.3955% -0.2589% -0.1477%] (p = 0.00 < 0.05)
                        Change within noise threshold.
 Found 13 outliers among 100 measurements (13.00%)
@@ -156,18 +156,18 @@ A borrowed value doesn't own the memory it refers to. Instead, it borrows the me
  
 For influx data, a lot of the strings can are perfectly fine represented inside the initial memory; they don't need modification or change to be then used in the final data representation.
  
-The first implementation ignored this fact and always created a newly owned data structure - this is expensive (as you will see below). However, it's not that simple. Not all strings can just be passed, pointing to the original memory. Influx uses some escaping in its line protocol that makes this impossible.
+The first implementation ignored this fact and always created a newly owned data structure - this is expensive (as you will see below). However, it's not only that. Not all strings can be passed, pointing to the original memory. Influx uses some escaping in its line protocol that makes this impossible.
  
-Fortunately, Rust has a data structure that allows representing the situation where we often return borrowed data but sometimes need to own it- it's named a `Cow`. No, not that cow, it doesn't eat grass, it is a Copy On Write structure that we can abuse to cover the "we sometimes need to own the data" situation.
+Fortunately, Rust has a data structure that allows representing the situation where we often return borrowed data but sometimes need to own it- it's named a `Cow`. No, not that cow, it doesn't eat grass, it is a Copy On Write structure that we can use to cover the "we sometimes need to own the data" situation.
  
 In short, a `Cow< '_, str>` allows returning either a borrowed `&str` or an owned String - perfect for our use case!
  
-Since most of the time we simply need can return the `&str` we use a trick I picked up from the [json crate](https://github.com/maciejhirsz/json-rust/blob/master/src/codegen.rs#L67-L99) that is to split out the logic in a base and a complex case where the base case can perform the common operation quickly and only if it is required we switch to the complex and more costly implementation.
+Since most of the time we can return the `&str` we use a trick I picked up from the [json crate](https://github.com/maciejhirsz/json-rust/blob/master/src/codegen.rs#L67-L99) that is to split out the logic in a base and a complex case where the base case can perform the common operation quickly and only if it is required we switch to the complex and more costly implementation.
  
 In our case, this means we assume that all strings can be returned as borrowed, and only if we find an escape sequence, we switch to a more complex implementation. While this has some extra cost on the rare case, it makes the typical case rather cheap.
  
 ```
-simple-value            time:   [385.62 ns 385.85 ns 386.06 ns]
+base-value            time:   [385.62 ns 385.85 ns 386.06 ns]
                        change: [-25.171% -25.122% -25.073%] (p = 0.00 < 0.05)
                        Performance has improved.
 Found 5 outliers among 100 measurements (5.00%)
@@ -198,7 +198,7 @@ Found 3 outliers among 100 measurements (3.00%)
 
 ## [Conclusion](https://github.com/tremor-rs/tremor-runtime/pull/87)
 
-So we performed 3 very simple and one more complex tweaks, and this doubled the performance of our influx parsing. As you can see, a few simple tweaks, when added together, can have some massive impact.
+So we performed 3 rudementary and one more complex tweaks, and this doubled the performance of our influx parsing. As you can see, a few tweaks, when added together, can have some massive impact.
 
 The most important take away here, however, is the process and that it is iterative.
 
@@ -208,7 +208,7 @@ And here the final results of all changes combined:
 
 ```
 Gnuplot not found, using plotters backend
-simple-value            time:   [376.98 ns 377.26 ns 377.52 ns]                         
+base-value            time:   [376.98 ns 377.26 ns 377.52 ns]                         
                         change: [-55.627% -55.569% -55.518%] (p = 0.00 < 0.05)
                         Performance has improved.
 Found 3 outliers among 100 measurements (3.00%)
