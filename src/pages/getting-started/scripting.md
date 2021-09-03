@@ -125,4 +125,4 @@ filter {
 
 </div>
 
-The full documentation [of the language](/docs/tremor-query), the [special operators](/docs/artefacts/operators), and [aggregation functions](/docs/tremor-query/functions) can be found in the [docs](/docs) .
+The full documentation [of the language](/docs/tremor-query), the [special operators](/docs/Artefacts/operators), and [aggregation functions](/docs/tremor-query/functions) can be found in the [docs](/docs) .
