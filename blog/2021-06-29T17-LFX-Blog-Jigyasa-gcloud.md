@@ -62,7 +62,7 @@ Before explaining more about it, here's what a connector involves:
 
 Connectors serve the purpose of sending events to and receiving events from the outside world. A connector can be an event `source` (a.k.a. `onramp`) or an event `sink` (a.k.a. `offramp`) or both.
 
-![Connector](../static/img/blog-images/LFX-blog-jigyasa/connector.png)
+![Connector](/img/blog-images/LFX-blog-jigyasa/connector.png)
 
 #### Google Cloud Storage connector:
 
@@ -236,7 +236,7 @@ Supported preprocessors, that can be configured in yaml file can be found here: 
 Supported postprocessors and more about it: [postprocessors](/docs/Artefacts/postprocessors/). 
 Supported codecs, that can be configured in yaml file can be found here: [codecs](/docs/Artefacts/codecs/)
 
-![Tremor Dot Diagram](../static/img/blog-images/LFX-blog-jigyasa/dot-diagram.png)
+![Tremor Dot Diagram](/img/blog-images/LFX-blog-jigyasa/dot-diagram.png)
 
 - Create a topic using the following `gcloud` command:
 
@@ -293,7 +293,7 @@ However, we wish to test the property of guranteed delivery and message-ordering
 
 For this purpose, we also use a write-ahead log or `wal` that builds on circuit breaker and acknowledgement mechanisms to provide guaranteed delivery. The write-ahead log is useful in situations where sources/onramps do not offer guaranteed delivery themselves, but the data being distributed downstream can benefit from protection against loss and duplication.
 
-We have 3 different configurations for the outbound trickle file - using a [transient wal](/docs/workshop/examples/20_transient_gd/), [persistent wal](/docs/workshop/examples/21_persistent_gd/) and no wal. The cofigurations are as follows:
+We have 3 different configurations for the outbound trickle file - using a [transient wal](/docs/Workshop/examples/20_transient_gd/), [persistent wal](/docs/Workshop/examples/21_persistent_gd/) and no wal. The cofigurations are as follows:
 
 **No wal**
 
@@ -417,7 +417,7 @@ select event from validate into out;
 
 For the testing, we run the sink (a.k.a offramp) to send messages and source (a.k.a onramp) to receive messages separately.
 
-![Testing gsub](../static/img/blog-images/LFX-blog-jigyasa/validation-testing-image.png)
+![Testing gsub](/img/blog-images/LFX-blog-jigyasa/validation-testing-image.png)
 
 
 ---
@@ -432,7 +432,7 @@ Hence, for the `gsub` onramp, a `wal` can assist with partial recovery of downst
 
 ## Network Failure Recovery
 
-![Network Failure Recovery testing](../static/img/blog-images/LFX-blog-jigyasa/network-failure-testing.png)
+![Network Failure Recovery testing](/img/blog-images/LFX-blog-jigyasa/network-failure-testing.png)
 
 While testing in poor connectivity, the pivot point (where it just works) was observed when downlink and uplink packets dropped varies between 47%-50%. 
 

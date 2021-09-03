@@ -131,7 +131,7 @@ So in the end we went with a webhooks based solution with a workflow like this:
 
 The end result looks something like this
 
-![Image for the Tremor Benchmark website](../static/img/blog-images/LFX-blog-akshat/tremor-benchmark.png)
+![Image for the Tremor Benchmark website](/img/blog-images/LFX-blog-akshat/tremor-benchmark.png)
 
 A lot of this setup for the charts is inspired by the Continuous Benchmarks of
 [Deno](https://deno.land/benchmarks). We even use the same charting library.

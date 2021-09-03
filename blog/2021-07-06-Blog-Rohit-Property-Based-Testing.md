@@ -37,7 +37,7 @@ My work involved writing "Property-based tests for tremor-script" and some of th
     - The purpose of tests is to check if our code is failing anywhere and test the same with various inputs.
     - Fig 1 shows different types of tests to easily understand which features are specialised in what.
 
-        ![](../static/img/blog-images/LFC-blog-diru/tests-comparison-graph.png)
+        ![](/img/blog-images/LFC-blog-diru/tests-comparison-graph.png)
 
         Fig 1. Showing various tests wrt Feature compilance and Input scope covered [1]
 
@@ -56,7 +56,7 @@ My work involved writing "Property-based tests for tremor-script" and some of th
     - Properties are written in erlang in tremor
 - The files shown in Fig 2 make the [eqc part of Tremor](https://github.com/tremor-rs/tremor-runtime/tree/main/tremor-script/eqc)
 
-    ![](../static/img/blog-images/LFC-blog-diru/eqc-files.png)
+    ![](/img/blog-images/LFC-blog-diru/eqc-files.png)
 
     Fig 2. Files related to eqc
 
@@ -68,7 +68,7 @@ My work involved writing "Property-based tests for tremor-script" and some of th
     - **util.erl:** Utility functions to support operations for easy handling.
 - On a high level Fig 3 explains how the property we consider is checked
 
-![](../static/img/blog-images/LFC-blog-diru/tremor-script-testing-workflow.png)
+![](/img/blog-images/LFC-blog-diru/tremor-script-testing-workflow.png)
 
 Fig 3. Highlevel overview of Property based testing in termor-script
 
@@ -79,7 +79,7 @@ Fig 3. Highlevel overview of Property based testing in termor-script
 - As patch has multiple operations inside it which have to be seperately created in every step, here is where the concept of incremental implementation comes into picture, if one makes sures if the PatchOperation is implemented before, we can take advantage of that here. For example: Merge is a seperate operation on records but it also is one of the patch operation.
 - gen_script.erl: The following code creates the structure needed for a patch operation as shown in Fig 4.
 
-    ![](../static/img/blog-images/LFC-blog-diru/patch-structure.png)
+    ![](/img/blog-images/LFC-blog-diru/patch-structure.png)
 
     Fig 4. Diagram showing Patch operation [4]
 

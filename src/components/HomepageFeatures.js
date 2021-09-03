@@ -6,11 +6,11 @@ const FeatureList = [
   {
     title: 'Connectivity',
     link: 'connectivity/',
-    Svg: require('../../static/img/connectivity.svg').default,
+    Svg: require('/img/connectivity.svg').default,
     description: (
       <>
         Connecting different systems is an integral part of Tremor.
-        
+
         Tremor connects to the external systems using connectors.
       </>
     ),
@@ -18,21 +18,21 @@ const FeatureList = [
   {
     title: 'Tooling',
     link: 'tooling/',
-    Svg: require('../../static/img/tooling.svg').default,
+    Svg: require('/img/tooling.svg').default,
     description: (
       <>
         Tooling is a first class concern for Tremor. From the very beginning, effort went into making errors and warnings
-        
+
         informative, and not leaving users with stack traces, or cryptic output; developer and operator friendliness- good user experience-
-        
-        are front and center. 
+
+        are front and center.
       </>
     ),
   },
   {
     title: 'Customisation',
     link: 'specialize/',
-    Svg: require('../../static/img/customisation.svg').default,
+    Svg: require('/img/customisation.svg').default,
     description: (
       <>
         Operators specialise Tremor pipelines, thus allowing for highly custom behaviour.
@@ -42,44 +42,44 @@ const FeatureList = [
   {
     title: 'Scripting',
     link: 'scripting/',
-    Svg: require('../../static/img/scripting.svg').default,
+    Svg: require('/img/scripting.svg').default,
     description: (
       <>
-      Tremor's application logic is scriptable. Tremor supports data processing through a directed acyclic graph-based pipeline
-      
-      or workflow. Pipelines can be configured via a YAML syntax or via a structured query language.
+        Tremor's application logic is scriptable. Tremor supports data processing through a directed acyclic graph-based pipeline
 
-      Both the query and scripting language are evolving as Tremor is applied to broader production use cases.
+        or workflow. Pipelines can be configured via a YAML syntax or via a structured query language.
+
+        Both the query and scripting language are evolving as Tremor is applied to broader production use cases.
       </>
     ),
   },
   {
     title: 'Codecs',
     link: 'codecs/',
-    Svg: require('../../static/img/codecs.svg').default,
+    Svg: require('/img/codecs.svg').default,
     description: (
       <>
-      Tremor connects to the external systems using connectors - either Onramps or Offramps- which use Codecs
-      
-      to transform the external wire form of connected system participants into a structured internal value type Tremor understands semantically.
+        Tremor connects to the external systems using connectors - either Onramps or Offramps- which use Codecs
+
+        to transform the external wire form of connected system participants into a structured internal value type Tremor understands semantically.
       </>
     ),
   },
   {
     title: 'Install',
     link: 'install/',
-    Svg: require('../../static/img/install.svg').default,
+    Svg: require('/img/install.svg').default,
     description: (
       <>
-      Quick developer install.<br/>
+        Quick developer install.<br />
 
-      But first, <a href="getting-started/">set up</a> your Tremor installation.
+        But first, <a href="getting-started/">set up</a> your Tremor installation.
       </>
     ),
   },
 ];
 
-function Feature({Svg, link, title, description}) {
+function Feature({ Svg, link, title, description }) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
