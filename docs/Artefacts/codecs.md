@@ -161,5 +161,6 @@ get translates to:
 }
 ```
 
-!!! note
-    invalid syslog message is treated under `3164` protocol and entire string goes to the `msg` of result object.
+:::note
+invalid syslog message is treated under `3164` protocol and entire string goes to the `msg` of result object.
+:::

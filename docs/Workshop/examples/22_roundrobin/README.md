@@ -138,8 +138,9 @@ If we lose a downstream instance we load-balance across the remainder
 
 If we lose all downstream instances, we buffer up to our rentention limit of 1000 events or 1MB of event data.
 
-!!! note
-    Notice that we recover **most** but now all of the data. As the downstream websocket connection is not a guaranteed delivery connection the recovery and protection against data loss is best effort in this case
+:::note
+Notice that we recover **most** but now all of the data. As the downstream websocket connection is not a guaranteed delivery connection the recovery and protection against data loss is best effort in this case
+:::
 
 In short, the transient in memory wal can assist with partial recovery and
 will actively reduce data loss to within the configured retention but it is

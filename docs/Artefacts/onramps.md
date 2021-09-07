@@ -355,9 +355,9 @@ Google Cloud Pubsub - Subscriber
 
 This onramp can issue basic operation of receiving messages from a subscription.
 
-!!! note
-
-    The onramp is experimental.
+:::note
+The onramp is experimental.
+:::
 
 This onramp assumes that the environment variable `GOOGLE_APPLICATION_CREDENTIALS` has been exported to the execution environment and it has been configured to point to a valid non-expired service account token json file.
 

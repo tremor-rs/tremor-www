@@ -6,8 +6,9 @@ We will only discuss the newly introduced components, for the rest pleas refer t
 
 ## Setup
 
-!!! tip
+:::tip
 All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/14_syslog_udp) as well and can be run with `docker compose up`.
+:::
 
 ## Environment
 
@@ -31,8 +32,9 @@ The `producer` pipeline remains unchanged however we add a new `dns` pipeline an
 
 The `dns` pipeline does two things. First it moves the event itself into the `$correlation` metadata. Linked transports will preserve this metadata key over requests allowing to correlate the output event with the input request. Second it changes the event into a lookup of the `A` record (ip address) for the hostname. Finally we do the wiering with select statments.
 
-!!! warn
-    Storing data in `$correlation` will mean this data has to be kept in memory until the event is processed, depending on throughput and pending requests this can be a significant memory cost.
+:::warn
+Storing data in `$correlation` will mean this data has to be kept in memory until the event is processed, depending on throughput and pending requests this can be a significant memory cost.
+:::
 
 ```trickle
 # dns.trickle
