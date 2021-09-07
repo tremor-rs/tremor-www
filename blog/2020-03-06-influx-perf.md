@@ -198,7 +198,7 @@ Found 3 outliers among 100 measurements (3.00%)
 
 ## [Conclusion](https://github.com/tremor-rs/tremor-runtime/pull/87)
 
-So we performed 3 rudementary and one more complex tweaks, and this doubled the performance of our influx parsing. As you can see, a few tweaks, when added together, can have some massive impact.
+So we performed 3 rudimentary and one more complex tweaks, and this doubled the performance of our influx parsing. As you can see, a few tweaks, when added together, can have some massive impact.
 
 The most important take away here, however, is the process and that it is iterative.
 
