@@ -11,8 +11,9 @@ For easy digestion it is entirely selfcontained inside a singel tremor instance 
 
 ## Setup
 
-!!! tip
-    All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/14_syslog_udp) as well and can be run with `docker compose up`.
+:::tip
+All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/14_syslog_udp) as well and can be run with `docker compose up`.
+:::
 
 ## Environment
 

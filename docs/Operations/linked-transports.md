@@ -1,7 +1,8 @@
 # Linked Transports
 
-!!! attention
-    Linked transports are in alpha status as of v0.9.0 and we recommend its use only for exploratory projects. Details around it (including any on this page) are likely to change, as the feature set matures.
+:::attention
+Linked transports are in alpha status as of v0.9.0 and we recommend its use only for exploratory projects. Details around it (including any on this page) are likely to change, as the feature set matures.
+:::
 
 Tremor supports ingestion of events from external sources ([onramps](../Artefacts/onramps.md)) and after processing them from pipelines, they can be written to external sinks ([offramps](../Artefacts/offramps.md)). Since v0.9, Tremor also supports Linked Transports (LT): a mechanism that allows linking of source and sink nature into one ramp artefact.
 

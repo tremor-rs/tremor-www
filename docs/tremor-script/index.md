@@ -445,9 +445,9 @@ Emit expressions enable short-circuiting the evaluation of a `tremor-script` whe
 
 As the content of the emitted event is user-defined, oeprators can standardise the format of the event emitted on emit from `tremor-script`
 
-!!! note
-
-    By default, if no `emit` or `drop` expressions are defined, all expressions in a correctly written tremor-script will be evaluated until completion and the value of the last expression evaluated will be returned as an `emit` message.
+:::note
+By default, if no `emit` or `drop` expressions are defined, all expressions in a correctly written tremor-script will be evaluated until completion and the value of the last expression evaluated will be returned as an `emit` message.
+:::
 
 Implicit emission:
 
@@ -593,10 +593,11 @@ end;
 
 #### Matching tuple patterns
 
-!!! tip
-    A *tuple pattern* matches a *target* value if the *target* is an array and **each** test matches the positionally correspondent value in the *target*. The *target* needs to be **at least as long** as the *pattern* but **can be longer** if the *pattern* ends with `...`.
+:::tip
+A *tuple pattern* matches a *target* value if the *target* is an array and **each** test matches the positionally correspondent value in the *target*. The *target* needs to be **at least as long** as the *pattern* but **can be longer** if the *pattern* ends with `...`.
 
-    If you are looking for a more set like operation look at the [array pattern](#matching-array-patterns).
+If you are looking for a more set like operation look at the [array pattern](#matching-array-patterns).
+:::
 
 > ![tuple case grammar](grammar/diagram/TupleCase.png)
 
@@ -623,10 +624,11 @@ end;
 
 #### Matching array patterns
 
-!!! tip
-    An *array pattern* matches a target value if the *target* is an array and **each** test in the pattern matches **at least for one** element in the *target* indiscriminate of their positions.
+:::tip
+An *array pattern* matches a target value if the *target* is an array and **each** test in the pattern matches **at least for one** element in the *target* indiscriminate of their positions.
 
-    If you are looking for a more array like / positional operation look at the [tuple pattern](#matching-tuple-patterns).
+If you are looking for a more array like / positional operation look at the [tuple pattern](#matching-tuple-patterns).
+:::
 
 
 > ![array case grammar](grammar/diagram/ArrayCase.png)
@@ -661,9 +663,9 @@ end;
 
 #### Matching record patterns
 
-!!! tip
-    A record pattern matches a target if the target is a record that contains **at least all declared keys** and the tests for **each of the declared key** match.
-
+:::tip
+A record pattern matches a target if the target is a record that contains **at least all declared keys** and the tests for **each of the declared key** match.
+:::
 
 > ![record case grammar](grammar/diagram/RecordCase.png)
 

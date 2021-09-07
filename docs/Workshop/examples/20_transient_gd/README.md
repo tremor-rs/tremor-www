@@ -102,8 +102,9 @@ Listening on ws://127.0.0.1:8080/
 {"onramp":"metronome","id":2,"hostname":"ALT01827","ingest_ns":1600689204889220000}
 ```
 
-!!! note
-    Notice that we start from sequence `0` 3 times, so we restarted tremor 3 times.
+:::note
+Notice that we start from sequence `0` 3 times, so we restarted tremor 3 times.
+:::
 
 If the downstream websocket service restarts we can recover up to 1000 events. We may lose in flight events that were sending at the time the server went down. However, for fast restarts of the downstream service the losses should be minimal.
 
@@ -136,8 +137,9 @@ Listening on ws://127.0.0.1:8080/
 {"onramp":"metronome","id":37,"hostname":"ALT01827","ingest_ns":1600689239985447000}
 ```
 
-!!! note
-    Note that we recover **most** but now all of the data. As the downstream websocket connection is not a guaranteed delivery connection the recovery and protection against data loss is best effort in this case
+:::note
+Note that we recover **most** but now all of the data. As the downstream websocket connection is not a guaranteed delivery connection the recovery and protection against data loss is best effort in this case
+:::
 
 In short, the transient in memory wal can assist with partial recovery and
 will actively reduce data loss within the configured retention but it is

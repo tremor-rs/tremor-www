@@ -8,8 +8,9 @@ The application itself is written on top of tremor, utilizing the [linked transp
 
 ## Setup
 
-!!! note
-    All the application code here is available from the docs [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/36_quota_service).
+:::note
+All the application code here is available from the docs [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/36_quota_service).
+:::
 
 ```sh
 # needed for elasticsearch container to start successfully
