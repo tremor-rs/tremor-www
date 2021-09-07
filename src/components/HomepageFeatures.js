@@ -25,7 +25,7 @@ const FeatureList = [
 
         informative, and not leaving users with stack traces, or cryptic output; developer and operator friendliness- good user experience-
 
-        are front and center.
+        are front and centre.
       </>
     ),
   },
