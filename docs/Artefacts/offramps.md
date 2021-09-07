@@ -193,9 +193,9 @@ offramp:
 
 The `dns` linked offramp allows performing DNS queries against the system resolver.
 
-!!! note
-
-    No codecs, configuration, or processors are supported.
+::note
+No codecs, configuration, or processors are supported.
+:::
 
 Example:
 ```yaml
@@ -242,10 +242,9 @@ where type can be one of (please consult your DNS manual for the meaning of each
 * `SVCB`
 * `TLSA`
 
-!!! note
-
-    If type is not specified `A` records will be looked up
-
+:::note
+If type is not specified `A` records will be looked up
+:::
 
 Responses are an Array of objects denoting the type of record found as a key, followed by the entry as a string and a `ttl` for the record (please consult your DNS manual for the return value of different record types):
 
@@ -475,9 +474,9 @@ Google Cloud Storage offramp.
 
 This offramp can issue basic operations to list buckets and objects and to create, insert and delete objects from the Google Cloud Platform cloud storage service.
 
-!!! note
-
-    The offramp is experimental.
+:::note
+The offramp is experimental.
+:::
 
 This offramp assumes that the environment variable `GOOGLE_APPLICATION_CREDENTIALS` been exported to the execution environment and it has been configured to point to a valid non-expired service account token json file.
 
@@ -853,10 +852,9 @@ Google Cloud Pubsub - Publisher
 
 This offramp can issue basic operation of creating a subscription and sending a message to a topic.
 
-!!! note
-
-    The offramp is experimental.
-
+:::note
+The offramp is  experimental.
+:::
 This offramp assumes that the environment variable `GOOGLE_APPLICATION_CREDENTIALS` has been exported to the execution environment and it has been configured to point to a valid non-expired service account token json file.
 
 Supported configuration options are:
@@ -1256,9 +1254,9 @@ CNCF OpenTelemetry offramp. Publishes to the specified host or IP and destinatio
 conforming to the CNCF OpenTelemetry protocol specification v1. Forwards tremor value variants of `logs`, `trace`
 and `metrics` messages from tremor query pipelines downstream to remote OpenTelemetry endpoints.
 
-!!! note
-
-    The offramp is experimental.
+:::note
+The offramp is experimental.
+:::
 
 Supported configuration options are:
 
@@ -1587,18 +1585,18 @@ Supported configuration options are:
 - `host` - the destination host to send data to
 - `port` - the destination port to send data to.
 
-!!! warn
-
-    Setting `bound` to `false` makes the UDP offramp potentially extremely slow as it forces a lookup of the destination on each event!
+:::warn
+Setting `bound` to `false` makes the UDP offramp potentially extremely slow as it forces a lookup of the destination on each event!
+:::
 
 Used metadata variables:
 
  - `$udp.host`: This overwrites the configured destination host for this event. Expects a string.
  - `$udp.port`: This overwrites the configured destination port for this event. Expects an integer.
 
-!!! warn
-
-    Be careful to set `$udp.host` to an IP, **not** a DNS name or the OS will resolve it on every event, which will be extremely slow!
+:::warn
+Be careful to set `$udp.host` to an IP, **not** a DNS name or the OS will resolve it on every event, which will be extremely slow!
+:::
 
 Example:
 

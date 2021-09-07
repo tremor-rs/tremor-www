@@ -40,8 +40,9 @@ $ docker-compose up
 
 Inject test messages via [websocat](https://github.com/vi/websocat)
 
-!!! note
-    Can be installed via `cargo install websocat` for the lazy/impatient amongst us
+:::note
+Can be installed via `cargo install websocat` for the lazy/impatient amongst us
+:::
 
 ```bash
 $ cat inputs.txt | websocat ws://localhost:4242
@@ -59,5 +60,6 @@ $ cat invalids.txt | websocat ws://localhost:4242
 
 We introduce the `declare script` and `create script` query language features. `delcare script` lets declare a template for a script to be run while `create script` instanciates it as a part of the graph. `create script` takes an additional `as <name>` argument if it is omitted the operator will have the same name as the declaration.
 
-!!! tip
-    Scripts themselves can not connect to elements inside the graph, a `select` statement is needed to glue scripts and other logic together.
+:::tip
+Scripts themselves can not connect to elements inside the graph, a `select` statement is needed to glue scripts and other logic together.
+:::

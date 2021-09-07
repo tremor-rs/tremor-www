@@ -4,8 +4,9 @@ Example Websocket proxy application built on top of Tremor and meant to be a dem
 
 ## Setup
 
-!!! tip
-    All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/33_proxies_lt_ws) as well.
+:::tip
+All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/33_proxies_lt_ws) as well.
+:::
 
 ### Sources and sinks
 
@@ -75,8 +76,9 @@ docker-compose up
 
 Now let's try to test the echo capabilities of our upstream server, via a tool like [websocat](https://github.com/vi/websocat).
 
-!!! note
-    Can be installed via `cargo install websocat` for the lazy/impatient amongst us
+:::note
+Can be installed via `cargo install websocat` for the lazy/impatient amongst us
+:::
 
 ```sh
 # via proxy

@@ -4,8 +4,9 @@ Example HTTP server application built on top of Tremor and meant to be a demonst
 
 ## Setup
 
-!!! tip
-    All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/30_servers_lt_http) as well.
+:::tip
+All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/30_servers_lt_http) as well.
+:::
 
 ### Sources
 

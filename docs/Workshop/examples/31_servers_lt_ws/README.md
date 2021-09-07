@@ -4,8 +4,9 @@ Example Websocket server application built on top of Tremor and meant to be a de
 
 ## Setup
 
-!!! tip
-    All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/31_servers_lt_ws) as well.
+:::tip
+All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/31_servers_lt_ws) as well.
+:::
 
 ### Sources
 
@@ -69,8 +70,9 @@ docker-compose up
 
 Test the websocket server with a tool like [websocat](https://github.com/vi/websocat).
 
-!!! note
-    Can be installed via `cargo install websocat` for the lazy/impatient amongst us
+:::note
+Can be installed via `cargo install websocat` for the lazy/impatient amongst us
+:::
 
 ```sh
 # anything you type and enter, will be echoed back
