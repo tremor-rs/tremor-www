@@ -97,10 +97,10 @@ machine. [^4]
 
 > We recommend that you only use self-hosted runners with private repositories.
 > This is because forks of your repository can potentially run dangerous code on
-> your self-hosted runner machine by creating a pull request that executes the
+> your self-hosted runner machine by creating a pull request that runs the
 > code in a workflow. This is not an issue with GitHub-hosted runners because
 > each GitHub-hosted runner is always a clean isolated virtual machine, and it
-> is destroyed at the end of the job execution. Untrusted workflows running on
+> is decomisioned at the end of the job. Untrusted workflows running on
 > your self-hosted runner pose significant security risks for your machine and
 > network environment, especially if your machine persists its environment
 > between jobs. Some of the risks include:
@@ -127,7 +127,7 @@ So in the end we went with a webhooks based solution with a workflow like this:
 - GitHub sends the payload to the webhooks server
 - The webhooks server starts a docker container, builds tremor and benchmarks it
 - It pushes the JSON data to the Git repository
-- And finally destroys the Docker container
+- And finally removes the Docker container
 
 The end result looks something like this
 
