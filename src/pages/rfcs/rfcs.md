@@ -6,6 +6,8 @@ draft: false
 hide_table_of_contents: false
 ---
 
+<!-- alex disable period -->
+
 # Tremor RFCs - [Active RFC List](https://rfcs.tremor.rs/)
 
 [Tremor RFCs]: #tremor-rfcs
@@ -60,7 +62,7 @@ Some changes do not require an RFC:
   - Rephrasing, reorganizing, refactoring, or otherwise "changing shape does
     not change meaning".
   - Additions that strictly improve objective, numerical quality criteria
-    (warning removal, speedup, better platform coverage, more parallelism, trap
+    (warning removal, speedup, better platform coverage, more parallelism, catch
     more errors, etc.).
   - Additions only likely to be _noticed by_ other developers-of-Tremor,
     invisible to users-of-Tremor.
@@ -141,6 +143,7 @@ merged into the RFC repository as a markdown file. At that point the RFC is
   - At some point, a member of the subteam will propose a "motion for final
     comment period" (FCP), along with a *disposition* for the RFC (merge, close,
     or postpone).
+    <!-- alex ignore clearly -->
   - This step is taken when enough of the tradeoffs have been discussed that
     the subteam is in a position to make a decision. That does not require
     consensus amongst all participants in the RFC thread (which is usually
@@ -217,7 +220,7 @@ associated issue tracking its implementation in the Rust repository; thus that
 associated issue can be assigned a priority via the triage process that the
 team uses for all issues in the Rust repository.
 
-The author of an RFC is not obligated to implement it. Of course, the RFC
+The author of an RFC is not obligated to implement it. That said, the RFC
 author (like any other developer) is welcome to post an implementation for
 review after the RFC has been accepted.
 
