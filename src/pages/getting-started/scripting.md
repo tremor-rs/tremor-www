@@ -70,7 +70,7 @@ Tremor Query builds around [Tremor Script](#h-script), and extends Tremor's capa
 
 <div id="before">
 
-The YAML-based decription is unwieldy and easy to get wrong.
+The YAML-based decription is unwieldy and can be gotten wrong.
 
 ```yaml
 pipeline:
@@ -125,4 +125,4 @@ filter {
 
 </div>
 
-The full documentation [of the language](/docs/tremor-query), the [special operators](/docs/Artefacts/operators), and [aggregation functions](/docs/tremor-query/functions) can be found in the [docs](/docs) .
+The full documentation [of the language](/docs/tremor-query), the [operators](/docs/Artefacts/operators), and [aggregation functions](/docs/tremor-query/functions) can be found in the [docs](/docs) .

@@ -15,7 +15,7 @@ So, with a tip of the hat to our Rust friends:
 
 ## We Owe Us
 
-Now, we just need to figure out which of the many wonderful community-enabling tools to adopt.
+Now, we need to figure out which of the many wonderful community-enabling tools to adopt.
 
 ## Fork Now
 
