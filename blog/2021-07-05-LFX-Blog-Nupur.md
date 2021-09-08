@@ -21,6 +21,7 @@ Matthias Wahl, Anup Dhamala and Heinz Gies.
 [Tremor](https://www.tremor.rs/) is an event processing system originally designed for the needs of platform engineering and infrastructure. It is built for
 the users that have a high message volume to deal with and want to build pipelines to process, route, or limit this event stream.
 
+<!-- alex ignore he -->
 At the beginning of the program, I was given walkthrough of the project by Matthias and he patiently explained me the components and working of tremor.
 Tremor is nicely documented and the [docs](/docs/) can be very useful for referring many things.
 
@@ -75,7 +76,7 @@ Code for the syslog codec can be found [here](https://github.com/tremor-rs/tremo
 ### textual-length-prefix pre and postprocessor 
 
 In order to support syslog messages over TCP, it was needed to add support for the [RFC 5425](https://datatracker.ietf.org/doc/html/rfc5425) transport protocol, that contains a textual length prefix before each message.
-textual-length-prefix `preprocessor` and `postprocessor` were implemented to handle the buffers accordingly. The message starts with a number of digits, denoting the message length followed by a whitespace and then the message. The processor gets the length and then wait until the buffer is long enough, to extract the right amount of bytes.
+textual-length-prefix `preprocessor` and `postprocessor` were implemented to handle the buffers accordingly. The message starts with a number of digits, denoting the message length followed by a space and then the message. The processor gets the length and then wait until the buffer is long enough, to extract the right amount of bytes.
 The implementation can be found [here](https://github.com/tremor-rs/tremor-runtime/pull/957).
 
 [Proptest](https://github.com/altsysrq/proptest) is something new and amazing I learnt while working on this. It is a property testing framework which allows to test certain properties of code for arbitrary inputs. We utilised this for testing the functioning of our preprocessor for all types of inputs possible.
