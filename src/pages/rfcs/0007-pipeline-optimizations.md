@@ -8,9 +8,9 @@
 ## Summary
 [summary]: #summary
 
-As part of Tremor's execution engine, we transform the logic described in trickle query scripts into Directed Acyclic Graph (DAG)-based pipelines. Each operation, operator, or action inside the query gets represented as a node in this graph. Every event passed through Tremor traverses this graph of operators depth-first. When an event arrives at an operator, this operator can alter, discard, or route the event to influence which following subgraph (or subgraphs) the event traverses afterward.
+As part of Tremor's runtime engine, we transform the logic described in trickle query scripts into Directed Acyclic Graph (DAG)-based pipelines. Each operation, operator, or action inside the query gets represented as a node in this graph. Every event passed through Tremor traverses this graph of operators depth-first. When an event arrives at an operator, this operator can alter, discard, or route the event to influence which following subgraph (or subgraphs) the event traverses afterward.
 
-The initial construction of the pipeline DAGs is naive and done in the most simplistic way possible to make extending/evolving it relatively painless during development. After the construction of the initial graph, it may undergo one or more transformations to optimise execution; for example, it may apply constant folding to migrate some runtime calculations to compile time, where possible.
+The initial construction of the pipeline DAGs is naive and done in the most simplistic way possible to make extending/evolving it relatively painless during development. After the construction of the initial graph, it may undergo one or more transformations to optimise evaluation; for example, it may apply constant folding to migrate some runtime calculations to compile time, where possible.
 
 This RFC aims to discuss these transformations and more complex transformations.
 
@@ -125,7 +125,7 @@ To visualize the above, we can draw the graph as following, where items in squar
     `-------------------------------------------------[select 5]----------------------------------------------'
 ```
 
-Other then connectivity, passthrough operators serve no direct value other than serving as a connection point. Looking at the example above, we can see that even a simple script like that can mean that an event traverses 6 passthrough operators and only 4 operators that affect the graph.
+Other then connectivity, passthrough operators serve no direct value other than serving as a connection point. Looking at the example above, we can see that even a script like that can mean that an event traverses 6 passthrough operators and only 4 operators that affect the graph.
 
 As Passthrough operators do not modify the event, nor do they affect how the event traverses the graph, it is possible to remove them from the graph without any impact on the function of the graph itself. In result, the above graph could be rewritten as:
 

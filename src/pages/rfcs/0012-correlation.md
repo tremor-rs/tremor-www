@@ -8,7 +8,7 @@
 ## Summary
 [summary]: #summary
 
-Linked Transports enable integrating request-response-based communications with Tremor event-streams. Events coming from pipelines can be turned into requests and responses are turned into events, and sent on to other pipelines. Nonetheless, we currently can't correlate them, that is, have request event data present in the context of the response event handling. This RFC is suggesting new means for convenient correlating of events, i.e. the special `$correlation` metadata key.
+Linked Transports enable integrating request-response-based communications with Tremor event-streams. Events coming from pipelines can be turned into requests and responses are turned into events, and sent on to other pipelines. Nonetheless, we currently can't correlate them, that is, have request event data present in the context of the response event handling. This RFC is suggesting new means for convenient correlating of events, i.e. the `$correlation` metadata key.
 
 ## Motivation
 [motivation]: #motivation
@@ -22,11 +22,11 @@ We are currently adding some correlation data e.g. for the `elastic` offramp, wh
 
 Every Linked Transport onramp or offramp will for every incoming event take the `Value` at the metadata key `$correlation`, if any, and inject it into the response event metadata under the same key.
 
-This way, users can pass correlation data from request to response without the need to manipulate the event payload, and thus, the application data to be sent out. Also, we only need to keep as much correlation data around as we have in-flight events, and most of all, we don't require users to write complex and error-prone correlation logic in tremor-script, which will blow up code bases, possibly beyond reasonable maintainability.
+This way, users can pass correlation data from request to response without the need to manipulate the event payload, and thus, the application data to be sent out. Also, we only need to keep as much correlation data around as we have in-flight events, and most of all, we don't require users to write complex and error-prone correlation logic in tremor-script, which will make code bases grow, possibly beyond reasonable maintainability.
 
 Usage example using the `rest` offramp:
 
-Here, we have the request handling pipeline, that moves some event field into the special `$correlation` metadata field:
+Here, we have the request handling pipeline, that moves some event field into the `$correlation` metadata field:
 
 ```trickle
 # request handling
@@ -59,7 +59,7 @@ select event from correlation/out into out;
 select event from correlation/err into err;
 ```
 
-For cases where the event payload should remain unaffected:
+For cases where the event payload should be unaffected:
 
 ## Reference-level Explanation
 [reference-level-explanation]: #reference-level-explanation

@@ -20,9 +20,9 @@ String interpolation is a powerful tool to create text in a dynamic fashion. Get
 
 Interpolation should work equally in heredocs and strings; for readability, we will refer to it as `string interpolation` in an inclusive way.
 
-The goal of string interpolation is making the creation of strings simpler. The basic facility is the ability to embed code inside a string that is executed and its result, then integrated into the string. There are more advanced systems, such as templating libraries like [Mustache](https://mustache.github.io/); however, for now, that kind of feature set is outside of the scope of the RFC.
+The goal of string interpolation is making the creation of strings simpler. The basic facility is the ability to embed code inside a string that is evaluated and its result, then integrated into the string. There are more advanced systems, such as templating libraries like [Mustache](https://mustache.github.io/); however, for now, that kind of feature set is outside of the scope of the RFC.
 
-For simplicity of use, we will include strings and numbers verbatim, but render all other data structures as JSON. An alternative approach would be to enforce the type to be primitive, or even string but that feels like an unnecessary burden as auto conversion does not prevent manual conversion.
+For simplicity of use, we will include strings and numbers verbatim, but render all other data structures as JSON. An alternative approach would be to enforce the type to be basic, or even string but that feels like an unnecessary burden as auto conversion does not prevent manual conversion.
 
 
 ### Considerations for Tremor
@@ -40,7 +40,7 @@ An alternative would be to adopt a more verbose form of interpolation and prefix
 * `${ ... }` - the drawback being that $ is already used to stand for `metadata`, by that overloading the sign. This is a well-known format.
 * `#{ ... }` - `#` is currently used for comments, by that, overloading the sign. This is a well-known format.
 * `%{ ... }` - the `%` sign with squiggly is currently also a record pattern for extractors, by that, overloading the sign.
-* `!{ ... }` - the `!` sign is easy to miss and not very readable.
+* `!{ ... }` - the `!` sign can be missed and not very readable.
 * `@{ ... }` - no overloading at the moment.
 * `&{ ... }` - no overloading at the moment.
 * `*{ ... }` - no overloading at the moment.
@@ -110,11 +110,11 @@ An alternative would be to adopt a more verbose form of interpolation and prefix
 
 #### Observations on Escaping
 
-There are competing concerns regarding escaping. In this section, those opposing considerations are laid out.
+There are competing concerns regarding escaping. In this section, those opposing considerations are lied out.
 
-One of the desires is to reduce complexity and the need to learn new syntax for an operator. This guides us towards a single escape character; `\` is what we use everywhere else, so the conclusion from this desire would be to escape the beginning with a `\` to be in line with all other escapes.
+One of the goals is to reduce complexity and the need to learn new syntax for an operator. This guides us towards a single escape character; `\` is what we use everywhere else, so the conclusion from this goal would be to escape the beginning with a `\` to be in line with all other escapes.
 
-A competing concern is the desire of readability, using `\{` to escape doesn't read well and introduces asymmetry unless `\}` is also escaped, however, then `\}` would be escaped without a reason to do so, and suddenly allow `}` to be written as `\}`, and `}` that adds possible style and usage complexity.
+A competing concern is the goal of readability, using `\{` to escape doesn't read well and introduces asymmetry unless `\}` is also escaped, however, then `\}` would be escaped without a reason to do so, and suddenly allow `}` to be written as `\}`, and `}` that adds possible style and usage complexity.
 
 To address asynchronicity, an option is using `{{` and `}}`. Those read nicely and are symmetric; however, this introduces an unnessessary escape of `}}`, and leads to the situation where there are two forms of correct code: `"this {{ is not }} interpolated"` as well as `"this {{ is not } interpolated"`.
 
@@ -159,7 +159,7 @@ string::format("this should create a {{}} and say {}", 42) == "this should creat
 string::format("this should {"also work"}, create a {{}} and show {}", 42)  == "this should also work, create a {} and say 42";
 ```
 
-This can cause issues since both interpolation and format give `{}` a special meaning. There are multiple possible solutions to this:
+This can cause issues since both interpolation and format give `{}` a meaning. There are multiple possible solutions to this:
 
 1. "Deal with it"- this means that passing an interpolated string into format will require different escaping as a non interpolated string. This adds an unnecessary burden and learning curve on users, and should be avoided.
 2. Choose a different placeholder for format- this will break backward compatibility; it has the advantage that revisiting string::format might make it more powerful.
@@ -174,7 +174,7 @@ Between the required tradeoffs to be made, using a two-letter starting sequence 
 
 Upsides:
 
-1. `string::format` compatibility: as `{}` no longer has a special meaning- this means `string::format` needs no change.
+1. `string::format` compatibility: as `{}` no longer has a meaning, this means `string::format` needs no change.
 2. Balanced escaping: as `{` no longer needs to be escaped, neither does `}`.
 3. Escaping in code generation: since a two character sequence is significantly less likely to overlap- it will not eliminate the potential need for it, but that is always true
 4. As there is only one sequence and one way to write it, it keeps the complexity at the same level
@@ -199,9 +199,9 @@ The implementation holds a few requirements:
 1. Non-interpolated strings should have no additional overhead.
 2. Constant folding should apply to interpolation.
 3. Interpolated strings should, at worst, have the same cost as string concatenation; at best, be more preformat.
-4. Errors should remain hygienic and useful.
+4. Errors should be hygienic and useful.
 5. The behaviour of interpolation should be the same in strings and heredocs.
-6. Aside from the interpolation, behaviour of interpolated and non-interpolated strings should remain the same (read: adding an interpolated item to a string should not change behaviour).
+6. Aside from the interpolation, behaviour of interpolated and non-interpolated strings should stay the same (read: adding an interpolated item to a string should not change behaviour).
 
 
 ## Drawbacks
@@ -211,9 +211,9 @@ There are some drawbacks to consider:
 
 From a user perspective, string interpolation adds to the cognitive complexity as it introduces a new logical element and new escaping requirements. This can partially be mitigated with good integration in highlighting to ease the readability.
 
-Another drawback to consider is hidden performance cost. A string, intuitively, feels cheep, as it is a primitive datatype. By adding interpolation, strings become significantly more 'expensive' without being very explicit about it.
+Another drawback to consider is hidden performance cost. A string, intuitively, feels cheep, as it is a basic datatype. By adding interpolation, strings become significantly more 'expensive' without being very explicit about it.
 
-The overlap with string::format introduces the situation where we have two mechanisms that to the most degree, solve the same problem. Giving users this choice makes it harder to write (and by that read) 'idiomatic' Tremor code.
+The overlap with string::format introduces the situation where we have two mechanisms that to the most degree, solve the same problem. Giving users this choice makes it more complex to write (and by that read) 'idiomatic' Tremor code.
 
 The choice of syntax comes with different drawbacks. Using a single `{}` style will force additional escaping. A longer syntax, for example, one of the prefixed ones, will be more typing, but would resolve a lot of escaping needs as `*{` is going to be a lot less common then a single `{`.
 
