@@ -3,6 +3,8 @@ title: Language Changes
 id: lang_changes
 ---
 
+<!-- alex disable period -->
+
 # RFC policy - Language Design
 
 Pretty much every change to the Tremor language(s) needs an RFC. Note that new
@@ -15,7 +17,7 @@ submission. The result of triage will either be that the PR is assigned to a
 member of the sub-team for shepherding, the PR is closed as postponed because
 the subteam believe it might be a good idea, but is not currently aligned with
 Tremor's priorities, or the PR is closed because the sub-team feel it should
-clearly not be done and further discussion is not necessary. In the latter two
+not be done and further discussion is not necessary. In the latter two
 cases, the sub-team will give a detailed explanation. We'll follow the standard
 procedure for shepherding, final comment period, etc.
 
