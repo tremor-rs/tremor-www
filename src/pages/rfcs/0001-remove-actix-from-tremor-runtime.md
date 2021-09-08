@@ -1,3 +1,5 @@
+<!-- alex disable actor -->
+
 - Feature Name: rfc_0001_remove_actix
 - Start Date: 2020-01-20
 - Issue: [tremor-rs/tremor-rfcs#0001](https://github.com/tremor-rs/tremor-rfcs/issues/1)

@@ -43,8 +43,8 @@ select event from cb/cb into out/cb;
 ```
 
 Circuit Breaker signals:
-* Circuit breaker enabled.
-* Circuit breaker disabled.
+* Circuit breaker opened.
+* Circuit breaker closed.
 
 Circuit breakers events:
 * Opened- The circuit breaker has transitioned from 'closed' to 'opened' for a named external endpoint.
@@ -63,7 +63,7 @@ None
 ## Rationale and Alternatives
 [rationale-and-alternatives]: #rationale-and-alternatives
 
-The introduction of circuit breakers enables finer-grained control of compensating logic when external sources or sinks are detected as failed. The circuit breaker operator encapsulates runtime signals and contraflow so that circuit breakers can be used simply in user defined logic.
+The introduction of circuit breakers enables finer-grained control of compensating logic when external sources or sinks are detected as failed. The circuit breaker operator encapsulates runtime signals and contraflow so that circuit breakers can be used in user defined logic.
 
 ## Prior Art
 [prior-art]: #prior-art
