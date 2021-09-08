@@ -3,7 +3,7 @@
 !! note
     All the application code here is available from the docs [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/42_otel_jaeger).
 
-This example builds on the simple passthrough CNCF OpenTelemetry
+This example builds on the passthrough CNCF OpenTelemetry
 configuration but configures Jaeger as a receiver and exporter in the
 OpenTelemetry Collector.
 
@@ -23,7 +23,7 @@ OpenTelemetry collector.
 ## Environment
 
 The [onramp](etc/tremor/config/00_ramps.yaml) we use is the `otel` CNCF OpenTelemetry onramp listening on a non-standard CNCF OpenTelemetry port `4316`, it receives protocol buffer messages over gRPC on this port. The log, metric and trace events received are converted to tremor's value system and passed through a passthrough pipeline to the CNCF OpenTelemetry sink. The sink will try to connect to a downstream CNCF
-OpenTelemetry endpoint. In this workshop we will use the well known OpenTelemetry port of `4317` for our sink and run the standard OpenTelemetry collector on this port using its a simple [collector configuration](etc/otel/collector.yaml).
+OpenTelemetry endpoint. In this workshop we will use the well known OpenTelemetry port of `4317` for our sink and run the standard OpenTelemetry collector on this port using its a [collector configuration](etc/otel/collector.yaml).
 
 ```yaml
 onramp:
@@ -35,7 +35,7 @@ onramp:
       host: "0.0.0.0" # The IP address to bind on ( all interfaces in this case )
 ```
 
-It connects to a simple passthrough pipeline. This pipeline forwards any received
+It connects to a passthrough pipeline. This pipeline forwards any received
 observability events downstream unchanged.
 
 We connect the passthrough output events into a standard output sink.

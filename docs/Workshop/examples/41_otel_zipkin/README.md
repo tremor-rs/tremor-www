@@ -1,6 +1,6 @@
 # CNCF OpenTelemetry Zipkin Interorking
 
-This example builds on the simple passthrough CNCF OpenTelemetry
+This example builds on the passthrough CNCF OpenTelemetry
 configuration but configures Zipkin as a receiver and exporter in the
 OpenTelemetry Collector.
 
@@ -20,7 +20,7 @@ OpenTelemetry collector.
 ## Environment
 
 The [onramp](etc/tremor/config/00_ramps.yaml) we use is the `otel` CNCF OpenTelemetry onramp listening on a non-standard CNCF OpenTelemetry port `4316`, it receives protocol buffer messages over gRPC on this port. The log, metric and trace events received are converted to tremor's value system and passed through a passthrough pipeline to the CNCF OpenTelemetry sink. The sink will try to connect to a downstream CNCF
-OpenTelemetry endpoint. In this workshop we will use the well known OpenTelemetry port of `4317` for our sink and run the standard OpenTelemetry collector on this port using its a simple [collector configuration](etc/otel/collector.yaml).
+OpenTelemetry endpoint. In this workshop we will use the well known OpenTelemetry port of `4317` for our sink and run the standard OpenTelemetry collector on this port using its a [collector configuration](etc/otel/collector.yaml).
 
 ```yaml
 onramp:
@@ -32,7 +32,7 @@ onramp:
       host: "0.0.0.0" # The IP address to bind on ( all interfaces in this case )
 ```
 
-It connects to a simple passthrough pipeline. This pipeline forwards any received
+It connects to a passthrough pipeline. This pipeline forwards any received
 observability events downstream unchanged.
 
 ```trickle
@@ -160,7 +160,7 @@ use std::record;
 
 fn transform_span(span) with
 
-  # A simple transient event counter
+  # A transient event counter
   let count = match state of
     case null => let state = 0
     default => let state = state + 1
@@ -235,7 +235,7 @@ fn transform_span(span) with
 end;
 ```
 
-And a simple tremor query as follows:
+And a tremor query as follows:
 
 ```trickle
 #
@@ -277,4 +277,4 @@ Zipkin PHP clients with minor adjustments to the script and query files above.
 
 However, the CNCF OpenTelemetry Collector has excellent support for legacy observability
 frameworks and formats. Tremor does not. The Zipkin UI will be familiar to users who
-have experience of observability through the Zipkin project. Tremor does not have a UI at all. We provide the example to illustrate a more complete example of how tremor is typically configured in production environments and to illustrate how existing trace and span information can relatively easily be adapted to `CNCF OpenTelemetry` using tremor's scripting and query language support.
+have experience of observability through the Zipkin project. Tremor does not have a UI at all. We provide the example to illustrate a more complete example of how tremor is typically configured in production environments and to illustrate how existing trace and span information can be adapted to `CNCF OpenTelemetry` using tremor's scripting and query language support.

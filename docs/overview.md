@@ -47,7 +47,7 @@ At this time, the full URL form is not used in the configuration model.
 
 ## Runtime model
 
-The Tremor runtime is composed of multiple internal components that communicate via queues across multiple threads of control managed/coordinated by a set of control plane actors driven by the Tremor REST API.
+The Tremor runtime is composed of multiple internal components that communicate via queues across multiple threads of control managed/coordinated by a set of control plane component driven by the Tremor REST API.
 
 ### Processing model
 
@@ -158,9 +158,9 @@ The set of facilities in the runtime that are related to service lifecycle, acti
 
 These terms can be used interchangeably.
 
-Operators CAN conduct or orchestrate one or many Tremor servers through its REST based API. The REST API is implemented as an actor in the Tremor runtime.
+Operators CAN conduct or orchestrate one or many Tremor servers through its REST based API.
 
-The API actor in turn interfaces with registry and repository facilities. Tremor distinguishes between artefacts and instances. Artefacts in Tremor have no runtime overhead.
+The API in turn interfaces with registry and repository facilities. Tremor distinguishes between artefacts and instances. Artefacts in Tremor have no runtime overhead.
 
 Artefacts in Tremor are declarative specifications of:
 

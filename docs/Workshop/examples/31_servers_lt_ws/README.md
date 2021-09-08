@@ -38,13 +38,13 @@ binding:
 
 ### Processing logic
 
-Implementation for the `echo` pipeline (techincally, echo with one special twist):
+Implementation for the `echo` pipeline (techincally, echo with one twist):
 
 ```trickle
 define script process
 script
   match event of
-    # snot is a special snowflake
+    # snot is a badger
     case "snot" => "badger"
     default => event
   end
@@ -88,7 +88,7 @@ goodbye
 goodbye
 ```
 
-If there's internal tremor error while processing the incoming message (eg: codec or preprocessor failure), the error should be bubbled up to the client. To test this out, change the codec in the [onramp configuration](etc/tremor/config/config.yaml) to be `json` from `string` and send an invalid json input:
+If there's internal tremor error while processing the incoming message (eg: codec or preprocessor failure), the error should be bubbled up to the client. To test this out, change the codec in the [onramp configuration](etc/tremor/config/config.yaml) to be `json` from `string` and send an malformed json input:
 
 ```sh
 # after changing the onramp codec to json

@@ -4,7 +4,7 @@
 All the application code here is available from the docs [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples/44_otel_elastic_apm).
 :::
 
-This example builds on the simple passthrough CNCF OpenTelemetry
+This example builds on the passthrough CNCF OpenTelemetry
 configuration but configures Elastic APM as an exporter in the
 OpenTelemetry Collector.
 
@@ -43,7 +43,7 @@ offramp:
       host: "apm-server" # The Elastic APM server we're distributing to
 ```
 
-It connects to a simple passthrough pipeline. This pipeline forwards any received
+It connects to a passthrough pipeline. This pipeline forwards any received
 observability events downstream unchanged.
 
 We connect the passthrough output events into a standard output sink.
@@ -111,6 +111,6 @@ We should also be able to see metrics and spans in the APM service section of el
 
 ## Advanced
 
-It should be relatively simple to configure the ElasticSearch offramp in tremor for log shipping to elastic whilst exposing a pure OpenTelemetry interface to the outside world.
+From here on you can configure the ElasticSearch offramp in tremor for log shipping to elastic whilst exposing a pure OpenTelemetry interface to the outside world.
 
-This would allow upstream clients to use the OpenTelemetry protocol exclusively. A simple tremor algorithm can batch and convert OpenTelemetry log formatted messages to the form that the ElasticSearch APIs prefer for bulk log shipping.
+This would allow upstream clients to use the OpenTelemetry protocol exclusively. A tremor algorithm can batch and convert OpenTelemetry log formatted messages to the form that the ElasticSearch APIs prefer for bulk log shipping.

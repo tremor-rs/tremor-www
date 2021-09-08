@@ -91,12 +91,12 @@ end;
 ```
 
 Here we add metadata for elasticsearch, so it ends up in the right index, we use the kafka key as elastic document id.
-We also extract a `message_id` from the kafka headers and put it in `$correlation`. This special metadata value will
+We also extract a `message_id` from the kafka headers and put it in `$correlation`. This metadata value will
 be forwarded across linked transports, like elasticsearch.
 
 Further down in the ingestion pipeline we batch events up into counts of 10 to be more efficient when sending stuff over to elastic.
 
-The elasticsearch offramp will issue success and error events from its `out` and `err` ports respectively. One event per batched document or one error event if something went wrong with the overall request execution (e.g. elasticsearch is not reachable).
+The elasticsearch offramp will issue success and error events from its `out` and `err` ports respectively. One event per batched document or one error event if something went wrong with the overall request (e.g. elasticsearch is not reachable).
 
 We handle those events in two different pipelines. Success events are handled in this one:
 
@@ -181,7 +181,7 @@ select {
 select event from error_notify/err into err;
 ```
 
-Here we distinguish between errors per document (e.g. invalid format for the given index) and errors scoped to the whole request execution (no `$elastic` metadata).
+Here we distinguish between errors per document (e.g. malformed data for the given index) and errors scoped to the whole request (no `$elastic` metadata).
 In the case of a request error, we have an array of all the batched `$correlation` values and need to "explode" the event into 1 per `$correlation` id, so we can correctly
 report back to kafka 1 document at a time.
 
@@ -200,4 +200,4 @@ tremor_out_1     | [OK] {"success":true,"message_id":"MTYyMDEzNjg1MjY2NjgxMzAwMA
 tremor_out_1     | [OK] {"success":true,"message_id":"MTYyMDEzNjg1MzY2NzA5NjAwMA==","payload":{"event":{"event":{"onramp":"metronome","ingest_ns":1620136853667088800,"id":600},"might_be_invalid":[true,false]},"some_data":["tremor-kafka://kafka:9092/tremor/0/600"]},"elastic_metadata":{"_id":"1620136853667096000","_index":"foo","_type":"_doc","id":"1620136853667096000","index":"foo","doc_type":"_doc","version":1}}
 ```
 
-Here we see one error message and two successful messages. For the error message you can clearly recognize the cause: `Current token (VALUE_NUMBER_INT) not of boolean type`.
+Here we see one error message and two successful messages. For the error message you can recognize the cause: `Current token (VALUE_NUMBER_INT) not of boolean type`.
