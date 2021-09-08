@@ -74,7 +74,7 @@ links:
   "/pipeline/main/{instance}/out": ["/offramp/stdout/{instance}/in"]
 ```
 
-Ths creates a binding specification. Again this does not instantiate the referenced onramps, offramps or pipelines. This is also just a blueprint of a connected topology with a unique identifier `default`.
+Ths creates a binding specification. Again this does not instantiate the referenced onramps, offramps or pipelines. This is also a blueprint of a connected topology with a unique identifier `default`.
 
 ## Publish via the REST API / curl
 
