@@ -1,3 +1,4 @@
+<!-- alex disable crash host -->
 # Investigations
 
 ## Tools

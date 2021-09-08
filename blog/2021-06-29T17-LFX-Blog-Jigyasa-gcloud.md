@@ -423,7 +423,7 @@ For the testing, we run the sink (a.k.a offramp) to send messages and source (a.
 
 ---
 ***Note:***
-*On killing the server and resarting right afterwards, we see that we lost 1 message (id 7) which was acknwledged inside tremor but not yet fully delivered to the console by gsub.*
+*On stopping the server and resarting right afterwards, we see that we lost 1 message (id 7) which was acknwledged inside tremor but not yet fully delivered to the console by gsub.*
 
 ---
 
