@@ -88,7 +88,7 @@ select event from process/err into err;
 
 This example demonstrates the minimal processing needed for the proxying logic to work, but you can do any arbitrary processsing on the incoming request as needed (eg: deciding a different upstream based on certain incoming request attributes like headers or request paths).
 
-The [response_processing](etc/tremor/config/response_processing.trickle) pipeline is similarly minimal -- it just adds an entry to the `x-powered-by` header for showing response modifications (if you don't need it, you can just use a passthrough pipeline, or even rely on the default `system::passthrough` pipeline which eliminates the need to create this new pipeline).
+The [response_processing](etc/tremor/config/response_processing.trickle) pipeline is similarly minimal -- it adds an entry to the `x-powered-by` header for showing response modifications (if you don't need it, you can use a passthrough pipeline, or even rely on the default `system::passthrough` pipeline which eliminates the need to create this new pipeline).
 
 ## Testing
 
@@ -112,7 +112,7 @@ date: Thu, 15 Oct 2020 05:00:06 GMT
 "badger"
 
 
-# just the upstream
+# the upstream
 $ curl -i http://localhost:8139/snot
 HTTP/1.1 200 OK
 content-length: 8

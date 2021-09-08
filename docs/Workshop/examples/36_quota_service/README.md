@@ -1,8 +1,8 @@
 # Quota Service
 
-Demo quota service, geared for a log collection usecase (but can be easily applied for similar needs elsewhere too).
+Demo quota service, geared for a log collection usecase (but can be applied for similar needs elsewhere too).
 
-This is a HTTP CRUD application running alongside an example log receiver setup (logs in via TCP -> tremor -> elastic out), that allows operators to easily (and quickly) update the throttling rates for various classes of logs. It also allows retrieving the current quotas for all classes, which can potentially be used by logging clients to pre-throttle on their end, even before transmitting the logs to tremor (or the information can be used to always provide up-to-date quota limits to folks using this log platform).
+This is a HTTP CRUD application running alongside an example log receiver setup (logs in via TCP -> tremor -> elastic out), that allows operators to update the throttling rates for various classes of logs. It also allows retrieving the current quotas for all classes, which can potentially be used by logging clients to pre-throttle on their end, even before transmitting the logs to tremor (or the information can be used to always provide up-to-date quota limits to folks using this log platform).
 
 The application itself is written on top of tremor, utilizing the [linked transports](../../../Operations/linked-transports.md) feature introduced in Tremor 0.9 and the [KV offramp](../../../Artefacts/offramps.md#kv) introduced in Tremor 0.11.
 

@@ -94,7 +94,7 @@ We don't include the whole pipeline logic here for brevity, but you can view it 
 
 ### Error handling
 
-Of special interest is the binding specific for error handling -- we make sure to link the `err` ports from all the involved onramp/pipeline aretefacts and also ensure that the error events from those artefacts are bubbled up to the client appropriately, with proper HTTP status code (the latter is done via routing them all to the central [internal_error_processing](etc/tremor/config/internal_error_processing.trickle) pipeline).
+Of interest is the binding specific for error handling -- we make sure to link the `err` ports from all the involved onramp/pipeline aretefacts and also ensure that the error events from those artefacts are bubbled up to the client appropriately, with proper HTTP status code (the latter is done via routing them all to the central [internal_error_processing](etc/tremor/config/internal_error_processing.trickle) pipeline).
 
 ```yaml
   - id: error
@@ -139,7 +139,7 @@ $ curl -s -o /dev/null -w ""%{http_code} http://localhost:8139/ping
 
 If you navigate to [http://localhost:8139/](http://localhost:8139/) from your browser, you should be redirected to [http://localhost:8139/index](http://localhost:8139/index) first (part of the `request_processing` pipeline logic), and then you should be able to see all the request attributes that your browser sent to the server, pretty-printed.
 
-Also try something like [http://localhost:8139/index?name=badger](http://localhost:8139/index?name=badger) -- we have a very simple dynamic web application now!
+Also try something like [http://localhost:8139/index?name=badger](http://localhost:8139/index?name=badger) -- we have a very basic dynamic web application now!
 
 > ![HTTP Server Application](images/tremor_web_server.png)
 
@@ -187,7 +187,7 @@ $ curl http://localhost:8139/stats
 {"requests_processed":7}
 ```
 
-This is utilizing the pipeline [state mechanism](../../../tremor-script/index.md#state) under the hood -- a simple yet powerful way to build stateful applications.
+This is utilizing the pipeline [state mechanism](../../../tremor-script/index.md#state) under the hood -- a powerful way to build stateful applications.
 
 ### Error handling
 
