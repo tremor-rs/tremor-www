@@ -10,7 +10,7 @@ hide_table_of_contents: false
 
 With the [Tremor language server](https://github.com/tremor-rs/tremor-language-server), Tremor comes with advanced support for editing [Tremor Script and Tremor Query](https://tremor.rs/getting-started/scripting) in both Visual Studio Code and VIM.
 
-To install the `tremor-language-server`, you require [Rust to be set up](https://rustup.rs) on your system, and then you can simply run `cargo install tremor-language-server`.
+To install the `tremor-language-server`, you require [Rust to be set up](https://rustup.rs) on your system, and then you can run `cargo install tremor-language-server`.
 
 The VS Code extension is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=tremorproject.tremor-language-features).
 

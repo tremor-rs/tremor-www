@@ -21,7 +21,7 @@ docker pull tremorproject/tremor:latest
 
 ### Configuring Tremor
 
-If you just want to see Tremor start, you can skip this step, but lets be real, you probably want to make Tremor do something more interesting than printing a few numbers on the screen.
+If you want to see Tremor start, you can skip this step, but lets be real, you probably want to make Tremor do something more interesting than printing a few numbers on the screen.
 
 The Tremor Docker image is configured by mounting a configuration folder to `/etc/tremor`.
 
