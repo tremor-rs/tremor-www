@@ -42,7 +42,7 @@ The resulting plugins can be loaded into a Tremor instance, either at start-time
 
 The PDK requires extending registries for various artefacts; we need to enable registering additional artefacts in addition to the supporting builtin ones. Nested namespaces may be of benefit to prevent collisions.
 
-Plugin unloading needs careful consideration. In this revision, we are making unloading illegal to eliminate the complexity of dependency tracking and live usage tracking. Unloading a plugin in the initial implementation will require a restart of the runtime. Plugin lifecycle with support for etherealization, destruction and unloading is envisaged. A future RFC revision may replace this one for this purpose.
+Plugin unloading needs careful consideration. In this revision, we are forbid unloading to eliminate the complexity of dependency tracking and live usage tracking. Unloading a plugin in the initial implementation will require a restart of the runtime. Plugin lifecycle with support for etherealization, destruction and unloading is envisaged. A future RFC revision may replace this one for this purpose.
 
 Developer tooling such as template projects, traits, examples, and eventually, testing frameworks to facilitate higher developer experience for plugin developers is out of scope in this revision. A future RFC should cover off plugin developer experience once the PDK and a set of plugins have been implemented as concrete needs will become clearer over time.
 
@@ -58,7 +58,7 @@ Plugin ownership and maintenance. Aside from code-related issues, we need a proc
 ## Rationale and Alternatives
 [rationale-and-alternatives]: #rationale-and-alternatives
 
-The simple alternative to a PDK, is to internalize every artefact explicitly. This limits scalability and effectivness and is not tenable in the medium to long-term.
+The alternative to a PDK, is to internalize every artefact explicitly. This limits scalability and effectivness and is not tenable in the medium to long-term.
 
 Another alternative is enhance Tremor so that plugins can be 'soft coded' through a DSL. This may require extending existing languages, adding new DSLs and other changes to the Tremor runtime. For some artefacts, such as codecs, or pre and post processors, this may be worth investigating. However, performance critical regions of the tremor runtime may limit the applicability of 'soft coded' plugins until the runtime evolves suitable APIs, facilities and development tooling.
 
