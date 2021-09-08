@@ -225,7 +225,7 @@ Met.
 
 ### Warning flags
 
-**The project MUST enable one or more compiler warning flags, a "safe" language mode, or use a separate "linter" tool to look for code quality errors or common simple mistakes, if there is at least one FLOSS tool that can implement this criterion in the selected language.**
+**The project MUST enable one or more compiler warning flags, a "safe" language mode, or use a separate "linter" tool to look for code quality errors or common mistakes, if there is at least one FLOSS tool that can implement this criterion in the selected language.**
 
 Met. The project enables all warnings and enforces strict / pedantic checks on code style, format. These are constraints and limitations are enforced by the build and continuous integration systems.
 
@@ -260,7 +260,7 @@ Met. The project does not provide bespoke cryptographic protocols, algorithms or
 **All functionality in the software produced by the project that depends on cryptography MUST be implementable using FLOSS.**
 
 Met.
-
+<!-- alex allow disabled -->
 **The security mechanisms within the software produced by the project MUST use default keylengths that at least meet the NIST minimum requirements through the year 2030 (as stated in 2012). It MUST be possible to configure the software so that smaller keylengths are completely disabled.**
 
 Met.

@@ -23,6 +23,7 @@ My work involved writing "Property-based tests for tremor-script" and some of th
 
 ### New concepts I learned specific to my work
 
+<!-- alex ignore his -->
 - Erlang and Rust
     - My work mostly revolved around Erlang and a little Rust and I was completely new to this ecosystem, it didn't help to not find much resources or actively accessible community for Erlang.
     - I took this as a challenge and went through [various resources to learn Erlang](https://github.com/diru1100/learn_erlang), functional programming in general and I was able to see why this Language was involved to do the task at hand, [my mentor](https://twitter.com/heinz_gies) is very passionate about Erlang and shared his thought-process, experience which helped me broaden my knowledge and how to approach any concept while learning something completely new.
@@ -30,18 +31,18 @@ My work involved writing "Property-based tests for tremor-script" and some of th
 <!--truncate-->
 
 - Tremor-script
-    - It is an interpreted expression-oriented language designed for the filtering, extraction, transformation and streaming of structured data in a stream or event-based processing system which is explicitly turing incomplete used to easily write programs specific to Tremor use-cases.
+    - It is an interpreted expression-oriented language designed for the filtering, extraction, transformation and streaming of structured data in a stream or event-based processing system which is explicitly turing incomplete used to write programs specific to Tremor use-cases.
     - It is written using Rust but tested using Erlang
 - Property based testing
     - We have seen various types of testing approaches like Unit testing, Integration testing, End2End testing etc.
     - The purpose of tests is to check if our code is failing anywhere and test the same with various inputs.
-    - Fig 1 shows different types of tests to easily understand which features are specialised in what.
+    - Fig 1 shows different types of tests to understand which features are specialised in what.
 
         ![](/img/blog-images/LFC-blog-diru/tests-comparison-graph.png)
 
         Fig 1. Showing various tests wrt Feature compilance and Input scope covered [1]
 
-    - Property based testing takes a new appraoch which has the right balance of randomness and examples. They also have this nice feature of called shrinking which shows a simple version of sample input which is failing your tests. However, Property based testing is not an ideal solution to use everywhere but it fits our use-case here i.e testing features of a custom-language.
+    - Property based testing takes a new appraoch which has the right balance of randomness and examples. They also have this nice feature of called shrinking which shows a simplified version of sample input which is failing your tests. However, Property based testing is not an ideal solution to use everywhere but it fits our use-case here i.e testing features of a custom-language.
     - Some of the resources I kept below may help understand Property based testing better
 
 ### Property Based testing in tremor-script
@@ -65,7 +66,7 @@ My work involved writing "Property-based tests for tremor-script" and some of th
     - **pbt.erl:** Some supporting headers needed by other files
     - **spec.erl:** We make use of EQC functions here to create the input generators to test a feature.
     - **test_eqc.erl:** The main property of the property based test is kept here.
-    - **util.erl:** Utility functions to support operations for easy handling.
+    - **util.erl:** Utility functions to support operations for easier handling.
 - On a high level Fig 3 explains how the property we consider is checked
 
 ![](/img/blog-images/LFC-blog-diru/tremor-script-testing-workflow.png)

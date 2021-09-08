@@ -52,7 +52,7 @@ repository you can run
 ```
 tremor test bench tremor-cli/tests
 ```
-
+<!-- alex ignore he -->
 The benchmarking system we had before this was, well it was mostly Heinz. So
 the usual process was to submit a patch and if the patch affects the performance
 in some way Heinz pulls the changes, runs the benchmarks and if he gives it a
@@ -80,7 +80,7 @@ GitHub Actions as well but doing that would be unreliable due to the
 
 Secondly, we need someplace to store that benchmark data so that we can view
 how it changed over time. This can be a SQL database, a metrics oriented
-database or just a simple git repository. We store our benchmark data in a JSON
+database or a git repository. We store our benchmark data in a JSON
 file and push it to a git repository.
 
 Finally, we use that JSON data to plot a time series graph to see how the
@@ -140,14 +140,14 @@ A lot of this setup for the charts is inspired by the Continuous Benchmarks of
 
 This was the first formal internship/mentorship I’ve ever done and I
 am grateful to be a part of it. I learned a lot in these past few months. A lot
-has changed in the way that I think not just about code or how to approach a
+has changed in the way that I think not only about code or how to approach a
 problem but about work and life in general and I'm grateful for that. Thanks
 Anup, Darach, Heinz and Matthias for being such awesome mentors. Thanks Ana for
 always being so helpful. Thanks to the other mentors who were a part of this
 program with me. It was a great time working with everyone and I look forward
 to some more.
 
-If you have any suggestions/thoughts/questions or just wanna say hi you can
+If you have any suggestions/thoughts/questions or wanna say hi you can
 message me on [Twitter](https://twitter.com/humancalico) or email me at
 [humancalico@disroot.org](mailto:humancalico@disroot.org)
  

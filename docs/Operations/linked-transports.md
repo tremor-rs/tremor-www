@@ -8,13 +8,13 @@ Tremor supports ingestion of events from external sources ([onramps](../Artefact
 
 In other words -- once this mechanism is turned on -- a Tremor onramp can behave as an *offramp* (i.e. send events to the outside world) and similarly, a Tremor offramp can behave as an *onramp* (i.e. receive events from the outside world). This is specifically useful for onramps and offramps like REST and websocket, where the protocol already provides facility for responding to events, and as such, the mechanism is currently supported for those onramps and offramps only.
 
-With the addition of linked transports and the whole new possibilities for event-flow that comes with it, Tremor has become a platform for implementing a wider variety of applications -- think servers, proxies, bridges etc., and not just ETL-style use cases. Moreover, in combination with other Tremor features and the composability that is Tremor's signature, operators can create richer applications with linked transports at the center -- think loadbalancers, or custom APIs that dynamically change pipeline behaviour (without the need for pipeline redeploy).
+With the addition of linked transports and the whole new possibilities for event-flow that comes with it, Tremor has become a platform for implementing a wider variety of applications -- think servers, proxies, bridges etc., and not only ETL-style use cases. Moreover, in combination with other Tremor features and the composability that is Tremor's signature, operators can create richer applications with linked transports at the center -- think loadbalancers, or custom APIs that dynamically change pipeline behaviour (without the need for pipeline redeploy).
 
 This document will describe the feature with concrete examples next, so if the above possibilities seem abstract to you, we hope it will be more clear by the end here.
 
 ## Basic configuration
 
-The linked behavior for an onramp or offramp can be turned on by setting the `linked` config param for the artefact to `true` (by default, it's `false`). A simple Tremor deployment illustrating the feature:
+The linked behavior for an onramp or offramp can be turned on by setting the `linked` config param for the artefact to `true` (by default, it's `false`). A basic Tremor deployment illustrating the feature:
 
 ```yaml
 onramp:
@@ -126,7 +126,7 @@ Examples of even more advanced Tremor applications:
 
 ## Error handling
 
-The above linked examples also demonstrate typical error handling needed for applications built on top of linked transports (eg: for HTTP-based applications, how to send a proper error response to the client with an appropriate status code on tremor-internal failures like runtime script errors, or codec errors on invalid input).
+The above linked examples also demonstrate typical error handling needed for applications built on top of linked transports (eg: for HTTP-based applications, how to send a proper error response to the client with an appropriate status code on tremor-internal failures like runtime script errors, or codec errors on malformed input).
 
 ??? example "Example error-handling binding for a HTTP proxy"
     ```yaml
@@ -157,7 +157,7 @@ The key here is remembering to link the error ports for all the onramp/offramp/p
 
 ## Correlation
 
-If requests to and responses from a linked transport need to be correlated, the special metadata field `$correlation` can be used. It will be forwarded from the request event to the response event, so that some data from the request can be present in the response context.
+If requests to and responses from a linked transport need to be correlated, the reserved metadata field `$correlation` can be used. It will be forwarded from the request event to the response event, so that some data from the request can be present in the response context.
 
 Example pipeline:
 

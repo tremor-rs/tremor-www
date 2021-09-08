@@ -10,6 +10,7 @@ description: Jigyasa's LFX spring Mentorship experience report.
 
 ### Introduction
 
+<!--alex ignore gals-men gals-men -->
 Hello folks! I'm Jigyasa, a final-year computer science engineering student at Indira Gandhi Delhi Technical University for Women pursuing my bachelor's in Technology. This blog is about my experience contributing to [Tremor](https://www.tremor.rs/) as part of the LFX Mentorship program.
 i
 ### Learning about Tremor
@@ -40,7 +41,7 @@ While getting started with a new language, I try to follow along some interactiv
 
 [https://doc.rust-lang.org/book/](https://doc.rust-lang.org/book/)
 
-However, while coding I used to run into a lot of errors. My mentor suggested me a good practice which is to document those errors and always make good notes of anything and everything I learn. So the next time I come across something similar, I can just refer to my notes instead of searching that up on the internet. I used to document the little things like a new `vi` or `git` command that I learned and found helpful. It's also very important to keep those notes organized so that it's faster and easier to find what you're looking for. Compiling notes of all the new things learned in a day can be very helpful.
+However, while coding I used to run into a lot of errors. My mentor suggested me a good practice which is to document those errors and always make good notes of anything and everything I learn. So the next time I come across something similar, I can refer to my notes instead of searching that up on the internet. I used to document the little things like a new `vi` or `git` command that I learned and found helpful. It's also very important to keep those notes organized so that it's faster and easier to find what you're looking for. Compiling notes of all the new things learned in a day can be very helpful.
 
 At times when I used to get stuck with some Rust errors, I used to reach out to my mentor or anyone from the Tremor community and they would help me. Apart from that, these discord servers can be of great help too:
 
@@ -434,7 +435,7 @@ Hence, for the `gsub` onramp, a `wal` can assist with partial recovery of downst
 
 ![Network Failure Recovery testing](/img/blog-images/LFX-blog-jigyasa/network-failure-testing.png)
 
-While testing in poor connectivity, the pivot point (where it just works) was observed when downlink and uplink packets dropped varies between 47%-50%. 
+While testing in poor connectivity, the pivot point (where it works) was observed when downlink and uplink packets dropped varies between 47%-50%. 
 
 ## Use of Connectors
 
