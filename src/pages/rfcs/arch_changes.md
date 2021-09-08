@@ -3,6 +3,8 @@ title: Architecture Changes
 id: arch_changes
 ---
 
+<!-- alex disable period -->
+
 # RFC policy - Architecture Design
 
 Pretty much every change to the Tremor internals architecture needs an RFC.
@@ -14,7 +16,7 @@ submission. The result of triage will either be that the PR is assigned to a
 member of the sub-team for shepherding, the PR is closed as postponed because
 the subteam believe it might be a good idea, but is not currently aligned with
 Tremor's priorities, or the PR is closed because the sub-team feel it should
-clearly not be done and further discussion is not necessary. In the latter two
+not be done and further discussion is not necessary. In the latter two
 cases, the sub-team will give a detailed explanation. We'll follow the standard
 procedure for shepherding, final comment period, etc.
 
@@ -39,7 +41,7 @@ be standalone and reference the original, rather than modifying the existing
 RFC. You should add a comment to the original RFC with referencing the new RFC
 as part of the PR.
 
-Obviously, there is some scope for judgment here. As a guideline, if a change
+There is some scope for judgment here. As a guideline, if a change
 affects more than one part of the RFC (i.e., is a non-local change), affects the
 applicability of the RFC to its motivating use cases, or there are multiple
 possible new solutions, then the feature is probably not 'minor' and should get
