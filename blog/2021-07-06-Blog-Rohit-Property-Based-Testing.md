@@ -36,7 +36,7 @@ My work involved writing "Property-based tests for tremor-script" and some of th
 - Property based testing
     - We have seen various types of testing approaches like Unit testing, Integration testing, End2End testing etc.
     - The purpose of tests is to check if our code is failing anywhere and test the same with various inputs.
-    - Fig 1 shows different types of tests to understand which features are specialised in what.
+    - Fig 1 shows different types of tests to help understand which features are specialised in what.
 
         ![](/img/blog-images/LFC-blog-diru/tests-comparison-graph.png)
 
