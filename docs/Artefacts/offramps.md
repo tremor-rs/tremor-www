@@ -1004,7 +1004,7 @@ Example:
       dir: "temp/kv" # directory to store data in
 ```
 
-One response event is sent for every command in the handled event. On success to the `out` port, in the error case (malformed or error during kv operation) to the `err` port.
+One response event is sent for every command in the handled event. On success to the `out` port, in the error case (malformed data or error during kv operation) to the `err` port.
 Each response event will have the following metadata structure:
 
 ```js
