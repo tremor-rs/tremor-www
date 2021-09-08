@@ -15,7 +15,7 @@ traffic shaping to all logging and metrics capture, distribution and processing
 systems at Wayfair.
 
 The initial release of Tremor supported proactive rate limiting, classification
-of data streams based on simple rules, and reactive backpressure handling processing in excess of 10TB per day of nested structured data.
+of data streams based on rules, and reactive backpressure handling processing in excess of 10TB per day of nested structured data.
 
 Tremor has been extended to support rich extract, transform, load and filtering of data streams with a scripting language designed for expressive ETL on JSON-like data structures with SIMD-accelerated JSON processing.
 
@@ -23,7 +23,7 @@ Tremor has been extended to support aggregate query processing and quartile esti
 
 Tremor is currently being extended with clustering support based on the RAFT protocol specification, ring-based topologies and V-Nodes inspired by riak-core from Basho Technologies.
 
-Tremor is also a system of plugins, or a framework. Although it is in production for only 50+ production use cases, it is designed to be easily extended, bent or stretched to other purposes.
+Tremor is also a system of plugins, or a framework. Although it is in production for only 50+ production use cases, it is designed to be extended, bent or stretched to other purposes.
 
 ## When not to use Tremor?
 
@@ -32,9 +32,9 @@ Tremor displaces, disintermediates or replaces a number of commercial and open-s
 In Wayfair's case the benefits are:
 
 * A single robust runtime solution with high UX for devops and SRE professionals working in a 24x7x365 environment.
-* An easy to use scripting and query language with good tooling for debugging and troubleshooting fungible, frequently changing business logic.
+* A scripting and query language with good tooling for debugging and troubleshooting fungible, frequently changing business logic.
 * Powerful ETL abstraction and scripting language for slicing, dicing, pattern matching and transforming JSON-like data, with a fast JSON processor.
-* A simple event processing language that supports aggregate functions suitable for many metrics and summary statistics computations.
+* A event processing language that supports aggregate functions suitable for many metrics and summary statistics computations.
 * A growing but incomplete set of pluggable functions, operators, aggregate functions, and connectors to other systems and protocols.
 
 But, tremor was built with some assumptions:
