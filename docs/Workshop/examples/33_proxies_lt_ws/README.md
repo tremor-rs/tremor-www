@@ -37,7 +37,7 @@ offramp:
 
 ### Message flow
 
-Incoming websocket messages from a client's websocket connection are forwarded to the upstream websocket server (via the `pass_incoming` pipeline which just lives up to its name). The resulting upstream reply is then returned back to the client reusing its connection (after a quick pass through the `pass_outgoing` pipeline).
+Incoming websocket messages from a client's websocket connection are forwarded to the upstream websocket server (via the `pass_incoming` pipeline which lives up to its name). The resulting upstream reply is then returned back to the client reusing its connection (after a quick pass through the `pass_outgoing` pipeline).
 
 ```yaml
 binding:
@@ -85,19 +85,19 @@ Can be installed via `cargo install websocat` for the lazy/impatient amongst us
 $ echo "hello" | websocat -n1 ws://localhost:9139
 hello
 
-# just the upstream
+# the upstream
 $ echo "hello" | websocat -n1 ws://localhost:8139
 hello
 ```
 
-Our special snot-handling works as well:
+Our snot-handling works as well:
 
 ```sh
 $ echo "snot" | websocat -n1 ws://localhost:9139
 badger
 ```
 
-And if there's an internal tremor error while processing both the incoming message and the upstream reply to it (eg: codec or pre/post-processor failure), or if the upstream server is just down, an error will be bubbled up to the client. Example:
+And if there's an internal tremor error while processing both the incoming message and the upstream reply to it (eg: codec or pre/post-processor failure), or if the upstream server is down, an error will be bubbled up to the client. Example:
 
 ```sh
 # stop the upstream server

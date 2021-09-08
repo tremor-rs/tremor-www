@@ -6,7 +6,7 @@ All the application code here is available from the docs [git repository](https:
 
 This example demonstrates using Tremor to periodically poll a data source (we use influx as it can quickly generate data) and make decisions based on the results - in our case alert us on low CPU or memory.
 
-We will not dive deep into the query used or the alerts defined as they're only supporting elements to the story we're trying to tell here: periodic, reactive workflows. To this end, we leverage a good bit of the configuration introduced in [the influx example](../11_influx/README.md).
+We will not look deep into the query used or the alerts defined as they're only supporting elements to the story we're trying to tell here: periodic, reactive workflows. To this end, we leverage a good bit of the configuration introduced in [the influx example](../11_influx/README.md).
 
 ## Environment
 
@@ -34,7 +34,7 @@ For the sake of not repeating the privious workshop we will focus on those new p
 
 This section deals with polling, in our case we want to query influxdb on a periodic interval.
 
-To this end we use a `metronome` onramp that fires an event every 10s. We send the events into [`poll.trickle`](./etc/tremor/config/poll.trickle) where we create a influx request out of the metronom event.
+To this end we use a `metronome` onramp that triggers an event every 10s. We send the events into [`poll.trickle`](./etc/tremor/config/poll.trickle) where we create a influx request out of the metronom event.
 
 The `poll` pipeline then connects to the linked influx offramp to run the query.
 

@@ -304,9 +304,9 @@ ArraySegment grammar:
 
 Path-like structures in `tremor-script` allow referencing local variables, ingested events, event meta-data, script-local state etc. and also indexing into them if they are records or arrays.
 
-#### Special paths
+#### Reserved paths
 
-_Normal_ paths are used to referring to local variables created with [let](#let), but tremor-script offers a set of special paths used to refer to commonly needed entities:
+_Normal_ paths are used to referring to local variables created with [let](#let), but tremor-script offers a set of reserved paths used to refer to commonly needed entities:
 
 - `event`: Always referring to the currently handled event.
 - `$`: Referring to the event metadata. Values inside the event metadata can only be accessed via a top-level name like: `$udp.port`. Its contents are usually either `null` or a record.
@@ -747,8 +747,7 @@ Effectors grammar:
 Block:
 > ![block grammar](grammar/diagram/Block.png)
 
-Effectors are the expressions evaluated when a case pattern and guard succeeded.
-Things are simple when using only a single expression as the match case effector. When we have to use multiple expressions to do some more complex processing, we need to separate those expressions with commas `,`:
+Effectors are the expressions evaluated when a case pattern and guard succeeded. When we have to use multiple expressions to do some more complex processing, we need to separate those expressions with commas `,`:
 
 ```tremor
 use std::string;
@@ -845,7 +844,7 @@ This will work as part of the [runtime::tremor](../tremor-query/operators.md#run
 
 A key thing to note is that by design, state is not shared across operator nodes in the pipeline. Therefore, if we have scripts across multiple nodes in the pipeline, the `state` keyword in each script allows access only to the local node-specific state storage, and not the state from any other operator nodes or something global to all the nodes.
 
-Since the state storage lives for the lifetime of a pipeline, state will not be persisted when the pipeline is undeployed or the host process is shut down.
+Since the state storage lives for the lifetime of a pipeline, state will not be persisted when the pipeline is undeployed or the main process is shut down.
 
 ## Extractors
 

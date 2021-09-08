@@ -131,7 +131,7 @@ Listening on ws://127.0.0.1:8080/
 ```
 
 :::note
-We killed the websocket server and restarted right afterwards. We in fact lost 1 event (id `5`) which was acked inside tremor but not yet fully delivered to the console by websocat. Other events that the offramp was unable to send will be resent once the ws offramp can connect again.
+We stopped the websocket server and restarted right afterwards. We in fact lost 1 event (id `5`) which was acked inside tremor but not yet fully delivered to the console by websocat. Other events that the offramp was unable to send will be resent once the ws offramp can connect again.
 :::
 
 In short, the persistent in memory wal can assist with partial recovery of downstream system or tremor itself and will actively reduce data loss within the configured retention but it is not guarenteed to be lossless.

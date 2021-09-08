@@ -154,7 +154,7 @@ select event from response_handling/err into err;
 
 Here we only set the `Via` response header.
 
-Now the single bits need to be connected in order to complete the flow back and forth between client and upstream. When linking [REST offramps](../../../Artefacts/offramps.md#rest) and [onramps](../../../Artefacts/onramps.md#rest) together it is important to take care that any error that might happen on the way is reported back to the REST onramp `http_in` as otherwise clients would not receive any response. Luckily with Linked Transports we can connect all error outputs easily in our binding and thus will receive proper error messages as HTTP responses.
+Now the single bits need to be connected in order to complete the flow back and forth between client and upstream. When linking [REST offramps](../../../Artefacts/offramps.md#rest) and [onramps](../../../Artefacts/onramps.md#rest) together it is important to take care that any error that might happen on the way is reported back to the REST onramp `http_in` as otherwise clients would not receive any response. Luckily with Linked Transports we can connect all error outputs in our binding and thus will receive proper error messages as HTTP responses.
 Again, we do it in `config.yaml`:
 
 ```yaml
@@ -194,7 +194,7 @@ Starting them is straight-forward:
 $ docker compose up
 ```
 
-In another shell, we fire up curl and send requests through our reverse proxy:
+In another shell, we start up curl and send requests through our reverse proxy:
 
 ```bash
 $ curl -v -XGET http://localhost:65535/anything  -H'Content-Type: application/json' -d '{"snot": "badger"}'

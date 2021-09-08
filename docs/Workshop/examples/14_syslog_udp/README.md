@@ -7,7 +7,7 @@ The `syslog udp` example is demonstrate a number things:
 3. Receiving data over `UDP`.
 4. Decoding `syslog` formated data.
 
-For easy digestion it is entirely selfcontained inside a singel tremor instance using multiple paralell pipelines, sinks and sources.
+For digestion it is entirely selfcontained inside a singel tremor instance using multiple paralell pipelines, sinks and sources.
 
 ## Setup
 
