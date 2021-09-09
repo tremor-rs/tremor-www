@@ -18,14 +18,14 @@ that can be configured with a number of steps.
 ## Motivation
 [motivation]: #motivation
 
-The tremor-query language cannot currently easily define windowing mechanics such as pair-wise comparisons or sliding data-driven windows that captures 'the last seconds worth' of data that update on an event by event basis.
+The tremor-query language cannot currently define windowing mechanics such as pair-wise comparisons or sliding data-driven windows that captures 'the last seconds worth' of data that update on an event by event basis.
 
 Sliding windows occur frequently in event processing algorithms and their addition to tremor-query is a natural extension to the language.
 
 ## Guide-level Explanation
 [guide-level-explanation]: #guide-level-explanation
 
-Definition of a simple sliding window of step size 2:
+Definition of a sliding window of step size 2:
 
 ```trickle
 define sliding window pairs
@@ -79,7 +79,7 @@ None.
 ## Drawbacks
 [drawbacks]: #drawbacks
 
-Sliding window mechanism uses relatively more memory when compared with tumbling windows, and this should feature clearly in documentation and examples.
+Sliding window mechanism uses relatively more memory when compared with tumbling windows, and this should feature in documentation and examples.
 
 ## Rationale and Alternatives
 [rationale-and-alternatives]: #rationale-and-alternatives

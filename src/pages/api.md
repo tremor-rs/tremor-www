@@ -450,6 +450,7 @@ delete_binding_by_id
 
 ### __GET__ /binding/{artefact-id}/{instance-id}
 
+<!-- alex ignore servant -->
 Get deployed artefact servant data from Tremor artefact registry.
 
 *Description:*

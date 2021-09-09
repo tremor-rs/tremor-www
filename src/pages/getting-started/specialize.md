@@ -19,7 +19,7 @@ Currently Tremor supports the following operators:
 * [generic::backpressure](/docs/Artefacts/operators#generic::backpressure)
 * [generic::batch](/docs/Artefacts/operators#generic::batch)
 
-Some special operators also exist:
+Some debug operators also exist:
 
 * [passthrough](/docs/Artefacts/operators#passthrough)- internal use.
 * [debug::history](/docs/Artefacts/operators#debughistory)- development.

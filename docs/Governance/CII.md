@@ -260,7 +260,7 @@ Met. The project does not provide bespoke cryptographic protocols, algorithms or
 **All functionality in the software produced by the project that depends on cryptography MUST be implementable using FLOSS.**
 
 Met.
-<!-- alex allow disabled -->
+<!-- alex ignore disabled -->
 **The security mechanisms within the software produced by the project MUST use default keylengths that at least meet the NIST minimum requirements through the year 2030 (as stated in 2012). It MUST be possible to configure the software so that smaller keylengths are completely disabled.**
 
 Met.

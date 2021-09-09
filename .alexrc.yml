@@ -1,2 +1,7 @@
 allow:
-        - host
+  - host
+  - hosts
+  - perid
+  - failure
+  - failures
+  - failed

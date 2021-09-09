@@ -28,7 +28,7 @@ dns -> consumer -> stdout-output
 
 ## Business Logic
 
-The `producer` pipeline remains unchanged however we add a new `dns` pipeline and the `consumer` piepline now includes some logic.
+The `producer` pipeline stays unchanged however we add a new `dns` pipeline and the `consumer` piepline now includes some logic.
 
 The `dns` pipeline does two things. First it moves the event itself into the `$correlation` metadata. Linked transports will preserve this metadata key over requests allowing to correlate the output event with the input request. Second it changes the event into a lookup of the `A` record (ip address) for the hostname. Finally we do the wiering with select statments.
 

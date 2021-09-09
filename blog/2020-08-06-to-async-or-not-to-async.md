@@ -19,7 +19,7 @@ Note that this is not a comprehensive treatise on threads or async tasks.
 Threads are a basic building block of programs that run multiple pieces of code concurrently.
 The operating system is responsible for coordinating across competing resource demands.
 
-The OS can preempt, pause, and resume threads. We can leverage infinite or tight loops without the risk of completely blocking execution. These guarantees make concurrent code more accessible, with tools like`crossbeam-channels` to build upon.
+The OS can preempt, pause, and resume threads. We can leverage infinite or tight loops without the risk of completely blocking the system. These guarantees make concurrent code more accessible, with tools like`crossbeam-channels` to build upon.
 
 Threads work especially well in use cases where the system and logical concurrency models are well aligned; or, we can map application threads to logical cores on the system being used. Each thread can happily work away on its part of the logic and pass the result on to the next. The one thread per core model is what tremor 0.8 and earlier used. We had a thread for the onramp, a thread for the pipeline, and a thread for the offramp. As the computational cost of decoding, processing, and encoding was often in the same ballpark, this worked exceptionally well. We managed to push up to 400MB/s of JSON through the system this way (including parsing, tremor-script logic, and serialization).
 

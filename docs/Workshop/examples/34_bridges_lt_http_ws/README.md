@@ -138,12 +138,12 @@ x-powered-by: Tremor
 hello
 
 
-# just the websocket server
+# the websocket server
 $ echo "hello" | websocat -n1 ws://localhost:8139
 hello
 ```
 
-Our special snot-handling works as well:
+Our snot-handling works as well:
 
 ```sh
 $ curl -i http://localhost:9139/bridge -d "snot"
@@ -157,7 +157,7 @@ $ curl http://localhost:9139/some_path -d "snot"
 {"error":"Oh no, we ran into something unexpected :(\n Unsupported url path: /some_path","event":"snot"}
 ```
 
-And if there's an internal tremor error while processing both the incoming HTTP request and the websocket reply to it (eg: codec or pre/post-processor failure), or if the websocket server is just down, an error will be bubbled up to the client. Example:
+And if there's an internal tremor error while processing both the incoming HTTP request and the websocket reply to it (eg: codec or pre/post-processor failure), or if the websocket server is down, an error will be bubbled up to the client. Example:
 
 ```sh
 # stop the websocket server

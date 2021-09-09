@@ -9,7 +9,7 @@ Specifically:
     * Safe code is generally considered the better option
     * Unless, performance critical concerns on the hot path suggest otherwise
     * Over time, unsafe code should be displaced with safe code
-  * Tremor is conservative on matters of code health.
+  * Tremor is extra careful on matters of code health.
     * Clippy is pedantic mode is mandated for all rust code
     * Property based testing, model-based testing and fuzz-testing are used
     * Additional audits for code quality are in force
