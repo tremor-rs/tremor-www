@@ -64,7 +64,7 @@ module.exports = {
     footer: {
       logo: {
         alt: 'Tremor Logo',
-        src: '/img/favicon.ico',
+        src: '/favicon.ico',
       },
       style: 'dark',
       links: [
