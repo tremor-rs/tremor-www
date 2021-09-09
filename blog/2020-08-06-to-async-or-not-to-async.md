@@ -4,8 +4,7 @@ author: The Tremor Team
 author_image_url: https://avatars.githubusercontent.com/u/60009416?s=200&v=4
 tags: [dev, rust]
 draft: false
-image: https://www.google.com/imgres?imgurl=https%3A%2F%2Fraw.githubusercontent.com%2Fwill-wow%2Fresult-async%2FHEAD%2Fassets%2Fimages%2Flogo.png&imgrefurl=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fresult-async&tbnid=YNViaemYW6WxgM&vet=10CA0QxiAoBWoXChMI-Pibqsup8gIVAAAAAB0AAAAAEAw..i&docid=avW8MHRaIq6BMM&w=1000&h=1000&itg=1&q=to%20async%20or%20not%20to%20async&client=firefox-b-d&ved=0CA0QxiAoBWoXChMI-Pibqsup8gIVAAAAAB0AAAAAEAw
-hide_table_of_contents: false
+image: /img/async.png
 description: Moving from threads to async tasks.
 ---
 
