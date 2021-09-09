@@ -22,7 +22,7 @@ module.exports = {
       },
       items: [
         {
-          to: 'about/',
+          to: 'getting-started/about/',
           label: 'About Us',
           position: 'left',
         },
@@ -36,7 +36,7 @@ module.exports = {
         { to: 'quick-start', label: 'Usage Guide', position: 'left' },
         { to: 'api', label: 'API', position: 'left' },
         { to: 'rfcs/rfcs', label: 'RFCs', position: 'left'},
-        { to: 'community', label: 'Community', position: 'left' },
+        { to: 'community/community', label: 'Community', position: 'left' },
         { to: 'governance', label: 'Governance', position: 'left' },
         { to: 'faqs', label: 'FAQs', position: 'left' },
         {
