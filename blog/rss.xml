@@ -2,7 +2,7 @@
 <rss version="2.0">
     <channel>
         <title>Tremor Blog</title>
-        <link>https://tremor-rs.github.io/tremor-new-website/blog</link>
+        <link>https://tremor-rs.github.io/blog</link>
         <description>Tremor Blog</description>
         <lastBuildDate>Wed, 14 Jul 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>

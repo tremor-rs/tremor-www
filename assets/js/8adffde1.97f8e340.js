@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknew_tremor_website=self.webpackChunknew_tremor_website||[]).push([[7414],{6457:function(e){e.exports=JSON.parse('{"allTagsPath":"/tremor-new-website/blog/tags","slug":"cncf","name":"cncf","count":3,"permalink":"/tremor-new-website/blog/tags/cncf"}')}}]);
