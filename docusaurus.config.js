@@ -16,7 +16,7 @@ module.exports = {
     navbar: {
       logo: {
         alt: 'Tremor Logo',
-        src: 'static/img/tremor-logo.png',
+        src: '/img/tremor-logo.png',
         href: 'https://tremor-rs.github.io/tremor-new-website/',
         target: '_self',
       },
@@ -64,7 +64,7 @@ module.exports = {
     footer: {
       logo: {
         alt: 'Tremor Logo',
-        src: 'static/favicon.ico',
+        src: '/img/favicon.ico',
       },
       style: 'dark',
       links: [

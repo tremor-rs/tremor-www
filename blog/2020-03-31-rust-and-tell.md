@@ -5,7 +5,7 @@ author_image_url: https://avatars.githubusercontent.com/u/60009416?s=200&v=4
 tags: [talks]
 draft: false
 hide_table_of_content: false
-image: https://i.ytimg.com/vi/43KS_nCqiIM/hqdefault.jpg
+image: /img/rust&tell.jpg
 description: Presenting Tremor at Rust & Tell Berlin- March 2020.
 ---
 
