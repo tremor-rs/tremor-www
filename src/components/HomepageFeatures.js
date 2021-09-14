@@ -5,7 +5,7 @@ import styles from './HomepageFeatures.module.css';
 const FeatureList = [
   {
     title: 'Connectivity',
-    link: 'connectivity/',
+    link: 'getting-started/connectivity/',
     Svg: require('/img/connectivity.svg').default,
     description: (
       <>
@@ -17,7 +17,7 @@ const FeatureList = [
   },
   {
     title: 'Tooling',
-    link: 'tooling/',
+    link: 'getting-started/tooling/',
     Svg: require('/img/tooling.svg').default,
     description: (
       <>
@@ -31,7 +31,7 @@ const FeatureList = [
   },
   {
     title: 'Customisation',
-    link: 'specialize/',
+    link: 'getting-started/specialize/',
     Svg: require('/img/customisation.svg').default,
     description: (
       <>
@@ -41,7 +41,7 @@ const FeatureList = [
   },
   {
     title: 'Scripting',
-    link: 'scripting/',
+    link: 'getting-started/scripting/',
     Svg: require('/img/scripting.svg').default,
     description: (
       <>
@@ -55,7 +55,7 @@ const FeatureList = [
   },
   {
     title: 'Codecs',
-    link: 'codecs/',
+    link: 'getting-started/codecs/',
     Svg: require('/img/codecs.svg').default,
     description: (
       <>
@@ -67,13 +67,13 @@ const FeatureList = [
   },
   {
     title: 'Install',
-    link: 'install/',
+    link: 'getting-started/install/',
     Svg: require('/img/install.svg').default,
     description: (
       <>
         Quick developer install.<br />
 
-        But first, <a href="getting-started/">set up</a> your Tremor installation.
+        But first, <a href="getting-started/getting-started/">set up</a> your Tremor installation.
       </>
     ),
   },
