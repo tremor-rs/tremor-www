@@ -33,7 +33,7 @@ Features relatively unique to tremor-script are structural pattern matching and 
 
 [Structural pattern matching](/docs/tremor-script/#match) allows patterns over arbitrarily nested values to be concisely declared with an intuitive syntax.
 
-[Micro-format Extractors](/docs/tremor-script/#extractors) allows embedded data conforming to orthogonal formats such as regular expressions in Strings, date/time variants to be conditionally transformed to Tremor internal form and for embedded data to be extracted upon matching.
+[Micro-format Extractors](/docs/tremor-script/extractors) allows embedded data conforming to orthogonal formats such as regular expressions in Strings, date/time variants to be conditionally transformed to Tremor internal form and for embedded data to be extracted upon matching.
 
 ```tremor
 define script extract                                # define the script that parses our Apache logs
@@ -48,7 +48,7 @@ script
 end;
 ```
 
-The full documentation [of the language](/docs/tremor-script) and its [standard library](/docs/tremor-script/functions) can be found in the [Docs](/docs).
+The full documentation [of the language](/docs/tremor-script/index) and its [standard library](/docs/tremor-script/functions) can be found in the [Docs](/docs).
 
 ### Tremor Query
 
