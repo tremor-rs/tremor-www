@@ -1,0 +1,73 @@
+version: "3.8"
+
+services:
+  tremor:
+    image: tremorproject/tremor:${TREMOR_VERSION}
+    environment:
+      - RUST_BACKTRACE=full
+    volumes:
+      - ./etc/tremor:/etc/tremor:rw
+      - ./var/log:/var/log:rw
+      - ./etc/tremor/data:/home/tremor/data
+      - ./usr/local/share/tremor:/usr/local/share/tremor
+    ports:
+      - 9898:9898   # tremor api
+      - 12202:12202 # log receiver
+      - 8139:8139 # quota service
+    networks:
+    - net
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+      # Elastic Search
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
+    environment:
+    - bootstrap.memory_lock=true
+    - cluster.name=docker-cluster
+    - cluster.routing.allocation.disk.threshold_enabled=false
+    - discovery.type=single-node
+    - ES_JAVA_OPTS=-XX:UseAVX=2 -Xms${ES_JAVA_HEAP_SIZE} -Xmx${ES_JAVA_HEAP_SIZE}
+    ulimits:
+      memlock:
+        hard: -1
+        soft: -1
+    volumes:
+    - esdata:/usr/share/elasticsearch/data
+    ports:
+    - 9200:9200
+    networks:
+    - net
+    healthcheck:
+      interval: 20s
+      retries: 10
+      test: curl -s http://localhost:9200/_cluster/health | grep -vq '"status":"red"'
+
+  kibana:
+    image: docker.elastic.co/kibana/${KIBANA_IMAGE}:${KIBANA_VERSION}
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    environment:
+      # limit kibana memory usage (default is 1G)
+      - "NODE_OPTIONS=--max-old-space-size=${KIBANA_NODE_MEM_LIMIT_MB}"
+      # for valid options here, see:
+      # https://github.com/elastic/kibana-docker/blob/master/build/kibana/bin/kibana-docker
+      # if true, only error messages are shown
+      - LOGGING_QUIET=${KIBANA_LOGGING_QUIET}
+      # which page to launch by default
+      - KIBANA_DEFAULTAPPID=discover
+      # kibana-specific xpack features (to be used when xpack is installed)
+      - XPACK_LICENSE_SELF_GENERATED_TYPE=basic
+    ports:
+    - 5601:5601
+    networks:
+    - net
+
+networks:
+  net:
+    driver: bridge
+
+volumes:
+  esdata:
+    driver: local
