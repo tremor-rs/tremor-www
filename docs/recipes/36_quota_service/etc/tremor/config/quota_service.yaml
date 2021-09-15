@@ -1,0 +1,93 @@
+onramp:
+  - id: http
+    type: rest
+    linked: true
+    codec: string
+    config:
+      host: 0.0.0.0
+      port: 8139
+  - id: initial
+    type: file
+    codec: json
+    config:
+      source: /etc/tremor/data/initial.json
+
+offramp:
+  - id: state
+    type: kv
+    codec: json
+    config:
+      dir: /home/tremor/data/state
+
+binding:
+  - id: main
+    links:
+      "/onramp/http/{instance}/out":
+        - "/pipeline/quota_service/{instance}/in"
+
+      # handle quota service requests
+      # ask the kv offramp for the current state, also update it
+      "/pipeline/quota_service/{instance}/quotas":
+        - "/offramp/state/{instance}/in"
+        # for debugging
+        #- "/offramp/system::stdout/system/in"
+
+      # send responses directly from the pipeline without visiting the kv for state
+      "/pipeline/quota_service/{instance}/out":
+        - "/onramp/http/{instance}/in"
+        # for debugging
+        # - "/offramp/system::stdout/system/in"
+
+      # initial get query against the state storage to fill in
+      # the quota state in the logs pipeline
+      "/onramp/initial/{instance}/out":
+        - "/pipeline/system::passthrough/{instance}/in"
+      "/pipeline/system::passthrough/{instance}/out":
+        - "/offramp/state/{instance}/in"
+        # for debugging
+        #- "/offramp/system::stdout/system/in"
+
+      # propagate kv responses
+      #  - to logs pipeline for state updates
+      #  - to response pipeline for creating HTTP responses
+      "/offramp/state/{instance}/out":
+        - "/pipeline/response/{instance}/in"
+        - "/pipeline/logs/{instance}/in"
+
+      # send responses back
+      "/pipeline/response/{instance}/out":
+        - "/onramp/http/{instance}/in"
+        # for debugging
+        #- "/offramp/system::stdout/system/in"
+
+  - id: error
+    links:
+      "/onramp/http/{instance}/err":
+        - "/pipeline/internal_error_processing/{instance}/in"
+
+      "/offramp/state/{instance}/err":
+        - "/pipeline/internal_error_processing/{instance}/in"
+
+      "/pipeline/quota_service/{instance}/err":
+        - "/pipeline/internal_error_processing/{instance}/in"
+
+      "/pipeline/response/{instance}/err":
+        - "/pipeline/internal_error_processing/{instance}/in"
+
+      # send back errors as response as well
+      "/pipeline/internal_error_processing/{instance}/out":
+        - "/onramp/http/{instance}/response"
+        # for debugging
+        #- "/offramp/system::stderr/system/in"
+
+      # respond on errors during error processing too
+      "/pipeline/internal_error_processing/{instance}/err":
+        - "/onramp/http/{instance}/response"
+        # for debugging
+        - "/offramp/system::stderr/system/in"
+
+mapping:
+  /binding/main/01:
+    instance: "01"
+  /binding/error/01:
+    instance: "01"
