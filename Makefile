@@ -1,6 +1,6 @@
 TREMOR_VSN=main
 
-all: docs/tremor-script/stdlib docs/Operations/cli.md docs/api.md
+all: docs/tremor-script/stdlib docs/Operations/cli.md
 
 tremor-runtime:
 	-git clone https://github.com/tremor-rs/tremor-runtime
@@ -14,9 +14,6 @@ docs/tremor-script/stdlib: tremor-runtime
 
 docs/Operations/cli.md: tremor-runtime
 	python3 ./python_scripts/cli2md.py tremor-runtime/tremor-cli/src/cli.yaml > docs/Operations/cli.md
-
-docs/api.md: tremor-runtime
-	python3 ./python_scripts/api2md.py tremor-runtime/static/openapi.yaml > docs/api.md
 
 clean:
 	-rm -rf docs/Operations/cli.md docs/api.md docs/tremor-script/stdlib
