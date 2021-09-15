@@ -2,13 +2,13 @@
 
 This is a short canned synopsis of testing in the tremor project.
 
-### Running Internal Tests
+## Running Internal Tests
 
 ```bash
 cargo test --all
 ```
 
-### Running Integration Tests
+## Running Integration Tests
 
 ```bash
 cargo run -p tremor-cli -- test all tremor-cli/tests
