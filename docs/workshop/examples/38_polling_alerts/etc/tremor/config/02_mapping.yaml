@@ -1,5 +1,0 @@
-mapping:
-  /binding/ingress/influx:
-    instance: "influx"
-  /binding/alert/influx:
-    instance: "influx"

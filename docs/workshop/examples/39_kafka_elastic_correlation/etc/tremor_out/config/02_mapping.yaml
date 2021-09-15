@@ -1,3 +1,0 @@
-mapping:
-  /binding/kafka_elastic/01:
-    instance: "01"
