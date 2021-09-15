@@ -3,6 +3,7 @@ draft: false
 title: Governance
 description: Tremor project governance model.
 hide_table_of_contents: false
+sidebar_position: 100
 ---
 
 The Tremor project originated as an internal solution at Wayfair and has become a CNCF sandbox project with an open community-based open-source development model. There are three pillars to the governance model for tremor that are worth explicitly acknowledging:
