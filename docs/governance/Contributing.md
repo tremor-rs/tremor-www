@@ -1,3 +1,8 @@
+---
+id: Contributing
+title: Contributing to Tremor
+---
+
 # Contributing to Tremor
 
 [contributing-to-tremor]: #contributing-to-tremor
@@ -25,7 +30,7 @@ If this is your first time contributing, we would like to thank you for spending
 on the project! Please reach out directly to any core project member if you would like
 any guidance or assistance.
 
-[code-of-conduct]: https://docs.tremor.rs/CodeOfConduct
+[code-of-conduct]: /docs/CodeOfConduct
 
 ## Feature Requests
 
@@ -45,7 +50,7 @@ don't know about, so please report liberally. If you're not sure if something
 is a bug or not, feel free to file a bug anyway.
 
 **If you believe reporting your bug publicly represents a security risk to Tremor users,
-please follow our [instructions for reporting security vulnerabilities](https://docs.tremor.rs/policies/security)**.
+please follow our [instructions for reporting security vulnerabilities](/docs/policies/security)**.
 
 If you have the chance, before reporting a bug, please [search existing
 issues](https://github.com/tremor-rs/tremor-runtime/search?q=&type=Issues&utf8=%E2%9C%93),
@@ -59,7 +64,7 @@ This can be the language or compiler feature used, the conditions that trigger t
 or part of the error message if there is any.
 An example could be: **"impossible case reached" on match expression in tremor scripting language**.
 
-Opening an issue is can be done by following [this
+To open an issue is as follow [this
 link](https://github.com/tremor-rs/tremor-runtime/issues/new) and filling out the fields.
 Here's a template that you can use to file a bug, though it's not necessary to
 use it exactly:
@@ -101,7 +106,7 @@ For info on how to configure and build the project, please see [the tremor build
 This guide contains info for contributions to the project and the standard facilities. It also lists some
 really useful commands to the build system, which could save you a lot of time.
 
-[tremor-build-guide]: https://docs.tremor.rs/development/quick-start/
+[tremor-build-guide]: /docs/development/quick-start/
 
 ## Pull Requests
 
@@ -133,16 +138,6 @@ the issue in question.
 
 [closing-keywords]: https://help.github.com/en/articles/closing-issues-using-keywords
 
-Please make sure your pull request is in compliance with Tremor's style
-guidelines by running
-
-    $ sh ./contrib/pre-commit
-
-<!-- alex ignore hooks -->
-Make this check before every pull request (and every new commit in a pull
-request); you can add [git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)
-before every push to make sure you never forget to make this check.
-
 All pull requests are reviewed by another person.
 
 If you want to request that a specific person reviews your pull request,
@@ -162,8 +157,8 @@ Once your merge request is approved it will enter the merge queue
 
 [darach]: https://github.com/darach
 
-Speaking of tests, tremor has a comprehensive test suite. More information about
-it can be found [here][https://github.com/tremor-rs/tremor-www-docs/blob/main/docs/development/testing.md].
+Speaking of tests, Rust has a comprehensive test suite. More information about
+it can be found [here][https://github.com/tremor-rs/tremor-runtime/blob/main/docs/development/testing.md].
 
 ### External Dependencies
 

@@ -1,6 +1,7 @@
 ---
 id: Glossary
 title: Glossary
+sidebar_position: 9999
 ---
 
 # Glossary of Terms
