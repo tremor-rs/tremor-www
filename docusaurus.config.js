@@ -94,7 +94,7 @@ module.exports = {
             },
             {
               label: 'Code of Conduct',
-              to: 'docs/Governance/CodeOfConduct/',
+              to: 'docs/governance/CodeOfConduct/',
             },
           ],
         },

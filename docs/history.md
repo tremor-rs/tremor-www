@@ -1,6 +1,7 @@
 ---
 id: history
 title: History
+sidebar_position: 800
 ---
 
 # History
@@ -105,7 +106,7 @@ The matching language of the earlier releases got a complete overhaul becoming a
 
 The basic idea of a `yaml` file as configuration was carried over from 0.3 but the content dramatically altered to be more usable. Along with the new syntax also the ability to run multiple pipelines, onramps and offramp in the same tremor instance were introduced.
 
-With the new config tremor, 0.4 also introduced an API that allows adding, remove and alter the components running in an instance without requiring a restart. This feature came with the addition of [tremor-cli](Operations/cli.md) to expose this API to operators without requiring to remember the interface details.
+With the new config tremor, 0.4 also introduced an API that allows adding, remove and alter the components running in an instance without requiring a restart. This feature came with the addition of [tremor-cli](operations/cli.md) to expose this API to operators without requiring to remember the interface details.
 
 ## tremor-0.3 (develop)
 

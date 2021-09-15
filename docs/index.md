@@ -1,6 +1,7 @@
 ---
 id: index
-title: Home
+title: Tremor
+sidebar_position: 0
 ---
 
 # Tremor
@@ -24,19 +25,19 @@ Other interesting topics are:
 * [The tremor-script language](tremor-script/index.md)
 * [The tremor-query language](tremor-query/index.md)
 * Artefacts namely:
-    * [Onramps](Artefacts/onramps.md)
-    * [Offramps](Artefacts/offramps.md)
-    * [Codecs](Artefacts/codecs.md)
-    * [Pre-](Artefacts/preprocessors.md) and [Postprocessors](Artefacts/postprocessors.md)
+    * [Onramps](artefacts/onramps.md)
+    * [Offramps](artefacts/offramps.md)
+    * [Codecs](artefacts/codecs.md)
+    * [Pre-](artefacts/preprocessors.md) and [Postprocessors](artefacts/postprocessors.md)
 * Operational information about
-    * [Monitoring](Operations/monitoring.md)
-    * [Configuration](Operations/configuration.md) and the [Configuration Walkthrough](Operations/configuration-walkthrough.md)
-    * [The tremor CLI](Operations/cli.md)
-* [The tremor API](api.md)
-* [Workshop](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/) and various use case [examples](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/Workshop/examples)
+    * [Monitoring](operations/monitoring.md)
+    * [Configuration](operations/configuration.md) and the [Configuration Walkthrough](operations/configuration-walkthrough.md)
+    * [The tremor CLI](operations/cli.md)
+* [The tremor API](/api)/0
+* [Workshop](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/) and various use case [examples](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples)
 * Development related information
-    * [Benchmarks](Development/benchmarking.md)
-    * [A Quickstart Guide](Development/quick-start.md)
-    * Notes about [Testing](Development/testing.md) and [Debugging](Development/debugging.md)
+    * [Benchmarks](development/benchmarking.md)
+    * [A Quickstart Guide](development/quick-start.md)
+    * Notes about [Testing](development/testing.md) and [Debugging](development/debugging.md)
 
 This is not an exhaustive list and for the curious it might be worth to explore the [docs](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs) folder on their own.

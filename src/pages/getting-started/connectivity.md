@@ -27,30 +27,30 @@ Tremor has built-in support for metrics capture of data ingested and distributed
 
 Tremor supports a number of stable general purpose onramps:
 
-* [Kafka](/docs/Artefacts/onramps/#kafka)
-* [TCP](/docs/Artefacts/onramps/#TCP)
-* [UDP](/docs/Artefacts/onramps/#udp)
-* [WS](/docs/Artefacts/onramps/#WS)
-* [File](/docs/Artefacts/onramps/#File)- reads a singular file.
-* [Metronome](/docs/Artefacts/onramps/#metronome)- periodic tick events.
-* [Crononome](/docs/Artefacts/onramps/#crononome)- cron based tick events.
-* [Blaster](/docs/Artefacts/onramps/#blaster)- Benchmarking onramp.
+* [Kafka](/docs/artefacts/onramps/#kafka)
+* [TCP](/docs/artefacts/onramps/#TCP)
+* [UDP](/docs/artefacts/onramps/#udp)
+* [WS](/docs/artefacts/onramps/#WS)
+* [File](/docs/artefacts/onramps/#File)- reads a singular file.
+* [Metronome](/docs/artefacts/onramps/#metronome)- periodic tick events.
+* [Crononome](/docs/artefacts/onramps/#crononome)- cron based tick events.
+* [Blaster](/docs/artefacts/onramps/#blaster)- Benchmarking onramp.
 
 And some early-access evolving production-grade onramps:
 
-* [REST](/docs/Artefacts/onramps/#REST)
+* [REST](/docs/artefacts/onramps/#REST)
 
 ### Offramps
 
 Tremor supports a number of stable general purpose offramps:
 
-* [File](/docs/Artefacts/offramps/#File)
-* [Kafka](/docs/Artefacts/offramps/#Kafka)
-* [REST](/docs/Artefacts/offramps/#REST)
-* [TCP](/docs/Artefacts/offramps/#TCP)
-* [UDP](/docs/Artefacts/offramps/#UDP)
-* [WS](/docs/Artefacts/offramps/#WS)
-* [BlackHole](/docs/Artefacts/offramps/#REST)- benchmarking offramp.
-* [elastic](/docs/Artefacts/offramps/#elastic)- ElasticSearch client
-* [debug](/docs/Artefacts/offramps/#REST)- tremor internal use for debugging.
-* [stdout](/docs/Artefacts/offramps/#stdout)
+* [File](/docs/artefacts/offramps/#File)
+* [Kafka](/docs/artefacts/offramps/#Kafka)
+* [REST](/docs/artefacts/offramps/#REST)
+* [TCP](/docs/artefacts/offramps/#TCP)
+* [UDP](/docs/artefacts/offramps/#UDP)
+* [WS](/docs/artefacts/offramps/#WS)
+* [BlackHole](/docs/artefacts/offramps/#REST)- benchmarking offramp.
+* [elastic](/docs/artefacts/offramps/#elastic)- ElasticSearch client
+* [debug](/docs/artefacts/offramps/#REST)- tremor internal use for debugging.
+* [stdout](/docs/artefacts/offramps/#stdout)
