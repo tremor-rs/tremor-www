@@ -4,7 +4,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   plugins: [
-    require.resolve('@cmfcmf/docusaurus-search-local')
+    require.resolve('@cmfcmf/docusaurus-search-local'),
+    require.resolve('docusaurus-plugin-redoc')
   ],
   title: 'Tremor',
   tagline: 'An early-stage event processing system for unstructured data with rich support for structural pattern-matching, filtering and transformation.',
@@ -37,7 +38,12 @@ module.exports = {
         },
         { to: 'blog', label: 'Blog', position: 'left' },
         { to: 'quick-start', label: 'Usage Guide', position: 'left' },
-        { to: 'api', label: 'API', position: 'left' },
+        {
+          to: "api/0",
+          activeBasePath: "api",
+          label: "API",
+          position: "left",
+        },
         { to: 'rfcs/rfcs', label: 'RFCs', position: 'left' },
         { to: 'community/community', label: 'Community', position: 'left' },
         { to: 'governance', label: 'Governance', position: 'left' },
@@ -147,6 +153,16 @@ module.exports = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+      },
+    ],
+    [
+      'redocusaurus',
+      {
+        specs: [
+          {
+            spec: 'openapi.yaml',
+          },
+        ],
       },
     ],
   ],
