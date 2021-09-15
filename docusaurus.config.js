@@ -114,7 +114,7 @@ module.exports = {
               href: 'https://github.com/tremor-rs/tremor-runtime/releases',
             },
             {
-              html: `<a href="https://www.cncf.io/" target="_blank" rel="noreferrer noopener" aria-label="CNCF"><img src="static/img/cncf-color-minimalism.png" alt="CNCF" /></a>`,
+              html: `<a href="https://www.cncf.io/" target="_blank" rel="noreferrer noopener" aria-label="CNCF"><img src="cncf-color.svg" alt="CNCF" /></a>`,
             },
           ],
         },
