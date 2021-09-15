@@ -1,0 +1,19 @@
+select {
+  "severity": "notice",
+  "facility": "local4",
+  "hostname": "example.com",
+  "appname": "evntsog",
+  "msg": "BOMAn application event log entry...",
+  "procid": null,
+  "msgid": "ID47",
+  "protocol": "RFC5424",
+  "protocol_version": 1,
+  "structured_data": {
+              "exampleSDID@32473" :
+              [
+                {"eventSource": "Tremor"},
+                {"eventID": "#{ event.id }"}
+              ]
+            },
+  "timestamp": event.ingest_ns
+} from in into out

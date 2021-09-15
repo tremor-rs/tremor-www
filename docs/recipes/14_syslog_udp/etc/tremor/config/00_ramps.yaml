@@ -1,0 +1,27 @@
+# The onramp and offramp sections of configuration specify external sources and sinks
+# to an instance of tremor server.
+#
+onramp:
+  - id: metronome
+    type: metronome
+    config:
+      interval: 1000 # 1 second
+  - id: syslog-udp-in
+    type: udp
+    codec: syslog # The syslog codec to deecode the data coming over UDP
+    config:
+      host: "127.0.0.1"
+      port: 12201
+
+offramp:
+  - id: syslog-udp-out
+    type: udp
+    codec: syslog # The syslog codec to enecode the data sent over UDP
+    config:
+      host: "127.0.0.1"
+      port: 12201
+  - id: stdout-output
+    type: stdout
+    codec: json
+    config:
+      prefix: ">> "
