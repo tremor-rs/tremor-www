@@ -9,14 +9,20 @@ module.exports = {
     [
       '@docusaurus/plugin-content-docs',
       /** @type {import('@docusaurus/plugin-content-docs').Options} */
-      ({
+      {
         id: 'community',
         path: 'community',
         routeBasePath: 'community',
-        editCurrentVersion: true,
-        showLastUpdateAuthor: true,
-        showLastUpdateTime: true,
-      }),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      {
+        id: 'rfc',
+        path: 'rfc',
+        routeBasePath: 'rfc',
+      },
     ],
   ],
   title: 'Tremor',
@@ -56,7 +62,7 @@ module.exports = {
           label: "API",
           position: "left",
         },
-        { to: 'rfcs/rfcs', label: 'RFCs', position: 'left' },
+        { to: 'rfc/index', label: 'RFCs', position: 'left' },
         { to: 'community/community', label: 'Community', position: 'left' },
         { to: 'community/governance', label: 'Governance', position: 'left' },
         { to: 'faqs', label: 'FAQs', position: 'left' },
