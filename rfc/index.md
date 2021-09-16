@@ -21,23 +21,6 @@ projects and libraries, so that all stakeholders can be confident about the
 direction the project is evolving in.
 
 
-## Table of Contents
-[Table of Contents]: #table-of-contents
-
-  - [Opening](#tremor-rfcs)
-  - [Table of Contents]
-  - [When you need to follow this process]
-  - [Before creating an RFC]
-  - [What the process is]
-  - [The RFC life-cycle]
-  - [Reviewing RFCs]
-  - [Implementing an RFC]
-  - [RFC Postponement]
-  - [Help this is all too informal!]
-  - [License]
-  - [Origins]
-
-
 ## When You Need to Follow this Process:
 [When you need to follow this process]: #when-you-need-to-follow-this-process
 

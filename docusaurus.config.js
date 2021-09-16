@@ -108,11 +108,11 @@ module.exports = {
             },
             {
               label: 'Tremor API',
-              to: 'api/',
+              to: 'api/0',
             },
             {
               label: 'Code of Conduct',
-              to: 'docs/governance/CodeOfConduct/',
+              to: 'community/governance/CodeofConduct',
             },
           ],
         },
