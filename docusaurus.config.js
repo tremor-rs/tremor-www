@@ -21,7 +21,7 @@ module.exports = {
       logo: {
         alt: 'Tremor Logo',
         src: '/img/tremor-logo.png',
-        href: 'https://tremor-rs.github.io/tremor-new-website/',
+        href: 'https://www.tremor.rs/',
         target: '_self',
       },
       items: [
