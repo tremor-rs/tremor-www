@@ -73,11 +73,11 @@ module.exports = {
           className: 'header-github-link',
           'aria-label': 'GitHub',
         },
-        // {
-        //   type: 'docsVersionDropdown',
-        //   position: 'left',
-        //   dropdownItemsAfter: [{ to: 'docs/', label: 'All versions' }],
-        // },
+        {
+          type: 'docsVersionDropdown',
+          position: 'left',
+
+        },
         // {
         //   type: 'localeDropdown',
         //   position: 'right',
