@@ -4,16 +4,9 @@
         <title>Tremor Blog</title>
         <link>https://tremor-rs.github.io/blog</link>
         <description>Tremor Blog</description>
-        <lastBuildDate>Wed, 14 Jul 2021 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 06 Jul 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
-        <item>
-            <title><![CDATA[Continuous Benchmarking in Tremor]]></title>
-            <link>https://tremor-rs.github.io/tremor-new-website/blog/continuous-benchmarking</link>
-            <guid>continuous-benchmarking</guid>
-            <pubDate>Wed, 14 Jul 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[How we implemented a continuous benchmarking pipeline in Tremor.]]></description>
-        </item>
         <item>
             <title><![CDATA[Property Based Testing of Tremor Script]]></title>
             <link>https://tremor-rs.github.io/tremor-new-website/blog/2021/07/06/Blog-Rohit-Property-Based-Testing</link>

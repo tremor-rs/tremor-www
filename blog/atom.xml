@@ -2,18 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tremor-rs.github.io/blog</id>
     <title>Tremor Blog</title>
-    <updated>2021-07-14T00:00:00.000Z</updated>
+    <updated>2021-07-06T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tremor-rs.github.io/blog"/>
     <subtitle>Tremor Blog</subtitle>
     <icon>https://tremor-rs.github.io/docs/favicon.ico</icon>
-    <entry>
-        <title type="html"><![CDATA[Continuous Benchmarking in Tremor]]></title>
-        <id>continuous-benchmarking</id>
-        <link href="https://tremor-rs.github.io/tremor-new-website/blog/continuous-benchmarking"/>
-        <updated>2021-07-14T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[How we implemented a continuous benchmarking pipeline in Tremor.]]></summary>
-    </entry>
     <entry>
         <title type="html"><![CDATA[Property Based Testing of Tremor Script]]></title>
         <id>Property Based Testing of Tremor Script</id>
