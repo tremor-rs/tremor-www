@@ -53,7 +53,7 @@ Thank you for taking the time to responsibly disclose any issues you find.
 All security bugs in the tremor project should be reported by email to <a href="mailto:opensource@wayfair.com">opensource@wayfair.com</a>. This list is delivered to a small team. Your email will be acknowledged within 24 hours, and you’ll receive a more detailed response to your email within 48 hours indicating the next steps in handling your report.
 
 If you would like, you can encrypt your report using a public key. This key can be requested from the security
-team via direct email, or through contacting us on our slack community and requesting same.
+team via direct email, or through contacting us on our discord community and requesting same.
 
 Be sure to use a descriptive subject line in email to avoid having your report missed. After the initial reply
 to your report, the security team will endeavor to keep you informed of the progress being made towards a fix
@@ -66,7 +66,7 @@ If you have not received a reply to your email within 48 hours, or have not hear
 Contact the current security coordinator (Darach Ennis) directly [PGP key](https://pgp.mit.edu/pks/lookup?op=get&search=0x962FAC01B6989EBB).
 Contact the back-up contact (Heinz Gies) directly [PGP key](https://keys.openpgp.org/vks/v1/by-fingerprint/71C9D7794FCEAC9D77AC4F6FE21BB9BD3F38481E).
 
-Post a friendly reminder on the community slack.
+Post a friendly reminder on the community discord.
 
 Please note that discussion forums are public areas. When escalating in these venues, please do not
 discuss your issue. Say that you’re trying to get a hold of someone from the security team.
