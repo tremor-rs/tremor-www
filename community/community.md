@@ -14,10 +14,16 @@ So, with a tip of the hat to our Rust friends:
 
 > Tremor's greatest strength is the community of people who come together to make working with Tremor a rewarding experience.
 
-## We Owe Us
+## Get involved
 
-Now, we need to figure out which of the many wonderful community-enabling tools to adopt.
+The best way to get in involved to to join our [community discord](https://chat.tremor.rs). Say hello and meet the rest of the community.
+
+You can also take a look at our code on [GitHub](https://github.com/tremor-rs) and brows through the different repositories we have.
+
+And, if you want to stay up to date with what is going on you can follow us on [twitter](https://twitter.com/TremorDebs).
+
+Lastly we do have community office hours and other events that we regularly hold and publish on your [CNCF Tremor Community](https://community.cncf.io/tremor-community/).
 
 ## Fork Now
 
-For now, fork this web site on github or create an [issue](https://github.com/tremor-rs/tremor-www-main/issues) to get in touch while we figure out a better way!
+For now, fork this web site on github or create an [issue](https://github.com/tremor-rs/tremor-new-wensite/issues) to get in touch while we figure out a better way!
