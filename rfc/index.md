@@ -77,7 +77,7 @@ beforehand, to ascertain that the RFC may be desirable; having a consistent
 impact on the project requires concerted effort toward consensus-building.
 
 The most common preparations for writing and submitting an RFC include talking
-the idea over on our [Tremor chat](https://join.slack.com/t/tremor-debs/shared_invite/enQtOTMxNzY3NDg0MjI2LTQ4MTU4NjlkZDk0MmJmNmIwYjU0ZDc1OTNjMGRmNzUwZTdlZGVkMWFmNGFkZTAwOWJlYjlkMDZkNGNiMjQ2NzI), and occasionally posting "pre-RFCs" on the
+the idea over on our [Tremor chat](https://chat.tremor.rs), and occasionally posting "pre-RFCs" on the
 chat environment. You may file issues on this repo for discussion, but these are
 not actively looked at by the teams.
 
@@ -94,7 +94,7 @@ merged into the RFC repository as a markdown file. At that point the RFC is
 "active" and may be implemented with the goal of eventual inclusion into Tremor.
 
   - Fork the RFC repo [RFC repository].
-  - Copy `0000-template.md` to `text/0000-my-feature.md` (where "my-feature" is
+  - Copy `process/0000-template.md` to `accepted/0000-my-feature.md` (where "my-feature" is
     descriptive. Don't assign an RFC number yet.).
   - Fill in the RFC. Put care into the details: RFCs that do not present
     convincing motivation, demonstrate lack of understanding of the design's
@@ -233,16 +233,16 @@ The process is intended to be as lightweight as reasonable for the present
 circumstances. As usual, we are trying to let the process be driven by
 consensus and community norms, not impose more structure than necessary.
 
-- Tremor chat: [Discord](https://discord.com/invite/Wjqu5H9rhQ)
+- Tremor chat: [Discord](https://chat.tremor.rs)
  
-- [RFC repository](http://github.com/tremor-rs/tremor-rfcs)
+- [RFC repository](http://github.com/tremor-rs/tremor-new-website/rfc)
 
 ## License
 [License]: #license
 
 This repository is currently licensed under:
 
-* Apache License, Version 2.0, ([LICENSE](./LICENSE.txt) or http://www.apache.org/licenses/LICENSE-2.0)
+* Apache License, Version 2.0, ([LICENSE](http://www.apache.org/licenses/LICENSE-2.0))
 
 ### Contributions
 
@@ -255,20 +255,4 @@ This process derives from, and is based on, the Rust language community RFC proc
 
 ## RFC Template
 
-This is the [template](0000-template/) you should use when making an RFC.
-
-## RFC List
-
-#### -[0001-remove-actix-from-tremor-runtime](0001-remove-actix-from-tremor-runtime/)
-#### -[0002-pipeline-state-mechanism](0002-pipeline-state-mechanism/)
-#### -[0003-linked-transports](0003-linked-transports/)
-#### -[0004-sliding-window-mechanism](0004-sliding-window-mechanism/)
-#### -[0005-circuit-breaker-mechanism](0005-circuit-breaker-mechanism/)
-#### -[0006-plugin-development-kit](0006-plugin-development-kit/)
-#### -[0007-pipeline-optimizations](0007-pipeline-optimizations/)
-#### -[0008-onramp-postgres](0008-onramp-postgres/)
-#### -[0009-ramp-interface](0009-ramp-interface/)
-#### -[0010-modularity](0010-modularity/)
-#### -[0011-string-interpolation](0011-string-interpolation/)
-#### -[0012-correlation](0012-correlation/)
-
+This is the [template](process/0000-template/) you should use when making an RFC.
