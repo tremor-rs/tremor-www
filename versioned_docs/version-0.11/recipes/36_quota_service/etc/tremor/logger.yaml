@@ -1,0 +1,38 @@
+---
+refresh_rate: 30 seconds
+
+appenders:
+  stdout:
+    kind: console
+  file:
+    kind: file
+    path: "/var/log/tremor/tremor.log"
+    encoder:
+      pattern: "[{d} {l}]- {m}{n}"
+
+
+
+root:
+  level: debug
+  appenders:
+    - stdout
+    - file
+
+loggers:
+  tide:
+    level: debug
+    appenders:
+      - stdout
+    additive: false
+  tremor_runtime:
+    level: debug
+    appenders:
+      - stdout
+      - file
+    additive: false
+  tremor:
+    level: debug
+    appenders:
+      - stdout
+      - file
+    additive: false

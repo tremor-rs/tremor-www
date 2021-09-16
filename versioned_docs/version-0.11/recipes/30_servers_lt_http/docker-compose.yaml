@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  tremor:
+    image: tremorproject/tremor:0.11
+    ports:
+      - 9898:9898
+      - 8139:8139
+    environment:
+      - RUST_BACKTRACE=full
+    volumes:
+      - ./etc/tremor:/etc/tremor:rw
+      - ./var/log:/var/log:rw
+      - ./usr/local/share/tremor:/usr/local/share/tremor:ro
