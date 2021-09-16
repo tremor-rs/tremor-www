@@ -79,10 +79,10 @@ Queries are compiled into a DAG of operator nodes and validated at compile time.
 
 ##### Grammar
 
-> ![query grammar](grammar/diagram/Query.png)
+> ![query grammar](../grammar/diagram/Query.png)
 
 Stmt: <a name="Stmt"></a>
-> ![statement grammar](grammar/diagram/Stmt.png)
+> ![statement grammar](../grammar/diagram/Stmt.png)
 
 See also [Additional Grammar Rules](#additional-grammar-rules).
 ### Statements
@@ -101,7 +101,7 @@ Stream definitions in `tremor-query` allow private intermediate streams to be na
 
 ##### Grammar
 
-> ![create stream grammar](grammar/diagram/CreateStreamDefn.png)
+> ![create stream grammar](../grammar/diagram/CreateStreamDefn.png)
 
 ##### Example
 
@@ -163,7 +163,7 @@ Configuration Parameters:
 A select query using one or more windows is generating _new_ synthetic events, aggregated from the events feeded into it. Even if a window only consists of a single event, it needs to be considered a new event. The shape of the new event is determined by the [`select`](#select-queries) _Target Expression_. Those new events will have an empty metadata and the [origin uri](tremor-script/stdlib/tremor/origin.md) is pointing to the windowed [`select`](#select-queries) query.
 
 ##### Grammar
-> ![window definition grammar](grammar/diagram/DefineWindowDefn.png)
+> ![window definition grammar](../grammar/diagram/DefineWindowDefn.png)
 
 
 See also [Additional Grammar Rules](#additional-grammar-rules).
@@ -207,11 +207,11 @@ Custom operators allow definition, configuration and usage of legacy operators, 
 ##### Grammar
 
 Operator Definition:
-> ![operator definition grammar](grammar/diagram/DefineOperatorDefn.png)
+> ![operator definition grammar](../grammar/diagram/DefineOperatorDefn.png)
 
 Operator Creation:
 
-> ![create operator grammar](grammar/diagram/CreateOperatorDefn.png)
+> ![create operator grammar](../grammar/diagram/CreateOperatorDefn.png)
 
 
 See also [Additional Grammar Rules](#additional-grammar-rules).
@@ -237,11 +237,11 @@ The tremor-script language can be embedded in the query language natively and th
 ##### Grammar
 
 Script Definition Grammar:
-> ![script definition grammar](grammar/diagram/DefineScriptDefn.png)
+> ![script definition grammar](../grammar/diagram/DefineScriptDefn.png)
 
 
 Script Creation Grammar:
-> ![create script grammar](grammar/diagram/CreateScriptDefn.png)
+> ![create script grammar](../grammar/diagram/CreateScriptDefn.png)
 
 See also [Additional Grammar Rules](#additional-grammar-rules).
 
@@ -272,7 +272,7 @@ select event from kfc into out;
 
 #### Select Queries
 
-> ![select grammar](grammar/diagram/SelectStmt.png)
+> ![select grammar](../grammar/diagram/SelectStmt.png)
 
 The select query is a builtin operation that is the workhorse of the `tremor-query` language. A select query describes from where to where an event should be routed (and under which conditions) and how it is transformed along the way.
 
@@ -394,62 +394,62 @@ into out;
 ##### Grammar
 
 Select Grammar:
-> ![select grammar](grammar/diagram/SelectStmt.png)
+> ![select grammar](../grammar/diagram/SelectStmt.png)
 
 FromClause:  <a name="FromClause"></a>
-> ![from grammar](grammar/diagram/FromClause.png)
+> ![from grammar](../grammar/diagram/FromClause.png)
 
 WhereClause: <a name="WhereClause"></a>
-> ![where grammar](grammar/diagram/WhereClause.png)
+> ![where grammar](../grammar/diagram/WhereClause.png)
 
 GroupByClause: <a name="GroupByClause"></a>
-> ![group by grammar](grammar/diagram/GroupByClause.png)
+> ![group by grammar](../grammar/diagram/GroupByClause.png)
 
 GroupByDimension: <a name="GroupByDimension"></a>
-> ![group by dimensions grammar](grammar/diagram/GroupByDimension.png)
+> ![group by dimensions grammar](../grammar/diagram/GroupByDimension.png)
 
 SetBasedGroup: <a name="SetBasedGroup"></a>
-> ![set group grammar](grammar/diagram/SetBasedGroup.png)
+> ![set group grammar](../grammar/diagram/SetBasedGroup.png)
 
 EachBasedGroup: <a name="EachBasedGroup"></a>
 
-> ![each group grammar](grammar/diagram/EachBasedGroup.png)
+> ![each group grammar](../grammar/diagram/EachBasedGroup.png)
 
 IntoClause: <a name="IntoClause"></a>
 
-> ![into grammar](grammar/diagram/IntoClause.png)
+> ![into grammar](../grammar/diagram/IntoClause.png)
 
 HavingClause: <a name="HavingClause"></a>
 
-> ![having grammar](grammar/diagram/HavingClause.png)
+> ![having grammar](../grammar/diagram/HavingClause.png)
 
 #### Additional Grammar Rules
 
 These rules are referenced in the main tremor-query grammar rules above and are listed here as extended reference.
 
 EmbeddedScript:
-> ![embedded script grammar](grammar/diagram/EmbeddedScript.png)
+> ![embedded script grammar](../grammar/diagram/EmbeddedScript.png)
 
 WithParams:
-> ![with params grammar](grammar/diagram/WithParams.png)
+> ![with params grammar](../grammar/diagram/WithParams.png)
 
 WithPartialParams:
-> ![with partial params grammar](grammar/diagram/WithPartialParams.png)
+> ![with partial params grammar](../grammar/diagram/WithPartialParams.png)
 
 Params: <a name="Params"></a>
-> ![params grammar](grammar/diagram/Params.png)
+> ![params grammar](../grammar/diagram/Params.png)
 
 Param: <a name="Param"></a>
-> ![param grammar](grammar/diagram/Param.png)
+> ![param grammar](../grammar/diagram/Param.png)
 
 ModularId: <a name="ModularId"></a>
-> ![modular id grammar](grammar/diagram/ModularId.png)
+> ![modular id grammar](../grammar/diagram/ModularId.png)
 
 Id: <a name="Id"></a>
-> ![id grammar](grammar/diagram/Id.png)
+> ![id grammar](../grammar/diagram/Id.png)
 
 TiltFrames: <a name="TiltFrames"></a>
-> ![tilt-frames grammar](grammar/diagram/TiltFrames.png)
+> ![tilt-frames grammar](../grammar/diagram/TiltFrames.png)
 
 WindowKind:
-> ![window kind grammar](grammar/diagram/WindowKind.png)
+> ![window kind grammar](../grammar/diagram/WindowKind.png)
