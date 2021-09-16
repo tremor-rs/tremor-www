@@ -1,8 +1,3 @@
----
-title: RFC Template
-id: 0000-template
----
-
 # RFC Template (RFC Title goes here)
 
 - Feature Name: (fill me in with a unique ident, `my_awesome_feature`)
