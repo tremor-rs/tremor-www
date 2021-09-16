@@ -14,7 +14,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+      - name: Clone tremor
+        run: git clone https://github.com/tremor-rs/tremor-runtime
       - uses: Swatinem/rust-cache@v1
+        with:
+          working-directory: tremor-runtime
       - name: generate stdlib
         run:  make clean all
       - name: Build docs
