@@ -10,7 +10,7 @@ png)
 Modules can define `const` constants, `fn` functions, or
 nested `mod` sub-modules.
 
-> ![module grammar](./grammar/diagram/ModuleExpr.png)
+> ![module grammar](../grammar/diagram/ModuleExpr.png)
 
 # Module Path
 
