@@ -27,8 +27,8 @@ module.exports = {
   ],
   title: 'Tremor',
   tagline: 'An early-stage event processing system for unstructured data with rich support for structural pattern-matching, filtering and transformation.',
-  url: 'https://tremor-rs.github.io/',
-  baseUrl: '/tremor-new-website/',
+  url: 'https://www.tremor.rs/',
+  baseUrl: '/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'docs/favicon.ico',
@@ -39,7 +39,7 @@ module.exports = {
       logo: {
         alt: 'Tremor Logo',
         src: '/img/tremor-logo.png',
-        href: 'https://tremor-rs.github.io/tremor-new-website/',
+        href: 'https://www.tremor.rs/',
         target: '_self',
       },
       items: [
@@ -73,15 +73,15 @@ module.exports = {
           className: 'header-github-link',
           'aria-label': 'GitHub',
         },
-        {
-          type: 'docsVersionDropdown',
-          position: 'left',
-          dropdownItemsAfter: [{ to: 'docs/', label: 'All versions' }],
-        },
-        {
-          type: 'localeDropdown',
-          position: 'right',
-        },
+        // {
+        //   type: 'docsVersionDropdown',
+        //   position: 'left',
+        //   dropdownItemsAfter: [{ to: 'docs/', label: 'All versions' }],
+        // },
+        // {
+        //   type: 'localeDropdown',
+        //   position: 'right',
+        // },
         {
           type: 'search',
           position: 'right',

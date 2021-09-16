@@ -14,6 +14,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+      - name: Clone tremor
+        run: git clone https://github.com/tremor-rs/tremor-runtime
+      - uses: Swatinem/rust-cache@v1
+        with:
+          working-directory: tremor-runtime
       - name: generate stdlib
         run:  make clean all
       - name: Build docs
@@ -25,7 +30,9 @@ jobs:
           else
             npm i
           fi
-          npm run build        
+          npm run build  
+      - name: Add CNAME
+        run: cp CNAME.txt ./build/CNAME
       - name: Deploy docs
         if: github.event_name == 'push'
         uses: peaceiris/actions-gh-pages@v2
