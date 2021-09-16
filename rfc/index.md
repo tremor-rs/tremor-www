@@ -1,14 +1,10 @@
 ---
-title: Home
-id: rfc
-description: Request for changes.
-draft: false
-hide_table_of_contents: false
+title: RFCs
+sidebar_position: 0
 ---
+# Tremor RFCs
 
 <!-- alex disable period -->
-
-# Tremor RFCs - [Active RFC List](https://rfcs.tremor.rs/)
 
 [Tremor RFCs]: #tremor-rfcs
 
@@ -77,10 +73,10 @@ the RFC process, it may be closed with a polite request to submit an RFC first.
 For more details on when an RFC is required for the following areas, please see
 the Tremor community's [sub-team] specific guidelines for:
 
- ### - [Language Changes](lang_changes/)
- ### - [Library Changes](libs_changes/)
- ### - [API Changes](api_changes/)
- ### - [Architecture Changes](arch_changes/)
+ ### - [Language Changes](process/lang_changes)
+ ### - [Library Changes](process/libs_changes)
+ ### - [API Changes](process/api_changes)
+ ### - [Architecture Changes](process/arch_changes)
 
 
 ## Before Creating an RFC:

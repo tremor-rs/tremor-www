@@ -1,9 +1,10 @@
+# Pipeline State Mechanism
+
 - Feature Name: rfc_0002_pipeline_state_mechanism
 - Start Date: 2020-01-22
 - Issue: [tremor-rs/tremor-rfcs#0003](https://github.com/tremor-rs/tremor-rfcs/issues/3)
 - RFC PR: [tremor-rs/tremor-rfcs#0004](https://github.com/tremor-rs/tremor-rfcs/pull/4)
 
-# Pipeline State Mechanism
 
 ## Summary
 [summary]: #summary
