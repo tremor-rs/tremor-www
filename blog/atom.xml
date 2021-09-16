@@ -1,65 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://tremor-rs.github.io/blog</id>
+    <id>https://www.tremor.rs/blog</id>
     <title>Tremor Blog</title>
     <updated>2021-07-06T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://tremor-rs.github.io/blog"/>
+    <link rel="alternate" href="https://www.tremor.rs/blog"/>
     <subtitle>Tremor Blog</subtitle>
-    <icon>https://tremor-rs.github.io/docs/favicon.ico</icon>
+    <icon>https://www.tremor.rs/docs/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[Property Based Testing of Tremor Script]]></title>
         <id>Property Based Testing of Tremor Script</id>
-        <link href="https://tremor-rs.github.io/tremor-new-website/blog/2021/07/06/Blog-Rohit-Property-Based-Testing"/>
+        <link href="https://www.tremor.rs/blog/2021/07/06/Blog-Rohit-Property-Based-Testing"/>
         <updated>2021-07-06T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Rohit's Experience working with Tremor as a LFX Spring 2021 Mentee.]]></summary>
     </entry>
     <entry>
         <title type="html"><![CDATA[Support for the Syslog Protocol]]></title>
         <id>LFX-Blog-Nupur</id>
-        <link href="https://tremor-rs.github.io/tremor-new-website/blog/LFX-Blog-Nupur"/>
+        <link href="https://www.tremor.rs/blog/LFX-Blog-Nupur"/>
         <updated>2021-07-05T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Nupur's experience contributing to Tremor and work overview.]]></summary>
     </entry>
     <entry>
         <title type="html"><![CDATA[Google Cloud Storage and Pub/Sub Connectors]]></title>
         <id>Google Cloud Storage and Pub/Sub Connectors</id>
-        <link href="https://tremor-rs.github.io/tremor-new-website/blog/2021/06/29/T17-LFX-Blog-Jigyasa-gcloud"/>
+        <link href="https://www.tremor.rs/blog/2021/06/29/T17-LFX-Blog-Jigyasa-gcloud"/>
         <updated>2021-06-29T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Jigyasa's LFX spring Mentorship experience report.]]></summary>
     </entry>
     <entry>
         <title type="html"><![CDATA[Releasing Tremor v0.9!]]></title>
         <id>Releasing Tremor v0.9!</id>
-        <link href="https://tremor-rs.github.io/tremor-new-website/blog/2020/10/16/v09-release"/>
+        <link href="https://www.tremor.rs/blog/2020/10/16/v09-release"/>
         <updated>2020-10-16T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Releasing Tremor v0.9]]></summary>
     </entry>
     <entry>
         <title type="html"><![CDATA[To async or Not to async]]></title>
         <id>To async or Not to async</id>
-        <link href="https://tremor-rs.github.io/tremor-new-website/blog/2020/08/06/to-async-or-not-to-async"/>
+        <link href="https://www.tremor.rs/blog/2020/08/06/to-async-or-not-to-async"/>
         <updated>2020-08-06T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Moving from threads to async tasks.]]></summary>
     </entry>
     <entry>
         <title type="html"><![CDATA[Rust & Tell Berlin- March 2020]]></title>
         <id>Rust &amp; Tell Berlin- March 2020</id>
-        <link href="https://tremor-rs.github.io/tremor-new-website/blog/2020/03/31/rust-and-tell"/>
+        <link href="https://www.tremor.rs/blog/2020/03/31/rust-and-tell"/>
         <updated>2020-03-31T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Presenting Tremor at Rust & Tell Berlin- March 2020.]]></summary>
     </entry>
     <entry>
         <title type="html"><![CDATA[Improving our Influx Parser- A Story in Four Acts]]></title>
         <id>Improving our Influx Parser- A Story in Four Acts</id>
-        <link href="https://tremor-rs.github.io/tremor-new-website/blog/2020/03/06/influx-perf"/>
+        <link href="https://www.tremor.rs/blog/2020/03/06/influx-perf"/>
         <updated>2020-03-06T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[The process of improving the performance of our influx line protocol parser.]]></summary>
     </entry>
     <entry>
         <title type="html"><![CDATA[Tremor is now Open Source!]]></title>
         <id>Tremor is now Open Source!</id>
-        <link href="https://tremor-rs.github.io/tremor-new-website/blog/2020/02/22/welcome"/>
+        <link href="https://www.tremor.rs/blog/2020/02/22/welcome"/>
         <updated>2020-02-22T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Announcement of Tremor as an OSS project.]]></summary>
     </entry>
