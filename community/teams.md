@@ -39,6 +39,18 @@ Overarching architectural concepts, pipeline and concurrency.
 * Heinz Gies
 * Matthias Wahl
 
+
+### Documentation (docs)
+
+Documentation, web presence, communication and design.
+
+#### Members
+
+* Sharon Koech
+* Darach Ennis
+* Heinz Gies
+* Matthias Wahl
+
 ### Language (lang)
 
 Designing new language features.
