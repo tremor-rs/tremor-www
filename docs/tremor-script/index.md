@@ -158,7 +158,7 @@ Since Tremor 0.9 Heredocs also support [String Interpolation](#string-interpolat
 
 Array grammar:
 
-> ![array grammar](grammar/diagram/Array.png)
+> ![array grammar](../grammar/diagram/Array.png)
 
 Array literals in `tremor-script` are a comma-delimited set of expressions bracketed by the square brakcets '[' and ']'.
 
@@ -178,11 +178,11 @@ array::push(["snot"], "badger") == ["snot", "badger"]
 
 Record grammar:
 
-> ![record grammar](grammar/diagram/Record.png)
+> ![record grammar](../grammar/diagram/Record.png)
 
 Field grammar:
 
-> ![field grammar](grammar/diagram/Field.png)
+> ![field grammar](../grammar/diagram/Field.png)
 
 Record literals in `tremor-script` are syntactically equivalent to JSON document objects
 
@@ -202,15 +202,15 @@ Binaries are based on the [Erlang bit syntax](https://erlang.org/doc/programming
 
 Binary grammar:
 
-> ![record grammar](grammar/diagram/Binary.png)
+> ![record grammar](../grammar/diagram/Binary.png)
 
 BinaryFields grammar:
 
-> ![fields grammar](grammar/diagram/BinaryFields.png)
+> ![fields grammar](../grammar/diagram/BinaryFields.png)
 
 BinaryField grammar:
 
-> ![field grammar](grammar/diagram/BinaryField.png)
+> ![field grammar](../grammar/diagram/BinaryField.png)
 
 
 Parts of each field are: `<value>:<size>/<type>` where both `size` and `type` are optional.
@@ -288,19 +288,19 @@ List of binary and unary operators in `tremor-script`, ordered by precedence (fr
 
 Path grammar:
 
-> ![path grammar](grammar/diagram/Path.png)
+> ![path grammar](../grammar/diagram/Path.png)
 
 Qualified Segments grammar:
 
-> ![qualified segment grammar](grammar/diagram/QualifiedSegments.png)
+> ![qualified segment grammar](../grammar/diagram/QualifiedSegments.png)
 
 PathSegment grammar:
 
-> ![segment grammar](grammar/diagram/PathSegment.png)
+> ![segment grammar](../grammar/diagram/PathSegment.png)
 
 ArraySegment grammar:
 
-> ![array grammar](grammar/diagram/ArraySegment.png)
+> ![array grammar](../grammar/diagram/ArraySegment.png)
 
 Path-like structures in `tremor-script` allow referencing local variables, ingested events, event meta-data, script-local state etc. and also indexing into them if they are records or arrays.
 
@@ -394,7 +394,7 @@ Path's in `tremor-script` are themselves expressions in their own right.
 
 Const grammer:
 
-![const grammar](grammar/diagram/Const.png)
+![const grammar](../grammar/diagram/Const.png)
 
 Const can be used to define immutable, constant values that get evaluated at compile time. This is more performant then `let` as all logic can happen at compile time and is helpful for setting up lookup tables or other never changing data structures.
 
@@ -402,7 +402,7 @@ Const can be used to define immutable, constant values that get evaluated at com
 
 Let grammar:
 
-> ![let grammar](grammar/diagram/Let.png)
+> ![let grammar](../grammar/diagram/Let.png)
 
 The let expression allows data pointed to by a path to be destructively mutated, and the pointed-to value reassigned. If the path does not yet exist, it will be created in-situ:
 
@@ -439,7 +439,7 @@ drop; # As the first drop always wins, this expression never runs
 
 Emit grammar:
 
-> ![emit grammar](grammar/diagram/Emit.png)
+> ![emit grammar](../grammar/diagram/Emit.png)
 
 Emit expressions enable short-circuiting the evaluation of a `tremor-script` when processing is known to be complete and further processing can be avoided. If no argument is supplied, emit` will return the event record. If an argument is supplied, the result of evaluating the expression will be returned. Tremor or other processing tools can process emitted events or data using their default flow-based or stream-based data processing pipelines.
 
@@ -482,11 +482,11 @@ emit {
 
 Match grammar:
 
-> ![match grammar](grammar/diagram/Match.png)
+> ![match grammar](../grammar/diagram/Match.png)
 
 Match case grammar:
 
-> ![case grammar](grammar/diagram/MatchCaseClause.png)
+> ![case grammar](../grammar/diagram/MatchCaseClause.png)
 
 Match expressions enable data to be filtered or queried using case-based reasoning. Match expressions take the form:
 
@@ -531,7 +531,7 @@ emit found;
 
 #### Matching literal expressions
 
-> ![expression grammar](grammar/diagram/ExprCase.png)
+> ![expression grammar](../grammar/diagram/ExprCase.png)
 
 The simplest form of case expression in match expressions is matching a literal value. Values can be any legal tremor-script type and they can be provided as literals, computed values or path references to local variables, metadata or values arriving via events.
 
@@ -599,15 +599,15 @@ A *tuple pattern* matches a *target* value if the *target* is an array and **eac
 If you are looking for a more set like operation look at the [array pattern](#matching-array-patterns).
 :::
 
-> ![tuple case grammar](grammar/diagram/TupleCase.png)
+> ![tuple case grammar](../grammar/diagram/TupleCase.png)
 
 Tuple Pattern grammar:
 
-> ![tuple pattern grammar](grammar/diagram/TuplePattern.png)
+> ![tuple pattern grammar](../grammar/diagram/TuplePattern.png)
 
 Tuple Pattern filter grammar:
 
-> ![tuple filter grammar](grammar/diagram/TuplePatternFilter.png)
+> ![tuple filter grammar](../grammar/diagram/TuplePatternFilter.png)
 
 In addition to literal array matching, where the case expression tuple literal must exactly match the target of the match expression one for one, tuple patterns enable testing for matching elements within an array and filtering on the basis of matched elements.
 
@@ -631,15 +631,15 @@ If you are looking for a more array like / positional operation look at the [tup
 :::
 
 
-> ![array case grammar](grammar/diagram/ArrayCase.png)
+> ![array case grammar](../grammar/diagram/ArrayCase.png)
 
 Array Pattern grammar:
 
-> ![array pattern grammar](grammar/diagram/ArrayPattern.png)
+> ![array pattern grammar](../grammar/diagram/ArrayPattern.png)
 
 Array Pattern filter grammar:
 
-> ![array filter grammar](grammar/diagram/ArrayPatternFilter.png)
+> ![array filter grammar](../grammar/diagram/ArrayPatternFilter.png)
 
 In addition to a subset match, where the elements of the pattern must be included in the target of the match expression, array patterns enable testing for matching elements within an array and filtering on the basis of matched elements.
 
@@ -667,15 +667,15 @@ end;
 A record pattern matches a target if the target is a record that contains **at least all declared keys** and the tests for **each of the declared key** match.
 :::
 
-> ![record case grammar](grammar/diagram/RecordCase.png)
+> ![record case grammar](../grammar/diagram/RecordCase.png)
 
 Record Pattern grammar
 
-> ![record pattern grammar](grammar/diagram/RecordPattern.png)
+> ![record pattern grammar](../grammar/diagram/RecordPattern.png)
 
 Record Pattern Fields grammar
 
-> ![record pattern field grammar](grammar/diagram/RecordPatternFields.png)
+> ![record pattern field grammar](../grammar/diagram/RecordPatternFields.png)
 
 Similarly to record literal matching where the case expression record must exactly match the target of the match expression, record patterns enable testing for matching fields or sub-structures within a record and extracting and elementizing data on the basis of matched predicate tests ( via `~=` ).
 
@@ -728,7 +728,7 @@ end;
 
 #### Guard clauses
 
-> ![guard clause grammar](grammar/diagram/Guard.png)
+> ![guard clause grammar](../grammar/diagram/Guard.png)
 
 Guard expressions in Match case clauses enable matching data structures to be further filtered based on predicate expressions. For example they can be used to restrict the match to a subset of matching cases where appropriate.
 
@@ -742,10 +742,10 @@ end
 #### Effectors
 
 Effectors grammar:
-> ![effectors grammar](grammar/diagram/Effectors.png)
+> ![effectors grammar](../grammar/diagram/Effectors.png)
 
 Block:
-> ![block grammar](grammar/diagram/Block.png)
+> ![block grammar](../grammar/diagram/Block.png)
 
 Effectors are the expressions evaluated when a case pattern and guard succeeded. When we have to use multiple expressions to do some more complex processing, we need to separate those expressions with commas `,`:
 
@@ -762,7 +762,7 @@ end
 
 ### Merge
 
-> ![merge grammar](grammar/diagram/Merge.png)
+> ![merge grammar](../grammar/diagram/Merge.png)
 
 Merge expressions defines a difference against a targetted record and applies that difference to produce a result record. Merge operations in `tremor-script` follow merge-semantics defined in [RFC 7386](https://tools.ietf.org/html/rfc7386).
 
@@ -780,11 +780,11 @@ let event = merge event of {"some": "record"} end
 
 ### Patch
 
-> ![patch grammar](grammar/diagram/Patch.png)
+> ![patch grammar](../grammar/diagram/Patch.png)
 
 Patch operation grammar
 
-> ![patch operation grammar](grammar/diagram/PatchOperation.png)
+> ![patch operation grammar](../grammar/diagram/PatchOperation.png)
 
 Patch expressions define a set of record level field operations to be applied to a target record in order to transform a targetted record. Patch allows fields to be: inserted where there was no field before; removed where there was a field before; updated where there was a field before; or inserted or updated regardless of whether or not there was a field before. Patch also allows field level merge operations on records or for the targetted document itself to be merged. Merge operations in patch are syntax sugar in that they are both based on the merge operation.
 
@@ -798,11 +798,11 @@ Patch follows the semantics of [RFC 6902](https://tools.ietf.org/html/rfc6902) w
 
 ### For comprehensions
 
-> ![for grammar](grammar/diagram/For.png)
+> ![for grammar](../grammar/diagram/For.png)
 
 For Case Clause grammar
 
-> ![for case clause grammar](grammar/diagram/ForCaseClause.png)
+> ![for case clause grammar](../grammar/diagram/ForCaseClause.png)
 
 For expressions are case-based record or array comprehensions that can iterate over index/element or key/value pairs in record or array literals respectively.
 
@@ -848,13 +848,13 @@ Since the state storage lives for the lifetime of a pipeline, state will not be 
 
 ## Extractors
 
-> ![test expression grammar](grammar/diagram/TestExpr.png)
+> ![test expression grammar](../grammar/diagram/TestExpr.png)
 
 TEST_LITERAL Grammar:
-> ![test literal grammar](grammar/diagram/TEST_LITERAL.png)
+> ![test literal grammar](../grammar/diagram/TEST_LITERAL.png)
 
 TEST_ESCAPE Grammar:
-> ![test literal escape grammar](grammar/diagram/TEST_ESCAPE.png)
+> ![test literal escape grammar](../grammar/diagram/TEST_ESCAPE.png)
 
 The language has pluggable support for a number of microformats with two basic modes of operation that enable predicate tests ( does a particular value match the expected micro-format ) and elementization ( if a value does match a specific micro-format, then extract and elementize accordingly ).
 
@@ -892,7 +892,7 @@ There is no concept of _injector_ in the `tremor-script` language that is analog
 These rules are referenced in the main tremor-query grammar rules above and are listed here as extended reference.
 
 DocComment Grammar:
-> ![doc comment grammar](grammar/diagram/DocComment.png)
+> ![doc comment grammar](../grammar/diagram/DocComment.png)
 
 DocCommentLine Grammar:
-> ![doc comment line grammar](grammar/diagram/DocCommentLine.png)
+> ![doc comment line grammar](../grammar/diagram/DocCommentLine.png)

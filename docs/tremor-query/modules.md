@@ -8,12 +8,12 @@ modules are rooted at a base path and are nested with folders.
 
 Within a file, nesting is via the `mod` clause.
 
-> ![module grammar](./grammar/diagram/ModuleStmt.png)
+> ![module grammar](./../grammar/diagram/ModuleStmt.png)
 
 Modules can use trickle definitions via the `define` clause variants to define
 windows, operators or scripts for reuse, or nested `mod` sub-modules.
 
-> ![module inner statement grammar](./grammar/diagram/ModuleStmtInner.png)
+> ![module inner statement grammar](./../grammar/diagram/ModuleStmtInner.png)
 
 # Module Path
 

@@ -76,7 +76,6 @@ module.exports = {
         {
           type: 'docsVersionDropdown',
           position: 'left',
-
         },
         // {
         //   type: 'localeDropdown',
