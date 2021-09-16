@@ -55,15 +55,15 @@ module.exports = {
           className: 'header-github-link',
           'aria-label': 'GitHub',
         },
-        {
-          type: 'docsVersionDropdown',
-          position: 'left',
-          dropdownItemsAfter: [{ to: 'docs/', label: 'All versions' }],
-        },
-        {
-          type: 'localeDropdown',
-          position: 'right',
-        },
+        // {
+        //   type: 'docsVersionDropdown',
+        //   position: 'left',
+        //   dropdownItemsAfter: [{ to: 'docs/', label: 'All versions' }],
+        // },
+        // {
+        //   type: 'localeDropdown',
+        //   position: 'right',
+        // },
         {
           type: 'search',
           position: 'right',
