@@ -141,19 +141,26 @@ the issue in question.
 All pull requests are reviewed by another person.
 
 If you want to request that a specific person reviews your pull request,
-you can add an `r?` to the pull request description. For example, [Darach Ennis][darach] usually reviews
-documentation changes. So if you were to make a documentation change, add
+you can tag them in the pull request description or in comments.
+ For example, [Darach Ennis][darach] usually reviews documentation changes.
+So if you were to make a documentation change, add
 
-    r? @darach
+    @darach
 
-to the end of the pull request description. This is entirely optional.
+to the end of the pull request description. This is entirely optional. If you
+have no preference we aim to go through pull requests quickly.
 
-After someone has reviewed your pull request, they will leave an annotation
-on the pull request with an `r+`. It will look something like this:
+After someone has reviewed your pull request, they will approve the
+pull request - leaving a comment so that you are notified - or some
+changes may be requested.
 
-    r+
+For example - tremor uses pedantic lint checks and obeys the rust formatting
+tool. Our CI/CD system runs automated checks that cover these and other things
+so we require these checks to go green and to pass. Sometimes it takes a few
+tweaks before they go green and this is ok. We sometimes forget too - this is
+why we have the checks automated!
 
-Once your merge request is approved it will enter the merge queue
+Once your merge request is approved it will enter the merge queue.
 
 [darach]: https://github.com/darach
 
