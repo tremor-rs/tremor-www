@@ -63,14 +63,7 @@ module.exports = {
           label: 'Docs',
           position: 'left',
         },
-        {
-          to: "api/0",
-          activeBasePath: "api",
-          label: "API",
-          position: "left",
-        },
         { to: 'blog', label: 'Blog', position: 'left' },
-
         {
           type: 'docsVersionDropdown',
           position: 'left',
