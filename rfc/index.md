@@ -235,7 +235,7 @@ consensus and community norms, not impose more structure than necessary.
 
 - Tremor chat: [Discord](https://chat.tremor.rs)
  
-- [RFC repository](http://github.com/tremor-rs/tremor-new-website/rfc)
+- [RFC repository](http://github.com/tremor-rs/tremor-www/rfc)
 
 ## License
 [License]: #license

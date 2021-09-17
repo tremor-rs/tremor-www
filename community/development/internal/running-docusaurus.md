@@ -14,7 +14,7 @@ As part of Tremor's web redesign project, we seek to use a framework that unifie
 We created a new Docusaurus site in the docs folder using npm.
 
 ```bash
-npx @docusaurus/init@latest init tremor-new-website classic
+npx @docusaurus/init@latest init tremor-www classic
 ```
 
 

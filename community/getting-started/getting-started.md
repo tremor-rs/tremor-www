@@ -1,8 +1,9 @@
 ---
-title: Setup
-id: setup
+title: Getting Started
+id: getting-started
 description: Starting Tremor for the first time- set up your first Tremor installation.
 hide_table_of_contents: false
+sidebar_position: 0
 ---
 
 ### Requirements
