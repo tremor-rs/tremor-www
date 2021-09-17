@@ -38,7 +38,7 @@ module.exports = {
     navbar: {
       logo: {
         alt: 'Tremor Logo',
-        src: '/img/tremor-logo.png',
+        src: '/img/tremor-logo.svg',
         href: 'https://www.tremor.rs/',
         target: '_self',
       },
@@ -151,7 +151,7 @@ module.exports = {
               href: 'https://github.com/tremor-rs/tremor-runtime/releases',
             },
             {
-              html: `<a href="https://www.cncf.io/" target="_blank" rel="noreferrer noopener" aria-label="CNCF"><img src="cncf-color.svg" alt="CNCF" /></a>`,
+              html: `<a href="https://www.cncf.io/" target="_blank" rel="noreferrer noopener" aria-label="CNCF"><img src="/img/cncf-color.svg" alt="CNCF" style="width: 200px;" /></a>`,
             },
           ],
         },
