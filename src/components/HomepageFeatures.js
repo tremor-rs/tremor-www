@@ -5,7 +5,7 @@ import styles from './HomepageFeatures.module.css';
 const FeatureList = [
   {
     title: 'Connectivity',
-    link: 'getting-started/connectivity/',
+    link: 'community/getting-started/connectivity/',
     Svg: require('/img/connectivity.svg').default,
     description: (
       <>
@@ -17,7 +17,7 @@ const FeatureList = [
   },
   {
     title: 'Tooling',
-    link: 'getting-started/tooling/',
+    link: 'community/getting-started/tooling/',
     Svg: require('/img/tooling.svg').default,
     description: (
       <>
@@ -31,7 +31,7 @@ const FeatureList = [
   },
   {
     title: 'Customisation',
-    link: 'getting-started/specialize/',
+    link: 'community/getting-started/specialize/',
     Svg: require('/img/customisation.svg').default,
     description: (
       <>
@@ -41,7 +41,7 @@ const FeatureList = [
   },
   {
     title: 'Scripting',
-    link: 'getting-started/scripting/',
+    link: 'community/getting-started/scripting/',
     Svg: require('/img/scripting.svg').default,
     description: (
       <>
@@ -55,7 +55,7 @@ const FeatureList = [
   },
   {
     title: 'Codecs',
-    link: 'getting-started/codecs/',
+    link: 'community/getting-started/codecs/',
     Svg: require('/img/codecs.svg').default,
     description: (
       <>
@@ -67,7 +67,7 @@ const FeatureList = [
   },
   {
     title: 'Install',
-    link: 'getting-started/install/',
+    link: 'community/getting-started/install/',
     Svg: require('/img/install.svg').default,
     description: (
       <>

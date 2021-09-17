@@ -33,7 +33,7 @@ module.exports = {
   onBrokenMarkdownLinks: 'warn',
   favicon: 'docs/favicon.ico',
   organizationName: 'tremor-rs',
-  projectName: 'tremor-new-website',
+  projectName: 'tremor-www',
   themeConfig: {
     navbar: {
       logo: {
@@ -43,10 +43,18 @@ module.exports = {
         target: '_self',
       },
       items: [
+        { to: 'community/getting-started/getting-started', label: 'Getting Started', position: 'left' },
         {
-          to: 'getting-started/about/',
-          label: 'About Us',
+          type: 'dropdown',
+          label: 'Community',
+          to: 'community/community',
           position: 'left',
+          items: [
+            { to: 'community/community', label: 'Overview' },
+            { to: 'community/governance', label: 'Governance' },
+            { to: 'community/faqs', label: 'FAQs' },
+            { to: 'rfc/index', label: 'RFCs' },
+          ],
         },
         {
           type: 'doc',
@@ -54,28 +62,31 @@ module.exports = {
           label: 'Docs',
           position: 'left',
         },
-        { to: 'blog', label: 'Blog', position: 'left' },
-        { to: 'quick-start', label: 'Usage Guide', position: 'left' },
         {
           to: "api/0",
           activeBasePath: "api",
           label: "API",
           position: "left",
         },
-        { to: 'rfc/index', label: 'RFCs', position: 'left' },
-        { to: 'community/community', label: 'Community', position: 'left' },
-        { to: 'community/governance', label: 'Governance', position: 'left' },
-        { to: 'faqs', label: 'FAQs', position: 'left' },
+        {
+          href: 'https://chat.tremor.rs',
+          label: 'Community Chat',
+          position: 'left',
+          className: 'header-chat-link',
+          'aria-label': 'Community Chat',
+        },
+        { to: 'blog', label: 'Blog', position: 'left' },
+
+        {
+          type: 'docsVersionDropdown',
+          position: 'left',
+        },
         {
           href: 'https://github.com/tremor-rs',
           label: 'GitHub',
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub',
-        },
-        {
-          type: 'docsVersionDropdown',
-          position: 'left',
         },
         // {
         //   type: 'localeDropdown',
@@ -160,12 +171,12 @@ module.exports = {
           path: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
-            'https://github.com/tremor-rs/tremor-new-website/tree/main',
+            'https://github.com/tremor-rs/tremor-www/tree/main',
         },
         blog: {
           showReadingTime: true,
           editUrl:
-            'https://github.com/tremor-rs/tremor-new-website/tree/main',
+            'https://github.com/tremor-rs/tremor-www/tree/main',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
