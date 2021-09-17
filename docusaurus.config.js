@@ -51,6 +51,7 @@ module.exports = {
           position: 'left',
           items: [
             { to: 'community/community', label: 'Overview' },
+            { href: 'https://chat.tremor.rs', label: 'Chat' },
             { to: 'community/governance', label: 'Governance' },
             { to: 'community/faqs', label: 'FAQs' },
             { to: 'rfc/index', label: 'RFCs' },
@@ -68,13 +69,6 @@ module.exports = {
           label: "API",
           position: "left",
         },
-        {
-          href: 'https://chat.tremor.rs',
-          label: 'Community Chat',
-          position: 'left',
-          className: 'header-chat-link',
-          'aria-label': 'Community Chat',
-        },
         { to: 'blog', label: 'Blog', position: 'left' },
 
         {
@@ -82,11 +76,16 @@ module.exports = {
           position: 'left',
         },
         {
-          href: 'https://github.com/tremor-rs',
-          label: 'GitHub',
+          href: 'https://chat.tremor.rs',
+          className: 'header-discord-link',
           position: 'right',
+          'aria-label': 'Community Chat',
+        },
+        {
+          href: 'https://github.com/tremor-rs',
           className: 'header-github-link',
-          'aria-label': 'GitHub',
+          'aria-label': 'GitHub repository',
+          position: 'right',
         },
         // {
         //   type: 'localeDropdown',
