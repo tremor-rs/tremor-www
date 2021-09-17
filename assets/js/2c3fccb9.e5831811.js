@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknew_tremor_website=self.webpackChunknew_tremor_website||[]).push([[5811],{39804:function(e){e.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"/blog/tags/tremorscript","name":"tremorscript","count":1,"permalink":"/blog/tags/tremorscript"}')}}]);
