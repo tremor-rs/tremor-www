@@ -45,7 +45,7 @@ module.exports = {
       items: [
         { to: 'community/getting-started/getting-started', label: 'Getting Started', position: 'left' },
         {
-          type: 'dropdown',
+       // type: 'dropdown',
           label: 'Community',
           to: 'community/community',
           position: 'left',
