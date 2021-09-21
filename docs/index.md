@@ -22,8 +22,8 @@ Click for an [Architectural overview](./overview.md) or [Canned History](./histo
 
 Other interesting topics are:
 
-* [The tremor-script language](tremor-script/index.md)
-* [The tremor-query language](tremor-query/index.md)
+* [The tremor-script language](scripting/tremor-script/index.md)
+* [The tremor-query language](scripting/tremor-query/index.md)
 * Artefacts namely:
     * [Onramps](artefacts/onramps.md)
     * [Offramps](artefacts/offramps.md)
