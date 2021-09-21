@@ -1,3 +1,7 @@
+---
+sidebar_position: 000
+---
+
 # Extractors
 
 The `tremor-script` language can recognize micro-formats and extract or elementize data from those micro-formats.
@@ -50,13 +54,13 @@ This will result in unintended behaviour because `present` will return the origi
 
 The different extractors available are:
 
-- [Base64](extractors/base64.md)
-- [CIDR](extractors/cidr.md)
-- [Datetime](extractors/datetime.md)
-- [Dissect](extractors/dissect.md)
-- [Glob](extractors/glob.md)
-- [Grok](extractors/grok.md)
-- [Influx](extractors/influx.md)
-- [JSON](extractors/json.md)
-- [KV](extractors/kv.md)
-- [Regex (Re)](extractors/regex.md)
+- [Base64](base64.md)
+- [CIDR](cidr.md)
+- [Datetime](datetime.md)
+- [Dissect](dissect.md)
+- [Glob](glob.md)
+- [Grok](grok.md)
+- [Influx](influx.md)
+- [JSON](json.md)
+- [KV](kv.md)
+- [Regex (Re)](regex.md)

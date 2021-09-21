@@ -76,12 +76,12 @@ As part of the above docs, you will also find event metadata variables that thes
 
 ## Example use cases
 
-In the above example, instead of using a passthrough pipeline, you can imagine processing the incoming event from a custom trickle pipeline, with the various [operators](../tremor-query/operators.md) we have at our disposal. In this vein, more elaborate server examples based on onramp linking (and supporting request/response style interactions) are linked below:
+In the above example, instead of using a passthrough pipeline, you can imagine processing the incoming event from a custom trickle pipeline, with the various [operators](../scripting/tremor-query/operators.md) we have at our disposal. In this vein, more elaborate server examples based on onramp linking (and supporting request/response style interactions) are linked below:
 
 * [HTTP server](../recipes/30_servers_lt_http/README.md)
 * [Websocket server](../recipes/31_servers_lt_ws/README.md)
 
-When linked onramps of this sort are coupled with linked offramps, we have proxy applications, where incoming requests from clients can be forwarded to upstream servers and the resulting response can then be returned back to the client which initiated the request. Custom proxying logic (eg: deciding the upstream based on incoming request attributes) can be coded up as part of the [runtime script](../tremor-query/operators.md#runtimetremor). Some concrete examples demonstrating this pattern:
+When linked onramps of this sort are coupled with linked offramps, we have proxy applications, where incoming requests from clients can be forwarded to upstream servers and the resulting response can then be returned back to the client which initiated the request. Custom proxying logic (eg: deciding the upstream based on incoming request attributes) can be coded up as part of the [runtime script](../scripting/tremor-query/operators.md#runtimetremor). Some concrete examples demonstrating this pattern:
 
 * [HTTP Proxy](../recipes/32_proxies_lt_http/README.md)
 * [Websocket Proxy](../recipes/33_proxies_lt_ws/README.md)
@@ -110,7 +110,7 @@ And when proxying, if we configure linked onramps and offramps of different type
 
 * [HTTP -> WS Bridge](../recipes/34_bridges_lt_http_ws/README.md)
 
-Or when the proxying use case is combined with some qos operators ([roundrobin](../tremor-query/operators.md#qosroundrobin) and [backpressure](../tremor-query/operators.md#qosbackpressure)), we get a working load-balancer:
+Or when the proxying use case is combined with some qos operators ([roundrobin](../scripting/tremor-query/operators.md#qosroundrobin) and [backpressure](../scripting/tremor-query/operators.md#qosbackpressure)), we get a working load-balancer:
 
 * [HTTP Load Balancing](../recipes/35_reverse_proxy_load_balancing/README.md)
 

@@ -1,4 +1,10 @@
-# Periodic Synthetic Metrics Events
+---
+sidebar_position: 900
+---
+
+# Recipes
+
+## Periodic Synthetic Metrics Events
 
 Periodically, produce basic statistics and percentiles / quartiles from a stream of ingested events, for a particular value in the inbound event stream.
 

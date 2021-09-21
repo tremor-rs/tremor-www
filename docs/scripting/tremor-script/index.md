@@ -1,3 +1,8 @@
+---
+sidebar_position: 000
+---
+
+
 # Tremor-Script
 
 The `tremor-script` scripting language is an interpreted expression-oriented language designed for the filtering, extraction, transformation and streaming of structured data in a stream or event-based processing system.
