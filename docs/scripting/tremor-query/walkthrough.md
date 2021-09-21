@@ -1,6 +1,8 @@
-# Trickle Walkthough
-
 ---
+sidebar_position: 010
+---
+
+# Walkthough
 
 In this section we walk through increasingly complex tremor query language ( trickle )
 programming examples, introducing key concepts as we progress.

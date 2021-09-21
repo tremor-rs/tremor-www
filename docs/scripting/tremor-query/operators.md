@@ -1,3 +1,7 @@
+---
+sidebar_position: 100
+---
+
 # Operators
 
 Operators are part of the pipeline configuration.

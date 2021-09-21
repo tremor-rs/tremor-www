@@ -187,7 +187,7 @@ $ curl http://localhost:8139/stats
 {"requests_processed":7}
 ```
 
-This is utilizing the pipeline [state mechanism](../../tremor-script/index.md#state) under the hood -- a powerful way to build stateful applications.
+This is utilizing the pipeline [state mechanism](../../scripting/tremor-script/index.md#state) under the hood -- a powerful way to build stateful applications.
 
 ### Error handling
 
