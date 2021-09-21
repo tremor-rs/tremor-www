@@ -1,3 +1,7 @@
+---
+sidebar_position: 000
+---
+
 # Tremor-Query
 
 The tremor query language, `tremor-query` or **trickle** is an interpreted statement-oriented language designed for continuous online structured queries with support for filtering, extraction, transformation and streaming of structured data in a stream or event-based processing system.
@@ -160,7 +164,7 @@ Configuration Parameters:
 
 #### Windowing Semantics
 
-A select query using one or more windows is generating _new_ synthetic events, aggregated from the events feeded into it. Even if a window only consists of a single event, it needs to be considered a new event. The shape of the new event is determined by the [`select`](#select-queries) _Target Expression_. Those new events will have an empty metadata and the [origin uri](tremor-script/stdlib/tremor/origin.md) is pointing to the windowed [`select`](#select-queries) query.
+A select query using one or more windows is generating _new_ synthetic events, aggregated from the events feeded into it. Even if a window only consists of a single event, it needs to be considered a new event. The shape of the new event is determined by the [`select`](#select-queries) _Target Expression_. Those new events will have an empty metadata and the [origin uri](../tremor-script/stdlib/tremor/origin.md) is pointing to the windowed [`select`](#select-queries) query.
 
 ##### Grammar
 > ![window definition grammar](../grammar/diagram/DefineWindowDefn.png)

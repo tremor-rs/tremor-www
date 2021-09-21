@@ -86,15 +86,15 @@ In this release in particular we introduce some quality of life improvements on 
 
 Along with that we fixed a bug on the influx line protocol renderer that caused integers to be re-rendered as floats and multi field items to be rendered in-correctly.
 
-We introduced the [`chash` module](tremor-script/stdlib/tremor/chash.md) that currently houses an implementation of Google's [jump consistent hashing](https://arxiv.org/abs/1406.2294). This enables partitioning a data flow uniformly over multiple outputs with minimal cost and no need for synchronisation.
+We introduced the [`chash` module](scripting/tremor-script/stdlib/tremor/chash.md) that currently houses an implementation of Google's [jump consistent hashing](https://arxiv.org/abs/1406.2294). This enables partitioning a data flow uniformly over multiple outputs with minimal cost and no need for synchronisation.
 
 ## tremor-0.5 (stable)
 
-Version 0.5 we introduced a completely overhauled scripting language. We moved from a rule to action based system to something that can best be described as a ETL focused language now with powerful constructs such as [`match` statements](tremor-script/index.md#match) with `record-` and `array patterns` and an extensive [function library](tremor-script/functions.md).
+Version 0.5 we introduced a completely overhauled scripting language. We moved from a rule to action based system to something that can best be described as a ETL focused language now with powerful constructs such as [`match` statements](scripting/tremor-script/index.md#match) with `record-` and `array patterns` and an extensive [function library](scripting/tremor-script/functions.md).
 
-It introduces the concept of [extractors](tremor-script/extractors.md), part of tremor script they allow matching against complex patterns and extracting information from them. This work covers common things like regular expressions or globs, as well as grok and dissect patterns. But also allows decoding embedded influx, json, or even base64 data without much extra work.
+It introduces the concept of [extractors](scripting/tremor-script/extractors/index.md), part of tremor script they allow matching against complex patterns and extracting information from them. This work covers common things like regular expressions or globs, as well as grok and dissect patterns. But also allows decoding embedded influx, json, or even base64 data without much extra work.
 
-As always this release introduces some optimisations, since JSON is the main encoding used for data we introduced [SIMD optimized](tremor-script/index.md#performant) decoding of this data base on [Geoff Langdales, and Daniel Lemires work](https://arxiv.org/abs/1902.08318) into this area.
+As always this release introduces some optimisations, since JSON is the main encoding used for data we introduced [SIMD optimized](scripting/tremor-script/index.md#performant) decoding of this data base on [Geoff Langdales, and Daniel Lemires work](https://arxiv.org/abs/1902.08318) into this area.
 
 ## tremor-0.4 (stable)
 
@@ -102,7 +102,7 @@ This release combined the lessons from the 0.3 and 0.2 looking at what worked in
 
 Also, [contraflow](overview.md#contraflow) introduced in 0.3 was extended with [signals](overview.md#signalflow) to allow non-event carrying messages to move through the pipeline for operational purposes such periodic ticks.
 
-The matching language of the earlier releases got a complete overhaul becoming a more powerful scripting language - [tremor-script](tremor-script/index.md). Tremor script introduced features such as event metadata variables to drive operator behavior outside of the script itself, mutation of event values, support for functions, along with a return statement that allows early returns from a script to save run time.
+The matching language of the earlier releases got a complete overhaul becoming a more powerful scripting language - [tremor-script](scripting/tremor-script/index.md). Tremor script introduced features such as event metadata variables to drive operator behavior outside of the script itself, mutation of event values, support for functions, along with a return statement that allows early returns from a script to save run time.
 
 The basic idea of a `yaml` file as configuration was carried over from 0.3 but the content dramatically altered to be more usable. Along with the new syntax also the ability to run multiple pipelines, onramps and offramp in the same tremor instance were introduced.
 

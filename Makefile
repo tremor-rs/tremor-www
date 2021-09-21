@@ -9,8 +9,8 @@ tremor-runtime:
 
 docs/tremor-script/stdlib: tremor-runtime
 	cd tremor-runtime && make stdlib-doc
-	-rm -r docs/tremor-script/stdlib
-	cp -r tremor-runtime/docs docs/tremor-script/stdlib
+	-rm -r docs/scripting/tremor-script/stdlib
+	cp -r tremor-runtime/docs docs/scripting/tremor-script/stdlib
 
 docs/operations/cli.md: tremor-runtime
 	python3 ./python_scripts/cli2md.py tremor-runtime/tremor-cli/src/cli.yaml > docs/operations/cli.md

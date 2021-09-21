@@ -122,7 +122,7 @@ The blaster onramp is built for performance testing, but it can be used for spac
 
 The default [codec](codecs.md#json) is `json`.
 
-The event [origin URI](../tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
+The event [origin URI](../scripting/tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
 
 ```
 tremor-blaster://<tremor-host.local>/<config_source_file>
@@ -172,7 +172,7 @@ This sends a scheduled tick down the offramp. Schedules can be one-off or repeat
 
 Multiple cron entries can be configured, each with a symbolic name and an optional JSON payload in addition to the cron expression.
 
-The event [origin URI](../tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
+The event [origin URI](../scripting/tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
 
 ```
 tremor-crononome://<tremor-host.local>
@@ -326,7 +326,7 @@ The file onramp reads the content of a file, line by line, and sends each line a
 
 The default [codec](codecs.md#json) is `json`.
 
-The event [origin URI](../tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
+The event [origin URI](../scripting/tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
 
 ```
 tremor-file://<tremor-host.local>/<config_source_file>
@@ -409,7 +409,7 @@ The Kafka onramp connects to one or more Kafka topics. It uses `librdkafka` to h
 
 The default [codec](codecs.md#json) is `json`.
 
-The event [origin URI](../tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
+The event [origin URI](../scripting/tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
 
 ```
 tremor-kafka://<config_first_broker_host>[:<config_first_broker_port>]/<topic>/<partition>/<offset>
@@ -483,7 +483,7 @@ This sends a periodic tick downstream. It is an excellent tool to generate some 
 
 The default [codec](codecs.md#pass) is `pass` (since we already output decoded JSON).
 
-The event [origin URI](../tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
+The event [origin URI](../scripting/tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
 
 ```
 tremor-metronome://<tremor-host.local>/<config_interval>
@@ -519,7 +519,7 @@ The `nats` onramp connects to Nats server(s) and subscribes to a specified subje
 
 The default [codec](codecs.md#json) is `json`.
 
-The event [origin URI](../tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
+The event [origin URI](../scripting/tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
 
 ```
 tremor-nats://<config_first_host_host_addr>[:<config_first_host_port>]/<subject>
@@ -626,7 +626,7 @@ config:
 
 The rest onramp listens on a specified port for inbound RESTful ( http ) data, treating the decoded and preprocessed http body as event data (and attaching other request attributes as event metadata).
 
-The event [origin URI](../tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
+The event [origin URI](../scripting/tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
 
 ```
 tremor-rest://<tremor-rest-client-host.remote>
@@ -690,7 +690,7 @@ It is currently not possible to configure rest onramps via swagger, RAML or Open
 
 The SSE (Server Sent Events) onramp subscribes to an sse endpoint treating `sse-event-data` as the event data.
 
-The event [origin URI](../tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
+The event [origin URI](../scripting/tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
 ```
 tremor-sse://<tremor-host.local>
 ```
@@ -718,7 +718,7 @@ An onramp that takes input from `stdin`.
 
 The default [codec](codecs.md#string) is `string`.
 
-The event [origin URI](../tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
+The event [origin URI](../scripting/tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
 
 ```
 tremor-stdin://<tremor-host.local>
@@ -733,7 +733,7 @@ to pipelines.
 
 The default [codec](codecs.md#json) is `json`.
 
-The event [origin URI](../tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
+The event [origin URI](../scripting/tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
 
 ```
 tremor-tcp://<client_ip>:<client_port>/<config_server_port>
@@ -801,7 +801,7 @@ The UDP onramp allows receiving data via UDP datagrams.
 
 The default [codec](codecs.md#string) is `string`.
 
-The event [origin URI](../tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
+The event [origin URI](../scripting/tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
 
 ```
 tremor-udp://<sender_ip>:<sender_port>/<config_receive_port>
@@ -858,7 +858,7 @@ onramp:
 
 WebSocket onramp. Receiving either binary or text packages from a WebSocket connection. the url is: `ws://<host>:<port>/`.
 
-The event [origin URI](../tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
+The event [origin URI](../scripting/tremor-script/stdlib/tremor/origin.md) set by the onramp is of the form:
 
 ```
 tremor-ws://<tremor-ws-client-host.remote>
