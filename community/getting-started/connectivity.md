@@ -28,29 +28,29 @@ Tremor has built-in support for metrics capture of data ingested and distributed
 Tremor supports a number of stable general purpose onramps:
 
 * [Kafka](/docs/artefacts/onramps/#kafka)
-* [TCP](/docs/artefacts/onramps/#TCP)
+* [TCP](/docs/artefacts/onramps/#tcp)
 * [UDP](/docs/artefacts/onramps/#udp)
 * [WS](/docs/artefacts/onramps/#WS)
-* [File](/docs/artefacts/onramps/#File)- reads a singular file.
+* [File](/docs/artefacts/onramps/#file)- reads a singular file.
 * [Metronome](/docs/artefacts/onramps/#metronome)- periodic tick events.
 * [Crononome](/docs/artefacts/onramps/#crononome)- cron based tick events.
 * [Blaster](/docs/artefacts/onramps/#blaster)- Benchmarking onramp.
 
 And some early-access evolving production-grade onramps:
 
-* [REST](/docs/artefacts/onramps/#REST)
+* [REST](/docs/artefacts/onramps/#rest)
 
 ### Offramps
 
 Tremor supports a number of stable general purpose offramps:
 
-* [File](/docs/artefacts/offramps/#File)
-* [Kafka](/docs/artefacts/offramps/#Kafka)
-* [REST](/docs/artefacts/offramps/#REST)
-* [TCP](/docs/artefacts/offramps/#TCP)
-* [UDP](/docs/artefacts/offramps/#UDP)
-* [WS](/docs/artefacts/offramps/#WS)
-* [BlackHole](/docs/artefacts/offramps/#REST)- benchmarking offramp.
+* [File](/docs/artefacts/offramps/#file)
+* [Kafka](/docs/artefacts/offramps/#kafka)
+* [REST](/docs/artefacts/offramps/#rest)
+* [TCP](/docs/artefacts/offramps/#tcp)
+* [UDP](/docs/artefacts/offramps/#udp)
+* [WS](/docs/artefacts/offramps/#ws)
+* [BlackHole](/docs/artefacts/offramps/#rest)- benchmarking offramp.
 * [elastic](/docs/artefacts/offramps/#elastic)- ElasticSearch client
-* [debug](/docs/artefacts/offramps/#REST)- tremor internal use for debugging.
+* [debug](/docs/artefacts/offramps/#rest)- tremor internal use for debugging.
 * [stdout](/docs/artefacts/offramps/#stdout)
