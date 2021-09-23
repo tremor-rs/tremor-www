@@ -37,7 +37,7 @@ be standalone and reference the original, rather than modifying the existing
 RFC. You should add a comment to the original RFC with referencing the new RFC
 as part of the PR.
 
-Obviously, there is some scope for judgment here. As a guideline, if a change
+There is some scope for judgment here. As a guideline, if a change
 affects more than one part of the RFC (i.e., is a non-local change), affects the
 applicability of the RFC to its motivating use cases, or there are multiple
 possible new solutions, then the feature is probably not 'minor' and should get
