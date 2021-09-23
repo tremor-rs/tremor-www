@@ -11,15 +11,13 @@ Any change to tremor that changes a public behaviour, configuration or any other
 
 All maintainers, in all sub-teams will monitor for documentation and content changes and may request changes to contributions - such as the addition of relevant details for complex changes; or, for additional content to be created where new capabilities or features are being added. For example, a new `codec` or `connector` should include examples of how to correctly configure and use them in a canonical example tremor application.
 
-Documentation RFCs are managed by the documentation sub-team, and tagged `docs`. The
-documentation sub-team will do an initial triage of new PRs within a week of
-submission. The result of triage will either be that the PR is assigned to a
-member of the sub-team for shepherding, the PR is closed as postponed because
-the sub-team believe it might be a good idea, but is not currently aligned with
-Tremor's priorities, or the PR is closed because the sub-team feel it should
-not be done and further discussion is not necessary. In the latter two
-cases, the sub-team will give a detailed explanation. We'll follow the standard
-procedure for shepherding, final comment period, etc.
+Documentation RFCs, if they are needed, are managed by the documentation sub-team, and tagged `docs`.
+
+All RFCs are monitored by the documentation sub-team who will do an initial triage of new `needs-rfc` PRs within a week of submission. The result of triage be a decision on the documentation needs for the PR or RFC candidate.
+
+Generally speaking all user facing functions, interactions or behaviors requires
+both reference and practical `how to get jobs done` guides and be accompanied
+with functional tutorials and usage examples.
 
 ## Since
 
