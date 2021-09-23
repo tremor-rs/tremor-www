@@ -39,6 +39,17 @@
         </author>
     </entry>
     <entry>
+        <title type="html"><![CDATA[Releasing Tremor v0.10!]]></title>
+        <id>Releasing Tremor v0.10!</id>
+        <link href="https://www.tremor.rs/blog/2021/02/12/v010-release"/>
+        <updated>2021-02-12T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Releasing Tremor v0.10.]]></summary>
+        <author>
+            <name>The Tremor Team</name>
+            <uri>https://github.com/tremor-rs</uri>
+        </author>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Releasing Tremor v0.9!]]></title>
         <id>Releasing Tremor v0.9!</id>
         <link href="https://www.tremor.rs/blog/2020/10/16/v09-release"/>
