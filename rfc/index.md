@@ -47,7 +47,10 @@ Some changes do not require an RFC:
     invisible to users-of-Tremor.
 
 If you submit a pull request to implement a new feature without going through
-the RFC process, it may be closed with a polite request to submit an RFC first.
+the RFC process, it may be:
+ * Modified to add a `needs-rfc` label by a maintainer. The maintainers will assist with following the RFC process and getting the candidate contribution merged following the RFC process.
+ * Closed with a polite request to submit an RFC first. For significant contributions we will likely request that one of the contributors becomes a maintainer of tremor - the the very least for the contribution.
+ * For large contributions - we recommend engaging with the community and maintainers as early as possible so that we can align the goals of the project and the needs of a specific contribution.
 
 
 ### Sub-team-specific Guidelines
@@ -60,7 +63,7 @@ the Tremor community's [sub-team] specific guidelines for:
  ### - [Library Changes](process/libs_changes)
  ### - [API Changes](process/api_changes)
  ### - [Architecture Changes](process/arch_changes)
-
+### - [Documentation Changes](process/docs_changes)
 
 ## Before Creating an RFC:
 [Before creating an RFC]: #before-creating-an-rfc
@@ -105,7 +108,7 @@ merged into the RFC repository as a markdown file. At that point the RFC is
     revise it in response.
   - Each pull request will be labeled with the most relevant [sub-team], which
     will lead to its being triaged by that team in a future meeting and assigned
-    to a member of the subteam.
+    to a member of the sub-team.
   - Build consensus and integrate feedback. RFCs that have broad support are
     much more likely to make progress than those that don't receive any
     comments. Feel free to reach out to the RFC assignee in particular to get
@@ -119,24 +122,24 @@ merged into the RFC repository as a markdown file. At that point the RFC is
     request, and leave a comment on the pull request explaining your changes.
     Specifically, do not squash or rebase commits after they are visible on the
     pull request.
-  - At some point, a member of the subteam will propose a "motion for final
+  - At some point, a member of the sub-team will propose a "motion for final
     comment period" (FCP), along with a *disposition* for the RFC (merge, close,
     or postpone).
     <!-- alex ignore clearly -->
   - This step is taken when enough of the tradeoffs have been discussed that
-    the subteam is in a position to make a decision. That does not require
+    the sub-team is in a position to make a decision. That does not require
     consensus amongst all participants in the RFC thread (which is usually
     impossible). However, the argument supporting the disposition on the RFC
     needs to have already been clearly articulated, and there should not be a
-    strong consensus *against* that position outside of the subteam. Subteam
+    strong consensus *against* that position outside of the sub-team. Sub-team
     members use their best judgment in taking this step, and the FCP itself
     ensures there is ample time and notification for stakeholders to push back
     if it is made prematurely.
     - For RFCs with lengthy discussion, the motion to FCP is usually preceded by
       a *summary comment* trying to lay out the current state of the discussion
       and major tradeoffs/points of disagreement.
-    - Before actually entering FCP, *all* members of the subteam must sign off;
-    this is often the point at which many subteam members first review the RFC
+    - Before actually entering FCP, *all* members of the sub-team must sign off;
+    this is often the point at which many sub-team members first review the RFC
     in full depth.
   - The FCP lasts ten calendar days, so that it is open for at least 5 business
     days.
