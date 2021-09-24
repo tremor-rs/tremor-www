@@ -195,7 +195,7 @@ offramp:
 
 The `dns` linked offramp allows performing DNS queries against the system resolver.
 
-::note
+:::note
 No codecs, configuration, or processors are supported.
 :::
 
