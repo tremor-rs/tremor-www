@@ -5,34 +5,55 @@ title: Contributing to Tremor
 
 # Contributing to Tremor
 
-[contributing-to-tremor]: #contributing-to-tremor
+Thank you for your interest in contributing to the Tremor project!
 
-Thank you for your interest in contributing to the Tremor project! There are many ways to
-contribute, and we appreciate all of them. Here's links to the primary ways to contribute
-to the Tremor project as an external contributor:
+There are many ways to contribute, and we appreciate all of them.
 
-- [Contributing to Tremor](#contributing-to-tremor)
-  - [Feature Requests](#feature-requests)
-  - [Bug Reports](#bug-reports)
-  - [The Build System](#the-build-system)
-  - [Pull Requests](#pull-requests)
-    - [External Dependencies](#external-dependencies)
-  - [Writing Documentation](#writing-documentation)
-  - [Issue Triage](#issue-triage)
+For [developers](#contributing-as-a-developer) and [technical writers](#contributing-as-a-technical-writer) we have some task or activity based
+guides on how to contribute documented here.
+
+If you are a web designer, a graphic designer or you would like to contribute
+in another way then we recommend getting in touch via [chat](#tremor-chat).
+
+If this is your first time contributing, we would like to thank you for spending time on the project and contemplating contributing! If you need any guidance or
+support making your contribution; our community is ready to assist and can be
+reached directly via our [chat](#tremor-chat) or through our issue tracking system.
+## Contributing as a developer
+
+[contributing-as-a-developer]: #contributing-as-a-developer
+
+As a developer there are a number of ways to contribute to the project
+which we have documented below:
+
+### How to contribute as a developer
+
+If you would like to contribute a new feature, then:
+
+  - [Submit a feature request](#feature-requests)
+
+If you would like to report a bug, then:
+
+  - [Submit a bug report](#bug-reports)
+
+If you would like to improve the build system, then:
+
+  - [Improve the build system](#the-build-system)
+
+If you have written some code and would like to submit a pull request, then:
+  - [Submitting a pull request](#pull-requests)
+    - [Managing external dependencies](#external-dependencies)
+
+If you have found an issue you would like to contribute against, then:
+
+  - [Attending to known and tracked issues](#issue-triage)
+
+If you would like to enhance, extend or make a large contribution/change to tremor, then:
+
   - [Out-of-tree Contributions](#out-of-tree-contributions)
-  - [Tremor Chat](#tremor-chat)
-
-If you have questions, please make a query hop on over to [Tremor Chat][tremor-chat].
-
-As a reminder, all contributors are expected to follow our [Code of Conduct][code-of-conduct].
-
-If this is your first time contributing, we would like to thank you for spending time
-on the project! Please reach out directly to any core project member if you would like
-any guidance or assistance.
 
 [code-of-conduct]: /docs/CodeOfConduct
 
-## Feature Requests
+### Feature Requests
 
 [feature-requests]: #feature-requests
 
@@ -41,7 +62,7 @@ to the [RFCs repository](https://github.com/tremor-rs/tremor-rfcs) and view the
 [README](https://github.com/tremor-rs/tremor-rfcs/blob/main/README.md)
 for instructions.
 
-## Bug Reports
+### Bug Reports
 
 [bug-reports]: #bug-reports
 
@@ -100,7 +121,7 @@ other than `0`. The easiest way to do this is to invoke `tremor` like this:
 $ RUST_BACKTRACE=1 tremor...
 ```
 
-## The Build System
+### The Build System
 
 For info on how to configure and build the project, please see [the tremor build guide][tremor-build-guide].
 This guide contains info for contributions to the project and the standard facilities. It also lists some
@@ -108,7 +129,7 @@ really useful commands to the build system, which could save you a lot of time.
 
 [tremor-build-guide]: /docs/development/quick-start/
 
-## Pull Requests
+### Pull Requests
 
 [pull-requests]: #pull-requests
 
@@ -127,7 +148,7 @@ Tremor follows a no merge policy, meaning, when you encounter merge
 conflicts you are expected to always rebase instead of merge.
 E.g. always use rebase when bringing the latest changes from
 the main branch to your feature branch.
-Also, please make sure that fixup commits are squashed into other related
+Also, please make sure that fix-up commits are squashed into other related
 commits with meaningful commit messages.
 
 GitHub allows [closing issues using keywords][closing-keywords]. This feature
@@ -142,15 +163,18 @@ All pull requests are reviewed by another person.
 
 If you want to request that a specific person reviews your pull request,
 you can tag them in the pull request description or in comments.
- For example, [Darach Ennis][darach] usually reviews documentation changes.
-So if you were to make a documentation change, add
 
-    @darach
+For example, [Sharon Koech][Sharon] and [Darach Ennis][Darach] usually review documentation changes. So if you were to make a documentation change, tag one
+or both in your pull request. You may also wish to tag other contributors or
+other community members as appropriate.
 
-to the end of the pull request description. This is entirely optional. If you
-have no preference we aim to go through pull requests quickly.
+```
+    @skoech @darach
+```
 
-After someone has reviewed your pull request, they will approve the
+You can `tag` or add the `github` usernames preceded by an `@` or `at` symbol in the content body of your pull request submission. This is entirely optional. If you have no preference this is fine too. We aim to work through pull requests as fast as possible and we monitor continuously for new requests.
+
+Once someone has reviewed your pull request, they will approve the
 pull request - leaving a comment so that you are notified - or some
 changes may be requested.
 
@@ -162,34 +186,38 @@ why we have the checks automated!
 
 Once your merge request is approved it will enter the merge queue.
 
-[darach]: https://github.com/darach
+[Darach]: https://github.com/darach
+[Sharon]: https://github.com/skoech
 
 Speaking of tests, Rust has a comprehensive test suite. More information about
-it can be found [here][https://github.com/tremor-rs/tremor-runtime/blob/main/docs/development/testing.md].
+it can be found [here](https://github.com/tremor-rs/tremor-runtime/blob/main/docs/development/testing.md).
 
-### External Dependencies
+#### External Dependencies
 
 Currently building the Tremor project will also build the following external projects:
 
 - [clippy](https://github.com/rust-lang/rust-clippy)
+  - You can check clippy via [cargo](https://doc.rust-lang.org/cargo/)
+    ```shell
+    $ cargo clippy --all
+    ```
 - [rustfmt](https://github.com/rust-lang/rustfmt)
+  - You can format code via [cargo](https://doc.rust-lang.org/cargo/)
+    ```shell
+    $ cargo fmt --all
+    ```
 
-Breakage is not allowed in released branches and must be addressed before a PR is merged.
+We do not allow tests to break, or code coverage to reduce. We recommend running
+the test suite and adding any relevant tests to cover any added or changed code and removing tests for code that has been removed.
 
-## Writing Documentation
+```shell
+$ cargo test --all
+```
 
-Documentation improvements are very welcome. The source of `docs.tremor.rs`
-is located in the [tremor docs repo](https://github.com/tremor-rs/tremor-www-docs). Documentation pull requests function in the same way as other pull requests.
+Code coverage will be setup and executed on your behalf by the build system and
+[reports](https://coveralls.io/github/tremor-rs/tremor-runtime?branch=main) generated that you can navigate.
 
-To find documentation-related issues, sort by the [doc label][tremor-doc-label].
-
-[tremor-doc-label]: https://github.com/tremor-rs/tremor-www-docs/issues?q=is%3Aopen%20is%3Aissue%20label%3Adoc
-
-Additionally, contributions to the [tremor-guide] are always welcome. Contributions
-can be made directly [here](https://github.com/tremor-rs/tremor-www-docs) repo. The issue
-tracker in that repo is also a great way to find things that need doing.
-
-## Issue Triage
+### Issue Triage
 
 Sometimes, an issue will stay open, even though the bug has been fixed. And
 sometimes, the original bug may go stale because something has changed in the
@@ -202,7 +230,7 @@ updated sort][lru] is good for finding issues like this.
 
 [lru]: https://github.com/tremor-rs/tremor-runtime/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-asc
 
-## Out-of-tree Contributions
+### Out-of-tree Contributions
 
 There are a number of other ways to contribute to Tremor that don't deal with
 this repository.
@@ -211,8 +239,95 @@ Answer questions in the _Get Help!_ channels from the [Tremor Chat][tremor-chat]
 
 Participate in the [RFC process](https://github.com/tremor-rs/tremor-rfcs).
 
+## Contributing as a Technical Writer
+
+[contributing-as-a-technical-writer]: #contributing-as-a-technical-writer
+
+As a technical writer, we have begun to document work on an information
+architecture, and have migrated from multiple sub domains - each with individually
+maintained sets of content using different documentation and static website frameworks to a single consolidated experience.
+
+We generally produce documentation as [markdown](https://www.markdownguide.org/basic-syntax/) and we use the [docusaurus](https://docusaurus.io/) framework for
+quickly building an optimized web experience.
+
+This migration is still an ongoing work in progress - if you are a technical
+writer or documentation expert - this is an area that we are actively improving
+and your help could be extremely beneficial to the Tremor project.
+### How to contribute as a technical writer
+
+If you would like to work on an existing documentation task, then:
+
+  - [Work with existing documentation tasks](#work-with-existing-documentation-tasks)
+  
+If you would like to document a new tutorial
+
+  - [Submit or refresh a tutorial](#submit-or-refresh-a-tutorial)
+
+If you find a documentation task in the primary project repository, then:
+
+  - [Documenting existing code](#work-with-existing-code)
+
+If you are submitting an RFC, and you need to provide documentation, then:
+
+  - [Working with the RFC process](#work-with-the-rfc-process)
+
+### Work with existing documentation tasks
+
+[work-with-existing-documentation-tasks]: #work-with-existing-documentation-tasks
+
+We maintain an active documentation [project kanban](https://github.com/tremor-rs/tremor-www/projects/1) board that has a set of tasks based on a technical writer [assessment](https://github.com/cncf/techdocs/blob/main/assessments/0004-tremor.md) conducted by Celeste Horgan of the CNCF by request of the Tremor project maintainers.
+
+This website redesign was undertaken by [Sharon Koech][Sharon] who leads the documentation team of the Tremor project.
+
+The assessment was factored into a number of [issues](https://github.com/tremor-rs/tremor-www/issues) which are in progress.
+
+A great way to contribute to Tremor is by picking one of these tasks and
+contributing with help and support from the team.
+
+### Submit or refresh a tutorial
+
+
+[submit-or-refresh-a-tutorial]: #submit-or-refresh-a-tutorial
+
+
+[Tutorials](http://localhost:3000/docs/recipes/passthrough/README) are basic working example projects that configure tremor with connectivity and sample logic that a user can follow in a step by step fashion to replicate a working tremor
+use case.
+
+### Work with existing code
+
+[work-with-existing-code]: #work-with-existing-code
+
+Sometimes we discover the need to extend, enhance or improve documentation
+based on user feedback, or based on issues reported in the primary rust-based
+tremor codebase.
+
+To find issues that related to documentation tasks, issues in the primary or
+other tremor code repositories can be [searched](https://github.com/tremor-rs/tremor-runtime/issues?q=is%3Aopen%20is%3Aissue%20label%3Adocumentation).
+
+Contributions are always welcome and can be made directly in [this](https://github.com/tremor-rs/tremor-www) repository.
+
+### Work with the RFC Process
+
+[work-with-the-rfc-process]: #work-with-the-rfc-process
+
+
+All significant changes, modifications, enhancements and new features to the
+project, regardless of the originator or contributor must follow the documented
+[RFC process](https://www.tremor.rs/rfc/index).
+
+As such, all significant new features should be accompanies with new
+reference documentation, guides, tutorials, quick starts and other content
+in addition to the code-level comments and the submitted RFC itself.
+
+This type of content follows a slightly different process as it typically involves
+a great commitment of time and effort by the primary originator and by the tremor maintainers and community.
+
+For significant contributions we recommend reaching to and chatting with the community via our community [chat](#tremor-chat) to get started.
+
 ## Tremor Chat
 
 [tremor-chat]: #tremor-chat
 
 Join the tremor community [discord](https://bit.ly/tremor-discord)
+
+We also maintain a presence on [CNCF Slack](https://slack.cncf.io/) in the `#tremor` channel which we use for announcements and collaborating with the wider CNCF community.
