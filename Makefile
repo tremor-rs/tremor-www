@@ -18,3 +18,6 @@ docs/operations/cli.md: tremor-runtime
 clean:
 	-rm -rf docs/operations/cli.md docs/tremor-script/stdlib
 
+reset: 
+	-rm -rf /node_modules
+	npm install
