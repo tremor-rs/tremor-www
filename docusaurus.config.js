@@ -55,6 +55,7 @@ module.exports = {
             { to: 'community/governance', label: 'Governance' },
             { to: 'community/faqs', label: 'FAQs' },
             { to: 'rfc/index', label: 'RFCs' },
+            { to: 'community/EventsAndMedia.md', label: 'Events and Media' },
           ],
         },
         {

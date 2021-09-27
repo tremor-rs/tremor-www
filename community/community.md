@@ -27,3 +27,9 @@ Lastly we do have community office hours and other events that we regularly hold
 ## Fork Now
 
 For now, fork this web site on github or create an [issue](https://github.com/tremor-rs/tremor-www/issues) to get in touch while we figure out a better way!
+
+## Events
+
+From time to time, the tremor community engages with events and social media.
+
+We report on previous [events](EventsAndMedia) in our media log.
