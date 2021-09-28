@@ -4,28 +4,30 @@ title: Architecture Overview
 sidebar_position: 100
 ---
 
-# Architecture Overview
+# Overview
 
-This is a short architectural overview of Tremor.
+This page is an overview of the Tremor Project and the model it is built on.
 
-## Scope
+## What is Tremor?
 
-We cover the runtime, data and distribution model of Tremor from 50,000 feet.
+Tremor is an event processing system designed to process and distribute unstructured data at scale. It primarily supports structural pattern matching, filtering, and transformation of data.
 
-## Goodness of fit
+## Functionality
 
-Tremor is designed for high volume messaging environments and is good for:
+Tremor is designed to handle the following:
 
-- Man in the middle bridging - Tremor is designed to bridge asynchronous upstream sources with synchronous downstream sinks. More generally, Tremor excels at intelligently bridging from sync/async to async/sync so that message flows can be classified, dimensioned, segmented, routed using user defined logic whilst providing facilities to handle back-pressure and other hard distributed systems problems on behalf of its operators.
-  - For example - Log data distributed from Kafka to ElasticSearch via Logstash can introduce significant lag or delays as logstash becomes a publication bottleneck. Untimely, late delivery of log data to the network operations centre under severity zero or at/over capacity conditions reduces our ability to respond to major outage and other byzantine events in a timely fashion.
-- In-flight redeployment - Tremor can be reconfigured via it's API allowing workloads to be migrated to/from new systems and logic to be retuned, reconfigured, or reconditioned without redeployment.
-- event processing - Tremor adopts many principles from DEBS ( Distributed Event Based Systems ), ESP ( Event Stream Processor ) and the CEP ( Complex Event Processing ) communities. However in its current state of evolution Tremor has an incomplete feature set in this regard. Over time Tremor MAY evolve as an ESP or CEP solution but this is an explicit non-goal of the project.
+- Data Bridging - Tremor bridges asynchronous sources with synchronous sinks. Its ability to bridge sync/async and vice-versa enables message flows to be classified, dimensioned, segmented, and routed using user defined logic while handling back-pressure and other distributed systems problems on behalf of its operators.
+- Distribution at Scale - Tremor is designed for high volume messaging environments. Using proactive rate limiting and a novel algorithm to handle back-propagation, Tremor optimizes back-pressure handling at capacity up to 10x more efficiently than alternatives such as Logstash and Telegraf.
+- In-flight Redeployment - Tremor can be reconfigured via its API to allow workload migration and reconfiguration without redeployment.
+- Event processing - Tremor adopts principles from the Distributed Event Based Systems, Event Stream Processor (ESP) and Complex Event Processing (CEP) communities; however, it currently encompasses an incomplete feature set. Over time, Tremor may evolve as an ESP or CEP solution, but this is not an explicit goal for the project.
+
+![Tremor Stats](/img/tremor/stats.png)
 
 ## Tremor URLs
 
 Since Tremor v0.4, all internal artefacts and running instances of **onramps**, **offramps** and **pipelines** are dynamically configurable. The introduction of a dynamically configurable deployment model has resulted in the introduction of Tremor URLs.
 
-The Tremor API is built around this URL and the configuration space it enshrines:
+The Tremor API is built around this URL and its configuration space:
 
 | Example URL                  | Description                                                                                                |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -42,27 +44,20 @@ The Tremor REST API and configuration file formats also follow the same URL form
 
 In the case of configuration, a shorthand URL form is often used. In the configuration model, we discriminate artefacts by type, so it is often sufficient to infer the `tremor:///{artefact-kind}` component when specifying ( configuring ) artefacts.
 
-In bindings, however, we minimally need to use the full URL path component ( for example:`/pipeline/01` ).
+In bindings, however, we need to use the full URL path component ( for example:`/pipeline/01` ).
 
 At this time, the full URL form is not used in the configuration model.
 
-## Runtime model
+## Runtime Model
 
-The Tremor runtime is composed of multiple internal components that communicate via queues across multiple threads of control managed/coordinated by a set of control plane component driven by the Tremor REST API.
+Tremor's runtime model is composed of tasks that communicate via queues managed through Tremor's REST API. A task is spawned per onramp, offramp, and pipeline.
 
-### Processing model
 
-Tremor uses an async task model ontop of the [smol runtime](https://github.com/stjepang/smol) and
+Tremor uses an async task model on top of the [smol runtime](https://github.com/stjepang/smol) and
 [async-rs](https://async.rs/).
 
-Currently, the model is:
 
-- A task is spawned per onramp
-- A task is spawned per offramp
-- A task is spawned per pipeline
-- Tasks communicate via queues
-
-The Processing model is very likely to evolve over time as concurrency, threading, async and other primitives available in the rust ecosystem mature and evolve.
+Note: The Processing model will likely evolve over time alongside concurrency, threading, async and other primitives available in the rust ecosystem.
 
 ## Event ordering
 
@@ -161,7 +156,7 @@ These terms can be used interchangeably.
 
 Operators CAN conduct or orchestrate one or many Tremor servers through its REST based API.
 
-The API in turn interfaces with registry and repository facilities. Tremor distinguishes between artefacts and instances. Artefacts in Tremor have no runtime overhead.
+The API in turn interfaces with registry and repository facilities. Tremor distinguishes between artefacts and instances. artefacts in Tremor have no runtime overhead.
 
 Artefacts in Tremor are declarative specifications of:
 
@@ -170,7 +165,7 @@ Artefacts in Tremor are declarative specifications of:
 - Pipelines - A pipeline specification is a specific configuration of a pipeline graph
 - Bindings - A binding specification describes how onramps, pipelines and offramps should be interconnected
 
-Artefacts can be thought of analagously to code. They are a set of instructions, rules or configurations. As such they are registered with Tremor via its API and stored in Tremor's artefact repository.
+Artefacts can be thought of analagous to code. They are a set of instructions, rules or configurations. As such they are registered with Tremor via its API and stored in Tremor's artefact repository.
 
 Deployment in Tremor, is achieved through a mapping artefact. The mapping artefact specifies how artefacts should be deployed into one or many runtime instances, activated, and connected to live instances of onramps or offramps.
 
