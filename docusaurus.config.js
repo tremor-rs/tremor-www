@@ -31,7 +31,7 @@ module.exports = {
   baseUrl: '/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'docs/favicon.ico',
+  favicon: '/favicon.ico',
   organizationName: 'tremor-rs',
   projectName: 'tremor-www',
   themeConfig: {
