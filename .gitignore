@@ -24,3 +24,4 @@ yarn-error.log*
 docs/operations/cli.md
 docs/api.md
 docs/scripting/tremor-script/stdlib/
+docs/scripting/tremor-query/functions/
