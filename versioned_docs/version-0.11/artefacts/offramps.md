@@ -872,7 +872,7 @@ offramp:
     type: gpub
     codec: json
     postprocessors:
-      - gzip    
+      - gzip
     linked: true
     config:
       pem: gcp.pem
@@ -929,11 +929,11 @@ Send a message to a pubsub topic.
 **Request**:
 ```js
 {
-  "command": "send_message", 
-  "project": "<project-id>", 
-  "topic": "<topic-name>", 
+  "command": "send_message",
+  "project": "<project-id>",
+  "topic": "<topic-name>",
   "data": `<data>`,
-  "ordering_key": "<ordering-key>" 
+  "ordering_key": "<ordering-key>"
 }
 ```
 
@@ -950,14 +950,14 @@ Send a message to a pubsub topic.
 - `<project-id>` - The project id of the Google Cloud Pubsub project where the topic is.
 - `<topic-name>` - The Google cloud PubSub topic name to which the message is being sent.
 - `<data>` - The data that is to be sent as message.
-- `<ordering-key>` - If non-empty, identifies related messages for which publish order should be respected. If a Subscription has message_ordering set to true, messages published with the same non-empty ordering_key value will be delivered to subscribers in the order in which they are received by the pub/sub system. All PubsubMessages published in a given PublishRequest must specify the same ordering_key value. 
+- `<ordering-key>` - If non-empty, identifies related messages for which publish order should be respected. If a Subscription has message_ordering set to true, messages published with the same non-empty ordering_key value will be delivered to subscribers in the order in which they are received by the pub/sub system. All PubsubMessages published in a given PublishRequest must specify the same ordering_key value.
 - `<message-id>` - The message id assigned by the Google Cloud pub/sub api.
 
 
 
 ### Kafka
 
-The Kafka offramp connects sends events to Kafka topics. It uses `librdkafka` to handle connections and can use the full set of [librdkaka 1.5.0 configuration options](https://github.com/edenhill/librdkafka/blob/v1.5.0/CONFIGURATION.md).
+The Kafka offramp connects sends events to Kafka topics. It uses `librdkafka` to handle connections and can use the full set of [librdkaka 1.5.2 configuration options](https://github.com/edenhill/librdkafka/blob/v1.5.2/CONFIGURATION.md).
 
 The default [codec](codecs.md#json) is `json`.
 
