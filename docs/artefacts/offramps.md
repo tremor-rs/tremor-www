@@ -957,7 +957,7 @@ Send a message to a pubsub topic.
 
 ### Kafka
 
-The Kafka offramp connects sends events to Kafka topics. It uses `librdkafka` to handle connections and can use the full set of [librdkaka 1.5.2 configuration options](https://github.com/edenhill/librdkafka/blob/v1.5.2/CONFIGURATION.md).
+The Kafka offramp connects sends events to Kafka topics. It uses `librdkafka` to handle connections and can use the full set of [librdkaka 1.6.1 configuration options](https://github.com/edenhill/librdkafka/blob/v1.6.1/CONFIGURATION.md).
 
 The default [codec](codecs.md#json) is `json`.
 

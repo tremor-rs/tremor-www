@@ -405,7 +405,7 @@ We get the meta data as response that includes the message id and the acknowledg
 
 ### Kafka
 
-The Kafka onramp connects to one or more Kafka topics. It uses `librdkafka` to handle connections and can use the full set of [librdkafka 1.5.2 configuration options](https://github.com/edenhill/librdkafka/blob/v1.5.2/CONFIGURATION.md).
+The Kafka onramp connects to one or more Kafka topics. It uses `librdkafka` to handle connections and can use the full set of [librdkafka 1.6.1 configuration options](https://github.com/edenhill/librdkafka/blob/v1.6.1/CONFIGURATION.md).
 
 The default [codec](codecs.md#json) is `json`.
 
