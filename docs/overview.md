@@ -19,7 +19,7 @@ Tremor is designed to handle the following:
 - Data Bridging - Tremor bridges asynchronous sources with synchronous sinks. Its ability to bridge sync/async and vice-versa enables message flows to be classified, dimensioned, segmented, and routed using user defined logic while handling back-pressure and other distributed systems problems on behalf of its operators.
 - Distribution at Scale - Tremor is designed for high volume messaging environments. Using proactive rate limiting and a novel algorithm to handle back-propagation, Tremor optimizes back-pressure handling at capacity up to 10x more efficiently than alternatives such as Logstash and Telegraf.
 - In-flight Redeployment - Tremor can be reconfigured via its API to allow workload migration and reconfiguration without redeployment.
-- Event processing - Tremor adopts principles from the Distributed Event Based Systems, Event Stream Processor (ESP) and Complex Event Processing (CEP) communities; however, it currently encompasses an incomplete feature set. Over time, Tremor may evolve as an ESP or CEP solution, but this is not an explicit goal for the project.
+- Event processing - Tremor adopts principles from the Distributed Event Based Systems (DEBS), Event Stream Processor (ESP) and Complex Event Processing (CEP) communities; however, it currently encompasses an incomplete feature set. Over time, Tremor may evolve as an ESP or CEP solution, but this is not an explicit goal for the project.
 
 ![Tremor Stats](/img/tremor/stats.png)
 
@@ -156,7 +156,7 @@ These terms can be used interchangeably.
 
 Operators CAN conduct or orchestrate one or many Tremor servers through its REST based API.
 
-The API in turn interfaces with registry and repository facilities. Tremor distinguishes between artefacts and instances. artefacts in Tremor have no runtime overhead.
+The API in turn interfaces with registry and repository facilities. Tremor distinguishes between artefacts and instances. Artefacts in Tremor have no runtime overhead.
 
 Artefacts in Tremor are declarative specifications of:
 
@@ -165,9 +165,9 @@ Artefacts in Tremor are declarative specifications of:
 - Pipelines - A pipeline specification is a specific configuration of a pipeline graph
 - Bindings - A binding specification describes how onramps, pipelines and offramps should be interconnected
 
-Artefacts can be thought of analagous to code. They are a set of instructions, rules or configurations. As such they are registered with Tremor via its API and stored in Tremor's artefact repository.
+Artefacts can be thought of as analagous to code. They are a set of instructions, rules or configurations. As such they are registered with Tremor via its API and stored in Tremor's artefact repository.
 
-Deployment in Tremor, is achieved through a mapping artefact. The mapping artefact specifies how artefacts should be deployed into one or many runtime instances, activated, and connected to live instances of onramps or offramps.
+Deployment in Tremor is achieved through a mapping artefact. The mapping artefact specifies how artefacts should be deployed into one or many runtime instances, activated, and connected to live instances of onramps or offramps.
 
 In Tremor, publishing a mapping results in instances being deployed as a side-effect. By unpublishing or deleting a mapping instances are undeployed as a side-effect.
 
