@@ -57,7 +57,7 @@ Tremor uses an async task model on top of the [smol runtime](https://github.com/
 The Processing model will likely evolve over time alongside concurrency, threading, async and other primitives available in the rust ecosystem.
 :::
 
-## Event ordering
+## Event Ordering
 
 Events flow from onramps (sources), through pipelines (connectors) that ingest them into the system, to offramps (sinks) that push them to external systems.
 
@@ -125,7 +125,7 @@ Result:
 
 There are other alternatives to handle back-pressure (such as those utilized by Spark, Storm, Hazelcast Jet, etc), however, Contraflow provides a much simpler solution than all other reasonable mechanisms with far fewer negative side-effects. Contraflow allows the Tremor project to provide users a tool to develop verifiable systems while undertaking much of the work needed to produce a lasting solution.
 
-## Guaranteed delivery
+## Guaranteed Delivery
 
 Tremor supports guaranteed delivery as long as both onramps and offramps support it. For onramps that do not provide natural support, the [qos::wal](scripting/tremor-query/operators.md#qos::wal) can be used to introduce a layer of guaranteed delivery.
 
@@ -133,7 +133,7 @@ Each event has a monotonic growing ID. Once an event ID is acknowledged
 as delivered, so are all other events with lower Id values. If an event ID
 is marked as failed to deliver, all events up to its ID value will be redeployed.
 
-## Runtime facilities
+## Runtime Facilities
 
 Tremor's runtime is composed of multiple facilities that work together to provide service.
 
@@ -166,7 +166,7 @@ Metrics in Tremor are implemented as a pipeline and deployed during startup. The
 
 Operators are able to attach offramps to the metrics service to distribute metrics to external systems, such as InfluxDB or Kafka.
 
-## Data model
+## Data Model
 
 Tremor supports unstructured data which can be in the form of raw binary, JSON, MsgPack, Influx or other structures.
 
@@ -184,7 +184,7 @@ In general, operators and developers should _minimize_ the number of encoding/de
 
 Since the major overhead in most Tremor systems is encoding and decoding and JSON is the dominant data format, we [ported](https://github.com/simd-lite/simdjson-rs) [simd-json](https://github.com/lemire/simdjson) to reduce the cost of encoding and decoding significantly compared to other JSON implementations in Rust.
 
-### Distribution model
+### Distribution Model
 
 Tremor does not yet have an out-of-the-box network protocol. A native Tremor protocol is planned for development in the immediate/mid-term.
 
