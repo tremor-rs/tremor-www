@@ -53,8 +53,9 @@ Tremor's runtime model is composed of tasks that communicate via queues managed 
 Tremor uses an async task model on top of the [smol runtime](https://github.com/stjepang/smol) and
 [async-rs](https://async.rs/).
 
-
-Note: The Processing model will likely evolve over time alongside concurrency, threading, async and other primitives available in the rust ecosystem.
+:::note
+The Processing model will likely evolve over time alongside concurrency, threading, async and other primitives available in the rust ecosystem.
+:::
 
 ## Event ordering
 
