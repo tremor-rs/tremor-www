@@ -19,34 +19,31 @@ Tremor is designed to handle the following:
 - Data Bridging - Tremor bridges asynchronous sources with synchronous sinks. Its ability to bridge sync/async and vice-versa enables message flows to be classified, dimensioned, segmented, and routed using user defined logic while handling back-pressure and other distributed systems problems on behalf of its operators.
 - Distribution at Scale - Tremor is designed for high volume messaging environments. Using proactive rate limiting and a novel algorithm to handle back-propagation, Tremor optimizes back-pressure handling at capacity up to 10x more efficiently than alternatives such as Logstash and Telegraf.
 - In-flight Redeployment - Tremor can be reconfigured via its API to allow workload migration and reconfiguration without redeployment.
-- Event processing - Tremor adopts principles from the Distributed Event Based Systems (DEBS), Event Stream Processor (ESP) and Complex Event Processing (CEP) communities; however, it currently encompasses an incomplete feature set. Over time, Tremor may evolve as an ESP or CEP solution, but this is not an explicit goal for the project.
+- Event processing - Tremor's primary goal is to operate as an Extract, Transform, and Loading (ETL) tool. While Tremor adopts principles from Distributed Event Based Systems (DEBS), Event Stream Processor (ESP) and Complex Event Processing (CEP) infrastructures, it is by no means an exhaustive system that encompasses all the aforementioned communities' features and requirements.
 
 ![Tremor Stats](/img/tremor/stats.png)
 
 ## Tremor URLs
 
-Since Tremor v0.4, all internal artefacts and running instances of **onramps**, **offramps** and **pipelines** are dynamically configurable. The introduction of a dynamically configurable deployment model has resulted in the introduction of Tremor URLs.
-
-The Tremor API is built around this URL and its configuration space:
+Since Tremor v0.4, all internal artefacts and running instances of **onramps**, **offramps** and **pipelines** are dynamically configurable. Connection with these artefacts and the Tremor API is facilitated through Tremor URLs:
 
 | Example URL                  | Description                                                                                                |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | `tremor://localhost:9898/`   | A local Tremor instance<br />_ Accessible on the local host<br />_ REST API on port 9898 of the local host |
-| `tremor:///`                 | The current Tremor instance or 'self'                                                                      |
-| `tremor:///pipeline`         | A list of pipelines                                                                                        |
-| `tremor:///pipeline/bob`     | The pipeline identified as bob                                                                             |
-| `tremor:///onramp/alice`     | The onramp identified as Alice                                                                             |
-| `tremor:///binding/talk`     | A binding that allows alice and bob to connect                                                             |
-| `tremor:///binding/talk/tls` | An active conversation or instance of a talk between alice and bob                                         |
+| `tremor:///`                 | Returns the current Tremor instance                                                                      |
+| `tremor:///pipeline`         | Returns a list of pipelines                                                                                        |
+| `tremor:///pipeline/pl_01`     | Returns a pipeline with identifier 'pl_01'                                            |
+| `tremor:///onramp/on_1`     | Returns an onramp with identifier 'on_01'                                                       |
+| `tremor:///offramp/off_01`  | Returns an offramp with identifier 'off_01'                                                       |
+| `tremor:///binding/bn_01`     | A binding that connects two artefacts                                                |
+| `tremor:///binding/bn_01/tl_01` | An active instance of data exchange between two artefacts                                         |
 |                              |                                                                                                            |
 
-The Tremor REST API and configuration file formats also follow the same URL format.
+The Tremor REST API and configuration file formats follow the same URL format.
 
-In the case of configuration, a shorthand URL form is often used. In the configuration model, we discriminate artefacts by type, so it is often sufficient to infer the `tremor:///{artefact-kind}` component when specifying ( configuring ) artefacts.
+The current configuration model uses a shorthand URL form. It discriminates artefacts by type, so it is often sufficient to infer the `tremor:///{artefact-kind}` component when specifying configuring artefacts.
 
-In bindings, however, we need to use the full URL path component ( for example:`/pipeline/01` ).
-
-At this time, the full URL form is not used in the configuration model.
+For bindings, full URL path components are needed (ie.:`/pipeline/01`).
 
 ## Runtime Model
 
@@ -61,156 +58,141 @@ Note: The Processing model will likely evolve over time alongside concurrency, t
 
 ## Event ordering
 
-Events generally flow from onramps, where they are ingested into the system, through pipelines, into offramps where they are pushed to external systems.
+Events flow from onramps (sources), through pipelines (connectors) that ingest them into the system, to offramps (sinks) that push them to external systems.
 
-Tremor imposes causal event ordering over ingested events and processes events deterministically. This does not mean that Tremor imposes a total ordering over all ingested events, however ( ugh, because that is not tractable in a distributed system ).
+Tremor imposes causal event ordering over ingested events and processes events deterministically, although, given its nature as a distributed system, it cannot impose a total ordering over all ingested events.
 
-Events flowing into Tremor from multiple onramps are considered independent. Events flowing from multiple clients into Tremor are also considered independent.
+Events flowing into Tremor from multiple onramps and multiple clients are considered independent. However, events sent by a _specific_ client through a _specific_ onramp into a _passthrough_ pipeline will flow through Tremor in their _origin_ order and be passed to offramps in the same _origin_ order. Requests from multiple independent sources over the same pipeline may arbitrarily interleave, but will not re-order.
 
-However, events sent by a _specific_ client through a _specific_ onramp into a _passthrough_ pipeline would flow through Tremor in their origin order and be passed to offramps in the same _origin_ order.
+In pipelines, events are processed in depth first order. In cases where Tremor operators have no intrinsic ordering (such as a branch split), Tremor internally _imposes_ an order.
 
-Requests from multiple independent sources over the same pipeline may arbitrarily interleave, but should not re-order.
+Operator's may reorder events. For example, a windowed operator might batch multiple events into a single batch. An iterator could then operate on the batch and forward the events in an order that is the reverse of the original ingested order.
 
-In pipelines, events are processed in depth first order. Where Tremor operators have no intrinsic ordering ( such as a branch split ), Tremor internally _imposes_ an order.
-
-Operator's may _arbitrarily_ reorder messages. For example, a windowed operator might batch multiple events into a single batch. An iteration operator could reverse the batch and forward individual unbatched events in an order that is the reverse of the original ingest order for that batch of events.
-
-However, the engine itself does not re-order events. Events are handled and processed in a strictly deterministic order by design.
+It is important to remember that Tremor itself does not re-order events - the order they are processed in is strictly deterministic.
 
 ## Pipeline Model
 
 The core processing model of Tremor is based on a directed-acyclic-graph based dataflow model.
 
-Tremor pipelines are a graph of vertices ( nodes, or operators ) with directed edges ( or connections, or links ) between operators in the graph.
+Tremor pipelines are a graph of vertices (operators) with directed edges (connections) between operators in the graph.
 
-Events from the outside world in a Tremor pipeline can only flow in one direction from inputs ( specific operators that connect pipeline operators to onramps ) via operators to outputs ( specific operators that connect pipeline operators to offramps).
+Events from the outside world in a Tremor pipeline can only flow in one direction from input operators (connecting the pipeline to onramps) to output operators (connecting the pipeline to offramps).
 
-Operators process events and may produce **zero or many** output events for each event processed by the operator. As operators are the primary building block of Tremor processing logic they are designed for extension.
+Operators process events and may produce **zero to multiple** output events for each event processed. As the building block of Tremor's processing logic, operators are designed for extension.
 
-Tremor pipelines understand three different types of events:
+Tremor pipelines are able to process three types of events:
 
-- Data events - these are data events delivered via onramps into a pipeline or to offramps from a pipeline. Most events that flow through a Tremor pipeline are of this type.
-- Signal events - these are synthetic events delivered by the Tremor runtime into a pipeline under certain conditions.
-- Contraflow events - these are synthetic events delivered by the Tremor runtime into a pipeline under certain conditions that are caused by the processing of events already in a Tremor system. Back-pressure events exploit contraflow.
+- Data-flow
+- Signal-flow
+- Contra-flow
 
-### Dataflow
+### Data Flow
 
-Data-flow events are the bread and butter of Tremor.
+Data flow constitute the majority of events that flow through Tremor's pipelines.
 
-These are line of business data events ingested via onramps from external upstream systems, processed through pipelines and published downstream via offramps to downstream external systems.
+These events that carry transactional data are ingested via onramps from external upstream systems, processed through pipelines, then pushed via offramps to external dowstream systems.
 
-### SignalFlow
+### Signal Flow
 
-Transparent to pipeline authors, but visible to onramp, offramp and operator developers are signal events. Signal events are synthetic events generated by the tremor-runtime and system that can be exploited by operators for advanced event handling purposes.
+Signal flow events are hidden from pipeline authors, but visible to onramp, offramp and operator developers. They are synthetic events generated by the tremor-runtime system that can be used by operators for advanced event handling purposes.
 
 ### Contraflow
 
-A core conceit with distributed event-based systems arises due to their typically asynchronous nature. Tremor employs a relatively novel algorithm to handle back-pressure or other events that propagate _backwards_ through a pipeline.
+Contraflow events are sythentic events delivered under conditions caused by processing events already in a Tremor system. Tremor handles back-pressure events by exploiting contraflow.
 
-But pipelines are directed-acyclic-graphs ( DAGs ), so how do we back-propagate events without introducing cycles?
+The asynchronous nature of distributed event-based systems causes complications when resolving back-propogation issues. Tremor employs a novel algorithm to handle back-pressure and other events that propagate _backwards_ through a pipeline.
 
-The answer is:
+Pipelines are directed-acyclic-graphs (DAGs), so how do we back-propagate events without introducing cycles?
 
-- There can be no cycles in a DAG
-- DAGS are traversed in depth-first-search ( DFS ) order
+Givens:
+- There can be no cycles in a DAG.
+- DAGS are traversed in depth-first-search (DFS) order.
 - There can be no cycles in a DAG traversed in reverse-DFS order.
-- If we join a DAG d, with its mirrored ( reversed ) DAG d'
-  - We get another DAG where
-    - Every output in the DAG d, can continue propagating events in its reverse DAG d', without cycles though its d' mirrored input
-    - Branches in DAG d, become Combinators in DAG d'
-    - Combinators in DAG d, become Branches in DAG d'
-    - Any back-pressure or other events detected in the processing of existing events can result in a synthetic signalling event being injected into the reverse-DAG.
-  - We call the injected events 'contraflow' events because they move _backwards_ against the primary data flow.
-- The cost or overhead of not injecting a contraflow event is zero
-- The cost or overhead of an injected contraflow event ( in Tremor ) is minimised through pruning - for example - operators that are not contraflow aware do not need to receive or process contraflow events - Tremor optimises for this case.
-- We call the output-input pairs at the heart of contraflow the 'pivot point'
 
-Contraflow has been used in other event processing systems and was designed /invented by one of the members of the Tremor core team ( in a previous life ).
+The proposed solution:
+- If we join a DAG _d_ with its mirrored (reversed) DAG _d'_, we get another DAG where:
+  - Every output in _d_ propogates events in _d'_ without cycles through its _d'_ mirrored input.
+  - Branches in _d_ become combinators in _d'_.
+  - Combinators in _d_ become branches in _d'_.
+  - Any back-pressure detected in the processing of existing events can result in a synthetic signaling event injected into the reverse-DAG.
+- The output-input pair at the heart of contraflow is called the 'pivot point'.
+- Injected events are called 'contraflow' because they move _backwards_ against the primary data flow.
 
-There are many other ways to handle back-pressure ( for example: those used by Spark, Storm, Hazelcast Jet, … ) but they are biasing for other nuances and tradeoffs than Tremor. Contraflow is far simpler to reason about and develop verifiable systems and code against as a user and puts a lot of the pressure for a good solution onto the Tremor project itself. Only time will tell
-which philosophy results in less pager duty!
+Result:
+- The cost of not injecting a contraflow event is zero.
+- The cost of an injected contraflow event, in Tremor, is minimized through pruning. For example, operators that are not contraflow aware do not receive or process contraflow events (Tremor optimizes for this case).
 
-Although the contraflow mechanism _may_ seem complex, its far simpler than back-pressure handling by almost all other reasonable mechanisms and with far fewer negative side-effects and tradeoffs.
+There are other alternatives to handle back-pressure (such as those utilized by Spark, Storm, Hazelcast Jet, etc), however, Contraflow provides a much simpler solution than all other reasonable mechanisms with far fewer negative side-effects. Contraflow allows the Tremor project to provide users a tool to develop verifiable systems while undertaking much of the work needed to produce a lasting solution.
 
 ## Guaranteed delivery
 
-Tremor supports guaranteed delivery as long as both onramps and offramps support it. Alternatively,
-the [qos::wal](scripting/tremor-query/operators.md#qos::wal) can be used to introduce a layer of Guaranteed
-delivery for onramps that do not support it naturally.
+Tremor supports guaranteed delivery as long as both onramps and offramps support it. For onramps that do not provide natural support, the [qos::wal](scripting/tremor-query/operators.md#qos::wal) can be used to introduce a layer of guaranteed delivery.
 
-The basic concept is that each event has a monotonically growing ID, once this ID is acknowledged
-as delivered all events with the provided ID or a lower Id are considered delivered. If an ID
-is marked as failed to deliver all events up until this ID will be replayed.
+Each event has a monotonic growing ID. Once an event ID is acknowledged
+as delivered, so are all other events with lower Id values. If an event ID
+is marked as failed to deliver, all events up to its ID value will be redeployed.
 
 ## Runtime facilities
 
-Tremor's runtime is composed of a number of facilities that work together to provide service.
+Tremor's runtime is composed of multiple facilities that work together to provide service.
 
-### Conductor
+### Conductors
 
-The Tremor API is a REST based API that allows Tremor operators to manage the lifecycle of onramps, offramps and pipelines deployed into a Tremor based system.
+Tremor uses a REST-based API that allows its operators to manage the lifecycle of onramps, offramps and pipelines deployed into a Tremor based system.
 
-The set of facilities in the runtime that are related to service lifecycle, activation and management are often referred to collectively as the Tremor conductor or Tremor control plane.
+The set of facilities in the runtime that are related to service lifecycle, activation, and management are  referred to collectively as the Tremor conductor or Tremor control plane.
 
-These terms can be used interchangeably.
+Operators can conduct up to multiple Tremor servers through its REST based API.
 
-Operators CAN conduct or orchestrate one or many Tremor servers through its REST based API.
-
-The API in turn interfaces with registry and repository facilities. Tremor distinguishes between artefacts and instances. Artefacts in Tremor have no runtime overhead.
+The API in turn interfaces with registry and repository facilities. Tremor distinguishes between artefacts and instances. Artefacts have no runtime overhead.
 
 Artefacts in Tremor are declarative specifications of:
 
-- Onramps - An onramp specification is a specific configuration of a supported onramp kind
-- Offramps - An offramp specification is a specific configuration of a supported offramp kind
-- Pipelines - A pipeline specification is a specific configuration of a pipeline graph
-- Bindings - A binding specification describes how onramps, pipelines and offramps should be interconnected
+- Onramps - a specific configuration of a supported onramp type
+- Offramps - a specific configuration of a supported offramp type
+- Pipelines - a specific configuration of a pipeline graph
+- Bindings - a specefic configuration of how all other artefacts should be connected
 
-Artefacts can be thought of as analagous to code. They are a set of instructions, rules or configurations. As such they are registered with Tremor via its API and stored in Tremor's artefact repository.
+Artefacts can be thought of as analagous to code. They are a set of instructions, rules or configurations. As such, they are registered with Tremor via its API and stored in Tremor's artefact repository.
 
 Deployment in Tremor is achieved through a mapping artefact. The mapping artefact specifies how artefacts should be deployed into one or many runtime instances, activated, and connected to live instances of onramps or offramps.
 
-In Tremor, publishing a mapping results in instances being deployed as a side-effect. By unpublishing or deleting a mapping instances are undeployed as a side-effect.
+In Tremor, publishing a mapping results in instances being deployed. By unpublishing or deleting a mapping, instances are undeployed.
 
 ### Metrics
 
-Metrics in Tremor are implemented as a pipeline and deployed during startup.
+Metrics in Tremor are implemented as a pipeline and deployed during startup. They are built-in and cannot be undeployed.
 
-Metrics are builtin and can not be undeployed.
-
-Operators **MAY** attach offramps to the metrics service to distribute metrics to external systems, such as InfluxDB or Kafka.
+Operators are able to attach offramps to the metrics service to distribute metrics to external systems, such as InfluxDB or Kafka.
 
 ## Data model
 
-Tremor supports unstructured data.
+Tremor supports unstructured data which can be in the form of raw binary, JSON, MsgPack, Influx or other structures.
 
-Data can be raw binary, JSON, MsgPack, Influx or other structures.
+Data can be ingested into a Tremor pipeline in any **supported** format.
 
-When data is ingested into a Tremor pipeline it can be any **supported** format.
+Tremor pipeline operators will assume _some_ structure. For hierarchic or nested formats such as JSON and MsgPack, Tremor uses `serde` serialisation and deserialisation capabilities.
 
-Tremor pipeline operators however, often assume _some_ structure. For hierarchic or nested formats such as JSON and MsgPack, Tremor uses the `serde` serialisation and deserialisation capabilities.
+Therefore, the _in-memory_ format for _JSON-like_ data in Tremor is effectively a `simd_json::Value`. This provides the advantage of allowing Tremor-script to work with YAML, JSON or MsgPack data with no changes or considerations in the Tremor-script based on the origin data's format.
 
-Therefore, the _in-memory_ format for _JSON-like_ data in Tremor is effectively a `simd_json::Value`. This has the advantage of allowing Tremor-script to work against YAML, JSON or MsgPack data with no changes or considerations in the Tremor-script based on the origin data format.
+For line-oriented formats such as the Influx Line Protocol or GELF, they are typically transformed into Tremor's in-memory format (currently based on `serde`).
 
-For line oriented formats such as the Influx Line Protocol, or GELF these are typically transformed to Tremor's in-memory format ( currently based on `serde`).
+For raw binary or other data formats, Tremor provides a growing set of codecs that convert external data into Tremor in-memory form or vice-versa.
 
-For raw binary or other data formats, Tremor provides a growing set of codecs that convert external data to Tremor in-memory form or that convert Tremor in-memory form to an external data format.
+In general, operators and developers should _minimize_ the number of encoding/decoding steps required for the transit of data through Tremor or between Tremor instances.
 
-In general, operators and developers should _minimize_ the number of encoding and decoding steps required in the transit of data through Tremor or between Tremor instances.
-
-The major overhead in most Tremor systems is encoding and decoding overhead. To compensate that, as JSON is the most dominant format, we [ported](https://github.com/simd-lite/simdjson-rs) [simd-json](https://github.com/lemire/simdjson) this reduces the cost of en- and decoding significantly compared to other JSON implementations in Rust.
+Since the major overhead in most Tremor systems is encoding and decoding and JSON is the dominant data format, we [ported](https://github.com/simd-lite/simdjson-rs) [simd-json](https://github.com/lemire/simdjson) to reduce the cost of encoding and decoding significantly compared to other JSON implementations in Rust.
 
 ### Distribution model
 
-Tremor does not ( yet ) have an out-of-the-box network protocol. A native Tremor protocol is planned in the immediate / medium term.
+Tremor does not yet have an out-of-the-box network protocol. A native Tremor protocol is planned for development in the immediate/mid-term.
 
-As such, the distribution model for Tremor is currently limited to the set of available onramp and offramp connectors.
+As such, Tremor's distribution model is currently limited to the set of available onramp and offramp connectors.
 
-However the websocket [onramp](artefacts/onramps.md#ws) and [offramp](artefacts/offramps.md#ws) can be used for Tremor to Tremor communication.
+However, the websocket [onramp](artefacts/onramps.md#ws) and [offramp](artefacts/offramps.md#ws) can be used for Tremor to Tremor communication.
 
 ### Client/Server
 
-Tremor, in its current form, is a client-server system. Tremor exposes a synchronous blocking RESTful API over HTTP for conducting operations related to its high throughput and relatively high performance pipeline-oriented data plane.
+Tremor, is currently a client-server system. It uses a synchronous blocking RESTful API over HTTP to conduct operations related to its high throughput and high performance pipeline-oriented data plane.
 
-Tremor, in the near future, will add a clustering capability making it a distributed system. Tremor will still support client-server deployments through a 'standalone' mode of clustered operation.
-
-Tremor in 'standalone' mode can be thought of as client-server or a 'cluster of one' depending on your own bias or preferences, dear reader.
+In the near future we plan on developing clustering capability, making Tremor a fully distributed system. Tremor will still support client-server deployments through a standalone mode of clustered operation, which can be thought of as a cluster of one.
