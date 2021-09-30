@@ -889,7 +889,7 @@ onramp:
       host: "127.0.0.1"
 ```
 
-# otel
+### otel
 
 CNCF OpenTelemetry onramp. Listens on TCP port `4317` for gRPC traffic conforming to the CNCF OpenTelemetry protocol specification.
 Forwards tremor value variants of `logs`, `trace` and `metrics` messages.
@@ -918,4 +918,22 @@ onramp:
     config:
       port: 4317
       host: 127.0.0.1
+```
+
+### unix-socket
+
+This onramp will create a unix socket and listen to any data coming on it.
+
+Supported configuarion options are:
+- `path` - String - The path where the unix socket will be placed
+
+Example:
+
+```yaml
+onramp:
+  - id: my_socket
+    type: unix-socket
+    codec: json
+    config:
+      path: /tmp/my-data.sock
 ```
