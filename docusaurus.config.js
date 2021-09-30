@@ -31,7 +31,7 @@ module.exports = {
   baseUrl: '/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'docs/favicon.ico',
+  favicon: '/favicon.ico',
   organizationName: 'tremor-rs',
   projectName: 'tremor-www',
   themeConfig: {
@@ -55,7 +55,7 @@ module.exports = {
             { to: 'community/governance', label: 'Governance' },
             { to: 'community/faqs', label: 'FAQs' },
             { to: 'rfc/index', label: 'RFCs' },
-            { to: 'community/EventsAndMedia.md', label: 'Events and Media' },
+            { to: 'community/EventsAndMedia', label: 'Events and Media' },
           ],
         },
         {
@@ -107,7 +107,7 @@ module.exports = {
             },
             {
               label: 'FAQs',
-              to: 'faqs/',
+              to: 'community/faqs',
             },
             {
               label: 'Tremor API',
