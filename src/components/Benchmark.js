@@ -3,7 +3,6 @@ import Chart from "react-apexcharts";
 
 class BenchmarkChart extends Component {
     constructor(props) {
-        console.log(props);
         super(props);
         this.shortCommitHash = props.commitList.map((c) => c.slice(0, 6));
         this.state = {
