@@ -59,11 +59,12 @@ class BenchmarkChart extends Component {
         };
     }
 
+
     render() {
+        const Chart = require("react-apexcharts").default;
         return (
             <BrowserOnly>
                 {() => {
-                    const Chart = require("react-apexcharts");
                     return (<Chart
                         options={this.state.options}
                         series={this.state.series}

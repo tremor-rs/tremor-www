@@ -31,8 +31,7 @@ export default function Home() {
         };
         history[name].mbps.push(entry.mbps);
         history[name].eps.push(entry.eps);
-        history[name].mbps.push(entry.mbps);
-
+        history[name].commits.push(entry.commit_hash);
     });
 
     const charList = Object.keys(history).map((name) => (
