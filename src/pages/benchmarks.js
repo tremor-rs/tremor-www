@@ -47,20 +47,6 @@ export default function Home() {
         </div>
     ));
 
-    // return (
-    //     <Layout
-    //         title="Benchmarks"
-    //         description="Description will go into a meta tag in <head />">
-    //         <HomepageHeader />
-    //         <main className="container mx-auto lg:px-80 px-4">
-    //             <h1 className="text-center font-bold lg:text-5xl text-3xl pb-8 pt-6">
-    //                 Tremor Benchmarks
-    //             </h1>
-    //             <div>{charList}</div>
-    //         </main>
-    //     </Layout >
-    // );
-
     return (
         <Layout
             title={`Hello from ${siteConfig.title}`}

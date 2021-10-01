@@ -1,5 +1,5 @@
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import React, { Component } from "react";
-import Chart from "react-apexcharts";
 
 class BenchmarkChart extends Component {
     constructor(props) {
@@ -61,11 +61,17 @@ class BenchmarkChart extends Component {
 
     render() {
         return (
-            <Chart
-                options={this.state.options}
-                series={this.state.series}
-                type="line"
-            />
+            <BrowserOnly>
+                {() => {
+                    const Chart = require("react-apexcharts");
+                    return (<Chart
+                        options={this.state.options}
+                        series={this.state.series}
+                        type="line"
+                    />);
+                }}
+
+            </BrowserOnly>
         );
     }
 }
