@@ -35,7 +35,6 @@ export default function Home() {
 
     });
 
-    window.snot = history;
     const charList = Object.keys(history).map((name) => (
         <div>
             <h2>{name}</h2>
