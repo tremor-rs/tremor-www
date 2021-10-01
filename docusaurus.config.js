@@ -3,6 +3,9 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
+  customFields: {
+    bench_url: "http://136.144.49.5:3001/bench",
+  },
   plugins: [
     require.resolve('@cmfcmf/docusaurus-search-local'),
     require.resolve('docusaurus-plugin-redoc'),
