@@ -17,6 +17,11 @@ module.exports = {
       dirName: '.'
     },
     {
+      "type": "link",
+      "label": "Benchmarks",
+      "href": "/benchmarks"
+    },
+    {
       type: 'link',
       label: 'API Explorer',
       href: '/api/0',
