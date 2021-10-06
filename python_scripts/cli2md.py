@@ -29,7 +29,7 @@ def print_args(c):
                 else:
                     multiple = "no"
                 print(
-                    f"|{name}|{get_or(arg, 'short', '-')}|{kind}|{multiple}|{arg['help'].strip()}|")
+                    f"|{name}|{get_or(arg, 'short', '-')}|{kind}|{multiple}|{arg['about'].strip()}|")
 
 
 def print_commands(c, pfx=""):
