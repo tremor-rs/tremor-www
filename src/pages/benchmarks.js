@@ -48,12 +48,19 @@ export default function Home() {
 
     return (
         <Layout
-            title={`Hello from ${siteConfig.title}`}
+            title={`${siteConfig.title}`}
             description="Description will go into a meta tag in <head />">
             <main>
                 <h1 className="text-center font-bold lg:text-5xl text-3xl pb-8 pt-6">
                     Tremor Benchmarks
                 </h1>
+                <p>
+                    Here you can track "live" benchmarks of the tremor runtime for every PR that is
+                    merged into the main branch. The benchmarks are run on the same machine to allow
+                    them to be compared easiley.<br />
+                    This allows comparing and tracking the performance progression of tremor over
+                    time. Clicking on a node will show the related commit hash.
+                </p>
                 <div>{charList}</div>
             </main>
         </Layout>
