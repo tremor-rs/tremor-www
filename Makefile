@@ -1,6 +1,6 @@
 TREMOR_VSN=main
 
-all: docs/scripting/tremor-script/stdlib docs/scripting/tremor-query/functions docs/operations/cli.md
+all: docs/operations/cli.md docs/scripting/tremor-script/stdlib docs/scripting/tremor-query/functions
 
 tremor-runtime:
 	-git clone https://github.com/tremor-rs/tremor-runtime
