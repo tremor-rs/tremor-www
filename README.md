@@ -1,25 +1,63 @@
-# tremor-www
+# ![Header Logo](img/tremor-logo.svg)
 
-This repo is the source to the main [tremor.rs](https://www.tremor.rs) website.
-The main branch between releases can be viewed [here](https://tremor-rs.github.io/tremor-www)
+This repo is the official source to the [Tremor](https://www.tremor.rs) website.
 
-### Prerequisites
+The main branch between releases can be viewed [here](https://tremor-rs.github.io/tremor-www).
 
-* Node v16
-* Rust
-* Cmake
-* libssl-dev
-* libclang-dev
+[![Tremor channel on Discord](https://img.shields.io/badge/chat-on%20discord-%233653a7)](https://discord.com/invite/Wjqu5H9rhQ)
+[![Tremor channel on Twitter](https://img.shields.io/badge/tremor--debs-twitter-%231da1f2)](https://twitter.com/TremorDEBS)
+
+## Installation
+
+This is a step-by-step guideline for installing and running our [Docusaurus](https://docusaurus.io/) (built with React) website:
+
+### Prerequisites/Dependencies
+
+* [Node v16](https://nodejs.org/en/download/package-manager/)
+
+```
+npm install
+```
+
+* [Rust](https://www.rust-lang.org/tools/install)
+* [CMake](https://cmake.org/install/)- an open-source, cross-platform family of tools designed to build, test and package software. CMake will help in the compilation process, and to generate native make.
+* [libssl-dev](https://pkgs.org/download/libssl-dev).
+* [libclang-dev](https://pkgs.org/download/libclang-dev)- Clang is a compiler front-end.
 
 ### Development
 
-Run `make`
+To generate a dynamic site and configuration:
 
-Run `npm install`
+Run `make clean` to get rid of object and executable files that had been created in the meantime so as to get a fresh start and make a clean build. Sometimes, the compiler may link or compile files incorrectly; you only need to recompile the files you changed and link the newly created object files with the pre-existing ones. 
 
-Run `npm run start`
+```
+make clean
+```
 
-### Syntax highlighting
+Run `make` to generate the site files for Tremor stdlib and cli and also produce the default config file for Docusaurus (docusaurus.config.js) with the right navigation references to the generated stdlib files.
+
+```
+make
+```
+
+### Running the Website
+
+To preview your changes as you edit the files, you can run a local development server that will serve your Tremor website and reflect the latest changes:
+
+```
+npm run start
+```
+
+By default, a browser window serving the website will open at http://localhost:3000.
+
+## Syntax Highlighting
 
 Docusaurus uses the [Prism](https://github.com/PrismJS/prism) syntax highlighting engine.
-We maintain a [fork](https://github.com/tremor-rs/prism) for tremor language definitions.
+
+We maintain a [fork](https://github.com/tremor-rs/prism) for Tremor language definitions.
+
+## Licence
+
+This repository's content is licensed under the [Apache License 2.0](https://github.com/tremor-rs/tremor-www/blob/main/LICENSE).
+
+Docusaurus is [MIT](https://github.com/facebook/docusaurus/blob/main/LICENSE) Licensed.
