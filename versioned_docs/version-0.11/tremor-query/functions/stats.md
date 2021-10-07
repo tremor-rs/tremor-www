@@ -108,6 +108,27 @@ The HDR Histogram trades off memory utilisation for accuracy and is configured i
 aggr::stats::hdr(event.value, ["0.5","0.75","0.9","0.99","0.999"])
 ```
 
+Example output:
+
+```json
+{
+  "min": 1,
+  "max": 100,
+  "count": 100,
+  "mean": 50.5,
+  "stdev": 28.866_070_047_722_12,
+  "var": 833.25,
+  "percentiles": {
+    "0.5": 50,
+    "0.9": 90,
+    "0.95": 95,
+    "0.99": 99,
+    "0.999": 100,
+    "0.9999": 100
+  }
+}
+```
+
 ### aggr::stats::dds(int|float) -> record
 
 * **size**: Fixed, 10 Kilo Bytes (estimate based on [this paper](https://arxiv.org/pdf/1908.10693.pdf))
@@ -116,4 +137,24 @@ Uses a Distributed data-stream Sketch ( [DDS (paper)](http://www.vldb.org/pvldb/
 
 ```trickle
 aggr::stats::dds(event.value, ["0.5","0.75","0.9","0.99","0.999"])
+```
+
+Example output:
+
+```json
+{
+  "count": 100,
+  "sum": 5050.0,
+  "min": 1.0,
+  "max": 100.0,
+  "mean": 50.5,
+  "percentiles": {
+    "0.5": 50.0,
+    "0.9": 89.2,
+    "0.95": 94.7,
+    "0.99": 98.6,
+    "0.999": 98.6,
+    "0.9999": 98.6,
+  }
+}
 ```
