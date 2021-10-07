@@ -1,4 +1,4 @@
-# ![Header Logo](img/tremor-logo.svg)
+# <a href='https://www.tremor.rs/'><img src='static/img/tremor-logo.svg' height='100' alt='Header Logo' aria-label='tremor.rs' /></a>
 
 This repo is the official source to the [Tremor](https://www.tremor.rs) website.
 
@@ -21,7 +21,7 @@ npm install
 
 * [Rust](https://www.rust-lang.org/tools/install)
 * [CMake](https://cmake.org/install/)- an open-source, cross-platform family of tools designed to build, test and package software. CMake will help in the compilation process, and to generate native make.
-* [libssl-dev](https://pkgs.org/download/libssl-dev).
+* [libssl-dev](https://pkgs.org/download/libssl-dev)
 * [libclang-dev](https://pkgs.org/download/libclang-dev)- Clang is a compiler front-end.
 
 ### Development
