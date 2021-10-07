@@ -64,23 +64,23 @@ record::from_array([["a", 1], ["b", 2]]) == {"a": 1, "b": 2}
 
 Returns a `record`
 
-### select(record, array)
+### extract(record, array)
 
-'Selects' a given set of field from an record, removing all others.
+'Exrtracts' a given set of field from an record, removing all others.
 
 ```tremor
-record::select({"a": 1, "b": 2, "c": 3}, ["a", "c"]) == {"a": 1, "c": 3}
+record::extract({"a": 1, "b": 2, "c": 3}, ["a", "c"]) == {"a": 1, "c": 3}
 ```
 
 Returns a `record`
 
-### merge(left, right)
+### combine(left, right)
 
-Merges the two records left and right overwriting existing values in left
+Combines the two records left and right overwriting existing values in left
 with those provided in right
 
 ```tremor
-record::merge({"a": 1, "b": 2, "c": 4}, {"c": 3, "d": 4})
+record::combine({"a": 1, "b": 2, "c": 4}, {"c": 3, "d": 4})
 == {"a": 1, "b": 2, "c": 3, "d": 4}
 ```
 
