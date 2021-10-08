@@ -164,3 +164,6 @@ get translates to:
 :::note
 a malformed syslog message is treated under `3164` protocol and entire string goes to the `msg` of result object.
 :::
+
+### csv
+Encodes or decodes the CSV format.
