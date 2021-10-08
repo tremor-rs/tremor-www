@@ -48,7 +48,7 @@ To preview your changes as you edit the files, you can run a local development s
 npm run start
 ```
 
-By default, a browser window serving the website will open at http://localhost:3000.
+By default, a browser window serving the website will open at http://localhost:3000 (supports live-reload as you edit).
 
 ## Syntax Highlighting
 
@@ -60,4 +60,4 @@ We maintain a [fork](https://github.com/tremor-rs/prism) for Tremor language def
 
 This repository's content is licensed under the [Apache License 2.0](https://github.com/tremor-rs/tremor-www/blob/main/LICENSE).
 
-Docusaurus is [MIT](https://github.com/facebook/docusaurus/blob/main/LICENSE) Licensed.
+Docusaurus is [MIT](https://github.com/facebook/docusaurus/blob/main/LICENSE) licensed.
