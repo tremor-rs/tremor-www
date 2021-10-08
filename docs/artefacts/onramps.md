@@ -6,9 +6,9 @@ title: Onramps
 
 <!-- alex disable host -->
 
-Specify how Tremor connects to the outside world in order to receive from external systems.
+Onramps specify how Tremor connects to the outside world in order to receive from external systems.
 
-All Onramps support circuit breakers as in that no new events are read from it in the case of a
+All onramps support circuit breakers, as in no new events are read from it in the case of a
 circuit breaker triggering.
 
 For example, the Kafka onramp receives data from a Kafka cluster by creating a local record
@@ -255,7 +255,7 @@ Replies sent to this onramp can perform multiple operations:
 }
 ```
 
-#### Message related
+#### Message Related
 
 ```json
 {"message": {
@@ -323,11 +323,11 @@ Replies sent to this onramp can perform multiple operations:
 
 ### env
 
-The `env` onramp reads the environment variables from the shell starting tremor and sends them as a message on startup. This message is send only once, right when the source is connected.
+The `env` onramp reads the environment variables from the shell starting Tremor, and sends them as a message on startup. This message is sent only once, right when the source is connected.
 
 There are no configuration variables and no codecs since data is provided in a structured format.
 
-The output has the form of a record with the key `env` that holds a record where the key is the name of the environment variable and the value is it's value as a string.
+The output has the form of a record with the key `env` that holds a record where the key is the name of the environment variable and the value is its value as a string.
 
 ```js
 {
