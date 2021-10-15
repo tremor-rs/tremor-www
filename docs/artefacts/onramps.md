@@ -441,6 +441,7 @@ Supported configuration options are:
 - `rdkafka_options` - An optional map of an option to value, where both sides need to be strings.
 - `retry_failed_events` - If set to `false`, the source will **not** seek back the consumer offset upon failed events, and thus not retry those when `enable.auto.commit` is set to `false` in `rdkafka_options`. (default `true`)
 - `poll_interval` - Duration in milliseconds to wait until we poll again if no message is in the kafka queue. (default: `100`)
+- `check_topic_metadata` - If set to `true`, checks topic metadata exists before subscribing, otherwise checks are bypassed.
 
 Set metadata variables are:
 
@@ -459,6 +460,7 @@ onramp:
         - demo
         - snotbadger
       group_id: demo
+      check_topic_metadata: false
 ```
 
 A more involved example, only committing on successful circuit breaker event and not retrying failed events, while also decreasing the poll interval to 10ms to get notified of new messages faster:
