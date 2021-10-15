@@ -14,6 +14,9 @@ cargo test --all
 cargo run -p tremor-cli -- test all tremor-cli/tests
 ```
 
+_Note: be sure to set a `TREMOR_PATH` before running the commands posted above, without it, some packages will not resolve, and tests may not run. If starting from the root of the tremor-runtime project, use `export TREMOR_PATH="./tremor-script/lib"` in the same terminal before running commands above.._
+
+
 ## EQC
 
 EQC or 'QuickCheck' is a specification-based testing tool for Erlang supporting a test methodology called property-based testing. Programs are tested by writing properties - preconditions, postconditions and invariants. QuickCheck uses random generation to create constructive ( should pass ) and destructive ( should fail ) tests given the specified properties. This allows suitably defined specifications to cover a far greater set of use cases than would ordinarily be possible to write manually.
