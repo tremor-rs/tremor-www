@@ -14,7 +14,9 @@ cargo test --all
 cargo run -p tremor-cli -- test all tremor-cli/tests
 ```
 
-_Note: be sure to set a `TREMOR_PATH` before running the commands posted above, without it, some packages will not resolve, and tests may not run. If starting from the root of the tremor-runtime project, use `export TREMOR_PATH="./tremor-script/lib"` in the same terminal before running commands above.._
+:::note
+Be sure to set a `TREMOR_PATH` before running the commands posted above, without it, some packages will not resolve, and tests may not run. If starting from the root of the tremor-runtime project, use `export TREMOR_PATH="./tremor-script/lib"` in the same terminal before running commands above..
+:::
 
 
 ## EQC
