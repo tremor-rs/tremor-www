@@ -6,9 +6,9 @@ title: Onramps
 
 <!-- alex disable host -->
 
-Specify how Tremor connects to the outside world in order to receive from external systems.
+Onramps specify how Tremor connects to the outside world in order to receive from external systems.
 
-All Onramps support circuit breakers as in that no new events are read from it in the case of a
+All onramps support circuit breakers, as in no new events are read from it in the case of a
 circuit breaker triggering.
 
 For example, the Kafka onramp receives data from a Kafka cluster by creating a local record
@@ -55,6 +55,7 @@ The column `Delivery Acknowledgements` describes when the onramp considers and r
 | cb         | not supported                                                       |
 | crononome  | not supported                                                       |
 | discord    | not supported                                                       |
+| env        | not supported                                                       |
 | file       | not supported                                                       |
 | gsub       | always                                                              |
 | kafka      | always, only on `ack` event if `enable.auto.commit` is set to false |
@@ -254,7 +255,7 @@ Replies sent to this onramp can perform multiple operations:
 }
 ```
 
-#### Message related
+#### Message Related
 
 ```json
 {"message": {
@@ -318,6 +319,23 @@ Replies sent to this onramp can perform multiple operations:
     ],
   }
 }}
+```
+
+### env
+
+The `env` onramp reads the environment variables from the shell starting Tremor, and sends them as a message on startup. This message is sent only once, right when the source is connected.
+
+There are no configuration variables and no codecs since data is provided in a structured format.
+
+The output has the form of a record with the key `env` that holds a record where the key is the name of the environment variable and the value is its value as a string.
+
+```js
+{
+  "env": {
+    "SHELL": "/usr/bin/zsh"
+    // ...
+  }
+}
 ```
 
 ### file
@@ -423,6 +441,7 @@ Supported configuration options are:
 - `rdkafka_options` - An optional map of an option to value, where both sides need to be strings.
 - `retry_failed_events` - If set to `false`, the source will **not** seek back the consumer offset upon failed events, and thus not retry those when `enable.auto.commit` is set to `false` in `rdkafka_options`. (default `true`)
 - `poll_interval` - Duration in milliseconds to wait until we poll again if no message is in the kafka queue. (default: `100`)
+- `check_topic_metadata` - If set to `true`, checks topic metadata exists before subscribing, otherwise checks are bypassed.
 
 Set metadata variables are:
 
@@ -441,6 +460,7 @@ onramp:
         - demo
         - snotbadger
       group_id: demo
+      check_topic_metadata: false
 ```
 
 A more involved example, only committing on successful circuit breaker event and not retrying failed events, while also decreasing the poll interval to 10ms to get notified of new messages faster:
