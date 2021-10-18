@@ -166,4 +166,17 @@ a malformed syslog message is treated under `3164` protocol and entire string go
 :::
 
 ### csv
-Encodes or decodes the CSV format.
+Encodes or decodes the CSV format. The codec expects a single line of RFC4180 CSV data, which will be translated into an array of string. If there's more than a single line in the message, the lines after the first will be discarded.
+Example:
+```csv
+"some "" field",1234567,other_text,"2020-01-01 00:00:00"
+```
+Will get transalted to:
+```json
+[
+    "some \" field",
+    "1234567",
+    "other_text",
+    "2020-01-01 00:00:00"
+]    
+```
