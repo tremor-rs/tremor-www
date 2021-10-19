@@ -1,11 +1,13 @@
 # <a href='https://www.tremor.rs/'><img src='static/img/tremor-logo.svg' height='100' alt='Header Logo' aria-label='tremor.rs' /></a>
 
-This repo is the official source to the [Tremor](https://www.tremor.rs) website.
-
-The main branch between releases can be viewed [here](https://tremor-rs.github.io/tremor-www).
-
+<a href= "#apache">![License](https://img.shields.io/github/license/tremor-rs/tremor-runtime)</a> 
+![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/4356/badge)
 [![Tremor channel on Discord](https://img.shields.io/badge/chat-on%20discord-%233653a7)](https://discord.com/invite/Wjqu5H9rhQ)
 [![Tremor channel on Twitter](https://img.shields.io/badge/tremor--debs-twitter-%231da1f2)](https://twitter.com/TremorDEBS)
+
+This project contains the source code for the official [Tremor](https://www.tremor.rs) website.
+
+The main branch between releases can be viewed [here](https://tremor-rs.github.io/tremor-www).
 
 ## Installation
 
@@ -21,7 +23,7 @@ npm install
 
 * [Rust](https://www.rust-lang.org/tools/install)
 * [CMake](https://cmake.org/install/)- an open-source, cross-platform family of tools designed to build, test and package software. CMake will help in the compilation process, and to generate native make.
-* [libssl-dev](https://pkgs.org/download/libssl-dev)
+* [libssl-dev](https://pkgs.org/download/libssl-dev).
 * [libclang-dev](https://pkgs.org/download/libclang-dev)- Clang is a compiler front-end.
 
 ### Development
@@ -48,7 +50,7 @@ To preview your changes as you edit the files, you can run a local development s
 npm run start
 ```
 
-By default, a browser window serving the website will open at http://localhost:3000 (supports live-reload as you edit).
+By default, a browser window serving the website will open at http://localhost:3000.
 
 ## Syntax Highlighting
 
@@ -56,8 +58,8 @@ Docusaurus uses the [Prism](https://github.com/PrismJS/prism) syntax highlightin
 
 We maintain a [fork](https://github.com/tremor-rs/prism) for Tremor language definitions.
 
-## Licence
+## <a id= "apache"> Licence </a>
 
 This repository's content is licensed under the [Apache License 2.0](https://github.com/tremor-rs/tremor-www/blob/main/LICENSE).
 
-Docusaurus is [MIT](https://github.com/facebook/docusaurus/blob/main/LICENSE) licensed.
+Docusaurus is [MIT](https://github.com/facebook/docusaurus/blob/main/LICENSE) Licensed.
