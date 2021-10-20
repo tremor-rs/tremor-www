@@ -405,7 +405,8 @@ We get the meta data as response that includes the message id and the acknowledg
 
 ### Kafka
 
-The Kafka onramp connects to one or more Kafka topics. It uses `librdkafka` to handle connections and can use the full set of [librdkafka 1.6.1 configuration options](https://github.com/edenhill/librdkafka/blob/v1.6.1/CONFIGURATION.md).
+The Kafka onramp connects to one or more Kafka topics. It uses `librdkafka` to handle connections and can use the full set of [librdkafka 1.6.1 configuration options](https://github.com/edenhill/librdkafka/blob/v1.6.1/CONFIGURATION.md) via `rdkafka_options`.
+
 
 The default [codec](codecs.md#json) is `json`.
 
@@ -422,7 +423,8 @@ Supported configuration options are:
 - `brokers` - Broker servers to connect to. (Kafka nodes)
 - `rdkafka_options` - An optional map of an option to value, where both sides need to be strings.
 - `retry_failed_events` - If set to `false`, the source will **not** seek back the consumer offset upon failed events, and thus not retry those when `enable.auto.commit` is set to `false` in `rdkafka_options`. (default `true`)
-- `poll_interval` - Duration in milliseconds to wait until we poll again if no message is in the kafka queue. (default: `100`)
+
+The onramp will not verify the existence of the configured `topics` before it subscribes to them. Due to the asynchronous nature of the kafka consumer `subscribe` command, a failed subscription (e.g. due to a typo in a topic name) can only be detected after initialization. The onramp will be stopped in this case.
 
 Set metadata variables are:
 
