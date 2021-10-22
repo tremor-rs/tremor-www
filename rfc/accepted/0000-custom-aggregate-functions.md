@@ -38,35 +38,33 @@ select merge_records(event) from in[minute] into out;
 
 To achieve this, we'll need to implement the aggregate function:
 ```
-define aggregate_function merge_records
-aggregate_function
-	init # initialize the state, called at the beginning of a window, the lifetime of the state is until the results are emitted
-		state = {}
-	end
-	
-	accumulate # called once for each event in the window
-		for event of
-			case (key, value) =>
-				match core::record::contains(state, key) of
-					case false => state[key] = value
-					default => state[key] = value + state[key]
-				end
-		end
-	end
-	
-	merge # this is called when two states are merged, the other state is in the variable called `other`
-		for other of 
-			case (key, value) =>
-				match core::record::contains(state, key) of
-					case false => state[key] = value
-					default => state[key] = value + state[key]
-				end
-		end
-	end
-	
-	emit # this is called at the end of the aggregation and must emit the result
-		emit state
-	end
+aggregate fn merge_records of
+  # initialize the state, called at the beginning of a window, the lifetime of the state is until the results are emitted
+  init() => 
+    state = {}
+  # called once for each event in the window        
+  aggregate(state, event)  =>
+    for event of
+      case (key, value) =>
+        match core::record::contains(state, key) of
+          case false => let state[key] = value
+          case _ => let state[key] = value + state[key]
+        end
+    end;
+    state
+  # this is called when two states are merged, the other state is in the variable called `other`
+  merge(state, other) =>
+    for other of 
+      case (key, value) =>
+        match core::record::contains(state, key) of
+          case false => let state[key] = value
+          default => let state[key] = value + state[key]
+        end
+    end;
+    state
+  # this is called at the end of the aggregation and must emit the result
+  emit(state)
+    state
 end;
 ```
 
