@@ -1,8 +1,12 @@
-# Tremor Workshop
+---
+title: Recipes
+sidebar_position: 0
+---
+# Tremor Recipes
 
-[tremor workshop]: #tremor-workshop
+[tremor Recipes]: #tremor-Recipes
 
-This workshop serves as a getting started laboratory for downloading,
+This Recipes serves as a getting started laboratory for downloading,
 compiling and running tremor on development machines and developing
 tremor-based solutions.
 
