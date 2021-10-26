@@ -46,7 +46,7 @@ module.exports = {
         target: '_self',
       },
       items: [
-        { to: 'community/getting-started/getting-started', label: 'Getting Started', position: 'left' },
+        { to: 'docs/next/getting-started/getting-started', label: 'Getting Started', position: 'left' },
         {
           type: 'dropdown',
           label: 'Community',

@@ -5,7 +5,7 @@ Example HTTP -> Websocket bridge application built on top of Tremor and meant to
 ## Setup
 
 :::tip
-All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples/34_bridges_lt_http_ws) as well.
+All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/34_bridges_lt_http_ws) as well.
 :::
 
 ### Sources and sinks
@@ -118,7 +118,7 @@ select event from process/err into err;
 
 ## Testing
 
-Assuming you have all the code from the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples/34_bridges_lt_http_ws), run the following to start our application (along with the [tremor websocket server example](../31_servers_lt_ws/README.md) that our application is bridging to):
+Assuming you have all the code from the [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/34_bridges_lt_http_ws), run the following to start our application (along with the [tremor websocket server example](../31_servers_lt_ws/README.md) that our application is bridging to):
 
 ```sh
 docker compose up

@@ -12,7 +12,7 @@ For digestion it is entirely selfcontained inside a singel tremor instance using
 ## Setup
 
 :::tip
-All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples/14_syslog_udp) as well and can be run with `docker compose up`.
+All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/14_syslog_udp) as well and can be run with `docker compose up`.
 :::
 
 ## Environment
