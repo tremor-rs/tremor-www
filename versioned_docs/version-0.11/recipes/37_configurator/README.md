@@ -11,7 +11,7 @@ This is an exploration project meant to push what we can do with the current tre
 ## Setup
 
 :::note
-All the application code here is available from the docs [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples/37_configurator).
+All the application code here is available from the docs [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/37_configurator).
 :::
 
 ```sh

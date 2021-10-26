@@ -1,7 +1,7 @@
 # CNCF OpenTelemetry Elastic APM Interworking
 
 :::note
-All the application code here is available from the docs [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples/44_otel_elastic_apm).
+All the application code here is available from the docs [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/44_otel_elastic_apm).
 :::
 
 This example builds on the passthrough CNCF OpenTelemetry
