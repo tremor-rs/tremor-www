@@ -5,7 +5,7 @@ Example Websocket proxy application built on top of Tremor and meant to be a dem
 ## Setup
 
 :::tip
-All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples/33_proxies_lt_ws) as well.
+All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/33_proxies_lt_ws) as well.
 :::
 
 ### Sources and sinks
@@ -68,7 +68,7 @@ This example is intentionally light on the processing but you can imagine doing 
 
 ## Testing
 
-Assuming you have all the code from the [git repository](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs/workshop/examples/33_proxies_lt_ws), run the following to start our application (along with the [tremor websocket server example](../31_servers_lt_ws/README.md) that is the upstream for our proxy):
+Assuming you have all the code from the [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/33_proxies_lt_ws), run the following to start our application (along with the [tremor websocket server example](../31_servers_lt_ws/README.md) that is the upstream for our proxy):
 
 ```sh
 docker-compose up
