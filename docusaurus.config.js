@@ -149,11 +149,11 @@ module.exports = {
             {
               html: '<a href="https://www.cncf.io/" rel="noreferrer noopener" aria-label="CNCF"><img src="/img/cncf-color.svg" alt="CNCF" style="width: 70%;" /></a>',
             },
-            {
-              html: '<a href="https://www.netlify.com" rel="noreferrer noopener" aria-label="Netlify"><img src="/img/netlify-color-accent.svg" alt="Deploys by Netlify" style="width: 40%;" /></a>',
-            },
-        ],
-       },
+            // {
+            //   html: '<a href="https://www.netlify.com" rel="noreferrer noopener" aria-label="Netlify"><img src="/img/netlify-color-accent.svg" alt="Deploys by Netlify" style="width: 40%;" /></a>',
+            // },
+          ],
+        },
       ],
       copyright: `
         <br />
