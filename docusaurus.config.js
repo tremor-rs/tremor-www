@@ -147,13 +147,23 @@ module.exports = {
               href: 'https://github.com/tremor-rs/tremor-runtime/releases',
             },
             {
-              html: `<a href="https://www.cncf.io/" target="_blank" rel="noreferrer noopener" aria-label="CNCF"><img src="/img/cncf-color.svg" alt="CNCF" style="width: 200px;" /></a>`,
+              html: '<a href="https://www.cncf.io/" rel="noreferrer noopener" aria-label="CNCF"><img src="/img/cncf-color.svg" alt="CNCF" style="width: 70%;" /></a>',
             },
-          ],
-        },
+            {
+              html: '<a href="https://www.netlify.com" rel="noreferrer noopener" aria-label="Netlify"><img src="/img/netlify-color-accent.svg" alt="Deploys by Netlify" style="width: 40%;" /></a>',
+            },
+        ],
+       },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Tremor`,
+      copyright: `
+        <br />
+        <strong> © Tremor Authors ${new Date().getFullYear()} | Documentation Distributed under CC-BY-4.0 </strong>
+        <br />
+        <br />
+        © ${new Date().getFullYear()} The Linux Foundation. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage/"> Trademark Usage</a> page.
+      `,
     },
+
     prism: {
       theme: lightCodeTheme,
       darkTheme: darkCodeTheme,
