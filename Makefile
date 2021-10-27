@@ -2,6 +2,10 @@ TREMOR_VSN=main
 
 all: docs/operations/cli.md docs/scripting/tremor-script/stdlib docs/scripting/tremor-query/functions
 
+netlify:
+	all
+	npm run build
+
 tremor-runtime:
 	-git clone https://github.com/tremor-rs/tremor-runtime
 	cd tremor-runtime &&\
