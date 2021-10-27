@@ -4,6 +4,7 @@
 ![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/4356/badge)
 [![Tremor channel on Discord](https://img.shields.io/badge/chat-on%20discord-%233653a7)](https://discord.com/invite/Wjqu5H9rhQ)
 [![Tremor channel on Twitter](https://img.shields.io/badge/tremor--debs-twitter-%231da1f2)](https://twitter.com/TremorDEBS)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f5c25f86-4c18-468e-be20-4408c02ca846/deploy-status)](https://app.netlify.com/sites/tremor-www/deploys)
 
 This project contains the source code for the official [Tremor](https://www.tremor.rs) website.
 
