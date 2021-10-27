@@ -10,8 +10,16 @@ cargo test --all
 
 ## Running Integration Tests
 
+Running all integration tests:
+
 ```bash
 cargo run -p tremor-cli -- test all tremor-cli/tests
+```
+
+You can also run a singular test or benchmark by referring to the containing folder:
+
+```bash
+cargo run -p tremor-cli -- test bench ./tremor-cli/tests/bench/specific-benchmark
 ```
 
 ## EQC
