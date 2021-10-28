@@ -115,7 +115,7 @@ This offramp uses the AMQP 0.9.1 [basic-publish operation](https://www.rabbitmq.
 
 ### blackhole
 
-The blackhole offramp is used for benchmarking it takes measurements of the end to end times of each event traversing the pipeline and at the end prints an HDR ( High Dynamic Range ) [histogram](http://hdrhistogram.org/).
+The blackhole offramp is used for benchmarking it takes measurements of the end to end times of each event traversing the pipeline and at the end prints an HDR ( High Dynamic Range ) [histogram](https://hdrhistogram.org/).
 
 Supported configuration options are:
 

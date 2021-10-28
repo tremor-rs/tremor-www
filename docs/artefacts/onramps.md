@@ -782,7 +782,7 @@ onramp:
       port: 9000
 ```
 
-#### tcp onramp example for [GELF](https://docs.graylog.org/en/latest/pages/gelf.html#gelf-via-tcp)
+#### tcp onramp example for [GELF](https://docs.graylog.org/docs/gelf#gelf-via-udp)
 
 ```yaml
 onramp:

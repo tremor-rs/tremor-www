@@ -19,7 +19,7 @@ Tremor's internal type system is JSON-like.
 `Onramps` and `Offramps` support `preprocessors` and `postprocessors`. External data ingested into Tremor via `Onramps` can be pre-processed through multiple transfomers before a code is applied to convert the data into Tremor-internal form. Preprocessors are configured as a chain of transformations. Postprocessors
 are applied to values leaving Tremor after a codec transforms them from Tremor internal form to wire form. Postprocessors are configured as a chain of transformations.
 
-Codecs share similar concepts to [extractors](https://docs.tremor.rs/tremor-script/#extractors), but differ in their application. Codecs are applied to external data as they are ingested by or egressed from a running Tremor process.
+Codecs share similar concepts to [extractors](https://www.tremor.rs/docs/tremor-script/extractors/), but differ in their application. Codecs are applied to external data as they are ingested by or egressed from a running Tremor process.
 Extractors, on the other hand, are Tremor-internal and convert data from and to Tremor's internal value type.
 
 ### Data Format
@@ -65,11 +65,11 @@ Tremor supports the following preprocessing transformations in `Onramp` configur
 * [lz4](/docs/artefacts/preprocessors/#lz4)- zl4 decompress.
 * [gelf-chunking](/docs/artefacts/preprocessors/#gelf-chunking)- GELF chunking support.
 * [remove-empty](/docs/artefacts/preprocessors/#remove-empty)- remove emtpy (0 len) messages.
-* [length-prefixerd](/docs/artefacts/preprocessors/#length-prefixerd)- length prefixed splitting for streams.
+* [length-prefixed](/docs/artefacts/preprocessors#length-prefixed)- length prefixed splitting for streams.
 
 Tremor supports the following postprocessing transformations in `Offramp` configurations:
 
 * [lines](/docs/artefacts/postprocessors/#lines)
 * [base64](/docs/artefacts/postprocessors/#base64)
-* [length-prefixerd](h/docs/artefacts/artefacts/postprocessors/#length-prefixerd)
+* [length-prefixed](/docs/artefacts/postprocessors#length-prefixed)
 * [compression](/docs/artefacts/postprocessors/#compression)

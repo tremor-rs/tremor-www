@@ -2,7 +2,7 @@
 
 An application built using tremor using the [linked transports](../../operations/linked-transports.md) feature and the [qos::wal](/docs/tremor-query/operators/#qoswal) operator introduced in 0.9 and the [`$correlation`](/docs/operations/linked-transports/#correlation) feature introduced in 0.11, allowing for centralized configuration across services and their component nodes.
 
-The main task of the Configurator is to distribute config changes to a group of upstream tremor nodes running the [_Quota Service_](../36_quota_service/README.md).
+The main task of the Configurator is to distribute config changes to a group of upstream tremor nodes running the [_Quota Service_](../100_quota_service/README.md).
 The config changes do not happen in an atomic or transactional fashion across all upstream nodes, but all valid configuration updates are persisted and retried until they succeed.
 The responses are aggregated from all the upstream nodes and bundled into a single event / HTTP response.
 
@@ -11,7 +11,7 @@ This is an exploration project meant to push what we can do with the current tre
 ## Setup
 
 :::note
-All the application code here is available from the docs [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/37_configurator).
+All the application code here is available from the docs [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/101_configurator).
 :::
 
 ```sh
@@ -22,8 +22,8 @@ docker-compose up
 Following services should be now accessible:
 
 * Configurator: [http://localhost:9139](http://localhost:9139)
-* [Quota Service](../36_quota_service/README.md) Node 1: [http://localhost:8139](http://localhost:8139)
-* [Quota Service](../36_quota_service/README.md) Node 2: [http://localhost:8140](http://localhost:8140)
+* [Quota Service](../100_quota_service/README.md) Node 1: [http://localhost:8139](http://localhost:8139)
+* [Quota Service](../100_quota_service/README.md) Node 2: [http://localhost:8140](http://localhost:8140)
 
 ## Using the Configurator
 
