@@ -121,7 +121,7 @@ Window definitions in `tremor-query` can be either tumbling or sliding.
 
 A tumbling window is a window configured with a fixed non-overlapping interval of time. The window aggregates events once opened, and continues aggregating until it closes. The window can emit synthetic events upon closing. The window reopens for its next cycle when it closes.
 
-Support for sliding windows has not been implemented yet (it has an [open RFC](https://rfcs.tremor.rs/0004-sliding-window-mechanism/) and it will be picked up for a future release).
+Support for sliding windows has not been implemented yet (it has an [open RFC](https://www.tremor.rs/rfc/accepted/sliding-window-mechanism) and it will be picked up for a future release).
 
 #### Tumbling Windows
 

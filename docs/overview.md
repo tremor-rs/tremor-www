@@ -21,7 +21,7 @@ Tremor is designed to handle the following:
 - In-flight Redeployment - Tremor can be reconfigured via its API to allow workload migration and reconfiguration without redeployment.
 - Event processing - Tremor's primary goal is to operate as an Extract, Transform, and Loading (ETL) tool. While Tremor adopts principles from Distributed Event Based Systems (DEBS), Event Stream Processor (ESP) and Complex Event Processing (CEP) infrastructures, it is by no means an exhaustive system that encompasses all the aforementioned communities' features and requirements.
 
-![Tremor Stats](/img/tremor/stats.png)
+![Tremor Stats](https://www.tremor.rs/img/tremor/stats.png)
 
 ## Tremor URLs
 

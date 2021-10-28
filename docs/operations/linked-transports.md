@@ -118,8 +118,8 @@ These are some example use cases now possible with linked transports at the cent
 
 Examples of even more advanced Tremor applications:
 
-* [Quota Service](../recipes/36_quota_service/README.md)
-* [Configurator](../recipes/37_configurator/README.md)
+* [Quota Service](../recipes/100_quota_service/README.md)
+* [Configurator](../recipes/101_configurator/README.md)
 
 ## Error handling
 

@@ -1,7 +1,7 @@
 # Ingesting documents from redpanda into elastic
 
 :::note
-All the application code here is available from the docs [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/39a_redpanda_elastic_correlation).
+All the application code here is available from the docs [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/104_redpanda_elastic_correlation).
 :::
 
 This example tries to show how to use tremor as the orchestrator for ingesting documents coming from redpanda into elasticsearch and notify the upstream system of success or failure of the ingest operation for every single document.
