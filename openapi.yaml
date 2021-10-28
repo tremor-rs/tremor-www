@@ -889,7 +889,9 @@ components:
         - base64
         - decompress
         - gelf-chunking
+        - gelf-chunking-tcp
         - gzip
+        - ingest-ns
         - length-prefixed
         - lines
         - lines-null
@@ -901,7 +903,9 @@ components:
         - snappy
         - textual-length-prefix
         - xz
+        - xz2
         - zlib
+        - zstd
 
     postprocessor:
       description: Supported postprocessors
@@ -910,6 +914,7 @@ components:
         - base64
         - gelf-chunking
         - gzip
+        - ingest-ns
         - length-prefixed
         - lines
         - lz4
@@ -917,3 +922,4 @@ components:
         - textual-length-prefix
         - xz
         - zlib
+        - zstd
