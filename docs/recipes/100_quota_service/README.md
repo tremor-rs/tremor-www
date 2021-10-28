@@ -9,7 +9,7 @@ The application itself is written on top of tremor, utilizing the [linked transp
 ## Setup
 
 :::note
-All the application code here is available from the docs [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/36_quota_service).
+All the application code here is available from the docs [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/100_quota_service).
 :::
 
 ```sh
