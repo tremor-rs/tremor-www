@@ -946,6 +946,7 @@ This onramp will create a unix socket and listen to any data coming on it.
 
 Supported configuarion options are:
 - `path` - String - The path where the unix socket will be placed
+- `permissions` - String - Unix permissions, in the format that the `chmod` utility expects
 
 Example:
 
@@ -956,4 +957,5 @@ onramp:
     codec: json
     config:
       path: /tmp/my-data.sock
+      permissions: "=600"
 ```
