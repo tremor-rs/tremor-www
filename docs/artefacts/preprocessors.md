@@ -11,6 +11,36 @@ Online codecs, preprocessors can be chained to perform multiple operations in su
 
 ## Supported Preprocessors
 
+### base64
+
+Decodes base64 encoded data to the raw bytes.
+
+### decompress
+
+Decompresses a data stream. It is assumed that each message reaching the decompressor is a complete compressed entity.
+
+The compression algorithm is detected automatically from the supported formats. If it can't be detected, the assumption is that the data was decompressed and will be sent on. Errors then can be transparently handled in the codec.
+
+Supported formats:
+
+- gzip
+- zlib
+- xz
+- snappy
+- lz4
+
+### gzip
+
+Decompress GZ compressed payload.
+
+### gelf-chunking
+
+Reassembles messages that were split apart using the [GELF chunking protocol](https://docs.graylog.org/en/3.0/pages/gelf.html#chunking).
+
+If the GELF messages were sent compressed, you can decompress them by chaining the [decompress](#decompress) preprocessor. An example is documented [here](onramps.md#udp-onramp-example-for-gelf) -- you may need to apply `decompress` before and/or after the reassembly here, depending on how your GELF client(s) behave.
+
+### gelf-chunking-tcp
+
 ### lines
 
 Splits the input into lines, using character 10 `\n` as the line separator.
@@ -43,58 +73,36 @@ Variant of the [lines](#lines) preprocessor that does *not* buffer any data that
 
 Variant of the [lines-no-buffer](#lines-no-buffer) preprocessor that uses character 13 `\r` ([carriage return](https://en.wikipedia.org/wiki/Carriage_return#Computers)) as the line separator.
 
-### base64
-
-Decodes base64 encoded data to the raw bytes.
-
-### decompress
-
-Decompresses a data stream. It is assumed that each message reaching the decompressor is a complete compressed entity.
-
-The compression algorithm is detected automatically from the supported formats. If it can't be detected, the assumption is that the data was decompressed and will be sent on. Errors then can be transparently handled in the codec.
-
-Supported formats:
-
-- gzip
-- zlib
-- xz
-- snappy
-- lz4
-
-### gzip
-
-Decompress GZ compressed payload.
-
-### zlib
-
-Decompress Zlib (deflate) compressed payload.
-
-### xz
-
-Decompress Xz2 (7z) compressed payload.
-
-### snappy
-
-Decompress framed snappy compressed payload (does not support raw snappy).
-
 ### lz4
 
 Decompress Lz4 compressed payload.
-
-### gelf-chunking
-
-Reassembles messages that were split apart using the [GELF chunking protocol](https://docs.graylog.org/en/3.0/pages/gelf.html#chunking).
-
-If the GELF messages were sent compressed, you can decompress them by chaining the [decompress](#decompress) preprocessor. An example is documented [here](onramps.md#udp-onramp-example-for-gelf) -- you may need to apply `decompress` before and/or after the reassembly here, depending on how your GELF client(s) behave.
-
-### remove-empty
-
-Removes empty messages (aka zero len).
 
 ### length-prefixed
 
 Separates a continuous stream of data based on length prefixing. The length for each package in a stream is based on the first 64 bit decoded as an unsigned big endian value.
 
+### remove-empty
+
+Removes empty messages (aka zero len).
+
+### snappy
+
+Decompress framed snappy compressed payload (does not support raw snappy).
+
 ### textual-length-prefix
 
 Extracts the message based on prefixed message length given in ascii digits which is followed by a space as used in [RFC 5425](https://tools.ietf.org/html/rfc5425#section-4.3) for TLS/TCP transport for syslog.
+
+### xz
+
+Decompress Xz2 (7z) compressed payload.
+
+### xz2
+
+Decompress xz and LZMA compressed payload.
+
+### zstd
+
+### zlib
+
+Decompress Zlib (deflate) compressed payload.
