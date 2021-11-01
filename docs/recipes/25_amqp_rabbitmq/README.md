@@ -9,9 +9,9 @@ downstream RabbitMQ based systems.
 
 The scenario isn't all-encompassing but looks at the following specific use-case:
 
-1. A RabbitMQ source
-2. A tremor intermediary
-3. A RabbitMQ destination
+1. A tremor instance publishing to RabbitMQ via an AMQP connector
+2. A tremor instance consuming from RabbitMQ via an AMQP connector
+3. A RabbitMQ exchange
 
 We can start the example using `docker-compose up`.
 
