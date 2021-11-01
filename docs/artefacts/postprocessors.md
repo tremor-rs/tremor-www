@@ -19,14 +19,6 @@ Delimits the output (events) into lines (by '\n').
 
 Encodes raw data into base64 encoded bytes.
 
-### length-prefixed
-
-Prefixes the data with a network byte order (big endian) length of the data in bytes.
-
-### gelf-chunking
-
-Splits the data using [GELF chunking protocol](https://docs.graylog.org/en/3.0/pages/gelf.html#chunking).
-
 ### compression
 
 Compresses event data.
@@ -41,7 +33,19 @@ Supported formats:
 - snappy - Snappy compression
 - lz4 - Lz level 4 compression
 
+### gelf-chunking
+
+Splits the data using [GELF chunking protocol](https://docs.graylog.org/en/3.0/pages/gelf.html#chunking).
+
+### ingest-ns
+
+### length-prefixed
+
+Prefixes the data with a network byte order (big endian) length of the data in bytes.
+
 ### textual-length-prefix
 
 Prefixes the data with the length of data given in ascii digits and a space as used in [RFC 5425](https://tools.ietf.org/html/rfc5425#section-4.3) for TLS/TCP transport for syslog.
+
+### zstd
  
