@@ -1,0 +1,4 @@
+select merge event of
+  { "tremor_out": "badger!" }
+end
+from in into out;
