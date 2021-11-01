@@ -135,3 +135,5 @@ delivery of kafka to kafka communications.
 [kafka_gd](/docs/recipes/kafka_gd/README) - Kafka guaranteed delivery
 
 [redpanda_gd](/docs/recipes/24_redpanda_gd/README) - Redpanda guaranteed delivery
+
+[rabbitmq](/docs/recipes/25_amqp_rabbitmq/README) - RabbitMQ integration
