@@ -2,15 +2,13 @@
 
 ## Happened Before
 
-Traffic Shaping with Tremor - our origin story.
-
-Data Distribution with Tremor - event processing origins.
-
-Data Flows with Tremor - the rise of query processing.  
+* [Traffic Shaping with Tremor - our origin story](./traffic-shaping).
+* [Data Distribution with Tremor - event processing origins.](./data-distribution)
+* [Data Flows with Tremor - the rise of query processing.](./data-flow)
   
 The simplified architecture of our systems is currently:  
   
-<img src="./media/kubernetes-sidecars/image1.png" />
+![old pipeline](./media/kubernetes-sidecars/image1.png)
 
 ## Identified Need
 
@@ -68,7 +66,7 @@ been open sourced in collaboration with our Kubernetes Team as a part of
 tremor, and have been extended to support OpenShift by the tremor
 community ( waves to **Anton Whalley** of [Rust Dublin](https://www.meetup.com/Rust-Dublin/) fame! ).
 
-[<u>https://github.com/tremor-rs/tremor-k8s-helm</u>](https://github.com/tremor-rs/tremor-k8s-helm)
+[Tremor Helm Charts](https://github.com/tremor-rs/tremor-k8s-helm)
 
 ## Conclusion
 
