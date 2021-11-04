@@ -59,6 +59,7 @@ module.exports = {
             { to: 'community/faqs', label: 'FAQs' },
             { to: 'rfc/index', label: 'RFCs' },
             { to: 'community/EventsAndMedia', label: 'Events and Media' },
+            { to: 'community/case-studies', label: 'Case Studies' },
           ],
         },
         {
