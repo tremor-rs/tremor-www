@@ -241,7 +241,7 @@ have indexes up to date - we issue a synthetic event ( that can be
 recorded in a wal ) that publishes the document processing status
 downstream.
 
-![search logic](./media/search.png)
+![search logic](./media/search/image1.png)
   
 So our document source is kafka, our indexing engines for elementized
 items and our destination for successfully elementized documents ( which
