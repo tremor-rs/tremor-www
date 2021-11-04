@@ -5,7 +5,7 @@
 This is our origin story. The simplified high level architecture of our
 logging systems at  the time of tremor’s birth is:
 
-<img src="./media/traffic-shaping/image1.png" />
+![old pipeline](./media/traffic-shaping/image1.png)
 
 ## Identified Need
 
@@ -35,11 +35,10 @@ the logs - whether over time, or across application or business units.
 When under extreme load beyond capacity - only a subset of the firehose
 is required for in-flight diagnostics of our production estate.
 
-*In-flight categorization, classification & rate limiting enables
-**just-in-time traffic shaping**,  
-load-shedding and bending critical infrastructure to available capacity
-even as capacity  
-changes in planned or surprising ways.*
+> In-flight categorization, classification & rate limiting enables
+> **just-in-time traffic shaping**, load-shedding and bending critical
+> infrastructure to available capacity even as capacity   changes in
+> planned or surprising ways.
 
 It is understood that, regardless of the system state - that some logs
 from a subset of systems, applications or services are relatively more
@@ -48,11 +47,9 @@ services are under extraordinary strain due to unplanned failures and
 outages. Unplanned failures and outages are expected at Wayfair
 production scale.
 
-*The **relative priority** of classified and categorized events is known
-and the relative  
-priority is subject to change over time, as are the event
-classifications and  
-categorizations.*
+> The **relative priority** of classified and categorized events is known
+> and the relative priority is subject to change over time, as are the event
+> classifications and categorizations.
 
 It is likely impossible to convince thousands of engineers in hundreds
 of teams across our technology organization to stop using JSON format in
@@ -69,7 +66,7 @@ service reliability and technical communities is severe at the exact
 moments when we are at peak trading periods and impact to the business
 is highest - a perfect storm.
 
-<img src="./media/traffic-shaping/image2.png" />
+![old pipeline](./media/traffic-shaping/image2.png)
 
 In our ELK ( ElasticSearch, Logstash, Kibana ) based logging and Influx
 ( Telegraf, Chronograf, InfluxDB ) based metrics environments there are
@@ -86,24 +83,20 @@ changing business and operational needs.
 The initial version of tremor simply preserved the overall pipeline:
 
 -   Applications in a number of programming languages generate logs
-
 -   A Logstash sidecar receives, normalizes and forwards logs to
-    > elasticsearch
-
+    elasticsearch
 -   ElasticSearch indexes logs for display by SRE’s and developers in
-    > Kibana
+    Kibana
 
 The processing stages remained unchanged ( and largely serviced by
 Logstash ):
 
 -   Enrich raw logs with business unit, organization, application and
-    > environment metadata
-
+    environment metadata
 -   Normalize schemas - map logs to a common structure and well known
-    > field names
-
+    field names
 -   Known unknowns - isolate user defined fields and extensions to a
-    > well known slush field
+    well known slush field
 
 But added an extra processing stage, a tremor cluster that added
 back-pressure detection and load-adaptive rate-limiting based on
@@ -134,4 +127,4 @@ is how we inject a little elasticity into our production quality of
 service - enriching our systems and services with just-in-time
 load-adaptive bendability.
 
-<img src="./media/traffic-shaping/image3.png" />
+[new pipeline](./media/traffic-shaping/image3.png)

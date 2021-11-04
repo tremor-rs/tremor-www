@@ -2,13 +2,12 @@
 
 ## Happened Before
 
-Traffic Shaping with Tremor - our origin story.
-
-Data Distribution with Tremor - event processing origins.  
+* [Traffic Shaping with Tremor - our origin story](./traffic-shaping).
+* [Data Distribution with Tremor - event processing origins.](./data-distribution)
   
 The simplified architecture of our systems is currently:  
   
-<img src="./media/data-flow/image1.png"/>
+![old pipeline](./media/data-flow/image1.png)
 
 
 ## Identified Need
@@ -31,7 +30,7 @@ releases into a single case study.
 
 Our systems specialists are writing increasingly complex, layered and
 rich business logic within tremor’s domain specific language
-\`tremor-script\` and are inhibited by our pipeline model which uses the
+`tremor-script` and are inhibited by our pipeline model which uses the
 YAML format for describing data flow graphs.
 
 YAML is hard to write, and hard to debug, and the embedded scripting
@@ -116,11 +115,11 @@ select event from kfc into out;
 ```
 
 The relatively simple structured query-like language allows script and
-window definitions to be reused. The \`define\` statements do not create
+window definitions to be reused. The `define` statements do not create
 operator instances in the data flow graph; they create named reusable
-definitions that encompass the desired semantics. The \`create\`
+definitions that encompass the desired semantics. The `create`
 statements create the nodes of the directed acyclic graph. The
-\`select\` statement is a builtin operator that is used for linking
+`select` statement is a builtin operator that is used for linking
 nodes in the graph together to form a data flow or event processing
 graph.
 
@@ -133,7 +132,7 @@ An aggregation example from the metrics or analytics domain. This example
 is a complete but simplified example of a tremor event processing application:  
 
 ```trickle  
-​*# File: aggregator.trickle
+# File: aggregator.trickle
 # Aggregate events using a high dynamic range histogram with 10 second, 1 minute, 10 minute
 # and 1 hour aggregate summaries.*
 
@@ -159,7 +158,7 @@ or event.measurement == "burrow_topic"
 group by set(event.measurement, event.tags,
 each(record::keys(event.fields)))
 into normalize
-*# Discard computed events with a small sample set*
+# Discard computed events with a small sample set
 having event.stats.count \> 100;
 ```
 
@@ -202,7 +201,7 @@ minimally terse yet easy to read form.
 Tremor’s core mission and mandate includes the efficient declaration of
 arbitrarily complex directed-acyclic pipeline processing graphs that are
 memory and compute efficient under the hood whilst preserving
-transparency or remaining \`hidden\` to most of the developers in our
+transparency or remaining `hidden` to most of the developers in our
 organization by continuing to conform to external transports, protocols
 and service interfaces in the surrounding production infrastructure
 estate.

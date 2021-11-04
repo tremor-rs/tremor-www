@@ -2,13 +2,10 @@
 
 ## Happened Before
 
-Traffic Shaping with Tremor - our origin story.
-
-Data Distribution with Tremor - event processing origins.
-
-Data Flows with Tremor - the rise of query processing.
-
-Kubernetes and Sidecars - it all went cloud native.
+* [Traffic Shaping with Tremor - our origin story](./traffic-shaping).
+* [Data Distribution with Tremor - event processing origins.](./data-distribution)
+* [Data Flows with Tremor - the rise of query processing.](./data-flow)
+* [Kubernetes and Sidecars - it all went cloud native.](./kubernetes-sidecars)
 
 ## Identified Need
 
@@ -44,18 +41,15 @@ functional units of logic that can be shared by all tremor domain
 specific languages.
 
 A new lexical preprocessing phase has been introduced allowing source to
-be packaged  
-within a modular set of paths through a \`TREMOR_PATH\` environment
-variable. Since  
-V0.8 of tremor the scripting and query languages both support modules,
-and share the  
-same module syntax and semantics.
+be packaged within a modular set of paths through a `TREMOR_PATH` environment
+variable. Since V0.8 of tremor the scripting and query languages both
+support modules, and share the same module syntax and semantics.
 
 The tremor API was upgraded to supported preprocessed or non-modular
 source so that no API changes were required to extend the deployment
 mechanisms to support modularity.
 
-Modular scripting
+### Modular scripting
 
 In a nutshell - this added support for user defined constants and user
 defined functions.
@@ -65,13 +59,13 @@ defined functions.
 
 # Tail recursive implementation of fibonacci
 #
-fn fib\_(a, b, n) of
-  case (a, b, n) when n \> 0 => recur(b, a + b, n - 1)
+fn fib_(a, b, n) of
+  case (a, b, n) when n > 0 => recur(b, a + b, n - 1)
   default => a
 end;
 
 fn fib(n) with
-  fib\_(0, 1, n)
+  fib_(0, 1, n)
 end;
 ```
 
@@ -97,30 +91,29 @@ select event from fib into out;
 Modules can be file-based, or defined inline in the scripting or query
 language. A standard set of system modules is provided by tremor out of the box.
 
-[<u>https://www.tremor.rs/docs/tremor-script/modules</u>](https://www.tremor.rs/docs/tremor-script/modules)  
+[Tremor Modules](https://www.tremor.rs/docs/tremor-script/modules)  
   
-**Modularity in the query language**
+### Modularity in the query language
 
 In the query language windows, scripts and pluggable operators may be
-defined and  
-shared across queries.
+defined and shared across queries.
 
 There is an RFC for modular sub-query to allow query sub-graphs to be
-defined and  
-shared which is being delivered as part of a tremor LFX mentorship  
+defined and shared which is being delivered as part of a tremor LFX
+mentorship.
   
-**Modularity in the deployment language**
+### Modularity in the deployment language
   
 Modular deployments through replacing the YAML configuration syntax with
-a   deployment language will embed the modular query language, which in turn
-embeds the   modular scripting language.  
+a deployment language will embed the modular query language, which in turn
+embeds the modular scripting language.  
   
 This work is under development and will span multiple releases - but it
 is being designed in such a way that as clustering capabilities are added to tremor, that
 clustered or  distributed deployments will be modularly composable by end users using
 the same  tooling as the other DSLs within tremor.
 
-### Solution
+## Solution
 
 The support for modularity is thematic. The scripting language now
 supports a functional programming paradigm and file-based or nested
@@ -148,7 +141,7 @@ complexity of traditional production domains for tremor increase in
 sophistication, size, complexity, the subject of modularity has evolved
 and new demands continue to emerge.  
   
-We expect the \`modularity\` theme to be long-lived, but its origins
+We expect the `modularity` theme to be long-lived, but its origins
 derive from production needs. When tremor was developed the user defined
 logic was small, relatively simple and applications built with tremor
 were fairly monolithic.  

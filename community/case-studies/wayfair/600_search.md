@@ -9,15 +9,11 @@ team.
 The following tremor-based use cases were in production at scale at the time
 tremor was adopted for this use case to replace legacy solutions.
 
-Traffic Shaping with Tremor - our origin story.
-
-Data Distribution with Tremor - event processing origins.
-
-Data Flows with Tremor - the rise of query processing.
-
-Kubernetes and Sidecars - it all went cloud native.
-
-Modularity - the rise of reusability.
+* [Traffic Shaping with Tremor - our origin story](./traffic-shaping).
+* [Data Distribution with Tremor - event processing origins.](./data-distribution)
+* [Data Flows with Tremor - the rise of query processing.](./data-flow)
+* [Kubernetes and Sidecars - it all went cloud native.](./kubernetes-sidecars)
+* [Modularity - the rise of reusability.](./modularity)
 
 ## Identified Need
 
@@ -36,35 +32,30 @@ engines.
 Many of the use cases that are battle tested with tremor are relevant in
 this domain:
 
--  Cleansing, normalization and enrichment of documents and indexable
-   - elementization and tracking documents and elementized items
-
--  Rate limiting, capacity-based load-shedding, with domain classification
-   - similar to the traffic shaping use cases where tremor started
-
--  Sourcing, transformation and distribution of documents and the
+- Cleansing, normalization and enrichment of documents and indexable
+  elementization and tracking documents and elementized items
+- Rate limiting, capacity-based load-shedding, with domain classification
+  similar to the traffic shaping use cases where tremor started
+- Sourcing, transformation and distribution of documents and the
   synthetic events in real-time at low or very low latencies
 
 But, for the use case at hand, there are additional needs:
 
--  All documents must be processed transactionally, without loss and
+- All documents must be processed transactionally, without loss and
   with proper reporting of processing outcome to upstream services and
-  the documents must be processed in arrival order
-   - The guaranteed delivery and circuit-breaker mechanisms in tremor now
-     need to be multi-pipeline.
-
--   All indexable elements of all documents must be indexed in multiple
-    downstream engines successfully ( or operator errors produced for
-    exceptions ) while all possible error cases need to be caught and
-    reported upstream in order to issue retries or let operators
-    intervene.
-    - This is a reasonably orchestration mapping processed elements and tracing
-      back to the documents the elements were produced from before publication
-      down stream.
-
--   There is significant variability, variant on a case by case basis, to the exact semantics
-    required for different document types to be processed to a varying number of downstream
-    indexing systems and technologies. The solution needs to be modular
+  the documents must be processed in arrival order. The guaranteed
+  delivery and circuit-breaker mechanisms in tremor now need to be
+  multi-pipeline.
+- All indexable elements of all documents must be indexed in multiple
+  downstream engines successfully ( or operator errors produced for
+  exceptions ) while all possible error cases need to be caught and
+  reported upstream in order to issue retries or let operators
+  intervene. This is a reasonably orchestration mapping processed elements and tracing
+  back to the documents the elements were produced from before publication
+  down stream.
+- There is significant variability, variant on a case by case basis, to the exact semantics
+  required for different document types to be processed to a varying number of downstream
+  indexing systems and technologies. The solution needs to be modular
 
 Gathering and aggregating multiple parallel processing outcomes and
 subsuming them under a common transaction is outside of the baseline
@@ -119,7 +110,7 @@ increasingly sophisticated and modular. So the QoS mechanisms that were
 originally constrained to the boundary of a single pipeline - now need
 to be preserved and propagated across an entire deployment.
 
-### Solution
+## Solution
 
 Tremor’s core processing element - pipelines - are executable
 directed-acyclic graphs.
@@ -153,24 +144,24 @@ downstream systems, or downstream breaks to upstream systems. These
 runtime control events - we call them signal-flow and contra-flow - are
 transparent to users.  
   
-Our \`wal\` ( write-ahead-log ) operator produces and consumes
+Our `wal` ( write-ahead-log ) operator produces and consumes
 signal-flow and contra-flow events.  
   
 So, given a simple tremor application that has no defined QoS ( it does
 not use guaranteed delivery )  
   
 ```trickle
-# File: etc/tremor/config/lossy.trickle
+# File: /etc/tremor/config/lossy.trickle
 select patch event of
   insert hostname = system::hostname()
 end
 from in into out;
 ```
 
-**We can configure the \`wal\` operator:**
+### We can configure the `wal` operator
 
 ```trickle
-# File: etc/tremor/config/mostly_guaranteed.trickle*
+# File: /etc/tremor/config/mostly_guaranteed.trickle
 
 use tremor::system;
 
@@ -178,8 +169,8 @@ define qos::wal operator in_memory_wal
 
 with  
  read_count = 20,
-  max_elements = 1000, *# Capacity limit of 1000 stored events*
-  max_bytes = 10485760 *# Capacity limit of 1MB of events*
+  max_elements = 1000, # Capacity limit of 1000 stored events
+  max_bytes = 10485760 # Capacity limit of 1MB of events
 end;
 
 create operator in_memory_wal;
@@ -208,14 +199,14 @@ fully recover.
 What if tremor or the host it is deployed on is rebooted?
 
 ```trickle
-​​*# File: etc/tremor/config/mostly_guaranteed.trickle*
+# File: etc/tremor/config/mostly_guaranteed.trickle
 use tremor::system;
 define qos::wal operator in_memory_wal
 with  
-  dir = ”./recovery”, *# Persistent file-based recovery file*
+  dir = ”./recovery”, # Persistent file-based recovery file
   read_count = 20,
-  max_elements = 1000, *# Capacity limit of 1000 stored events*
-  max_bytes = 10485760 *# Capacity limit of 1MB of events*
+  max_elements = 1000, # Capacity limit of 1000 stored events
+  max_bytes = 10485760 # Capacity limit of 1MB of events
 end;
 
 create operator in_memory_wal;
@@ -233,13 +224,13 @@ mechanisms, or their implementation. And for simple applications with a
 single primary data flow, its as easy as the examples above to
 selectively introduce grades of guaranteed delivery with a spectrum of
 robustness that derives from choice of connectivity ( kafka vs http ) or
-how the [<u>qos</u>](https://www.tremor.rs/docs/tremor-query/operators/)
+how the [qos](https://www.tremor.rs/docs/tremor-query/operators/)
 operators are chosen, placed in a flow, and configured.
 
 Orchestration however, is different. In an orchestrated transaction the
 user defined logic provided by the tremor developer also needs to do
 some tracking. This is achieved through using tremor’s state mechanism
-alongside the \`qos\` capabilities and operators that tremor provides to
+alongside the `qos` capabilities and operators that tremor provides to
 compose a solution.  
   
 So, in our search case - let us say we have two downstream search
@@ -250,7 +241,7 @@ have indexes up to date - we issue a synthetic event ( that can be
 recorded in a wal ) that publishes the document processing status
 downstream.
 
-<img src="./media/search.png" />  
+![search logic](./media/search.png)
   
 So our document source is kafka, our indexing engines for elementized
 items and our destination for successfully elementized documents ( which
@@ -272,8 +263,8 @@ define qos::wal operator forget_me_not
 with
   dir = "./brain",
   read_count = 1,
-  max_elements = 1000, *# Capacity limit of 1000 stored events*
-  max_bytes = 10485760 *# Capacity limit of 1MB of events*
+  max_elements = 1000, # Capacity limit of 1000 stored events
+  max_bytes = 10485760 # Capacity limit of 1MB of events
 end;
 
 create script remember;
@@ -293,8 +284,8 @@ multi-participant stateful orchestrations did not expose new features to
 the tremor developer or user.  
   
 It has been a significant change to tremor internals, however and the
-work reaches a stable point with our \`0.12\` release - the ability to
-\`pause\` and \`resume\` connectors, and the ability for the tremor
-runtime itself to detect and act on \`quiescence\` will mean that tremor
+work reaches a stable point with our `0.12` release - the ability to
+`pause` and `resume` connectors, and the ability for the tremor
+runtime itself to detect and act on `quiescence` will mean that tremor
 is flexible enough for the demands and use cases that originated in the
 search domain.
