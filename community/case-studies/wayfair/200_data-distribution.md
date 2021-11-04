@@ -2,7 +2,7 @@
 
 ## Happened Before
 
-Traffic Shaping with Tremor - our origin story.  
+* [Traffic Shaping with Tremor - our origin story](./traffic-shaping).
 
 After the initial production success of tremor as a point solution for capacity
 management during our peak trading cycles at Wayfair, the focus shifted a little
@@ -10,7 +10,7 @@ to the next key set of issues with our traditional observability platforms.
 
 The simplified architecture of our logging systems is currently:  
   
-<img src="./media/data-distribution/image1.png"  />
+![old pipeline](./media/data-distribution/image1.png)
 
 The traffic shaping use case was a huge win for Wayfair's SRE and operational
 teams who manage our production estate.
@@ -24,7 +24,7 @@ engineers.
 
 Their environment still looks pretty grim:
 
-<img src="./media/data-distribution/image3.png"  />
+![new pipeline](./media/data-distribution/image3.png)
 
 Displace and replace a plethora of in-house, open-source and commercial
 off the shelf log capture, metrics capture and data distribution
@@ -55,20 +55,17 @@ Format, Syslog,
 Kafka, TCP, UDP, Telegraf, Influx Line Protocol, ElasticSearch and many
 more...
 
-*Connectivity must be flexible enough to capture data from and
-distributed data to  
-synchronous, asynchronous protocols, transports and systems without
-developers  
-needing to learn or integrate with a new technology. The solution must
-be invisible to  
-developers.*
+> Connectivity must be flexible enough to capture data from and
+> distributed data to synchronous, asynchronous protocols, transports
+> and systems without developers needing to learn or integrate with a
+> new technology. The solution must be invisible to developers.
 
 The unit economics of the existing system is hard to measure, hard to
 plan and hard to remediate; especially given the rising year on year
 firehose volumetrics, with rising velocity and rising peak loads.
 
-*99% of the data either originates as JSON, or is transformed to JSON
-just in time.*
+> 99% of the data either originates as JSON, or is transformed to JSON
+> just in time.
 
 The target systems for displacement and replacement have very well
 understood and extract, load, transform, enrichment and normalization
@@ -76,11 +73,10 @@ algorithms that are coded and configured differently in each system.
 This is difficult to maintain, enhance and evolve in an environment
 where infrastructure and services are continuously evolving.
 
-A rich set of ETL and data manipulation and mutation primitives are
-required so that all  
-existing methods used for data processing across the target systems can
-be replaced by  
-a single easy to understand, easy to program and optimized alternative.
+> A rich set of ETL and data manipulation and mutation primitives are
+> required so that all existing methods used for data processing across
+> the target systems can be replaced by a single easy to understand,
+> easy to program and optimized alternative.
 
 ### Solution
 
@@ -90,7 +86,8 @@ capabilities when needed; and preserving the original system’s
 operational semantics and behaviours during normal operating conditions
 when the system is operating within planned capacity constraints.
 
-<img src="./media/data-distribution/image2.png" />  
+![new pipeline](./media/data-distribution/image2.png)
+
 The mandate now expands to replacing many of our event capture systems
 deployed on on-premise and cloud-native operating environments across
 multiple data-centres globally.
@@ -104,26 +101,21 @@ environments with tremor.
 
 The relatively primitive domain specific language developed as part of
 the initial solution for traffic shaping is replaced with a new domain
-specific language \`tremor-script\` designed for expressive data
+specific language `tremor-script` designed for expressive data
 filtration, extraction, enrichment and transformation to support:
 
 -   Classification, Categorization and rate limiting for Traffic Shaping
-
 -   Enrichment, Normalization and micro-format parsing
-
 -   Structural pattern matching over hierarchical nested JSON-like data
-
 -   The ability to patch, merge and iterate over JSON-like data
-
 -   A familiar expression language like in regular programming languages
-    > with arithmetic, multiplicative and other common operations on
-    > numeric and string data
-
+    with arithmetic, multiplicative and other common operations on
+    numeric and string data
 -   Testing string encoded data for regular expression and other
-    > micro-formats such as the logstash \`grok\`, \`dissect\`, \`kv\`
-    > or stringified embedded json
+    micro-formats such as the logstash `grok`, `dissect`, `kv`
+    or stringified embedded json
 
-The resulting language and interpreter for \`tremor-script\` forms the
+The resulting language and interpreter for `tremor-script` forms the
 basis of the solution and is largely designed around the needs of the
 logging domain - but delivered in a more generally useful incarnation
 that is more widely applicable to other domains - such as in flight data
@@ -141,7 +133,7 @@ driven performance optimizations. The combined effect of an efficient
 interpreter, the ability to easily benchmark synthetic analogs of real
 world use cases in our benchmark system, and the adoption of more
 workload appropriate and efficient low level memory allocators such as
-\`jemalloc\`, then \`mimalloc\`, then \`snmalloc\` by Microsoft Research
+`jemalloc`, then `mimalloc`, then `snmalloc` by Microsoft Research
 results an order of magnitude level of infrastructure cost savings. The
 production estate shrinks by 10x in terms of the number of deployed
 systems, the compute capacity required, and the committed memory

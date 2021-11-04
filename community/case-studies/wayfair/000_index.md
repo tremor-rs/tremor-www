@@ -12,8 +12,7 @@ our Kafka-based environments.
 
 ## The Origin of Tremor
 
-The [<u>Traffic
-Shaping</u>](./traffic-shaping)
+The [Traffic Shaping](./traffic-shaping)
 use case required that log information streaming from various systems be
 categorized and classified in-flight, so that temporally bound rate
 limits could be applied if, or rather when, our production estate has a
@@ -57,8 +56,8 @@ these datasets.
 The rising processing sophistication and the adoption of Tremor to
 displace and replace Logstash and other log shipping frameworks in our
 source hosts, and to displace and replace telegraf in our metrics
-environments gave birth to tremor as an [<u>event processing
-engine</u>](./data-distribution)
+environments gave birth to tremor as an [event processing
+engine](./data-distribution)
 in its own right.
 
 With richer programming primitives Tremor advanced from traffic shaping,
@@ -165,7 +164,7 @@ As the tremor community grows, we have seen great contributions from the
 growing tremor community adding support for many different types of
 systems - ranging from the addition of AMQP support by Nokia
 Communications through to our ongoing collaboration with Microsoft
-Research on the \`snmalloc\` allocator which tremor defaults to.  
+Research on the `snmalloc` allocator which tremor defaults to.  
   
 The tremor maintainers also work on the rust port of simd-json - SIMD
 accelerated JSON, which is a sister project to tremor. Mentorships via
