@@ -41,7 +41,7 @@ To achieve this, we'll need to implement the aggregate function:
 aggregate fn merge_records of
   # initialize the state, called at the beginning of a window, the lifetime of the state is until the results are emitted
   init() => 
-    state = {}
+    {}
   # called once for each event in the window        
   aggregate(state, event)  =>
     for event of
