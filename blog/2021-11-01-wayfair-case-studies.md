@@ -1,13 +1,12 @@
 ---
 title: Wayfair Case Study
+tags:  [case-study, wayfair]
 author: The Tremor Team
 author_url: https://github.com/tremor-rs
 author_image_url: https://avatars.githubusercontent.com/u/60009416?s=200&v=4
-tags:  [case-study, wayfair]
 image: ./media/wayfair.png
 draft: false
 hide_table_of_contents: false
-description: Tremor at Wayfair
 ---
 
 # Wayfair

@@ -1,6 +1,12 @@
 ---
-title: Wayfair Case Study - Nov 2021
-description: Case Study - Traffic Shaping
+title: Case Study - Traffic Shaping
+tags:  [case-study, wayfair]
+author: The Tremor Team
+author_url: https://github.com/tremor-rs
+author_image_url: https://avatars.githubusercontent.com/u/60009416?s=200&v=4
+image: ./media/wayfair.png
+draft: false
+hide_table_of_contents: false
 ---
 
 # Traffic Shaping
