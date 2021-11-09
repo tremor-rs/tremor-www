@@ -1,14 +1,17 @@
 ---
-title: Wayfair Case Study - Nov 2021
-description: Case Study - Data Flow
+title: Case Study - Data Flow with Tremor
+tags:  [case-study, wayfair]
+author: The Tremor Team
+author_url: https://github.com/tremor-rs
+author_image_url: https://avatars.githubusercontent.com/u/60009416?s=200&v=4
+image: ./media/wayfair.png
+draft: false
+hide_table_of_contents: false
 ---
 
 # Data Flow with Tremor
 
 ## Happened Before
-
-* [Traffic Shaping with Tremor - our origin story](/blog/2021_11_09_wayfair_traffic_shaping).
-* [Data Distribution with Tremor - event processing origins.](/blog/2021_11_09_wayfair_data_distribution)
   
 The simplified architecture of our systems is currently:  
   

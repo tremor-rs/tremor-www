@@ -1,19 +1,15 @@
 ---
-title: Wayfair Case Study - Nov 2021
-description: Case Study - PHP Platform Dead Code Elimination
+title: Case Study - Dead Code Detection in PHP
+tags:  [case-study, wayfair]
+author: Ramona Łuczkiewicz
+author_url: https://github.com/Agares
+author_image_url: https://avatars.githubusercontent.com/u/303398?v=4
+image: ./media/wayfair.png
+draft: false
+hide_table_of_contents: false
 ---
 
 # Dead Code Detection in PHP
-
-## Happened Before
-
-* [Traffic Shaping with Tremor - our origin story](/blog/2021_11_09_wayfair_traffic_shaping).
-* [Data Distribution with Tremor - event processing origins.](/blog/2021_11_09_wayfair_data_distribution)
-* [Data Flows with Tremor - the rise of query processing.](/blog/2021_11_09_wayfair_data_flow)
-* [Kubernetes and Sidecars - it all went cloud native.](/blog/2021_11_09_wayfair_kubernetes_sidecars)
-* [Modularity - the rise of reusability.](/blog/2021_11_09_wayfair_modularity)
-* [Transaction Orchestration](/blog/2021_11_09_wayfair_search)
-* [Unified Observability Platform](/blog/2021_11_09_wayfair_uop)
 
 ## Identified Need
 We have a humongous PHP application - around 20 million lines of code. It’s believed that there are certain parts of the codebase that are no longer used, but it’s hard to reliably find out which ones. Due to the dynamic nature of PHP, attempts at static analysis have failed. We decided that dynamic analysis was needed, and created a PHP extension that logs all the calls to all functions and methods. That’s a lot of data, and we used tremor to aggregate it.

@@ -1,6 +1,12 @@
 ---
-title: Wayfair Case Study - Nov 2021
-description: Case Study - Unified Observability Platform
+title: Case Study - Unified Observability Platform
+tags:  [case-study, wayfair]
+author: The Tremor Team
+author_url: https://github.com/tremor-rs
+author_image_url: https://avatars.githubusercontent.com/u/60009416?s=200&v=4
+image: ./media/wayfair.png
+draft: false
+hide_table_of_contents: false
 ---
 
 # Unified Observability Platform
@@ -24,15 +30,6 @@ by cloud providers.
 
 Moving 1000s of developers to a new technology stack when you are operating continuously
 with no downtime and at a large scale is hard.
-
-## Happened Before
-
-* [Traffic Shaping with Tremor - our origin story](/blog/2021_11_09_wayfair_traffic_shaping).
-* [Data Distribution with Tremor - event processing origins.](/blog/2021_11_09_wayfair_data_distribution)
-* [Data Flows with Tremor - the rise of query processing.](/blog/2021_11_09_wayfair_data_flow)
-* [Kubernetes and Sidecars - it all went cloud native.](/blog/2021_11_09_wayfair_kubernetes_sidecars)
-* [Modularity - the rise of reusability.](/blog/2021_11_09_wayfair_modularity)
-* [Transaction Orchestration](/blog/2021_11_09_wayfair_search)
 
 ## Identified Need
 
