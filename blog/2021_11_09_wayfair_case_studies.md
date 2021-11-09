@@ -1,3 +1,8 @@
+---
+title: Wayfair Case Study - Nov 2021
+description: Tremor at Wayfair
+---
+
 # Wayfair
 
 ![wayfair](./media/wayfair.png)
@@ -12,7 +17,7 @@ Kafka-based environments.
 
 ## The Origin of Tremor
 
-The [Traffic Shaping](./traffic-shaping)
+The [Traffic Shaping](/blog/2021_11_09_wayfair_traffic_shaping)
 use case required that log information streaming from various systems be
 categorized and classified in-flight, so that temporally bound rate
 limits could be applied if, or rather when, our production estate has a
@@ -56,7 +61,7 @@ The rising processing sophistication and the adoption of Tremor to
 displace and replace Logstash and other log shipping frameworks in our
 source hosts, and to displace and replace telegraf in our metrics
 environments gave birth to tremor as an [event processing
-engine](./data-distribution)
+engine](/blog/2021_11_09_wayfair_data_distribution)
 in its own right.
 
 With richer programming primitives Tremor advanced from traffic shaping,
@@ -74,7 +79,7 @@ language
 [<u>tremor-script</u>](/docs/next/getting-started/scripting)
 and its hygienic set of tooling and IDE integration supported adding a
 query language - giving birth to [<u>data flow
-processing</u>](./data-flow)
+processing</u>](/blog/2021_11_09_wayfair_data_flow)
 with tremor.
 
 ## Cloud native migration
@@ -92,7 +97,7 @@ allow our line of business service engineers to migrate to the cloud.
 Tremor was already battle-hardened as a sidecar deployment and this was
 extended to cloud-native deployments by our kubernetes team who packaged
 tremor for kubernetes as a set of [<u>helm
-charts</u>](./kubernetes-sidecars).
+charts</u>](/blog/2021_11_09_wayfair_kubernetes_sidecars).
 
 As a relatively fast-paced technology organization - our logging and
 metrics teams weren’t standing still - the scripting and query languages
@@ -100,7 +105,7 @@ enabled rapid development but lack of native support in tremor to
 modularise and reuse logic became a limiting factor.
 
 Thus, over the span of approximately a year most of the [<u>modularity
-mechanisms</u>](./modularity)
+mechanisms</u>](/blog/2021_11_09_wayfair_modularity)
 now standard in tremor today were developed.
 
 Tremor was now battle tested, battle hardened and widely adopted having
@@ -127,7 +132,7 @@ elementization and indexing that are multi-participant and that need to
 occur transactionally.
 
 Tremor’s QoS mechanisms were extended to support [<u>transaction
-orchestration</u>](./search)
+orchestration</u>](/blog/2021_11_09_wayfair_search)
 to enable this and similar use cases. Our search teams are also
 leveraging tremor for its traditional areas of strength in traffic
 shaping and adaptive rate limiting.
@@ -147,7 +152,7 @@ teams can now unify our production support, operations and services
 around tremor-based OpenTelemetry - preserving the key values that
 tremor adds, whilst opening up the cloud native new possibilities that
 OpenTelemetry and [<u>OpenTelemetry based
-services</u>](./uop)
+services</u>](/blog/2021_11_09_wayfair_uop)
 offer.
 
 ## Tremor tomorrow

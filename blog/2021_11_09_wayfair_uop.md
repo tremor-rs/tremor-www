@@ -1,3 +1,8 @@
+---
+title: Wayfair Case Study - Nov 2021
+description: Case Study - Unified Observability Platform
+---
+
 # Unified Observability Platform
 
 As Wayfair's technology organization modernizes its infrastructure services to meet
@@ -22,12 +27,12 @@ with no downtime and at a large scale is hard.
 
 ## Happened Before
 
-* [Traffic Shaping with Tremor - our origin story](./traffic-shaping).
-* [Data Distribution with Tremor - event processing origins.](./data-distribution)
-* [Data Flows with Tremor - the rise of query processing.](./data-flow)
-* [Kubernetes and Sidecars - it all went cloud native.](./kubernetes-sidecars)
-* [Modularity - the rise of reusability.](./modularity)
-* [Transaction Orchestration](./search)
+* [Traffic Shaping with Tremor - our origin story](/blog/2021_11_09_wayfair_traffic_shaping).
+* [Data Distribution with Tremor - event processing origins.](/blog/2021_11_09_wayfair_data_distribution)
+* [Data Flows with Tremor - the rise of query processing.](/blog/2021_11_09_wayfair_data_flow)
+* [Kubernetes and Sidecars - it all went cloud native.](/blog/2021_11_09_wayfair_kubernetes_sidecars)
+* [Modularity - the rise of reusability.](/blog/2021_11_09_wayfair_modularity)
+* [Transaction Orchestration](/blog/2021_11_09_wayfair_search)
 
 ## Identified Need
 

@@ -1,3 +1,8 @@
+---
+title: Wayfair Case Study - Nov 2021
+description: Case Study - Traffic Shaping
+---
+
 # Traffic Shaping
 
 ## Happened Before
@@ -127,4 +132,4 @@ is how we inject a little elasticity into our production quality of
 service - enriching our systems and services with just-in-time
 load-adaptive bendability.
 
-[new pipeline](./media/traffic-shaping/image3.png)
+![new pipeline](./media/traffic-shaping/image3.png)
