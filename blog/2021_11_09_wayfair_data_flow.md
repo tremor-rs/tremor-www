@@ -1,9 +1,14 @@
+---
+title: Wayfair Case Study - Nov 2021
+description: Case Study - Data Flow
+---
+
 # Data Flow with Tremor
 
 ## Happened Before
 
-* [Traffic Shaping with Tremor - our origin story](./traffic-shaping).
-* [Data Distribution with Tremor - event processing origins.](./data-distribution)
+* [Traffic Shaping with Tremor - our origin story](/blog/2021_11_09_wayfair_traffic_shaping).
+* [Data Distribution with Tremor - event processing origins.](/blog/2021_11_09_wayfair_data_distribution)
   
 The simplified architecture of our systems is currently:  
   

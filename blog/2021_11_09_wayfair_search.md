@@ -1,3 +1,8 @@
+---
+title: Wayfair Case Study - Nov 2021
+description: Case Study - Multi-Participant Transaction Orchestration
+---
+
 # Multi-Participant Transaction Orchestration
 
 The support for multi-participant transaction orchestration in tremor
@@ -9,11 +14,11 @@ team.
 The following tremor-based use cases were in production at scale at the time
 tremor was adopted for this use case to replace legacy solutions.
 
-* [Traffic Shaping with Tremor - our origin story](./traffic-shaping).
-* [Data Distribution with Tremor - event processing origins.](./data-distribution)
-* [Data Flows with Tremor - the rise of query processing.](./data-flow)
-* [Kubernetes and Sidecars - it all went cloud native.](./kubernetes-sidecars)
-* [Modularity - the rise of reusability.](./modularity)
+* [Traffic Shaping with Tremor - our origin story](/blog/2021_11_09_wayfair_traffic_shaping).
+* [Data Distribution with Tremor - event processing origins.](/blog/2021_11_09_wayfair_data_distribution)
+* [Data Flows with Tremor - the rise of query processing.](/blog/2021_11_09_wayfair_data_flow)
+* [Kubernetes and Sidecars - it all went cloud native.](/blog/2021_11_09_wayfair_kubernetes_sidecars)
+* [Modularity - the rise of reusability.](/blog/2021_11_09_wayfair_modularity)
 
 ## Identified Need
 
