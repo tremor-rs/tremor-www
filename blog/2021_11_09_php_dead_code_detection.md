@@ -1,3 +1,8 @@
+---
+title: Wayfair Case Study - Nov 2021
+description: Case Study - PHP Platform Dead Code Elimination
+---
+
 # Dead Code Detection in PHP
 
 ## Happened Before
