@@ -2,13 +2,13 @@
 
 ## Happened Before
 
-* [Traffic Shaping with Tremor - our origin story](./traffic-shaping).
-* [Data Distribution with Tremor - event processing origins.](./data-distribution)
-* [Data Flows with Tremor - the rise of query processing.](./data-flow)
-* [Kubernetes and Sidecars - it all went cloud native.](./kubernetes-sidecars)
-* [Modularity - the rise of reusability.](./modularity)
-* [Transaction Orchestration](./search)
-* [Unified Observability Platform](./uop)
+* [Traffic Shaping with Tremor - our origin story](/blog/2021_11_09_wayfair_traffic_shaping).
+* [Data Distribution with Tremor - event processing origins.](/blog/2021_11_09_wayfair_data_distribution)
+* [Data Flows with Tremor - the rise of query processing.](/blog/2021_11_09_wayfair_data_flow)
+* [Kubernetes and Sidecars - it all went cloud native.](/blog/2021_11_09_wayfair_kubernetes_sidecars)
+* [Modularity - the rise of reusability.](/blog/2021_11_09_wayfair_modularity)
+* [Transaction Orchestration](/blog/2021_11_09_wayfair_search)
+* [Unified Observability Platform](/blog/2021_11_09_wayfair_uop)
 
 ## Identified Need
 We have a humongous PHP application - around 20 million lines of code. It’s believed that there are certain parts of the codebase that are no longer used, but it’s hard to reliably find out which ones. Due to the dynamic nature of PHP, attempts at static analysis have failed. We decided that dynamic analysis was needed, and created a PHP extension that logs all the calls to all functions and methods. That’s a lot of data, and we used tremor to aggregate it.
