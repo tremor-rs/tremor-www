@@ -126,19 +126,18 @@ OpenTelemetry and [<u>OpenTelemetry-based services</u>](./uop) offer.
 
 ## Tremor Tomorrow
 
-As Tremor continues to evolve and grow in adoption inside Wayfair and
-in the wider Tremor and open-source community, we know that clustering
-primitives and better flexibility in composing distributed event-based
-systems are an important and commonly shared concern across the Tremor
-use cases we’ve seen at Wayfair, and the adoptions of Tremor in other
-organisations.
+As the tremor community grows, we have seen great contributions from the
+growing tremor community adding support for many different types of
+systems - ranging from the addition of AMQP support by Nokia
+Communications through to our ongoing collaboration with Microsoft
+Research on the `snmalloc` allocator which tremor defaults to. 
 
-As the Tremor community grows, we have seen great contributions from the
-growing Tremor community, adding support for many different types of
-systems- from the addition of AMQP support by Nokia
-Communications to our ongoing collaboration with Microsoft
-Research on the `snmalloc` allocator which Tremor defaults to.  
-  
+The latest production solution based on tremor at Wayfair is from our
+Developer Platforms technology organization - who have used an extension
+to PHP to identify [dead code](/blog/2021_11_09_php_dead_code_detection) in our legacy PHP monolith. This solution is
+based on tremor and included contributions to tremor in the form of the
+`unix_socket` connectivity. Thank you Ramona!
+
 The Tremor maintainers also work on the Rust port of simd-json- SIMD
 accelerated JSON, which is a sister project to Tremor. Mentorships via
 the Linux Foundation are also producing some wonderful new capabilities
