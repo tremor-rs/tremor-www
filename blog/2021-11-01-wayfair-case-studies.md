@@ -21,7 +21,7 @@ There were two use cases being considered at the time- the traffic-shaping use c
 
 ## The Origin of Tremor
 
-The [Traffic Shaping](./traffic-shaping)
+The [Traffic Shaping](./2021-11-02-traffic-shaping.md)
 use case required that log information streaming from various systems be
 categorized and classified in-flight, so that temporally bound rate
 limits could be applied when our production estate has a
@@ -51,7 +51,7 @@ quickly became sophisticated. A fairly quick succession of releases saw
 the logic change from fairly simple filtering, classification (enrichment)
 and rate limiting (selective dropping due to backpressure) to richer needs to slice and dice nested JSON-like data, to normalize
 these datasets. This rising need for sophistication in processing along with the adoption of Tremor to replace Logstash and other log shipping frameworks in our
-source hosts, and to replace Telegraf in our metrics environments, gave birth to Tremor as an [event processing engine](./data-distribution) in its own right.
+source hosts, and to replace Telegraf in our metrics environments, gave birth to Tremor as an [event processing engine](./2021-11-03-data-distribution.md) in its own right.
 
 With richer programming primitives, Tremor advanced from traffic shaping,
 and log and metrics shipping to log and metrics cleansing, normalisation,
@@ -62,9 +62,9 @@ originated via Syslog, to those via GELF, or Prometheus.
 
 The YAML-based configuration of the query pipelines quickly became error-prone and cumbersome as the sophistication, complexity and size of
 application logic grew. In addition, the success of our scripting
-language, [<u>tremor-script</u>](/docs/next/getting-started/scripting),
+language, [tremor-script](/docs/getting-started/scripting),
 and its hygienic set of tooling and IDE integration encouraged the addition a
-query language, thus enabling [<u>data flow processing</u>](./data-flow) with Tremor.
+query language, thus enabling [data flow processing](./2021-11-04-data-flow.md) with Tremor.
 
 ## Cloud Native Migration
 
@@ -78,13 +78,12 @@ allow our line of business service engineers to migrate to the cloud.
 
 Tremor was already battle-hardened as a sidecar deployment, and this was
 extended to Cloud-native deployments by our kubernetes team who packaged
-Tremor for kubernetes as a set of [<u>helm charts</u>](./kubernetes-sidecars).
+Tremor for kubernetes as a set of [helm charts](./2021-11-05-kubernetes-sidecars.md).
 
 As a relatively fast-paced technology organisation, our logging and
 metrics teams weren’t stalled- the scripting and query languages
 enabled rapid development. However, lack of native support in Tremor to
-modularise and reuse logic became a limiting factor. Thus, over the span of approximately a year, most of the [<u>modularity
-mechanisms</u>](./modularity), now standard in Tremor, were developed.
+modularise and reuse logic became a limiting factor. Thus, over the span of approximately a year, most of the [modularity mechanisms](./2021-11-06-modularity.md), now standard in Tremor, were developed.
 
 Tremor was now battle-tested, battle-hardened and widely adopted, having
 gone through many enhancements and replacing many disparate tools and
@@ -109,8 +108,7 @@ search domain has some complex use cases for audited document
 elementisation and indexing that are multi-participant and that need to
 occur transactionally.
 
-Tremor’s QoS mechanisms were extended to support [<u>transaction
-orchestration</u>](./search) to enable this and similar use cases. Our search teams are also
+Tremor’s QoS mechanisms were extended to support [transaction orchestration](./2021-11-07-search.md) to enable this and similar use cases. Our search teams are also
 leveraging Tremor for its traditional areas of strength in traffic
 shaping and adaptive rate limiting.
 
@@ -128,7 +126,7 @@ building block, now natively supported in Tremor, our observability
 teams can now unify our production support, operations and services
 around Tremor-based OpenTelemetry- preserving the key values that
 Tremor adds, whilst opening up the Cloud Native new possibilities that
-OpenTelemetry and [<u>OpenTelemetry-based services</u>](./uop) offer.
+OpenTelemetry and [OpenTelemetry-based services](./2021-11-08-uop.md) offer.
 
 ## Tremor Tomorrow
 
@@ -140,7 +138,7 @@ Research on the `snmalloc` allocator which tremor defaults to.
 
 The latest production solution based on tremor at Wayfair is from our
 Developer Platforms technology organization - who have used an extension
-to PHP to identify [dead code](/blog/2021_11_09_php_dead_code_detection) in our legacy PHP monolith. This solution is
+to PHP to identify [dead code](./2021-11-09-php-dead-code-detection.md) in our legacy PHP monolith. This solution is
 based on tremor and included contributions to tremor in the form of the
 `unix_socket` connectivity. Thank you Ramona!
 
@@ -157,5 +155,5 @@ result of open-sourcing the project. We are hoping to package and open-source mo
 Tremor Project, and through other open-source projects at Wayfair
 through our new Open Source Program Office.
 
-If you are interested, hop on over to our [<u>community chat
-server</u>](https://chat.tremor.rs/) and say hello!
+If you are interested, hop on over to our [community chat
+server](https://chat.tremor.rs/) and say hello!
