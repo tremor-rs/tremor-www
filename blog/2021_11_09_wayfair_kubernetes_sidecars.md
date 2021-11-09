@@ -1,10 +1,15 @@
+---
+title: Wayfair Case Study - Nov 2021
+description: Case Study - Kubernetes Sidecars
+---
+
 # Kubernetes and Tremor Sidecars
 
 ## Happened Before
 
-* [Traffic Shaping with Tremor - our origin story](./traffic-shaping).
-* [Data Distribution with Tremor - event processing origins.](./data-distribution)
-* [Data Flows with Tremor - the rise of query processing.](./data-flow)
+* [Traffic Shaping with Tremor - our origin story](/blog/2021_11_09_wayfair_traffic_shaping).
+* [Data Distribution with Tremor - event processing origins.](/blog/2021_11_09_wayfair_data_distribution)
+* [Data Flows with Tremor - the rise of query processing.](/blog/2021_11_09_wayfair_data_flow)
   
 The simplified architecture of our systems is currently:  
   
