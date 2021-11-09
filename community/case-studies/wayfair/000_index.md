@@ -6,9 +6,9 @@ Development on tremor started in the autumn of 2018 as a point solution
 for introducing a configurable traffic shaping mechanism for our
 infrastructure platform engineering organization.
 
-There were two use cases being considered at the time - this use case
-had the highest priority. The other was distributed data replication for
-our Kafka-based environments.
+There were two use cases being considered at the time - the traffic-shaping use case,
+which had the highest priority, and the distributed data replication use case for our
+Kafka-based environments.
 
 ## The Origin of Tremor
 
@@ -39,10 +39,9 @@ InfluxDB downstream rather than ElasticSearch, but the logic was
 basically the same ).
 
 Tremor was designed to detect or sense when downstream systems are
-suffering back-pressure and to intelligently - based on user defined
-logic - to react by adaptively tuning the data distribution to
-selectively discard or forward data based on a classification system and
-rate limits.
+suffering back-pressure and based on user defined logic - to react
+to events by adaptively tuning the data distribution to selectively
+discard or forward data based on a classification system and rate limits.
 
 ## The Rise of event processing
 
