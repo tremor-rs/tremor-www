@@ -1,16 +1,15 @@
 ---
-title: Wayfair Case Study - Nov 2021
-description: Case Study - Modularity
+title: Case Study - Modularity, Oh My
+tags:  [case-study, wayfair]
+author: The Tremor Team
+author_url: https://github.com/tremor-rs
+author_image_url: https://avatars.githubusercontent.com/u/60009416?s=200&v=4
+image: ./media/wayfair.png
+draft: false
+hide_table_of_contents: false
 ---
 
 # Modularity, Oh My
-
-## Happened Before
-
-* [Traffic Shaping with Tremor - our origin story](/blog/2021_11_09_wayfair_traffic_shaping).
-* [Data Distribution with Tremor - event processing origins.](/blog/2021_11_09_wayfair_data_distribution)
-* [Data Flows with Tremor - the rise of query processing.](/blog/2021_11_09_wayfair_data_flow)
-* [Kubernetes and Sidecars - it all went cloud native.](/blog/2021_11_09_wayfair_kubernetes_sidecars)
 
 ## Identified Need
 

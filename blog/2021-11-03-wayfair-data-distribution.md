@@ -1,13 +1,17 @@
 ---
-title: Wayfair Case Study - Nov 2021
-description: Case Study - Data Distribution
+title: Case Study - Data Distribution
+tags:  [case-study, wayfair]
+author: The Tremor Team
+author_url: https://github.com/tremor-rs
+author_image_url: https://avatars.githubusercontent.com/u/60009416?s=200&v=4
+image: ./media/wayfair.png
+draft: false
+hide_table_of_contents: false
 ---
 
 # Data Distribution with Tremor
 
 ## Happened Before
-
-* [Traffic Shaping with Tremor - our origin story](/blog/2021_11_09_wayfair_traffic_shaping).
 
 After the initial production success of tremor as a point solution for capacity
 management during our peak trading cycles at Wayfair, the focus shifted a little
