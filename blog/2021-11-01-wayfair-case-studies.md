@@ -51,7 +51,7 @@ quickly became sophisticated. A fairly quick succession of releases saw
 the logic change from fairly simple filtering, classification (enrichment)
 and rate limiting (selective dropping due to backpressure) to richer needs to slice and dice nested JSON-like data, to normalize
 these datasets. This rising need for sophistication in processing along with the adoption of Tremor to replace Logstash and other log shipping frameworks in our
-source hosts, and to replace Telegraf in our metrics environments, gave birth to Tremor as an [event processing engine](./2021-11-03-data-distribution.md) in its own right.
+source nodes, and to replace Telegraf in our metrics environments, gave birth to Tremor as an [event processing engine](./2021-11-03-data-distribution.md) in its own right.
 
 With richer programming primitives, Tremor advanced from traffic shaping,
 and log and metrics shipping to log and metrics cleansing, normalisation,
