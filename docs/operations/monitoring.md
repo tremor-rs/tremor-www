@@ -132,12 +132,12 @@ onramp:
     type: kafka
     codec: json
     config:
-      # abbirivated
+      # abbreviated
 offramp:
   - id: elastic-out-stores
     type: elastic
     config:
-      # abbirivated
+      # abbreviated
 
 pipeline:
   - id: main
