@@ -1,6 +1,6 @@
 TREMOR_VSN=main
 
-all: docs/operations/cli.md docs/scripting/tremor-script/stdlib docs/scripting/tremor-query/functions
+all: docs/scripting/tremor-script/stdlib docs/scripting/tremor-query/functions
 
 netlify: all
 	npm run build
@@ -20,11 +20,8 @@ docs/scripting/tremor-query/functions: tremor-runtime
 	-rm -r docs/scripting/tremor-query/functions
 	cp -r tremor-runtime/aggr-docs docs/scripting/tremor-query/functions
 
-docs/operations/cli.md: tremor-runtime
-	python3 ./python_scripts/cli2md.py tremor-runtime/tremor-cli/src/cli.yaml > docs/operations/cli.md
-
 clean:
-	-rm -rf docs/operations/cli.md docs/scripting/tremor-script/stdlib docs/scripting/tremor-query/functions
+	-rm -rf docs/scripting/tremor-script/stdlib docs/scripting/tremor-query/functions
 
 reset: 
 	-rm -rf /node_modules
