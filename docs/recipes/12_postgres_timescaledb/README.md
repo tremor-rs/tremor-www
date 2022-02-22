@@ -1,4 +1,4 @@
-# Transform
+# PostgreSQL TimescaleDB
 
 This example demonstrates extracting data from a Postgres database and inserting
 data to TimescaleDB.
