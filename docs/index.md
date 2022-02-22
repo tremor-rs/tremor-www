@@ -32,7 +32,6 @@ Other interesting topics are:
 * Operational information about
     * [Monitoring](operations/monitoring.md)
     * [Configuration](operations/configuration.md) and the [Configuration Walkthrough](operations/configuration-walkthrough.md)
-    * [The tremor CLI](operations/cli.md)
 * [The tremor API](/api/0/)
 * [Recipes](recipes/README.md)
 
