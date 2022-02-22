@@ -1,4 +1,4 @@
-# Transform
+# Logstash
 
 This example shows how handling apache logs with a tremor and elastic search could work. The example is a lot more complex than the initial showcases and combines three components.
 

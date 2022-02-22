@@ -1,4 +1,4 @@
-# Transform
+# Influx
 
 This example demonstrates using Tremor as a proxy and aggregator for InfluxDB data. As such it coveres three topics. Ingesting and decoding influx data is the first part. Then grouping this data and aggregating over it.
 
