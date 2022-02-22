@@ -10,6 +10,9 @@ tremor-runtime:
 	cd tremor-runtime &&\
 	git checkout $(TREMOR_VSN)
 
+openapi.yaml: tremor-runtime
+	cp tremor-runtime/static/openapi.yaml ./openapi.yaml
+
 docs/scripting/tremor-script/stdlib: tremor-runtime
 	cd tremor-runtime && make stdlib-doc
 	-rm -r docs/scripting/tremor-script/stdlib
