@@ -1,8 +1,8 @@
 TREMOR_VSN=main
 
-all: docs/scripting/tremor-script/stdlib docs/scripting/tremor-query/functions
+all: docs/scripting/tremor-script/stdlib docs/scripting/tremor-query/functions openapi.yaml
 
-netlify: all
+netlify: all | reset
 	npm run build
 
 tremor-runtime:
