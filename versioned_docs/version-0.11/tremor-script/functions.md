@@ -5,7 +5,7 @@ advanced data manipulation or access to additional information.
 
 Functions are namespaced to make identification easier.
 
-Tremor also supports user defined functions. There are a few
+Tremor also supports user-defined functions. There are a few
 noteworthy restrictions:
 
 1. Functions are pure / side effect free - you can not mutate `event`, `state`,
@@ -20,14 +20,14 @@ noteworthy restrictions:
 Function Declaration Grammar:
 > ![function clause](grammar/diagram/FnDecl.png)
 
-Lets look at the types of functions we have.
+Letns look at the types of functions we have.
 
 ## Intrinsic Functions
 
 ![intrinsic fn](grammar/diagram/IntrinsicFnDecl.png)
 
-Intrinsic functions represent builtin or pre-defined functions implemented in the rust programming
-language that are a builtin component of the tremor project and are provided out of the box.
+Intrinsic functions represent builtin or pre-defined functions implemented in the Rust programming
+language that are a builtin component of the Tremor project and are provided out of the box.
 
 The function reference in this documentation set, for example, is generated from the documentation
 provided in the standard library. The standard library is primarily composed of intrinsic or bulitin
@@ -58,10 +58,10 @@ function definition. The anonymous arguments will be provided via the `args` key
 
 ### Recursion
 
-Tail-recursion is provided for fixed arity ( number of arguments ) tandard functions.
+Tail-recursion is provided for fixed arity ( number of arguments ) standard functions.
 
-Tremor imposes a restriction in recursion depth. As tremor is an event processing system
-it is not desirable to have long running functions that block events from being processed
+Tremor imposes a restriction in recursion depth. As Tremor is an event processing system
+it is not desirable to have long-running functions that block events from being processed
 through the system.
 
 ```tremor
@@ -98,13 +98,13 @@ including extractors. If any extracting pattern is used and matches the function
 argument will be replaced by the result of the extraction.
 
 ```tremor
-## calculates the fibonaci sequence
+## calculates the fibonacci sequence
 fn fib_(a, b, n) of
   case (a, b, n) when n > 0 => recur(b, a + b, n - 1)
   default => a
 end;
 
-## calculates the fibonaci sequence
+## calculates the fibonacci sequence
 fn fib(n) with
   fib_(0, 1, n)
 end;
