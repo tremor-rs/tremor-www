@@ -20,7 +20,7 @@ noteworthy restrictions:
 Function Declaration Grammar:
 > ![function clause](grammar/diagram/FnDecl.png)
 
-Letns look at the types of functions we have.
+Let's look at the types of functions we have.
 
 ## Intrinsic Functions
 
