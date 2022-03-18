@@ -1,14 +1,17 @@
 TREMOR_VSN=main
 
-all: docs/scripting/tremor-script/stdlib docs/scripting/tremor-query/functions
+all: docs/scripting/tremor-script/stdlib docs/scripting/tremor-query/functions openapi.yaml
 
-netlify: all
+netlify: all | reset
 	npm run build
 
 tremor-runtime:
 	-git clone https://github.com/tremor-rs/tremor-runtime
 	cd tremor-runtime &&\
 	git checkout $(TREMOR_VSN)
+
+openapi.yaml: tremor-runtime
+	cp tremor-runtime/static/openapi.yaml ./openapi.yaml
 
 docs/scripting/tremor-script/stdlib: tremor-runtime
 	cd tremor-runtime && make stdlib-doc

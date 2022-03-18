@@ -1,4 +1,4 @@
-# Transform
+# Validate
 
 The `validate` example adds the concept of scripts to the trickle file. In this script we validate the schema of the input json against some requirements and only let events through that do satisfy them. Other events are dropped. Those changes are entirely inside the [`example.trickle`](etc/tremor/config/example.trickle).
 
