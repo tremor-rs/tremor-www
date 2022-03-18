@@ -1,3 +1,0 @@
-mapping:
-  /binding/rabbit_amqp/01:
-    instance: "01"
