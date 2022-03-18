@@ -1,0 +1,122 @@
+define script process
+script
+  use std::array;
+  use std::string;
+  use std::json;
+  use std::type;
+  use tremor::origin;
+
+  # picked up from ../lib folder here
+  #use utils;
+
+  # defaults for the server response
+  let $response = {
+      "status": 200,
+      "headers": {
+        "content-type": "application/json",
+        "x-powered-by": "Tremor",
+      }
+    };
+
+  # short-circuit if $request is absent
+  match absent $request of
+    case true =>
+      let $response.status = 500,
+      emit {
+        "error": "Not a request",
+        "event": event,
+      } => "app_error"
+    default =>
+      null
+  end;
+
+  # --------------------------------------------------------------------------
+
+  fn last_path_segment(path) with
+    let split_path = string::split(path, "/");
+    split_path[array::len(split_path) - 1]
+  end;
+
+  # content based on method and path combo
+  match [$request.method, $request.url.path] of
+    case %("GET", "/") =>
+      let $response.headers["content-type"] = "text/plain",
+      emit """
+      Welcome to the Logging Quota Service!
+
+      Available routes:
+
+      GET /quotas
+      GET /quotas/<quota_name>
+      PUT /quotas/<quota_name>
+      DELETE /quotas/<quota_name>
+
+      HEAD /ping
+
+      * /echo
+      """
+
+    case %("GET", "/quotas") =>
+      # get all quotas
+      emit {"scan": {}} => "quotas"
+
+    case %("GET", ~ glob|/quotas/?*|) =>
+      # get a specific quota
+      let quota_name = last_path_segment($request.url.path),
+      emit {"get": {"key": quota_name}} => "quotas"
+    case %("DELETE", ~ glob|/quotas/?*|) =>
+      # delete a quota
+      let quota_name = last_path_segment($request.url.path),
+      emit {"delete": {"key": quota_name}} => "quotas"
+    case %("PUT", ~ glob|/quotas/?*|) =>
+      # add a quota
+      # put returns the old value, we need the new one to be forwarded as well
+      let $correlation = event,
+      let quota_name = last_path_segment($request.url.path),
+      emit {"put": {"key": quota_name, "value": event }} => "quotas"
+
+    # TODO add path for setting total instances
+    case %("HEAD", "/ping") =>
+      emit "pong"
+
+    # useful for debugging (also matches all methods)
+    case %(_, "/echo") =>
+      emit {
+        "body": event,
+        "meta": $request,
+      }
+
+    # our top-secret endpoint
+    case %("GET", "/snot") =>
+      emit "badger"
+
+    # example for runtime error handling
+    case %("GET", "/error-test") =>
+      emit non_existent_var
+
+    default =>
+      let $response.status = 404,
+      emit {
+        "error": "Path '#{$request.url.path}' not found for method #{$request.method}",
+        "event": event,
+      } => "app_error"
+  end;
+end;
+
+create script process;
+
+# main request processing
+select event from in into process;
+
+# this will send short circuiting HTTP responses back
+select event from process into out;
+
+# forward requests to the kv state offramp
+select event from process/quotas into out/quotas;
+
+# our defined app errors (still succesful processing from tremor's perspective)
+# useful to track these from different port (app_error) for metrics
+select event from process/app_error into out;
+
+# tremor runtime errors from the processing script
+select event from process/err into err;

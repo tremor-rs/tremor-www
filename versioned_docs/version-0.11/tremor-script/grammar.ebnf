@@ -1,0 +1,232 @@
+/**
+ * Color: #4D88FF
+ */
+
+/**
+ * Literal documentation support
+ */
+
+ModComment ::=
+    ModComment ModCommentLine |
+    ModCommentLine
+
+ModCommentLine ::=
+    '###' ( [^\n] )* '\n'
+
+DocComment ::=
+    DocComment DocCommentLine |
+    DocCommentLine
+
+DocCommentLine ::=
+    '##' ( [^\n] )* '\n'
+
+/**
+  * Tremor Script Language v0.10
+  */
+
+Script ::=
+    ModComment? ( Exprs | Expr ) |
+    ( Exprs | Expr )
+
+
+Exprs ::=
+    Expr  ';' Exprs
+    | Expr ';'
+
+Expr ::= Expr 'or' XorExpr | XorExpr
+
+XorExpr ::= XorExpr 'xor' AndExpr  | AndExpr
+
+AndExpr ::= AndExpr 'and' BitOrExpr | BitOrExpr
+
+BitOrExpr ::= BitOrExpr '|' BitXorExpr  | BitXorExpr
+
+BitXorExpr ::= BitXorExpr '^' BitAndExpr  | BitAndExpr
+
+BitAndExpr ::= BitAndExpr '&' BinExpr | BinExpr
+
+BinExpr ::= EqExpr ( '&&' | '||' ) EqExpr | EqExpr
+
+EqExpr ::= CmpExpr ( '==' | '!=' ) CmpExpr | CmpExpr
+
+CmpExpr ::= AddExpr ( '>=' | '>' | '<=' | '<' ) BitShiftExpr | BitShiftExpr
+
+BitShiftExpr ::= BitShiftExpr ( '>>' | '<<<' | '<<' ) AddExpr | AddExpr
+
+AddExpr ::= MulExpr ( '+' | '-' ) MulExpr | MulExpr
+
+MulExpr ::= UnaryExpr ( '*' | '/' | '%' ) UnaryExpr | UnaryExpr
+
+UnaryExpr ::= ( '+' | '-' ) NotExpr
+
+NotExpr ::= 'not' PresenceExpr
+
+PresenceExpr ::= ( 'present' | 'absent' ) SimpleExpr
+
+SimpleExpr ::= Literal | '(' Expr ')' | Path | Record | Match | Patch | 
+    Merge | FnCall | For | Let | Const | FnDecl |
+    ModuleExpr | Drop | Emit
+
+Literal ::=
+    'null' | Bool | INTEGER | FLOAT | String | Array | Binary
+
+
+Binary ::= '<<' BinaryFields '>>'  | '<<' '>>' 
+
+BinaryFields ::= BinaryFields ',' BinaryFields | BinaryField 
+
+BinaryField ::= SimpleExpr | SimpleExpr ':' INTEGER | SimpleExpr '/' BinaryType | SimpleExpr ':' INTEGER '/' BinaryType
+
+BinaryType ::= Ident | Ident '-' Ident | Ident '-' Ident '-' Ident
+
+Record ::= '{' Fields '}'
+
+Fields ::= Fields ',' Field | Field
+
+Field ::= STRING_LITERAL ':' Expr
+
+Array ::= '[' ArrayElements ']' | '[' ']'
+
+ArrayElements ::= Expr ',' ArrayElements | Expr
+
+Bool ::=
+    'true' | 'false'
+
+Let ::=
+    'let' Path '=' SimpleExpr |
+    DocComment 'let' Path '=' SimpleExpr
+
+Const ::=
+    'const' Path '=' SimpleExpr |
+    DocComment 'const' Path '=' SimpleExpr
+
+Module ::=
+    'mod' Id 'with' DocComment? ModuleExprs 'end'
+
+ModuleExprs ::=
+    ModuleExpr ';' ModuleExprs |
+    ModuleExpr ';'
+
+ModuleExpr ::=
+    Const | FnDecl | Module
+
+FnDecl ::= IntrinsicFnDecl | SimpleFnDecl | MatchingFnDecl
+
+IntrinsicFnDecl ::=
+    DocComment? 'intrinsic' 'fn' Id '(' ')' 'as' Id '::' Id |
+    DocComment? 'intrinsic' 'fn' Id '(' FnDeclArgs ')' 'as' Id '::' Id |
+    DocComment? 'intrinsic' 'fn' Id '(' FnDeclArgs ',' '...' ')' 'as' Id '::' Id |
+    DocComment? 'intrinsic' 'fn' Id '(' '...' ')' 'as' Id '::' Id
+
+SimpleFnDecl ::=
+    DocComment? 'fn' Id '(' ')' 'with' FnDeclBody 'end' |
+    DocComment? 'fn' Id '(' '...' ')' 'with' FnDeclBody 'end' |
+    DocComment? 'fn' Id '(' FnDeclArgs ')' 'with' FnDeclBody 'end' |
+    DocComment? 'fn' Id '(' FnDeclArgs ',' '...' ')' 'with' FnDeclBody 'end'
+
+MatchingFnDecl ::=
+    DocComment? 'fn' Id '(' ')' 'of' FnDeclCases 'end' |
+    DocComment? 'fn' Id '(' FnDeclArgs ')' 'of' FnDeclCases 'end' |
+    DocComment? 'fn' Id '(' ')' 'of' FnDeclCases 'end'
+
+FnDeclArgs ::=
+    Id |
+    FnDeclArgs ',' Id
+
+FnDeclBody ::= Exprs
+
+FnDeclCaseClause ::=
+    'case' '(' ArrayPattern ')' Guard Effectors
+
+FnDeclCaseDefault ::=
+    'default' Effectors
+
+FnDeclCases ::=
+    FnDeclCases FnCaseClause FnDeclCaseDefault |
+    FnDeclCaseDefault
+
+Emit ::= 'emit' Expr ( '=>' STRING_LITERAL )?
+
+Drop ::= 'drop'
+
+Match ::= 'match' Expr 'of' MatchCaseClauses 'end'
+MatchCaseClauses ::= MatchCaseClause ',' MatchCaseClauses | MatchCaseClause
+MatchCaseClause ::= 'case' ( RecordCase | ArrayCase | TupleCase | ExprCase ) Guard? Effectors
+
+RecordCase ::= ( Id '=' )? RecordPattern
+RecordPattern ::= '%{' RecordPatternFields '}'
+RecordPatternFields ::= ( Id '=' )? Id '~=' ( TestExpr | RecordPattern | ArrayPattern ) | Id ( '==' | '!=' ) SimpleExpr
+
+TestExpr ::= Id TEST_LITERAL
+
+ArrayCase ::= ( Id '=' )? ArrayPattern
+ArrayPattern ::= '%[' ArrayPatternFilters ']'
+ArrayPatternFilters ::= ArrayPatternFilters ',' ArrayPatternFilter | ArrayPatternFilter
+ArrayPatternFilter ::= '~' TestExpr | Expr | RecordPattern
+
+TupleCase ::=  ( Id '=' )? TuplePattern
+TuplePattern ::=
+    '%(' ')' |
+    '%(' '...' ')' |
+    '%(' TuplePatternFilters OpenTuple ')'
+OpenTuple ::= ( ',' '...' )?
+TuplePatternFilters ::= TuplePatternFilters ',' TuplePatternFilter | TuplePatternFilter
+TuplePatternFilter ::= ArrayPatternFilter | '_'
+
+ExprCase ::= ( Id '=' )? Expr
+
+Guard ::= 'when' Expr
+
+Effectors ::= '=>' Block
+
+Block ::= Block ',' Expr | Block
+
+Patch ::= 'patch' Expr 'of' PatchOperations 'end'
+PatchOperations ::= PatchOperation ',' PatchOperations | PatchOperation
+PatchOperation ::= ( 'insert' | 'upsert' | 'update' | 'merge' ) Expr '=>' Expr | 'merge' '=>' Expr | 'erase' Id
+
+Merge ::= 'merge' Expr 'of' Expr 'end'
+
+For ::= 'for' Expr 'of' ForCaseClause 'end'
+
+ForCaseClause ::=
+    'case' '(' Id ',' Id ')' Expr |
+    'case' '(' Id ',' Id ')' 'when' Expr '=>' Expr
+
+FnCall ::= ( Id '::' )* Id '(' FnArgs ')' | Id '::' '(' ')'
+FnArgs ::= FnArgs ',' Expr | Expr
+
+Path ::= '$' QualifiedSegments | '$'
+    | 'event' '.' QualifiedSegments | 'event' '[' ArraySegment ']' | 'event'
+    | 'state' '.' QualifiedSegments | 'state' '[' ArraySegment ']' | 'state'
+    | 'args' '.' QualifiedSegments  | 'args' '[' ArraySegment ']' | 'args'
+    | Id LocalSegments
+
+QualifiedSegments ::= QualifiedSegments '.' PathSegment
+    | QualifiedSegments '[' ArraySegment ']'
+    | '[' ArraySegment ']'
+
+LocalSegments ::= '.' PathSegment LocalSegments
+    | '[' ArraySegment ']' LocalSegments
+    | '[' ArraySegment ']'
+    | '.' PathSegment
+
+PathSegment ::= Id
+
+ArraySegment ::= Expr ':' ArraySegment | Expr
+
+STRING_LITERAL
+         ::= '"' ( ([^#x22#x5C#xA#xD]) | STRING_ESCAPE )* '"'
+STRING_ESCAPE    ::= '\' [tbnrf\"']
+
+TEST_LITERAL
+         ::= '|' ( ([^#x22#x5C#xA#xD]) | TEST_ESCAPE )* '|'
+TEST_ESCAPE    ::= '\' [\n|\]
+
+Id ::= '`' ([^`])* '`' | [a-z][A-Z] ([a-z][A-Z][0-9]_)*
+
+INTEGER  ::= [0-9]+
+
+DECIMAL  ::= [0-9]* '.' [0-9]+
+FLOAT    ::= [0-9]+ '.' [0-9]* EXPONENT | '.' ([0-9])+ EXPONENT | ([0-9])+ EXPONENT
+EXPONENT ::= [eE] [+-]? [0-9]+

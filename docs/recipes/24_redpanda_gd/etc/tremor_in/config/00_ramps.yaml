@@ -1,0 +1,18 @@
+# The onramp and offramp sections of configuration specify external sources and sinks
+# to an instance of tremor server.
+#
+onramp:
+  - id: metronome
+    type: metronome
+    config:
+      interval: 1000 # Every second
+
+offramp:
+  - id: redpanda-out
+    type: kafka
+    codec: json
+    config:
+      group_id: tremor-in
+      brokers:
+        - redpanda:9092
+      topic: tremor
