@@ -32,3 +32,6 @@ log/
 
 # openapi fetched from tremor-runtime
 /openapi.yaml
+
+# ignore lalrop-docgen
+lalrpop-docgen

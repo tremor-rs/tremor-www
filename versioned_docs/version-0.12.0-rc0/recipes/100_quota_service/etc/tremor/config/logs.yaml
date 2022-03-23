@@ -1,0 +1,36 @@
+onramp:
+  - id: tcp
+    type: tcp
+    preprocessors:
+      - lines
+    codec: json
+    config:
+      host: 0.0.0.0
+      port: 12202
+
+offramp:
+  - id: elastic
+    type: elastic
+    codec: json
+    config:
+      nodes:
+        - http://elasticsearch:9200
+
+binding:
+  - id: logs
+    links:
+      "/onramp/tcp/{instance}/out":
+        - "/pipeline/logs/{instance}/in"
+      "/pipeline/logs/{instance}/out":
+        - "/offramp/elastic/{instance}/in"
+        # for debugging
+        #- "/offramp/system::stdout/system/in"
+      "/pipeline/logs/{instance}/err":
+        - "/offramp/system::stderr/system/in"
+      # for debugging (inspect tremor metrics)
+      #"/pipeline/system::metrics/system/out":
+      #  - "/offramp/system::stdout/system/in"
+
+mapping:
+  /binding/logs/01:
+    instance: "01"

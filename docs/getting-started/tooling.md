@@ -1,10 +1,4 @@
----
-title: Tooling
-description: Good user experience- Tooling is a first class concern for Tremor.
-hide_table_of_contents: false
----
-
-### IDE Integration
+# IDE Integration and tooling
 
 ![tremor-vim](/img/tremor/tremor-vim.png)
 

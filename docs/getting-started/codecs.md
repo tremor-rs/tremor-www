@@ -1,10 +1,4 @@
----
-title: Codecs
-description: Understanding data. De- and encode data from wire formats.
-hide_table_of_contents: false
----
-
-### Concept
+# Codecs
 
 Tremor connects to the external systems using connectors.
 
@@ -19,7 +13,7 @@ Tremor's internal type system is JSON-like.
 `Onramps` and `Offramps` support `preprocessors` and `postprocessors`. External data ingested into Tremor via `Onramps` can be pre-processed through multiple transfomers before a code is applied to convert the data into Tremor-internal form. Preprocessors are configured as a chain of transformations. Postprocessors
 are applied to values leaving Tremor after a codec transforms them from Tremor internal form to wire form. Postprocessors are configured as a chain of transformations.
 
-Codecs share similar concepts to [extractors](https://www.tremor.rs/docs/tremor-script/extractors/), but differ in their application. Codecs are applied to external data as they are ingested by or egressed from a running Tremor process.
+Codecs share similar concepts to [extractors](/docs/extractors/overview), but differ in their application. Codecs are applied to external data as they are ingested by or egressed from a running Tremor process.
 Extractors, on the other hand, are Tremor-internal and convert data from and to Tremor's internal value type.
 
 ### Data Format
@@ -41,35 +35,35 @@ For specific components, their documentation should be consulted for correct usa
 
 Tremor supports the encoding and decoding of the following formats:
 
-* [json](/docs/artefacts/codecs#json)
-* [msgpack](/docs/artefacts/codecs#msgpack)
-* [influx](/docs/artefacts/codecs#influx)
-* [binflux](/docs/artefacts/codecs#binflux)- (binary representation of the influx wire protocol).
-* [statsd](/docs/artefacts/codecs#statsd)
-* [yaml](/docs/artefacts/codecs#yaml)
-* [string](/docs/artefacts/codecs#string)- any valid UTF-8 string sequence.
+* [json](/docs/connectors/codecs#json)
+* [msgpack](/docs/connectors/codecs#msgpack)
+* [influx](/docs/connectors/codecs#influx)
+* [binflux](/docs/connectors/codecs#binflux)- (binary representation of the influx wire protocol).
+* [statsd](/docs/connectors/codecs#statsd)
+* [yaml](/docs/connectors/codecs#yaml)
+* [string](/docs/connectors/codecs#string)- any valid UTF-8 string sequence.
 
 <h3 class="section-head" id="h-concept"><a href="#h-codecs"></a>Pre- and Postprocessors</h3>
 
 Tremor supports the following preprocessing transformations in `Onramp` configurations:
 
-* [lines](/docs/artefacts/preprocessors/#lines)- split by newline.
-* [lines-null](/docs/artefacts/preprocessors/#lines-null)- split by null byte.
-* [lines-pipe](/docs/artefacts/preprocessors/#lines-pipe)- split by `|`.
-* [base64](/docs/artefacts/preprocessors/#base64)- base64 decoding.
-* [decompress](/docs/artefacts/preprocessors/#decompress)- auto detecting decompress.
-* [gzip](/docs/artefacts/preprocessors/#gzip)- gzip decompress.
-* [zlib](/docs/artefacts/preprocessors/#zlib)- zlib decompress.
-* [xz](/docs/artefacts/preprocessors/#xz)- xz decompress.
-* [snappy](/docs/artefacts/preprocessors/#snappy)- snappy decompress.
-* [lz4](/docs/artefacts/preprocessors/#lz4)- zl4 decompress.
-* [gelf-chunking](/docs/artefacts/preprocessors/#gelf-chunking)- GELF chunking support.
-* [remove-empty](/docs/artefacts/preprocessors/#remove-empty)- remove emtpy (0 len) messages.
-* [length-prefixed](/docs/artefacts/preprocessors#length-prefixed)- length prefixed splitting for streams.
+* [lines](/docs/connectors/preprocessors/#lines)- split by newline.
+* [lines-null](/docs/connectors/preprocessors/#lines-null)- split by null byte.
+* [lines-pipe](/docs/connectors/preprocessors/#lines-pipe)- split by `|`.
+* [base64](/docs/connectors/preprocessors/#base64)- base64 decoding.
+* [decompress](/docs/connectors/preprocessors/#decompress)- auto detecting decompress.
+* [gzip](/docs/connectors/preprocessors/#gzip)- gzip decompress.
+* [zlib](/docs/connectors/preprocessors/#zlib)- zlib decompress.
+* [xz](/docs/connectors/preprocessors/#xz)- xz decompress.
+* [snappy](/docs/connectors/preprocessors/#snappy)- snappy decompress.
+* [lz4](/docs/connectors/preprocessors/#lz4)- zl4 decompress.
+* [gelf-chunking](/docs/connectors/preprocessors/#gelf-chunking)- GELF chunking support.
+* [remove-empty](/docs/connectors/preprocessors/#remove-empty)- remove emtpy (0 len) messages.
+* [length-prefixed](/docs/connectors/preprocessors#length-prefixed)- length prefixed splitting for streams.
 
 Tremor supports the following postprocessing transformations in `Offramp` configurations:
 
-* [lines](/docs/artefacts/postprocessors/#lines)
-* [base64](/docs/artefacts/postprocessors/#base64)
-* [length-prefixed](/docs/artefacts/postprocessors#length-prefixed)
-* [compression](/docs/artefacts/postprocessors/#compression)
+* [lines](/docs/connectors/postprocessors/#lines)
+* [base64](/docs/connectors/postprocessors/#base64)
+* [length-prefixed](/docs/connectors/postprocessors#length-prefixed)
+* [compression](/docs/connectors/postprocessors/#compression)

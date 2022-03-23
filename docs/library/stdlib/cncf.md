@@ -1,0 +1,15 @@
+
+# cncf
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/cncf/artwork/master/other/cncf/horizontal/color/cncf-color.png" width='35%'/>
+</p>
+
+<hr/>
+
+# The Tremor language CNCF library.
+
+It provides the following modules for cloud native computing:
+
+* [otel](cncf/otel.md) - functionality related to `CNCF OpenTelemetry`
+

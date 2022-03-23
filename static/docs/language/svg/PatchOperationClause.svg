@@ -1,0 +1,312 @@
+<svg class="railroad" viewBox="0 0 537 339" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+
+svg.railroad {
+  background-color: rgba(238, 238, 238, .91);
+  background-size: 15px 15px;
+  background-image: linear-gradient(to right, rgba(25, 25, 225, .65) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(25, 25, 225, .65) 1px, transparent 1px);
+}
+
+svg.railroad path {
+  stroke-width: 3px;
+  stroke: black;
+  fill: transparent;
+}
+
+svg.railroad .debug {
+  stroke-width: 1px;
+  stroke: red;
+}
+
+svg.railroad text {
+  font: 14px monospace;
+  text-anchor: middle;
+}
+
+svg.railroad .nonterminal text {
+  font-weight: bold;
+}
+
+svg.railroad text.comment {
+  font: italic 12px monospace;
+}
+
+svg.railroad rect {
+  stroke-width: 3px;
+  stroke: black;
+  fill:rgba(0, 0, 90, 0%);
+}
+
+svg.railroad .terminal rect {
+  fill: aquamarine;  
+}
+
+svg.railroad .nonterminal rect {
+  fill: orange;  
+}
+
+svg.railroad g.labeledbox &gt; rect {
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  stroke-width: 1.5px;
+  stroke: grey;
+  stroke-dasharray: 5px;
+  fill:rgba(150, 150, 150, 25%);
+}
+
+</style>
+<g class="sequence">
+<path d=" M 10 21 a 5 5 0 0 1 5 -5 a 5 5 0 0 1 5 5 a 5 5 0 0 1 -5 5 a 5 5 0 0 1 -5 -5 m 10 0 h 5"/>
+<g class="choice">
+<path d=" M 35 21 h 24 m 406 0 h 32"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="10"/>
+<text x="101" y="26">
+&quot;insert&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="153" y="10"/>
+<text x="203" y="26">
+PatchField</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="263" y="10"/>
+<text x="289" y="26">
+&quot;=&gt;&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="140" x="325" y="10"/>
+<text x="395" y="26">
+ComplexExprImut</text>
+</g>
+<path d=" M 143 21 h 10"/>
+<path d=" M 253 21 h 10"/>
+<path d=" M 315 21 h 10"/>
+</g>
+<path d=" M 35 21 a 12 12 0 0 1 12 12 v 9 m 438 0 v -9 a 12 12 0 0 1 12 -12"/>
+<path d=" M 47 42 v 33 m 438 0 v -33"/>
+<path d=" M 47 75 v 33 m 438 0 v -33"/>
+<path d=" M 47 108 v 33 m 438 0 v -33"/>
+<path d=" M 47 141 v 33 m 438 0 v -33"/>
+<path d=" M 47 174 v 33 m 438 0 v -33"/>
+<path d=" M 47 207 v 33 m 438 0 v -33"/>
+<path d=" M 47 240 v 33 m 438 0 v -33"/>
+<path d=" M 47 273 v 33 m 438 0 v -33"/>
+<path d=" M 47 42 v 0 a 12 12 0 0 0 12 12 m 406 0 h 8 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="43"/>
+<text x="101" y="59">
+&quot;upsert&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="153" y="43"/>
+<text x="203" y="59">
+PatchField</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="263" y="43"/>
+<text x="289" y="59">
+&quot;=&gt;&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="140" x="325" y="43"/>
+<text x="395" y="59">
+ComplexExprImut</text>
+</g>
+<path d=" M 143 54 h 10"/>
+<path d=" M 253 54 h 10"/>
+<path d=" M 315 54 h 10"/>
+</g>
+<path d=" M 47 75 v 0 a 12 12 0 0 0 12 12 m 406 0 h 8 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="76"/>
+<text x="101" y="92">
+&quot;update&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="153" y="76"/>
+<text x="203" y="92">
+PatchField</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="263" y="76"/>
+<text x="289" y="92">
+&quot;=&gt;&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="140" x="325" y="76"/>
+<text x="395" y="92">
+ComplexExprImut</text>
+</g>
+<path d=" M 143 87 h 10"/>
+<path d=" M 253 87 h 10"/>
+<path d=" M 315 87 h 10"/>
+</g>
+<path d=" M 47 108 v 0 a 12 12 0 0 0 12 12 m 186 0 h 228 m -111 0 l -5 -5 m 0 10 l 5 -5 m 111 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="76" x="59" y="109"/>
+<text x="97" y="125">
+&quot;erase&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="145" y="109"/>
+<text x="195" y="125">
+PatchField</text>
+</g>
+<path d=" M 135 120 h 10"/>
+</g>
+<path d=" M 47 141 v 0 a 12 12 0 0 0 12 12 m 350 0 h 64 m -29 0 l -5 -5 m 0 10 l 5 -5 m 29 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="68" x="59" y="142"/>
+<text x="93" y="158">
+&quot;move&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="137" y="142"/>
+<text x="187" y="158">
+PatchField</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="247" y="142"/>
+<text x="273" y="158">
+&quot;=&gt;&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="309" y="142"/>
+<text x="359" y="158">
+PatchField</text>
+</g>
+<path d=" M 127 153 h 10"/>
+<path d=" M 237 153 h 10"/>
+<path d=" M 299 153 h 10"/>
+</g>
+<path d=" M 47 174 v 0 a 12 12 0 0 0 12 12 m 350 0 h 64 m -29 0 l -5 -5 m 0 10 l 5 -5 m 29 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="68" x="59" y="175"/>
+<text x="93" y="191">
+&quot;copy&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="137" y="175"/>
+<text x="187" y="191">
+PatchField</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="247" y="175"/>
+<text x="273" y="191">
+&quot;=&gt;&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="309" y="175"/>
+<text x="359" y="191">
+PatchField</text>
+</g>
+<path d=" M 127 186 h 10"/>
+<path d=" M 237 186 h 10"/>
+<path d=" M 299 186 h 10"/>
+</g>
+<path d=" M 47 207 v 0 a 12 12 0 0 0 12 12 m 398 0 h 16 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="76" x="59" y="208"/>
+<text x="97" y="224">
+&quot;merge&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="145" y="208"/>
+<text x="195" y="224">
+PatchField</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="255" y="208"/>
+<text x="281" y="224">
+&quot;=&gt;&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="140" x="317" y="208"/>
+<text x="387" y="224">
+ComplexExprImut</text>
+</g>
+<path d=" M 135 219 h 10"/>
+<path d=" M 245 219 h 10"/>
+<path d=" M 307 219 h 10"/>
+</g>
+<path d=" M 47 240 v 0 a 12 12 0 0 0 12 12 m 288 0 h 126 m -60 0 l -5 -5 m 0 10 l 5 -5 m 60 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="76" x="59" y="241"/>
+<text x="97" y="257">
+&quot;merge&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="145" y="241"/>
+<text x="171" y="257">
+&quot;=&gt;&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="140" x="207" y="241"/>
+<text x="277" y="257">
+ComplexExprImut</text>
+</g>
+<path d=" M 135 252 h 10"/>
+<path d=" M 197 252 h 10"/>
+</g>
+<path d=" M 47 273 v 0 a 12 12 0 0 0 12 12 m 414 0 h 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="92" x="59" y="274"/>
+<text x="105" y="290">
+&quot;default&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="161" y="274"/>
+<text x="211" y="290">
+PatchField</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="271" y="274"/>
+<text x="297" y="290">
+&quot;=&gt;&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="140" x="333" y="274"/>
+<text x="403" y="290">
+ComplexExprImut</text>
+</g>
+<path d=" M 151 285 h 10"/>
+<path d=" M 261 285 h 10"/>
+<path d=" M 323 285 h 10"/>
+</g>
+<path d=" M 47 306 v 0 a 12 12 0 0 0 12 12 m 304 0 h 110 m -52 0 l -5 -5 m 0 10 l 5 -5 m 52 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="92" x="59" y="307"/>
+<text x="105" y="323">
+&quot;default&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="161" y="307"/>
+<text x="187" y="323">
+&quot;=&gt;&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="140" x="223" y="307"/>
+<text x="293" y="323">
+ComplexExprImut</text>
+</g>
+<path d=" M 151 318 h 10"/>
+<path d=" M 213 318 h 10"/>
+</g>
+</g>
+<path d=" M 507 21 h 20 m -10 -10 v 20 m 10 -20 v 20"/>
+<path d=" M 25 21 h 10"/>
+<path d=" M 497 21 h 10"/>
+</g>
+</svg>

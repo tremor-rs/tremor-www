@@ -1,13 +1,13 @@
 # syslog udp dns
 
-This workshop is the samne as the [syslog_upd](../14_syslog_udp/) workship with the added component of enriching the syslog message we receive with a DNS lookup.
+This workshop is the samne as the [syslog_udp](/docs/0.11/recipes/syslog_udp/) workship with the added component of enriching the syslog message we receive with a DNS lookup.
 
-We will only discuss the newly introduced components, for the rest pleas refer to the [syslog_upd](../14_syslog_udp/) workshop.
+We will only discuss the newly introduced components, for the rest pleas refer to the [syslog_udp](/docs/0.11/recipes/syslog_udp/) workshop.
 
 ## Setup
 
 :::tip
-All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/14_syslog_udp) as well and can be run with `docker compose up`.
+All the code here is available in the [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/syslog_udp) as well and can be run with `docker compose up`.
 :::
 
 ## Environment

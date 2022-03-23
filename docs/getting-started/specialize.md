@@ -1,10 +1,4 @@
----
-title: Operators
-description: Operators specialise Tremor pipelines; allow for highly custom behaviour.
-hide_table_of_contents: false
----
-
-### Concept
+# Specialize
 
 Some behaviour is either so performance critical, or so specialised that it can't or shouldn't be expressed using  [Tremor Script](https://tremor.rs/docs/next/getting-started/scripting/#h-script).
 
@@ -14,12 +8,12 @@ The solution to this is custom operators. Unlike Tremor Script that is interpret
 
 Currently Tremor supports the following operators:
 
-* [runtime::tremor](/docs/tremor-query/operators#script)
-* [grouper::bucket](/docs/tremor-query/operators#grouperbucket)
-* [generic::backpressure](/docs/tremor-query/operators#genericbackpressure)
-* [generic::batch](/docs/tremor-query/operators#genericbatch)
+* [runtime::tremor](/docs/queries/operators#script)
+* [grouper::bucket](/docs/queries/operators#grouperbucket)
+* [generic::backpressure](/docs/queries/operators#genericbackpressure)
+* [generic::batch](/docs/queries/operators#genericbatch)
 
 Some debug operators also exist:
 
-* [passthrough](/docs/tremor-query/operators#passthrough)- internal use.
-* [debug::history](/docs/tremor-query/operators#debughistory)- development.
+* [passthrough](/docs/queries/operators#passthrough)- internal use.
+* [debug::history](/docs/queries/operators#debughistory)- development.

@@ -1,10 +1,4 @@
----
-title: About Us
-description: More information about Tremor, where and how it works.
-hide_table_of_contents: false
----
-
-## About Us
+# About Us
 
 Tremor is an early-stage event processing system for unstructured data, with rich support for structural pattern matching, filtering and transformation.
 
