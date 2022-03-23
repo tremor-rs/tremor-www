@@ -31,3 +31,6 @@ log/
 # Local Netlify folder
 .netlify
 /node_modules
+
+# openapi fetched from tremor-runtime
+/openapi.yaml
