@@ -23,7 +23,7 @@ the users that have a high message volume to deal with and want to build pipelin
 
 <!-- alex ignore he -->
 At the beginning of the program, I was given walkthrough of the project by Matthias and he patiently explained me the components and working of tremor.
-Tremor is nicely documented and the [docs](/docs/) can be very useful for referring many things.
+Tremor is nicely documented and the [docs](https://www.tremor.rs/) can be very useful for referring many things.
 
 ## My Project
 
