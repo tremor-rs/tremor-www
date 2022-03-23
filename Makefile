@@ -66,6 +66,7 @@ touch_version:
 	npm run docusaurus docs:version 0.12.0-rc0
 
 reset: 
+	npm i -g redoc-cli
 	npm run clear
 	-rm -rf /node_modules package-lock.json yarn.lock
 	npm install
