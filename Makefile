@@ -15,7 +15,7 @@ lalrpop-docgen:
 	cd lalrpop-docgen &&\
 	git checkout docgen
 
-static/docs/svg:
+static/docs/svg: lalrpop-docgen
 	-mkdir docs/language
 	cd lalrpop-docgen && cargo build --all
 	lalrpop-docgen/target/debug/lalrpop-docgen \
