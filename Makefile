@@ -42,6 +42,7 @@ docs/library/aggr: tremor-runtime
 	cp -r tremor-runtime/aggr-docs/aggr docs/library/aggr
 
 openapi: tremor-runtime
+	npm i -g redoc-cli
 	cp tremor-runtime/static/openapi.yaml static/api/v0.12
 	redoc-cli bundle static/api/v0.12/openapi.yaml
 	mv redoc-static.html static/api/v0.12/index.html
@@ -68,7 +69,6 @@ touch_version:
 reset: 
 	npm run clear
 	-rm -rf /node_modules package-lock.json yarn.lock
-	npm install -g redoc-cli
 	npm install
 
 .PHONY: static/docs/svg
