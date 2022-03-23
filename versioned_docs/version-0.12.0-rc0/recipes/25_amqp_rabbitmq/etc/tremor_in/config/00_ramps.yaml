@@ -1,0 +1,23 @@
+# The onramp and offramp sections of configuration specify external sources and sinks
+# to an instance of tremor server.
+#
+onramp:
+  - id: metronome
+    type: metronome
+    config:
+      interval: 1000 # 1 per second
+
+offramp:
+  - id: rabbit-out
+    type: amqp
+    config:
+      amqp_addr: "amqp://guest:guest@rabbitmq:5672/shared"
+      queue_name: "tremor"
+
+      publish_options:
+        passive: true
+        durable: true
+        exclusive: false
+        auto_delete: false
+        nowait: true
+      exchange: "tremor"

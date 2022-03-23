@@ -33,7 +33,7 @@ Other interesting topics are:
     * [Monitoring](operations/monitoring.md)
     * [Configuration](operations/configuration.md) and the [Configuration Walkthrough](operations/configuration-walkthrough.md)
     * [The tremor CLI](operations/cli.md)
-* [The tremor API](/api/0)
-* [Recipes](docs/recipes/README)
+* [The tremor API](pathname:///docs/api/v0.11)
+* [Recipes](docs/recipes/overview)
 
 This is not an exhaustive list and for the curious it might be worth to explore the [docs](https://github.com/tremor-rs/tremor-www-docs/tree/main/docs) folder on their own.
