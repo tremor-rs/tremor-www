@@ -2,7 +2,7 @@ TREMOR_VSN=connectors
 
 all: clean docs/library/stdlib docs/library/aggr openapi static/docs/svg
 
-netlify: all | reset
+netlify: all reset
 	npm run build
 
 tremor-runtime:
@@ -63,7 +63,7 @@ touch_version:
 	npm run docusaurus docs:version 0.12.0-rc0
 
 reset: 
-	npm clear
+	npm run clear
 	-rm -rf /node_modules package-lock.json yarn.lock
 	npm install
 
