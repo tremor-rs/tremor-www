@@ -1,4 +1,4 @@
-<svg class="railroad" viewBox="0 0 411 108" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg class="railroad" viewBox="0 0 363 108" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style type="text/css">
 
 svg.railroad {
@@ -59,7 +59,7 @@ svg.railroad g.labeledbox &gt; rect {
 <g class="sequence">
 <path d=" M 10 21 a 5 5 0 0 1 5 -5 a 5 5 0 0 1 5 5 a 5 5 0 0 1 -5 5 a 5 5 0 0 1 -5 -5 m 10 0 h 5"/>
 <g class="choice">
-<path d=" M 35 21 h 24 m 288 0 h 24"/>
+<path d=" M 35 21 h 24 m 240 0 h 24"/>
 <g class="sequence">
 <g class="terminal">
 <rect height="22" rx="10" ry="10" width="44" x="59" y="10"/>
@@ -67,21 +67,21 @@ svg.railroad g.labeledbox &gt; rect {
 &quot;$&quot;</text>
 </g>
 <g class="nonterminal">
-<rect height="22" width="108" x="113" y="10"/>
-<text x="167" y="26">
-PathSegment</text>
+<rect height="22" width="60" x="113" y="10"/>
+<text x="143" y="26">
+Ident</text>
 </g>
 <g class="nonterminal">
-<rect height="22" width="116" x="231" y="10"/>
-<text x="289" y="26">
+<rect height="22" width="116" x="183" y="10"/>
+<text x="241" y="26">
 PathSegments</text>
 </g>
 <path d=" M 103 21 h 10"/>
-<path d=" M 221 21 h 10"/>
+<path d=" M 173 21 h 10"/>
 </g>
-<path d=" M 35 21 a 12 12 0 0 1 12 12 v 9 m 312 0 v -9 a 12 12 0 0 1 12 -12"/>
-<path d=" M 47 42 v 33 m 312 0 v -33"/>
-<path d=" M 47 42 v 0 a 12 12 0 0 0 12 12 m 162 0 h 126 m -60 0 l -5 -5 m 0 10 l 5 -5 m 60 0 a 12 12 0 0 0 12 -12 v 0"/>
+<path d=" M 35 21 a 12 12 0 0 1 12 12 v 9 m 264 0 v -9 a 12 12 0 0 1 12 -12"/>
+<path d=" M 47 42 v 33 m 264 0 v -33"/>
+<path d=" M 47 42 v 0 a 12 12 0 0 0 12 12 m 114 0 h 126 m -60 0 l -5 -5 m 0 10 l 5 -5 m 60 0 a 12 12 0 0 0 12 -12 v 0"/>
 <g class="sequence">
 <g class="terminal">
 <rect height="22" rx="10" ry="10" width="44" x="59" y="43"/>
@@ -89,13 +89,13 @@ PathSegments</text>
 &quot;$&quot;</text>
 </g>
 <g class="nonterminal">
-<rect height="22" width="108" x="113" y="43"/>
-<text x="167" y="59">
-PathSegment</text>
+<rect height="22" width="60" x="113" y="43"/>
+<text x="143" y="59">
+Ident</text>
 </g>
 <path d=" M 103 54 h 10"/>
 </g>
-<path d=" M 47 75 v 0 a 12 12 0 0 0 12 12 m 44 0 h 244 m -119 0 l -5 -5 m 0 10 l 5 -5 m 119 0 a 12 12 0 0 0 12 -12 v 0"/>
+<path d=" M 47 75 v 0 a 12 12 0 0 0 12 12 m 44 0 h 196 m -95 0 l -5 -5 m 0 10 l 5 -5 m 95 0 a 12 12 0 0 0 12 -12 v 0"/>
 <g class="sequence">
 <g class="terminal">
 <rect height="22" rx="10" ry="10" width="44" x="59" y="76"/>
@@ -104,8 +104,8 @@ PathSegment</text>
 </g>
 </g>
 </g>
-<path d=" M 381 21 h 20 m -10 -10 v 20 m 10 -20 v 20"/>
+<path d=" M 333 21 h 20 m -10 -10 v 20 m 10 -20 v 20"/>
 <path d=" M 25 21 h 10"/>
-<path d=" M 371 21 h 10"/>
+<path d=" M 323 21 h 10"/>
 </g>
 </svg>

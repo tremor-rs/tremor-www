@@ -158,7 +158,7 @@ Configuration Parameters:
 
 #### Windowing Semantics
 
-A select query using one or more windows is generating _new_ synthetic events, aggregated from the events feeded into it. Even if a window only consists of a single event, it needs to be considered a new event. The shape of the new event is determined by the [`select`](#select-queries) _Target Expression_. Those new events will have an empty metadata and the [origin uri](/docs/library/stdlib/tremor/origin) is pointing to the windowed [`select`](#select-queries) query.
+A select query using one or more windows is generating _new_ synthetic events, aggregated from the events feeded into it. Even if a window only consists of a single event, it needs to be considered a new event. The shape of the new event is determined by the [`select`](#select-queries) _Target Expression_. Those new events will have an empty metadata and the [origin uri](../library/stdlib/tremor/origin) is pointing to the windowed [`select`](#select-queries) query.
 
 ##### Grammar
 > ![window definition grammar](../language/svg/DefineWindow.svg)
@@ -325,7 +325,7 @@ select { "count": aggr::stats::count() } from in[fifteen_secs] into out having e
 In the above operation, we emit a synthetic count every fifteen seconds if at least one event has been witnessed during a 15 second window of time.
 
 Windows emit new events which are an aggregation of the events feeded into them. Those new events will have an empty event metadata (accessible via `$`).
-The same is true for the [origin uri](/docs/library/stdlib/tremor/origin), which will point to the windowed query, not the origin of any event feeded into the window.
+The same is true for the [origin uri](../library/stdlib/tremor/origin), which will point to the windowed query, not the origin of any event feeded into the window.
 
 To drag event metadata across a windowed query, it needs to be selected into the event payload:
 
