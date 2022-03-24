@@ -27,4 +27,4 @@ For now, fork this web site on github or create an [issue](https://github.com/tr
 
 From time to time, the tremor community engages with events and social media.
 
-We report on previous [events](/docs/community/events/overview) in our media log.
+We report on previous [events](../community/events/overview) in our media log.

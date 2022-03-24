@@ -51,7 +51,7 @@ If you would like to enhance, extend or make a large contribution/change to trem
 
   - [Out-of-tree Contributions](#out-of-tree-contributions)
 
-[code-of-conduct]: /docs/governance/CodeOfConduct
+[code-of-conduct]: CodeOfConduct
 
 ### Feature Requests
 
@@ -71,7 +71,7 @@ don't know about, so please report liberally. If you're not sure if something
 is a bug or not, feel free to file a bug anyway.
 
 **If you believe reporting your bug publicly represents a security risk to Tremor users,
-please follow our [instructions for reporting security vulnerabilities](/docs/community/governance/policies/security)**.
+please follow our [instructions for reporting security vulnerabilities](policies/security)**.
 
 If you have the chance, before reporting a bug, please [search existing
 issues](https://github.com/tremor-rs/tremor-runtime/search?q=&type=Issues&utf8=%E2%9C%93),
@@ -127,7 +127,7 @@ For info on how to configure and build the project, please see [the tremor build
 This guide contains info for contributions to the project and the standard facilities. It also lists some
 really useful commands to the build system, which could save you a lot of time.
 
-[tremor-build-guide]: /docs/community/development/quick-start/
+[tremor-build-guide]: ../../community/development/quick-start/
 
 ### Pull Requests
 

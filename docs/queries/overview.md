@@ -68,8 +68,8 @@ This section details the major components of the `tremor-query` language.
 
 ### Tremor-Script
 
-[Comments](/docs/scripts/overview#comments), [Literals](/docs/scripts/overview#literals), [Paths](/docs/scripts/overview#paths) and Expression forms supported in **trickle** are the
-same as in [`tremor-script`](/docs/scripts/overview).
+[Comments](../scripts/overview#comments), [Literals](../scripts/overview#literals), [Paths](../scripts/overview#paths) and Expression forms supported in **trickle** are the
+same as in [`tremor-script`](../scripts/overview).
 
 ### Queries
 
@@ -287,7 +287,7 @@ That means the `event` available to the [`where` clause](#WhereClause) is the un
 select event from in where event.is_interesting into out;
 ```
 
-The _Target Expression_ of a select query is used to describe transformations of the event. To pass through the event without changes, use `select event`, otherwise you can construct arbitrary [literals](/docs/scripts/overview#literals) (numbers, records, arrays, ...), call functions, aggregate functions, reference the event metadata via `$` or other [path expressionss](/docs/scripts/overview#paths). Nearly everything is possible:
+The _Target Expression_ of a select query is used to describe transformations of the event. To pass through the event without changes, use `select event`, otherwise you can construct arbitrary [literals](../scripts/overview#literals) (numbers, records, arrays, ...), call functions, aggregate functions, reference the event metadata via `$` or other [path expressionss](../scripts/overview#paths). Nearly everything is possible:
 
 ```trickle
 use std::string;
@@ -369,7 +369,7 @@ In windowed queries any event related data can only be referenced in those two c
 * it is used as an argument to an aggregate function
 * it is used as expression in the `group by` clause
 
-Here is an example of valid and invalid references:
+Here is an example of good and bad references:
 
 ```trickle
 define tumbling window my_window

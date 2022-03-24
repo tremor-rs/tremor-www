@@ -20,7 +20,7 @@ tremor-based solutions.
 
 Make sure your environment is setup for building tremor:
 
-[Tremor Development Quick Start](/docs/community/development/quick-start)
+[Tremor Development Quick Start](../community/development/quick-start)
 
 ### Setup support for your IDE
 
@@ -47,74 +47,74 @@ working knowledge of tremor.
 
 Basic introduction to core features of tremor.
 
-[passthrough](/docs/recipes/passthrough/) - Pass through events
+[passthrough](./passthrough/index.md) - Pass through events
 
-[filter](/docs/recipes/filter/) - Filter events
+[filter](./filter/index.md) - Filter events
 
-[transform](/docs/recipes/transform/) - Transform events
+[transform](./transform/index.md) - Transform events
 
-[validate](/docs/recipes/validate/) - Validate structure of data in events
+[validate](./validate/index.md) - Validate structure of data in events
 
 ## Legacy Observability
 
 Before the rise of CNCF OpenTelemetry, logging, metrics and tracing required
 a lot of glue to be used to wire together a well-monitored and observable system.
 
-[logstash](/docs/recipes/logstash/) - Logstash
+[logstash](./logstash/index.md) - Logstash
 
-[influx](/docs/recipes/influx/) - Influx
+[influx](./influx/index.md) - Influx
 
-[postgres_timescaledb](/docs/recipes/postgres_timescaledb/) - Postgres / Timescale
+[postgres_timescaledb](./postgres_timescaledb/index.md) - Postgres / Timescale
 
-[grafana](/docs/recipes/grafana/) - Grafana
+[grafana](./grafana/index.md) - Grafana
 
-[syslog_udp](/docs/recipes/syslog_udp/) - Syslog over UDP
+[syslog_udp](./syslog_udp/index.md) - Syslog over UDP
 
-[syslog_udp_dns](/docs/recipes/syslog_udp_dns/) - Syslog over UDP with DNS
+[syslog_udp_dns](./syslog_udp_dns/index.md) - Syslog over UDP with DNS
 
 ## Modern Observability
 
 CNCF OpenTelemetry provides a way forward, finally a standardised wire form and protocol
 for logging, metrics and tracing.
 
-[otel_elastic_apm](/docs/recipes/otel_elastic_apm/) - Elastic APM integration
+[otel_elastic_apm](./otel_elastic_apm/index.md) - Elastic APM integration
 
-[otel_passthrough](/docs/recipes/otel_passthrough/) - Otel passthrough service
+[otel_passthrough](./otel_passthrough/index.md) - Otel passthrough service
 
-[otel_zipkin](/docs/recipes/otel_zipkin/) - Otel Zipkin integration
+[otel_zipkin](./otel_zipkin/index.md) - Otel Zipkin integration
 
-[otel_jaeger](/docs/recipes/otel_jaeger/) - Otel Jaeger integration
+[otel_jaeger](./otel_jaeger/index.md) - Otel Jaeger integration
 
-[otel_prometheus](/docs/recipes/otel_prometheus/) - Otel Prometheus integration
+[otel_prometheus](./otel_prometheus/index.md) - Otel Prometheus integration
 
 ## Deployment Patterns
 
 Tremor-based systems have generally followed a set of predictable architectures and
 configurations. These recipes show some of those patterns in their simplest forms.
 
-[quota_service](/docs/recipes/quota_service/) - A quota configuration service
+[quota_service](./quota_service/index.md) - A quota configuration service
 
-[configurator](/docs/recipes/configurator/) - A generic configuration service
+[configurator](./configurator/index.md) - A generic configuration service
 
-[polling_alerts](/docs/recipes/polling_alerts/) - Alert polling
+[polling_alerts](./polling_alerts/index.md) - Alert polling
 
-[transient_gd](/docs/recipes/transient_gd/) - Transient guaranteed delivery
+[transient_gd](./transient_gd/index.md) - Transient guaranteed delivery
 
-[persistent_gd](/docs/recipes/persistent_gd/) - Persistent guaranteed delivery
+[persistent_gd](./persistent_gd/index.md) - Persistent guaranteed delivery
 
-[roundrobin](/docs/recipes/roundrobin/index) - Round robin delivery
+[roundrobin](./roundrobin/index.md) - Round robin delivery
 
-[servers_lt_http](/docs/recipes/servers_lt_http/index) - HTTP rpc
+[servers_lt_http](./servers_lt_http/index.md) - HTTP rpc
 
-[servers_lt_ws](/docs/recipes/servers_lt_ws/index) - WS rpc
+[servers_lt_ws](./servers_lt_ws/index.md) - WS rpc
 
-[proxies_lt_http](/docs/recipes/proxies_lt_http/index) - HTTP proxy
+[proxies_lt_http](./proxies_lt_http/index.md) - HTTP proxy
 
-[proxies_lt_ws](/docs/recipes/proxies_lt_ws/index) - WS proxy
+[proxies_lt_ws](./proxies_lt_ws/index.md) - WS proxy
 
-[bridges_lt_http_ws](/docs/recipes/bridges_lt_http_ws/index) - HTTP WS bridge
+[bridges_lt_http_ws](./bridges_lt_http_ws/index.md) - HTTP WS bridge
 
-[reverse_proxy_load_balancing](/docs/recipes/reverse_proxy_load_balancing/index) - Reverse proxy
+[reverse_proxy_load_balancing](./reverse_proxy_load_balancing/index.md) - Reverse proxy
 
 ## Messaging
 
@@ -123,13 +123,13 @@ open source Apache edition, the Confluent edition or the Redpanda edition, then 
 examples are a good reference for event processing with tremor that preserves guaranteed
 delivery of kafka to kafka communications.
 
-[kafka_elastic_correlation](/docs/recipes/kafka_elastic_correlation/index) - Kafka correlation
+[kafka_elastic_correlation](./kafka_elastic_correlation/index.md) - Kafka correlation
 
 
-[redpanda_elastic_correlation](/docs/recipes/redpanda_elastic_correlation/index) - Redpanda correlation
+[redpanda_elastic_correlation](./redpanda_elastic_correlation/index.md) - Redpanda correlation
 
-[kafka_gd](/docs/recipes/kafka_gd/index) - Kafka guaranteed delivery
+[kafka_gd](./kafka_gd/index.md) - Kafka guaranteed delivery
 
-[redpanda_gd](/docs/recipes/redpanda_gd/index) - Redpanda guaranteed delivery
+[redpanda_gd](./redpanda_gd/index.md) - Redpanda guaranteed delivery
 
-[rabbitmq](/docs/recipes/amqp_rabbitmq/index) - RabbitMQ integration
+[rabbitmq](./amqp_rabbitmq/index.md) - RabbitMQ integration

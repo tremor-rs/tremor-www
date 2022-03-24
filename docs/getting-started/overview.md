@@ -32,7 +32,7 @@ The structure is as follows:
 * `config/*.trickle` One or more trickle files loaded in lexigraphical order to provide pipelines.
 * `config/*.yaml` One or more YAML files with configurations for Onramps, Offramps and Bindings and Mappings.
 
-For details on the files please consult the [documentation](/docs/operations/configuration).
+For details on the files please consult the [documentation](../operations/configuration).
 
 ### Running Tremor
 
@@ -46,5 +46,5 @@ docker run -v host/path/to/etc/tremor:/etc/tremor tremor-runtime
 
 The following use case examples come with a full set of configuration files and a `docker-compose.yaml`. To get a use case set up with a single command, inspect the following cases:
 
-* [Apache Log](/docs/recipes/logstash/index)- storing apache logs in elastic search.
-* [Influx Aggregation](/docs/recipes/influx/index/)- aggregating metrics for InfluxDB.
+* [Apache Log](../recipes/logstash/index.md)- storing apache logs in elastic search.
+* [Influx Aggregation](../recipes/influx/index.md)- aggregating metrics for InfluxDB.
