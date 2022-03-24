@@ -1,4 +1,4 @@
-<svg class="railroad" viewBox="0 0 463 240" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg class="railroad" viewBox="0 0 463 273" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style type="text/css">
 
 svg.railroad {
@@ -85,6 +85,7 @@ TestExpr</text>
 <path d=" M 47 108 v 33 m 364 0 v -33"/>
 <path d=" M 47 141 v 33 m 364 0 v -33"/>
 <path d=" M 47 174 v 33 m 364 0 v -33"/>
+<path d=" M 47 207 v 33 m 364 0 v -33"/>
 <path d=" M 47 42 v 0 a 12 12 0 0 0 12 12 m 340 0 h 0 a 12 12 0 0 0 12 -12 v 0"/>
 <g class="sequence">
 <g class="nonterminal">
@@ -157,53 +158,73 @@ ArrayPattern</text>
 <path d=" M 119 120 h 10"/>
 <path d=" M 181 120 h 10"/>
 </g>
-<path d=" M 47 141 v 0 a 12 12 0 0 0 12 12 m 162 0 h 178 m -86 0 l -5 -5 m 0 10 l 5 -5 m 86 0 a 12 12 0 0 0 12 -12 v 0"/>
+<path d=" M 47 141 v 0 a 12 12 0 0 0 12 12 m 248 0 h 92 m -43 0 l -5 -5 m 0 10 l 5 -5 m 43 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="nonterminal">
+<rect height="22" width="60" x="59" y="142"/>
+<text x="89" y="158">
+Ident</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="129" y="142"/>
+<text x="155" y="158">
+&quot;~=&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="116" x="191" y="142"/>
+<text x="249" y="158">
+TuplePattern</text>
+</g>
+<path d=" M 119 153 h 10"/>
+<path d=" M 181 153 h 10"/>
+</g>
+<path d=" M 47 174 v 0 a 12 12 0 0 0 12 12 m 162 0 h 178 m -86 0 l -5 -5 m 0 10 l 5 -5 m 86 0 a 12 12 0 0 0 12 -12 v 0"/>
 <g class="sequence">
 <g class="terminal">
-<rect height="22" rx="10" ry="10" width="92" x="59" y="142"/>
-<text x="105" y="158">
+<rect height="22" rx="10" ry="10" width="92" x="59" y="175"/>
+<text x="105" y="191">
 &quot;present&quot;</text>
 </g>
 <g class="nonterminal">
-<rect height="22" width="60" x="161" y="142"/>
-<text x="191" y="158">
+<rect height="22" width="60" x="161" y="175"/>
+<text x="191" y="191">
 Ident</text>
 </g>
-<path d=" M 151 153 h 10"/>
+<path d=" M 151 186 h 10"/>
 </g>
-<path d=" M 47 174 v 0 a 12 12 0 0 0 12 12 m 154 0 h 186 m -90 0 l -5 -5 m 0 10 l 5 -5 m 90 0 a 12 12 0 0 0 12 -12 v 0"/>
+<path d=" M 47 207 v 0 a 12 12 0 0 0 12 12 m 154 0 h 186 m -90 0 l -5 -5 m 0 10 l 5 -5 m 90 0 a 12 12 0 0 0 12 -12 v 0"/>
 <g class="sequence">
 <g class="terminal">
-<rect height="22" rx="10" ry="10" width="84" x="59" y="175"/>
-<text x="101" y="191">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="208"/>
+<text x="101" y="224">
 &quot;absent&quot;</text>
 </g>
 <g class="nonterminal">
-<rect height="22" width="60" x="153" y="175"/>
-<text x="183" y="191">
+<rect height="22" width="60" x="153" y="208"/>
+<text x="183" y="224">
 Ident</text>
 </g>
-<path d=" M 143 186 h 10"/>
+<path d=" M 143 219 h 10"/>
 </g>
-<path d=" M 47 207 v 0 a 12 12 0 0 0 12 12 m 304 0 h 36 a 12 12 0 0 0 12 -12 v 0"/>
+<path d=" M 47 240 v 0 a 12 12 0 0 0 12 12 m 304 0 h 36 a 12 12 0 0 0 12 -12 v 0"/>
 <g class="sequence">
 <g class="nonterminal">
-<rect height="22" width="60" x="59" y="208"/>
-<text x="89" y="224">
+<rect height="22" width="60" x="59" y="241"/>
+<text x="89" y="257">
 Ident</text>
 </g>
 <g class="nonterminal">
-<rect height="22" width="84" x="129" y="208"/>
-<text x="171" y="224">
+<rect height="22" width="84" x="129" y="241"/>
+<text x="171" y="257">
 BinCmpEq</text>
 </g>
 <g class="nonterminal">
-<rect height="22" width="140" x="223" y="208"/>
-<text x="293" y="224">
+<rect height="22" width="140" x="223" y="241"/>
+<text x="293" y="257">
 ComplexExprImut</text>
 </g>
-<path d=" M 119 219 h 10"/>
-<path d=" M 213 219 h 10"/>
+<path d=" M 119 252 h 10"/>
+<path d=" M 213 252 h 10"/>
 </g>
 </g>
 <path d=" M 433 21 h 20 m -10 -10 v 20 m 10 -20 v 20"/>

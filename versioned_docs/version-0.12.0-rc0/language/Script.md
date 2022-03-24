@@ -15,11 +15,11 @@ A legal script is composed of:
 
 
 
-<img src="svg/Script.svg" alt="Script" width="459" height="55"/>
+<img src="svg/Script.svg" alt="Script" width="523" height="55"/>
 
 ```ebnf
 rule Script ::=
-    ModComment Exprs  '<end-of-stream>' ?  
+    ModComment TopLevelExprs  '<end-of-stream>' ?  
   ;
 
 ```
@@ -76,164 +76,96 @@ The content of a module documentation comment is markdown syntax.
 
 
 
-## Rule Exprs
+## Rule TopLevelExprs
 
-<img src="svg/Exprs.svg" alt="Exprs" width="379" height="87"/>
+The `TopLevelExprs` rule defines semi-colon separated sequence of top level
+tremor expressions with an optional terminating semi-colon
+
+
+
+<img src="svg/TopLevelExprs.svg" alt="TopLevelExprs" width="427" height="87"/>
 
 ```ebnf
-rule Exprs ::=
-    MayBeConstExpr  ';' Exprs 
-  | MayBeConstExpr  ';' ?  
+rule TopLevelExprs ::=
+    TopLevelExpr  ';' TopLevelExprs 
+  | TopLevelExpr  ';' ?  
   ;
 
 ```
 
 
 
-## Rule ModComment_
-
-The `ModComment_` rule is an internal part of the `ModComment` rule
-
-
-
-<img src="svg/ModComment_.svg" alt="ModComment_" width="381" height="75"/>
-
-```ebnf
-rule ModComment_ ::=
-     '<mod-comment>' 
-  | ModComment_  '<mod-comment>' 
-  ;
-
-```
+The `TopLevelExprs` rule defines semi-colon separated sequence of top level
+tremor expressions with an optional terminating semi-colon
 
 
 
-The `ModComment_` rule is an internal part of the `ModComment` rule
+## Rule TopLevelExpr
+
+The `TopLevelExpr` rule specifies the expression forms that are legal at the
+outer most scope of a tremor script definition.
+
+The legal forms are:
+* Use declarations - these allow external modules to be referenced.
+* Constant expressions - these are immutable compile time constants.
+* Function definitions - these are user defined functions.
+* Intrinsic function definitions - these are builtin funtions provided by the runtime.
 
 
 
-## Rule MayBeConstExpr
-
-<img src="svg/MayBeConstExpr.svg" alt="MayBeConstExpr" width="215" height="174"/>
+<img src="svg/TopLevelExpr.svg" alt="TopLevelExpr" width="215" height="174"/>
 
 ```ebnf
-rule MayBeConstExpr ::=
+rule TopLevelExpr ::=
     Const 
-  | FnDecl 
+  | FnDefn 
   | Intrinsic 
-  | Module 
   | Expr 
+  | Use 
   ;
 
 ```
 
 
 
-## Rule Const
+The `TopLevelExpr` rule specifies the expression forms that are legal at the
+outer most scope of a tremor script definition.
 
-The `Const` rule defines a rule that binds an immutable expression to an identifier.
+The legal forms are:
+* Use declarations - these allow external modules to be referenced.
+* Constant expressions - these are immutable compile time constants.
+* Function definitions - these are user defined functions.
+* Intrinsic function definitions - these are builtin funtions provided by the runtime.
 
-As the value cannot be changed at runtime.
+
+
+## Rule InnerExprs
+
+The `InnerExprs` rule defines the expression forms permissible within another
+containing scope. Like `TopLevelExprs`, inner expressions are separated by semi-colons.
+The semi-colon is optional for the last expression in a set of expressions.
+
+At least one expression MUST be provided.
 
 
 
-<img src="svg/Const.svg" alt="Const" width="527" height="42"/>
+<img src="svg/InnerExprs.svg" alt="InnerExprs" width="339" height="87"/>
 
 ```ebnf
-rule Const ::=
-    DocComment  'const' Ident  '=' SimpleExprImut 
+rule InnerExprs ::=
+    Expr  ';' InnerExprs 
+  | Expr  ';' ?  
   ;
 
 ```
 
 
 
-The `Const` rule defines a rule that binds an immutable expression to an identifier.
+The `InnerExprs` rule defines the expression forms permissible within another
+containing scope. Like `TopLevelExprs`, inner expressions are separated by semi-colons.
+The semi-colon is optional for the last expression in a set of expressions.
 
-As the value cannot be changed at runtime.
-
-
-
-## Rule FnDecl
-
-The `FnDecl` rule allows user defined functions to be defined.
-
-This rule allows tremor users to create functions for reuse in one or many tremor applications.
-
-
-
-<img src="svg/FnDecl.svg" alt="FnDecl" width="975" height="207"/>
-
-```ebnf
-rule FnDecl ::=
-    DocComment  'fn' Ident  '('  '.'  '.'  '.'  ')'  'with' Exprs  'end' 
-  | DocComment  'fn' Ident  '(' FnArgs  ','  '.'  '.'  '.'  ')'  'with' Exprs  'end' 
-  | DocComment  'fn' Ident  '('  ')'  'with' Exprs  'end' 
-  | DocComment  'fn' Ident  '(' FnArgs  ')'  'with' Exprs  'end' 
-  | DocComment  'fn' Ident  '('  ')'  'of' FnCases  'end' 
-  | DocComment  'fn' Ident  '(' FnArgs  ')'  'of' FnCases  'end' 
-  ;
-
-```
-
-
-
-The `FnDecl` rule allows user defined functions to be defined.
-
-This rule allows tremor users to create functions for reuse in one or many tremor applications.
-
-
-
-## Rule Intrinsic
-
-The `intrinsic` rule defines intrinsic function signatures.
-
-This rule allows tremor maintainers to document the builtin functions implemented as
-native rust code. The facility also allows document generation tools to document builtin
-intrinsic functions in the same way as user defined functions.
-
-In short, these can be thought of as runtime provided.
-
-For information on how to define user defined functions see the [function](#rule-fndecl) rule.
-
-
-
-<img src="svg/Intrinsic.svg" alt="Intrinsic" width="1071" height="141"/>
-
-```ebnf
-rule Intrinsic ::=
-    DocComment  'intrinsic'  'fn' Ident  '('  ')'  'as' ModularTarget 
-  | DocComment  'intrinsic'  'fn' Ident  '(' FnArgs  ')'  'as' ModularTarget 
-  | DocComment  'intrinsic'  'fn' Ident  '(' FnArgs  ','  '.'  '.'  '.'  ')'  'as' ModularTarget 
-  | DocComment  'intrinsic'  'fn' Ident  '('  '.'  '.'  '.'  ')'  'as' ModularTarget 
-  ;
-
-```
-
-
-
-The `intrinsic` rule defines intrinsic function signatures.
-
-This rule allows tremor maintainers to document the builtin functions implemented as
-native rust code. The facility also allows document generation tools to document builtin
-intrinsic functions in the same way as user defined functions.
-
-In short, these can be thought of as runtime provided.
-
-For information on how to define user defined functions see the [function](#rule-fndefn) rule.
-
-
-
-## Rule Module
-
-<img src="svg/Module.svg" alt="Module" width="581" height="42"/>
-
-```ebnf
-rule Module ::=
-     'mod' Ident  'with' ModComment ModuleExprs  'end' 
-  ;
-
-```
+At least one expression MUST be provided.
 
 
 
@@ -277,6 +209,137 @@ variations of expression are significant.
 Hoewver, in the higher level we limit exposure to a subset of
 these forms. This is done for convenience, and for consistency
 of usage, and ease of learning the language.
+
+
+
+## Rule Const
+
+The `Const` rule defines a rule that binds an immutable expression to an identifier.
+
+As the value cannot be changed at runtime.
+
+
+
+<img src="svg/Const.svg" alt="Const" width="535" height="42"/>
+
+```ebnf
+rule Const ::=
+    DocComment  'const' Ident  '=' ComplexExprImut 
+  ;
+
+```
+
+
+
+The `Const` rule defines a rule that binds an immutable expression to an identifier.
+
+As the value cannot be changed at runtime.
+
+
+
+## Rule FnDefn
+
+<img src="svg/FnDefn.svg" alt="FnDefn" width="1015" height="207"/>
+
+```ebnf
+rule FnDefn ::=
+    DocComment  'fn' Ident  '('  '.'  '.'  '.'  ')'  'with' InnerExprs  'end' 
+  | DocComment  'fn' Ident  '(' FnArgs  ','  '.'  '.'  '.'  ')'  'with' InnerExprs  'end' 
+  | DocComment  'fn' Ident  '('  ')'  'with' InnerExprs  'end' 
+  | DocComment  'fn' Ident  '(' FnArgs  ')'  'with' InnerExprs  'end' 
+  | DocComment  'fn' Ident  '('  ')'  'of' FnCases  'end' 
+  | DocComment  'fn' Ident  '(' FnArgs  ')'  'of' FnCases  'end' 
+  ;
+
+```
+
+
+
+## Rule Intrinsic
+
+The `intrinsic` rule defines intrinsic function signatures.
+
+This rule allows tremor maintainers to document the builtin functions implemented as
+native rust code. The facility also allows document generation tools to document builtin
+intrinsic functions in the same way as user defined functions.
+
+In short, these can be thought of as runtime provided.
+
+For information on how to define user defined functions see the [function](#rule-fndecl) rule.
+
+
+
+<img src="svg/Intrinsic.svg" alt="Intrinsic" width="1071" height="141"/>
+
+```ebnf
+rule Intrinsic ::=
+    DocComment  'intrinsic'  'fn' Ident  '('  ')'  'as' ModularTarget 
+  | DocComment  'intrinsic'  'fn' Ident  '(' FnArgs  ')'  'as' ModularTarget 
+  | DocComment  'intrinsic'  'fn' Ident  '(' FnArgs  ','  '.'  '.'  '.'  ')'  'as' ModularTarget 
+  | DocComment  'intrinsic'  'fn' Ident  '('  '.'  '.'  '.'  ')'  'as' ModularTarget 
+  ;
+
+```
+
+
+
+The `intrinsic` rule defines intrinsic function signatures.
+
+This rule allows tremor maintainers to document the builtin functions implemented as
+native rust code. The facility also allows document generation tools to document builtin
+intrinsic functions in the same way as user defined functions.
+
+In short, these can be thought of as runtime provided.
+
+For information on how to define user defined functions see the [function](#rule-fndefn) rule.
+
+
+
+## Rule Use
+
+Imports definitions from an external source for use in the current source file.
+
+The contents of a source file form a module.
+
+### TREMOR_PATH
+
+The `TREMOR_PATH` environment path variable is a `:` delimited set of paths.
+
+Each path is an absolute or relative path to a directory.
+
+When using relative paths - these are relative to the working directory where the
+`tremor` executable is executed from.
+
+The tremor standard library MUST be added to the path to be accessible to scripts.
+
+
+
+<img src="svg/Use.svg" alt="Use" width="449" height="75"/>
+
+```ebnf
+rule Use ::=
+     'use' ModularTarget 
+  |  'use' ModularTarget  'as' Ident 
+  ;
+
+```
+
+
+
+Imports definitions from an external source for use in the current source file.
+
+The contents of a source file form a module.
+
+### TREMOR_PATH
+
+The `TREMOR_PATH` environment path variable is a `:` delimited set of paths.
+
+Each path is an absolute or relative path to a directory.
+
+When using relative paths - these are relative to the working directory where the
+`tremor` executable is executed from.
+
+The tremor standard library MUST be added to the path to be accessible to scripts.
 
 
 
@@ -338,47 +401,26 @@ An `Ident` is an identifier - a user defined name for a tremor value.
 
 
 
-## Rule SimpleExprImut
+## Rule ComplexExprImut
 
-The `SimpleExprImut` rule defines optionally parenthesized simple immutable expressions in tremor.
+The `ComplexExprImut` rule defines complex immutable expression in tremor.
 
 
 
-<img src="svg/SimpleExprImut.svg" alt="SimpleExprImut" width="371" height="75"/>
+<img src="svg/ComplexExprImut.svg" alt="ComplexExprImut" width="215" height="108"/>
 
 ```ebnf
-rule SimpleExprImut ::=
-     '(' ComplexExprImut  ')' 
-  | AlwaysImutExpr 
+rule ComplexExprImut ::=
+    MatchImut 
+  | ForImut 
+  | ExprImut 
   ;
 
 ```
 
 
 
-The `SimpleExprImut` rule defines optionally parenthesized simple immutable expressions in tremor.
-
-
-
-## Rule DocComment_
-
-The `DocComment_` rule is an internal part of the `DocComment` rule
-
-
-
-<img src="svg/DocComment_.svg" alt="DocComment_" width="381" height="75"/>
-
-```ebnf
-rule DocComment_ ::=
-     '<doc-comment>' 
-  | DocComment_  '<doc-comment>' 
-  ;
-
-```
-
-
-
-The `DocComment_` rule is an internal part of the `DocComment` rule
+The `ComplexExprImut` rule defines complex immutable expression in tremor.
 
 
 
@@ -1630,26 +1672,25 @@ The simple expression has lower precedence.
 
 
 
-## Rule ComplexExprImut
+## Rule SimpleExprImut
 
-The `ComplexExprImut` rule defines complex immutable expression in tremor.
+The `SimpleExprImut` rule defines optionally parenthesized simple immutable expressions in tremor.
 
 
 
-<img src="svg/ComplexExprImut.svg" alt="ComplexExprImut" width="215" height="108"/>
+<img src="svg/SimpleExprImut.svg" alt="SimpleExprImut" width="371" height="75"/>
 
 ```ebnf
-rule ComplexExprImut ::=
-    MatchImut 
-  | ForImut 
-  | ExprImut 
+rule SimpleExprImut ::=
+     '(' ComplexExprImut  ')' 
+  | AlwaysImutExpr 
   ;
 
 ```
 
 
 
-The `ComplexExprImut` rule defines complex immutable expression in tremor.
+The `SimpleExprImut` rule defines optionally parenthesized simple immutable expressions in tremor.
 
 
 
@@ -1756,36 +1797,6 @@ rule FnArgs ::=
 
 
 The `FnArgs` rule defines `,` comma delimited arguments to a tremor function.
-
-
-
-## Rule ModuleExprs
-
-<img src="svg/ModuleExprs.svg" alt="ModuleExprs" width="395" height="87"/>
-
-```ebnf
-rule ModuleExprs ::=
-    ModuleExpr  ';' ModuleExprs 
-  | ModuleExpr  ';' ?  
-  ;
-
-```
-
-
-
-## Rule ModuleExpr
-
-<img src="svg/ModuleExpr.svg" alt="ModuleExpr" width="215" height="141"/>
-
-```ebnf
-rule ModuleExpr ::=
-    Const 
-  | FnDecl 
-  | Intrinsic 
-  | Module 
-  ;
-
-```
 
 
 
@@ -2180,12 +2191,12 @@ connectors can read and write metadata.
 
 
 
-<img src="svg/MetaPath.svg" alt="MetaPath" width="411" height="108"/>
+<img src="svg/MetaPath.svg" alt="MetaPath" width="363" height="108"/>
 
 ```ebnf
 rule MetaPath ::=
-     '$' PathSegment PathSegments 
-  |  '$' PathSegment 
+     '$' Ident PathSegments 
+  |  '$' Ident 
   |  '$' 
   ;
 
@@ -2262,12 +2273,12 @@ The `LocalPath` rule enables path operations on locally scoped identifiers.
 
 
 
-<img src="svg/LocalPath.svg" alt="LocalPath" width="357" height="75"/>
+<img src="svg/LocalPath.svg" alt="LocalPath" width="309" height="75"/>
 
 ```ebnf
 rule LocalPath ::=
-    PathSegment PathSegments 
-  | PathSegment 
+    Ident PathSegments 
+  | Ident 
   ;
 
 ```
@@ -2426,10 +2437,10 @@ The `PathSegments` rule specifies the continuation of a path rule.
 
 ```ebnf
 rule PathSegments ::=
-     '.' PathSegment PathSegments 
+     '.' Ident PathSegments 
   |  '[' Selector  ']' PathSegments 
   |  '[' Selector  ']' 
-  |  '.' PathSegment 
+  |  '.' Ident 
   ;
 
 ```
@@ -2445,19 +2456,6 @@ The `PathSegments` rule specifies the continuation of a path rule.
 |`[<Selector>]`|A range or index segment dereferencing an array|
 |`[<Selector>]`|A terminal range or index segment dereferencing an array|
 |`[<Selector>]<PathSegments>`|A non-terminal range or index segment dereferencing an array|
-
-
-
-## Rule PathSegment
-
-<img src="svg/PathSegment.svg" alt="PathSegment" width="135" height="42"/>
-
-```ebnf
-rule PathSegment ::=
-    Ident 
-  ;
-
-```
 
 
 
@@ -2608,7 +2606,7 @@ The `PatchOperations` rule defines a sequence of semi-colon delimited patch oper
 ```ebnf
 rule PatchOperations ::=
     PatchOperationClause 
-  | PatchOperations  ',' PatchOperationClause 
+  | PatchOperations  ';' PatchOperationClause 
   ;
 
 ```
@@ -2875,7 +2873,7 @@ The `Block` rule defines a semi-colon delimited set of `Expr` rules.
 ```ebnf
 rule Block ::=
     Expr 
-  | Block  ',' Expr 
+  | Block  ';' Expr 
   ;
 
 ```
@@ -3129,7 +3127,7 @@ Record patterns can use:
 
 
 
-<img src="svg/PredicateFieldPattern.svg" alt="PredicateFieldPattern" width="463" height="240"/>
+<img src="svg/PredicateFieldPattern.svg" alt="PredicateFieldPattern" width="463" height="273"/>
 
 ```ebnf
 rule PredicateFieldPattern ::=
@@ -3137,6 +3135,7 @@ rule PredicateFieldPattern ::=
   | Ident  '=' Ident  '~=' TestExpr 
   | Ident  '~=' RecordPattern 
   | Ident  '~=' ArrayPattern 
+  | Ident  '~=' TuplePattern 
   |  'present' Ident 
   |  'absent' Ident 
   | Ident BinCmpEq ComplexExprImut 

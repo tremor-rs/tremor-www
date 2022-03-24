@@ -61,10 +61,13 @@ svg.railroad g.labeledbox &gt; rect {
 <g class="choice">
 <path d=" M 35 21 h 24 m 60 0 h 172 m -83 0 l -5 -5 m 0 10 l 5 -5 m 83 0"/>
 <g class="sequence">
+<g class="choice">
+<path d=" M 59 21 h 0 m 60 0 h 0"/>
 <g class="nonterminal">
 <rect height="22" width="60" x="59" y="10"/>
 <text x="89" y="26">
 Ident</text>
+</g>
 </g>
 </g>
 <path d=" M 35 21 a 12 12 0 0 1 12 12 v 9 m 232 0 v -9 a 12 12 0 0 1 12 -12"/>

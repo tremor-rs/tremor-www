@@ -42,7 +42,7 @@ script
 end;
 ```
 
-See the full documentation [of the language](/docs/language) and its [standard library](/docs/library/overview) for more information.
+See the full documentation [of the language](/docs/language) and its [standard library](../library/overview) for more information.
 
 ### Tremor Query
 
