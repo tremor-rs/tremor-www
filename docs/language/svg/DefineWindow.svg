@@ -1,4 +1,4 @@
-<svg class="railroad" viewBox="0 0 701 42" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg class="railroad" viewBox="0 0 991 42" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style type="text/css">
 
 svg.railroad {
@@ -70,35 +70,53 @@ DocComment</text>
 <text x="187" y="26">
 &quot;define&quot;</text>
 </g>
-<g class="nonterminal">
-<rect height="22" width="100" x="239" y="10"/>
-<text x="289" y="26">
-WindowKind</text>
-</g>
 <g class="terminal">
-<rect height="22" rx="10" ry="10" width="84" x="349" y="10"/>
-<text x="391" y="26">
+<rect height="22" rx="10" ry="10" width="84" x="239" y="10"/>
+<text x="281" y="26">
 &quot;window&quot;</text>
 </g>
 <g class="nonterminal">
-<rect height="22" width="60" x="443" y="10"/>
-<text x="473" y="26">
+<rect height="22" width="60" x="333" y="10"/>
+<text x="363" y="26">
 Ident</text>
 </g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="68" x="403" y="10"/>
+<text x="437" y="26">
+&quot;from&quot;</text>
+</g>
 <g class="nonterminal">
-<rect height="22" width="148" x="513" y="10"/>
-<text x="587" y="26">
-WithScriptClause</text>
+<rect height="22" width="100" x="481" y="10"/>
+<text x="531" y="26">
+WindowKind</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="116" x="591" y="10"/>
+<text x="649" y="26">
+CreationWith</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="164" x="717" y="10"/>
+<text x="799" y="26">
+EmbeddedScriptImut</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="60" x="891" y="10"/>
+<text x="921" y="26">
+&quot;end&quot;</text>
 </g>
 <path d=" M 135 21 h 10"/>
 <path d=" M 229 21 h 10"/>
-<path d=" M 339 21 h 10"/>
-<path d=" M 433 21 h 10"/>
-<path d=" M 503 21 h 10"/>
+<path d=" M 323 21 h 10"/>
+<path d=" M 393 21 h 10"/>
+<path d=" M 471 21 h 10"/>
+<path d=" M 581 21 h 10"/>
+<path d=" M 707 21 h 10"/>
+<path d=" M 881 21 h 10"/>
 </g>
 </g>
-<path d=" M 671 21 h 20 m -10 -10 v 20 m 10 -20 v 20"/>
+<path d=" M 961 21 h 20 m -10 -10 v 20 m 10 -20 v 20"/>
 <path d=" M 25 21 h 10"/>
-<path d=" M 661 21 h 10"/>
+<path d=" M 951 21 h 10"/>
 </g>
 </svg>

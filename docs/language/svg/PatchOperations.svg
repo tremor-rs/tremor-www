@@ -78,7 +78,7 @@ PatchOperations</text>
 <g class="terminal">
 <rect height="22" rx="10" ry="10" width="44" x="209" y="43"/>
 <text x="231" y="59">
-&quot;,&quot;</text>
+&quot;;&quot;</text>
 </g>
 <g class="nonterminal">
 <rect height="22" width="188" x="263" y="43"/>
