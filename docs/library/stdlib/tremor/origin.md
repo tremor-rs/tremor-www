@@ -50,7 +50,7 @@ Returns `string` or `null`
 ### port()
 
 Returns the origin URI port, or null value if not set (either the whole URI
-or just the port). Encodes the source port on the host that sent the event.
+or the port). Encodes the source port on the host that sent the event.
 
 For example, with udp onramp:
 
