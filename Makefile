@@ -4,6 +4,8 @@ all: clean docs/library/stdlib docs/library/aggr openapi docs/language/svg
 
 netlify: all reset
 	npm run build
+	cp -rf docs/language/svg build/docs/language/svg      # Saves duplicates in git this way
+	cp -rf docs/language/svg build/docs/next/language/svg # Saves duplicates in git this way
 
 tremor-runtime:
 	-git clone https://github.com/tremor-rs/tremor-runtime
