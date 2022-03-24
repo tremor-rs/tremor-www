@@ -1,4 +1,18 @@
 {
+  "gettingStartedSidebar": [
+    {
+      "type": "doc",
+      "id": "getting-started/overview",
+      "label": "Getting Started"
+    },
+    "getting-started/about",
+    "getting-started/install",
+    "getting-started/connectivity",
+    "getting-started/tooling",
+    "getting-started/codecs",
+    "getting-started/scripting",
+    "getting-started/specialize"
+  ],
   "communitySidebar": [
     {
       "type": "doc",
@@ -33,20 +47,6 @@
     },
     "community/faqs",
     "community/case-studies"
-  ],
-  "gettingStartedSidebar": [
-    {
-      "type": "doc",
-      "id": "getting-started/overview",
-      "label": "Getting Started"
-    },
-    "getting-started/about",
-    "getting-started/install",
-    "getting-started/connectivity",
-    "getting-started/tooling",
-    "getting-started/codecs",
-    "getting-started/scripting",
-    "getting-started/specialize"
   ],
   "connectorsSidebar": [
     {

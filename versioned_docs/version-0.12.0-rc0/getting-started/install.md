@@ -1,3 +1,5 @@
+# Install
+
 <h3 class="section-head" id="h-platforms"><a href="#h-platforms"></a>Supported Platforms</h3>
 
 Select the operating system your are developing on.

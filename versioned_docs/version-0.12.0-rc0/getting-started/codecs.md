@@ -1,4 +1,4 @@
-### Concept
+# Codecs
 
 Tremor connects to the external systems using connectors.
 

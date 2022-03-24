@@ -1,0 +1,552 @@
+<svg class="railroad" viewBox="0 0 1237 537" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+
+svg.railroad {
+  background-color: rgba(238, 238, 238, .91);
+  background-size: 15px 15px;
+  background-image: linear-gradient(to right, rgba(25, 25, 225, .65) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(25, 25, 225, .65) 1px, transparent 1px);
+}
+
+svg.railroad path {
+  stroke-width: 3px;
+  stroke: black;
+  fill: transparent;
+}
+
+svg.railroad .debug {
+  stroke-width: 1px;
+  stroke: red;
+}
+
+svg.railroad text {
+  font: 14px monospace;
+  text-anchor: middle;
+}
+
+svg.railroad .nonterminal text {
+  font-weight: bold;
+}
+
+svg.railroad text.comment {
+  font: italic 12px monospace;
+}
+
+svg.railroad rect {
+  stroke-width: 3px;
+  stroke: black;
+  fill:rgba(0, 0, 90, 0%);
+}
+
+svg.railroad .terminal rect {
+  fill: aquamarine;  
+}
+
+svg.railroad .nonterminal rect {
+  fill: orange;  
+}
+
+svg.railroad g.labeledbox &gt; rect {
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  stroke-width: 1.5px;
+  stroke: grey;
+  stroke-dasharray: 5px;
+  fill:rgba(150, 150, 150, 25%);
+}
+
+</style>
+<g class="sequence">
+<path d=" M 10 21 a 5 5 0 0 1 5 -5 a 5 5 0 0 1 5 5 a 5 5 0 0 1 -5 5 a 5 5 0 0 1 -5 -5 m 10 0 h 5"/>
+<g class="choice">
+<path d=" M 35 21 h 24 m 100 0 h 1038 m -516 0 l -5 -5 m 0 10 l 5 -5 m 516 0"/>
+<g class="sequence">
+<g class="nonterminal">
+<rect height="22" width="100" x="59" y="10"/>
+<text x="109" y="26">
+ModuleStmt</text>
+</g>
+</g>
+<path d=" M 35 21 a 12 12 0 0 1 12 12 v 9 m 1138 0 v -9 a 12 12 0 0 1 12 -12"/>
+<path d=" M 47 42 v 33 m 1138 0 v -33"/>
+<path d=" M 47 75 v 33 m 1138 0 v -33"/>
+<path d=" M 47 108 v 33 m 1138 0 v -33"/>
+<path d=" M 47 141 v 33 m 1138 0 v -33"/>
+<path d=" M 47 174 v 33 m 1138 0 v -33"/>
+<path d=" M 47 207 v 33 m 1138 0 v -33"/>
+<path d=" M 47 240 v 33 m 1138 0 v -33"/>
+<path d=" M 47 273 v 33 m 1138 0 v -33"/>
+<path d=" M 47 306 v 33 m 1138 0 v -33"/>
+<path d=" M 47 339 v 33 m 1138 0 v -33"/>
+<path d=" M 47 372 v 33 m 1138 0 v -33"/>
+<path d=" M 47 405 v 33 m 1138 0 v -33"/>
+<path d=" M 47 438 v 33 m 1138 0 v -33"/>
+<path d=" M 47 471 v 33 m 1138 0 v -33"/>
+<path d=" M 47 42 v 0 a 12 12 0 0 0 12 12 m 516 0 h 598 m -296 0 l -5 -5 m 0 10 l 5 -5 m 296 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="43"/>
+<text x="101" y="59">
+&quot;define&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="153" y="43"/>
+<text x="203" y="59">
+WindowKind</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="263" y="43"/>
+<text x="305" y="59">
+&quot;window&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="357" y="43"/>
+<text x="387" y="59">
+Ident</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="148" x="427" y="43"/>
+<text x="501" y="59">
+WithScriptClause</text>
+</g>
+<path d=" M 143 54 h 10"/>
+<path d=" M 253 54 h 10"/>
+<path d=" M 347 54 h 10"/>
+<path d=" M 417 54 h 10"/>
+</g>
+<path d=" M 47 75 v 0 a 12 12 0 0 0 12 12 m 500 0 h 614 m -304 0 l -5 -5 m 0 10 l 5 -5 m 304 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="76"/>
+<text x="101" y="92">
+&quot;define&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="116" x="153" y="76"/>
+<text x="211" y="92">
+OperatorKind</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="100" x="279" y="76"/>
+<text x="329" y="92">
+&quot;operator&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="389" y="76"/>
+<text x="419" y="92">
+Ident</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="459" y="76"/>
+<text x="509" y="92">
+WithClause</text>
+</g>
+<path d=" M 143 87 h 10"/>
+<path d=" M 269 87 h 10"/>
+<path d=" M 379 87 h 10"/>
+<path d=" M 449 87 h 10"/>
+</g>
+<path d=" M 47 108 v 0 a 12 12 0 0 0 12 12 m 390 0 h 724 m -359 0 l -5 -5 m 0 10 l 5 -5 m 359 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="109"/>
+<text x="101" y="125">
+&quot;define&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="116" x="153" y="109"/>
+<text x="211" y="125">
+OperatorKind</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="100" x="279" y="109"/>
+<text x="329" y="125">
+&quot;operator&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="389" y="109"/>
+<text x="419" y="125">
+Ident</text>
+</g>
+<path d=" M 143 120 h 10"/>
+<path d=" M 269 120 h 10"/>
+<path d=" M 379 120 h 10"/>
+</g>
+<path d=" M 47 141 v 0 a 12 12 0 0 0 12 12 m 548 0 h 566 m -280 0 l -5 -5 m 0 10 l 5 -5 m 280 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="142"/>
+<text x="101" y="158">
+&quot;define&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="153" y="142"/>
+<text x="195" y="158">
+&quot;script&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="247" y="142"/>
+<text x="277" y="158">
+Ident</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="148" x="317" y="142"/>
+<text x="391" y="158">
+ScriptWithClause</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="132" x="475" y="142"/>
+<text x="541" y="158">
+EmbeddedScript</text>
+</g>
+<path d=" M 143 153 h 10"/>
+<path d=" M 237 153 h 10"/>
+<path d=" M 307 153 h 10"/>
+<path d=" M 465 153 h 10"/>
+</g>
+<path d=" M 47 174 v 0 a 12 12 0 0 0 12 12 m 390 0 h 724 m -359 0 l -5 -5 m 0 10 l 5 -5 m 359 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="175"/>
+<text x="101" y="191">
+&quot;define&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="153" y="175"/>
+<text x="195" y="191">
+&quot;script&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="247" y="175"/>
+<text x="277" y="191">
+Ident</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="132" x="317" y="175"/>
+<text x="383" y="191">
+EmbeddedScript</text>
+</g>
+<path d=" M 143 186 h 10"/>
+<path d=" M 237 186 h 10"/>
+<path d=" M 307 186 h 10"/>
+</g>
+<path d=" M 47 207 v 0 a 12 12 0 0 0 12 12 m 248 0 h 866 m -430 0 l -5 -5 m 0 10 l 5 -5 m 430 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="208"/>
+<text x="101" y="224">
+&quot;create&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="153" y="208"/>
+<text x="195" y="224">
+&quot;stream&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="247" y="208"/>
+<text x="277" y="224">
+Ident</text>
+</g>
+<path d=" M 143 219 h 10"/>
+<path d=" M 237 219 h 10"/>
+</g>
+<path d=" M 47 240 v 0 a 12 12 0 0 0 12 12 m 586 0 h 528 m -261 0 l -5 -5 m 0 10 l 5 -5 m 261 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="241"/>
+<text x="101" y="257">
+&quot;create&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="100" x="153" y="241"/>
+<text x="203" y="257">
+&quot;operator&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="263" y="241"/>
+<text x="293" y="257">
+Ident</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="68" x="333" y="241"/>
+<text x="367" y="257">
+&quot;from&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="124" x="411" y="241"/>
+<text x="473" y="257">
+ModularTarget</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="545" y="241"/>
+<text x="595" y="257">
+WithClause</text>
+</g>
+<path d=" M 143 252 h 10"/>
+<path d=" M 253 252 h 10"/>
+<path d=" M 323 252 h 10"/>
+<path d=" M 401 252 h 10"/>
+<path d=" M 535 252 h 10"/>
+</g>
+<path d=" M 47 273 v 0 a 12 12 0 0 0 12 12 m 476 0 h 638 m -316 0 l -5 -5 m 0 10 l 5 -5 m 316 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="274"/>
+<text x="101" y="290">
+&quot;create&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="100" x="153" y="274"/>
+<text x="203" y="290">
+&quot;operator&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="263" y="274"/>
+<text x="293" y="290">
+Ident</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="68" x="333" y="274"/>
+<text x="367" y="290">
+&quot;from&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="124" x="411" y="274"/>
+<text x="473" y="290">
+ModularTarget</text>
+</g>
+<path d=" M 143 285 h 10"/>
+<path d=" M 253 285 h 10"/>
+<path d=" M 323 285 h 10"/>
+<path d=" M 401 285 h 10"/>
+</g>
+<path d=" M 47 306 v 0 a 12 12 0 0 0 12 12 m 374 0 h 740 m -367 0 l -5 -5 m 0 10 l 5 -5 m 367 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="307"/>
+<text x="101" y="323">
+&quot;create&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="100" x="153" y="307"/>
+<text x="203" y="323">
+&quot;operator&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="263" y="307"/>
+<text x="293" y="323">
+Ident</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="333" y="307"/>
+<text x="383" y="323">
+WithClause</text>
+</g>
+<path d=" M 143 318 h 10"/>
+<path d=" M 253 318 h 10"/>
+<path d=" M 323 318 h 10"/>
+</g>
+<path d=" M 47 339 v 0 a 12 12 0 0 0 12 12 m 264 0 h 850 m -422 0 l -5 -5 m 0 10 l 5 -5 m 422 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="340"/>
+<text x="101" y="356">
+&quot;create&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="100" x="153" y="340"/>
+<text x="203" y="356">
+&quot;operator&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="263" y="340"/>
+<text x="293" y="356">
+Ident</text>
+</g>
+<path d=" M 143 351 h 10"/>
+<path d=" M 253 351 h 10"/>
+</g>
+<path d=" M 47 372 v 0 a 12 12 0 0 0 12 12 m 570 0 h 544 m -269 0 l -5 -5 m 0 10 l 5 -5 m 269 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="373"/>
+<text x="101" y="389">
+&quot;create&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="153" y="373"/>
+<text x="195" y="389">
+&quot;script&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="247" y="373"/>
+<text x="277" y="389">
+Ident</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="68" x="317" y="373"/>
+<text x="351" y="389">
+&quot;from&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="124" x="395" y="373"/>
+<text x="457" y="389">
+ModularTarget</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="529" y="373"/>
+<text x="579" y="389">
+WithClause</text>
+</g>
+<path d=" M 143 384 h 10"/>
+<path d=" M 237 384 h 10"/>
+<path d=" M 307 384 h 10"/>
+<path d=" M 385 384 h 10"/>
+<path d=" M 519 384 h 10"/>
+</g>
+<path d=" M 47 405 v 0 a 12 12 0 0 0 12 12 m 460 0 h 654 m -324 0 l -5 -5 m 0 10 l 5 -5 m 324 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="406"/>
+<text x="101" y="422">
+&quot;create&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="153" y="406"/>
+<text x="195" y="422">
+&quot;script&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="247" y="406"/>
+<text x="277" y="422">
+Ident</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="68" x="317" y="406"/>
+<text x="351" y="422">
+&quot;from&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="124" x="395" y="406"/>
+<text x="457" y="422">
+ModularTarget</text>
+</g>
+<path d=" M 143 417 h 10"/>
+<path d=" M 237 417 h 10"/>
+<path d=" M 307 417 h 10"/>
+<path d=" M 385 417 h 10"/>
+</g>
+<path d=" M 47 438 v 0 a 12 12 0 0 0 12 12 m 358 0 h 756 m -375 0 l -5 -5 m 0 10 l 5 -5 m 375 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="439"/>
+<text x="101" y="455">
+&quot;create&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="153" y="439"/>
+<text x="195" y="455">
+&quot;script&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="247" y="439"/>
+<text x="277" y="455">
+Ident</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="317" y="439"/>
+<text x="367" y="455">
+WithClause</text>
+</g>
+<path d=" M 143 450 h 10"/>
+<path d=" M 237 450 h 10"/>
+<path d=" M 307 450 h 10"/>
+</g>
+<path d=" M 47 471 v 0 a 12 12 0 0 0 12 12 m 248 0 h 866 m -430 0 l -5 -5 m 0 10 l 5 -5 m 430 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="472"/>
+<text x="101" y="488">
+&quot;create&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="153" y="472"/>
+<text x="195" y="488">
+&quot;script&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="247" y="472"/>
+<text x="277" y="488">
+Ident</text>
+</g>
+<path d=" M 143 483 h 10"/>
+<path d=" M 237 483 h 10"/>
+</g>
+<path d=" M 47 504 v 0 a 12 12 0 0 0 12 12 m 1114 0 h 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="84" x="59" y="505"/>
+<text x="101" y="521">
+&quot;select&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="140" x="153" y="505"/>
+<text x="223" y="521">
+ComplexExprImut</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="68" x="303" y="505"/>
+<text x="337" y="521">
+&quot;from&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="381" y="505"/>
+<text x="431" y="521">
+StreamPort</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="116" x="491" y="505"/>
+<text x="549" y="521">
+WindowClause</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="108" x="617" y="505"/>
+<text x="671" y="521">
+WhereClause</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="124" x="735" y="505"/>
+<text x="797" y="521">
+GroupByClause</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="68" x="869" y="505"/>
+<text x="903" y="521">
+&quot;into&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="100" x="947" y="505"/>
+<text x="997" y="521">
+StreamPort</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="116" x="1057" y="505"/>
+<text x="1115" y="521">
+HavingClause</text>
+</g>
+<path d=" M 143 516 h 10"/>
+<path d=" M 293 516 h 10"/>
+<path d=" M 371 516 h 10"/>
+<path d=" M 481 516 h 10"/>
+<path d=" M 607 516 h 10"/>
+<path d=" M 725 516 h 10"/>
+<path d=" M 859 516 h 10"/>
+<path d=" M 937 516 h 10"/>
+<path d=" M 1047 516 h 10"/>
+</g>
+</g>
+<path d=" M 1207 21 h 20 m -10 -10 v 20 m 10 -20 v 20"/>
+<path d=" M 25 21 h 10"/>
+<path d=" M 1197 21 h 10"/>
+</g>
+</svg>
