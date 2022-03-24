@@ -18,6 +18,10 @@ lalrpop-docgen:
 	cd lalrpop-docgen &&\
 	git checkout docgen
 
+alex:
+	npm install -g alex
+	alex docs
+
 static/docs/svg: lalrpop-docgen
 	-mkdir docs/language
 	cd lalrpop-docgen && cargo build --all
