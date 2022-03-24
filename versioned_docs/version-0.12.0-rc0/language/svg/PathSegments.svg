@@ -59,7 +59,7 @@ svg.railroad g.labeledbox &gt; rect {
 <g class="sequence">
 <path d=" M 10 21 a 5 5 0 0 1 5 -5 a 5 5 0 0 1 5 5 a 5 5 0 0 1 -5 5 a 5 5 0 0 1 -5 -5 m 10 0 h 5"/>
 <g class="choice">
-<path d=" M 35 21 h 24 m 288 0 h 54 m -24 0 l -5 -5 m 0 10 l 5 -5 m 24 0"/>
+<path d=" M 35 21 h 24 m 240 0 h 102 m -48 0 l -5 -5 m 0 10 l 5 -5 m 48 0"/>
 <g class="sequence">
 <g class="terminal">
 <rect height="22" rx="10" ry="10" width="44" x="59" y="10"/>
@@ -67,17 +67,17 @@ svg.railroad g.labeledbox &gt; rect {
 &quot;.&quot;</text>
 </g>
 <g class="nonterminal">
-<rect height="22" width="108" x="113" y="10"/>
-<text x="167" y="26">
-PathSegment</text>
+<rect height="22" width="60" x="113" y="10"/>
+<text x="143" y="26">
+Ident</text>
 </g>
 <g class="nonterminal">
-<rect height="22" width="116" x="231" y="10"/>
-<text x="289" y="26">
+<rect height="22" width="116" x="183" y="10"/>
+<text x="241" y="26">
 PathSegments</text>
 </g>
 <path d=" M 103 21 h 10"/>
-<path d=" M 221 21 h 10"/>
+<path d=" M 173 21 h 10"/>
 </g>
 <path d=" M 35 21 a 12 12 0 0 1 12 12 v 9 m 342 0 v -9 a 12 12 0 0 1 12 -12"/>
 <path d=" M 47 42 v 33 m 342 0 v -33"/>
@@ -128,7 +128,7 @@ Selector</text>
 <path d=" M 103 87 h 10"/>
 <path d=" M 197 87 h 10"/>
 </g>
-<path d=" M 47 108 v 0 a 12 12 0 0 0 12 12 m 162 0 h 156 m -75 0 l -5 -5 m 0 10 l 5 -5 m 75 0 a 12 12 0 0 0 12 -12 v 0"/>
+<path d=" M 47 108 v 0 a 12 12 0 0 0 12 12 m 114 0 h 204 m -99 0 l -5 -5 m 0 10 l 5 -5 m 99 0 a 12 12 0 0 0 12 -12 v 0"/>
 <g class="sequence">
 <g class="terminal">
 <rect height="22" rx="10" ry="10" width="44" x="59" y="109"/>
@@ -136,9 +136,9 @@ Selector</text>
 &quot;.&quot;</text>
 </g>
 <g class="nonterminal">
-<rect height="22" width="108" x="113" y="109"/>
-<text x="167" y="125">
-PathSegment</text>
+<rect height="22" width="60" x="113" y="109"/>
+<text x="143" y="125">
+Ident</text>
 </g>
 <path d=" M 103 120 h 10"/>
 </g>
