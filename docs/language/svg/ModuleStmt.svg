@@ -1,4 +1,4 @@
-<svg class="railroad" viewBox="0 0 581 42" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg class="railroad" viewBox="0 0 263 339" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style type="text/css">
 
 svg.railroad {
@@ -58,47 +58,99 @@ svg.railroad g.labeledbox &gt; rect {
 </style>
 <g class="sequence">
 <path d=" M 10 21 a 5 5 0 0 1 5 -5 a 5 5 0 0 1 5 5 a 5 5 0 0 1 -5 5 a 5 5 0 0 1 -5 -5 m 10 0 h 5"/>
+<g class="choice">
+<path d=" M 35 21 h 24 m 44 0 h 120 m -57 0 l -5 -5 m 0 10 l 5 -5 m 57 0"/>
 <g class="sequence">
+<g class="nonterminal">
+<rect height="22" width="44" x="59" y="10"/>
+<text x="81" y="26">
+Use</text>
+</g>
+</g>
+<path d=" M 35 21 a 12 12 0 0 1 12 12 v 9 m 164 0 v -9 a 12 12 0 0 1 12 -12"/>
+<path d=" M 47 42 v 33 m 164 0 v -33"/>
+<path d=" M 47 75 v 33 m 164 0 v -33"/>
+<path d=" M 47 108 v 33 m 164 0 v -33"/>
+<path d=" M 47 141 v 33 m 164 0 v -33"/>
+<path d=" M 47 174 v 33 m 164 0 v -33"/>
+<path d=" M 47 207 v 33 m 164 0 v -33"/>
+<path d=" M 47 240 v 33 m 164 0 v -33"/>
+<path d=" M 47 273 v 33 m 164 0 v -33"/>
+<path d=" M 47 42 v 0 a 12 12 0 0 0 12 12 m 60 0 h 80 m -37 0 l -5 -5 m 0 10 l 5 -5 m 37 0 a 12 12 0 0 0 12 -12 v 0"/>
 <g class="sequence">
-<g class="terminal">
-<rect height="22" rx="10" ry="10" width="60" x="35" y="10"/>
-<text x="65" y="26">
-&quot;mod&quot;</text>
-</g>
 <g class="nonterminal">
-<rect height="22" width="60" x="105" y="10"/>
-<text x="135" y="26">
-Ident</text>
+<rect height="22" width="60" x="59" y="43"/>
+<text x="89" y="59">
+Const</text>
 </g>
-<g class="terminal">
-<rect height="22" rx="10" ry="10" width="68" x="175" y="10"/>
-<text x="209" y="26">
-&quot;with&quot;</text>
 </g>
+<path d=" M 47 75 v 0 a 12 12 0 0 0 12 12 m 68 0 h 72 m -33 0 l -5 -5 m 0 10 l 5 -5 m 33 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
 <g class="nonterminal">
-<rect height="22" width="100" x="253" y="10"/>
-<text x="303" y="26">
-ModComment</text>
+<rect height="22" width="68" x="59" y="76"/>
+<text x="93" y="92">
+FnDefn</text>
 </g>
+</g>
+<path d=" M 47 108 v 0 a 12 12 0 0 0 12 12 m 92 0 h 48 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
 <g class="nonterminal">
-<rect height="22" width="108" x="363" y="10"/>
-<text x="417" y="26">
-ModuleStmts</text>
-</g>
-<g class="terminal">
-<rect height="22" rx="10" ry="10" width="60" x="481" y="10"/>
-<text x="511" y="26">
-&quot;end&quot;</text>
-</g>
-<path d=" M 95 21 h 10"/>
-<path d=" M 165 21 h 10"/>
-<path d=" M 243 21 h 10"/>
-<path d=" M 353 21 h 10"/>
-<path d=" M 471 21 h 10"/>
+<rect height="22" width="92" x="59" y="109"/>
+<text x="105" y="125">
+Intrinsic</text>
 </g>
 </g>
-<path d=" M 551 21 h 20 m -10 -10 v 20 m 10 -20 v 20"/>
+<path d=" M 47 141 v 0 a 12 12 0 0 0 12 12 m 116 0 h 24 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="nonterminal">
+<rect height="22" width="116" x="59" y="142"/>
+<text x="117" y="158">
+DefineWindow</text>
+</g>
+</g>
+<path d=" M 47 174 v 0 a 12 12 0 0 0 12 12 m 132 0 h 8 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="nonterminal">
+<rect height="22" width="132" x="59" y="175"/>
+<text x="125" y="191">
+DefineOperator</text>
+</g>
+</g>
+<path d=" M 47 207 v 0 a 12 12 0 0 0 12 12 m 116 0 h 24 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="nonterminal">
+<rect height="22" width="116" x="59" y="208"/>
+<text x="117" y="224">
+DefineScript</text>
+</g>
+</g>
+<path d=" M 47 240 v 0 a 12 12 0 0 0 12 12 m 132 0 h 8 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="nonterminal">
+<rect height="22" width="132" x="59" y="241"/>
+<text x="125" y="257">
+DefinePipeline</text>
+</g>
+</g>
+<path d=" M 47 273 v 0 a 12 12 0 0 0 12 12 m 140 0 h 0 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="nonterminal">
+<rect height="22" width="140" x="59" y="274"/>
+<text x="129" y="290">
+DefineConnector</text>
+</g>
+</g>
+<path d=" M 47 306 v 0 a 12 12 0 0 0 12 12 m 100 0 h 40 a 12 12 0 0 0 12 -12 v 0"/>
+<g class="sequence">
+<g class="nonterminal">
+<rect height="22" width="100" x="59" y="307"/>
+<text x="109" y="323">
+DefineFlow</text>
+</g>
+</g>
+</g>
+<path d=" M 233 21 h 20 m -10 -10 v 20 m 10 -20 v 20"/>
 <path d=" M 25 21 h 10"/>
-<path d=" M 541 21 h 10"/>
+<path d=" M 223 21 h 10"/>
 </g>
 </svg>

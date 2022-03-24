@@ -72,52 +72,6 @@ The `Stmts` rule defines a `;` semi-colon delimited sequence of `Stmt` rules.
 
 
 
-## Rule ConfigDirective
-
-A `ConfigDirective` is a directive to the tremor runtime.
-
-Directives MUST begin on a new line with the `#!config` shebang  config token.
-
-
-
-<img src="svg/ConfigDirective.svg" alt="ConfigDirective" width="269" height="42"/>
-
-```ebnf
-rule ConfigDirective ::=
-     '#!config' WithExpr 
-  ;
-
-```
-
-
-
-A `ConfigDirective` is a directive to the tremor runtime.
-
-Directives MUST begin on a new line with the `#!config` shebang  config token.
-
-
-
-## Rule WithExpr
-
-The `WithExpr` rule defines a name value binding.
-
-
-
-<img src="svg/WithExpr.svg" alt="WithExpr" width="283" height="42"/>
-
-```ebnf
-rule WithExpr ::=
-    Ident  '=' ExprImut 
-  ;
-
-```
-
-
-
-The `WithExpr` rule defines a name value binding.
-
-
-
 ## Rule Stmt
 
 The `Stmt` rule defines the legal statements in a query script.
@@ -129,25 +83,19 @@ Queries in tremor support:
 
 
 
-<img src="svg/Stmt.svg" alt="Stmt" width="1237" height="537"/>
+<img src="svg/Stmt.svg" alt="Stmt" width="1237" height="339"/>
 
 ```ebnf
 rule Stmt ::=
-    ModuleStmt 
-  |  'define' WindowKind  'window' Ident WithScriptClause 
-  |  'define' OperatorKind  'operator' Ident WithClause 
-  |  'define' OperatorKind  'operator' Ident 
-  |  'define'  'script' Ident ScriptWithClause EmbeddedScript 
-  |  'define'  'script' Ident EmbeddedScript 
+    Use 
+  | DefineWindow 
+  | DefineOperator 
+  | DefineScript 
+  | DefinePipeline 
+  | CreateOperator 
+  | CreateScript 
+  | CreatePipeline 
   |  'create'  'stream' Ident 
-  |  'create'  'operator' Ident  'from' ModularTarget WithClause 
-  |  'create'  'operator' Ident  'from' ModularTarget 
-  |  'create'  'operator' Ident WithClause 
-  |  'create'  'operator' Ident 
-  |  'create'  'script' Ident  'from' ModularTarget WithClause 
-  |  'create'  'script' Ident  'from' ModularTarget 
-  |  'create'  'script' Ident WithClause 
-  |  'create'  'script' Ident 
   |  'select' ComplexExprImut  'from' StreamPort WindowClause WhereClause GroupByClause  'into' StreamPort HavingClause 
   ;
 
@@ -164,26 +112,287 @@ Queries in tremor support:
 
 
 
-## Rule ModuleStmt
+## Rule Use
 
-The `ModuleStmt` rule defines the statement types that are valid in a tremor module.
+Imports definitions from an external source for use in the current source file.
+
+The contents of a source file form a module.
+
+### TREMOR_PATH
+
+The `TREMOR_PATH` environment path variable is a `:` delimited set of paths.
+
+Each path is an absolute or relative path to a directory.
+
+When using relative paths - these are relative to the working directory where the
+`tremor` executable is executed from.
+
+The tremor standard library MUST be added to the path to be accessible to scripts.
 
 
 
-
-<img src="svg/ModuleStmt.svg" alt="ModuleStmt" width="581" height="42"/>
+<img src="svg/Use.svg" alt="Use" width="449" height="75"/>
 
 ```ebnf
-rule ModuleStmt ::=
-     'mod' Ident  'with' ModComment ModuleStmts  'end' 
+rule Use ::=
+     'use' ModularTarget 
+  |  'use' ModularTarget  'as' Ident 
   ;
 
 ```
 
 
 
-The `ModuleStmt` rule defines the statement types that are valid in a tremor module.
+Imports definitions from an external source for use in the current source file.
 
+The contents of a source file form a module.
+
+### TREMOR_PATH
+
+The `TREMOR_PATH` environment path variable is a `:` delimited set of paths.
+
+Each path is an absolute or relative path to a directory.
+
+When using relative paths - these are relative to the working directory where the
+`tremor` executable is executed from.
+
+The tremor standard library MUST be added to the path to be accessible to scripts.
+
+
+
+## Rule DefineWindow
+
+The `DefineWindow` rule defines a temporal window specification.
+
+A window is a mechanism that caches, stores or buffers events for processing
+over a finite temporal range. The time range can be based on the number of
+events, the wall clock or other defined parameters.
+
+The named window can be instanciated via operations that support windows such
+as the `select` operation.
+
+
+
+<img src="svg/DefineWindow.svg" alt="DefineWindow" width="991" height="42"/>
+
+```ebnf
+rule DefineWindow ::=
+    DocComment  'define'  'window' Ident  'from' WindowKind CreationWith EmbeddedScriptImut  'end' 
+  ;
+
+```
+
+
+
+The `DefineWindow` rule defines a temporal window specification.
+
+A window is a mechanism that caches, stores or buffers events for processing
+over a finite temporal range. The time range can be based on the number of
+events, the wall clock or other defined parameters.
+
+The named window can be instanciated via operations that support windows such
+as the `select` operation.
+
+
+
+## Rule DefineOperator
+
+The `DefineOperator` rule defines an operator.
+
+An operator is a query operation composed using the builtin 
+operators provided by tremor written in the rust programming language.
+
+The named operator can be parameterized and instanciated via the `CreateOperator` rule
+
+
+<img src="svg/DefineOperator.svg" alt="DefineOperator" width="819" height="55"/>
+
+```ebnf
+rule DefineOperator ::=
+    DocComment  'define'  'operator' Ident  'from' OperatorKind ArgsWithEnd ?  
+  ;
+
+```
+
+
+
+The `DefineOperator` rule defines an operator.
+
+An operator is a query operation composed using the builtin 
+operators provided by tremor written in the rust programming language.
+
+The named operator can be parameterized and instanciated via the `CreateOperator` rule
+
+
+## Rule DefineScript
+
+The `DefineScript` rule defines a named operator based on a tremor script.
+
+A script operator is a query operation composed using the scripting language
+DSL rather than the builtin operators provided by tremor written in the
+rust programming language.
+
+The named script can be parameterized and instanciated via the `CreateScript` rule
+ 
+
+
+<img src="svg/DefineScript.svg" alt="DefineScript" width="717" height="42"/>
+
+```ebnf
+rule DefineScript ::=
+    DocComment  'define'  'script' Ident DefinitionArgs EmbeddedScript 
+  ;
+
+```
+
+
+
+The `DefineScript` rule defines a named operator based on a tremor script.
+
+A script operator is a query operation composed using the scripting language
+DSL rather than the builtin operators provided by tremor written in the
+rust programming language.
+
+The named script can be parameterized and instanciated via the `CreateScript` rule
+ 
+
+
+## Rule DefinePipeline
+
+The `DefinePipeline` rule creates a named pipeline.
+
+A pipeline is a query operation composed using the query langauge DSL
+instead of a builtin operation provided by tremor written in the rust
+programming language.
+
+The named pipeline can be parameterized and instanciated via the `CreatePipeline` rule
+
+
+
+<img src="svg/DefinePipeline.svg" alt="DefinePipeline" width="1077" height="55"/>
+
+```ebnf
+rule DefinePipeline ::=
+    DocComment  'define'  'pipeline' Ident (  'from' Ports ) ?  (  'into' Ports ) ?  DefinitionArgs Pipeline 
+  ;
+
+```
+
+
+
+The `DefinePipeline` rule creates a named pipeline.
+
+A pipeline is a query operation composed using the query langauge DSL
+instead of a builtin operation provided by tremor written in the rust
+programming language.
+
+The named pipeline can be parameterized and instanciated via the `CreatePipeline` rule
+
+
+
+## Rule CreateOperator
+
+The `CreateOperator` rule creates an operator.
+
+An operator is a query operation composed using the builtin 
+operators provided by tremor written in the rust programming language.
+
+The rule causes an instance of the referenced operator definition to be
+created an inserted into the query processing execution graph.
+
+
+
+<img src="svg/CreateOperator.svg" alt="CreateOperator" width="749" height="75"/>
+
+```ebnf
+rule CreateOperator ::=
+     'create'  'operator' Ident CreationWithEnd 
+  |  'create'  'operator' Ident  'from' ModularTarget CreationWithEnd 
+  ;
+
+```
+
+
+
+The `CreateOperator` rule creates an operator.
+
+An operator is a query operation composed using the builtin 
+operators provided by tremor written in the rust programming language.
+
+The rule causes an instance of the referenced operator definition to be
+created an inserted into the query processing execution graph.
+
+
+
+## Rule CreateScript
+
+The `CreateScript` rule creates an operator based on a tremor script.
+
+A script operator is a query operation composed using the scripting language
+DSL rather than the builtin operators provided by tremor written in the
+rust programming language.
+
+The rule causes an instance of the referenced script definition to be
+created an inserted into the query processing execution graph.
+
+
+
+<img src="svg/CreateScript.svg" alt="CreateScript" width="733" height="75"/>
+
+```ebnf
+rule CreateScript ::=
+     'create'  'script' Ident CreationWithEnd 
+  |  'create'  'script' Ident  'from' ModularTarget CreationWithEnd 
+  ;
+
+```
+
+
+
+The `CreateScript` rule creates an operator based on a tremor script.
+
+A script operator is a query operation composed using the scripting language
+DSL rather than the builtin operators provided by tremor written in the
+rust programming language.
+
+The rule causes an instance of the referenced script definition to be
+created an inserted into the query processing execution graph.
+
+
+
+## Rule CreatePipeline
+
+The `CreatePipeline` rule creates a pipeline.
+
+A pipeline is a query operation composed using the query langauge DSL
+instead of a builtin operation provided by tremor written in the rust
+programming language.
+
+The rule causes an instance of the referenced pipeline definition to be
+created an inserted into the query processing execution graph.
+
+
+
+<img src="svg/CreatePipeline.svg" alt="CreatePipeline" width="749" height="75"/>
+
+```ebnf
+rule CreatePipeline ::=
+     'create'  'pipeline' Ident CreationWithEnd 
+  |  'create'  'pipeline' Ident  'from' ModularTarget CreationWithEnd 
+  ;
+
+```
+
+
+
+The `CreatePipeline` rule creates a pipeline.
+
+A pipeline is a query operation composed using the query langauge DSL
+instead of a builtin operation provided by tremor written in the rust
+programming language.
+
+The rule causes an instance of the referenced pipeline definition to be
+created an inserted into the query processing execution graph.
 
 
 
@@ -205,374 +414,6 @@ rule Ident ::=
 
 
 An `Ident` is an identifier - a user defined name for a tremor value.
-
-
-
-## Rule ModComment
-
-The `ModComment` rule specifies module comments in tremor.
-
-Documentation comments for modules are optional.
-
-A module documentation comment begins with a `###` triple-hash and they are line delimited.
-
-Muliple successive comments are coalesced together to form a complete comment.
-
-The content of a module documentation comment is markdown syntax.
-
-
-
-<img src="svg/ModComment.svg" alt="ModComment" width="231" height="55"/>
-
-```ebnf
-rule ModComment ::=
-    ( ModComment_ ) ?  
-  ;
-
-```
-
-
-
-The `ModComment` rule specifies module comments in tremor.
-
-Documentation comments for modules are optional.
-
-A module documentation comment begins with a `###` triple-hash and they are line delimited.
-
-Muliple successive comments are coalesced together to form a complete comment.
-
-The content of a module documentation comment is markdown syntax.
-
-
-
-## Rule ModuleStmts
-
-The `ModuleStmts` rule defines a set of module statements.
-
-Module statements are a `;` semi-colon delimited set of `ModuleStmt` rules
-
-
-
-<img src="svg/ModuleStmts.svg" alt="ModuleStmts" width="435" height="87"/>
-
-```ebnf
-rule ModuleStmts ::=
-    ModuleInnerStmt  ';' ModuleStmts 
-  | ModuleInnerStmt  ';' ?  
-  ;
-
-```
-
-
-
-The `ModuleStmts` rule defines a set of module statements.
-
-Module statements are a `;` semi-colon delimited set of `ModuleStmt` rules
-
-
-
-## Rule ModuleInnerStmt
-
-<img src="svg/ModuleInnerStmt.svg" alt="ModuleInnerStmt" width="671" height="306"/>
-
-```ebnf
-rule ModuleInnerStmt ::=
-    ModuleStmt 
-  |  'define' WindowKind  'window' Ident WithScriptClause 
-  |  'define' OperatorKind  'operator' Ident WithClause 
-  |  'define' OperatorKind  'operator' Ident 
-  |  'define'  'script' Ident ScriptWithClause EmbeddedScript 
-  |  'define'  'script' Ident EmbeddedScript 
-  | Const 
-  | FnDecl 
-  | Intrinsic 
-  ;
-
-```
-
-
-
-## Rule WindowKind
-
-### Tumbling
-
-A `tumbling` window defines a wall-clock-bound or data-bound window of non-overlapping
-time for storing events. The windows can not overlap, and there are no gaps between
-windows permissible.
-
-### Sliding
-
-A `sliding` window defines a wall-clock-bound or data-bound window of events that captures
-an intervalic window of events whose extent derives from the size of the window. A sliding
-window of size 2 captures up to to events. Every subsequent event will evict the oldest and
-retain the newest event with the previous ( now oldest ) event.
-
-### Conditioning
-
-Both kinds of window store events in arrival order
-
-
-<img src="svg/WindowKind.svg" alt="WindowKind" width="223" height="75"/>
-
-```ebnf
-rule WindowKind ::=
-     'sliding' 
-  |  'tumbling' 
-  ;
-
-```
-
-
-
-### Tumbling
-
-A `tumbling` window defines a wall-clock-bound or data-bound window of non-overlapping
-time for storing events. The windows can not overlap, and there are no gaps between
-windows permissible.
-
-### Sliding
-
-A `sliding` window defines a wall-clock-bound or data-bound window of events that captures
-an intervalic window of events whose extent derives from the size of the window. A sliding
-window of size 2 captures up to to events. Every subsequent event will evict the oldest and
-retain the newest event with the previous ( now oldest ) event.
-
-### Conditioning
-
-Both kinds of window store events in arrival order
-
-
-## Rule WithScriptClause
-
-<img src="svg/WithScriptClause.svg" alt="WithScriptClause" width="489" height="42"/>
-
-```ebnf
-rule WithScriptClause ::=
-     'with' WithExprs EmbeddedScriptImut  'end' 
-  ;
-
-```
-
-
-
-## Rule OperatorKind
-
-The `OperatorKind` rule defines a modular path like reference to a builtin tremor operator.
-
-Operators are programmed in rust native code and referenced via a virtual module path.
-
-
-
-<img src="svg/OperatorKind.svg" alt="OperatorKind" width="267" height="42"/>
-
-```ebnf
-rule OperatorKind ::=
-    Ident  '::' Ident 
-  ;
-
-```
-
-
-
-The `OperatorKind` rule defines a modular path like reference to a builtin tremor operator.
-
-Operators are programmed in rust native code and referenced via a virtual module path.
-
-
-
-## Rule WithClause
-
-The `WithClause` rule defines a `with` block with a `,` comma delimited set of `WithExpr` rules.
-
-
-
-<img src="svg/WithClause.svg" alt="WithClause" width="293" height="42"/>
-
-```ebnf
-rule WithClause ::=
-    ScriptWithClause  'end' 
-  ;
-
-```
-
-
-
-The `WithClause` rule defines a `with` block with a `,` comma delimited set of `WithExpr` rules.
-
-
-
-## Rule ScriptWithClause
-
-<img src="svg/ScriptWithClause.svg" alt="ScriptWithClause" width="245" height="42"/>
-
-```ebnf
-rule ScriptWithClause ::=
-     'with' WithExprs 
-  ;
-
-```
-
-
-
-## Rule EmbeddedScript
-
-The `EmbeddedScript` rule defines a script using the [Script DSL](/docs/language/Script) [ [Full](/docs/language/Full#rule-script) ].
-
-The script is enclosed in `script` .. `end` blocks.
-
-
-
-<img src="svg/EmbeddedScript.svg" alt="EmbeddedScript" width="299" height="42"/>
-
-```ebnf
-rule EmbeddedScript ::=
-     'script' Exprs  'end' 
-  ;
-
-```
-
-
-
-The `EmbeddedScript` rule defines a script using the [Script DSL](/docs/language/Script) [ [Full](/docs/language/Full#rule-script) ].
-
-The script is enclosed in `script` .. `end` blocks.
-
-
-
-## Rule Const
-
-The `Const` rule defines a rule that binds an immutable expression to an identifier.
-
-As the value cannot be changed at runtime.
-
-
-
-<img src="svg/Const.svg" alt="Const" width="527" height="42"/>
-
-```ebnf
-rule Const ::=
-    DocComment  'const' Ident  '=' SimpleExprImut 
-  ;
-
-```
-
-
-
-The `Const` rule defines a rule that binds an immutable expression to an identifier.
-
-As the value cannot be changed at runtime.
-
-
-
-## Rule FnDecl
-
-The `FnDecl` rule allows user defined functions to be defined.
-
-This rule allows tremor users to create functions for reuse in one or many tremor applications.
-
-
-
-<img src="svg/FnDecl.svg" alt="FnDecl" width="975" height="207"/>
-
-```ebnf
-rule FnDecl ::=
-    DocComment  'fn' Ident  '('  '.'  '.'  '.'  ')'  'with' Exprs  'end' 
-  | DocComment  'fn' Ident  '(' FnArgs  ','  '.'  '.'  '.'  ')'  'with' Exprs  'end' 
-  | DocComment  'fn' Ident  '('  ')'  'with' Exprs  'end' 
-  | DocComment  'fn' Ident  '(' FnArgs  ')'  'with' Exprs  'end' 
-  | DocComment  'fn' Ident  '('  ')'  'of' FnCases  'end' 
-  | DocComment  'fn' Ident  '(' FnArgs  ')'  'of' FnCases  'end' 
-  ;
-
-```
-
-
-
-The `FnDecl` rule allows user defined functions to be defined.
-
-This rule allows tremor users to create functions for reuse in one or many tremor applications.
-
-
-
-## Rule Intrinsic
-
-The `intrinsic` rule defines intrinsic function signatures.
-
-This rule allows tremor maintainers to document the builtin functions implemented as
-native rust code. The facility also allows document generation tools to document builtin
-intrinsic functions in the same way as user defined functions.
-
-In short, these can be thought of as runtime provided.
-
-For information on how to define user defined functions see the [function](#rule-fndecl) rule.
-
-
-
-<img src="svg/Intrinsic.svg" alt="Intrinsic" width="1071" height="141"/>
-
-```ebnf
-rule Intrinsic ::=
-    DocComment  'intrinsic'  'fn' Ident  '('  ')'  'as' ModularTarget 
-  | DocComment  'intrinsic'  'fn' Ident  '(' FnArgs  ')'  'as' ModularTarget 
-  | DocComment  'intrinsic'  'fn' Ident  '(' FnArgs  ','  '.'  '.'  '.'  ')'  'as' ModularTarget 
-  | DocComment  'intrinsic'  'fn' Ident  '('  '.'  '.'  '.'  ')'  'as' ModularTarget 
-  ;
-
-```
-
-
-
-The `intrinsic` rule defines intrinsic function signatures.
-
-This rule allows tremor maintainers to document the builtin functions implemented as
-native rust code. The facility also allows document generation tools to document builtin
-intrinsic functions in the same way as user defined functions.
-
-In short, these can be thought of as runtime provided.
-
-For information on how to define user defined functions see the [function](#rule-fndefn) rule.
-
-
-
-## Rule ModularTarget
-
-A `ModularTarget` indexes into tremor's module path.
-
-In tremor a `module` is a file on the file system.
-
-A `module` is also a unit of compilation.
-
-A `ModularTarget` is a `::` double-colon delimited set of identifiers.
-
-Leading `::` are not supported in a modular target..
-
-Trailing `::` are not supported in a modular target.
-
-
-
-<img src="svg/ModularTarget.svg" alt="ModularTarget" width="331" height="75"/>
-
-```ebnf
-rule ModularTarget ::=
-    Ident 
-  | ModPath  '::' Ident 
-  ;
-
-```
-
-
-
-A `ModularTarget` indexes into tremor's module path.
-
-In tremor a `module` is a file on the file system.
-
-A `module` is also a unit of compilation.
-
-A `ModularTarget` is a `::` double-colon delimited set of identifiers.
-
-Leading `::` are not supported in a modular target..
-
-Trailing `::` are not supported in a modular target.
 
 
 
@@ -724,6 +565,336 @@ The `HavingClause` defines a predicate expression used to filter ( forward or di
 The `having` clause is executed after an operation has processed an event.
 
 
+## Rule DocComment
+
+The `DocComment` rule specifies documentation comments in tremor.
+
+Documentation comments are optional.
+
+A documentation comment begins with a `##` double-hash and they are line delimited.
+
+Muliple successive comments are coalesced together to form a complete comment.
+
+The content of a documentation comment is markdown syntax.
+
+
+
+<img src="svg/DocComment.svg" alt="DocComment" width="231" height="55"/>
+
+```ebnf
+rule DocComment ::=
+    ( DocComment_ ) ?  
+  ;
+
+```
+
+
+
+The `DocComment` rule specifies documentation comments in tremor.
+
+Documentation comments are optional.
+
+A documentation comment begins with a `##` double-hash and they are line delimited.
+
+Muliple successive comments are coalesced together to form a complete comment.
+
+The content of a documentation comment is markdown syntax.
+
+
+
+## Rule WindowKind
+
+### Tumbling
+
+A `tumbling` window defines a wall-clock-bound or data-bound window of non-overlapping
+time for storing events. The windows can not overlap, and there are no gaps between
+windows permissible.
+
+### Sliding
+
+A `sliding` window defines a wall-clock-bound or data-bound window of events that captures
+an intervalic window of events whose extent derives from the size of the window. A sliding
+window of size 2 captures up to to events. Every subsequent event will evict the oldest and
+retain the newest event with the previous ( now oldest ) event.
+
+### Conditioning
+
+Both kinds of window store events in arrival order
+
+
+<img src="svg/WindowKind.svg" alt="WindowKind" width="223" height="75"/>
+
+```ebnf
+rule WindowKind ::=
+     'sliding' 
+  |  'tumbling' 
+  ;
+
+```
+
+
+
+### Tumbling
+
+A `tumbling` window defines a wall-clock-bound or data-bound window of non-overlapping
+time for storing events. The windows can not overlap, and there are no gaps between
+windows permissible.
+
+### Sliding
+
+A `sliding` window defines a wall-clock-bound or data-bound window of events that captures
+an intervalic window of events whose extent derives from the size of the window. A sliding
+window of size 2 captures up to to events. Every subsequent event will evict the oldest and
+retain the newest event with the previous ( now oldest ) event.
+
+### Conditioning
+
+Both kinds of window store events in arrival order
+
+
+## Rule CreationWith
+
+The `CreationWit` rule defines an optional `with` block of expressions without a terminal `end` keyword.
+
+
+
+<img src="svg/CreationWith.svg" alt="CreationWith" width="223" height="55"/>
+
+```ebnf
+rule CreationWith ::=
+    WithClause ?  
+  ;
+
+```
+
+
+
+The `CreationWit` rule defines an optional `with` block of expressions without a terminal `end` keyword.
+
+
+
+## Rule EmbeddedScriptImut
+
+The `EmbeddedScriptImut` rule defines an optional embedded `script`.
+ 
+
+
+<img src="svg/EmbeddedScriptImut.svg" alt="EmbeddedScriptImut" width="413" height="55"/>
+
+```ebnf
+rule EmbeddedScriptImut ::=
+    (  'script' EmbeddedScriptContent ) ?  
+  ;
+
+```
+
+
+
+The `EmbeddedScriptImut` rule defines an optional embedded `script`.
+ 
+
+
+## Rule OperatorKind
+
+The `OperatorKind` rule defines a modular path like reference to a builtin tremor operator.
+
+Operators are programmed in rust native code and referenced via a virtual module path.
+
+
+
+<img src="svg/OperatorKind.svg" alt="OperatorKind" width="267" height="42"/>
+
+```ebnf
+rule OperatorKind ::=
+    Ident  '::' Ident 
+  ;
+
+```
+
+
+
+The `OperatorKind` rule defines a modular path like reference to a builtin tremor operator.
+
+Operators are programmed in rust native code and referenced via a virtual module path.
+
+
+
+## Rule ArgsWithEnd
+
+The `ArgsWithEnd` rule defines an arguments block with an `end` block.
+
+
+
+<img src="svg/ArgsWithEnd.svg" alt="ArgsWithEnd" width="357" height="55"/>
+
+```ebnf
+rule ArgsWithEnd ::=
+    ArgsClause ?  WithEndClause 
+  ;
+
+```
+
+
+
+The `ArgsWithEnd` rule defines an arguments block with an `end` block.
+
+
+
+## Rule DefinitionArgs
+
+The `DefinitionArgs` rule defines an arguments block without an `end` block.
+
+
+
+<img src="svg/DefinitionArgs.svg" alt="DefinitionArgs" width="223" height="55"/>
+
+```ebnf
+rule DefinitionArgs ::=
+    ArgsClause ?  
+  ;
+
+```
+
+
+
+The `DefinitionArgs` rule defines an arguments block without an `end` block.
+
+
+
+## Rule EmbeddedScript
+
+The `EmbeddedScript` rule defines a script using the [Script DSL](/docs/language/Script) [ [Full](/docs/language/Full#rule-script) ].
+
+The script is enclosed in `script` .. `end` blocks.
+
+
+
+<img src="svg/EmbeddedScript.svg" alt="EmbeddedScript" width="363" height="42"/>
+
+```ebnf
+rule EmbeddedScript ::=
+     'script' TopLevelExprs  'end' 
+  ;
+
+```
+
+
+
+The `EmbeddedScript` rule defines a script using the [Script DSL](/docs/language/Script) [ [Full](/docs/language/Full#rule-script) ].
+
+The script is enclosed in `script` .. `end` blocks.
+
+
+
+## Rule Ports
+
+The `Ports` rule defines a `,` comma delimited set of stream ports.
+
+
+
+<img src="svg/Ports.svg" alt="Ports" width="275" height="86"/>
+
+```ebnf
+rule Ports ::=
+    Sep!(Ports, <Ident>, ",") 
+  ;
+
+```
+
+
+
+The `Ports` rule defines a `,` comma delimited set of stream ports.
+
+
+
+## Rule Pipeline
+
+The `Pipeline` rule defines a block of statements in a `pipeline` .. `end` block.
+
+The block MAY begin with an optional set of `ConfigDirectives`.
+
+
+
+<img src="svg/Pipeline.svg" alt="Pipeline" width="633" height="55"/>
+
+```ebnf
+rule Pipeline ::=
+     'pipeline' ConfigDirectives ?  PipelineCreateInner  'end' 
+  ;
+
+```
+
+
+
+The `Pipeline` rule defines a block of statements in a `pipeline` .. `end` block.
+
+The block MAY begin with an optional set of `ConfigDirectives`.
+
+
+
+## Rule CreationWithEnd
+
+The `CreationWithEnd` rule defines a `with` block of expressions with a terminal `end` keyword.
+
+
+
+<img src="svg/CreationWithEnd.svg" alt="CreationWithEnd" width="247" height="55"/>
+
+```ebnf
+rule CreationWithEnd ::=
+    WithEndClause ?  
+  ;
+
+```
+
+
+
+The `CreationWithEnd` rule defines a `with` block of expressions with a terminal `end` keyword.
+
+
+
+## Rule ModularTarget
+
+A `ModularTarget` indexes into tremor's module path.
+
+In tremor a `module` is a file on the file system.
+
+A `module` is also a unit of compilation.
+
+A `ModularTarget` is a `::` double-colon delimited set of identifiers.
+
+Leading `::` are not supported in a modular target..
+
+Trailing `::` are not supported in a modular target.
+
+
+
+<img src="svg/ModularTarget.svg" alt="ModularTarget" width="331" height="75"/>
+
+```ebnf
+rule ModularTarget ::=
+    Ident 
+  | ModPath  '::' Ident 
+  ;
+
+```
+
+
+
+A `ModularTarget` indexes into tremor's module path.
+
+In tremor a `module` is a file on the file system.
+
+A `module` is also a unit of compilation.
+
+A `ModularTarget` is a `::` double-colon delimited set of identifiers.
+
+Leading `::` are not supported in a modular target..
+
+Trailing `::` are not supported in a modular target.
+
+
+
 ## Rule MaybePort
 
 The `MaybePort` rule defines an optional `Port`.
@@ -745,32 +916,6 @@ The `MaybePort` rule defines an optional `Port`.
 
 
 
-## Rule ModPath
-
-The `ModPath` rule defines a modular path.
-
-A modular path is a sequence of `Ident`s separated by a `::` double-colon.
-
-
-
-<img src="svg/ModPath.svg" alt="ModPath" width="331" height="75"/>
-
-```ebnf
-rule ModPath ::=
-    ModPath  '::' Ident 
-  | Ident 
-  ;
-
-```
-
-
-
-The `ModPath` rule defines a modular path.
-
-A modular path is a sequence of `Ident`s separated by a `::` double-colon.
-
-
-
 ## Rule WindowDefn
 
 The `WindowDefn` defines a temporal basis over which a stream of events is applicable.
@@ -789,28 +934,6 @@ rule WindowDefn ::=
 
 
 The `WindowDefn` defines a temporal basis over which a stream of events is applicable.
-
-
-
-## Rule Window
-
-The `Window` rule defines a modular target to a window definition.
-
-
-
-<img src="svg/Window.svg" alt="Window" width="331" height="75"/>
-
-```ebnf
-rule Window ::=
-    Ident 
-  | ModPath  '::' Ident 
-  ;
-
-```
-
-
-
-The `Window` rule defines a modular target to a window definition.
 
 
 
@@ -853,6 +976,27 @@ rule Windows_ ::=
 
 
 The `Windows_` rule defines a sequence of window definitions that are `,` comma delimited.
+
+
+
+## Rule Window
+
+The `Window` rule defines a modular target to a window definition.
+
+
+
+<img src="svg/Window.svg" alt="Window" width="199" height="42"/>
+
+```ebnf
+rule Window ::=
+    ModularTarget 
+  ;
+
+```
+
+
+
+The `Window` rule defines a modular target to a window definition.
 
 
 
@@ -952,27 +1096,6 @@ The `GroupDefs_` rule defines a `,` comma delimited set of `GroupDef` rules.
 
 
 
-## Rule EmbeddedScriptImut
-
-The `EmbeddedScriptImut` rule defines an optional embedded `script`.
- 
-
-
-<img src="svg/EmbeddedScriptImut.svg" alt="EmbeddedScriptImut" width="413" height="55"/>
-
-```ebnf
-rule EmbeddedScriptImut ::=
-    (  'script' EmbeddedScriptContent ) ?  
-  ;
-
-```
-
-
-
-The `EmbeddedScriptImut` rule defines an optional embedded `script`.
- 
-
-
 ## Rule EmbeddedScriptContent
 
 The `EmbeddedScriptContent` rule defines an embedded script expression. 
@@ -994,51 +1117,53 @@ The `EmbeddedScriptContent` rule defines an embedded script expression.
 
 
 
-## Rule WithExprs
+## Rule TopLevelExprs
 
-The `WithExprs` rule defines a `,` comma delimited set of `WithExpr` rules.
+The `TopLevelExprs` rule defines semi-colon separated sequence of top level
+tremor expressions with an optional terminating semi-colon
 
 
 
-<img src="svg/WithExprs.svg" alt="WithExprs" width="175" height="42"/>
+<img src="svg/TopLevelExprs.svg" alt="TopLevelExprs" width="427" height="87"/>
 
 ```ebnf
-rule WithExprs ::=
-    WithExprs_ 
+rule TopLevelExprs ::=
+    TopLevelExpr  ';' TopLevelExprs 
+  | TopLevelExpr  ';' ?  
   ;
 
 ```
 
 
 
-The `WithExprs` rule defines a `,` comma delimited set of `WithExpr` rules.
+The `TopLevelExprs` rule defines semi-colon separated sequence of top level
+tremor expressions with an optional terminating semi-colon
 
 
 
-## Rule WithExprs_
+## Rule PipelineCreateInner
 
-<img src="svg/WithExprs_.svg" alt="WithExprs_" width="339" height="86"/>
+The `PipelineCreateInner` is an internal rule of the `Pipeline` rule.
+
+The rule defines a `;` semi-colon delimited set of one or many `Stmt`s.
+
+
+
+<img src="svg/PipelineCreateInner.svg" alt="PipelineCreateInner" width="299" height="87"/>
 
 ```ebnf
-rule WithExprs_ ::=
-    Sep!(WithExprs_, WithExpr, ",") 
+rule PipelineCreateInner ::=
+    Stmt  ';' Stmts 
+  | Stmt  ';' ?  
   ;
 
 ```
 
 
 
-## Rule Exprs
+The `PipelineCreateInner` is an internal rule of the `Pipeline` rule.
 
-<img src="svg/Exprs.svg" alt="Exprs" width="379" height="87"/>
-
-```ebnf
-rule Exprs ::=
-    MayBeConstExpr  ';' Exprs 
-  | MayBeConstExpr  ';' ?  
-  ;
-
-```
+The rule defines a `;` semi-colon delimited set of one or many `Stmt`s.
 
 
 

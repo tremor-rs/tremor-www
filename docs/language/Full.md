@@ -1,27 +1,51 @@
 # Full Grammar
 
-## Rule Query
+## Rule Use
 
-### Query Language Entrypoint
+Imports definitions from an external source for use in the current source file.
 
-This is the top level rule of the tremor query language `trickle`
+The contents of a source file form a module.
+
+### TREMOR_PATH
+
+The `TREMOR_PATH` environment path variable is a `:` delimited set of paths.
+
+Each path is an absolute or relative path to a directory.
+
+When using relative paths - these are relative to the working directory where the
+`tremor` executable is executed from.
+
+The tremor standard library MUST be added to the path to be accessible to scripts.
 
 
-<img src="svg/Query.svg" alt="Query" width="555" height="100"/>
+
+<img src="svg/Use.svg" alt="Use" width="449" height="75"/>
 
 ```ebnf
-rule Query ::=
-    ConfigDirectives Stmts  '<end-of-stream>' ?  
-  | Stmts  '<end-of-stream>' ?  
+rule Use ::=
+     'use' ModularTarget 
+  |  'use' ModularTarget  'as' Ident 
   ;
 
 ```
 
 
 
-### Query Language Entrypoint
+Imports definitions from an external source for use in the current source file.
 
-This is the top level rule of the tremor query language `trickle`
+The contents of a source file form a module.
+
+### TREMOR_PATH
+
+The `TREMOR_PATH` environment path variable is a `:` delimited set of paths.
+
+Each path is an absolute or relative path to a directory.
+
+When using relative paths - these are relative to the working directory where the
+`tremor` executable is executed from.
+
+The tremor standard library MUST be added to the path to be accessible to scripts.
+
 
 
 ## Rule ConfigDirectives
@@ -75,6 +99,982 @@ Directives MUST begin on a new line with the `#!config` shebang  config token.
 
 
 
+## Rule ArgsWithEnd
+
+The `ArgsWithEnd` rule defines an arguments block with an `end` block.
+
+
+
+<img src="svg/ArgsWithEnd.svg" alt="ArgsWithEnd" width="357" height="55"/>
+
+```ebnf
+rule ArgsWithEnd ::=
+    ArgsClause ?  WithEndClause 
+  ;
+
+```
+
+
+
+The `ArgsWithEnd` rule defines an arguments block with an `end` block.
+
+
+
+## Rule DefinitionArgs
+
+The `DefinitionArgs` rule defines an arguments block without an `end` block.
+
+
+
+<img src="svg/DefinitionArgs.svg" alt="DefinitionArgs" width="223" height="55"/>
+
+```ebnf
+rule DefinitionArgs ::=
+    ArgsClause ?  
+  ;
+
+```
+
+
+
+The `DefinitionArgs` rule defines an arguments block without an `end` block.
+
+
+
+## Rule ArgsClause
+
+The `ArgsClause` rule marks the beginning of an arguments block.
+
+A valid clause has one or many argument expressions delimited by a ',' comma.
+
+
+
+<img src="svg/ArgsClause.svg" alt="ArgsClause" width="245" height="42"/>
+
+```ebnf
+rule ArgsClause ::=
+     'args' ArgsExprs 
+  ;
+
+```
+
+
+
+The `ArgsClause` rule marks the beginning of an arguments block.
+
+A valid clause has one or many argument expressions delimited by a ',' comma.
+
+
+
+## Rule ArgsEndClause
+
+The `ArgsEndClause` rule defines an argument block with an `end`
+
+
+
+<img src="svg/ArgsEndClause.svg" alt="ArgsEndClause" width="245" height="42"/>
+
+```ebnf
+rule ArgsEndClause ::=
+    ArgsClause  'end' 
+  ;
+
+```
+
+
+
+The `ArgsEndClause` rule defines an argument block with an `end`
+
+
+
+## Rule ArgsExprs
+
+The `ArgsExpr` rule is a macro rule invocation based on the `Sep` separator macro rule.
+
+An args expression is a comma delimited set of argument expressions.
+
+
+
+<img src="svg/ArgsExprs.svg" alt="ArgsExprs" width="331" height="86"/>
+
+```ebnf
+rule ArgsExprs ::=
+    Sep!(ArgsExprs, ArgsExpr, ",") 
+  ;
+
+```
+
+
+
+The `ArgsExpr` rule is a macro rule invocation based on the `Sep` separator macro rule.
+
+An args expression is a comma delimited set of argument expressions.
+
+
+
+## Rule ArgsExpr
+
+<img src="svg/ArgsExpr.svg" alt="ArgsExpr" width="331" height="75"/>
+
+```ebnf
+rule ArgsExpr ::=
+    Ident  '=' ExprImut 
+  | Ident 
+  ;
+
+```
+
+
+
+## Rule CreationWithEnd
+
+The `CreationWithEnd` rule defines a `with` block of expressions with a terminal `end` keyword.
+
+
+
+<img src="svg/CreationWithEnd.svg" alt="CreationWithEnd" width="247" height="55"/>
+
+```ebnf
+rule CreationWithEnd ::=
+    WithEndClause ?  
+  ;
+
+```
+
+
+
+The `CreationWithEnd` rule defines a `with` block of expressions with a terminal `end` keyword.
+
+
+
+## Rule CreationWith
+
+The `CreationWit` rule defines an optional `with` block of expressions without a terminal `end` keyword.
+
+
+
+<img src="svg/CreationWith.svg" alt="CreationWith" width="223" height="55"/>
+
+```ebnf
+rule CreationWith ::=
+    WithClause ?  
+  ;
+
+```
+
+
+
+The `CreationWit` rule defines an optional `with` block of expressions without a terminal `end` keyword.
+
+
+
+## Rule WithClause
+
+The `WithClause` rule defines a `with` block with a `,` comma delimited set of `WithExpr` rules.
+
+
+
+<img src="svg/WithClause.svg" alt="WithClause" width="245" height="42"/>
+
+```ebnf
+rule WithClause ::=
+     'with' WithExprs 
+  ;
+
+```
+
+
+
+The `WithClause` rule defines a `with` block with a `,` comma delimited set of `WithExpr` rules.
+
+
+
+## Rule WithEndClause
+
+<img src="svg/WithEndClause.svg" alt="WithEndClause" width="245" height="42"/>
+
+```ebnf
+rule WithEndClause ::=
+    WithClause  'end' 
+  ;
+
+```
+
+
+
+## Rule WithExprs
+
+The `WithExprs` rule defines a `,` comma delimited set of `WithExpr` rules.
+
+
+
+<img src="svg/WithExprs.svg" alt="WithExprs" width="331" height="86"/>
+
+```ebnf
+rule WithExprs ::=
+    Sep!(WithExprs, WithExpr, ",") 
+  ;
+
+```
+
+
+
+The `WithExprs` rule defines a `,` comma delimited set of `WithExpr` rules.
+
+
+
+## Rule WithExpr
+
+The `WithExpr` rule defines a name value binding.
+
+
+
+<img src="svg/WithExpr.svg" alt="WithExpr" width="283" height="42"/>
+
+```ebnf
+rule WithExpr ::=
+    Ident  '=' ExprImut 
+  ;
+
+```
+
+
+
+The `WithExpr` rule defines a name value binding.
+
+
+
+## Rule ModuleBody
+
+The `ModuleBody` rule defines the structure of a valid module in tremor.
+
+Modules begin with optional module comments.
+
+Modules MUST define at least one statement, but may define many.
+
+Statements are `;` semi-colon delimited.
+
+
+
+<img src="svg/ModuleBody.svg" alt="ModuleBody" width="293" height="42"/>
+
+```ebnf
+rule ModuleBody ::=
+    ModComment ModuleStmts 
+  ;
+
+```
+
+
+
+The `ModuleBody` rule defines the structure of a valid module in tremor.
+
+Modules begin with optional module comments.
+
+Modules MUST define at least one statement, but may define many.
+
+Statements are `;` semi-colon delimited.
+
+
+
+## Rule ModuleFile
+
+The `ModuleFile` rule defines a module in tremor.
+
+A module is a unit of compilation.
+
+
+
+<img src="svg/ModuleFile.svg" alt="ModuleFile" width="341" height="42"/>
+
+```ebnf
+rule ModuleFile ::=
+    ModuleBody  '<end-of-stream>' 
+  ;
+
+```
+
+
+
+The `ModuleFile` rule defines a module in tremor.
+
+A module is a unit of compilation.
+
+
+
+## Rule ModuleStmts
+
+The `ModuleStmts` rule defines a set of module statements.
+
+Module statements are a `;` semi-colon delimited set of `ModuleStmt` rules
+
+
+
+<img src="svg/ModuleStmts.svg" alt="ModuleStmts" width="395" height="87"/>
+
+```ebnf
+rule ModuleStmts ::=
+    ModuleStmt  ';' ModuleStmts 
+  | ModuleStmt  ';' ?  
+  ;
+
+```
+
+
+
+The `ModuleStmts` rule defines a set of module statements.
+
+Module statements are a `;` semi-colon delimited set of `ModuleStmt` rules
+
+
+
+## Rule ModuleStmt
+
+The `ModuleStmt` rule defines the statement types that are valid in a tremor module.
+
+
+
+
+<img src="svg/ModuleStmt.svg" alt="ModuleStmt" width="263" height="339"/>
+
+```ebnf
+rule ModuleStmt ::=
+    Use 
+  | Const 
+  | FnDefn 
+  | Intrinsic 
+  | DefineWindow 
+  | DefineOperator 
+  | DefineScript 
+  | DefinePipeline 
+  | DefineConnector 
+  | DefineFlow 
+  ;
+
+```
+
+
+
+The `ModuleStmt` rule defines the statement types that are valid in a tremor module.
+
+
+
+
+## Rule ModularTarget
+
+A `ModularTarget` indexes into tremor's module path.
+
+In tremor a `module` is a file on the file system.
+
+A `module` is also a unit of compilation.
+
+A `ModularTarget` is a `::` double-colon delimited set of identifiers.
+
+Leading `::` are not supported in a modular target..
+
+Trailing `::` are not supported in a modular target.
+
+
+
+<img src="svg/ModularTarget.svg" alt="ModularTarget" width="331" height="75"/>
+
+```ebnf
+rule ModularTarget ::=
+    Ident 
+  | ModPath  '::' Ident 
+  ;
+
+```
+
+
+
+A `ModularTarget` indexes into tremor's module path.
+
+In tremor a `module` is a file on the file system.
+
+A `module` is also a unit of compilation.
+
+A `ModularTarget` is a `::` double-colon delimited set of identifiers.
+
+Leading `::` are not supported in a modular target..
+
+Trailing `::` are not supported in a modular target.
+
+
+
+## Rule DocComment
+
+The `DocComment` rule specifies documentation comments in tremor.
+
+Documentation comments are optional.
+
+A documentation comment begins with a `##` double-hash and they are line delimited.
+
+Muliple successive comments are coalesced together to form a complete comment.
+
+The content of a documentation comment is markdown syntax.
+
+
+
+<img src="svg/DocComment.svg" alt="DocComment" width="231" height="55"/>
+
+```ebnf
+rule DocComment ::=
+    ( DocComment_ ) ?  
+  ;
+
+```
+
+
+
+The `DocComment` rule specifies documentation comments in tremor.
+
+Documentation comments are optional.
+
+A documentation comment begins with a `##` double-hash and they are line delimited.
+
+Muliple successive comments are coalesced together to form a complete comment.
+
+The content of a documentation comment is markdown syntax.
+
+
+
+## Rule DocComment_
+
+The `DocComment_` rule is an internal part of the `DocComment` rule
+
+
+
+<img src="svg/DocComment_.svg" alt="DocComment_" width="381" height="75"/>
+
+```ebnf
+rule DocComment_ ::=
+     '<doc-comment>' 
+  | DocComment_  '<doc-comment>' 
+  ;
+
+```
+
+
+
+The `DocComment_` rule is an internal part of the `DocComment` rule
+
+
+
+## Rule ModComment
+
+The `ModComment` rule specifies module comments in tremor.
+
+Documentation comments for modules are optional.
+
+A module documentation comment begins with a `###` triple-hash and they are line delimited.
+
+Muliple successive comments are coalesced together to form a complete comment.
+
+The content of a module documentation comment is markdown syntax.
+
+
+
+<img src="svg/ModComment.svg" alt="ModComment" width="231" height="55"/>
+
+```ebnf
+rule ModComment ::=
+    ( ModComment_ ) ?  
+  ;
+
+```
+
+
+
+The `ModComment` rule specifies module comments in tremor.
+
+Documentation comments for modules are optional.
+
+A module documentation comment begins with a `###` triple-hash and they are line delimited.
+
+Muliple successive comments are coalesced together to form a complete comment.
+
+The content of a module documentation comment is markdown syntax.
+
+
+
+## Rule ModComment_
+
+The `ModComment_` rule is an internal part of the `ModComment` rule
+
+
+
+<img src="svg/ModComment_.svg" alt="ModComment_" width="381" height="75"/>
+
+```ebnf
+rule ModComment_ ::=
+     '<mod-comment>' 
+  | ModComment_  '<mod-comment>' 
+  ;
+
+```
+
+
+
+The `ModComment_` rule is an internal part of the `ModComment` rule
+
+
+
+## Rule Deploy
+
+### Deployment Language Entrypoint
+
+This is the top level rule of the tremor deployment language `troy`
+
+
+
+<img src="svg/Deploy.svg" alt="Deploy" width="713" height="100"/>
+
+```ebnf
+rule Deploy ::=
+    ConfigDirectives ModComment DeployStmts  '<end-of-stream>' ?  
+  | ModComment DeployStmts  '<end-of-stream>' ?  
+  ;
+
+```
+
+
+
+### Deployment Language Entrypoint
+
+This is the top level rule of the tremor deployment language `troy`
+
+
+
+## Rule DeployStmts
+
+The `DeployStmts` rule defines the statements that are legal in a deployment
+module.
+
+Statements in a deployment modules are `;` semi-colon delimited.
+
+There MUST be at least one.
+
+There MAY be more than one.
+
+
+
+<img src="svg/DeployStmts.svg" alt="DeployStmts" width="395" height="87"/>
+
+```ebnf
+rule DeployStmts ::=
+    DeployStmt  ';' DeployStmts 
+  | DeployStmt  ';' ?  
+  ;
+
+```
+
+
+
+The `DeployStmts` rule defines the statements that are legal in a deployment
+module.
+
+Statements in a deployment modules are `;` semi-colon delimited.
+
+There MUST be at least one.
+
+There MAY be more than one.
+
+
+
+## Rule DeployStmt
+
+The `DeployStmt` rule constrains the statements that are legal in a `.troy` deployment module.
+
+Importing modules via the `use` clause is allowed.
+
+Flow definitions and `deploy` commands are allowed.
+
+
+
+<img src="svg/DeployStmt.svg" alt="DeployStmt" width="255" height="108"/>
+
+```ebnf
+rule DeployStmt ::=
+    DefineFlow 
+  | DeployFlowStmt 
+  | Use 
+  ;
+
+```
+
+
+
+The `DeployStmt` rule constrains the statements that are legal in a `.troy` deployment module.
+
+Importing modules via the `use` clause is allowed.
+
+Flow definitions and `deploy` commands are allowed.
+
+
+
+## Rule DeployFlowStmt
+
+<img src="svg/DeployFlowStmt.svg" alt="DeployFlowStmt" width="827" height="75"/>
+
+```ebnf
+rule DeployFlowStmt ::=
+    DocComment  'deploy'  'flow' Ident  'from' ModularTarget CreationWithEnd 
+  | DocComment  'deploy'  'flow' Ident CreationWithEnd 
+  ;
+
+```
+
+
+
+## Rule ConnectorKind
+
+The `ConnectorKind` rule identifies a builtin connector in tremor.
+
+Connectors in tremor are provided by the runtime and builtin. They can be resolved
+through an identifier. 
+
+### Examples
+
+The `http_server` identifies a HTTP server connector.
+
+The `metronome` identifies a periodic metronome.
+
+
+
+<img src="svg/ConnectorKind.svg" alt="ConnectorKind" width="135" height="42"/>
+
+```ebnf
+rule ConnectorKind ::=
+    Ident 
+  ;
+
+```
+
+
+
+The `ConnectorKind` rule identifies a builtin connector in tremor.
+
+Connectors in tremor are provided by the runtime and builtin. They can be resolved
+through an identifier. 
+
+### Examples
+
+The `http_server` identifies a HTTP server connector.
+
+The `metronome` identifies a periodic metronome.
+
+
+
+## Rule FlowStmts
+
+The `FlowStmts` rule defines a mandatory `;` semi-colon delimited sequence of `FlowStmtInner` rules.
+
+
+
+<img src="svg/FlowStmts.svg" alt="FlowStmts" width="175" height="42"/>
+
+```ebnf
+rule FlowStmts ::=
+    FlowStmts_ 
+  ;
+
+```
+
+
+
+The `FlowStmts` rule defines a mandatory `;` semi-colon delimited sequence of `FlowStmtInner` rules.
+
+
+
+## Rule FlowStmts_
+
+The `FlowStmts_` rule defines a `;` semi-colon delimited sequence of `FlowStmtInner` rules.
+
+
+
+<img src="svg/FlowStmts_.svg" alt="FlowStmts_" width="379" height="86"/>
+
+```ebnf
+rule FlowStmts_ ::=
+    Sep!(FlowStmts_, FlowStmtInner, ";") 
+  ;
+
+```
+
+
+
+The `FlowStmts_` rule defines a `;` semi-colon delimited sequence of `FlowStmtInner` rules.
+
+
+
+## Rule CreateKind
+
+The `CreateKind` rule encapsulates the artefact types that can be created in the tremor deploymant language.
+
+
+
+<img src="svg/CreateKind.svg" alt="CreateKind" width="231" height="75"/>
+
+```ebnf
+rule CreateKind ::=
+     'connector' 
+  |  'pipeline' 
+  ;
+
+```
+
+
+
+The `CreateKind` rule encapsulates the artefact types that can be created in the tremor deploymant language.
+
+
+
+## Rule FlowStmtInner
+
+The `FlowStmtInner` rule defines the body of a flow definition.
+
+
+
+<img src="svg/FlowStmtInner.svg" alt="FlowStmtInner" width="199" height="141"/>
+
+```ebnf
+rule FlowStmtInner ::=
+    Define 
+  | Create 
+  | Connect 
+  | Use 
+  ;
+
+```
+
+
+
+The `FlowStmtInner` rule defines the body of a flow definition.
+
+
+
+## Rule Define
+
+The `Define` rule allows connectors and pipelines to be specified.
+
+
+
+<img src="svg/Define.svg" alt="Define" width="263" height="75"/>
+
+```ebnf
+rule Define ::=
+    DefinePipeline 
+  | DefineConnector 
+  ;
+
+```
+
+
+
+The `Define` rule allows connectors and pipelines to be specified.
+
+
+
+## Rule Create
+
+The `Create` rule creates instances of connectors and pipelines in a flow.
+
+
+
+<img src="svg/Create.svg" alt="Create" width="749" height="75"/>
+
+```ebnf
+rule Create ::=
+     'create' CreateKind Ident  'from' ModularTarget CreationWithEnd 
+  |  'create' CreateKind Ident CreationWithEnd 
+  ;
+
+```
+
+
+
+The `Create` rule creates instances of connectors and pipelines in a flow.
+
+
+
+## Rule Connect
+
+The `Connect` rule defines routes between connectors and pipelines running in a flow.
+
+
+
+<img src="svg/Connect.svg" alt="Connect" width="749" height="108"/>
+
+```ebnf
+rule Connect ::=
+     'connect'  '/' ConnectFromConnector  'to'  '/' ConnectToPipeline 
+  |  'connect'  '/' ConnectFromPipeline  'to'  '/' ConnectToConnector 
+  |  'connect'  '/' ConnectFromPipeline  'to'  '/' ConnectToPipeline 
+  ;
+
+```
+
+
+
+The `Connect` rule defines routes between connectors and pipelines running in a flow.
+
+
+
+## Rule ConnectFromConnector
+
+The `ConnectFromConnector` rule defines a route from a connector instance.
+
+
+
+<img src="svg/ConnectFromConnector.svg" alt="ConnectFromConnector" width="409" height="42"/>
+
+```ebnf
+rule ConnectFromConnector ::=
+     'connector'  '/' Ident MaybePort 
+  ;
+
+```
+
+
+
+The `ConnectFromConnector` rule defines a route from a connector instance.
+
+
+
+## Rule ConnectFromPipeline
+
+The `ConnectFromPipeline` rule defines route from a pipeline instance.
+
+
+
+<img src="svg/ConnectFromPipeline.svg" alt="ConnectFromPipeline" width="401" height="42"/>
+
+```ebnf
+rule ConnectFromPipeline ::=
+     'pipeline'  '/' Ident MaybePort 
+  ;
+
+```
+
+
+
+The `ConnectFromPipeline` rule defines route from a pipeline instance.
+
+
+
+## Rule ConnectToPipeline
+
+The `ConnectToPipeline` rule defines route to a pipeline instance.
+
+
+
+<img src="svg/ConnectToPipeline.svg" alt="ConnectToPipeline" width="401" height="42"/>
+
+```ebnf
+rule ConnectToPipeline ::=
+     'pipeline'  '/' Ident MaybePort 
+  ;
+
+```
+
+
+
+The `ConnectToPipeline` rule defines route to a pipeline instance.
+
+
+
+## Rule ConnectToConnector
+
+The `ConnectToConnector` rule defines a route to a connector instance.
+
+
+
+<img src="svg/ConnectToConnector.svg" alt="ConnectToConnector" width="409" height="42"/>
+
+```ebnf
+rule ConnectToConnector ::=
+     'connector'  '/' Ident MaybePort 
+  ;
+
+```
+
+
+
+The `ConnectToConnector` rule defines a route to a connector instance.
+
+
+
+## Rule DefineConnector
+
+The `DefineConnector` rule defines a connector.
+
+A connector is a runtime artefact that allows tremor to connect to the outside
+world, or for the outside connector to connect to tremor to send and/or receive
+data.
+
+The named connector can be parameterized and instanciated via the `Create` rule
+
+
+
+<img src="svg/DefineConnector.svg" alt="DefineConnector" width="835" height="55"/>
+
+```ebnf
+rule DefineConnector ::=
+    DocComment  'define'  'connector' Ident  'from' ConnectorKind ArgsWithEnd ?  
+  ;
+
+```
+
+
+
+The `DefineConnector` rule defines a connector.
+
+A connector is a runtime artefact that allows tremor to connect to the outside
+world, or for the outside connector to connect to tremor to send and/or receive
+data.
+
+The named connector can be parameterized and instanciated via the `Create` rule
+
+
+
+## Rule DefineFlow
+
+<img src="svg/DefineFlow.svg" alt="DefineFlow" width="809" height="42"/>
+
+```ebnf
+rule DefineFlow ::=
+    DocComment  'define'  'flow' Ident DefinitionArgs  'flow' FlowStmts  'end' 
+  ;
+
+```
+
+
+
+## Rule Query
+
+### Query Language Entrypoint
+
+This is the top level rule of the tremor query language `trickle`
+
+
+<img src="svg/Query.svg" alt="Query" width="555" height="100"/>
+
+```ebnf
+rule Query ::=
+    ConfigDirectives Stmts  '<end-of-stream>' ?  
+  | Stmts  '<end-of-stream>' ?  
+  ;
+
+```
+
+
+
+### Query Language Entrypoint
+
+This is the top level rule of the tremor query language `trickle`
+
+
 ## Rule Stmts
 
 The `Stmts` rule defines a `;` semi-colon delimited sequence of `Stmt` rules.
@@ -97,73 +1097,329 @@ The `Stmts` rule defines a `;` semi-colon delimited sequence of `Stmt` rules.
 
 
 
-## Rule ModuleStmt
+## Rule Stmt
 
-The `ModuleStmt` rule defines the statement types that are valid in a tremor module.
+The `Stmt` rule defines the legal statements in a query script.
+
+Queries in tremor support:
+* Defining named `window`, `operator`, `script` and `pipeline` definitions.
+* Creating node instances of `stream`, `pipeline`, `operator` and `script` operations.
+* Linking nodes togther to form an execution graph via the `select` operation.
 
 
 
-
-<img src="svg/ModuleStmt.svg" alt="ModuleStmt" width="581" height="42"/>
+<img src="svg/Stmt.svg" alt="Stmt" width="1237" height="339"/>
 
 ```ebnf
-rule ModuleStmt ::=
-     'mod' Ident  'with' ModComment ModuleStmts  'end' 
+rule Stmt ::=
+    Use 
+  | DefineWindow 
+  | DefineOperator 
+  | DefineScript 
+  | DefinePipeline 
+  | CreateOperator 
+  | CreateScript 
+  | CreatePipeline 
+  |  'create'  'stream' Ident 
+  |  'select' ComplexExprImut  'from' StreamPort WindowClause WhereClause GroupByClause  'into' StreamPort HavingClause 
   ;
 
 ```
 
 
 
-The `ModuleStmt` rule defines the statement types that are valid in a tremor module.
+The `Stmt` rule defines the legal statements in a query script.
+
+Queries in tremor support:
+* Defining named `window`, `operator`, `script` and `pipeline` definitions.
+* Creating node instances of `stream`, `pipeline`, `operator` and `script` operations.
+* Linking nodes togther to form an execution graph via the `select` operation.
 
 
 
+## Rule DefineWindow
 
-## Rule ModuleStmts
+The `DefineWindow` rule defines a temporal window specification.
 
-The `ModuleStmts` rule defines a set of module statements.
+A window is a mechanism that caches, stores or buffers events for processing
+over a finite temporal range. The time range can be based on the number of
+events, the wall clock or other defined parameters.
 
-Module statements are a `;` semi-colon delimited set of `ModuleStmt` rules
+The named window can be instanciated via operations that support windows such
+as the `select` operation.
 
 
 
-<img src="svg/ModuleStmts.svg" alt="ModuleStmts" width="435" height="87"/>
+<img src="svg/DefineWindow.svg" alt="DefineWindow" width="991" height="42"/>
 
 ```ebnf
-rule ModuleStmts ::=
-    ModuleInnerStmt  ';' ModuleStmts 
-  | ModuleInnerStmt  ';' ?  
+rule DefineWindow ::=
+    DocComment  'define'  'window' Ident  'from' WindowKind CreationWith EmbeddedScriptImut  'end' 
   ;
 
 ```
 
 
 
-The `ModuleStmts` rule defines a set of module statements.
+The `DefineWindow` rule defines a temporal window specification.
 
-Module statements are a `;` semi-colon delimited set of `ModuleStmt` rules
+A window is a mechanism that caches, stores or buffers events for processing
+over a finite temporal range. The time range can be based on the number of
+events, the wall clock or other defined parameters.
+
+The named window can be instanciated via operations that support windows such
+as the `select` operation.
 
 
 
-## Rule ModuleInnerStmt
+## Rule DefineOperator
 
-<img src="svg/ModuleInnerStmt.svg" alt="ModuleInnerStmt" width="671" height="306"/>
+The `DefineOperator` rule defines an operator.
+
+An operator is a query operation composed using the builtin 
+operators provided by tremor written in the rust programming language.
+
+The named operator can be parameterized and instanciated via the `CreateOperator` rule
+
+
+<img src="svg/DefineOperator.svg" alt="DefineOperator" width="819" height="55"/>
 
 ```ebnf
-rule ModuleInnerStmt ::=
-    ModuleStmt 
-  |  'define' WindowKind  'window' Ident WithScriptClause 
-  |  'define' OperatorKind  'operator' Ident WithClause 
-  |  'define' OperatorKind  'operator' Ident 
-  |  'define'  'script' Ident ScriptWithClause EmbeddedScript 
-  |  'define'  'script' Ident EmbeddedScript 
-  | Const 
-  | FnDecl 
-  | Intrinsic 
+rule DefineOperator ::=
+    DocComment  'define'  'operator' Ident  'from' OperatorKind ArgsWithEnd ?  
   ;
 
 ```
+
+
+
+The `DefineOperator` rule defines an operator.
+
+An operator is a query operation composed using the builtin 
+operators provided by tremor written in the rust programming language.
+
+The named operator can be parameterized and instanciated via the `CreateOperator` rule
+
+
+## Rule DefineScript
+
+The `DefineScript` rule defines a named operator based on a tremor script.
+
+A script operator is a query operation composed using the scripting language
+DSL rather than the builtin operators provided by tremor written in the
+rust programming language.
+
+The named script can be parameterized and instanciated via the `CreateScript` rule
+ 
+
+
+<img src="svg/DefineScript.svg" alt="DefineScript" width="717" height="42"/>
+
+```ebnf
+rule DefineScript ::=
+    DocComment  'define'  'script' Ident DefinitionArgs EmbeddedScript 
+  ;
+
+```
+
+
+
+The `DefineScript` rule defines a named operator based on a tremor script.
+
+A script operator is a query operation composed using the scripting language
+DSL rather than the builtin operators provided by tremor written in the
+rust programming language.
+
+The named script can be parameterized and instanciated via the `CreateScript` rule
+ 
+
+
+## Rule DefinePipeline
+
+The `DefinePipeline` rule creates a named pipeline.
+
+A pipeline is a query operation composed using the query langauge DSL
+instead of a builtin operation provided by tremor written in the rust
+programming language.
+
+The named pipeline can be parameterized and instanciated via the `CreatePipeline` rule
+
+
+
+<img src="svg/DefinePipeline.svg" alt="DefinePipeline" width="1077" height="55"/>
+
+```ebnf
+rule DefinePipeline ::=
+    DocComment  'define'  'pipeline' Ident (  'from' Ports ) ?  (  'into' Ports ) ?  DefinitionArgs Pipeline 
+  ;
+
+```
+
+
+
+The `DefinePipeline` rule creates a named pipeline.
+
+A pipeline is a query operation composed using the query langauge DSL
+instead of a builtin operation provided by tremor written in the rust
+programming language.
+
+The named pipeline can be parameterized and instanciated via the `CreatePipeline` rule
+
+
+
+## Rule CreateScript
+
+The `CreateScript` rule creates an operator based on a tremor script.
+
+A script operator is a query operation composed using the scripting language
+DSL rather than the builtin operators provided by tremor written in the
+rust programming language.
+
+The rule causes an instance of the referenced script definition to be
+created an inserted into the query processing execution graph.
+
+
+
+<img src="svg/CreateScript.svg" alt="CreateScript" width="733" height="75"/>
+
+```ebnf
+rule CreateScript ::=
+     'create'  'script' Ident CreationWithEnd 
+  |  'create'  'script' Ident  'from' ModularTarget CreationWithEnd 
+  ;
+
+```
+
+
+
+The `CreateScript` rule creates an operator based on a tremor script.
+
+A script operator is a query operation composed using the scripting language
+DSL rather than the builtin operators provided by tremor written in the
+rust programming language.
+
+The rule causes an instance of the referenced script definition to be
+created an inserted into the query processing execution graph.
+
+
+
+## Rule CreateOperator
+
+The `CreateOperator` rule creates an operator.
+
+An operator is a query operation composed using the builtin 
+operators provided by tremor written in the rust programming language.
+
+The rule causes an instance of the referenced operator definition to be
+created an inserted into the query processing execution graph.
+
+
+
+<img src="svg/CreateOperator.svg" alt="CreateOperator" width="749" height="75"/>
+
+```ebnf
+rule CreateOperator ::=
+     'create'  'operator' Ident CreationWithEnd 
+  |  'create'  'operator' Ident  'from' ModularTarget CreationWithEnd 
+  ;
+
+```
+
+
+
+The `CreateOperator` rule creates an operator.
+
+An operator is a query operation composed using the builtin 
+operators provided by tremor written in the rust programming language.
+
+The rule causes an instance of the referenced operator definition to be
+created an inserted into the query processing execution graph.
+
+
+
+## Rule CreatePipeline
+
+The `CreatePipeline` rule creates a pipeline.
+
+A pipeline is a query operation composed using the query langauge DSL
+instead of a builtin operation provided by tremor written in the rust
+programming language.
+
+The rule causes an instance of the referenced pipeline definition to be
+created an inserted into the query processing execution graph.
+
+
+
+<img src="svg/CreatePipeline.svg" alt="CreatePipeline" width="749" height="75"/>
+
+```ebnf
+rule CreatePipeline ::=
+     'create'  'pipeline' Ident CreationWithEnd 
+  |  'create'  'pipeline' Ident  'from' ModularTarget CreationWithEnd 
+  ;
+
+```
+
+
+
+The `CreatePipeline` rule creates a pipeline.
+
+A pipeline is a query operation composed using the query langauge DSL
+instead of a builtin operation provided by tremor written in the rust
+programming language.
+
+The rule causes an instance of the referenced pipeline definition to be
+created an inserted into the query processing execution graph.
+
+
+
+## Rule MaybePort
+
+The `MaybePort` rule defines an optional `Port`.
+
+
+
+<img src="svg/MaybePort.svg" alt="MaybePort" width="237" height="55"/>
+
+```ebnf
+rule MaybePort ::=
+    (  '/' Ident ) ?  
+  ;
+
+```
+
+
+
+The `MaybePort` rule defines an optional `Port`.
+
+
+
+## Rule StreamPort
+
+The `StreamPort` rule defines a stream by name with an optional named `Port`.
+
+When the `Port` is omitted, tremor will internally default the `Port` to the
+appropriate `in` or `out` port. Where the `err` or user defined `Port`s are
+preferred, the optional `Port` specification SHOULD be provided.
+
+
+
+<img src="svg/StreamPort.svg" alt="StreamPort" width="237" height="42"/>
+
+```ebnf
+rule StreamPort ::=
+    Ident MaybePort 
+  ;
+
+```
+
+
+
+The `StreamPort` rule defines a stream by name with an optional named `Port`.
+
+When the `Port` is omitted, tremor will internally default the `Port` to the
+appropriate `in` or `out` port. Where the `err` or user defined `Port`s are
+preferred, the optional `Port` specification SHOULD be provided.
 
 
 
@@ -217,144 +1473,6 @@ retain the newest event with the previous ( now oldest ) event.
 Both kinds of window store events in arrival order
 
 
-## Rule Stmt
-
-The `Stmt` rule defines the legal statements in a query script.
-
-Queries in tremor support:
-* Defining named `window`, `operator`, `script` and `pipeline` definitions.
-* Creating node instances of `stream`, `pipeline`, `operator` and `script` operations.
-* Linking nodes togther to form an execution graph via the `select` operation.
-
-
-
-<img src="svg/Stmt.svg" alt="Stmt" width="1237" height="537"/>
-
-```ebnf
-rule Stmt ::=
-    ModuleStmt 
-  |  'define' WindowKind  'window' Ident WithScriptClause 
-  |  'define' OperatorKind  'operator' Ident WithClause 
-  |  'define' OperatorKind  'operator' Ident 
-  |  'define'  'script' Ident ScriptWithClause EmbeddedScript 
-  |  'define'  'script' Ident EmbeddedScript 
-  |  'create'  'stream' Ident 
-  |  'create'  'operator' Ident  'from' ModularTarget WithClause 
-  |  'create'  'operator' Ident  'from' ModularTarget 
-  |  'create'  'operator' Ident WithClause 
-  |  'create'  'operator' Ident 
-  |  'create'  'script' Ident  'from' ModularTarget WithClause 
-  |  'create'  'script' Ident  'from' ModularTarget 
-  |  'create'  'script' Ident WithClause 
-  |  'create'  'script' Ident 
-  |  'select' ComplexExprImut  'from' StreamPort WindowClause WhereClause GroupByClause  'into' StreamPort HavingClause 
-  ;
-
-```
-
-
-
-The `Stmt` rule defines the legal statements in a query script.
-
-Queries in tremor support:
-* Defining named `window`, `operator`, `script` and `pipeline` definitions.
-* Creating node instances of `stream`, `pipeline`, `operator` and `script` operations.
-* Linking nodes togther to form an execution graph via the `select` operation.
-
-
-
-## Rule MaybePort
-
-The `MaybePort` rule defines an optional `Port`.
-
-
-
-<img src="svg/MaybePort.svg" alt="MaybePort" width="237" height="55"/>
-
-```ebnf
-rule MaybePort ::=
-    (  '/' Ident ) ?  
-  ;
-
-```
-
-
-
-The `MaybePort` rule defines an optional `Port`.
-
-
-
-## Rule ModularTarget
-
-A `ModularTarget` indexes into tremor's module path.
-
-In tremor a `module` is a file on the file system.
-
-A `module` is also a unit of compilation.
-
-A `ModularTarget` is a `::` double-colon delimited set of identifiers.
-
-Leading `::` are not supported in a modular target..
-
-Trailing `::` are not supported in a modular target.
-
-
-
-<img src="svg/ModularTarget.svg" alt="ModularTarget" width="331" height="75"/>
-
-```ebnf
-rule ModularTarget ::=
-    Ident 
-  | ModPath  '::' Ident 
-  ;
-
-```
-
-
-
-A `ModularTarget` indexes into tremor's module path.
-
-In tremor a `module` is a file on the file system.
-
-A `module` is also a unit of compilation.
-
-A `ModularTarget` is a `::` double-colon delimited set of identifiers.
-
-Leading `::` are not supported in a modular target..
-
-Trailing `::` are not supported in a modular target.
-
-
-
-## Rule StreamPort
-
-The `StreamPort` rule defines a stream by name with an optional named `Port`.
-
-When the `Port` is omitted, tremor will internally default the `Port` to the
-appropriate `in` or `out` port. Where the `err` or user defined `Port`s are
-preferred, the optional `Port` specification SHOULD be provided.
-
-
-
-<img src="svg/StreamPort.svg" alt="StreamPort" width="237" height="42"/>
-
-```ebnf
-rule StreamPort ::=
-    Ident MaybePort 
-  ;
-
-```
-
-
-
-The `StreamPort` rule defines a stream by name with an optional named `Port`.
-
-When the `Port` is omitted, tremor will internally default the `Port` to the
-appropriate `in` or `out` port. Where the `err` or user defined `Port`s are
-preferred, the optional `Port` specification SHOULD be provided.
-
-
-
 ## Rule WindowClause
 
 The `WindowClause` rule defines an optional window definition for a supporting operation.
@@ -373,28 +1491,6 @@ rule WindowClause ::=
 
 
 The `WindowClause` rule defines an optional window definition for a supporting operation.
-
-
-
-## Rule Window
-
-The `Window` rule defines a modular target to a window definition.
-
-
-
-<img src="svg/Window.svg" alt="Window" width="331" height="75"/>
-
-```ebnf
-rule Window ::=
-    Ident 
-  | ModPath  '::' Ident 
-  ;
-
-```
-
-
-
-The `Window` rule defines a modular target to a window definition.
 
 
 
@@ -437,6 +1533,27 @@ rule Windows_ ::=
 
 
 The `Windows_` rule defines a sequence of window definitions that are `,` comma delimited.
+
+
+
+## Rule Window
+
+The `Window` rule defines a modular target to a window definition.
+
+
+
+<img src="svg/Window.svg" alt="Window" width="199" height="42"/>
+
+```ebnf
+rule Window ::=
+    ModularTarget 
+  ;
+
+```
+
+
+
+The `Window` rule defines a modular target to a window definition.
 
 
 
@@ -653,105 +1770,24 @@ The `EmbeddedScriptContent` rule defines an embedded script expression.
 
 
 
-## Rule WithScriptClause
+## Rule Ports
 
-<img src="svg/WithScriptClause.svg" alt="WithScriptClause" width="489" height="42"/>
+The `Ports` rule defines a `,` comma delimited set of stream ports.
+
+
+
+<img src="svg/Ports.svg" alt="Ports" width="275" height="86"/>
 
 ```ebnf
-rule WithScriptClause ::=
-     'with' WithExprs EmbeddedScriptImut  'end' 
+rule Ports ::=
+    Sep!(Ports, <Ident>, ",") 
   ;
 
 ```
 
 
 
-## Rule WithClause
-
-The `WithClause` rule defines a `with` block with a `,` comma delimited set of `WithExpr` rules.
-
-
-
-<img src="svg/WithClause.svg" alt="WithClause" width="293" height="42"/>
-
-```ebnf
-rule WithClause ::=
-    ScriptWithClause  'end' 
-  ;
-
-```
-
-
-
-The `WithClause` rule defines a `with` block with a `,` comma delimited set of `WithExpr` rules.
-
-
-
-## Rule ScriptWithClause
-
-<img src="svg/ScriptWithClause.svg" alt="ScriptWithClause" width="245" height="42"/>
-
-```ebnf
-rule ScriptWithClause ::=
-     'with' WithExprs 
-  ;
-
-```
-
-
-
-## Rule WithExprs
-
-The `WithExprs` rule defines a `,` comma delimited set of `WithExpr` rules.
-
-
-
-<img src="svg/WithExprs.svg" alt="WithExprs" width="175" height="42"/>
-
-```ebnf
-rule WithExprs ::=
-    WithExprs_ 
-  ;
-
-```
-
-
-
-The `WithExprs` rule defines a `,` comma delimited set of `WithExpr` rules.
-
-
-
-## Rule WithExprs_
-
-<img src="svg/WithExprs_.svg" alt="WithExprs_" width="339" height="86"/>
-
-```ebnf
-rule WithExprs_ ::=
-    Sep!(WithExprs_, WithExpr, ",") 
-  ;
-
-```
-
-
-
-## Rule WithExpr
-
-The `WithExpr` rule defines a name value binding.
-
-
-
-<img src="svg/WithExpr.svg" alt="WithExpr" width="283" height="42"/>
-
-```ebnf
-rule WithExpr ::=
-    Ident  '=' ExprImut 
-  ;
-
-```
-
-
-
-The `WithExpr` rule defines a name value binding.
+The `Ports` rule defines a `,` comma delimited set of stream ports.
 
 
 
@@ -788,11 +1824,11 @@ The script is enclosed in `script` .. `end` blocks.
 
 
 
-<img src="svg/EmbeddedScript.svg" alt="EmbeddedScript" width="299" height="42"/>
+<img src="svg/EmbeddedScript.svg" alt="EmbeddedScript" width="363" height="42"/>
 
 ```ebnf
 rule EmbeddedScript ::=
-     'script' Exprs  'end' 
+     'script' TopLevelExprs  'end' 
   ;
 
 ```
@@ -802,6 +1838,57 @@ rule EmbeddedScript ::=
 The `EmbeddedScript` rule defines a script using the [Script DSL](/docs/language/Script) [ [Full](/docs/language/Full#rule-script) ].
 
 The script is enclosed in `script` .. `end` blocks.
+
+
+
+## Rule Pipeline
+
+The `Pipeline` rule defines a block of statements in a `pipeline` .. `end` block.
+
+The block MAY begin with an optional set of `ConfigDirectives`.
+
+
+
+<img src="svg/Pipeline.svg" alt="Pipeline" width="633" height="55"/>
+
+```ebnf
+rule Pipeline ::=
+     'pipeline' ConfigDirectives ?  PipelineCreateInner  'end' 
+  ;
+
+```
+
+
+
+The `Pipeline` rule defines a block of statements in a `pipeline` .. `end` block.
+
+The block MAY begin with an optional set of `ConfigDirectives`.
+
+
+
+## Rule PipelineCreateInner
+
+The `PipelineCreateInner` is an internal rule of the `Pipeline` rule.
+
+The rule defines a `;` semi-colon delimited set of one or many `Stmt`s.
+
+
+
+<img src="svg/PipelineCreateInner.svg" alt="PipelineCreateInner" width="299" height="87"/>
+
+```ebnf
+rule PipelineCreateInner ::=
+    Stmt  ';' Stmts 
+  | Stmt  ';' ?  
+  ;
+
+```
+
+
+
+The `PipelineCreateInner` is an internal rule of the `Pipeline` rule.
+
+The rule defines a `;` semi-colon delimited set of one or many `Stmt`s.
 
 
 
@@ -820,11 +1907,11 @@ A legal script is composed of:
 
 
 
-<img src="svg/Script.svg" alt="Script" width="459" height="55"/>
+<img src="svg/Script.svg" alt="Script" width="523" height="55"/>
 
 ```ebnf
 rule Script ::=
-    ModComment Exprs  '<end-of-stream>' ?  
+    ModComment TopLevelExprs  '<end-of-stream>' ?  
   ;
 
 ```
@@ -844,93 +1931,96 @@ A legal script is composed of:
 
 
 
-## Rule ModComment
+## Rule TopLevelExprs
 
-The `ModComment` rule specifies module comments in tremor.
-
-Documentation comments for modules are optional.
-
-A module documentation comment begins with a `###` triple-hash and they are line delimited.
-
-Muliple successive comments are coalesced together to form a complete comment.
-
-The content of a module documentation comment is markdown syntax.
+The `TopLevelExprs` rule defines semi-colon separated sequence of top level
+tremor expressions with an optional terminating semi-colon
 
 
 
-<img src="svg/ModComment.svg" alt="ModComment" width="231" height="55"/>
+<img src="svg/TopLevelExprs.svg" alt="TopLevelExprs" width="427" height="87"/>
 
 ```ebnf
-rule ModComment ::=
-    ( ModComment_ ) ?  
+rule TopLevelExprs ::=
+    TopLevelExpr  ';' TopLevelExprs 
+  | TopLevelExpr  ';' ?  
   ;
 
 ```
 
 
 
-The `ModComment` rule specifies module comments in tremor.
-
-Documentation comments for modules are optional.
-
-A module documentation comment begins with a `###` triple-hash and they are line delimited.
-
-Muliple successive comments are coalesced together to form a complete comment.
-
-The content of a module documentation comment is markdown syntax.
+The `TopLevelExprs` rule defines semi-colon separated sequence of top level
+tremor expressions with an optional terminating semi-colon
 
 
 
-## Rule ModComment_
+## Rule InnerExprs
 
-The `ModComment_` rule is an internal part of the `ModComment` rule
+The `InnerExprs` rule defines the expression forms permissible within another
+containing scope. Like `TopLevelExprs`, inner expressions are separated by semi-colons.
+The semi-colon is optional for the last expression in a set of expressions.
+
+At least one expression MUST be provided.
 
 
 
-<img src="svg/ModComment_.svg" alt="ModComment_" width="381" height="75"/>
+<img src="svg/InnerExprs.svg" alt="InnerExprs" width="339" height="87"/>
 
 ```ebnf
-rule ModComment_ ::=
-     '<mod-comment>' 
-  | ModComment_  '<mod-comment>' 
+rule InnerExprs ::=
+    Expr  ';' InnerExprs 
+  | Expr  ';' ?  
   ;
 
 ```
 
 
 
-The `ModComment_` rule is an internal part of the `ModComment` rule
+The `InnerExprs` rule defines the expression forms permissible within another
+containing scope. Like `TopLevelExprs`, inner expressions are separated by semi-colons.
+The semi-colon is optional for the last expression in a set of expressions.
+
+At least one expression MUST be provided.
 
 
 
-## Rule Exprs
+## Rule TopLevelExpr
 
-<img src="svg/Exprs.svg" alt="Exprs" width="379" height="87"/>
+The `TopLevelExpr` rule specifies the expression forms that are legal at the
+outer most scope of a tremor script definition.
+
+The legal forms are:
+* Use declarations - these allow external modules to be referenced.
+* Constant expressions - these are immutable compile time constants.
+* Function definitions - these are user defined functions.
+* Intrinsic function definitions - these are builtin funtions provided by the runtime.
+
+
+
+<img src="svg/TopLevelExpr.svg" alt="TopLevelExpr" width="215" height="174"/>
 
 ```ebnf
-rule Exprs ::=
-    MayBeConstExpr  ';' Exprs 
-  | MayBeConstExpr  ';' ?  
-  ;
-
-```
-
-
-
-## Rule MayBeConstExpr
-
-<img src="svg/MayBeConstExpr.svg" alt="MayBeConstExpr" width="215" height="174"/>
-
-```ebnf
-rule MayBeConstExpr ::=
+rule TopLevelExpr ::=
     Const 
-  | FnDecl 
+  | FnDefn 
   | Intrinsic 
-  | Module 
   | Expr 
+  | Use 
   ;
 
 ```
+
+
+
+The `TopLevelExpr` rule specifies the expression forms that are legal at the
+outer most scope of a tremor script definition.
+
+The legal forms are:
+* Use declarations - these allow external modules to be referenced.
+* Constant expressions - these are immutable compile time constants.
+* Function definitions - these are user defined functions.
+* Intrinsic function definitions - these are builtin funtions provided by the runtime.
 
 
 
@@ -942,11 +2032,11 @@ As the value cannot be changed at runtime.
 
 
 
-<img src="svg/Const.svg" alt="Const" width="527" height="42"/>
+<img src="svg/Const.svg" alt="Const" width="535" height="42"/>
 
 ```ebnf
 rule Const ::=
-    DocComment  'const' Ident  '=' SimpleExprImut 
+    DocComment  'const' Ident  '=' ComplexExprImut 
   ;
 
 ```
@@ -956,65 +2046,6 @@ rule Const ::=
 The `Const` rule defines a rule that binds an immutable expression to an identifier.
 
 As the value cannot be changed at runtime.
-
-
-
-## Rule DocComment
-
-The `DocComment` rule specifies documentation comments in tremor.
-
-Documentation comments are optional.
-
-A documentation comment begins with a `##` double-hash and they are line delimited.
-
-Muliple successive comments are coalesced together to form a complete comment.
-
-The content of a documentation comment is markdown syntax.
-
-
-
-<img src="svg/DocComment.svg" alt="DocComment" width="231" height="55"/>
-
-```ebnf
-rule DocComment ::=
-    ( DocComment_ ) ?  
-  ;
-
-```
-
-
-
-The `DocComment` rule specifies documentation comments in tremor.
-
-Documentation comments are optional.
-
-A documentation comment begins with a `##` double-hash and they are line delimited.
-
-Muliple successive comments are coalesced together to form a complete comment.
-
-The content of a documentation comment is markdown syntax.
-
-
-
-## Rule DocComment_
-
-The `DocComment_` rule is an internal part of the `DocComment` rule
-
-
-
-<img src="svg/DocComment_.svg" alt="DocComment_" width="381" height="75"/>
-
-```ebnf
-rule DocComment_ ::=
-     '<doc-comment>' 
-  | DocComment_  '<doc-comment>' 
-  ;
-
-```
-
-
-
-The `DocComment_` rule is an internal part of the `DocComment` rule
 
 
 
@@ -1621,76 +2652,21 @@ For information on how to define user defined functions see the [function](#rule
 
 
 
-## Rule Module
+## Rule FnDefn
 
-<img src="svg/Module.svg" alt="Module" width="581" height="42"/>
-
-```ebnf
-rule Module ::=
-     'mod' Ident  'with' ModComment ModuleExprs  'end' 
-  ;
-
-```
-
-
-
-## Rule ModuleExprs
-
-<img src="svg/ModuleExprs.svg" alt="ModuleExprs" width="395" height="87"/>
+<img src="svg/FnDefn.svg" alt="FnDefn" width="1015" height="207"/>
 
 ```ebnf
-rule ModuleExprs ::=
-    ModuleExpr  ';' ModuleExprs 
-  | ModuleExpr  ';' ?  
-  ;
-
-```
-
-
-
-## Rule ModuleExpr
-
-<img src="svg/ModuleExpr.svg" alt="ModuleExpr" width="215" height="141"/>
-
-```ebnf
-rule ModuleExpr ::=
-    Const 
-  | FnDecl 
-  | Intrinsic 
-  | Module 
-  ;
-
-```
-
-
-
-## Rule FnDecl
-
-The `FnDecl` rule allows user defined functions to be defined.
-
-This rule allows tremor users to create functions for reuse in one or many tremor applications.
-
-
-
-<img src="svg/FnDecl.svg" alt="FnDecl" width="975" height="207"/>
-
-```ebnf
-rule FnDecl ::=
-    DocComment  'fn' Ident  '('  '.'  '.'  '.'  ')'  'with' Exprs  'end' 
-  | DocComment  'fn' Ident  '(' FnArgs  ','  '.'  '.'  '.'  ')'  'with' Exprs  'end' 
-  | DocComment  'fn' Ident  '('  ')'  'with' Exprs  'end' 
-  | DocComment  'fn' Ident  '(' FnArgs  ')'  'with' Exprs  'end' 
+rule FnDefn ::=
+    DocComment  'fn' Ident  '('  '.'  '.'  '.'  ')'  'with' InnerExprs  'end' 
+  | DocComment  'fn' Ident  '(' FnArgs  ','  '.'  '.'  '.'  ')'  'with' InnerExprs  'end' 
+  | DocComment  'fn' Ident  '('  ')'  'with' InnerExprs  'end' 
+  | DocComment  'fn' Ident  '(' FnArgs  ')'  'with' InnerExprs  'end' 
   | DocComment  'fn' Ident  '('  ')'  'of' FnCases  'end' 
   | DocComment  'fn' Ident  '(' FnArgs  ')'  'of' FnCases  'end' 
   ;
 
 ```
-
-
-
-The `FnDecl` rule allows user defined functions to be defined.
-
-This rule allows tremor users to create functions for reuse in one or many tremor applications.
 
 
 
@@ -2260,12 +3236,12 @@ connectors can read and write metadata.
 
 
 
-<img src="svg/MetaPath.svg" alt="MetaPath" width="411" height="108"/>
+<img src="svg/MetaPath.svg" alt="MetaPath" width="363" height="108"/>
 
 ```ebnf
 rule MetaPath ::=
-     '$' PathSegment PathSegments 
-  |  '$' PathSegment 
+     '$' Ident PathSegments 
+  |  '$' Ident 
   |  '$' 
   ;
 
@@ -2342,12 +3318,12 @@ The `LocalPath` rule enables path operations on locally scoped identifiers.
 
 
 
-<img src="svg/LocalPath.svg" alt="LocalPath" width="357" height="75"/>
+<img src="svg/LocalPath.svg" alt="LocalPath" width="309" height="75"/>
 
 ```ebnf
 rule LocalPath ::=
-    PathSegment PathSegments 
-  | PathSegment 
+    Ident PathSegments 
+  | Ident 
   ;
 
 ```
@@ -2449,10 +3425,10 @@ The `PathSegments` rule specifies the continuation of a path rule.
 
 ```ebnf
 rule PathSegments ::=
-     '.' PathSegment PathSegments 
+     '.' Ident PathSegments 
   |  '[' Selector  ']' PathSegments 
   |  '[' Selector  ']' 
-  |  '.' PathSegment 
+  |  '.' Ident 
   ;
 
 ```
@@ -2468,19 +3444,6 @@ The `PathSegments` rule specifies the continuation of a path rule.
 |`[<Selector>]`|A range or index segment dereferencing an array|
 |`[<Selector>]`|A terminal range or index segment dereferencing an array|
 |`[<Selector>]<PathSegments>`|A non-terminal range or index segment dereferencing an array|
-
-
-
-## Rule PathSegment
-
-<img src="svg/PathSegment.svg" alt="PathSegment" width="135" height="42"/>
-
-```ebnf
-rule PathSegment ::=
-    Ident 
-  ;
-
-```
 
 
 
@@ -2803,7 +3766,7 @@ The `PatchOperations` rule defines a sequence of semi-colon delimited patch oper
 ```ebnf
 rule PatchOperations ::=
     PatchOperationClause 
-  | PatchOperations  ',' PatchOperationClause 
+  | PatchOperations  ';' PatchOperationClause 
   ;
 
 ```
@@ -3121,7 +4084,7 @@ The `Block` rule defines a semi-colon delimited set of `Expr` rules.
 ```ebnf
 rule Block ::=
     Expr 
-  | Block  ',' Expr 
+  | Block  ';' Expr 
   ;
 
 ```
@@ -3319,7 +4282,7 @@ Record patterns can use:
 
 
 
-<img src="svg/PredicateFieldPattern.svg" alt="PredicateFieldPattern" width="463" height="240"/>
+<img src="svg/PredicateFieldPattern.svg" alt="PredicateFieldPattern" width="463" height="273"/>
 
 ```ebnf
 rule PredicateFieldPattern ::=
@@ -3327,6 +4290,7 @@ rule PredicateFieldPattern ::=
   | Ident  '=' Ident  '~=' TestExpr 
   | Ident  '~=' RecordPattern 
   | Ident  '~=' ArrayPattern 
+  | Ident  '~=' TuplePattern 
   |  'present' Ident 
   |  'absent' Ident 
   | Ident BinCmpEq ComplexExprImut 
