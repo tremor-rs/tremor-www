@@ -79,10 +79,10 @@ Queries are compiled into a DAG of operator nodes and validated at compile time.
 
 ##### Grammar
 
-> ![query grammar](/docs/svg/Query.svg)
+> ![query grammar](../language/svg/Query.svg)
 
 Stmt: <a name="Stmt"></a>
-> ![statement grammar](/docs/svg/Stmt.svg)
+> ![statement grammar](../language/svg/Stmt.svg)
 
 See also [Additional Grammar Rules](#additional-grammar-rules).
 ### Statements
@@ -161,7 +161,7 @@ Configuration Parameters:
 A select query using one or more windows is generating _new_ synthetic events, aggregated from the events feeded into it. Even if a window only consists of a single event, it needs to be considered a new event. The shape of the new event is determined by the [`select`](#select-queries) _Target Expression_. Those new events will have an empty metadata and the [origin uri](/docs/library/stdlib/tremor/origin) is pointing to the windowed [`select`](#select-queries) query.
 
 ##### Grammar
-> ![window definition grammar](/docs/svg/DefineWindow.svg)
+> ![window definition grammar](../language/svg/DefineWindow.svg)
 
 
 See also [Additional Grammar Rules](#additional-grammar-rules).
@@ -205,11 +205,11 @@ Custom operators allow definition, configuration and usage of legacy operators, 
 ##### Grammar
 
 Operator Definition:
-> ![operator definition grammar](/docs/svg/DefineOperator.svg)
+> ![operator definition grammar](../language/svg/DefineOperator.svg)
 
 Operator Creation:
 
-> ![create operator grammar](/docs/svg/CreateOperator.svg)
+> ![create operator grammar](../language/svg/CreateOperator.svg)
 
 
 See also [Additional Grammar Rules](#additional-grammar-rules).
@@ -235,11 +235,11 @@ The tremor-script language can be embedded in the query language natively and th
 ##### Grammar
 
 Script Definition Grammar:
-> ![script definition grammar](/docs/svg/DefineScript.svg)
+> ![script definition grammar](../language/svg/DefineScript.svg)
 
 
 Script Creation Grammar:
-> ![create script grammar](/docs/svg/CreateScript.svg)
+> ![create script grammar](../language/svg/CreateScript.svg)
 
 See also [Additional Grammar Rules](#additional-grammar-rules).
 
@@ -390,62 +390,62 @@ into out;
 ##### Grammar
 
 Select Grammar:
-<!-- > ![select grammar](/docs/svg/SelectStmt.svg) -->
+<!-- > ![select grammar](../language/svg/SelectStmt.svg) -->
 
 FromClause:  <a name="FromClause"></a>
-<!-- > ![from grammar](/docs/svg/FromClause.svg) -->
+<!-- > ![from grammar](../language/svg/FromClause.svg) -->
 
 WhereClause: <a name="WhereClause"></a>
-> ![where grammar](/docs/svg/WhereClause.svg)
+> ![where grammar](../language/svg/WhereClause.svg)
 
 GroupByClause: <a name="GroupByClause"></a>
-> ![group by grammar](/docs/svg/GroupByClause.svg)
+> ![group by grammar](../language/svg/GroupByClause.svg)
 
 GroupByDimension: <a name="GroupByDimension"></a>
-<!-- > ![group by dimensions grammar](/docs/svg/GroupByDimension.svg) -->
+<!-- > ![group by dimensions grammar](../language/svg/GroupByDimension.svg) -->
 
 SetBasedGroup: <a name="SetBasedGroup"></a>
-<!-- > ![set group grammar](/docs/svg/SetBasedGroup.svg) -->
+<!-- > ![set group grammar](../language/svg/SetBasedGroup.svg) -->
 
 EachBasedGroup: <a name="EachBasedGroup"></a>
 
-<!-- > ![each group grammar](/docs/svg/EachBasedGroup.svg) -->
+<!-- > ![each group grammar](../language/svg/EachBasedGroup.svg) -->
 
 IntoClause: <a name="IntoClause"></a>
 
-<!-- > ![into grammar](/docs/svg/IntoClause.svg) -->
+<!-- > ![into grammar](../language/svg/IntoClause.svg) -->
 
 HavingClause: <a name="HavingClause"></a>
 
-> ![having grammar](/docs/svg/HavingClause.svg)
+> ![having grammar](../language/svg/HavingClause.svg)
 
 #### Additional Grammar Rules
 
 These rules are referenced in the main tremor-query grammar rules above and are listed here as extended reference.
 
 EmbeddedScript:
-> ![embedded script grammar](/docs/svg/EmbeddedScript.svg)
+> ![embedded script grammar](../language/svg/EmbeddedScript.svg)
 
 WithParams:
-<!-- > ![with params grammar](/docs/svg/WithParams.svg) -->
+<!-- > ![with params grammar](../language/svg/WithParams.svg) -->
 
 WithPartialParams:
-<!-- > ![with partial params grammar](/docs/svg/WithPartialParams.svg) -->
+<!-- > ![with partial params grammar](../language/svg/WithPartialParams.svg) -->
 
 Params: <a name="Params"></a>
-<!-- > ![params grammar](/docs/svg/Params.svg) -->
+<!-- > ![params grammar](../language/svg/Params.svg) -->
 
 Param: <a name="Param"></a>
-<!-- > ![param grammar](/docs/svg/Param.svg) -->
+<!-- > ![param grammar](../language/svg/Param.svg) -->
 
 ModularId: <a name="ModularId"></a>
-<!-- > ![modular id grammar](/docs/svg/ModularId.svg) -->
+<!-- > ![modular id grammar](../language/svg/ModularId.svg) -->
 
 Id: <a name="Iddent"></a>
-> ![id grammar](/docs/svg/Ident.svg)
+> ![id grammar](../language/svg/Ident.svg)
 
 TiltFrames: <a name="Windows"></a>
-> ![tilt-frames grammar](/docs/svg/Windows.svg)
+> ![tilt-frames grammar](../language/svg/Windows.svg)
 
 WindowKind:
-> ![window kind grammar](/docs/svg/WindowKind.svg)
+> ![window kind grammar](../language/svg/WindowKind.svg)

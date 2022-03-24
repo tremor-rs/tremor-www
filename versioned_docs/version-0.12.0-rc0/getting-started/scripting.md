@@ -1,4 +1,4 @@
-### Concept
+# Scripting
 
 Tremor supports data processing through a directed acyclic graph-based pipeline or workflow. Pipelines can be configured via a YAML syntax or via a structured query language.
 

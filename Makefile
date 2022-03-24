@@ -1,6 +1,6 @@
 TREMOR_VSN=connectors
 
-all: clean docs/library/stdlib docs/library/aggr openapi static/docs/svg
+all: clean docs/library/stdlib docs/library/aggr openapi docs/language/svg
 
 netlify: all reset
 	npm run build
@@ -22,7 +22,7 @@ alex:
 	npm install -g alex
 	alex docs
 
-static/docs/svg: lalrpop-docgen
+docs/language/svg: lalrpop-docgen
 	-mkdir docs/language
 	cd lalrpop-docgen && cargo build --all
 	lalrpop-docgen/target/debug/lalrpop-docgen \
@@ -31,9 +31,8 @@ static/docs/svg: lalrpop-docgen
 	  -gc "Use,Deploy,Query,Script" \
 	  --out-dir docs/language \
 	  ./tremor-runtime/tremor-script/src/grammar.lalrpop
-	mv docs/language/grammar.md docs/language/EBNF.md
-	mv docs/language/Use.md docs/language/ModuleSystem.md
-	mv docs/language/svg static/docs/svg
+	if test -f docs/language/grammar.md; then  mv docs/language/grammar.md docs/language/EBNF.md; fi
+	if test -f docs/language/Use.md; then mv docs/language/Use.md docs/language/ModuleSystem.md; fi
 
 docs/library/stdlib: tremor-runtime
 	cd tremor-runtime && make stdlib-doc
@@ -70,9 +69,12 @@ touch_version:
 	rm -rf versioned_docs/version-0.12.0-rc0
 	npm run docusaurus docs:version 0.12.0-rc0
 
+check_verify: touch_version
+	npm run build
+
 reset: 
 	npm run clear
 	-rm -rf /node_modules package-lock.json yarn.lock
 	npm install
 
-.PHONY: static/docs/svg
+.PHONY: docs/language/svg
