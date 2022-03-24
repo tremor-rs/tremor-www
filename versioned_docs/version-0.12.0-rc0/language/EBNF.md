@@ -5,9 +5,9 @@ This EBNF grammar was generated from: "./tremor-runtime/tremor-script/src/gramma
 ```ebnf
 
 
-rule Use ::=
-     'use' ModularTarget 
-  |  'use' ModularTarget  'as' Ident 
+rule Query ::=
+    ConfigDirectives Stmts  '<end-of-stream>' ?  
+  | Stmts  '<end-of-stream>' ?  
   ;
 
 rule ConfigDirectives ::=
@@ -19,249 +19,30 @@ rule ConfigDirective ::=
      '#!config' WithExpr 
   ;
 
-rule ArgsWithEnd ::=
-    ArgsClause ?  WithEndClause 
-  ;
-
-rule DefinitionArgs ::=
-    ArgsClause ?  
-  ;
-
-rule ArgsClause ::=
-     'args' ArgsExprs 
-  ;
-
-rule ArgsEndClause ::=
-    ArgsClause  'end' 
-  ;
-
-rule ArgsExprs ::=
-    Sep!(ArgsExprs, ArgsExpr, ",") 
-  ;
-
-rule ArgsExpr ::=
-    Ident  '=' ExprImut 
-  | Ident 
-  ;
-
-rule CreationWithEnd ::=
-    WithEndClause ?  
-  ;
-
-rule CreationWith ::=
-    WithClause ?  
-  ;
-
-rule WithClause ::=
-     'with' WithExprs 
-  ;
-
-rule WithEndClause ::=
-    WithClause  'end' 
-  ;
-
-rule WithExprs ::=
-    Sep!(WithExprs, WithExpr, ",") 
-  ;
-
-rule WithExpr ::=
-    Ident  '=' ExprImut 
-  ;
-
-rule ModuleBody ::=
-    ModComment ModuleStmts 
-  ;
-
-rule ModuleFile ::=
-    ModuleBody  '<end-of-stream>' 
-  ;
-
-rule ModuleStmts ::=
-    ModuleStmt  ';' ModuleStmts 
-  | ModuleStmt  ';' ?  
-  ;
-
-rule ModuleStmt ::=
-    Use 
-  | Const 
-  | FnDefn 
-  | Intrinsic 
-  | DefineWindow 
-  | DefineOperator 
-  | DefineScript 
-  | DefinePipeline 
-  | DefineConnector 
-  | DefineFlow 
-  ;
-
-rule ModularTarget ::=
-    Ident 
-  | ModPath  '::' Ident 
-  ;
-
-rule DocComment ::=
-    ( DocComment_ ) ?  
-  ;
-
-rule DocComment_ ::=
-     '<doc-comment>' 
-  | DocComment_  '<doc-comment>' 
-  ;
-
-rule ModComment ::=
-    ( ModComment_ ) ?  
-  ;
-
-rule ModComment_ ::=
-     '<mod-comment>' 
-  | ModComment_  '<mod-comment>' 
-  ;
-
-rule Deploy ::=
-    ConfigDirectives ModComment DeployStmts  '<end-of-stream>' ?  
-  | ModComment DeployStmts  '<end-of-stream>' ?  
-  ;
-
-rule DeployStmts ::=
-    DeployStmt  ';' DeployStmts 
-  | DeployStmt  ';' ?  
-  ;
-
-rule DeployStmt ::=
-    DefineFlow 
-  | DeployFlowStmt 
-  | Use 
-  ;
-
-rule DeployFlowStmt ::=
-    DocComment  'deploy'  'flow' Ident  'from' ModularTarget CreationWithEnd 
-  | DocComment  'deploy'  'flow' Ident CreationWithEnd 
-  ;
-
-rule ConnectorKind ::=
-    Ident 
-  ;
-
-rule FlowStmts ::=
-    FlowStmts_ 
-  ;
-
-rule FlowStmts_ ::=
-    Sep!(FlowStmts_, FlowStmtInner, ";") 
-  ;
-
-rule CreateKind ::=
-     'connector' 
-  |  'pipeline' 
-  ;
-
-rule FlowStmtInner ::=
-    Define 
-  | Create 
-  | Connect 
-  | Use 
-  ;
-
-rule Define ::=
-    DefinePipeline 
-  | DefineConnector 
-  ;
-
-rule Create ::=
-     'create' CreateKind Ident  'from' ModularTarget CreationWithEnd 
-  |  'create' CreateKind Ident CreationWithEnd 
-  ;
-
-rule Connect ::=
-     'connect'  '/' ConnectFromConnector  'to'  '/' ConnectToPipeline 
-  |  'connect'  '/' ConnectFromPipeline  'to'  '/' ConnectToConnector 
-  |  'connect'  '/' ConnectFromPipeline  'to'  '/' ConnectToPipeline 
-  ;
-
-rule ConnectFromConnector ::=
-     'connector'  '/' Ident MaybePort 
-  ;
-
-rule ConnectFromPipeline ::=
-     'pipeline'  '/' Ident MaybePort 
-  ;
-
-rule ConnectToPipeline ::=
-     'pipeline'  '/' Ident MaybePort 
-  ;
-
-rule ConnectToConnector ::=
-     'connector'  '/' Ident MaybePort 
-  ;
-
-rule DefineConnector ::=
-    DocComment  'define'  'connector' Ident  'from' ConnectorKind ArgsWithEnd ?  
-  ;
-
-rule DefineFlow ::=
-    DocComment  'define'  'flow' Ident DefinitionArgs  'flow' FlowStmts  'end' 
-  ;
-
-rule Query ::=
-    ConfigDirectives Stmts  '<end-of-stream>' ?  
-  | Stmts  '<end-of-stream>' ?  
-  ;
-
 rule Stmts ::=
     Stmt  ';' Stmts 
   | Stmt  ';' ?  
   ;
 
-rule Stmt ::=
-    Use 
-  | DefineWindow 
-  | DefineOperator 
-  | DefineScript 
-  | DefinePipeline 
-  | CreateOperator 
-  | CreateScript 
-  | CreatePipeline 
-  |  'create'  'stream' Ident 
-  |  'select' ComplexExprImut  'from' StreamPort WindowClause WhereClause GroupByClause  'into' StreamPort HavingClause 
+rule ModuleStmt ::=
+     'mod' Ident  'with' ModComment ModuleStmts  'end' 
   ;
 
-rule DefineWindow ::=
-    DocComment  'define'  'window' Ident  'from' WindowKind CreationWith EmbeddedScriptImut  'end' 
+rule ModuleStmts ::=
+    ModuleInnerStmt  ';' ModuleStmts 
+  | ModuleInnerStmt  ';' ?  
   ;
 
-rule DefineOperator ::=
-    DocComment  'define'  'operator' Ident  'from' OperatorKind ArgsWithEnd ?  
-  ;
-
-rule DefineScript ::=
-    DocComment  'define'  'script' Ident DefinitionArgs EmbeddedScript 
-  ;
-
-rule DefinePipeline ::=
-    DocComment  'define'  'pipeline' Ident (  'from' Ports ) ?  (  'into' Ports ) ?  DefinitionArgs Pipeline 
-  ;
-
-rule CreateScript ::=
-     'create'  'script' Ident CreationWithEnd 
-  |  'create'  'script' Ident  'from' ModularTarget CreationWithEnd 
-  ;
-
-rule CreateOperator ::=
-     'create'  'operator' Ident CreationWithEnd 
-  |  'create'  'operator' Ident  'from' ModularTarget CreationWithEnd 
-  ;
-
-rule CreatePipeline ::=
-     'create'  'pipeline' Ident CreationWithEnd 
-  |  'create'  'pipeline' Ident  'from' ModularTarget CreationWithEnd 
-  ;
-
-rule MaybePort ::=
-    (  '/' Ident ) ?  
-  ;
-
-rule StreamPort ::=
-    Ident MaybePort 
+rule ModuleInnerStmt ::=
+    ModuleStmt 
+  |  'define' WindowKind  'window' Ident WithScriptClause 
+  |  'define' OperatorKind  'operator' Ident WithClause 
+  |  'define' OperatorKind  'operator' Ident 
+  |  'define'  'script' Ident ScriptWithClause EmbeddedScript 
+  |  'define'  'script' Ident EmbeddedScript 
+  | Const 
+  | FnDecl 
+  | Intrinsic 
   ;
 
 rule WindowKind ::=
@@ -269,8 +50,45 @@ rule WindowKind ::=
   |  'tumbling' 
   ;
 
+rule Stmt ::=
+    ModuleStmt 
+  |  'define' WindowKind  'window' Ident WithScriptClause 
+  |  'define' OperatorKind  'operator' Ident WithClause 
+  |  'define' OperatorKind  'operator' Ident 
+  |  'define'  'script' Ident ScriptWithClause EmbeddedScript 
+  |  'define'  'script' Ident EmbeddedScript 
+  |  'create'  'stream' Ident 
+  |  'create'  'operator' Ident  'from' ModularTarget WithClause 
+  |  'create'  'operator' Ident  'from' ModularTarget 
+  |  'create'  'operator' Ident WithClause 
+  |  'create'  'operator' Ident 
+  |  'create'  'script' Ident  'from' ModularTarget WithClause 
+  |  'create'  'script' Ident  'from' ModularTarget 
+  |  'create'  'script' Ident WithClause 
+  |  'create'  'script' Ident 
+  |  'select' ComplexExprImut  'from' StreamPort WindowClause WhereClause GroupByClause  'into' StreamPort HavingClause 
+  ;
+
+rule MaybePort ::=
+    (  '/' Ident ) ?  
+  ;
+
+rule ModularTarget ::=
+    Ident 
+  | ModPath  '::' Ident 
+  ;
+
+rule StreamPort ::=
+    Ident MaybePort 
+  ;
+
 rule WindowClause ::=
     ( WindowDefn ) ?  
+  ;
+
+rule Window ::=
+    Ident 
+  | ModPath  '::' Ident 
   ;
 
 rule Windows ::=
@@ -279,10 +97,6 @@ rule Windows ::=
 
 rule Windows_ ::=
     Sep!(Windows_, Window, ",") 
-  ;
-
-rule Window ::=
-    ModularTarget 
   ;
 
 rule WindowDefn ::=
@@ -323,8 +137,28 @@ rule EmbeddedScriptContent ::=
     ExprImut 
   ;
 
-rule Ports ::=
-    Sep!(Ports, <Ident>, ",") 
+rule WithScriptClause ::=
+     'with' WithExprs EmbeddedScriptImut  'end' 
+  ;
+
+rule WithClause ::=
+    ScriptWithClause  'end' 
+  ;
+
+rule ScriptWithClause ::=
+     'with' WithExprs 
+  ;
+
+rule WithExprs ::=
+    WithExprs_ 
+  ;
+
+rule WithExprs_ ::=
+    Sep!(WithExprs_, WithExpr, ",") 
+  ;
+
+rule WithExpr ::=
+    Ident  '=' ExprImut 
   ;
 
 rule OperatorKind ::=
@@ -332,42 +166,46 @@ rule OperatorKind ::=
   ;
 
 rule EmbeddedScript ::=
-     'script' TopLevelExprs  'end' 
-  ;
-
-rule Pipeline ::=
-     'pipeline' ConfigDirectives ?  PipelineCreateInner  'end' 
-  ;
-
-rule PipelineCreateInner ::=
-    Stmt  ';' Stmts 
-  | Stmt  ';' ?  
+     'script' Exprs  'end' 
   ;
 
 rule Script ::=
-    ModComment TopLevelExprs  '<end-of-stream>' ?  
+    ModComment Exprs  '<end-of-stream>' ?  
   ;
 
-rule TopLevelExprs ::=
-    TopLevelExpr  ';' TopLevelExprs 
-  | TopLevelExpr  ';' ?  
+rule ModComment ::=
+    ( ModComment_ ) ?  
   ;
 
-rule InnerExprs ::=
-    Expr  ';' InnerExprs 
-  | Expr  ';' ?  
+rule ModComment_ ::=
+     '<mod-comment>' 
+  | ModComment_  '<mod-comment>' 
   ;
 
-rule TopLevelExpr ::=
+rule Exprs ::=
+    MayBeConstExpr  ';' Exprs 
+  | MayBeConstExpr  ';' ?  
+  ;
+
+rule MayBeConstExpr ::=
     Const 
-  | FnDefn 
+  | FnDecl 
   | Intrinsic 
+  | Module 
   | Expr 
-  | Use 
   ;
 
 rule Const ::=
-    DocComment  'const' Ident  '=' ComplexExprImut 
+    DocComment  'const' Ident  '=' SimpleExprImut 
+  ;
+
+rule DocComment ::=
+    ( DocComment_ ) ?  
+  ;
+
+rule DocComment_ ::=
+     '<doc-comment>' 
+  | DocComment_  '<doc-comment>' 
   ;
 
 rule Expr ::=
@@ -490,11 +328,27 @@ rule Intrinsic ::=
   | DocComment  'intrinsic'  'fn' Ident  '('  '.'  '.'  '.'  ')'  'as' ModularTarget 
   ;
 
-rule FnDefn ::=
-    DocComment  'fn' Ident  '('  '.'  '.'  '.'  ')'  'with' InnerExprs  'end' 
-  | DocComment  'fn' Ident  '(' FnArgs  ','  '.'  '.'  '.'  ')'  'with' InnerExprs  'end' 
-  | DocComment  'fn' Ident  '('  ')'  'with' InnerExprs  'end' 
-  | DocComment  'fn' Ident  '(' FnArgs  ')'  'with' InnerExprs  'end' 
+rule Module ::=
+     'mod' Ident  'with' ModComment ModuleExprs  'end' 
+  ;
+
+rule ModuleExprs ::=
+    ModuleExpr  ';' ModuleExprs 
+  | ModuleExpr  ';' ?  
+  ;
+
+rule ModuleExpr ::=
+    Const 
+  | FnDecl 
+  | Intrinsic 
+  | Module 
+  ;
+
+rule FnDecl ::=
+    DocComment  'fn' Ident  '('  '.'  '.'  '.'  ')'  'with' Exprs  'end' 
+  | DocComment  'fn' Ident  '(' FnArgs  ','  '.'  '.'  '.'  ')'  'with' Exprs  'end' 
+  | DocComment  'fn' Ident  '('  ')'  'with' Exprs  'end' 
+  | DocComment  'fn' Ident  '(' FnArgs  ')'  'with' Exprs  'end' 
   | DocComment  'fn' Ident  '('  ')'  'of' FnCases  'end' 
   | DocComment  'fn' Ident  '(' FnArgs  ')'  'of' FnCases  'end' 
   ;
@@ -615,8 +469,8 @@ rule ExprPath ::=
   ;
 
 rule MetaPath ::=
-     '$' Ident PathSegments 
-  |  '$' Ident 
+     '$' PathSegment PathSegments 
+  |  '$' PathSegment 
   |  '$' 
   ;
 
@@ -633,8 +487,8 @@ rule ArgsPath ::=
   ;
 
 rule LocalPath ::=
-    Ident PathSegments 
-  | Ident 
+    PathSegment PathSegments 
+  | PathSegment 
   ;
 
 rule ConstPath ::=
@@ -652,10 +506,14 @@ rule EventPath ::=
   ;
 
 rule PathSegments ::=
-     '.' Ident PathSegments 
+     '.' PathSegment PathSegments 
   |  '[' Selector  ']' PathSegments 
   |  '[' Selector  ']' 
-  |  '.' Ident 
+  |  '.' PathSegment 
+  ;
+
+rule PathSegment ::=
+    Ident 
   ;
 
 rule Selector ::=
@@ -711,7 +569,7 @@ rule Patch ::=
 
 rule PatchOperations ::=
     PatchOperationClause 
-  | PatchOperations  ';' PatchOperationClause 
+  | PatchOperations  ',' PatchOperationClause 
   ;
 
 rule PatchField ::=
@@ -781,7 +639,7 @@ rule Effectors ::=
 
 rule Block ::=
     Expr 
-  | Block  ';' Expr 
+  | Block  ',' Expr 
   ;
 
 rule MatchImut ::=
@@ -826,7 +684,6 @@ rule PredicateFieldPattern ::=
   | Ident  '=' Ident  '~=' TestExpr 
   | Ident  '~=' RecordPattern 
   | Ident  '~=' ArrayPattern 
-  | Ident  '~=' TuplePattern 
   |  'present' Ident 
   |  'absent' Ident 
   | Ident BinCmpEq ComplexExprImut 

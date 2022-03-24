@@ -1,4 +1,4 @@
-### IDE Integration
+# IDE Integration and tooling
 
 ![tremor-vim](/img/tremor/tremor-vim.png)
 

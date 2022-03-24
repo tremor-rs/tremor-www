@@ -1,4 +1,4 @@
-### Concept
+# Specialize
 
 Some behaviour is either so performance critical, or so specialised that it can't or shouldn't be expressed using  [Tremor Script](https://tremor.rs/docs/next/getting-started/scripting/#h-script).
 

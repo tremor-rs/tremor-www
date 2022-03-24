@@ -1,4 +1,4 @@
-### Concept
+# Connectivity
 
 In order to provide a general-purpose event processing facility to a broad base
 of applications, Tremor separates processing from connectivity and distribution.
