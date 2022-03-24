@@ -287,7 +287,7 @@ That means the `event` available to the [`where` clause](#WhereClause) is the un
 select event from in where event.is_interesting into out;
 ```
 
-The _Target Expression_ of a select query is used to describe transformations of the event. To pass through the event without changes, use `select event`, otherwise you can construct arbitrary [literals](/docs/scripts/overview#literals) (numbers, records, arrays, ...), call functions, aggregate functions, reference the event metadata via `$` or other [Special paths](/docs/scripts/overview#special-paths). Nearly everything is possible:
+The _Target Expression_ of a select query is used to describe transformations of the event. To pass through the event without changes, use `select event`, otherwise you can construct arbitrary [literals](/docs/scripts/overview#literals) (numbers, records, arrays, ...), call functions, aggregate functions, reference the event metadata via `$` or other [path expressionss](/docs/scripts/overview#paths). Nearly everything is possible:
 
 ```trickle
 use std::string;
