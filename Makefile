@@ -74,4 +74,3 @@ reset:
 	-rm -rf /node_modules package-lock.json yarn.lock
 	npm install
 
-.PHONY: docs/language/svg
