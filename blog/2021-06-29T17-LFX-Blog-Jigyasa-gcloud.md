@@ -294,7 +294,7 @@ However, we wish to test the property of guranteed delivery and message-ordering
 
 For this purpose, we also use a write-ahead log or `wal` that builds on circuit breaker and acknowledgement mechanisms to provide guaranteed delivery. The write-ahead log is useful in situations where sources/onramps do not offer guaranteed delivery themselves, but the data being distributed downstream can benefit from protection against loss and duplication.
 
-We have 3 different configurations for the outbound trickle file - using a [transient wal](/docs/recipes/transient_gd), [persistent wal](/docs/recipes/persistent_gd) and no wal. The cofigurations are as follows:
+We have 3 different configurations for the outbound trickle file - using a [transient wal](https://github.com/tremor-rs/tremor-www/docs/recipes/transient_gd), [persistent wal](https://github.com/tremor-rs/tremor-www/docs/recipes/persistent_gd) and no wal. The cofigurations are as follows:
 
 **No wal**
 

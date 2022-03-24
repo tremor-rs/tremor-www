@@ -30,9 +30,9 @@ create operator my_custom_operator;
 
 ## script
 
-An embedded tremor script is created with a special syntax that deviates from the operator creation. For a full reference see the section on [tremor-query embedded-scripts](/docs/queries/overview##embedded-script-definitions).
+An embedded tremor script is created with a special syntax that deviates from the operator creation. For a full reference see the section on [tremor-query embedded-scripts](overview##embedded-script-definitions).
 
-The tremor script runtime allows to modify events or their metadata. To learn more about Tremor Script please see the [related section](/docs/scripts/overview).
+The tremor script runtime allows to modify events or their metadata. To learn more about Tremor Script please see the [related section](../scripts/overview).
 
 The `script` operator allows to modify the events metadata (via `$`), and the script local `state` which persists across single events.
 

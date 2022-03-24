@@ -102,4 +102,4 @@ Select the operating system your are developing on.
   > cargo build --release --all # go get a nice cup of tea
   > ```
 
-For more details on building Tremor, please refer to the [Tremor development docs](/docs/getting-started/overview).
+For more details on building Tremor, please refer to the [Tremor development docs](overview).
