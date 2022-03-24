@@ -4,7 +4,7 @@
 Linked transports are in alpha status as of v0.9.0 and we recommend its use only for exploratory projects. Details around it (including any on this page) are likely to change, as the feature set matures.
 :::
 
-Tremor supports ingestion of events from external sources ([onramps](/docs/connectors/onramps)) and after processing them from pipelines, they can be written to external sinks ([offramps](../connectors/offramps)). Since v0.9, Tremor also supports Linked Transports (LT): a mechanism that allows linking of source and sink nature into one ramp artefact.
+Tremor supports ingestion of events from external sources ([onramps](../connectors/onramps)) and after processing them from pipelines, they can be written to external sinks ([offramps](../connectors/offramps)). Since v0.9, Tremor also supports Linked Transports (LT): a mechanism that allows linking of source and sink nature into one ramp artefact.
 
 In other words -- once this mechanism is turned on -- a Tremor onramp can behave as an *offramp* (i.e. send events to the outside world) and similarly, a Tremor offramp can behave as an *onramp* (i.e. receive events from the outside world). This is specifically useful for onramps and offramps like REST and websocket, where the protocol already provides facility for responding to events, and as such, the mechanism is currently supported for those onramps and offramps only.
 
@@ -76,15 +76,15 @@ As part of the above docs, you will also find event metadata variables that thes
 
 ## Example use cases
 
-In the above example, instead of using a passthrough pipeline, you can imagine processing the incoming event from a custom trickle pipeline, with the various [operators](/docs/queries/operators) we have at our disposal. In this vein, more elaborate server examples based on onramp linking (and supporting request/response style interactions) are linked below:
+In the above example, instead of using a passthrough pipeline, you can imagine processing the incoming event from a custom trickle pipeline, with the various [operators](../queries/operators.md) we have at our disposal. In this vein, more elaborate server examples based on onramp linking (and supporting request/response style interactions) are linked below:
 
-* [HTTP server](/docs/recipes/servers_lt_http)
-* [Websocket server](/docs/recipes/servers_lt_ws)
+* [HTTP server](../recipes/servers_lt_http)
+* [Websocket server](../recipes/servers_lt_ws)
 
-When linked onramps of this sort are coupled with linked offramps, we have proxy applications, where incoming requests from clients can be forwarded to upstream servers and the resulting response can then be returned back to the client which initiated the request. Custom proxying logic (eg: deciding the upstream based on incoming request attributes) can be coded up as part of the [runtime script](/docs/queries/operators#runtimetremor). Some concrete examples demonstrating this pattern:
+When linked onramps of this sort are coupled with linked offramps, we have proxy applications, where incoming requests from clients can be forwarded to upstream servers and the resulting response can then be returned back to the client which initiated the request. Custom proxying logic (eg: deciding the upstream based on incoming request attributes) can be coded up as part of the [runtime script](../queries/operators.md#runtimetremor). Some concrete examples demonstrating this pattern:
 
-* [HTTP Proxy](/docs/recipes/proxies_lt_http)
-* [Websocket Proxy](/docs/recipes/proxies_lt_ws)
+* [HTTP Proxy](../recipes/proxies_lt_http)
+* [Websocket Proxy](../recipes/proxies_lt_ws)
 
 example "Example binding for a HTTP proxy"
 ```yaml
@@ -108,18 +108,18 @@ example "Example binding for a HTTP proxy"
 
 And when proxying, if we configure linked onramps and offramps of different types, we have bridges:
 
-* [HTTP -> WS Bridge](/docs/recipes/bridges_lt_http_ws)
+* [HTTP -> WS Bridge](../recipes/bridges_lt_http_ws)
 
-Or when the proxying use case is combined with some qos operators ([roundrobin](/docs/queries/operators#qosroundrobin) and [backpressure](/docs//queries/operators#qosbackpressure)), we get a working load-balancer:
+Or when the proxying use case is combined with some qos operators ([roundrobin](../queries/operators#qosroundrobin) and [backpressure](../queries/operators#qosbackpressure)), we get a working load-balancer:
 
-* [HTTP Load Balancing](/docs/recipes/reverse_proxy_load_balancing)
+* [HTTP Load Balancing](../recipes/reverse_proxy_load_balancing)
 
 These are some example use cases now possible with linked transports at the center, but with the amount of flexibility and composability that Tremor supports for its various capabilities, we can get very creative with what we can do here -- our imagination is the limit.
 
 Examples of even more advanced Tremor applications:
 
-* [Quota Service](/docs/recipes/quota_service)
-* [Configurator](/docs/recipes/configurator)
+* [Quota Service](../recipes/quota_service)
+* [Configurator](../recipes/configurator)
 
 ## Error handling
 

@@ -161,13 +161,13 @@ $ tremor server run echo.troy
 
 All tremor DSLs share a common set of compiler and runtime infrastructure.
 
-The module system is itself defined as a [tremor-module](/docs/language/ModuleSystem) DSL.
+The module system is itself defined as a [tremor-module](language/ModuleSystem) DSL.
 
 The primary domain specific languages are:
 
 |Guide|Description|Extension|
 |---|---|---|
-|[tremor-module](/docs/language/ModuleSystem)| - The tremor module system.|`none`|
+|[tremor-module[](language/ModuleSystem)| - The tremor module system.|`none`|
 |[tremor-deploy](docs/language//Deploy)| - The tremor deployment language.|troy|
 |[tremor-query](docs/language//Query)| - The tremor query language.|trickle|
 |[tremor-script](docs/language/Script)| - the tremor scripting language.|script|

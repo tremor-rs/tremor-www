@@ -25,9 +25,9 @@ Tremor Script adds an expression language that supports unary, binary, compariso
 
 Features relatively unique to tremor-script are structural pattern matching and the recognition of and ability to extract data from microformats typically embedded in event data.
 
-[Structural pattern matching](/docs/scripts/overview#match) allows patterns over arbitrarily nested values to be concisely declared with an intuitive syntax.
+[Structural pattern matching](../scripts/overview#match) allows patterns over arbitrarily nested values to be concisely declared with an intuitive syntax.
 
-[Micro-format Extractors](/docs/extractors/overview) allows embedded data conforming to orthogonal formats such as regular expressions in Strings, date/time variants to be conditionally transformed to Tremor internal form and for embedded data to be extracted upon matching.
+[Micro-format Extractors](../extractors/overview) allows embedded data conforming to orthogonal formats such as regular expressions in Strings, date/time variants to be conditionally transformed to Tremor internal form and for embedded data to be extracted upon matching.
 
 ```tremor
 define script extract                                # define the script that parses our Apache logs
@@ -42,7 +42,7 @@ script
 end;
 ```
 
-See the full documentation [of the language](/docs/language) and its [standard library](../library/overview) for more information.
+See the full documentation [of the language](../language) and its [standard library](../library/overview) for more information.
 
 ### Tremor Query
 
@@ -119,4 +119,4 @@ filter {
 
 </div>
 
-The full documentation [of the language](/docs/queries/overview), the [operators](/docs/queries/operators), and [aggregation functions](/docs/queries/functions) can be found in the [language docs](/docs/language) .
+The full documentation [of the language](../queries/overview), the [operators](../queries/operators), and [aggregation functions](../queries/functions) can be found in the [language docs](../language) .

@@ -260,7 +260,7 @@ let event = {
 See also:
 
  - [`std::binary`](../library/stdlib/std/binary) for useful function for working with binary data.
- - [`std::string::into_binary`](/docs/library/stdlib/std/string#into_binarybytes) and [`std::string::from_utf8_lossy`](../library/stdlib/std/string#from_utf8_lossybytes)
+ - [`std::string::into_binary`](../library/stdlib/std/string#into_binarybytes) and [`std::string::from_utf8_lossy`](../library/stdlib/std/string#from_utf8_lossybytes)
  - [`std::base64`](../library/stdlib/std/base64) for encoding and decoding binary data to string using base64.
 
 
@@ -306,9 +306,9 @@ _Normal_ paths are used to referring to local variables created with [let](#let)
 - `event`: Always referring to the currently handled event.
 - `$`: Referring to the event metadata. Values inside the event metadata can only be accessed via a top-level name like: `$udp.port`. Its contents are usually either `null` or a record.
 - `state`: Referring to the script's state, which will persist across the lifetime of a pipeline, but not across tremor reboots. So it can be used as state kept across different events. Default value is `null`.
-- `args`: Referring to a record of arguments passed into the [script definition](/docs/queries/overview#embedded-script-definitions) or [create script](#embedded-script-definitions).
-- `window`: Referring to the name of the [window](/docs/queries/overview#tumbling-windows) this event is emitted from. This is `null` if the event is not handled inside a tremor-query [select](/docs/queries/overview#select-queries) statement with a [window](/docs/queries/overview#tumbling-windows).
-- `group`: Referring to the current group if the event is handled inside a tremor-query [select](/docs/queries/overview#select-queries) statement with a `group by` clause. It will be `null` outside of a `group by` select, if used inside, it will be an array where the first element is the value of the current group, and the second element is the stringified _name_ of the group, derived from the group value.
+- `args`: Referring to a record of arguments passed into the [script definition](../queries/overview#embedded-script-definitions) or [create script](#embedded-script-definitions).
+- `window`: Referring to the name of the [window](../queries/overview#tumbling-windows) this event is emitted from. This is `null` if the event is not handled inside a tremor-query [select](../queries/overview#select-queries) statement with a [window](../queries/overview#tumbling-windows).
+- `group`: Referring to the current group if the event is handled inside a tremor-query [select](../queries/overview#select-queries) statement with a `group by` clause. It will be `null` outside of a `group by` select, if used inside, it will be an array where the first element is the value of the current group, and the second element is the stringified _name_ of the group, derived from the group value.
 
 #### Example
 
@@ -358,7 +358,7 @@ Grab the books from the store (the same using key, index and escaped key notatio
 
 ```tremor
 let capture = event.store.book;
-# index and escaped notation can acomodate keys that include 'odd' characters such as whitespaces or dots.
+# index and escaped notation can acomodate keys that include 'odd' characters such as space or dots.
 let capture = event.store["book"];
 let capture = event.store.`book`;
 ```
@@ -821,7 +821,7 @@ Here's a tremor-script example demonstrating the usage of the `state` keyword --
   }
 ```
 
-This will work as part of the [runtime::tremor](/docs/queries/operators#runtimetremor) operator confguration in the legacy pipeline yaml setup, and also as an embedded script in the [trickle definition](/docs/queries/walkthrough#scripts-and-operators) of the pipeline.
+This will work as part of the [runtime::tremor](../queries/operators#runtimetremor) operator confguration in the legacy pipeline yaml setup, and also as an embedded script in the [trickle definition](../queries/walkthrough#scripts-and-operators) of the pipeline.
 
 A key thing to note is that by design, state is not shared across operator nodes in the pipeline. Therefore, if we have scripts across multiple nodes in the pipeline, the `state` keyword in each script allows access only to the local node-specific state storage, and not the state from any other operator nodes or something global to all the nodes.
 

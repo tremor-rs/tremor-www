@@ -8,12 +8,12 @@ The solution to this is custom operators. Unlike Tremor Script that is interpret
 
 Currently Tremor supports the following operators:
 
-* [runtime::tremor](/docs/queries/operators#script)
-* [grouper::bucket](/docs/queries/operators#grouperbucket)
-* [generic::backpressure](/docs/queries/operators#genericbackpressure)
-* [generic::batch](/docs/queries/operators#genericbatch)
+* [runtime::tremor](../queries/operators#script)
+* [grouper::bucket](../queries/operators#grouperbucket)
+* [generic::backpressure](../queries/operators#genericbackpressure)
+* [generic::batch](../queries/operators#genericbatch)
 
 Some debug operators also exist:
 
-* [passthrough](/docs/queries/operators#passthrough)- internal use.
-* [debug::history](/docs/queries/operators#debughistory)- development.
+* [passthrough](../queries/operators#passthrough)- internal use.
+* [debug::history](../queries/operators#debughistory)- development.

@@ -50,13 +50,13 @@ This will result in unintended behaviour because `present` will return the origi
 
 The different extractors available are:
 
-- [Base64](/docs/extractors/base64)
-- [CIDR](/docs/extractors/cidr)
-- [Datetime](/docs/extractors/datetime)
-- [Dissect](/docs/extractors/dissect)
-- [Glob](/docs/extractors/glob)
-- [Grok](/docs/extractors/grok)
-- [Influx](/docs/extractors/influx)
-- [JSON](/docs/extractors/json)
-- [KV](/docs/extractors/kv)
-- [Regex (Re)](/docs/extractors/regex)
+- [Base64](base64)
+- [CIDR](cidr)
+- [Datetime](datetime)
+- [Dissect](dissect)
+- [Glob](glob)
+- [Grok](grok)
+- [Influx](influx)
+- [JSON](json)
+- [KV](kv)
+- [Regex (Re)](regex)
