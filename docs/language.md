@@ -168,7 +168,7 @@ The primary domain specific languages are:
 |Guide|Description|Extension|
 |---|---|---|
 |[tremor-module[](language/ModuleSystem)| - The tremor module system.|`none`|
-|[tremor-deploy](docs/language//Deploy)| - The tremor deployment language.|troy|
+|[tremor-deploy](docs/language/Deploy)| - The tremor deployment language.|troy|
 |[tremor-query](docs/language//Query)| - The tremor query language.|trickle|
 |[tremor-script](docs/language/Script)| - the tremor scripting language.|script|
 
