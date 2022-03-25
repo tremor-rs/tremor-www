@@ -1,4 +1,7 @@
-A `ConfigDirective` is a directive to the tremor runtime.
+### Providing a metrics internal via a config directive
 
-Directives MUST begin on a new line with the `#!config` shebang  config token.
+```tremor
+# Enable metrics with a 10 second interval
+#!config metrics_interval_s = 10
+```
 
