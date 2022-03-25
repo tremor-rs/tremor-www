@@ -1,4 +1,9 @@
-The `Const` rule defines a rule that binds an immutable expression to an identifier.
+### Example
 
-As the value cannot be changed at runtime.
+```tremor
+use std::base64;
+const snot = "snot";
+const badger = "badger";
+const snot_badger = { "#{snot}": "#{base64::encode(badger)}" };
+```
 

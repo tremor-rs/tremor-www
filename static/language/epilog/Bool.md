@@ -1,1 +1,10 @@
-The `Bool` rule defines the syntax of boolean literal in tremor.
+### Example
+
+```tremor
+true # The boolean `true` literal
+```
+
+```tremor
+false # The boolean `false` literal
+```
+

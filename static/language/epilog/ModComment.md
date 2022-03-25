@@ -1,10 +1,19 @@
-The `ModComment` rule specifies module comments in tremor.
+### Example
 
-Documentation comments for modules are optional.
+Module level comments are used throughput the tremor standard library
+and used as part of our document generation process.
 
-A module documentation comment begins with a `###` triple-hash and they are line delimited.
+Here is a modified snippet from the standard library to illustrate
 
-Muliple successive comments are coalesced together to form a complete comment.
-
-The content of a module documentation comment is markdown syntax.
+```tremor
+### The tremor language standard library it provides the following modules:
+###
+### * [array](std/array.md) - functions to deal with arrays (`[]`)
+### * [base64](std/base64.md) - functions for base64 en and decoding
+### * [binary](std/base64.md) - functions to deal with binary data (`<< 1, 2, 3 >>`)
+### * [float](std/float.md) - functions to deal with floating point numbers
+### * [integer](std/integer.md) - functions to deal with integer numbers
+### * [json](std/json.md) - functions to deal with JSON
+...
+```
 
