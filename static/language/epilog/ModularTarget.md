@@ -1,12 +1,21 @@
-A `ModularTarget` indexes into tremor's module path.
+### Examples
 
-In tremor a `module` is a file on the file system.
+#### Loading and using a builtin function
+```tremor
+# Load the base64 utilities
+use std::base64;
 
-A `module` is also a unit of compilation.
+# Base64 encode the current `event`.
+base64::encode(event)
+```
 
-A `ModularTarget` is a `::` double-colon delimited set of identifiers.
+#### Loading and using a builtin function with an alias
 
-Leading `::` are not supported in a modular target..
+```tremor
+# Load the base64 utilities
+use std::base64 as snot;
 
-Trailing `::` are not supported in a modular target.
+# Base64 encode the current `event`.
+snot::encode(event)
+```
 

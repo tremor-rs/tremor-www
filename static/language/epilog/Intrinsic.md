@@ -1,10 +1,12 @@
-The `intrinsic` rule defines intrinsic function signatures.
+### Example
 
-This rule allows tremor maintainers to document the builtin functions implemented as
-native rust code. The facility also allows document generation tools to document builtin
-intrinsic functions in the same way as user defined functions.
+From our standard library generated documentation, we can see that the base64
+encode function is an intrinsic function.
 
-In short, these can be thought of as runtime provided.
-
-For information on how to define user defined functions see the [function](#rule-fndefn) rule.
+```tremor
+## Encodes a `binary` as a base64 encoded string
+##
+## Returns a `string`
+intrinsic fn encode(input) as base64::encode;
+```
 

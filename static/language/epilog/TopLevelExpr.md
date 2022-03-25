@@ -1,9 +1,14 @@
-The `TopLevelExpr` rule specifies the expression forms that are legal at the
-outer most scope of a tremor script definition.
+### Example
 
-The legal forms are:
-* Use declarations - these allow external modules to be referenced.
-* Constant expressions - these are immutable compile time constants.
-* Function definitions - these are user defined functions.
-* Intrinsic function definitions - these are builtin funtions provided by the runtime.
+In the tremor standard library many of the top level expressions
+are `use` definitions importing sub modules from the module path.
+
+```tremor
+use std::array;     # Import the std array utilities
+use std::base64     # Import the std base64 utilities;
+use std::binary;    # ...
+use std::float;
+use std::integer;
+use std::json;
+```
 

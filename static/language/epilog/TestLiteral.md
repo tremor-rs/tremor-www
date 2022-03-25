@@ -1,14 +1,50 @@
-The `TestLiteral` rule specifies an extractor microformat block.
+### Extracting JSON embedded within strings
 
-An extractor takes the general form:
-
-```ebnf
-Ident '|' MicroFormat '|'
+```tremor
+let example = { "snot": "{\"snot\": \"badger\"" };
+match example of
+  case extraction=%{ snot ~= json|| } => extraction.snot
+  default => "no match"
+end;
 ```
 
-Where
+When executed this will result in:
 
-The `ident` is the name of a builtin extractor such as `json` or `base64`.
+```tremor
+"badger"
+```
 
-The `Microformat` content depends on the extractor being used
+### Decoding base64 embedded within strings
+
+```tremor
+let example = { "snot": "eyJzbm90IjogImJhZGdlciJ9Cg==" };
+match example of
+  case extraction=%{ snot ~= base64|| } => extraction.snot
+  default => "no match"
+end;
+```
+
+When executed this will result in:
+
+```tremor
+"{\"snot\": \"badger\"}
+```
+
+### Wrap and Extract
+
+We can decode the base64 decoded string through composition:
+
+```tremor
+let example = { "snot": "eyJzbm90IjogImJhZGdlciJ9Cg==" };
+match example of
+  case decoded = %{ snot ~= base64|| } =>
+    match { "snot": decoded.snot } of
+      case json = %{ snot ~= json|| } => json.snot.snot
+      default => "no match - json"
+    end
+  default => "no match - base64"
+end;
+
+```
+
 

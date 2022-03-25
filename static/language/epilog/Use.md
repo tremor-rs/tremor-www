@@ -1,15 +1,27 @@
-Imports definitions from an external source for use in the current source file.
+### Modules
 
-The contents of a source file form a module.
+Modules can be scripts. Scripts can store function and constant definitions.
 
-### TREMOR_PATH
+Scripts are stored in `.tremor` files.
 
-The `TREMOR_PATH` environment path variable is a `:` delimited set of paths.
+Modules can be queries. Queries can store window, pipeline, script and operator definitions.
 
-Each path is an absolute or relative path to a directory.
+Scripts are stored in `.trickle` files.
 
-When using relative paths - these are relative to the working directory where the
-`tremor` executable is executed from.
+Modules can be deployments. Deployments can store connector, pipeline and flow definitions.
 
-The tremor standard library MUST be added to the path to be accessible to scripts.
+Deployments are stored in `.troy` files.
+
+#### Conditioning
+
+Modules in tremor are resolved via the `TREMOR_PATH` environment variable. The variable can
+refer to multiple directory paths, each separated by a `:` colon. The relative directory
+structure and base file name of the source file form the relative module path.
+
+### Constraints
+
+It is not recommended to have overlapping or shared directories across the set of paths
+provided in the tremor path.
+
+It is not recommended to have multiple definitions mapping to the same identifier.
 
