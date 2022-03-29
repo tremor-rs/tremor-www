@@ -9,9 +9,6 @@ class BenchmarkChart extends Component {
             title: props.title,
             options: {
                 chart: {
-                    width: '100px',
-                    height: 0.5,
-                    parentHeightOffset: 0.5,
                     id: props.title + "-chart",
                     events: {
                         markerClick: (c1, c2, { dataPointIndex }) =>
@@ -66,6 +63,7 @@ class BenchmarkChart extends Component {
             <BrowserOnly>
                 {() => {
                     return (<Chart
+                        height="100%"
                         options={this.state.options}
                         series={this.state.series}
                         type="line"
