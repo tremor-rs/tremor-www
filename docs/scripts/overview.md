@@ -594,7 +594,7 @@ A *tuple pattern* matches a *target* value if the *target* is an array and **eac
 If you are looking for a more set like operation look at the [array pattern](#matching-array-patterns).
 :::
 
-> ![tuple case grammar](../language/svg/tuplePattern.svg)
+> ![tuple case grammar](../language/svg/tuplepattern.svg)
 
 Tuple Pattern filter grammar:
 
