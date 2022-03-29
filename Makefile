@@ -18,7 +18,7 @@ tremor-runtime:
 
 tremor-runtime-refresh:
 	cd tremor-runtime &&\
-	git checkout $(TREMOR_VSN) && `
+	git checkout $(TREMOR_VSN) &&\
 	git pull
 
 alex:
