@@ -1,11 +1,16 @@
 TREMOR_VSN=connectors
 
-all: clean docs/library/stdlib docs/library/aggr openapi docs/language/svg
+all: clean tremor-runtime-docs
 
 netlify: all reset
 	npm run build
 	cp -rf docs/language/svg build/docs/language/svg      # Saves duplicates in git this way
 	cp -rf docs/language/svg build/docs/next/language/svg # Saves duplicates in git this way
+
+serve:
+	cp -rf docs/language/svg build/docs/language/svg      # Saves duplicates in git this way
+	cp -rf docs/language/svg build/docs/next/language/svg # Saves duplicates in git this way
+	npm run serve
 
 tremor-runtime:
 	-git clone https://github.com/tremor-rs/tremor-runtime
@@ -15,36 +20,20 @@ tremor-runtime-refresh:
 	git checkout $(TREMOR_VSN) &&\
 	git pull origin $(TREMOR_VSN)
 
-lalrpop-docgen:
-	-git clone https://github.com/darach/lalrpop lalrpop-docgen
-	cd lalrpop-docgen &&\
-	git checkout docgen
-
 alex:
 	npm install -g alex
 	alex docs
 
-docs/language/svg: lalrpop-docgen
-	-mkdir docs/language
-	cd lalrpop-docgen && cargo build --all
-	lalrpop-docgen/target/debug/lalrpop-docgen \
-	  -mp static/language/prolog \
-	  -me static/language/epilog \
-	  -gc "Use,Deploy,Query,Script" \
-	  --out-dir docs/language \
-	  ./tremor-runtime/tremor-script/src/grammar.lalrpop
-	if test -f docs/language/grammar.md; then  mv docs/language/grammar.md docs/language/EBNF.md; fi
-	if test -f docs/language/Use.md; then mv docs/language/Use.md docs/language/ModuleSystem.md; fi
+tremor-runtime-docs: tremor-runtime
+	-cd tremor-runtime && make docs
+	-rm -rf docs/language docs/library
+	cp -rf tremor-runtime/docs/language docs/language
+	cp -rf tremor-runtime/docs/library docs/library
+	cp -rf tremor-runtime/static/docs/library/*.md docs/library
+	-rm -rf static/docs/svg
+	-[ ! -d static/docs/language/svg ] && mkdir static/docs/language/svg || true
+	cp -rf docs/language/svg static/docs/language/svg
 
-docs/library/stdlib: tremor-runtime
-	cd tremor-runtime && make stdlib-doc
-	-rm -r docs/library/stdlib
-	cp -r tremor-runtime/docs docs/library/stdlib
-
-docs/library/aggr: tremor-runtime
-	cd tremor-runtime && make aggr-doc
-	-rm -r docs/library/aggr
-	cp -r tremor-runtime/aggr-docs/aggr docs/library/aggr
 
 openapi: tremor-runtime
 	npm i -g redoc-cli

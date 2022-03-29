@@ -79,10 +79,10 @@ Queries are compiled into a DAG of operator nodes and validated at compile time.
 
 ##### Grammar
 
-> ![query grammar](../language/svg/Query.svg)
+> ![query grammar](../language/svg/query.svg)
 
 Stmt: <a name="Stmt"></a>
-> ![statement grammar](../language/svg/Stmt.svg)
+> ![statement grammar](../language/svg/stmt.svg)
 
 See also [Additional Grammar Rules](#additional-grammar-rules).
 ### Statements
@@ -158,10 +158,10 @@ Configuration Parameters:
 
 #### Windowing Semantics
 
-A select query using one or more windows is generating _new_ synthetic events, aggregated from the events feeded into it. Even if a window only consists of a single event, it needs to be considered a new event. The shape of the new event is determined by the [`select`](#select-queries) _Target Expression_. Those new events will have an empty metadata and the [origin uri](../library/stdlib/tremor/origin) is pointing to the windowed [`select`](#select-queries) query.
+A select query using one or more windows is generating _new_ synthetic events, aggregated from the events feeded into it. Even if a window only consists of a single event, it needs to be considered a new event. The shape of the new event is determined by the [`select`](#select-queries) _Target Expression_. Those new events will have an empty metadata and the [origin uri](../library/tremor/origin) is pointing to the windowed [`select`](#select-queries) query.
 
 ##### Grammar
-> ![window definition grammar](../language/svg/DefineWindow.svg)
+> ![window definition grammar](../language/svg/definewindow.svg)
 
 
 See also [Additional Grammar Rules](#additional-grammar-rules).
@@ -205,11 +205,11 @@ Custom operators allow definition, configuration and usage of legacy operators, 
 ##### Grammar
 
 Operator Definition:
-> ![operator definition grammar](../language/svg/DefineOperator.svg)
+> ![operator definition grammar](../language/svg/defineoperator.svg)
 
 Operator Creation:
 
-> ![create operator grammar](../language/svg/CreateOperator.svg)
+> ![create operator grammar](../language/svg/createoperator.svg)
 
 
 See also [Additional Grammar Rules](#additional-grammar-rules).
@@ -235,11 +235,11 @@ The tremor-script language can be embedded in the query language natively and th
 ##### Grammar
 
 Script Definition Grammar:
-> ![script definition grammar](../language/svg/DefineScript.svg)
+> ![script definition grammar](../language/svg/definescript.svg)
 
 
 Script Creation Grammar:
-> ![create script grammar](../language/svg/CreateScript.svg)
+> ![create script grammar](../language/svg/createscript.svg)
 
 See also [Additional Grammar Rules](#additional-grammar-rules).
 
@@ -325,7 +325,7 @@ select { "count": aggr::stats::count() } from in[fifteen_secs] into out having e
 In the above operation, we emit a synthetic count every fifteen seconds if at least one event has been witnessed during a 15 second window of time.
 
 Windows emit new events which are an aggregation of the events feeded into them. Those new events will have an empty event metadata (accessible via `$`).
-The same is true for the [origin uri](../library/stdlib/tremor/origin), which will point to the windowed query, not the origin of any event feeded into the window.
+The same is true for the [origin uri](../library/tremor/origin), which will point to the windowed query, not the origin of any event feeded into the window.
 
 To drag event metadata across a windowed query, it needs to be selected into the event payload:
 
@@ -390,62 +390,62 @@ into out;
 ##### Grammar
 
 Select Grammar:
-<!-- > ![select grammar](../language/svg/SelectStmt.svg) -->
+<!-- > ![select grammar](../language/svg/selectstmt.svg) -->
 
 FromClause:  <a name="FromClause"></a>
-<!-- > ![from grammar](../language/svg/FromClause.svg) -->
+<!-- > ![from grammar](../language/svg/fromclause.svg) -->
 
 WhereClause: <a name="WhereClause"></a>
-> ![where grammar](../language/svg/WhereClause.svg)
+> ![where grammar](../language/svg/whereclause.svg)
 
 GroupByClause: <a name="GroupByClause"></a>
-> ![group by grammar](../language/svg/GroupByClause.svg)
+> ![group by grammar](../language/svg/groupbyclause.svg)
 
 GroupByDimension: <a name="GroupByDimension"></a>
-<!-- > ![group by dimensions grammar](../language/svg/GroupByDimension.svg) -->
+<!-- > ![group by dimensions grammar](../language/svg/groupbydimension.svg) -->
 
 SetBasedGroup: <a name="SetBasedGroup"></a>
-<!-- > ![set group grammar](../language/svg/SetBasedGroup.svg) -->
+<!-- > ![set group grammar](../language/svg/setbasedgroup.svg) -->
 
-EachBasedGroup: <a name="EachBasedGroup"></a>
+EachBasedGroup: <a name="eachbasedgroup"></a>
 
-<!-- > ![each group grammar](../language/svg/EachBasedGroup.svg) -->
+<!-- > ![each group grammar](../language/svg/eachbasedgroup.svg) -->
 
 IntoClause: <a name="IntoClause"></a>
 
-<!-- > ![into grammar](../language/svg/IntoClause.svg) -->
+<!-- > ![into grammar](../language/svg/intoclause.svg) -->
 
 HavingClause: <a name="HavingClause"></a>
 
-> ![having grammar](../language/svg/HavingClause.svg)
+> ![having grammar](../language/svg/havingclause.svg)
 
 #### Additional Grammar Rules
 
 These rules are referenced in the main tremor-query grammar rules above and are listed here as extended reference.
 
 EmbeddedScript:
-> ![embedded script grammar](../language/svg/EmbeddedScript.svg)
+> ![embedded script grammar](../language/svg/embeddedscript.svg)
 
 WithParams:
-<!-- > ![with params grammar](../language/svg/WithParams.svg) -->
+<!-- > ![with params grammar](../language/svg/withparams.svg) -->
 
 WithPartialParams:
-<!-- > ![with partial params grammar](../language/svg/WithPartialParams.svg) -->
+<!-- > ![with partial params grammar](../language/svg/withpartialparams.svg) -->
 
 Params: <a name="Params"></a>
-<!-- > ![params grammar](../language/svg/Params.svg) -->
+<!-- > ![params grammar](../language/svg/params.svg) -->
 
 Param: <a name="Param"></a>
-<!-- > ![param grammar](../language/svg/Param.svg) -->
+<!-- > ![param grammar](../language/svg/param.svg) -->
 
 ModularId: <a name="ModularId"></a>
-<!-- > ![modular id grammar](../language/svg/ModularId.svg) -->
+<!-- > ![modular id grammar](../language/svg/modularid.svg) -->
 
 Id: <a name="Iddent"></a>
-> ![id grammar](../language/svg/Ident.svg)
+> ![id grammar](../language/svg/ident.svg)
 
 TiltFrames: <a name="Windows"></a>
-> ![tilt-frames grammar](../language/svg/Windows.svg)
+> ![tilt-frames grammar](../language/svg/windows.svg)
 
 WindowKind:
-> ![window kind grammar](../language/svg/WindowKind.svg)
+> ![window kind grammar](../language/svg/windowkind.svg)

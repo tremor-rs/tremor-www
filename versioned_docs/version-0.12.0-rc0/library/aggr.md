@@ -1,8 +1,6 @@
 
 # aggr
 
-Standard Aggregate Functions
+Tremor query provides access to a growing number of aggregate functions that allow advanced data manipulation over sets of events delineated by windowed operations.
 
-* [stats](aggr/stats.md) - Statatistical aggregate functions
-* [win](aggr/win.md) - Windowing aggregate functions
-
+Functions are namespaced to make identification easier.
