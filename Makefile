@@ -1,16 +1,24 @@
 TREMOR_VSN=connectors
 
-all: clean tremor-runtime-docs
+all: clean tremor-runtime-docs openapi
 
-netlify: reset all
+build_thunk:
+	-mkdir build/docs/language/svg
+	-mkdir build/docs/next/language/svg
+	cp -f docs/language/svg/*.svg build/docs/language/svg      # Saves duplicates in git this way
+	cp -f docs/language/svg/*.svg build/docs/next/language/svg # Saves duplicates in git this way
+
+clean_build: reset all
 	-rm -rf ../cache/*
 	npm run build
-	cp -rf docs/language/svg build/docs/language/svg      # Saves duplicates in git this way
-	cp -rf docs/language/svg build/docs/next/language/svg # Saves duplicates in git this way
 
-serve:
-	cp -rf docs/language/svg build/docs/language/svg      # Saves duplicates in git this way
-	cp -rf docs/language/svg build/docs/next/language/svg # Saves duplicates in git this way
+netlify: clean_build build_thunk
+
+serve: build_thunk
+	-mkdir build/docs/language/svg
+	-mkdir build/docs/next/language/svg
+	cp -f docs/language/svg/*.svg build/docs/language/svg      # Saves duplicates in git this way
+	cp -f docs/language/svg/*.svg build/docs/next/language/svg # Saves duplicates in git this way
 	npm run serve
 
 tremor-runtime:
@@ -37,6 +45,7 @@ tremor-runtime-docs: tremor-runtime
 
 
 openapi: tremor-runtime
+	-mkdir static/api/v0.12
 	npm i -g redoc-cli
 	cp tremor-runtime/static/openapi.yaml static/api/v0.12
 	redoc-cli bundle static/api/v0.12/openapi.yaml
