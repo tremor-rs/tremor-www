@@ -86,58 +86,58 @@
       "Standard Library": [
         {
           "std": [
-            "library/stdlib/std",
-            "library/stdlib/std/array",
-            "library/stdlib/std/base64",
-            "library/stdlib/std/binary",
-            "library/stdlib/std/float",
-            "library/stdlib/std/integer",
-            "library/stdlib/std/json",
-            "library/stdlib/std/math",
-            "library/stdlib/std/path",
-            "library/stdlib/std/random",
-            "library/stdlib/std/range",
-            "library/stdlib/std/re",
-            "library/stdlib/std/record",
-            "library/stdlib/std/string",
-            "library/stdlib/std/test",
-            "library/stdlib/std/type",
-            "library/stdlib/std/url",
-            "library/stdlib/std/size"
+            "library/std",
+            "library/std/array",
+            "library/std/base64",
+            "library/std/binary",
+            "library/std/float",
+            "library/std/integer",
+            "library/std/json",
+            "library/std/math",
+            "library/std/path",
+            "library/std/random",
+            "library/std/range",
+            "library/std/re",
+            "library/std/record",
+            "library/std/string",
+            "library/std/test",
+            "library/std/type",
+            "library/std/url",
+            "library/std/size"
           ]
         },
         {
           "tremor": [
-            "library/stdlib/tremor",
-            "library/stdlib/tremor/chash",
-            "library/stdlib/tremor/origin",
-            "library/stdlib/tremor/system"
+            "library/tremor",
+            "library/tremor/chash",
+            "library/tremor/origin",
+            "library/tremor/system"
           ]
         },
         {
           "cncf": [
-            "library/stdlib/cncf",
-            "library/stdlib/cncf/otel",
-            "library/stdlib/cncf/otel/span_id",
-            "library/stdlib/cncf/otel/trace_id",
+            "library/cncf",
+            "library/cncf/otel",
+            "library/cncf/otel/span_id",
+            "library/cncf/otel/trace_id",
             {
               "logs": [
-                "library/stdlib/cncf/otel/logs",
-                "library/stdlib/cncf/otel/logs/severity",
-                "library/stdlib/cncf/otel/logs/traceflags"
+                "library/cncf/otel/logs",
+                "library/cncf/otel/logs/severity",
+                "library/cncf/otel/logs/traceflags"
               ]
             },
             {
               "metrics": [
-                "library/stdlib/cncf/otel/metrics",
-                "library/stdlib/cncf/otel/metrics/temporality"
+                "library/cncf/otel/metrics",
+                "library/cncf/otel/metrics/temporality"
               ]
             },
             {
               "trace": [
-                "library/stdlib/cncf/otel/trace",
-                "library/stdlib/cncf/otel/trace/spankind",
-                "library/stdlib/cncf/otel/trace/status"
+                "library/cncf/otel/trace",
+                "library/cncf/otel/trace/spankind",
+                "library/cncf/otel/trace/status"
               ]
             }
           ]
@@ -197,11 +197,11 @@
         }
       ],
       "Reference": [
-        "language/ModuleSystem",
-        "language/Deploy",
-        "language/Query",
-        "language/Script",
-        "language/Full",
+        "language/module_system",
+        "language/deploy",
+        "language/query",
+        "language/script",
+        "language/full",
         "language/EBNF"
       ]
     }

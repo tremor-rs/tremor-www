@@ -1,6 +1,6 @@
 ## EBNF Grammar
 
-This EBNF grammar was generated from: "./tremor-runtime/tremor-script/src/grammar.lalrpop"
+This EBNF grammar was generated from: "/Users/dennis/code/oss/tremor-rs/tremor-www/tremor-runtime/tremor-script/src/grammar.lalrpop"
 
 ```ebnf
 
@@ -21,6 +21,7 @@ rule ConfigDirective ::=
 
 rule ArgsWithEnd ::=
     ArgsClause ?  WithEndClause 
+  | 
   ;
 
 rule DefinitionArgs ::=
@@ -29,10 +30,6 @@ rule DefinitionArgs ::=
 
 rule ArgsClause ::=
      'args' ArgsExprs 
-  ;
-
-rule ArgsEndClause ::=
-    ArgsClause  'end' 
   ;
 
 rule ArgsExprs ::=
@@ -45,11 +42,13 @@ rule ArgsExpr ::=
   ;
 
 rule CreationWithEnd ::=
-    WithEndClause ?  
+    WithEndClause 
+  | 
   ;
 
 rule CreationWith ::=
-    WithClause ?  
+    WithClause 
+  | 
   ;
 
 rule WithClause ::=
@@ -195,7 +194,7 @@ rule ConnectToConnector ::=
   ;
 
 rule DefineConnector ::=
-    DocComment  'define'  'connector' Ident  'from' ConnectorKind ArgsWithEnd ?  
+    DocComment  'define'  'connector' Ident  'from' ConnectorKind ArgsWithEnd 
   ;
 
 rule DefineFlow ::=
@@ -230,7 +229,7 @@ rule DefineWindow ::=
   ;
 
 rule DefineOperator ::=
-    DocComment  'define'  'operator' Ident  'from' OperatorKind ArgsWithEnd ?  
+    DocComment  'define'  'operator' Ident  'from' OperatorKind ArgsWithEnd 
   ;
 
 rule DefineScript ::=
