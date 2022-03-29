@@ -2,7 +2,7 @@ TREMOR_VSN=connectors
 
 all: clean tremor-runtime-docs
 
-netlify: all reset
+netlify: reset all
 	-rm -rf ../cache/*
 	npm run build
 	cp -rf docs/language/svg build/docs/language/svg      # Saves duplicates in git this way
@@ -63,7 +63,7 @@ check_verify: touch_version
 	npm run build
 
 reset: 
-	npm run clear
+	-npm run clear
 	-rm -rf /node_modules package-lock.json yarn.lock
 	npm install
 
