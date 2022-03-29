@@ -1,5 +1,5 @@
 tasks:
-  - init: npm install && npm run build && make all
+  - init: npm install && npm run build && make netlify
     command: npm run start
 
 
