@@ -64,6 +64,7 @@ check_verify: touch_version
 
 reset: 
 	-npm run clear
+	-rm -rf tremor-runtime
 	-rm -rf /node_modules package-lock.json yarn.lock
 	npm install
 
