@@ -31,7 +31,7 @@ tremor-runtime-docs: tremor-runtime
 	cp -rf tremor-runtime/docs/library docs/library
 	cp -rf tremor-runtime/static/docs/library/*.md docs/library
 	-rm -rf static/docs/svg
-	-[ ! -d static/docs/language/svg ] && mkdir static/docs/language/svg || true
+	-[ ! -d static/docs/language/svg ] && mkdir -p static/docs/language/svg || true
 	cp -rf docs/language/svg static/docs/language/svg
 
 
