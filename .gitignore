@@ -33,5 +33,7 @@ log/
 # openapi fetched from tremor-runtime
 /openapi.yaml
 
-# ignore lalrop-docgen
-lalrpop-docgen
+# Generated docs copied from tremor-runtime
+docs/langauge
+docs/library
+static/docs/language/svg
