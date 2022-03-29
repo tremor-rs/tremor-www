@@ -3,6 +3,7 @@ TREMOR_VSN=connectors
 all: clean tremor-runtime-docs
 
 netlify: all reset
+	-rm -rf ../cache/*
 	npm run build
 	cp -rf docs/language/svg build/docs/language/svg      # Saves duplicates in git this way
 	cp -rf docs/language/svg build/docs/next/language/svg # Saves duplicates in git this way
@@ -17,8 +18,8 @@ tremor-runtime:
 
 tremor-runtime-refresh:
 	cd tremor-runtime &&\
-	git checkout $(TREMOR_VSN) &&\
-	git pull origin $(TREMOR_VSN)
+	git checkout $(TREMOR_VSN) && `
+	git pull
 
 alex:
 	npm install -g alex
