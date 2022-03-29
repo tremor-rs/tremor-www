@@ -16,7 +16,7 @@ serve:
 tremor-runtime:
 	-git clone https://github.com/tremor-rs/tremor-runtime
 	cd tremor-runtime &&\
-	git checkout $(TREMOR_VSN) && `
+	git checkout $(TREMOR_VSN) &&\
 	git pull
 
 alex:
