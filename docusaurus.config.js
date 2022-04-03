@@ -187,10 +187,11 @@ const config = {
           },
         ],
         copyright: `
-          Tremor is Copyright © by the Tremor Authors ${new Date().getFullYear()} - Documentation Distributed under CC-BY-4.0.<br/><br/>
-              Hosted by: <a href="https://www.netlify.com/" rel="noreferrer noopener" aria-label="Netlify"><img src="/img/netlify-full-logo.svg" alt="CNCF" style="width: 60px;" /></a>
-	      &nbsp;&nbsp;&nbsp;&nbsp;
-              Project of: <a href="https://www.cncf.io/" rel="noreferrer noopener" aria-label="CNCF"><img src="/img/cncf-color.svg" alt="CNCF" style="width: 80px;" /></a>
+          Copyright © ${new Date().getFullYear()}, Tremor Authors | Documentation Distributed under CC-BY-4.0.<br/><br>
+              <p style="font-size: smaller;">Hosted by: <a href="https://www.netlify.com/" rel="noreferrer noopener" aria-label="Netlify"><img src="/img/netlify-full-logo.svg" alt="CNCF" style="width: 3%;" /></a>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              Project of: <a href="https://www.cncf.io/" rel="noreferrer noopener" aria-label="CNCF"><img src="/img/cncf-color.svg" alt="CNCF" style="width: 5%;" /></a></p>
+        <small>© ${new Date().getFullYear()} The Linux Foundation. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.</small>
         `,
       },
       prism: {
