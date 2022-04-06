@@ -1,5 +1,3 @@
-# Frequently Asked Questions
-
 ## What is Tremor?
 
 Tremor is an event processing engine designed for high-density deployment in
