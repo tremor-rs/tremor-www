@@ -1,4 +1,4 @@
-### Extracting JSON embedded within strings
+### Extracting JSON Embedded within Strings
 
 ```tremor
 let example = { "snot": "{\"snot\": \"badger\"" };
@@ -8,13 +8,13 @@ match example of
 end;
 ```
 
-When executed this will result in:
+When executed, this will result in:
 
 ```tremor
 "badger"
 ```
 
-### Decoding base64 embedded within strings
+### Decoding base64 Embedded within Strings
 
 ```tremor
 let example = { "snot": "eyJzbm90IjogImJhZGdlciJ9Cg==" };
@@ -24,7 +24,7 @@ match example of
 end;
 ```
 
-When executed this will result in:
+When executed, this will result in:
 
 ```tremor
 "{\"snot\": \"badger\"}
@@ -32,7 +32,7 @@ When executed this will result in:
 
 ### Wrap and Extract
 
-We can decode the base64 decoded string through composition:
+We can decode the base64-decoded string through composition:
 
 ```tremor
 let example = { "snot": "eyJzbm90IjogImJhZGdlciJ9Cg==" };
@@ -42,7 +42,7 @@ match example of
       case json = %{ snot ~= json|| } => json.snot.snot
       default => "no match - json"
     end
-  default => "no match - base64"
+  default => "no match- base64"
 end;
 
 ```
