@@ -1,10 +1,10 @@
 ### Examples
 
 ```tremor
-# Import standard tremor binary utility functions
+# Import standard Tremor binary utility functions:
 use std::binary;
 
-# Structure of a TCP packet header
+# Structure of a TCP packet header:
 #  0                   1                   2                   3
 #  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 # +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -21,7 +21,7 @@ use std::binary;
 # |                    Options                    |    Padding    | IGNORED
 # +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-# Record representation of a TCP packet
+# Record representation of a TCP packet:
 let event = {
   "src": {"port": 1234},
   "dst": {"port": 2345},
@@ -36,15 +36,15 @@ let event = {
   "data": "snot badger!"
 };
 
-# Convert the record into a binary encoded TCP packet
+# Convert the record into a binary-encoded TCP packet:
 binary::into_bytes(<<
-  # Header segment
+  # Header segment:
   event.src.port:16,  event.dst.port:16,
   event.seq:32,
   event.ack:32,
   event.offset:4, event.res:4, event.flags:8, event.win:16,
   event.checksum:16, event.urgent:16,
-  # Data segment
+  # Data segment:
   event.data/binary
 >>)
 ```

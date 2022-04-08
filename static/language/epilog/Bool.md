@@ -1,10 +1,10 @@
 ### Example
 
 ```tremor
-true # The boolean `true` literal
+true # The boolean `true` literal.
 ```
 
 ```tremor
-false # The boolean `false` literal
+false # The boolean `false` literal.
 ```
 
