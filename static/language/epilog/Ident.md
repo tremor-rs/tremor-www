@@ -1,14 +1,14 @@
 
-### Examples of identifiers
+### Examples of Identifiers
 
 ```tremor
 let snot = { "snot": "badger" };
 ```
 
-### Keyword escaping
+### Keyword Escaping
 
-Surrounding an identifier with a tick '`' allows keywords in tremor's DSLs to be
-escaped
+Surrounding an identifier with a backtick (`) allows keywords in Tremor's DSLs to be
+escaped.
 
 ```tremor
 let `let` = 1234.5;
@@ -16,7 +16,11 @@ let `let` = 1234.5;
 
 ### Emoji
 
+:::tip
+
 You can even use emoji as identifiers via the escaping mechanism.
+
+:::
 
 ```tremor
 let `🚀` = "rocket";
