@@ -7,7 +7,7 @@
 
 *type*: U64
 
-! Unsigned integer constatns
+! Unsigned integer constants
 Max signed value
 
 ### min

@@ -25,9 +25,9 @@ Returns a `bool`
 
 Returns an array of record keys.
 
-```tremor
-record::keys({"a": 1, "b": 2}) == ["a", "b"]
-```
+> ```tremor
+> record::keys({"a": 1, "b": 2}) == ["a", "b"]
+> ```
 
 Returns a `[string]`
 
@@ -35,9 +35,9 @@ Returns a `[string]`
 
 Returns an array of record values.
 
-```tremor
-record::values({"a": 1, "b": 2}) == [1, 2]
-```
+> ```tremor
+> record::values({"a": 1, "b": 2}) == [1, 2]
+> ```
 
 Returns a `[any]`
 
@@ -45,9 +45,9 @@ Returns a `[any]`
 
 Turns the record into an array of key value pairs.
 
-```tremor
-record::to_array({"a": 1, "b": 2}) == [["a", 1], ["b", 2]]
-```
+> ```tremor
+> record::to_array({"a": 1, "b": 2}) == [["a", 1], ["b", 2]]
+> ```
 
 Returns a `[(string, any)]`
 
@@ -58,9 +58,9 @@ Turns an array of key value pairs into an record.
 Note: array's elements need to be arrays of two elements with the first
 element being a string.
 
-```tremor
-record::from_array([["a", 1], ["b", 2]]) == {"a": 1, "b": 2}
-```
+> ```tremor
+> record::from_array([["a", 1], ["b", 2]]) == {"a": 1, "b": 2}
+> ```
 
 Returns a `record`
 
@@ -68,9 +68,9 @@ Returns a `record`
 
 `Extract`s a given set of field from an record, removing all others.
 
-```tremor
-record::extract({"a": 1, "b": 2, "c": 3}, ["a", "c"]) == {"a": 1, "c": 3}
-```
+> ```tremor
+> record::extract({"a": 1, "b": 2, "c": 3}, ["a", "c"]) == {"a": 1, "c": 3}
+> ```
 
 Returns a `record`
 
@@ -79,10 +79,10 @@ Returns a `record`
 `Combine`s (aka merges) the two records left and right overwriting
 existing values in left with those provided in right
 
-```tremor
-record::combine({"a": 1, "b": 2, "c": 4}, {"c": 3, "d": 4})
-== {"a": 1, "b": 2, "c": 3, "d": 4}
-```
+> ```tremor
+> record::combine({"a": 1, "b": 2, "c": 4}, {"c": 3, "d": 4})
+>   == {"a": 1, "b": 2, "c": 3, "d": 4}
+> ```
 
 Returns a `record`
 
@@ -92,9 +92,9 @@ Renames the keys in the record target based on the key value pairs in the
 record changes where the key is the current name and the value is the new
 name.
 
-```tremor
-record::rename({"a": 1, "b": 2, "c": 4}, {"a": "A", "b": "B"})
-== {"A": 1, "B": 2, "c": 4}
-```
+> ```tremor
+> record::rename({"a": 1, "b": 2, "c": 4}, {"a": "A", "b": "B"})
+>   == {"A": 1, "B": 2, "c": 4}
+> ```
 
 Returns a `record`

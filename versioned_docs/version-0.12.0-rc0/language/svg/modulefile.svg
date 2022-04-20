@@ -1,4 +1,4 @@
-<svg class="railroad" viewBox="0 0 341 42" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg class="railroad" viewBox="0 0 175 42" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style type="text/css">
 
 svg.railroad {
@@ -68,16 +68,10 @@ svg.railroad g.labeledbox &gt; rect {
 ModuleBody</text>
 </g>
 </g>
-<g class="terminal">
-<rect height="22" rx="10" ry="10" width="156" x="145" y="10"/>
-<text x="223" y="26">
-&quot;&lt;end-of-stream&gt;&quot;</text>
-</g>
-<path d=" M 135 21 h 10"/>
 </g>
 </g>
-<path d=" M 311 21 h 20 m -10 -10 v 20 m 10 -20 v 20"/>
+<path d=" M 145 21 h 20 m -10 -10 v 20 m 10 -20 v 20"/>
 <path d=" M 25 21 h 10"/>
-<path d=" M 301 21 h 10"/>
+<path d=" M 135 21 h 10"/>
 </g>
 </svg>

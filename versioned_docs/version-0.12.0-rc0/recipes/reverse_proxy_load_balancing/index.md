@@ -19,7 +19,7 @@ All the code here is available in the [git repository](https://github.com/tremor
 
 
 To issue incoming HTTP requests to an upstream HTTP server
-a [REST onramp](../../connectors/onramps#rest) needs to be configured in `config.yaml` to listen on a port of our choice:
+a [REST onramp](/docs/0.11/artefacts/onramps#rest) needs to be configured in `config.yaml` to listen on a port of our choice:
 
 ```yaml
 onramp:
@@ -32,7 +32,7 @@ onramp:
         port: 65535
 ```
 
-To forward received requests to the httpbin upstream servers a [REST offramp](../../connectors/offramps#rest) needs to be configured in `config.yaml` to point at each of it:
+To forward received requests to the httpbin upstream servers a [REST offramp](/docs/0.11/artefacts/offramps#rest) needs to be configured in `config.yaml` to point at each of it:
 
 ```yaml
 offramp:
@@ -154,7 +154,7 @@ select event from response_handling/err into err;
 
 Here we only set the `Via` response header.
 
-Now the single bits need to be connected in order to complete the flow back and forth between client and upstream. When linking [REST offramps](../../connectors/offramps#rest) and [onramps](../../connectors/onramps#rest) together it is important to take care that any error that might happen on the way is reported back to the REST onramp `http_in` as otherwise clients would not receive any response. Luckily with Linked Transports we can connect all error outputs in our binding and thus will receive proper error messages as HTTP responses.
+Now the single bits need to be connected in order to complete the flow back and forth between client and upstream. When linking [REST offramps](/docs/0.11/artefacts/offramps#rest) and [onramps](/docs/0.11/artefacts/onramps#rest) together it is important to take care that any error that might happen on the way is reported back to the REST onramp `http_in` as otherwise clients would not receive any response. Luckily with Linked Transports we can connect all error outputs in our binding and thus will receive proper error messages as HTTP responses.
 Again, we do it in `config.yaml`:
 
 ```yaml

@@ -10,10 +10,10 @@ same. If not errors.
 
 **WARNING**: Do not run assertions in production code!
 
-```tremor
-assert("one equals one", 1, 1) == true; # suces
-assert("one equals one", 1, 2); # errors
-```
+> ```tremor
+> assert("one equals one", 1, 1) == true; # suces
+> assert("one equals one", 1, 2); # errors
+> ```
 
 Returns an `bool`.
 

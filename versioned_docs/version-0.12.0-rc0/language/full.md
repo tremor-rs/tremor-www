@@ -1,5 +1,343 @@
 # Full Grammar
 
+## Rule ModuleFile
+
+The `ModuleFile` rule defines a module in tremor.
+
+A module is a unit of compilation.
+
+
+
+<img src="./svg/modulefile.svg" alt="ModuleFile" width="175" height="42"/>
+
+```ebnf
+rule ModuleFile ::=
+    ModuleBody 
+  ;
+
+```
+
+
+
+
+Represents the compiled form of a tremor source file.
+
+Currently this can be `troy` deployment files, `trickle` query files, or tremor `script` files.
+
+This is part of of tremor's compiler and runtime and not user modifiable.
+
+
+
+## Rule ModuleBody
+
+The `ModuleBody` rule defines the structure of a valid module in tremor.
+
+Modules begin with optional module comments.
+
+Modules MUST define at least one statement, but may define many.
+
+Statements are `;` semi-colon delimited.
+
+
+
+<img src="./svg/modulebody.svg" alt="ModuleBody" width="293" height="42"/>
+
+```ebnf
+rule ModuleBody ::=
+    ModComment ModuleStmts 
+  ;
+
+```
+
+
+
+
+The body of a compiled tremor source file has a module level comment ( lines beginning with 3 hashes )
+and the statements that form the logic of that module.
+
+This is part of of tremor's compiler and runtime and not user modifiable.
+
+
+
+## Rule ModComment
+
+The `ModComment` rule specifies module comments in tremor.
+
+Documentation comments for modules are optional.
+
+A module documentation comment begins with a `###` triple-hash and they are line delimited.
+
+Muliple successive comments are coalesced together to form a complete comment.
+
+The content of a module documentation comment is markdown syntax.
+
+
+
+<img src="./svg/modcomment.svg" alt="ModComment" width="231" height="55"/>
+
+```ebnf
+rule ModComment ::=
+    ( ModComment_ ) ?  
+  ;
+
+```
+
+
+
+### Example
+
+Module level comments are used throughout the tremor standard library
+and used as part of our document generation process.
+
+Here is a modified snippet from the standard library to illustrate
+
+```tremor
+### The tremor language standard library it provides the following modules:
+###
+### * [array](std/array.md) - functions to deal with arrays (`[]`)
+### * [base64](std/base64.md) - functions for base64 en and decoding
+### * [binary](std/base64.md) - functions to deal with binary data (`<< 1, 2, 3 >>`)
+### * [float](std/float.md) - functions to deal with floating point numbers
+### * [integer](std/integer.md) - functions to deal with integer numbers
+### * [json](std/json.md) - functions to deal with JSON
+...
+```
+
+
+
+## Rule ModComment_
+
+The `ModComment_` rule is an internal part of the `ModComment` rule
+
+
+
+<img src="./svg/modcomment_.svg" alt="ModComment_" width="381" height="75"/>
+
+```ebnf
+rule ModComment_ ::=
+     '<mod-comment>' 
+  | ModComment_  '<mod-comment>' 
+  ;
+
+```
+
+
+
+
+Multiple consecutive module comments are coalesced into a single comment.
+
+```tremor
+### I am a single
+### module level comment
+### split across multiple lines
+```
+
+
+
+## Rule DocComment
+
+The `DocComment` rule specifies documentation comments in tremor.
+
+Documentation comments are optional.
+
+A documentation comment begins with a `##` double-hash and they are line delimited.
+
+Muliple successive comments are coalesced together to form a complete comment.
+
+The content of a documentation comment is markdown syntax.
+
+
+
+<img src="./svg/doccomment.svg" alt="DocComment" width="231" height="55"/>
+
+```ebnf
+rule DocComment ::=
+    ( DocComment_ ) ?  
+  ;
+
+```
+
+
+
+### Example
+
+Documentation level comments are used throughout the tremor standard library
+and used as part of our document generation process.
+
+Here is a modified snippet from the standard library to illustrate
+
+```tremor
+## Returns the instance of tremor.
+##
+## Returns a `string`
+intrinsic fn instance() as system::instance;
+...
+```
+
+This is a builtin function implemented in rust and used in a script as follows:
+
+```tremor
+use tremor::system;
+
+system::instance()
+```
+
+
+
+## Rule DocComment_
+
+The `DocComment_` rule is an internal part of the `DocComment` rule
+
+
+
+<img src="./svg/doccomment_.svg" alt="DocComment_" width="381" height="75"/>
+
+```ebnf
+rule DocComment_ ::=
+     '<doc-comment>' 
+  | DocComment_  '<doc-comment>' 
+  ;
+
+```
+
+
+
+
+Multiple consecutive documentation comments are coalesced into a single comment.
+
+```tremor
+## I am a single
+## documentation level comment
+## split across multiple lines
+```
+
+Documentation comments are used by the documentation tool to generate references
+such as the standard library on the tremor website.
+
+The following incantation will generate a `docs` folder with markdown generated
+for the user defined `lib` library of reusable logic
+
+```bash
+$ TREMOR_PATH=/path/to/stdlib:/path/to/otherlib tremor doc /path/to/my/lib
+```
+
+
+
+## Rule ModuleStmts
+
+The `ModuleStmts` rule defines a set of module statements.
+
+Module statements are a `;` semi-colon delimited set of `ModuleStmt` rules
+
+
+
+<img src="./svg/modulestmts.svg" alt="ModuleStmts" width="395" height="87"/>
+
+```ebnf
+rule ModuleStmts ::=
+    ModuleStmt  ';' ModuleStmts 
+  | ModuleStmt  ';' ?  
+  ;
+
+```
+
+
+
+
+The set of computed statements in a compiled script.
+
+This is part of of tremor's compiler and runtime and not user modifiable.
+
+
+
+## Rule ModuleStmt
+
+The `ModuleStmt` rule defines the statement types that are valid in a tremor module.
+
+
+
+
+<img src="./svg/modulestmt.svg" alt="ModuleStmt" width="263" height="339"/>
+
+```ebnf
+rule ModuleStmt ::=
+    Use 
+  | Const 
+  | FnDefn 
+  | Intrinsic 
+  | DefineWindow 
+  | DefineOperator 
+  | DefineScript 
+  | DefinePipeline 
+  | DefineConnector 
+  | DefineFlow 
+  ;
+
+```
+
+
+
+
+The set of statements that are legal in any tremor supported domain specific language.
+
+This is part of of tremor's compiler and runtime and not user modifiable.
+
+
+
+## Rule ConfigDirectives
+
+The `ConfigDirectives` rule allows line delimited compiler, interpreter or
+runtime hints to be specified.
+
+
+
+
+<img src="./svg/configdirectives.svg" alt="ConfigDirectives" width="421" height="75"/>
+
+```ebnf
+rule ConfigDirectives ::=
+    ConfigDirective ConfigDirectives 
+  | ConfigDirective 
+  ;
+
+```
+
+
+
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+See `ConfigDirective` for supported directives.
+
+
+
+## Rule ConfigDirective
+
+A `ConfigDirective` is a directive to the tremor runtime.
+
+Directives MUST begin on a new line with the `#!config` shebang  config token.
+
+
+
+<img src="./svg/configdirective.svg" alt="ConfigDirective" width="269" height="42"/>
+
+```ebnf
+rule ConfigDirective ::=
+     '#!config' WithExpr 
+  ;
+
+```
+
+
+
+### Providing a metrics internal via a config directive
+
+```tremor
+# Enable metrics with a 10 second interval
+#!config metrics_interval_s = 10
+```
+
+
+
 ## Rule Use
 
 Imports definitions from an external source for use in the current source file.
@@ -60,54 +398,6 @@ It is not recommended to have multiple definitions mapping to the same identifie
 
 
 
-## Rule ConfigDirectives
-
-The `ConfigDirectives` rule allows line delimited compiler, interpreter or
-runtime hints to be specified.
-
-
-
-
-<img src="./svg/configdirectives.svg" alt="ConfigDirectives" width="421" height="75"/>
-
-```ebnf
-rule ConfigDirectives ::=
-    ConfigDirective ConfigDirectives 
-  | ConfigDirective 
-  ;
-
-```
-
-
-
-## Rule ConfigDirective
-
-A `ConfigDirective` is a directive to the tremor runtime.
-
-Directives MUST begin on a new line with the `#!config` shebang  config token.
-
-
-
-<img src="./svg/configdirective.svg" alt="ConfigDirective" width="269" height="42"/>
-
-```ebnf
-rule ConfigDirective ::=
-     '#!config' WithExpr 
-  ;
-
-```
-
-
-
-### Providing a metrics internal via a config directive
-
-```tremor
-# Enable metrics with a 10 second interval
-#!config metrics_interval_s = 10
-```
-
-
-
 ## Rule ArgsWithEnd
 
 The `ArgsWithEnd` rule defines an arguments block with an `end` block.
@@ -123,6 +413,13 @@ rule ArgsWithEnd ::=
   ;
 
 ```
+
+
+
+
+An internal rule that defines an optional `args` block with and optional `end` token.
+
+This rule is used and shared in other rules as part of their definitions.
 
 
 
@@ -143,6 +440,17 @@ rule DefinitionArgs ::=
 
 
 
+
+An optional argument block
+
+```tremor
+args arg1, arg 2
+```
+
+This is a shared internal rule used in other rules as part of their definition.
+
+
+
 ## Rule ArgsClause
 
 The `ArgsClause` rule marks the beginning of an arguments block.
@@ -158,6 +466,14 @@ rule ArgsClause ::=
      'args' ArgsExprs 
   ;
 
+```
+
+
+
+
+```troy
+args
+  x = y
 ```
 
 
@@ -181,7 +497,16 @@ rule ArgsExprs ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule ArgsExpr
+
+The `ArgExpr` rule specifies argument lists.
+
+An argument can be an `Ident` or an assignment of the form `<Ident> = <Expr>`
+
+
 
 <img src="./svg/argsexpr.svg" alt="ArgsExpr" width="331" height="75"/>
 
@@ -192,6 +517,16 @@ rule ArgsExpr ::=
   ;
 
 ```
+
+
+
+
+As used in deployment rules to set or override arguments specifications. Arguments specifications
+define interface parameters that must be set by default ( or overridden ) for something to be
+well defined.
+
+The tremor runtime checks for ommissions and produces an error for attempted instanciations that
+omit to provide a value for specified arguments.
 
 
 
@@ -213,9 +548,16 @@ rule CreationWithEnd ::=
 
 
 
+
+```tremor
+with x = y end
+```
+
+
+
 ## Rule CreationWith
 
-The `CreationWit` rule defines an optional `with` block of expressions without a terminal `end` keyword.
+The `CreationWith` rule defines an optional `with` block of expressions without a terminal `end` keyword.
 
 
 
@@ -229,6 +571,9 @@ rule CreationWith ::=
 
 ```
 
+
+
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
 
 
 ## Rule WithClause
@@ -248,7 +593,20 @@ rule WithClause ::=
 
 
 
+
+
+```tremor
+with x = y
+```
+
+
+
+
 ## Rule WithEndClause
+
+The `WithEndClause` rule defines a with clause with an `end` terminal token.
+
+
 
 <img src="./svg/withendclause.svg" alt="WithEndClause" width="245" height="42"/>
 
@@ -257,6 +615,13 @@ rule WithEndClause ::=
     WithClause  'end' 
   ;
 
+```
+
+
+
+
+```tremor
+with x = y end
 ```
 
 
@@ -276,6 +641,9 @@ rule WithExprs ::=
 
 ```
 
+
+
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
 
 
 ## Rule WithExpr
@@ -312,95 +680,6 @@ Where:
 snot = "badger"
 ```
  
-
-
-## Rule ModuleBody
-
-The `ModuleBody` rule defines the structure of a valid module in tremor.
-
-Modules begin with optional module comments.
-
-Modules MUST define at least one statement, but may define many.
-
-Statements are `;` semi-colon delimited.
-
-
-
-<img src="./svg/modulebody.svg" alt="ModuleBody" width="293" height="42"/>
-
-```ebnf
-rule ModuleBody ::=
-    ModComment ModuleStmts 
-  ;
-
-```
-
-
-
-## Rule ModuleFile
-
-The `ModuleFile` rule defines a module in tremor.
-
-A module is a unit of compilation.
-
-
-
-<img src="./svg/modulefile.svg" alt="ModuleFile" width="341" height="42"/>
-
-```ebnf
-rule ModuleFile ::=
-    ModuleBody  '<end-of-stream>' 
-  ;
-
-```
-
-
-
-## Rule ModuleStmts
-
-The `ModuleStmts` rule defines a set of module statements.
-
-Module statements are a `;` semi-colon delimited set of `ModuleStmt` rules
-
-
-
-<img src="./svg/modulestmts.svg" alt="ModuleStmts" width="395" height="87"/>
-
-```ebnf
-rule ModuleStmts ::=
-    ModuleStmt  ';' ModuleStmts 
-  | ModuleStmt  ';' ?  
-  ;
-
-```
-
-
-
-## Rule ModuleStmt
-
-The `ModuleStmt` rule defines the statement types that are valid in a tremor module.
-
-
-
-
-<img src="./svg/modulestmt.svg" alt="ModuleStmt" width="263" height="339"/>
-
-```ebnf
-rule ModuleStmt ::=
-    Use 
-  | Const 
-  | FnDefn 
-  | Intrinsic 
-  | DefineWindow 
-  | DefineOperator 
-  | DefineScript 
-  | DefinePipeline 
-  | DefineConnector 
-  | DefineFlow 
-  ;
-
-```
-
 
 
 ## Rule ModularTarget
@@ -454,129 +733,63 @@ snot::encode(event)
 
 
 
-## Rule DocComment
-
-The `DocComment` rule specifies documentation comments in tremor.
-
-Documentation comments are optional.
-
-A documentation comment begins with a `##` double-hash and they are line delimited.
-
-Muliple successive comments are coalesced together to form a complete comment.
-
-The content of a documentation comment is markdown syntax.
-
-
-
-<img src="./svg/doccomment.svg" alt="DocComment" width="231" height="55"/>
-
-```ebnf
-rule DocComment ::=
-    ( DocComment_ ) ?  
-  ;
-
-```
-
-
-
-## Rule DocComment_
-
-The `DocComment_` rule is an internal part of the `DocComment` rule
-
-
-
-<img src="./svg/doccomment_.svg" alt="DocComment_" width="381" height="75"/>
-
-```ebnf
-rule DocComment_ ::=
-     '<doc-comment>' 
-  | DocComment_  '<doc-comment>' 
-  ;
-
-```
-
-
-
-## Rule ModComment
-
-The `ModComment` rule specifies module comments in tremor.
-
-Documentation comments for modules are optional.
-
-A module documentation comment begins with a `###` triple-hash and they are line delimited.
-
-Muliple successive comments are coalesced together to form a complete comment.
-
-The content of a module documentation comment is markdown syntax.
-
-
-
-<img src="./svg/modcomment.svg" alt="ModComment" width="231" height="55"/>
-
-```ebnf
-rule ModComment ::=
-    ( ModComment_ ) ?  
-  ;
-
-```
-
-
-
-### Example
-
-Module level comments are used throughput the tremor standard library
-and used as part of our document generation process.
-
-Here is a modified snippet from the standard library to illustrate
-
-```tremor
-### The tremor language standard library it provides the following modules:
-###
-### * [array](std/array.md) - functions to deal with arrays (`[]`)
-### * [base64](std/base64.md) - functions for base64 en and decoding
-### * [binary](std/base64.md) - functions to deal with binary data (`<< 1, 2, 3 >>`)
-### * [float](std/float.md) - functions to deal with floating point numbers
-### * [integer](std/integer.md) - functions to deal with integer numbers
-### * [json](std/json.md) - functions to deal with JSON
-...
-```
-
-
-
-## Rule ModComment_
-
-The `ModComment_` rule is an internal part of the `ModComment` rule
-
-
-
-<img src="./svg/modcomment_.svg" alt="ModComment_" width="381" height="75"/>
-
-```ebnf
-rule ModComment_ ::=
-     '<mod-comment>' 
-  | ModComment_  '<mod-comment>' 
-  ;
-
-```
-
-
-
 ## Rule Deploy
 
-### Deployment Language Entrypoint
+The `Deploy` rule defines the logical entry point into Tremor's command
+oriented deployment syntax. The deployment grammar defines units of
+deployment that the runtime manages on behalf of users.
 
-This is the top level rule of the tremor deployment language `troy`
+The grammar embeds the statement oriented query syntax and expression
+oriented scripting syntax where appropriate.
+
+A legal deployment is composed of:
+* An optional set of module comments
+* A sequence of top level expressions. There must be at least one defined.
+* An optional end of stream token.
+
+At least one *deploy* command.
 
 
 
-<img src="./svg/deploy.svg" alt="Deploy" width="713" height="100"/>
+<img src="./svg/deploy.svg" alt="Deploy" width="499" height="75"/>
 
 ```ebnf
 rule Deploy ::=
-    ConfigDirectives ModComment DeployStmts  '<end-of-stream>' ?  
-  | ModComment DeployStmts  '<end-of-stream>' ?  
+    ConfigDirectives ModComment DeployStmts 
+  | ModComment DeployStmts 
   ;
 
+```
+
+
+
+
+```troy
+define flow test
+flow
+  define connector metronome from metronome
+  with
+    config = {
+      "interval": 1
+    }
+  end;
+  define connector exit from exit;
+  define pipeline identity
+  args
+    snot = "badger",
+  pipeline
+    select args.snot from in into out;
+  end;
+  create connector metronome;
+  create connector exit;
+  create pipeline identity with
+    snot = "snot"
+  end;
+  connect /connector/metronome to /pipeline/identity;
+  connect /pipeline/identity to /connector/exit;
+end;
+
+deploy flow test
 ```
 
 
@@ -606,6 +819,9 @@ rule DeployStmts ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule DeployStmt
 
 The `DeployStmt` rule constrains the statements that are legal in a `.troy` deployment module.
@@ -629,7 +845,20 @@ rule DeployStmt ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule DeployFlowStmt
+
+The `DeployFlowStmt` rule defines the content of a command to tremor
+to deploy a flow.
+
+The flows can be re-parameterized through overriding the default
+parameters set in their originating source definitions via a `with`
+clause.
+
+
+
 
 <img src="./svg/deployflowstmt.svg" alt="DeployFlowStmt" width="827" height="75"/>
 
@@ -639,6 +868,36 @@ rule DeployFlowStmt ::=
   | DocComment  'deploy'  'flow' Ident CreationWithEnd 
   ;
 
+```
+
+
+
+
+```troy
+define flow test
+flow
+  define connector metronome from metronome
+  with
+    config = {
+      "interval": 1
+    }
+  end;
+  define connector exit from exit;
+  define pipeline identity
+  pipeline
+    select event from in into out;
+  end;
+  create connector metronome;
+  create connector exit;
+  create pipeline identity;
+  connect /connector/metronome to /pipeline/identity;
+  connect /pipeline/identity to /connector/exit;
+end;
+
+# The `deploy` statements commands tremor to instanciate the flow `test` - the flow in turn
+# will result in a metronome, exit connector, pipeline to be started and interconnected as
+# per the `test` definition above
+deploy flow test
 ```
 
 
@@ -669,6 +928,11 @@ rule ConnectorKind ::=
 
 
 
+
+The name of a builtin connector implemented in rust provided by the tremor runtime.
+
+
+
 ## Rule FlowStmts
 
 The `FlowStmts` rule defines a mandatory `;` semi-colon delimited sequence of `FlowStmtInner` rules.
@@ -684,6 +948,9 @@ rule FlowStmts ::=
 
 ```
 
+
+
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
 
 
 ## Rule FlowStmts_
@@ -703,6 +970,12 @@ rule FlowStmts_ ::=
 
 
 
+See `FlowStmts` rule for details.
+
+This rule wraps away a lalrpop macro call for ease of reference in other rules in the grammar source.
+
+
+
 ## Rule CreateKind
 
 The `CreateKind` rule encapsulates the artefact types that can be created in the tremor deploymant language.
@@ -718,6 +991,11 @@ rule CreateKind ::=
   ;
 
 ```
+
+
+
+
+An internal rule that allows connectors and pipelines to be created and used by the `Create` rule.
 
 
 
@@ -741,6 +1019,14 @@ rule FlowStmtInner ::=
 
 
 
+
+* A pipeline or connector definition 
+* A pipeline or connector instance via `create`
+* A `use` statement to import a definition
+* A `connect` statement to interlink instances
+
+
+
 ## Rule Define
 
 The `Define` rule allows connectors and pipelines to be specified.
@@ -759,6 +1045,11 @@ rule Define ::=
 
 
 
+
+Within a flow definition, allows pipeline and connectors to be defined.
+
+
+
 ## Rule Create
 
 The `Create` rule creates instances of connectors and pipelines in a flow.
@@ -773,6 +1064,21 @@ rule Create ::=
   |  'create' CreateKind Ident CreationWithEnd 
   ;
 
+```
+
+
+
+
+### Create a connector
+
+```troy
+create connector foo from snot::foo end;
+```
+
+### Create a pipeline
+
+```troy
+create pipeline bar from badger::bar end;
 ```
 
 
@@ -796,6 +1102,26 @@ rule Connect ::=
 
 
 
+
+### Defines how to interconnect pipeline and connectors
+
+Given
+
+```troy
+create connector ingest;
+create connector egress;
+create pipeline logic;
+
+connect /connector/ingress/out to /pipeline/logic/in;
+connect /pipeline/logic/out to  /connector/egress/in;
+```
+
+Defines how the `ingress`, `egress` and `logic` runtime instances
+are interconnected for data to flow through them in a specified
+order.
+
+
+
 ## Rule ConnectFromConnector
 
 The `ConnectFromConnector` rule defines a route from a connector instance.
@@ -810,6 +1136,21 @@ rule ConnectFromConnector ::=
   ;
 
 ```
+
+
+
+
+```tremor
+connector/console/out
+```
+
+Connection from the `console` connector definition via the standard `out` port.
+
+```tremor
+connector/console
+```
+
+The shorthand form where the standard `out` port is implied can also be used.
 
 
 
@@ -830,6 +1171,21 @@ rule ConnectFromPipeline ::=
 
 
 
+
+```tremor
+pipeline/filter/out
+```
+
+Connection from the `filter` pipeline definition via the standard `out` port.
+
+```tremor
+pipeline/console
+```
+
+The shorthand form where the standard `out` port is implied can also be used.
+
+
+
 ## Rule ConnectToPipeline
 
 The `ConnectToPipeline` rule defines route to a pipeline instance.
@@ -847,6 +1203,21 @@ rule ConnectToPipeline ::=
 
 
 
+
+```tremor
+pipeline/filter/in
+```
+
+Connection to the `filter` pipeline definition via the standard `in` port.
+
+```tremor
+pipeline/console
+```
+
+The shorthand form where the standard `in` port is implied can also be used.
+
+
+
 ## Rule ConnectToConnector
 
 The `ConnectToConnector` rule defines a route to a connector instance.
@@ -861,6 +1232,21 @@ rule ConnectToConnector ::=
   ;
 
 ```
+
+
+
+
+```tremor
+connector/console/in
+```
+
+Connection to the `console` connector definition via the standard `in` port.
+
+```tremor
+connector/console
+```
+
+The shorthand form where the standard `in` port is implied can also be used.
 
 
 
@@ -887,7 +1273,39 @@ rule DefineConnector ::=
 
 
 
+
+```troy
+define connector metronome from metronome
+  with
+    config = {
+      "interval": 1
+    }
+end;
+```
+
+Define user defind connector `metronome` from the builtin `metronome` connector
+using a 1 second periodicity interval.
+
+```troy
+define connector exit from exit;
+```
+
+Define user dfeind connector `exit` from the builtin `exit` connector
+with no arguments specified.
+
+
+
 ## Rule DefineFlow
+
+The `DefineFlow` rule defines a flow.
+
+A flow is a runtime artefact that informs tremor how to interconnect and launch
+instances of pipelines and connectors.
+
+A flow can define or use multiple in scope and already define pipelines and
+connectors and interconnect their streams together.
+
+
 
 <img src="./svg/defineflow.svg" alt="DefineFlow" width="809" height="42"/>
 
@@ -900,22 +1318,73 @@ rule DefineFlow ::=
 
 
 
+
+```troy
+define flow test
+flow
+  define connector metronome from metronome
+  with
+    config = {
+      "interval": 1
+    }
+  end;
+  define connector exit from exit;
+  define pipeline identity
+  args
+    snot = "badger",
+  pipeline
+    select args.snot from in into out;
+  end;
+  create connector metronome;
+  create connector exit;
+  create pipeline identity;
+  connect /connector/metronome to /pipeline/identity;
+  connect /pipeline/identity to /connector/exit;
+end;
+
+deploy flow test
+```
+
+A flow definition is a runnable or executable streaming program that describes
+the connectivity, the logic and how they are interconnected. A deploy statement
+is responsible for the actual deployment.
+
+
+
 ## Rule Query
 
-### Query Language Entrypoint
+The `Query` rule defines the logical entry point into Tremor's statement
+oriented query grammar. The grammar is embedded into deployments via
+`define pipeline` statements.
 
-This is the top level rule of the tremor query language `trickle`
+Pipelines effectively provide a continous streaming abstraction for
+event processing. The pipeline query is a graph of connected streams
+and operators. The operators can be builtin or provided by users through
+the `script` operator.
+
+Window definitions for use in windowed statements such as those supported by
+the `select` operation  are also defined and named so that they can be used
+by multiple operations and to compose tilt frames - chains of successive
+windows of data in a streaming continuous select operation.
+
+The syntax supports the definition of sub queries through the same `define pipeline`
+syntax as in the deployment grammar.
 
 
-<img src="./svg/query.svg" alt="Query" width="555" height="100"/>
+
+<img src="./svg/query.svg" alt="Query" width="341" height="75"/>
 
 ```ebnf
 rule Query ::=
-    ConfigDirectives Stmts  '<end-of-stream>' ?  
-  | Stmts  '<end-of-stream>' ?  
+    ConfigDirectives Stmts 
+  | Stmts 
   ;
 
 ```
+
+
+
+
 
 
 
@@ -937,6 +1406,18 @@ rule Stmts ::=
 
 
 
+### Example for a query pipeline
+
+```tremor
+use tremor;
+create stream snot;
+create stream badger;
+
+# ...
+```
+
+
+
 ## Rule Stmt
 
 The `Stmt` rule defines the legal statements in a query script.
@@ -948,7 +1429,7 @@ Queries in tremor support:
 
 
 
-<img src="./svg/stmt.svg" alt="Stmt" width="1237" height="339"/>
+<img src="./svg/stmt.svg" alt="Stmt" width="255" height="339"/>
 
 ```ebnf
 rule Stmt ::=
@@ -960,12 +1441,15 @@ rule Stmt ::=
   | CreateOperator 
   | CreateScript 
   | CreatePipeline 
-  |  'create'  'stream' Ident 
-  |  'select' ComplexExprImut  'from' StreamPort WindowClause WhereClause GroupByClause  'into' StreamPort HavingClause 
+  | CreateStream 
+  | OperatorSelect 
   ;
 
 ```
 
+
+
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
 
 
 ## Rule DefineWindow
@@ -992,6 +1476,17 @@ rule DefineWindow ::=
 
 
 
+
+
+```trickle
+define window four from tumbling
+with
+  size = 4
+end;
+```
+
+
+
 ## Rule DefineOperator
 
 The `DefineOperator` rule defines an operator.
@@ -1010,6 +1505,26 @@ rule DefineOperator ::=
   ;
 
 ```
+
+
+
+
+```trickle
+define pipeline subq
+pipeline
+  define operator counter from generic::counter;
+  create operator counter;
+  select event from in into counter;
+  select event from counter into out;
+end;
+
+create pipeline subq;
+
+select event from in into subq;
+select event from subq into out;
+```
+
+Uses the builtin counter sequencing operator to numerate a stream.
 
 
 
@@ -1036,6 +1551,28 @@ rule DefineScript ::=
 
 
 
+
+
+```trickle
+define operator bucket from grouper::bucket;
+
+define script categorize
+script
+  let $rate = 1;
+  let $dimensions = event.logger_name;
+  let $class = "test";
+  event
+end;
+
+create operator bucket;
+create script categorize;
+
+select event from in into categorize;
+select event from categorize into bucket;
+select event from bucket into out;
+```
+
+
 ## Rule DefinePipeline
 
 The `DefinePipeline` rule creates a named pipeline.
@@ -1056,6 +1593,103 @@ rule DefinePipeline ::=
   ;
 
 ```
+
+
+
+
+```troy
+define pipeline identity
+pipeline
+  select event from in into out;
+end;
+```
+
+
+
+## Rule OperatorSelect
+
+The `OperatorSelect` rule provides the `select` statement in streaming queries.
+
+The statement has
+* A target expression
+* A stream and port from which to consume events
+* A stream and port to which synthetic events are produced
+* An optional set of iwndow definitions
+* An optional `where` filter
+* An optional `having` filter
+* An optional `group by`
+
+Unlike ANSI-ISO SQL select operations in tremor do not presume tabular or columnar data. The
+target expression can be any well-formed and legal value supported by tremor.
+
+
+
+<img src="./svg/operatorselect.svg" alt="OperatorSelect" width="1189" height="42"/>
+
+```ebnf
+rule OperatorSelect ::=
+     'select' ComplexExprImut  'from' StreamPort WindowClause WhereClause GroupByClause  'into' StreamPort HavingClause 
+  ;
+
+```
+
+
+
+
+The builtin `select` operator in queries.
+
+### A simple non-windowed non-grouped select
+
+```trickle
+select event from in into out;
+```
+
+### A simple non-windowed grouped select
+
+```trickle
+select event from in into out group by event.key;
+```
+
+### A windowed grouped select operation
+
+```trickle
+select event from in[one_sec] by event.key into out;
+```
+
+Multiple windows can be configured in lower resolutions
+for multi-resolution windowed expressions where lower
+resolutions are merged into from higher resolution windows
+
+```trickle
+select aggr::stats::hdr(event.count) form in[one_sec, fifteen_sec, one_min, one_hour] into out;
+```
+
+
+
+## Rule CreateStream
+
+The `CreateStream` allows users to create user defined streams beyond the basic
+buitin set of `in`, `out` and `err` provided by the runtime for a pipeline query.
+
+
+
+<img src="./svg/createstream.svg" alt="CreateStream" width="323" height="42"/>
+
+```ebnf
+rule CreateStream ::=
+     'create'  'stream' Ident 
+  ;
+
+```
+
+
+
+
+```trickle
+create stream ctrl;
+```
+
+Creates a user defined stream by the provided name `ctrl`
 
 
 
@@ -1084,6 +1718,31 @@ rule CreateScript ::=
 
 
 
+
+```trickle
+define operator bucket from grouper::bucket;
+
+define script categorize
+script
+  let $class = "test";
+  let $dimensions = [event.type, event.application];
+  let $rate = 1;
+  event;
+end;
+
+create operator bucket;
+
+create script categorize;
+
+select event from in into categorize;
+
+select event from categorize into bucket;
+
+select event from bucket into out;
+```
+
+
+
 ## Rule CreateOperator
 
 The `CreateOperator` rule creates an operator.
@@ -1104,6 +1763,29 @@ rule CreateOperator ::=
   |  'create'  'operator' Ident  'from' ModularTarget CreationWithEnd 
   ;
 
+```
+
+
+
+
+```trickle
+
+# Define a round robin operator with 3 slots
+define operator roundrobin from qos::roundrobin
+with
+  outputs = ["one", "two", "three"]
+end;
+
+# create an instance of the operator
+create operator roundrobin;
+
+# Filter all inbound events into the rond robin
+select event from in into roundrobin;
+
+# Union slots inot outbound port
+select event from roundrobin/one into out;
+select event from roundrobin/two into out;
+select event from roundrobin/three into out;
 ```
 
 
@@ -1133,6 +1815,21 @@ rule CreatePipeline ::=
 
 
 
+
+```trickle
+
+# Define a pipeline called `identity`
+define pipeline identity
+pipeline
+  select event from in into out;
+end;
+
+# Create an instance of the pipeline
+create pipeline identity
+````
+
+
+
 ## Rule MaybePort
 
 The `MaybePort` rule defines an optional `Port`.
@@ -1147,6 +1844,15 @@ rule MaybePort ::=
   ;
 
 ```
+
+
+
+
+When interconnecting pipelines and connectors in flow definitions
+default ports can be inferred by the tremor runtime.
+
+When an alternate port is required, the port specification can be
+used to explicitly select from available inbound or outbound ports.
 
 
 
@@ -1168,6 +1874,15 @@ rule StreamPort ::=
   ;
 
 ```
+
+
+
+
+```trickle
+in/snot
+```
+
+Within a query, allows the port of a specific stream to be referenced directly.
 
 
 
@@ -1203,6 +1918,11 @@ rule WindowKind ::=
 
 
 
+
+Currently only `tumbling` is implemented.
+
+
+
 ## Rule WindowClause
 
 The `WindowClause` rule defines an optional window definition for a supporting operation.
@@ -1220,6 +1940,9 @@ rule WindowClause ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule Windows
 
 The `Windows` rule defines a sequence of window definitions that are `,` comma delimited.
@@ -1234,6 +1957,10 @@ rule Windows ::=
   ;
 
 ```
+
+
+
+Wraps the `Windows_` internal rule for other rules to consume in their definitions
 
 
 
@@ -1254,6 +1981,40 @@ rule Windows_ ::=
 
 
 
+
+A comma delimited set of window references.
+
+Windows can be local or modular
+
+```tremor
+win, my_module::one_sec, my_module::five_sec
+```
+
+The identifers refer to a window definition and can be used
+in operators to define a temporally bound set of events based
+on the semantics of the window definition.
+
+In a tilt frame - or set of windows, the output of a window can
+is the input the next window in a sequence. This is a form of
+temporal window-driven event compaction that allows memory be
+conserved.
+
+At 1000 events per second, a 1 minute window needs to store 60,000
+events per group per second. But 60 1 second windows can be merged
+with aggregate functions like `dds` and `hdr` histograms.
+
+Say, each histogram is 1k of memory per group per frame - that is
+a cost of 2k bytes per group.
+
+In a streaming system - indefinite aggregation of in memory events is
+always a tradeoff against available reosurces, and the relative business
+value.
+
+Often multiple windows in a tilt frame can be more effective than a
+single very long lived window.
+
+
+
 ## Rule Window
 
 The `Window` rule defines a modular target to a window definition.
@@ -1271,6 +2032,9 @@ rule Window ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule WindowDefn
 
 The `WindowDefn` defines a temporal basis over which a stream of events is applicable.
@@ -1285,6 +2049,25 @@ rule WindowDefn ::=
   ;
 
 ```
+
+
+
+
+Operations supporting windowed aggregate functions in tremor such as the `select`
+statement can window incoming streams in the `from` clause:
+
+```tremor
+select aggr::count(event) from in[one_second, ten_second]
+...
+```
+
+Here, we stream events from the `in` stream into a `one_second` window.
+Every second, we stream the aggregate result from the one second window
+into the `ten_second` window.
+
+So, even if we have 1 million events per second, the `one_second` and `ten_second`
+windows will convert the event firehose into a `trickle`. Fun fact: this pun is where the
+query language got its name from.
 
 
 
@@ -1307,6 +2090,19 @@ rule WhereClause ::=
 
 
 
+
+```tremor
+select event from in
+where present event.important
+into out
+```
+
+The `where` filters events before computations occur upon them in operators
+that support the clause. Any predicate ( boolean ) expression can be used
+in a `where` filter.
+
+
+
 ## Rule HavingClause
 
 The `HavingClause` defines a predicate expression used to filter ( forward or discard ) events in an operation.
@@ -1322,6 +2118,22 @@ rule HavingClause ::=
   ;
 
 ```
+
+
+
+
+```tremor
+select event from in
+having present event.important
+into out
+```
+
+The `having` filters events __after__ computations has occured within them in operators
+that support the clause. Any predicate ( boolean ) expression can be used
+in a `having` filter.
+
+When appropriate, the `where` clause should be used in preference over the `having` clause.
+It is better to filter early before computation occurs when this is practicable or possible.
 
 
 
@@ -1342,6 +2154,24 @@ rule GroupByClause ::=
   ;
 
 ```
+
+
+
+
+```tremor
+select event from in[one_second]
+having present event.important
+group by event.priority
+into out
+```
+
+The `group by` clause groups events based on a group expression. Each computed group effectively
+has its own memory and computation allocated.
+
+For windowed operations the windows are allocated for each group.
+
+These groups and their windows are independant. This means that opening, closing, filling and
+recycling of windows is by group.
 
 
 
@@ -1369,6 +2199,36 @@ rule GroupDef ::=
 
 
 
+### Example group definitions
+
+A string value
+```tremor
+event.string
+```
+
+The serialization of any legal tremor data value
+
+```tremor
+event
+```
+
+A set based on multiple expressions:
+
+```tremor
+set(event.key, state[key])
+```
+
+An set computed from an interation
+
+let keys = ['snot', 'badger', 'goose'];
+
+# ...
+
+each(keys)
+```
+
+
+
 ## Rule GroupDefs
 
 The `GroupDefs` rule defines a `,` comma delimited set of `GroupDef` rules.
@@ -1383,6 +2243,11 @@ rule GroupDefs ::=
   ;
 
 ```
+
+
+
+
+Wraps a macro call for use by other productions in the grammar
 
 
 
@@ -1403,6 +2268,11 @@ rule GroupDefs_ ::=
 
 
 
+
+A comma delimited set of `GroupDef` productions
+
+
+
 ## Rule EmbeddedScriptImut
 
 The `EmbeddedScriptImut` rule defines an optional embedded `script`.
@@ -1417,6 +2287,15 @@ rule EmbeddedScriptImut ::=
   ;
 
 ```
+
+
+
+
+This rule is used in productions that contain an optional `script` element.
+
+As such, it does not have an `end` token. That token is defined by the parent rule.
+
+The host rule will terminate with an `end` so `end` in an optional embedded script isn't needed.
 
 
 
@@ -1437,6 +2316,11 @@ rule EmbeddedScriptContent ::=
 
 
 
+
+A single expression embedded within an embedded script
+
+
+
 ## Rule Ports
 
 The `Ports` rule defines a `,` comma delimited set of stream ports.
@@ -1451,6 +2335,26 @@ rule Ports ::=
   ;
 
 ```
+
+
+
+A set of `ports` exposed in pipeline definitions in their `from` and `into` clauses
+
+```tremor
+define pipeline example
+  from in, out, err, ctrl
+  into in, out, err, ctrl
+pipeline
+  # A pipeline query implementation
+  ...
+end
+```
+
+The `from` and `into` ports do not need to be the same.
+
+Tremor's compiler and runtime can use these definitions to validate deployments
+are correct, or discover deployments that are invalid. It is an error to send
+data to or receive data from a pipeline port that is not specified.
 
 
 
@@ -1473,6 +2377,16 @@ rule OperatorKind ::=
 
 
 
+
+A modular path identifying a builtin operator.
+
+```tremor
+define operator roundrobin from qos::roundrobin;
+```
+
+
+
+
 ## Rule EmbeddedScript
 
 The `EmbeddedScript` rule defines a script using the [Script DSL](/docs/language/Script) [ [Full](/docs/language/Full#rule-script) ].
@@ -1492,6 +2406,14 @@ rule EmbeddedScript ::=
 
 
 
+
+```tremor
+script
+  event
+end
+```
+
+
 ## Rule Pipeline
 
 The `Pipeline` rule defines a block of statements in a `pipeline` .. `end` block.
@@ -1508,6 +2430,11 @@ rule Pipeline ::=
   ;
 
 ```
+
+
+
+
+An internal rule to the `DefinePipeline` rule where the pipeline logic is provided.
 
 
 
@@ -1531,6 +2458,11 @@ rule PipelineCreateInner ::=
 
 
 
+
+This rule allows queries to be defined in the context of a pipeline definition.
+
+
+
 ## Rule Script
 
 The `Script` rule defines the logical entry point into Tremor's expression
@@ -1544,13 +2476,17 @@ A legal script is composed of:
 * A sequence of top level expressions. There must be at least one defined.
 * An optional end of stream token
 
+### Scripting Language Entrypoint
+
+This is the top level of the tremor scripting language `tremor`
 
 
-<img src="./svg/script.svg" alt="Script" width="523" height="55"/>
+
+<img src="./svg/script.svg" alt="Script" width="309" height="42"/>
 
 ```ebnf
 rule Script ::=
-    ModComment TopLevelExprs  '<end-of-stream>' ?  
+    ModComment TopLevelExprs 
   ;
 
 ```
@@ -1663,6 +2599,27 @@ rule TopLevelExprs ::=
 
 
 
+The `ToplEvelExprs` specifies the expressions that are legal at the top level
+of a `script` expression.
+
+```tremor
+script
+  event.sum * 2
+end
+```
+
+A sequence of ';' semi-colon delimited expressions of the following form are permissible:
+
+* Constants
+* Function definitions
+* Intrinsic function definitions in the standard library 
+  * Provided by the runtime to document builtins - not user modifiable without a pull request or feature enhancement
+* Arbitrary complex expressions
+* Use definitions
+
+
+
+
 ## Rule InnerExprs
 
 The `InnerExprs` rule defines the expression forms permissible within another
@@ -1681,6 +2638,24 @@ rule InnerExprs ::=
   | Expr  ';' ?  
   ;
 
+```
+
+
+
+### Example
+
+The following basic forms are permissible
+
+```tremor
+for event.object of case (k, v) => v end;
+for event.list of case (i, e) => e end;
+match event of case %{} => "record" default => "not a record" end;
+let list = event.list;
+drop;
+"any literal or basic expression";
+1 + 2 * 3;
+emit {"snot": "badger" }
+# ...
 ```
 
 
@@ -1748,7 +2723,7 @@ rule Const ::=
 
 
 
-### Example
+### How do I create new immutable constant variable in tremor?
 
 ```tremor
 use std::base64;
@@ -1770,7 +2745,7 @@ complexity in the scripting language.
 Within the scripting DSLs grammar the different forms and
 variations of expression are significant.
 
-Hoewver, in the higher level we limit exposure to a subset of
+However, in the higher level we limit exposure to a subset of
 these forms. This is done for convenience, and for consistency
 of usage, and ease of learning the language.
 
@@ -1784,6 +2759,12 @@ rule Expr ::=
   ;
 
 ```
+
+
+
+
+The effective root of the subset of the expression langauge applicable in most processing
+context in tremor is captured by this rule.
 
 
 
@@ -1806,6 +2787,27 @@ rule SimpleExpr ::=
   ;
 
 ```
+
+
+
+
+### Structural expressions
+
+* Match
+* For
+
+### Assignment
+
+* Let
+
+### Flow
+
+* Emit
+* Drop
+
+### Basic expressions
+
+Binary, unary and literal expressions
 
 
 
@@ -1837,6 +2839,9 @@ rule AlwaysImutExpr ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule Recur
 
 The `Recur` rule defines stack-depth-limited tail-recursion in tremor functions.
@@ -1853,6 +2858,24 @@ rule Recur ::=
   ;
 
 ```
+
+
+
+
+```tremor
+fn fib_(a, b, n) of
+  case (a, b, n) when n > 0 => recur(b, a + b, n - 1)
+  default => a
+end;
+
+fn fib(n) with
+  fib_(0, 1, n)
+end;
+```
+
+Tremor's functional programming langauge supports tail recursion via the
+`recur` keyword. Tail recursion in tremor is limited to a fixed stack
+depth - infinite recursion is not permissible.
 
 
 
@@ -1873,6 +2896,12 @@ rule ExprImut ::=
 
 
 
+
+The effective root of the subset of the expression langauge applicable in most immutable
+processing context in tremor is captured by this rule.
+
+
+
 ## Rule OrExprImut
 
 The `OrExprImut` rule supports logical or expressions in tremor.
@@ -1889,6 +2918,14 @@ rule OrExprImut ::=
   | XorExprImut 
   ;
 
+```
+
+
+
+
+
+```tremor
+let example = a or (b & 0);
 ```
 
 
@@ -1913,6 +2950,14 @@ rule XorExprImut ::=
 
 
 
+
+
+```tremor
+let example = a ^ (b & 0);
+```
+
+
+
 ## Rule AndExprImut
 
 The `AndExprImut` rule supports logical and expressions in tremor.
@@ -1933,6 +2978,13 @@ rule AndExprImut ::=
 
 
 
+
+```tremor
+x + y
+```
+
+
+
 ## Rule BitOrExprImut
 
 The `BitOrExprImut` rule supports bitwise or expressions in tremor.
@@ -1948,6 +3000,14 @@ rule BitOrExprImut ::=
     BitXorExprImut 
   ;
 
+```
+
+
+
+
+
+```tremor
+let example = a | (b & 0);
 ```
 
 
@@ -1972,6 +3032,14 @@ rule BitXorExprImut ::=
 
 
 
+
+
+```tremor
+let example = a ^ (b & 0);
+```
+
+
+
 ## Rule BitAndExprImut
 
 The `BitAndExprImut` rule supports bitwise and expressions in tremor.
@@ -1988,6 +3056,14 @@ rule BitAndExprImut ::=
   | EqExprImut 
   ;
 
+```
+
+
+
+
+
+```tremor
+let example = a & (b & 0);
 ```
 
 
@@ -2012,6 +3088,14 @@ rule EqExprImut ::=
 
 
 
+
+
+```tremor
+let example = a == (b & 0);
+```
+
+
+
 ## Rule CmpExprImut
 
 The `CmpExprImut` rule supports comparative expressions in tremor.
@@ -2028,6 +3112,13 @@ rule CmpExprImut ::=
   | BitShiftExprImut 
   ;
 
+```
+
+
+
+
+```tremor
+x > y
 ```
 
 
@@ -2052,6 +3143,14 @@ rule BitShiftExprImut ::=
 
 
 
+
+
+```tremor
+let example = a >>> (b & 0);
+```
+
+
+
 ## Rule AddExprImut
 
 The `AddExprImut` rule supports additive expressions in tremor.
@@ -2072,6 +3171,13 @@ rule AddExprImut ::=
 
 
 
+
+```tremor
+x - y
+```
+
+
+
 ## Rule MulExprImut
 
 The `MulExprImut` rule supports multiplicative expressions in tremor.
@@ -2088,6 +3194,13 @@ rule MulExprImut ::=
   | UnaryExprImut 
   ;
 
+```
+
+
+
+
+```tremor
+x * y
 ```
 
 
@@ -2117,6 +3230,15 @@ rule UnaryExprImut ::=
 
 
 
+
+Is the root expression for unary expressions in the language.
+
+```tremor
+-(1)
+```
+
+
+
 ## Rule UnarySimpleExprImut
 
 The `UnarySimpleExprImut` rule specifies predicate unary expression operations.
@@ -2138,6 +3260,13 @@ rule UnarySimpleExprImut ::=
   | PresenceSimplExprImut 
   ;
 
+```
+
+
+
+
+```tremor
+not (a and b)
 ```
 
 
@@ -2168,6 +3297,17 @@ rule PresenceSimplExprImut ::=
 
 
 
+
+```tremor
+present $.request.method
+```
+
+```tremor
+absent state.cache
+```
+
+
+
 ## Rule ComplexExprImut
 
 The `ComplexExprImut` rule defines complex immutable expression in tremor.
@@ -2185,6 +3325,9 @@ rule ComplexExprImut ::=
 
 ```
 
+
+
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
 
 
 ## Rule Intrinsic
@@ -2231,6 +3374,12 @@ intrinsic fn encode(input) as base64::encode;
 
 ## Rule FnDefn
 
+The `FnDefn` rule allows user defined functions to be defined.
+
+This rule allows tremor users to create functions for reuse in one or many tremor applications.
+
+
+
 <img src="./svg/fndefn.svg" alt="FnDefn" width="1015" height="207"/>
 
 ```ebnf
@@ -2243,6 +3392,84 @@ rule FnDefn ::=
   | DocComment  'fn' Ident  '(' FnArgs  ')'  'of' FnCases  'end' 
   ;
 
+```
+
+
+
+### Pattern match based function arguments
+
+Functions defined with an `of` keyword in their signature use pattern matching against arguments
+
+```tremor
+fn fib_(a, b, n) of
+  case (a, b, n) when n > 0 => recur(b, a + b, n - 1)
+  default => a
+end;
+```
+
+### Ordinary functions
+
+Functions defined with a `with` keyword in their signature use ordinary
+arity based matching.
+
+```
+fn fib(n) with
+  fib_(0, 1, n)
+end;
+```
+
+## Function documentation
+
+In modular functions, it is customary to provide user level documentation for the intended
+users of a function. Here is an example from the tremor standard library
+
+```tremor
+### Trace Identifiers
+###
+###
+
+use std::type;
+use std::binary;
+use std::array;
+use std::string;
+
+## Is the `trace_id` valid
+##
+## Checks the `trace_id` argument to see if it is a valid
+## trace id. A legal trace id is one of:
+##
+## * An array of integers in the range of [0..=255] of length 8
+## * A binary 16 byte value
+## * A 32-byte hex-encoded string
+## * An array of 16 int values
+## * Regardless of representation, the value must not be all zeroes
+##
+## Returns a record when the representation is well-formed of the form:
+##
+## ```tremor
+## {
+##    "kind": "string"|"binary"|"array", # Depends on input
+##    "valid": true|false,               # True if well-formed and valid
+##    "value": "<trace_id>"              # Representation depends on `kind`
+## }
+## ```
+##
+## Returns an empty record `{}` when the representation not well-formed
+##
+fn is_valid(trace_id) of
+    # String representation
+    case(trace_id) when type::is_string(trace_id) =>
+      { "kind": "string", "valid": trace_id != "00000000000000000000000000000000" and string::bytes(trace_id) == 32, "value": trace_id }
+    # Binary representation
+    case(trace_id) when type::is_binary(trace_id) =>
+      let arr = binary::into_bytes(trace_id);
+      { "kind": "binary", "valid": binary::len(arr) == 16 and trace_id != << 0:64, 0:64 >>, "value": trace_id }
+    # Array representation
+    case(trace_id) when type::is_array(trace_id) =>
+      { "kind": "array", "valid":  array::len(arr) == 16 and trace_id != [ 0, 0, 0, 0, 0, 0, 0, 0], "value": trace_id }
+    default =>
+      false
+end
 ```
 
 
@@ -2265,6 +3492,15 @@ rule FnCases ::=
 
 
 
+
+```tremor
+connector/console/in
+```
+
+The connector `console` via its standard `in` port
+
+
+
 ## Rule FnCaseDefault
 
 The `FnCaseDefines` rule defines a default match clause for use in pattern match function signatures in tremor.
@@ -2282,6 +3518,9 @@ rule FnCaseDefault ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule FnCase
 
 The `FnCase` rule defines an array predicate pattern supporting match clause for use in pattern match function signatures in tremor.
@@ -2295,6 +3534,26 @@ rule FnCase ::=
      'case'  '(' ArrayPredicatePatterns  ')' WhenClause Effectors 
   ;
 
+```
+
+
+
+
+A case definition in a pattern match function definition
+
+```tremor
+use std::type;
+
+fn snottify(s) of
+  # Matches the literal string "badger"
+  case ("badger") => "snot badger, hell yea!"
+  # Matches any well formed json argument
+  case (~ json||) => let s.snot = true; s
+  # Matches any literal string
+  case (s) when type::is_string(s) => "snot #{s}"
+  # Matches, everything else
+  default => "snot caller, you can't snottify that!"
+end;
 ```
 
 
@@ -2317,6 +3576,9 @@ rule FnCaseClauses ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule FnArgs
 
 The `FnArgs` rule defines `,` comma delimited arguments to a tremor function.
@@ -2335,6 +3597,9 @@ rule FnArgs ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule SimpleExprImut
 
 The `SimpleExprImut` rule defines optionally parenthesized simple immutable expressions in tremor.
@@ -2350,6 +3615,16 @@ rule SimpleExprImut ::=
   ;
 
 ```
+
+
+
+
+A parenthetic or simple non-parenthetic expression
+
+```tremor
+( 1 + 2 ) * 3;
+```
+
 
 
 
@@ -2373,7 +3648,18 @@ rule Literal ::=
 
 
 
+
+Primitive literal types in tremor are integer, floating point, boolean and the `null` reference.
+
+String literals are UTF-8 encoded values and support interpolation with single line ( regular ) and
+multi line ( heredoc style ) variant forms.
+
+
+
 ## Rule Nil
+
+The `Nil` rule defines the syntax of the nil literal in tremor.
+
 
 <img src="./svg/nil.svg" alt="Nil" width="135" height="42"/>
 
@@ -2438,6 +3724,23 @@ rule Int ::=
 
 
 
+
+### Integer literals
+
+Integer literals in tremor are 64 bit signed values of the form
+
+```
+1234
+```
+
+Values can be separated by an `_` ( underscore ) for easy reading
+
+```
+let million = 1_000_000
+```
+
+
+
 ## Rule Float
 
 The `Float` rule literal specifes the syntax of IEEE float literals in tremor.
@@ -2451,6 +3754,23 @@ rule Float ::=
      'float' 
   ;
 
+```
+
+
+
+
+### Floating point literals
+
+Floating point literals in tremor are 64 bit signed IEEE floating point values of the form
+
+```
+1234.0e10
+```
+
+Values can be separated by an `_` ( underscore ) for easy reading
+
+```
+let million = 1_000_000.1234e-5
 ```
 
 
@@ -2480,6 +3800,75 @@ rule StringLiteral ::=
 
 
 
+### How do I define single line string literals?
+
+A single line string MUST be on a single line with raw newline characters ( unless escaped ).
+
+```tremor
+"I am a literal string"
+```
+
+### How do i define multi line string literals?
+
+A multi line string MUST span multiple lines with raw newline characters.
+
+Multi line strings 
+```tremor
+"""
+I am a
+multi
+line
+string
+"""
+```
+
+The following example is a malformed multi line string:
+
+```tremor
+""" snot """
+```
+
+Which when executed will result in a compile time error:
+
+```
+Error:
+    1 | """ snot """
+      | ^^^ It looks like you have characters tailing the here doc opening, it needs to be followed by a newline
+```
+
+### Simple and nested Interpolation
+
+Strings in tremor can be interpolated with internal scripts
+
+```tremor
+"""
+
+I am an #{interpolated} #{event.sum / event.count} string
+
+Interpolations can be simple, as above, or #{
+merge event of
+  { "#{snot}": """
+
+    #{badger * 1000 + crazy_snake }
+
+    """ }
+}
+"""
+```
+
+This will result in the output:
+
+```tremor
+"\nI am an interpolated 5.0 string\n\nInterpolations can be simple, as above, or {\"sum\":10,\"count\":2,\"snot\":\"\\n    20001\\n\\n    \"}\n"
+```
+
+Note that the merge operation merges an event `{ "sum": 10, "count": 10 }` with in scope values of `snot` that evaluates to the literal string `"snot"` and the numerics `badger` ( `20` ) and crazy_snake ( `1` ). Interpolations are nestable and field names or any other string literal in tremor can be interpolated.
+
+However, we do not recommend complex nested interpolated strings. Defining a function and calling it may be a better
+alternative for most applications and uses.
+
+
+
 ## Rule StrLitElements
 
 The `StrLitElements` rule defines the internal structure of a string literal in tremor.
@@ -2506,6 +3895,21 @@ rule StrLitElements ::=
 
 
 
+### Inside a literal tremor string
+
+A string literal in tremor is a composition of multiple segments or parts.
+
+These can be composed of:
+* One or many single line string parts
+* One or many multi line string parts
+* A blackslash escaped `\\#` to escape interpolated syntax, optinally followed by more string literal parts
+* Or, a `#{` .. `}` delimited interpolated section
+  * Within an interpolated section there are no constraints on raw newline usage
+  * For complex interpolated sections, prefer good indentation!
+
+
+
+
 ## Rule StringPart
 
 The `StringPart` rule defines a simple or heredoc style string part.
@@ -2521,6 +3925,16 @@ rule StringPart ::=
   ;
 
 ```
+
+
+
+The `"` delimited string is single line
+
+The `"""` delimited string is multi line
+
+The forms can be mixed to construct a string literal
+
+Interpolation is supported by both forms
 
 
 
@@ -2542,6 +3956,46 @@ rule List ::=
 
 
 
+### How are literal array or list or vectorc data collections defined in tremor?
+
+We use `[` .. `]` square brackets to delimit list-like data.
+
+### Are multi-dimensional arrays supported?
+
+Multi-dimensional arrays are compositional and can be nested
+
+### Does tremor support typed lists?
+
+No. A list in tremor can have elements from any supported primitive or
+structural type.
+
+Validation that a list is for a single type - such as a list of boolean
+values can be defined as follows:
+
+```tremor
+use std::type;
+
+let bad = [true, false, "snot"];
+let good = [true, false ];
+
+fn list_of_bool(l) with
+  let valid = true;
+  for l of
+    case (i,e) when type::is_bool(e) and valid == true => let valid = true
+    case (i, otherwise) => let valid = false
+  end;
+  valid # return true if list is all bool, false otherwise
+end;
+
+list_of_bool(bad); # should fail
+list_of_bool(good); # should succeed
+```
+
+This user defined function can then be used in guard clauses like `when type::is_bool(e) ...` in the
+example code.
+
+
+
 ## Rule ListElements
 
 The `ListElements` rule defines a `,` comma delimited sequence of expression elements.
@@ -2555,6 +4009,22 @@ rule ListElements ::=
     ListElements_ 
   ;
 
+```
+
+
+
+### List literals
+
+Unlike JSON, trailing commas are supported
+
+```tremor
+[foo,] # A non empty list, a trailing comma is optionally permissible
+```
+
+Except in empty lists, where the idiomatic form is preferred:
+
+```tremor
+[] # An empty list - no trailing comma here!
 ```
 
 
@@ -2575,6 +4045,12 @@ rule ListElements_ ::=
   ;
 
 ```
+
+
+
+See `ListElements` rule for details.
+
+This rule wraps away a lalrpop macro call for ease of reference in other rules in the grammar source.
 
 
 
@@ -2605,6 +4081,58 @@ rule Record ::=
 
 
 
+### How are literal records or map types or key-value collections defined in tremor?
+
+We use `{` .. `}` squigly braces to delimit record -like data.
+
+### Can records be nested?
+
+Record values can be any valid primitive of structural type supported by tremor, including other records.
+
+### Does tremor support typed records?
+
+No. A record in tremor can have element values from any supported primitive or
+structural type in tremor.
+
+Validation that a record conforms to a shape, schema or structure can be achieved
+through match expressions.
+
+```tremor
+use std::type;
+
+let bad = { "list-of-bool": [true, false, "snot"] };
+let good = { "list-of-bool": [true, false ], "flag": true };
+
+fn list_of_bool(l) with
+  let valid = true;
+  for l of
+    case (i,e) when type::is_bool(e) and valid == true => let valid = true
+    case (i, otherwise) => let valid = false
+  end;
+  valid # return true if list is all bool, false otherwise
+end;
+
+fn is_good_record(r) with
+  let valid = false;
+  match r of
+    case extract=%{ present flag, list-of-bool ~= %[] } 
+      when list_of_bool(extract["list-of-bool"]) => 
+       let valid = true
+    default => 
+      let valid = false
+  end;
+  valid
+end;
+
+is_good_record(bad); # should fail
+is_good_record(good); # should succeed
+```
+
+This user defined function can then be used in guard clauses like `when type::is_bool(e) ...` in the
+example code.
+
+
+
 ## Rule Field
 
 The `Field` rule defines a `:` colon delimited name value pair for a record literal.
@@ -2622,6 +4150,51 @@ rule Field ::=
     StringLiteral  ':' ComplexExprImut 
   ;
 
+```
+
+
+
+### How do i define record fields?
+
+The syntax is similar to JSON:
+
+```tremor
+{ "field": "value" }
+```
+
+With the exception that fields may have an optional ',' terminal trailing comma
+
+### Interpolated field names
+
+As literal strings in tremor support string interpolation the following
+variants are equivalent:
+
+```tremor
+{ "snot": "badger" }
+
+let snot = "snot";
+{ "#{snot}": "badger" };
+```
+
+But, not all legal variations are recommended:
+
+```tremor
+let snot = """
+snot"""; # This may result in tears
+{ "#{snot}": "badger" };
+```
+
+Another legal but likely not useful variation:
+
+```tremor
+let snot = { "snot": "badger" };
+{ "#{snot}": "badger" };
+```
+
+Will result in a stringifield json being encoded as the field name:
+
+```json
+{"{\"snot\":\"badger\"}":"badger"}
 ```
 
 
@@ -2656,6 +4229,76 @@ rule Path ::=
 
 
 
+
+Path expressions are how events and in memory state in tremor are referenced
+in scripts.
+
+### How to reference metadata
+
+The tremor runtime can provide and consume metadata with the events
+being processed by the runtime.
+
+Metadata is distinguished by a `$` dollar sign
+
+```tremor
+let foo = $request # The local path `foo` is a copy of the metadata `$request`
+```
+
+Connectors such as `kafka` and `http` can generate metadata that scripts, queries
+and pipelines can manipulate and process to tune tremor's runtime behaviour.
+
+### How to reference the current streaming event
+
+The current event streaming through tremor in the current pipeline will
+be available to queries, logics and scripts via the `event` keyword.
+
+The `event` keyword can be further dereferenced via path statements
+
+```tremor
+# Where event is a record
+let foo = event.snot; # The local path `foo` is a copy of the `snot` field from the current event
+```
+
+```tremor
+# Where event is an array
+let foo = event[10]; The local path `foo` is a copy of the 10th element of the current event.
+```
+
+### How to reference pipeline state
+
+Scripts in tremor can store state that is available for the lifetime of a pipeline
+via the `state` keyword.
+
+The `state` keyword can be further dereferenced via path statements
+
+```tremor
+# Where state is a record
+let foo = state.snot; # The local path `foo` is a copy of the `snot` field from the state record 
+```
+
+```tremor
+# Where state is an array
+let foo = state[10]; The local path `foo` is a copy of the 10th element of the state array
+
+### How to reference arguments
+
+For operators and structures that support arguments the `args` keyword can be
+used to dereference values via path statements.
+
+```tremor
+# Where state is a record
+let foo = args.snot; # The local path `foo` is a copy of the `snot` field from the args record 
+```
+
+Args are nominal and always record values in tremor.
+
+### How can window state be referenced
+
+Operations supporting windows and groups can dereference the cached state via the
+`window` and `group` keywords which both support path operations.
+
+
+
 ## Rule ExprPathRoot
 
 The `ExprPathRoot` rule defines a subset of expressions where path operations are supported.
@@ -2682,6 +4325,10 @@ rule ExprPathRoot ::=
 
 
 
+An internal rule to the `ExprPath` rule that defines legal roots for a dynamic path dereference.
+
+
+
 ## Rule ExprPath
 
 The `ExprPath` rule defines path operations for expressions.
@@ -2695,6 +4342,20 @@ rule ExprPath ::=
     ExprPathRoot PathSegments 
   ;
 
+```
+
+
+
+
+Allows dereferencing literal values vi path expressions
+
+```tremor
+{"snot": 0, "badger": 1, "goose": 2}["badger"];
+{"snot": 0, "badger": 1, "goose": 2}.badger;
+
+...
+
+some_record_fn().record_field
 ```
 
 
@@ -2725,6 +4386,35 @@ rule MetaPath ::=
 
 
 
+
+### How do i reference event metadata?
+
+Events in tremor encapsulate data from other systems sent and received
+from tremor via configured connectors. Information about that data or
+metadata can also be provided by the runtime, and used in some operators
+and connectors to control tremor's runtime behaviour.
+
+Meta-data is accessed via the `$` dollar symbol.
+
+```tremor
+let metadata = $;
+```
+
+Metadata can be any legal tremor value, but it is typically a record
+structure
+
+```tremor
+let metastring = "snot" + $;
+```
+
+Meta-data can be written through via a `let` operation
+
+```tremor
+let $command = { "do-things": "with-this-meta-request" }
+```
+
+
+
 ## Rule AggrPath
 
 The `AggrPath` rule defines path operations for `group` and `window` references.
@@ -2748,6 +4438,26 @@ rule AggrPath ::=
 
 
 
+
+### How do I reference the computed group dimension?
+
+```trickle
+use std::record;
+define window by_2 from tumbling
+with
+  size = 2
+end;
+
+select {
+  "g": group[0], # Extract current group dimension
+  "c": aggr::stats::sum(event.c),
+}
+from in[by_2]
+group by set(each(record::keys(event.g))) into out;
+```
+
+
+
 ## Rule ArgsPath
 
 The `ArgsPath` rule defines path operations for `args` references.
@@ -2763,6 +4473,27 @@ rule ArgsPath ::=
   ;
 
 ```
+
+
+
+
+### How do i reference arguments?
+
+Arguments are encapsualted via the `args` keyword symbol.
+
+```tremor
+let what = args;
+```
+
+Arguments are always record structured
+
+```tremor
+    1 | let args = 1;
+      |     ^^^^^^^^ Can't assign to a constant expression
+```
+
+Arguments cannot be assigned to or overridden in scripts.
+
 
 
 
@@ -2784,6 +4515,17 @@ rule LocalPath ::=
 
 
 
+
+A local path is simply a path structure that is bounded to a locally defined value
+
+```tremor
+let snot = { "snot": "badger" };
+
+snot.snot # The field 'snot', on the local path reference 'snot'
+```
+
+
+
 ## Rule ConstPath
 
 The `ConstPath` rule enables path operations on module scoped references.
@@ -2798,6 +4540,11 @@ rule ConstPath ::=
   ;
 
 ```
+
+
+
+
+A fully scoped path that does not include dynamic resolution or runtime type information.
 
 
 
@@ -2821,6 +4568,31 @@ rule StatePath ::=
 
 
 
+
+### How do i reference state in tremor?
+
+Tremor programs can be stateful in many ways - such as through the state managed
+by operators and windowed operations by the runtime on behalf of the user provided
+program.
+
+The `state` keyword allows an arbitrary value controlled by a users program to be
+maintained and managed by the user program.
+
+```tremor
+let my_state = state;
+```
+
+State can be written through via a `let` operation
+
+```tremor
+let state = match state of
+  case null => { "count": 1 }
+  default => { "count"": state.count + 1 }
+end;
+```
+
+
+
 ## Rule EventPath
 
 The `EventPath` rule defines path operations for streaming events in tremor.
@@ -2838,6 +4610,32 @@ rule EventPath ::=
   ;
 
 ```
+
+
+
+
+### How do i dereference event data?
+
+The current event is accessed via the `event` keyword.
+
+The event can be any legal tremor value. If it is a record or
+an array, then it can be dereferenced via the path language in
+the usual way.
+
+```tremor
+event.snot; # Event record, field 'snot'
+```
+
+```tremor
+let badger = event[0]; Event array, first element
+```
+
+Events can be mutated and manipulated and used as an output
+
+```tremor
+select { "wrapped-event": event } from in into out;
+```
+
 
 
 
@@ -2869,6 +4667,18 @@ rule PathSegments ::=
 
 
 
+
+``tremor
+a.b
+a["b"]
+a[0..5]
+```
+
+Defines how structural values in tremor can be dereferenced to get at internal parts such as
+an element of an array, or a field of a record.
+
+
+
 ## Rule Selector
 
 The `Selector` rule specifies an index or range of an array.
@@ -2891,6 +4701,36 @@ rule Selector ::=
 
 
 
+
+### Field selection for records
+
+Selecing a record field using array notation
+
+```tremor
+let snot = badger["snot"]
+```
+
+Select the field 'snot' from the record 'badger'
+
+### Ordinal selection for arrays
+
+```tremor
+let e = badger[0];
+```
+
+Select the 0th ( first ) element of the array 'badger'
+
+### Range selection for arrays
+
+```tremor
+let e = badger[0:5];
+```
+
+Select the 0th up to but no including the 5th element of the array 'badger'
+
+
+
+
 ## Rule Invoke
 
 The `Invoke` rule specifies the syntax of a function invocation.
@@ -2905,6 +4745,15 @@ rule Invoke ::=
   | FunctionName  '('  ')' 
   ;
 
+```
+
+
+
+
+```tremor
+use std::string;
+
+string::len("snot")
 ```
 
 
@@ -2931,6 +4780,9 @@ rule FunctionName ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule ModPath
 
 The `ModPath` rule defines a modular path.
@@ -2947,6 +4799,39 @@ rule ModPath ::=
   | Ident 
   ;
 
+```
+
+
+
+
+### How do i reference something from the standard library?
+
+The standard library contains reusable constants, functions
+and other definitions that can be used in scripts via the
+`Use` and `ModPath` rules.
+
+For example, if you have a file called `foo.tremor` in a `src`
+folder you can append this to your `TREMOR_PATH` environment
+variable
+
+```bash
+export TREMOR_PATH=/path/to/src
+```
+
+Assuming `foo.tremor` contains the following code:
+
+```tremor
+fn meaning_of_life() of
+  42
+end;
+```
+
+We can use this in another script as follows:
+
+```tremor
+use foo;
+
+let meaning = foo::meaning_of_life();
 ```
 
 
@@ -2968,6 +4853,11 @@ rule InvokeArgs ::=
 
 
 
+
+A comma delimited sequence of complex expressions
+
+
+
 ## Rule InvokeArgs_
 
 The `InvokeArgs_` rule is an internal rule of the `InvokeArgs` rule.
@@ -2984,6 +4874,12 @@ rule InvokeArgs_ ::=
   ;
 
 ```
+
+
+
+See `InvokeArgs` rule for details.
+
+This rule wraps away a lalrpop macro call for ease of reference in other rules in the grammar source.
 
 
 
@@ -3015,6 +4911,26 @@ rule Drop ::=
 
 
 
+
+```trickle
+define script boring
+script
+  drop
+end;
+create script boring;
+select event from in into boring;
+select event from boring into out;
+```
+
+Drop signals to the tremor runtime that an event is not interesting and can
+be dropped without any further handling by the engine. Drop statements in
+a script or query result in the processing of the current event halting without
+any further action bye the tremor runtime.
+
+The dropped event is discarded by the engine.
+
+
+
 ## Rule Emit
 
 ###
@@ -3041,6 +4957,26 @@ rule Emit ::=
 
 
 
+
+```trickle
+define script route
+script
+  emit => "not_out"
+end;
+
+create script route;
+select event from in into route;
+select event from route/not_out into out;
+```
+
+Emit signals to the tremor runtime that an event has been processed fully and
+processing can stop at the point emit is invoked and a synthetic value returned
+without any further processing.
+
+The emitted event is forwarded by the engine.
+
+
+
 ## Rule Let
 
 The `Let` rule allows an expression to be bound to a `Path`.
@@ -3058,6 +4994,16 @@ rule Let ::=
      'let' Assignment 
   ;
 
+```
+
+
+
+
+
+### How do i create a local mutable variable in tremor?
+
+```
+let my_var = "this is a string";
 ```
 
 
@@ -3081,6 +5027,25 @@ rule Assignment ::=
 
 
 
+
+The rule assigns an expression to a path by reference.
+
+```tremor
+x = 2
+```
+
+Assigns `x` to the value literal 2
+
+```tremor
+x.y = 2
+```
+
+Assigns the field y on record x to the value literal 2
+
+Assignments expressions can be constant such as via the `Const` rule or mutable such as via the `Let` rule.
+
+
+
 ## Rule Patch
 
 The `Patch` rule defines the `patch` statement in tremor.
@@ -3095,6 +5060,23 @@ rule Patch ::=
   ;
 
 ```
+
+
+
+
+### Patch insert a field in a record
+
+```tremor
+let a = patch event of
+  insert "test" => 1
+end;
+```
+
+### Default patch templates
+```tremor
+patch event of
+  default => {"snot": {"badger": "goose"}}
+end
 
 
 
@@ -3116,6 +5098,11 @@ rule PatchOperations ::=
 
 
 
+
+A sequence of patch operations
+
+
+
 ## Rule PatchField
 
 The `PatchField` is a string literal identifying a the field of a record to which a `PatchOperationClause` is being applied.
@@ -3131,6 +5118,9 @@ rule PatchField ::=
 
 ```
 
+
+
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
 
 
 ## Rule PatchOperationClause
@@ -3163,6 +5153,130 @@ rule PatchOperationClause ::=
 
 
 
+### How do I insert a new value into a record?
+
+```tremor
+patch {"a": 1, "b": 2, "c": 3 } of
+  insert "d" => "delta"
+end;
+```
+
+It is a semantic error to insert a value if the field already exists:
+
+```tremor
+Error in foo.tremor:2:3
+    1 | patch {"a": 1, "b": 2, "c": 3 } of
+    2 |   insert "b" => "bravo"
+      |   ^^^^^^^^^^^^^^^^^^^^^ The key that is supposed to be written to already exists: b
+    3 | end;
+```
+
+### How do I update an existing value in a record?
+
+```tremor
+patch {"a": 1, "b": 2, "c": 3 } of
+  update "b" => "bravo"
+end;
+```
+
+It is a semantic error to update a value if the field does not already exist:
+
+
+```tremor
+    1 | patch {"a": 1, "b": 2, "c": 3 } of
+    2 |   update "d" => "delta"
+      |   ^^^^^^^^^^^^^^^^^^^^^ The key that is supposed to be updated does not exists: d
+    3 | end;
+```
+
+### How do I insert or update a value in a record?
+
+If the distinction between an `insert` and an `update` is not significant the
+`upsert` operation will insert a new field, or update an existing field. This
+operation is more flexible, but does not offer compile time errors to protect
+against invalid usage. Where possible, use `insert` or `update` in preference
+to `upsert` when a new field or replacing an existing fields value would be
+an error given the business logic at hand.
+
+### How do I erase a field from a record?
+
+```tremor
+patch {"a": 1, "b": 2, "c": 3 } of
+  erase "d"
+end;
+```
+
+The field `c` is removed from our record
+
+### How do I rename a field?
+
+```tremor
+patch {"a": 1, "b": 2, "c": 3 } of
+  move "c" => "d" # The value MUST be a string literal as it represents a field name
+end;
+```
+
+The `c` field is removed and a `d` field is added with the value from `c`
+
+## How do I duplicate a field?
+
+Similar to `move`, the `copy` operation copies the value of one field to a new field
+
+```tremor
+patch {"a": 1, "b": 2, "c": 3 } of
+  copy "c" => "d" # The value MUST be a string literal as it represents a field name
+end;
+```
+
+The `c` field is preserved, and the `d` field is added with a copy of the value from `c`
+
+### Can I use `patch` and `merge` together?
+
+The `merge` operation in a `patch` expression can be applied to the patch
+target record or to a specified field.
+
+```tremor
+patch {"a": 1, "b": 2, "c": 3 } of
+  merge "d" => {}
+end;
+```
+
+The field `d` is created in this case with the empty record.
+
+```tremor
+patch {"a": 1, "b": 2, "c": 3 } of
+  merge => { "snot": "badger", "b": "bravo" } # This is a terse form of insert for `snot`, and `update for `b`
+end;
+```
+
+### Defaults
+
+For repetitive or template operations, the `default` operation allows a patch record
+to be defined that is effectively merged with the target document
+
+```tremor
+patch event of
+  default => {"snot": {"badger": "goose"}}
+end
+```
+
+If event is an empty record, the result is the same as the `default` value expression.
+If event has a `snot` field, the value for snot is preserved. The default value is not used.
+
+Like `merge` operations, the `default` merge operation can be very effective for reducing the
+boilerplate complexity of patch operations and improving the readability of the transformations
+being performed by readers of the code.
+
+For example, we could limit our `default` record patch to apply to only the `snot` field as follows:
+
+```tremor
+patch event of
+  default "snot" => {"badger": "goose"}
+end
+```
+
+
+
 ## Rule Merge
 
 The `Merge` rule defines a merge operation of two complex immutable expressions.
@@ -3180,6 +5294,28 @@ rule Merge ::=
 
 
 
+## How do I merge two two records?
+
+```tremor
+merge {"a": 1, "b": 2, "c": 3 } of
+  { "b": "bravo", "c": "charlie", "d": "delta" }
+end;
+```
+
+The merge expression loosely follows the semantics of [RFC 7396 - JSON Merge Patch](https://datatracker.ietf.org/doc/html/rfc7396).
+
+From our example:
+* The field `a` is not patched and preserved
+* The field `b` is patched with the value `bravo` - the original value is replaced
+* The field `d` is not in the original, and is added.
+
+The expression is useful when one record with another.
+
+An alternative to the `Merge` expression is the `Patch` expression which is operation
+rather than value based.
+
+
+
 ## Rule For
 
 The `For` rule defines an mutable `for` comprehension.
@@ -3194,6 +5330,19 @@ rule For ::=
   ;
 
 ```
+
+
+
+
+An illustration of the rule is a set of case statements, followed by an optional `default` case
+
+```tremor
+  for event of
+    ## Cases
+  end
+```
+
+The `ForCaseClause` rule has examples of the two basic forms for record and array comprehensions.
 
 
 
@@ -3215,6 +5364,10 @@ rule ForCaseClauses ::=
 
 
 
+A set of one or many case clauses for record key-value or array index-element comprehensions
+
+
+
 ## Rule ForCaseClause
 
 The `ForCaseClause` defines the case clause for mutable `for` comprehensions.
@@ -3228,6 +5381,35 @@ rule ForCaseClause ::=
      'case'  '(' Ident  ',' Ident  ')' WhenClause Effectors 
   ;
 
+```
+
+
+
+### Record Comprehension
+
+```tremor
+for { "snot": "badger" } of
+  case (name, value) => value
+end;
+```
+
+### Array Comprehension
+
+```tremor
+for [1, "foo", 2, "bar"] of
+  case (index, value) => value
+end;
+```
+
+### Guards
+
+```tremor
+use std::type;
+
+for [1, "foo", 2, "bar"] of
+  case (index, value) when type::is_string(value) => { "string": value }
+  case (index, value) when type::is_integer(value) => { "integer": value }
+end;
 ```
 
 
@@ -3249,6 +5431,19 @@ rule ForImut ::=
 
 
 
+
+An illustration of the rule is a set of case statements, followed by an optional `default` case
+
+```tremor
+  for event of
+    ## Cases
+  end
+```
+
+The `ForCaseClauseImut` rule has examples of the two basic forms for record and array comprehensions.
+
+
+
 ## Rule ForCaseClausesImut
 
 The `ForCaseClausesImut` defines a sequence of case clauses in an immutable `for` comprehension.
@@ -3264,6 +5459,10 @@ rule ForCaseClausesImut ::=
   ;
 
 ```
+
+
+
+A set of one or many case clauses for record key-value or array index-element comprehensions
 
 
 
@@ -3300,6 +5499,17 @@ for [1, "foo", 2, "bar"] of
 end;
 ```
 
+### Guards
+
+```tremor
+use std::type;
+
+for [1, "foo", 2, "bar"] of
+  case (index, value) when type::is_string(value) => { "string": value }
+  case (index, value) when type::is_integer(value) => { "integer": value }
+end;
+```
+
 
 
 ## Rule Match
@@ -3315,6 +5525,20 @@ rule Match ::=
      'match' ComplexExprImut  'of' Predicates  'end' 
   ;
 
+```
+
+
+
+
+An illustration of the rule is a set of case statements, followed by an optional `default` case
+
+```tremor
+  match event of
+    case %{} => "I am a possibly non-empty record",
+    case %[] => "I am a possibly non-empty array",
+    case %( "snot" ) => "I am a list with 1 element which is the string \"snot\"
+    default => "I'm something else"
+  end
 ```
 
 
@@ -3337,6 +5561,20 @@ rule Predicates ::=
 
 
 
+
+An illustration of the rule is a set of case statements, followed by an optional `default` case
+
+```tremor
+  match event of
+    case %{} => "I am a possibly non-empty record",
+    case %[] => "I am a possibly non-empty array",
+    case %( "snot" ) => "I am a list with 1 element which is the string \"snot\"
+    default => "I'm something else"
+  end
+```
+
+
+
 ## Rule PredicateClause
 
 The `PredicateClause` rule defines the forms of a mutable match statement in tremor.
@@ -3352,6 +5590,59 @@ rule PredicateClause ::=
   ;
 
 ```
+
+
+
+## How do i write robust match predicate rules?
+
+There are two basic forms of `match` expression predicate
+
+### Case form
+
+```tremor
+  match event of
+    case %{} => "I am a possibly non-empty record",
+    case %[] => "I am a possibly non-empty array",
+    case %( "snot" ) => "I am a list with 1 element which is the string \"snot\"
+```
+
+These are used for isolating specific cases of interest that need to specific
+processing. Sometimes cases can be incomplete without a `default` case and this
+is also supported.
+
+```tremor
+    default => "If i'm not one of these things, I'm something else"
+end
+```
+
+If tremor can prove at compile time that a `default` case is advisable it will
+emit a warning:
+
+```tremor
+match event of
+  case true => "I believe you"
+end;
+```
+
+```tremor
+    1 | match event of
+    2 |   case true => "I believe you"
+    3 | end;
+      | ^^^ This match expression has no default clause, if the other clauses do not cover all possibilities this will lead to events being discarded with runtime errors.
+```
+
+And, tremor will issue a runtime error when a bad case is found:
+
+```tremor
+    1 | match event of
+    2 |   case true => "I believe you"
+    3 | end;
+      | ^^^ A match expression executed but no clause matched
+      |     NOTE: Consider adding a `default => null` clause at the end of your match or validate full coverage beforehand.
+
+```
+
+It is almost always preferable to have a `default` case and this practice is recommended.
 
 
 
@@ -3373,6 +5664,28 @@ rule Effectors ::=
 
 
 
+### Example
+
+An effector is an `=>` arrow followed by `Block` sequence.
+
+In many of the structural forms such as `match`, `for` or `patch` and effector is
+a sequence of logic that is executed when certain conditions occur. The final statement
+in an effector is the result of the sequence of executions.
+
+As an example, here is a `for` compresension that enumerates a list
+and computes the stringified representation of the elements of the list.
+
+The `for` expression collects each iterations result from the effector's `block`
+statement and aggregates them into a list.
+
+```tremor
+for [1, 2, 3, 4, 5] of
+  case (i, e) => "#{e}";
+end;
+
+```
+
+
 ## Rule Block
 
 The `Block` rule defines a semi-colon delimited set of `Expr` rules.
@@ -3388,6 +5701,24 @@ rule Block ::=
   ;
 
 ```
+
+
+
+### How does tremor process blocks?
+
+A block of expressions is a `;` semi-colon delimited set of statements that
+share the same scope. This means that the same set of metadata, `state` and
+any scoped identifiers are visible to the block.
+
+The last expression in a block of statements is the return value.
+
+```tremor
+let return = 1;
+let return = return << 7 % 4;
+return - 1
+```
+
+The answer as we're sure you'll agree is `7`.
 
 
 
@@ -3408,6 +5739,20 @@ rule MatchImut ::=
 
 
 
+
+An illustration of the rule is a set of case statements, followed by an optional `default` case
+
+```tremor
+  match event of
+    case %{} => "I am a possibly non-empty record",
+    case %[] => "I am a possibly non-empty array",
+    case %( "snot" ) => "I am a list with 1 element which is the string \"snot\"
+    default => "I'm something else"
+  end
+```
+
+
+
 ## Rule PredicatesImut
 
 The `PredicatesImut` rule defines a sequence of `PredicateClauseImut` rules.
@@ -3422,6 +5767,20 @@ rule PredicatesImut ::=
   | PredicatesImut PredicateClauseImut 
   ;
 
+```
+
+
+
+
+An illustration of the rule is a set of case statements, followed by an optional `default` case
+
+```tremor
+  match event of
+    case %{} => "I am a possibly non-empty record",
+    case %[] => "I am a possibly non-empty array",
+    case %( "snot" ) => "I am a list with 1 element which is the string \"snot\"
+    default => "I'm something else"
+  end
 ```
 
 
@@ -3450,6 +5809,16 @@ rule CasePattern ::=
 
 
 
+
+An internal part of the match statement rule supporting
+* Record, Array and Tuple structural patterns
+* Complex predicate expressions
+* The "_" dont care condition
+* A predicate extractor
+* An aliased case pattern
+
+
+
 ## Rule PredicateClauseImut
 
 The `PredicateClauseImut` rule defines valid clauses of a match statement.
@@ -3473,6 +5842,59 @@ rule PredicateClauseImut ::=
 
 
 
+## How do i write robust match predicate rules?
+
+There are two basic forms of `match` expression predicate
+
+### Case form
+
+```tremor
+  match event of
+    case %{} => "I am a possibly non-empty record",
+    case %[] => "I am a possibly non-empty array",
+    case %( "snot" ) => "I am a list with 1 element which is the string \"snot\"
+```
+
+These are used for isolating specific cases of interest that need to specific
+processing. Sometimes cases can be incomplete without a `default` case and this
+is also supported.
+
+```tremor
+    default => "If i'm not one of these things, I'm something else"
+end
+```
+
+If tremor can prove at compile time that a `default` case is advisable it will
+emit a warning:
+
+```tremor
+match event of
+  case true => "I believe you"
+end;
+```
+
+```tremor
+    1 | match event of
+    2 |   case true => "I believe you"
+    3 | end;
+      | ^^^ This match expression has no default clause, if the other clauses do not cover all possibilities this will lead to events being discarded with runtime errors.
+```
+
+And, tremor will issue a runtime error when a bad case is found:
+
+```tremor
+    1 | match event of
+    2 |   case true => "I believe you"
+    3 | end;
+      | ^^^ A match expression executed but no clause matched
+      |     NOTE: Consider adding a `default => null` clause at the end of your match or validate full coverage beforehand.
+
+```
+
+It is almost always preferable to have a `default` case and this practice is recommended.
+
+
+
 ## Rule EffectorsImut
 
 The `EffectorsImut` rule defines the result value block sequence of pattern rule.
@@ -3493,6 +5915,28 @@ rule EffectorsImut ::=
 
 
 
+### Example
+
+An effector is an `=>` arrow followed by `Block` sequence.
+
+In many of the structural forms such as `match`, `for` or `patch` and effector is
+a sequence of logic that is executed when certain conditions occur. The final statement
+in an effector is the result of the sequence of executions.
+
+As an example, here is a `for` compresension that enumerates a list
+and computes the stringified representation of the elements of the list.
+
+The `for` expression collects each iterations result from the effector's `block`
+statement and aggregates them into a list.
+
+```tremor
+for [1, 2, 3, 4, 5] of
+  case (i, e) => "#{e}";
+end;
+
+```
+
+
 ## Rule BlockImut
 
 The `BlockImut` rule defines a comma delimited sequence of complex immutable expressions.
@@ -3511,6 +5955,24 @@ rule BlockImut ::=
 
 
 
+### How does tremor process blocks?
+
+A block of expressions is a `;` semi-colon delimited set of statements that
+share the same scope. This means that the same set of metadata, `state` and
+any scoped identifiers are visible to the block.
+
+The last expression in a block of statements is the return value.
+
+```tremor
+let return = 1;
+let return = return << 7 % 4;
+return - 1
+```
+
+The answer as we're sure you'll agree is `7`.
+
+
+
 ## Rule WhenClause
 
 The `WhenClause` rule defines an optional guard expression.
@@ -3525,6 +5987,29 @@ rule WhenClause ::=
   ;
 
 ```
+
+
+
+
+### Implicit guard
+
+When no `when` clause is provided it is always executed equivalent to
+
+```tremor
+when true
+```
+
+### Explicit guards
+
+Guards are predicate or boolean expressions, so any expression that reduces
+to a boolean result can be used in the `WhenClause`
+
+```tremor
+when present state.snot and present event.badger
+```
+
+In the above rule, the state must be a record with a field `snot` 
+present and the current event must be a record with a field `badger` present
 
 
 
@@ -3559,6 +6044,77 @@ rule PredicateFieldPattern ::=
 
 
 
+###  Extraction
+
+```tremor
+x ~= json||
+```
+
+Tests if the field x represents an embedded json script. If true,
+extracts and parses the embedded JSON and stores the parsed document
+in the field `x` in the predicate patterns result, if configured.
+
+### Aliased extraction
+
+
+```tremor
+alias = x ~= json||
+```
+
+Tests if the field x represents an embedded json script. If true,
+extracts and parses the embedded JSON and stores the parsed document
+in the field `alias` in the predicate patterns result, if configured.
+
+### Sub records
+
+```tremor
+x ~= %{}
+```
+
+Tests if the field x represents a record value. If true, extracts embedded
+record and stores it in the field `x` in the predicate patterns result, if configured.
+
+### Sub arrays
+
+```tremor
+x ~= %[]
+```
+
+Tests if the field x represents an array value. If true, extracts embedded
+array and stores it in the field `x` in the predicate patterns result, if configured.
+
+
+```tremor
+x ~= %()
+```
+
+Tests if the field x represents an array value. If true, extracts embedded
+array and stores it in the field `x` in the predicate patterns result, if configured.
+
+### Presence and absence
+
+```tremor
+present x
+```
+
+Is the field `x` present in the record? If true, extracts the field.
+
+```tremor
+absent x
+```
+
+Is the field `x` absent in the record?
+
+### Comprison and Equality tests
+
+```tremor
+x >= 10
+```
+
+Tests if the numeric field x is greater than or equal to the literal 10. If true, extracts the field.
+
+
+
 ## Rule TestExpr
 
 The `TestExpr` defines an extractor with an optional microformat body.
@@ -3581,6 +6137,19 @@ rule TestExpr ::=
   ;
 
 ```
+
+
+
+
+```tremor
+json||
+```
+
+The rule identifies an extractor by name and delimits any micro-format arguments using the '|' pipe symbol.
+
+In the above example the extractor is a JSON recognizer that can detect well formed JSON embedded inside a
+string literal. Such values will match the test expression and be parsed so that the content can be used in
+logic expressions.
 
 
 
@@ -3610,6 +6179,35 @@ rule RecordPattern ::=
 
 
 
+
+### An empty record pattern
+
+Matches any record value
+
+```tremor
+%{ }
+```
+
+### A record with a field called 'snot'
+
+```tremor
+%{ snot }
+```
+
+### A record with a field called 'snot', with a string literal value 'badger'
+
+```tremor
+%{ snot == "badger" }
+```
+
+### A record with a field called 'snot', whose string contents is well-formed embedded JSON
+
+```tremor
+%{ snot ~= json|| }
+```
+
+
+
 ## Rule ArrayPattern
 
 The `ArrayPattern` defines structural patterns against array values.
@@ -3632,6 +6230,17 @@ rule ArrayPattern ::=
   |  '%['  ']' 
   ;
 
+```
+
+
+
+
+```tremor
+match event of
+  case result = %[ 1, 2 ] => result
+  case %[ _ ] => "ignore"
+  default => null
+end
 ```
 
 
@@ -3664,6 +6273,26 @@ rule TuplePattern ::=
 
 
 
+
+A tuple pattern allows ordinal matching of arrays. A tuple pattern is useful
+where the search oriented `%[` .. `]` array pattern syntax is insufficient or
+when the order of entries or elements in an array is significant.
+
+```tremor
+use std::string;
+
+match string::split(event, "/") of
+  case %("snot") => 0	# An array with a single string literal 'snot' value
+  case %("snot", ...) => 1 # An array with a first value string literal 'snot', and possibly zero or many more values
+  case %("api", _, "badger", ...) => 2 # An array with first value 'api', and 3rd value 'badger'
+  case %("") => 3 # An array with an empty string literal value
+  case %("badger", "snot") => 4 The two element array with 1st element "badger", and 2nd element "snot"
+  default => string::split(event, "/")
+end
+```
+
+
+
 ## Rule OpenTuple
 
 The `OpenTuple` rule defines a tuple pattern that matches any element in a tuple
@@ -3681,6 +6310,15 @@ rule OpenTuple ::=
   ;
 
 ```
+
+
+
+
+```tremor
+%("snot", ...)
+```
+
+An open tuple that starts with `["snot"]` but may have zero or more extra elements
 
 
 
@@ -3702,6 +6340,13 @@ rule TuplePredicatePatterns ::=
 
 
 
+See `ArrayPredicatePattern` rule for predicate patterns avilable in tuple predicate patterns.
+
+The predicate patterns are essentially the same, with the distinction that tuple patterns
+are ordinal and array predicate patterns are search based.
+
+
+
 ## Rule TuplePredicatePattern
 
 The syntax of the `TuplePredicatePattern` is the same as that of the `ArrayPredicatePattern`.
@@ -3717,6 +6362,13 @@ rule TuplePredicatePattern ::=
 
 ```
 
+
+
+
+Wraps an `ArrayPredicatePattern` as the predicates supported by Array and Tuple predicate patterns
+are the same.
+
+See the `ArrayPredicatePattern` rule for more details
 
 
 ## Rule ArrayPredicatePattern
@@ -3741,6 +6393,22 @@ rule ArrayPredicatePattern ::=
 
 
 
+
+### Array predicate extraction - contains embedded JSON
+
+```
+~ json||
+```
+
+### Contains records
+
+```
+%{}
+```
+
+
+
+
 ## Rule ArrayPredicatePatterns
 
 The `ArrayPredicatePatterns` rule defines a set of comma delimited `ArrayPredicatePattern` rules.
@@ -3759,6 +6427,9 @@ rule ArrayPredicatePatterns ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule PatternFields
 
 The `PatternFields` rule defines a set of comma delimited `PredicateFieldPattern` rules.
@@ -3773,6 +6444,10 @@ rule PatternFields ::=
   ;
 
 ```
+
+
+
+Wraps a macro invocation rule for for use in other rules.
 
 
 
@@ -3795,6 +6470,12 @@ rule PatternFields_ ::=
 
 
 
+See `PatternFields` rule for details.
+
+This rule wraps away a lalrpop macro call for ease of reference in other rules in the grammar source.
+
+
+
 ## Rule Fields
 
 The `Fields` rule defines a set of comma delimited `Field` rules.
@@ -3808,6 +6489,14 @@ rule Fields ::=
     Fields_ 
   ;
 
+```
+
+
+
+### Example for record patterns
+
+```tremor
+%{ present snot, badger == "badger", list = %[] }
 ```
 
 
@@ -3828,6 +6517,12 @@ rule Fields_ ::=
   ;
 
 ```
+
+
+
+See `Fields` rule for details.
+
+This rule wraps away a lalrpop macro call for ease of reference in other rules in the grammar source.
 
 
 
@@ -4001,8 +6696,14 @@ use std::binary;
 # +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 # |            Checksum           |         Urgent Pointer        |
 # +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-# |                    Options                    |    Padding    | IGNORED
+# |                    Options                    |    Padding    |
 # +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+#                                                                 |
+#  Data section proceeding packet header is optional and may or   |
+#  it is up to the user whether or not to include this in a       |
+#  binary literal or not                                          |
+#                                                                 |
+#  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .|
 
 # Record representation of a TCP packet
 let event = {
@@ -4016,7 +6717,7 @@ let event = {
   "win": 4,
   "checksum": 5,
   "urgent": 6,
-  "data": "snot badger!"
+  "data": "snot badger!" # For encoding we 
 };
 
 # Convert the record into a binary encoded TCP packet
@@ -4163,6 +6864,9 @@ macro Sep<L, T, D> ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule BinOp
 
 The `BinOp` rule is a [LALRPOP](http://lalrpop.github.io/lalrpop/) convenience that allows defining
@@ -4199,6 +6903,9 @@ macro BinOp<Op, Current, Next> ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule BinCmpEq
 
 The `BinCmpEq` rule allows binary or comparative operations
@@ -4219,6 +6926,9 @@ rule BinCmpEq ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule BinOr
 
 The `BinOr` rule defines binary or operation
@@ -4236,6 +6946,21 @@ rule BinOr ::=
      'or' 
   ;
 
+```
+
+
+
+
+### Logical OR
+
+```tremor
+false or false	# false
+
+false or true	# true
+
+true or false	# true
+
+true or true	# true
 ```
 
 
@@ -4261,6 +6986,21 @@ rule BinXor ::=
 
 
 
+
+### Logical Exclusive Or
+
+```tremor
+    false xor false # false
+
+    false xor true  # true
+
+    true xor false  # true
+
+    true xor true   # false
+```
+ 
+
+
 ## Rule BinAnd
 
 The `BinAnd` rule defines binary and operation
@@ -4278,6 +7018,21 @@ rule BinAnd ::=
      'and' 
   ;
 
+```
+
+
+
+
+### Logical And
+
+```tremor
+false and false   # false
+
+false and true    # false 
+
+true and false    # false
+
+true and true     # true
 ```
 
 
@@ -4303,6 +7058,26 @@ rule BinBitXor ::=
 
 
 
+
+### Bitwise behaviour, when used with integers
+
+```tremor
+  42 ^ 2	# 40
+  42 ^ -2	# -44
+  42 ^ 0	# 42
+  -42 ^ 2	# -44
+  -42 ^ -2	# 40
+```
+
+### Logical behaviour, when used with boolean predicates
+
+```tremor
+  true ^ true	# false
+  true ^ false  # true
+```
+
+
+
 ## Rule BinBitAnd
 
 The `BinBitAnd` rule defines binary bitwise and operation
@@ -4320,6 +7095,27 @@ rule BinBitAnd ::=
      '&' 
   ;
 
+```
+
+
+
+
+### Bitwise behaviour, when used with integers
+
+```tremor
+  42 & 2 	# 2
+  42 & -2 	# 42
+  42 & 0 	# 0
+  -42 & 2 	# 2
+  -42 & -2 	# -42
+```
+
+### Logical behaviour, when used with boolean predicates
+
+
+```tremor
+  true & true	# true
+  false & true,	# false
 ```
 
 
@@ -4343,6 +7139,21 @@ rule BinEq ::=
   |  '!=' 
   ;
 
+```
+
+
+
+
+### Are these values the same
+
+```tremor
+let predicate = a == b
+```
+
+### Are these values different
+
+```tremor
+let predicate = a != b
 ```
 
 
@@ -4374,15 +7185,43 @@ rule BinCmp ::=
 
 
 
+
+### Is greater than
+
+```tremor
+let predicate = a > b
+```
+
+### Is greater than or or equal to
+
+```tremor
+let predicate = a >= b
+```
+
+
+### Is less than or equal to
+
+```tremor
+let predicate = a <= b
+```
+
+### Is less than
+
+```tremor
+let predicate = a < b
+```
+
+
+
 ## Rule BinBitShift
 
 The `BinBitShift` rule defines bit shift operations
 
 |Operator|Description|
 |---|---|
-|`>>>`|Binary bit shift right, with `1` injected|
-|`>>`|Binary bit shift right, with `0` injected|
-|`<<`|Binary bit shift left, with `0` injected|
+|`>>>`|Binary bit shift right, unsigned|
+|`>>`|Binary bit shift right, signed|
+|`<<`|Binary bit shift left, signed|
 
 
 
@@ -4397,6 +7236,55 @@ rule BinBitShift ::=
 
 ```
 
+
+
+
+
+~~~tremor
+[
+  "right bit shift (signed)",
+  42 >> 0, 	# 0
+  42 >> 2, 	# 10
+  -42 >> 2,	# -11
+  42 >> 63,	# 0
+
+  # right bit shift (signed) (invalid)
+  #42 >> 64,
+  #42 >> -1,
+  #42 >> 2.0,
+  #42 >> "2",
+  #42 >> true
+
+  "right bit shift (unsigned)",
+  42 >>> 0,	# 42
+  42 >>> 2,	# 10
+  -42 >>> 2,	# 4611686018427387893
+  42 >>> 63,	# 0
+
+  # right bit shift (unsigned) (invalid)
+  #42 >>> 64,
+  #42 >>> -1,
+  #42 >>> 2.0,
+  #42 >>> "2",
+  #42 >>> true
+
+  "left bit shift",
+  42 << 0,	# 42
+  42 << 2,	# 168
+  -42 << 2,	# -168
+  42 << 63	# 0
+
+  # left bit shift (invalid)
+  #42 << 64
+  #a << 64
+  #42 << -1
+  #42 << 2.0
+  #42 << "2"
+  #a << "2"
+  #42 << true
+  #42 <<< 2
+]
+~~~
 
 
 ## Rule BinAdd
@@ -4424,6 +7312,20 @@ rule BinAdd ::=
 
 
 
+
+## Numeric addition
+
+```tremor
+1 + 2 # Addition, if one operand is a float, the result will be a float
+```
+
+## Numeric subtraction
+```tremor
+1 - 2 # Subtraction, if one operand is a float, the result will be a float
+```
+
+
+
 ## Rule BinMul
 
 The `BinMul` rule defines multiplicative operations
@@ -4445,6 +7347,27 @@ rule BinMul ::=
   |  '%' 
   ;
 
+```
+
+
+
+
+### Numeric multiplication
+
+```tremor
+2 * 1.5 # multiplication, if any argument is floating point, result is floating point
+```
+
+### Numeric division
+
+```tremor
+2 / 1.5 # division, results is always a floating point value
+```
+
+### Integer numeric Modulus
+
+```tremor
+5  % 2 # modulus - operands must not integers
 ```
 
 

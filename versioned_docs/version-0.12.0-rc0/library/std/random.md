@@ -17,7 +17,7 @@ we will always get the same value for an event.
 
 Generates a random boolean.
 
-Returns an `bool`;
+Returns a `bool`;
 
 ### string(length)
 
@@ -25,10 +25,10 @@ Generates a random string of given length with ASCII letters and numbers:
 `a`-`z`, `A`-`Z` and `0`-`9`. The argument must be an `integer` greater than
 or equal to zero -- otherwise the function errors out.
 
-```tremor
-random::string(16) # 16 alphanumeric characters. eg: "QuSFjpW8PBNewRml"
-random::string(0)  # ""
-```
+> ```tremor
+> random::string(16) # 16 alphanumeric characters. eg: "QuSFjpW8PBNewRml"
+> random::string(0)  # ""
+> ```
 
 Returns an `string`
 
@@ -37,16 +37,18 @@ Returns an `string`
 Generates a random `integer`, with the functionality changing based on the
 number of arguments passed.
 
-```tremor
-random::integer(0, 2)     # either 0 or 1
-random::integer(42, 43)   # always 42
-random::integer(0, 100)   # one of 0-99
-random::integer(-1, 1)    # either -1 or 0
-random::integer(-42, -41) # always -42
-random::integer(i) -> integer
-random::integer(100) # one of 0-99. same as random::integer(0, 100)
-random::integer() -> integer
-```
+> ```tremor
+> random::integer(0, 2)     # either 0 or 1
+> random::integer(42, 43)   # always 42
+> random::integer(0, 100)   # one of 0-99
+> random::integer(-1, 1)    # either -1 or 0
+> random::integer(-42, -41) # always -42
+> random::integer(i) -> integer
+> random::integer(100) # one of 0-99. same as random::integer(0, 100)
+> random::integer() -> integer
+> ```
+
+Returns an `integer`
 
 ### float()
 
@@ -54,10 +56,12 @@ Generates a random float, with the functionality changing based on the
 number of arguments passed.
 
 
-```tremor
-random::float(0.0, 100.0) # >= 0.0 and < 100.0
-random::float(-1.0, 1.0)  # >= -1.0 and < 1.0
-random::float(-3.0, -2.0) # >= -3.0 and < -2.0
-random::float(100.0) # same as random::float(0.0, 100.0)
-random::float() -> float
-```
+> ```tremor
+> random::float(0.0, 100.0) # >= 0.0 and < 100.0
+> random::float(-1.0, 1.0)  # >= -1.0 and < 1.0
+> random::float(-3.0, -2.0) # >= -3.0 and < -2.0
+> random::float(100.0) # same as random::float(0.0, 100.0)
+> random::float() -> float
+> ```
+
+Returns a `float`

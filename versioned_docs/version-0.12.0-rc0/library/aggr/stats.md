@@ -3,7 +3,7 @@
 
 The stats module contains functions for aggregating statistical measures of various events.
 
-## Size¶
+## Size
 When using stats aggregate functions size in memory becomes an important factor from a capacity planning perspective. The exact size of a window using aggregates depends on three main factors:
 
 The size of the dimension identifier. I.e. if the window is identified by the string "window" it will require that amount of memory related to this. If it is identified by an array of 10.000 elements all reading "window" it will use (about) 10.000 times that size.
@@ -82,9 +82,10 @@ limit accuracy to 2 significant decimal places.
 * size: Fixed, 100 Kilo Bytes (note: this strongly depends on configuration, and can be estimated
 more correctly with [this formula](https://github.com/HdrHistogram/HdrHistogram#footprint-estimation))
 
-```tremor
-aggr::stats::hdr(event.value, ["0.5","0.75","0.9","0.99","0.999"])
-```
+> ```tremor
+> aggr::stats::hdr(event.value, ["0.5","0.75","0.9","0.99","0.999"])
+>  ```
+
 Returns a `record` (all values are integers)
 
 
@@ -97,8 +98,8 @@ and unlike HDR histograms does not need bounds specified.
 
 size: Fixed, 10 Kilo Bytes (estimate based on [this paper](https://arxiv.org/pdf/1908.10693.pdf))
 
-```tremor
-aggr::stats::hdr(event.value, ["0.5","0.75","0.9","0.99","0.999"])
-```
+> ```tremor
+> aggr::stats::hdr(event.value, ["0.5","0.75","0.9","0.99","0.999"])
+>  ```
 
 Returns a `record` (all values are floats)

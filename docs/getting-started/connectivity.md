@@ -21,30 +21,29 @@ Tremor has built-in support for metrics capture of data ingested and distributed
 
 Tremor supports a number of stable general purpose onramps:
 
-* [Kafka](../connectors/onramps/#kafka)
-* [TCP](../connectors/onramps/#tcp)
-* [UDP](../connectors/onramps/#udp)
-* [WS](../connectors/onramps/#WS)
-* [File](../connectors/onramps/#file)- reads a singular file.
-* [Metronome](../connectors/onramps/#metronome)- periodic tick events.
-* [Crononome](../connectors/onramps/#crononome)- cron based tick events.
-* [Blaster](../connectors/onramps/#blaster)- Benchmarking onramp.
+* [Kafka](/docs/0.11/artefacts/onramps#kafka)
+* [TCP](/docs/0.11/artefacts/onramps#tcp)
+* [UDP](/docs/0.11/artefacts/onramps#udp)
+* [WS](/docs/0.11/artefacts/onramps#ws)
+* [File](/docs/0.11/artefacts/onramps#file)- reads a singular file.
+* [Metronome](/docs/0.11/artefacts/onramps#metronome)- periodic tick events.
+* [Crononome](/docs/0.11/artefacts/onramps#crononome)- cron based tick events.
+* [Blaster](/docs/0.11/artefacts/onramps#blaster)- Benchmarking onramp.
 
 And some early-access evolving production-grade onramps:
 
-* [REST](../connectors/onramps/#rest)
+* [REST](/docs/0.11/artefacts/onramps#rest)
 
 ### Offramps
 
 Tremor supports a number of stable general purpose offramps:
 
-* [File](../connectors/offramps/#file)
-* [Kafka](../connectors/offramps/#kafka)
-* [REST](../connectors/offramps/#rest)
-* [TCP](../connectors/offramps/#tcp)
-* [UDP](../connectors/offramps/#udp)
-* [WS](../connectors/offramps/#ws)
-* [BlackHole](../connectors/offramps/#rest)- benchmarking offramp.
-* [elastic](../connectors/offramps/#elastic)- ElasticSearch client
-* [debug](../connectors/offramps/#rest)- tremor internal use for debugging.
-* [stdout](../connectors/offramps/#stdout)
+* [File](/docs/0.11/artefacts/offramps#file)
+* [Kafka](/docs/0.11/artefacts/offramps#kafka)
+* [REST](/docs/0.11/artefacts/offramps#http)
+* [TCP](/docs/0.11/artefacts/offramps#tcp)
+* [UDP](/docs/0.11/artefacts/offramps#udp)
+* [WS](/docs/0.11/artefacts/offramps#ws)
+* [BlackHole](/docs/0.11/artefacts/offramps#blackhole)- benchmarking offramp.
+* [elastic](/docs/0.11/artefacts/offramps#elastic)- ElasticSearch client
+* [stdout](/docs/0.11/artefacts/offramps#stdout)
