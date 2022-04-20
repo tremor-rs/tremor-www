@@ -35,8 +35,8 @@ Returns a `bool`
 Splits the input string using the provided regular expression regex as
 separator.
 
-```tremor
-re::split(" ", "this is a test") == ["this", "is", "a", "string"].
-```
+> ```tremor
+> re::split(" ", "this is a test") == ["this", "is", "a", "string"].
+> ```
 
 Returns a `[string]`

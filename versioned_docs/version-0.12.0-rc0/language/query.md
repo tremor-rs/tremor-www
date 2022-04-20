@@ -2,20 +2,38 @@
 
 ## Rule Query
 
-### Query Language Entrypoint
+The `Query` rule defines the logical entry point into Tremor's statement
+oriented query grammar. The grammar is embedded into deployments via
+`define pipeline` statements.
 
-This is the top level rule of the tremor query language `trickle`
+Pipelines effectively provide a continous streaming abstraction for
+event processing. The pipeline query is a graph of connected streams
+and operators. The operators can be builtin or provided by users through
+the `script` operator.
+
+Window definitions for use in windowed statements such as those supported by
+the `select` operation  are also defined and named so that they can be used
+by multiple operations and to compose tilt frames - chains of successive
+windows of data in a streaming continuous select operation.
+
+The syntax supports the definition of sub queries through the same `define pipeline`
+syntax as in the deployment grammar.
 
 
-<img src="./svg/query.svg" alt="Query" width="555" height="100"/>
+
+<img src="./svg/query.svg" alt="Query" width="341" height="75"/>
 
 ```ebnf
 rule Query ::=
-    ConfigDirectives Stmts  '<end-of-stream>' ?  
-  | Stmts  '<end-of-stream>' ?  
+    ConfigDirectives Stmts 
+  | Stmts 
   ;
 
 ```
+
+
+
+
 
 
 
@@ -39,6 +57,12 @@ rule ConfigDirectives ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+See `ConfigDirective` for supported directives.
+
+
+
 ## Rule Stmts
 
 The `Stmts` rule defines a `;` semi-colon delimited sequence of `Stmt` rules.
@@ -57,6 +81,18 @@ rule Stmts ::=
 
 
 
+### Example for a query pipeline
+
+```tremor
+use tremor;
+create stream snot;
+create stream badger;
+
+# ...
+```
+
+
+
 ## Rule Stmt
 
 The `Stmt` rule defines the legal statements in a query script.
@@ -68,7 +104,7 @@ Queries in tremor support:
 
 
 
-<img src="./svg/stmt.svg" alt="Stmt" width="1237" height="339"/>
+<img src="./svg/stmt.svg" alt="Stmt" width="255" height="339"/>
 
 ```ebnf
 rule Stmt ::=
@@ -80,12 +116,15 @@ rule Stmt ::=
   | CreateOperator 
   | CreateScript 
   | CreatePipeline 
-  |  'create'  'stream' Ident 
-  |  'select' ComplexExprImut  'from' StreamPort WindowClause WhereClause GroupByClause  'into' StreamPort HavingClause 
+  | CreateStream 
+  | OperatorSelect 
   ;
 
 ```
 
+
+
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
 
 
 ## Rule Use
@@ -172,6 +211,17 @@ rule DefineWindow ::=
 
 
 
+
+
+```trickle
+define window four from tumbling
+with
+  size = 4
+end;
+```
+
+
+
 ## Rule DefineOperator
 
 The `DefineOperator` rule defines an operator.
@@ -190,6 +240,26 @@ rule DefineOperator ::=
   ;
 
 ```
+
+
+
+
+```trickle
+define pipeline subq
+pipeline
+  define operator counter from generic::counter;
+  create operator counter;
+  select event from in into counter;
+  select event from counter into out;
+end;
+
+create pipeline subq;
+
+select event from in into subq;
+select event from subq into out;
+```
+
+Uses the builtin counter sequencing operator to numerate a stream.
 
 
 
@@ -216,6 +286,28 @@ rule DefineScript ::=
 
 
 
+
+
+```trickle
+define operator bucket from grouper::bucket;
+
+define script categorize
+script
+  let $rate = 1;
+  let $dimensions = event.logger_name;
+  let $class = "test";
+  event
+end;
+
+create operator bucket;
+create script categorize;
+
+select event from in into categorize;
+select event from categorize into bucket;
+select event from bucket into out;
+```
+
+
 ## Rule DefinePipeline
 
 The `DefinePipeline` rule creates a named pipeline.
@@ -235,6 +327,16 @@ rule DefinePipeline ::=
     DocComment  'define'  'pipeline' Ident (  'from' Ports ) ?  (  'into' Ports ) ?  DefinitionArgs Pipeline 
   ;
 
+```
+
+
+
+
+```troy
+define pipeline identity
+pipeline
+  select event from in into out;
+end;
 ```
 
 
@@ -259,6 +361,29 @@ rule CreateOperator ::=
   |  'create'  'operator' Ident  'from' ModularTarget CreationWithEnd 
   ;
 
+```
+
+
+
+
+```trickle
+
+# Define a round robin operator with 3 slots
+define operator roundrobin from qos::roundrobin
+with
+  outputs = ["one", "two", "three"]
+end;
+
+# create an instance of the operator
+create operator roundrobin;
+
+# Filter all inbound events into the rond robin
+select event from in into roundrobin;
+
+# Union slots inot outbound port
+select event from roundrobin/one into out;
+select event from roundrobin/two into out;
+select event from roundrobin/three into out;
 ```
 
 
@@ -288,6 +413,31 @@ rule CreateScript ::=
 
 
 
+
+```trickle
+define operator bucket from grouper::bucket;
+
+define script categorize
+script
+  let $class = "test";
+  let $dimensions = [event.type, event.application];
+  let $rate = 1;
+  event;
+end;
+
+create operator bucket;
+
+create script categorize;
+
+select event from in into categorize;
+
+select event from categorize into bucket;
+
+select event from bucket into out;
+```
+
+
+
 ## Rule CreatePipeline
 
 The `CreatePipeline` rule creates a pipeline.
@@ -309,6 +459,158 @@ rule CreatePipeline ::=
   |  'create'  'pipeline' Ident  'from' ModularTarget CreationWithEnd 
   ;
 
+```
+
+
+
+
+```trickle
+
+# Define a pipeline called `identity`
+define pipeline identity
+pipeline
+  select event from in into out;
+end;
+
+# Create an instance of the pipeline
+create pipeline identity
+````
+
+
+
+## Rule CreateStream
+
+The `CreateStream` allows users to create user defined streams beyond the basic
+buitin set of `in`, `out` and `err` provided by the runtime for a pipeline query.
+
+
+
+<img src="./svg/createstream.svg" alt="CreateStream" width="323" height="42"/>
+
+```ebnf
+rule CreateStream ::=
+     'create'  'stream' Ident 
+  ;
+
+```
+
+
+
+
+```trickle
+create stream ctrl;
+```
+
+Creates a user defined stream by the provided name `ctrl`
+
+
+
+## Rule OperatorSelect
+
+The `OperatorSelect` rule provides the `select` statement in streaming queries.
+
+The statement has
+* A target expression
+* A stream and port from which to consume events
+* A stream and port to which synthetic events are produced
+* An optional set of iwndow definitions
+* An optional `where` filter
+* An optional `having` filter
+* An optional `group by`
+
+Unlike ANSI-ISO SQL select operations in tremor do not presume tabular or columnar data. The
+target expression can be any well-formed and legal value supported by tremor.
+
+
+
+<img src="./svg/operatorselect.svg" alt="OperatorSelect" width="1189" height="42"/>
+
+```ebnf
+rule OperatorSelect ::=
+     'select' ComplexExprImut  'from' StreamPort WindowClause WhereClause GroupByClause  'into' StreamPort HavingClause 
+  ;
+
+```
+
+
+
+
+The builtin `select` operator in queries.
+
+### A simple non-windowed non-grouped select
+
+```trickle
+select event from in into out;
+```
+
+### A simple non-windowed grouped select
+
+```trickle
+select event from in into out group by event.key;
+```
+
+### A windowed grouped select operation
+
+```trickle
+select event from in[one_sec] by event.key into out;
+```
+
+Multiple windows can be configured in lower resolutions
+for multi-resolution windowed expressions where lower
+resolutions are merged into from higher resolution windows
+
+```trickle
+select aggr::stats::hdr(event.count) form in[one_sec, fifteen_sec, one_min, one_hour] into out;
+```
+
+
+
+## Rule DocComment
+
+The `DocComment` rule specifies documentation comments in tremor.
+
+Documentation comments are optional.
+
+A documentation comment begins with a `##` double-hash and they are line delimited.
+
+Muliple successive comments are coalesced together to form a complete comment.
+
+The content of a documentation comment is markdown syntax.
+
+
+
+<img src="./svg/doccomment.svg" alt="DocComment" width="231" height="55"/>
+
+```ebnf
+rule DocComment ::=
+    ( DocComment_ ) ?  
+  ;
+
+```
+
+
+
+### Example
+
+Documentation level comments are used throughout the tremor standard library
+and used as part of our document generation process.
+
+Here is a modified snippet from the standard library to illustrate
+
+```tremor
+## Returns the instance of tremor.
+##
+## Returns a `string`
+intrinsic fn instance() as system::instance;
+...
+```
+
+This is a builtin function implemented in rust and used in a script as follows:
+
+```tremor
+use tremor::system;
+
+system::instance()
 ```
 
 
@@ -358,145 +660,6 @@ But we cannot think of any good reason to do so!
 
 
 
-## Rule ComplexExprImut
-
-The `ComplexExprImut` rule defines complex immutable expression in tremor.
-
-
-
-<img src="./svg/complexexprimut.svg" alt="ComplexExprImut" width="215" height="108"/>
-
-```ebnf
-rule ComplexExprImut ::=
-    MatchImut 
-  | ForImut 
-  | ExprImut 
-  ;
-
-```
-
-
-
-## Rule StreamPort
-
-The `StreamPort` rule defines a stream by name with an optional named `Port`.
-
-When the `Port` is omitted, tremor will internally default the `Port` to the
-appropriate `in` or `out` port. Where the `err` or user defined `Port`s are
-preferred, the optional `Port` specification SHOULD be provided.
-
-
-
-<img src="./svg/streamport.svg" alt="StreamPort" width="237" height="42"/>
-
-```ebnf
-rule StreamPort ::=
-    Ident MaybePort 
-  ;
-
-```
-
-
-
-## Rule WindowClause
-
-The `WindowClause` rule defines an optional window definition for a supporting operation.
-
-
-
-<img src="./svg/windowclause.svg" alt="WindowClause" width="223" height="55"/>
-
-```ebnf
-rule WindowClause ::=
-    ( WindowDefn ) ?  
-  ;
-
-```
-
-
-
-## Rule WhereClause
-
-The `WhereClause` defines a predicate expression used to filter ( forward or discard ) events in an operation.
-
-The `where` clause is executed before a operation processes an event.
-
-
-
-<img src="./svg/whereclause.svg" alt="WhereClause" width="349" height="55"/>
-
-```ebnf
-rule WhereClause ::=
-    (  'where' ComplexExprImut ) ?  
-  ;
-
-```
-
-
-
-## Rule GroupByClause
-
-The `GroupByClause` defines the group by clause of a supporting operation in tremor.
-
-An operator that uses a group by clause maintains the operation for each group captured
-by the grouping dimensions specified in this clause.
-
-
-
-<img src="./svg/groupbyclause.svg" alt="GroupByClause" width="355" height="55"/>
-
-```ebnf
-rule GroupByClause ::=
-    (  'group'  'by' GroupDef ) ?  
-  ;
-
-```
-
-
-
-## Rule HavingClause
-
-The `HavingClause` defines a predicate expression used to filter ( forward or discard ) events in an operation.
-
-The `having` clause is executed after an operation has processed an event.
-
-
-<img src="./svg/havingclause.svg" alt="HavingClause" width="357" height="55"/>
-
-```ebnf
-rule HavingClause ::=
-    (  'having' ComplexExprImut ) ?  
-  ;
-
-```
-
-
-
-## Rule DocComment
-
-The `DocComment` rule specifies documentation comments in tremor.
-
-Documentation comments are optional.
-
-A documentation comment begins with a `##` double-hash and they are line delimited.
-
-Muliple successive comments are coalesced together to form a complete comment.
-
-The content of a documentation comment is markdown syntax.
-
-
-
-<img src="./svg/doccomment.svg" alt="DocComment" width="231" height="55"/>
-
-```ebnf
-rule DocComment ::=
-    ( DocComment_ ) ?  
-  ;
-
-```
-
-
-
 ## Rule WindowKind
 
 ### Tumbling
@@ -529,9 +692,14 @@ rule WindowKind ::=
 
 
 
+
+Currently only `tumbling` is implemented.
+
+
+
 ## Rule CreationWith
 
-The `CreationWit` rule defines an optional `with` block of expressions without a terminal `end` keyword.
+The `CreationWith` rule defines an optional `with` block of expressions without a terminal `end` keyword.
 
 
 
@@ -545,6 +713,9 @@ rule CreationWith ::=
 
 ```
 
+
+
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
 
 
 ## Rule EmbeddedScriptImut
@@ -561,6 +732,15 @@ rule EmbeddedScriptImut ::=
   ;
 
 ```
+
+
+
+
+This rule is used in productions that contain an optional `script` element.
+
+As such, it does not have an `end` token. That token is defined by the parent rule.
+
+The host rule will terminate with an `end` so `end` in an optional embedded script isn't needed.
 
 
 
@@ -583,6 +763,16 @@ rule OperatorKind ::=
 
 
 
+
+A modular path identifying a builtin operator.
+
+```tremor
+define operator roundrobin from qos::roundrobin;
+```
+
+
+
+
 ## Rule ArgsWithEnd
 
 The `ArgsWithEnd` rule defines an arguments block with an `end` block.
@@ -601,6 +791,13 @@ rule ArgsWithEnd ::=
 
 
 
+
+An internal rule that defines an optional `args` block with and optional `end` token.
+
+This rule is used and shared in other rules as part of their definitions.
+
+
+
 ## Rule DefinitionArgs
 
 The `DefinitionArgs` rule defines an arguments block without an `end` block.
@@ -615,6 +812,17 @@ rule DefinitionArgs ::=
   ;
 
 ```
+
+
+
+
+An optional argument block
+
+```tremor
+args arg1, arg 2
+```
+
+This is a shared internal rule used in other rules as part of their definition.
 
 
 
@@ -637,6 +845,14 @@ rule EmbeddedScript ::=
 
 
 
+
+```tremor
+script
+  event
+end
+```
+
+
 ## Rule Ports
 
 The `Ports` rule defines a `,` comma delimited set of stream ports.
@@ -651,6 +867,26 @@ rule Ports ::=
   ;
 
 ```
+
+
+
+A set of `ports` exposed in pipeline definitions in their `from` and `into` clauses
+
+```tremor
+define pipeline example
+  from in, out, err, ctrl
+  into in, out, err, ctrl
+pipeline
+  # A pipeline query implementation
+  ...
+end
+```
+
+The `from` and `into` ports do not need to be the same.
+
+Tremor's compiler and runtime can use these definitions to validate deployments
+are correct, or discover deployments that are invalid. It is an error to send
+data to or receive data from a pipeline port that is not specified.
 
 
 
@@ -673,6 +909,187 @@ rule Pipeline ::=
 
 
 
+
+An internal rule to the `DefinePipeline` rule where the pipeline logic is provided.
+
+
+
+## Rule ComplexExprImut
+
+The `ComplexExprImut` rule defines complex immutable expression in tremor.
+
+
+
+<img src="./svg/complexexprimut.svg" alt="ComplexExprImut" width="215" height="108"/>
+
+```ebnf
+rule ComplexExprImut ::=
+    MatchImut 
+  | ForImut 
+  | ExprImut 
+  ;
+
+```
+
+
+
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
+## Rule StreamPort
+
+The `StreamPort` rule defines a stream by name with an optional named `Port`.
+
+When the `Port` is omitted, tremor will internally default the `Port` to the
+appropriate `in` or `out` port. Where the `err` or user defined `Port`s are
+preferred, the optional `Port` specification SHOULD be provided.
+
+
+
+<img src="./svg/streamport.svg" alt="StreamPort" width="237" height="42"/>
+
+```ebnf
+rule StreamPort ::=
+    Ident MaybePort 
+  ;
+
+```
+
+
+
+
+```trickle
+in/snot
+```
+
+Within a query, allows the port of a specific stream to be referenced directly.
+
+
+
+## Rule WindowClause
+
+The `WindowClause` rule defines an optional window definition for a supporting operation.
+
+
+
+<img src="./svg/windowclause.svg" alt="WindowClause" width="223" height="55"/>
+
+```ebnf
+rule WindowClause ::=
+    ( WindowDefn ) ?  
+  ;
+
+```
+
+
+
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
+## Rule WhereClause
+
+The `WhereClause` defines a predicate expression used to filter ( forward or discard ) events in an operation.
+
+The `where` clause is executed before a operation processes an event.
+
+
+
+<img src="./svg/whereclause.svg" alt="WhereClause" width="349" height="55"/>
+
+```ebnf
+rule WhereClause ::=
+    (  'where' ComplexExprImut ) ?  
+  ;
+
+```
+
+
+
+
+```tremor
+select event from in
+where present event.important
+into out
+```
+
+The `where` filters events before computations occur upon them in operators
+that support the clause. Any predicate ( boolean ) expression can be used
+in a `where` filter.
+
+
+
+## Rule GroupByClause
+
+The `GroupByClause` defines the group by clause of a supporting operation in tremor.
+
+An operator that uses a group by clause maintains the operation for each group captured
+by the grouping dimensions specified in this clause.
+
+
+
+<img src="./svg/groupbyclause.svg" alt="GroupByClause" width="355" height="55"/>
+
+```ebnf
+rule GroupByClause ::=
+    (  'group'  'by' GroupDef ) ?  
+  ;
+
+```
+
+
+
+
+```tremor
+select event from in[one_second]
+having present event.important
+group by event.priority
+into out
+```
+
+The `group by` clause groups events based on a group expression. Each computed group effectively
+has its own memory and computation allocated.
+
+For windowed operations the windows are allocated for each group.
+
+These groups and their windows are independant. This means that opening, closing, filling and
+recycling of windows is by group.
+
+
+
+## Rule HavingClause
+
+The `HavingClause` defines a predicate expression used to filter ( forward or discard ) events in an operation.
+
+The `having` clause is executed after an operation has processed an event.
+
+
+<img src="./svg/havingclause.svg" alt="HavingClause" width="357" height="55"/>
+
+```ebnf
+rule HavingClause ::=
+    (  'having' ComplexExprImut ) ?  
+  ;
+
+```
+
+
+
+
+```tremor
+select event from in
+having present event.important
+into out
+```
+
+The `having` filters events __after__ computations has occured within them in operators
+that support the clause. Any predicate ( boolean ) expression can be used
+in a `having` filter.
+
+When appropriate, the `where` clause should be used in preference over the `having` clause.
+It is better to filter early before computation occurs when this is practicable or possible.
+
+
+
 ## Rule CreationWithEnd
 
 The `CreationWithEnd` rule defines a `with` block of expressions with a terminal `end` keyword.
@@ -687,6 +1104,13 @@ rule CreationWithEnd ::=
   | 
   ;
 
+```
+
+
+
+
+```tremor
+with x = y end
 ```
 
 
@@ -759,6 +1183,15 @@ rule MaybePort ::=
 
 
 
+
+When interconnecting pipelines and connectors in flow definitions
+default ports can be inferred by the tremor runtime.
+
+When an alternate port is required, the port specification can be
+used to explicitly select from available inbound or outbound ports.
+
+
+
 ## Rule WindowDefn
 
 The `WindowDefn` defines a temporal basis over which a stream of events is applicable.
@@ -773,6 +1206,25 @@ rule WindowDefn ::=
   ;
 
 ```
+
+
+
+
+Operations supporting windowed aggregate functions in tremor such as the `select`
+statement can window incoming streams in the `from` clause:
+
+```tremor
+select aggr::count(event) from in[one_second, ten_second]
+...
+```
+
+Here, we stream events from the `in` stream into a `one_second` window.
+Every second, we stream the aggregate result from the one second window
+into the `ten_second` window.
+
+So, even if we have 1 million events per second, the `one_second` and `ten_second`
+windows will convert the event firehose into a `trickle`. Fun fact: this pun is where the
+query language got its name from.
 
 
 
@@ -793,6 +1245,10 @@ rule Windows ::=
 
 
 
+Wraps the `Windows_` internal rule for other rules to consume in their definitions
+
+
+
 ## Rule Windows_
 
 The `Windows_` rule defines a sequence of window definitions that are `,` comma delimited.
@@ -807,6 +1263,40 @@ rule Windows_ ::=
   ;
 
 ```
+
+
+
+
+A comma delimited set of window references.
+
+Windows can be local or modular
+
+```tremor
+win, my_module::one_sec, my_module::five_sec
+```
+
+The identifers refer to a window definition and can be used
+in operators to define a temporally bound set of events based
+on the semantics of the window definition.
+
+In a tilt frame - or set of windows, the output of a window can
+is the input the next window in a sequence. This is a form of
+temporal window-driven event compaction that allows memory be
+conserved.
+
+At 1000 events per second, a 1 minute window needs to store 60,000
+events per group per second. But 60 1 second windows can be merged
+with aggregate functions like `dds` and `hdr` histograms.
+
+Say, each histogram is 1k of memory per group per frame - that is
+a cost of 2k bytes per group.
+
+In a streaming system - indefinite aggregation of in memory events is
+always a tradeoff against available reosurces, and the relative business
+value.
+
+Often multiple windows in a tilt frame can be more effective than a
+single very long lived window.
 
 
 
@@ -825,6 +1315,9 @@ rule Window ::=
 
 ```
 
+
+
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
 
 
 ## Rule GroupDef
@@ -851,6 +1344,36 @@ rule GroupDef ::=
 
 
 
+### Example group definitions
+
+A string value
+```tremor
+event.string
+```
+
+The serialization of any legal tremor data value
+
+```tremor
+event
+```
+
+A set based on multiple expressions:
+
+```tremor
+set(event.key, state[key])
+```
+
+An set computed from an interation
+
+let keys = ['snot', 'badger', 'goose'];
+
+# ...
+
+each(keys)
+```
+
+
+
 ## Rule ExprImut
 
 The `ExprImut` is the root of immutable expressions in tremor.
@@ -865,6 +1388,12 @@ rule ExprImut ::=
   ;
 
 ```
+
+
+
+
+The effective root of the subset of the expression langauge applicable in most immutable
+processing context in tremor is captured by this rule.
 
 
 
@@ -885,6 +1414,11 @@ rule GroupDefs ::=
 
 
 
+
+Wraps a macro call for use by other productions in the grammar
+
+
+
 ## Rule GroupDefs_
 
 The `GroupDefs_` rule defines a `,` comma delimited set of `GroupDef` rules.
@@ -902,6 +1436,11 @@ rule GroupDefs_ ::=
 
 
 
+
+A comma delimited set of `GroupDef` productions
+
+
+
 ## Rule EmbeddedScriptContent
 
 The `EmbeddedScriptContent` rule defines an embedded script expression. 
@@ -916,6 +1455,11 @@ rule EmbeddedScriptContent ::=
   ;
 
 ```
+
+
+
+
+A single expression embedded within an embedded script
 
 
 
@@ -938,6 +1482,27 @@ rule TopLevelExprs ::=
 
 
 
+The `ToplEvelExprs` specifies the expressions that are legal at the top level
+of a `script` expression.
+
+```tremor
+script
+  event.sum * 2
+end
+```
+
+A sequence of ';' semi-colon delimited expressions of the following form are permissible:
+
+* Constants
+* Function definitions
+* Intrinsic function definitions in the standard library 
+  * Provided by the runtime to document builtins - not user modifiable without a pull request or feature enhancement
+* Arbitrary complex expressions
+* Use definitions
+
+
+
+
 ## Rule PipelineCreateInner
 
 The `PipelineCreateInner` is an internal rule of the `Pipeline` rule.
@@ -955,6 +1520,11 @@ rule PipelineCreateInner ::=
   ;
 
 ```
+
+
+
+
+This rule allows queries to be defined in the context of a pipeline definition.
 
 
 

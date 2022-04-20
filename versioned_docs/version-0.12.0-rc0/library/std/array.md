@@ -35,11 +35,11 @@ array.
 
 **Note**: left and right need to have the same length.
 
-```tremor
-let left = [1, 2, 3];
-let right = ["a", "b", "c"];
-array::zip(left, right) == [[1, "a"], [2, "b"], [3, "c"]]
-```
+> ```tremor
+> let left = [1, 2, 3];
+> let right = ["a", "b", "c"];
+> array::zip(left, right) == [[1, "a"], [2, "b"], [3, "c"]]
+> ```
 
 Returns an `array`.
 
@@ -49,9 +49,9 @@ Unzips an array of tuples into an array of two arrays.
 
 **Note**: array's elements need to be arrays of two elements.
 
-```tremor
-array::unzip([[1, "a"], [2, "b"], [3, "c"]]) ==  [[1, 2, 3], ["a", "b", "c"]]
-```
+> ```tremor
+> array::unzip([[1, "a"], [2, "b"], [3, "c"]]) ==  [[1, 2, 3], ["a", "b", "c"]]
+> ```
 
 Returns an `array`.
 
@@ -59,9 +59,9 @@ Returns an `array`.
 
 Flattens a nested array recursively.
 
-```tremor
-array::flatten([[1, 2, 3], ["a", "b", "c"]]) = [1, 2, 3, "a", "b", "c"]
-```
+> ```tremor
+> array::flatten([[1, 2, 3], ["a", "b", "c"]]) = [1, 2, 3, "a", "b", "c"]
+> ```
 
 Returns an `array`.
 
@@ -69,9 +69,9 @@ Returns an `array`.
 
 Returns the array for null values removed.
 
-```tremor
-array::coalesce([1, null, 2, null, 3]) = [1, 2, 3]
-```
+> ```tremor
+> array::coalesce([1, null, 2, null, 3]) = [1, 2, 3]
+> ```
 
 Returns an `array`.
 
@@ -80,9 +80,9 @@ Returns an `array`.
 Joins the elements of an array (turing them into Strings) for a given
 separator.
 
-```tremor
-array:join(["this", "is", "a", "cake"], " ") => "this is a cake"
-```
+> ```tremor
+> array:join(["this", "is", "a", "cake"], " ") => "this is a cake"
+> ```
 
 Returns a `string`.
 
@@ -91,9 +91,9 @@ Returns a `string`.
 Concatenates two arrays returning a new array. The new array is not a set,
 i.e. it can contain duplicates depending on the input arrays.
 
-```tremor
-array::concatenate([1, 2, 3], [3, 4]) == [1, 2, 3, 3, 4]
-```
+> ```tremor
+> array::concatenate([1, 2, 3], [3, 4]) == [1, 2, 3, 3, 4]
+> ```
 
 Returns an `array`
 
@@ -101,8 +101,8 @@ Returns an `array`
 
 Sorts an array
 
-```tremor
-array::concatenate([3, 2, 3, 1, 4]) == [1, 2, 3, 3, 4]
-```
+> ```tremor
+> array::concatenate([3, 2, 3, 1, 4]) == [1, 2, 3, 3, 4]
+> ```
 
 Returns an `array`

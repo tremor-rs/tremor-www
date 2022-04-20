@@ -1,0 +1,1 @@
+#!/usr/bin/env tremor run tremor-filter.tremor

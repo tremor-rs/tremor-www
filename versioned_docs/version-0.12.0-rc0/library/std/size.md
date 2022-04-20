@@ -7,46 +7,51 @@ This module is responsible for converting size units into bytes
 
 Returns the number of bytes in a given number of kibibytes
 
-```tremor
-size::kiB(10)
-```
+> ```tremor
+> size::kiB(10)
+> ```
+
 
 ### MiB(size)
 
 Returns the number of bytes in a given number of mebibytes
 
-```tremor
-size::MiB(10)
-```
+> ```tremor
+> size::MiB(10)
+> ```
 
 ### GiB(size)
 
 Returns the number of bytes in a given number of gibibytes
 
-```tremor
-size::GiB(10)
-```
+> ```tremor
+> size::GiB(10)
+> ```
+
 
 ### TiB(size)
 
 Returns the number of bytes in a given number of tebibytes
 
-```tremor
-size::TiB(10)
-```
+> ```tremor
+> size::TiB(10)
+> ```
+
 
 ### PiB(size)
 
 Returns the number of bytes in a given number of pebibytes
 
-```tremor
-size::PiB(10)
-```
+> ```tremor
+> size::PiB(10)
+> ```
+
 
 ### EiB(size)
 
 Returns the number of bytes in a given number of exbibytes
 
-```tremor
-size::EiB(10)
-```
+> ```tremor
+> size::EiB(10)
+> ```
+

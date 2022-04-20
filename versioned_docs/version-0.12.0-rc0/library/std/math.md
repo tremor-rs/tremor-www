@@ -7,9 +7,9 @@ The math module contains functions for common mathematical operations.
 
 Returns the smallest integer value less than or equal to n.
 
-```tremor
-math::floor(42.9) == 42
-```
+> ```tremor
+> math::floor(42.9) == 42
+> ```
 
 Returns an `integer`
 
@@ -17,9 +17,9 @@ Returns an `integer`
 
 Returns the largest `integer` value greater than or equal to n.
 
-```tremor
-math::ceil(41.1) == 42
-```
+> ```tremor
+> math::ceil(41.1) == 42
+> ```
 
 Returns an `integer`
 
@@ -27,10 +27,10 @@ Returns an `integer`
 
 Returns the `integer` nearest to.
 
-```tremor
-math::round(41.4) == 41
-math::round(41.5) == 42
-```
+> ```tremor
+> math::round(41.4) == 41
+> math::round(41.5) == 42
+> ```
 
 Returns an `integer`
 
@@ -38,10 +38,10 @@ Returns an `integer`
 
 Returns the `integer` part of `n`.
 
-```tremor
-math::trunc(41.4) == 41
-math::trunc(41.5) == 41
-```
+> ```tremor
+> math::trunc(41.4) == 41
+> math::trunc(41.5) == 41
+> ```
 
 Returns an `integer`
 
@@ -49,9 +49,9 @@ Returns an `integer`
 
 Returns the maximum of two numbers.
 
-```tremor
-math::max(41, 42) == 42
-```
+> ```tremor
+> math::max(41, 42) == 42
+> ```
 
 Returns a `number` (`integer` or `float`)
 
@@ -59,8 +59,8 @@ Returns a `number` (`integer` or `float`)
 
 Returns the minimum of two numbers.
 
-```tremor
-math::min(41, 42) == 41
-```
+> ```tremor
+> math::min(41, 42) == 41
+> ```
 
 Returns a `number` (`integer` or `float`)

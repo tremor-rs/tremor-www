@@ -49,54 +49,117 @@ The amount of nanoseconds in a week
 
 convert the given weeks to nanoseconds
 
+> ```tremor
+> use std::time::nanos;
+> nanos::from_weeks(1) # 604800000000000
+> ```
+
+Returns an integer
+
 ### from_days(days)
 
-convert the given hours to nanoseconds
+convert the given days to nanoseconds
+
+> ```tremor
+> use std::time::nanos;
+> nanos::from_days(1) # 86400000000000
+> ```
+
+Returns an integer
 
 ### from_hours(hours)
 
 convert the given hours to nanoseconds
 
+> ```tremor
+> use std::time::nanos;
+> nanos::from_hours(1) # 3600000000000
+> ```
+
+Returns an integer
+
 ### from_minutes(minutes)
 
 convert the given minutes to nanoseconds
+
+> ```tremor
+> use std::time::nanos;
+> nanos::from_minutes(1) # 60000000000
+> ```
+
+Returns an integer
 
 ### from_seconds(secs)
 
 Convert the given seconds to nanoseconds
 
+> ```tremor
+> use std::time::nanos;
+> nanos::from_seconds(1) # 1000000000
+> ```
+
+Returns an integer
+
 ### from_millis(millis)
 
 Convert the given milliseconds to nanoseconds
+
+> ```tremor
+> use std::time::nanos;
+> nanos::from_millis(1) # 1000000
+> ```
+
+Returns an integer
 
 ### from_micros(micros)
 
 Convert the given microseconds to nanoseconds
 
+> ```tremor
+> use std::time::nanos;
+> nanos::from_micros(1) # 1000
+> ```
+
+Returns an integer
+
 ### to_weeks(nanos)
 
 Convert the given nanoseconds to weeks
+
+Returns an integer
 
 ### to_days(nanos)
 
 Convert the given nanoseconds to days
 
+Returns an integer
+
 ### to_hours(nanos)
 
 Convert the given nanoseconds to hours
+
+Returns an integer
 
 ### to_minutes(nanos)
 
 Convert the given nanoseconds to minutes
 
+Returns an integer
+
 ### to_seconds(nanos)
 
 Convert the given nanoseconds to seconds
+
+Returns an integer
 
 ### to_millis(nanos)
 
 Convert the given nanoseconds to milliseconds
 
+Returns an integer
+
 ### to_micros(nanos)
 
 Convert the given nanoseconds to microseconds
+
+Returns an integer

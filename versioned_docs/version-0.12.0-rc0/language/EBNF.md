@@ -1,13 +1,52 @@
 ## EBNF Grammar
 
-This EBNF grammar was generated from: "/workspace/tremor-www/tremor-runtime/tremor-script/src/grammar.lalrpop"
+This EBNF grammar was generated from: "/Users/dennis/code/oss/tremor-rs/tremor-www-idle/tremor-runtime/tremor-script/src/grammar.lalrpop"
 
 ```ebnf
 
 
-rule Use ::=
-     'use' ModularTarget 
-  |  'use' ModularTarget  'as' Ident 
+rule ModuleFile ::=
+    ModuleBody 
+  ;
+
+rule ModuleBody ::=
+    ModComment ModuleStmts 
+  ;
+
+rule ModComment ::=
+    ( ModComment_ ) ?  
+  ;
+
+rule ModComment_ ::=
+     '<mod-comment>' 
+  | ModComment_  '<mod-comment>' 
+  ;
+
+rule DocComment ::=
+    ( DocComment_ ) ?  
+  ;
+
+rule DocComment_ ::=
+     '<doc-comment>' 
+  | DocComment_  '<doc-comment>' 
+  ;
+
+rule ModuleStmts ::=
+    ModuleStmt  ';' ModuleStmts 
+  | ModuleStmt  ';' ?  
+  ;
+
+rule ModuleStmt ::=
+    Use 
+  | Const 
+  | FnDefn 
+  | Intrinsic 
+  | DefineWindow 
+  | DefineOperator 
+  | DefineScript 
+  | DefinePipeline 
+  | DefineConnector 
+  | DefineFlow 
   ;
 
 rule ConfigDirectives ::=
@@ -17,6 +56,11 @@ rule ConfigDirectives ::=
 
 rule ConfigDirective ::=
      '#!config' WithExpr 
+  ;
+
+rule Use ::=
+     'use' ModularTarget 
+  |  'use' ModularTarget  'as' Ident 
   ;
 
 rule ArgsWithEnd ::=
@@ -67,58 +111,14 @@ rule WithExpr ::=
     Ident  '=' ExprImut 
   ;
 
-rule ModuleBody ::=
-    ModComment ModuleStmts 
-  ;
-
-rule ModuleFile ::=
-    ModuleBody  '<end-of-stream>' 
-  ;
-
-rule ModuleStmts ::=
-    ModuleStmt  ';' ModuleStmts 
-  | ModuleStmt  ';' ?  
-  ;
-
-rule ModuleStmt ::=
-    Use 
-  | Const 
-  | FnDefn 
-  | Intrinsic 
-  | DefineWindow 
-  | DefineOperator 
-  | DefineScript 
-  | DefinePipeline 
-  | DefineConnector 
-  | DefineFlow 
-  ;
-
 rule ModularTarget ::=
     Ident 
   | ModPath  '::' Ident 
   ;
 
-rule DocComment ::=
-    ( DocComment_ ) ?  
-  ;
-
-rule DocComment_ ::=
-     '<doc-comment>' 
-  | DocComment_  '<doc-comment>' 
-  ;
-
-rule ModComment ::=
-    ( ModComment_ ) ?  
-  ;
-
-rule ModComment_ ::=
-     '<mod-comment>' 
-  | ModComment_  '<mod-comment>' 
-  ;
-
 rule Deploy ::=
-    ConfigDirectives ModComment DeployStmts  '<end-of-stream>' ?  
-  | ModComment DeployStmts  '<end-of-stream>' ?  
+    ConfigDirectives ModComment DeployStmts 
+  | ModComment DeployStmts 
   ;
 
 rule DeployStmts ::=
@@ -202,8 +202,8 @@ rule DefineFlow ::=
   ;
 
 rule Query ::=
-    ConfigDirectives Stmts  '<end-of-stream>' ?  
-  | Stmts  '<end-of-stream>' ?  
+    ConfigDirectives Stmts 
+  | Stmts 
   ;
 
 rule Stmts ::=
@@ -220,8 +220,8 @@ rule Stmt ::=
   | CreateOperator 
   | CreateScript 
   | CreatePipeline 
-  |  'create'  'stream' Ident 
-  |  'select' ComplexExprImut  'from' StreamPort WindowClause WhereClause GroupByClause  'into' StreamPort HavingClause 
+  | CreateStream 
+  | OperatorSelect 
   ;
 
 rule DefineWindow ::=
@@ -238,6 +238,14 @@ rule DefineScript ::=
 
 rule DefinePipeline ::=
     DocComment  'define'  'pipeline' Ident (  'from' Ports ) ?  (  'into' Ports ) ?  DefinitionArgs Pipeline 
+  ;
+
+rule OperatorSelect ::=
+     'select' ComplexExprImut  'from' StreamPort WindowClause WhereClause GroupByClause  'into' StreamPort HavingClause 
+  ;
+
+rule CreateStream ::=
+     'create'  'stream' Ident 
   ;
 
 rule CreateScript ::=
@@ -344,7 +352,7 @@ rule PipelineCreateInner ::=
   ;
 
 rule Script ::=
-    ModComment TopLevelExprs  '<end-of-stream>' ?  
+    ModComment TopLevelExprs 
   ;
 
 rule TopLevelExprs ::=
