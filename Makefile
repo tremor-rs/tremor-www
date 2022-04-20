@@ -1,4 +1,4 @@
-TREMOR_VSN=connectors
+TREMOR_VSN=main
 
 all: clean tremor-runtime-docs openapi
 
