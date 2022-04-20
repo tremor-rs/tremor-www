@@ -67,10 +67,7 @@ const sidebars = {
       id: 'connectors',
       label: 'Connectors Reference',
     },
-    'connectors/overview',
-    {
-        'Facilities': [
-	       { 'Codecs': [ 
+        { 'Codecs': [ 
             'connectors/codecs',
             'connectors/codecs/json',
             'connectors/codecs/yaml',
@@ -81,11 +78,49 @@ const sidebars = {
             'connectors/codecs/binflux',
             'connectors/codecs/statsd',
             'connectors/codecs/syslog',
-          ]},
-	        'connectors/preprocessors',
+        ]},
+        { 'Preprocessors': [
+	  'connectors/preprocessors',
+	  'connectors/preprocessors/base64',
+	  'connectors/preprocessors/decompress',
+	  'connectors/preprocessors/gelf',
+	  'connectors/preprocessors/length-prefix',
+	  'connectors/preprocessors/lines',
+	  'connectors/preprocessors/remove-empty',
+        ]},
+        { 'Postprocessors': [
           'connectors/postprocessors',
-        ]
-    }
+          'connectors/postprocessors/base64',
+          'connectors/postprocessors/compress',
+          'connectors/postprocessors/gelf',
+          'connectors/postprocessors/ingest-timestamp',
+          'connectors/postprocessors/length-prefix',
+          'connectors/postprocessors/lines',
+        ]},
+        { 'Supported Connectors': [
+          'connectors/file',
+          'connectors/metrics',
+          'connectors/stdio',
+          'connectors/tcp',
+          'connectors/udp',
+          'connectors/kv',
+          'connectors/metronome',
+          'connectors/crononome',
+          'connectors/wal',
+          'connectors/dns',
+          'connectors/discord',
+          'connectors/ws',
+          'connectors/elastic',
+          'connectors/s3',
+          'connectors/kafka',
+          'connectors/unix_socket',
+          'connectors/otel',
+        ]},
+        { 'Development Connectors': [
+          'connectors/cb',
+          'connectors/bench',
+          'connectors/null',
+        ]},
   ],
   librarySidebar: [
     {

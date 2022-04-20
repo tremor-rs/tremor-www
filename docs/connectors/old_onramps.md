@@ -487,7 +487,7 @@ onramp:
 
 #### Semantics with `enable.auto.commit`
 
-If `enable.auto.commit: false` is set in `rdkafka_options`, the consumer offset in kafka will only be committed when the event has successfully reached the other end of the pipeline (typically some [offramp](offramps.md#offramps) ).
+If `enable.auto.commit: false` is set in `rdkafka_options`, the consumer offset in kafka will only be committed when the event has successfully reached the other end of the pipeline (typically some [offramp](old_offramps.md#offramps) ).
 If an event failed during processing within the pipeline or at a downstream offramp, the consumer offset will be reset to the offset of the failed event, so it will be retried. This has some consequences worth mentioning:
 
 - Already processed `kafka` messages (that have succeeded before the failed message failed) might be seen again multiple times.
