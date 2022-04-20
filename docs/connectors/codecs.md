@@ -1,9 +1,4 @@
----
-id: codecs
-title: Codecs
----
-
-# Codecs
+# Codecs Overview
 
 Codecs are used to describe how to decode data from the wire and encode it back to wire format.
 
