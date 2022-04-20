@@ -10,5 +10,12 @@ Returns the **current** cardinality of a group by
 statement. When used without a group by it will
 return zero (0).
 
+> ```trickle
+> use std::win;
+>
+> select { "group#{group[0]}": win::cardinality() }
+> from in
+> group by each([1, 2, 3, 4, 5]) into out;
+> ```
 
 Returns a `integer`

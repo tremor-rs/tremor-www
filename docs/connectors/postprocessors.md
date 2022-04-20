@@ -8,9 +8,9 @@ Online codecs and postprocessors can be chained to perform multiple operations i
 
 |PostprocessorName|Description|
 |---|---|
-|[base64](postprocesses/base64)|Base64 Encoding|
-|[compress](postprocessors/cmopress)|Compression Algorithms|
-|[gelf](postprocessors/gelf|GELF format|
+|[base64](postprocessors/base64)|Base64 Encoding|
+|[compress](postprocessors/compress)|Compression Algorithms|
+|[gelf](postprocessors/gelf)|GELF format|
 |[ingest-timestamp](postprocessors/ingest-timestamp)|Ingest timestamp|
 |[length-prefix](postprocessors/length-prefix)|Length prefixed data|
 |[lines](postprocessors/lines)|Line delimited data||

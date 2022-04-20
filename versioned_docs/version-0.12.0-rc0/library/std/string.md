@@ -7,28 +7,28 @@ The string module contains functions that primarily work with strings.
 
 The placeholder {} is replaced by the arguments in the list in order.
 
-```tremor
-string::format("the {} is {}.", "meaning of life", 42)
-```
+> ```tremor
+> string::format("the {} is {}.", "meaning of life", 42)
+> ```
 
 would result in the string
 
-```tremor
-"the meaning of life is 42"
-```
+> ```tremor
+> "the meaning of life is 42"
+> ```
 
 To use `{` or `}` as string literals in your format string, it needs to be
 escapedby adding another parenthesis of the same type.
 
-```tremor
-string::format("{{ this is a string format in parenthesis }}")
-```
+> ```tremor
+> string::format("{{ this is a string format in parenthesis }}")
+> ```
 
 this will output:
 
-```tremor
-"{ this is a string format in parenthesis }"
-```
+> ```tremor
+> "{ this is a string format in parenthesis }"
+> ```
 
 Returns a `string`
 

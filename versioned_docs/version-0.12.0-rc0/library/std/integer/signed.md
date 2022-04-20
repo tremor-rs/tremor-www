@@ -1,7 +1,7 @@
 
 # signed
 
-Signed integer constatns
+Signed integer constants
 ## Constants
 ### max
 

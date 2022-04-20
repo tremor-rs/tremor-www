@@ -2,20 +2,61 @@
 
 ## Rule Deploy
 
-### Deployment Language Entrypoint
+The `Deploy` rule defines the logical entry point into Tremor's command
+oriented deployment syntax. The deployment grammar defines units of
+deployment that the runtime manages on behalf of users.
 
-This is the top level rule of the tremor deployment language `troy`
+The grammar embeds the statement oriented query syntax and expression
+oriented scripting syntax where appropriate.
+
+A legal deployment is composed of:
+* An optional set of module comments
+* A sequence of top level expressions. There must be at least one defined.
+* An optional end of stream token.
+
+At least one *deploy* command.
 
 
 
-<img src="./svg/deploy.svg" alt="Deploy" width="713" height="100"/>
+<img src="./svg/deploy.svg" alt="Deploy" width="499" height="75"/>
 
 ```ebnf
 rule Deploy ::=
-    ConfigDirectives ModComment DeployStmts  '<end-of-stream>' ?  
-  | ModComment DeployStmts  '<end-of-stream>' ?  
+    ConfigDirectives ModComment DeployStmts 
+  | ModComment DeployStmts 
   ;
 
+```
+
+
+
+
+```troy
+define flow test
+flow
+  define connector metronome from metronome
+  with
+    config = {
+      "interval": 1
+    }
+  end;
+  define connector exit from exit;
+  define pipeline identity
+  args
+    snot = "badger",
+  pipeline
+    select args.snot from in into out;
+  end;
+  create connector metronome;
+  create connector exit;
+  create pipeline identity with
+    snot = "snot"
+  end;
+  connect /connector/metronome to /pipeline/identity;
+  connect /pipeline/identity to /connector/exit;
+end;
+
+deploy flow test
 ```
 
 
@@ -37,6 +78,12 @@ rule ConfigDirectives ::=
   ;
 
 ```
+
+
+
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+See `ConfigDirective` for supported directives.
 
 
 
@@ -67,7 +114,7 @@ rule ModComment ::=
 
 ### Example
 
-Module level comments are used throughput the tremor standard library
+Module level comments are used throughout the tremor standard library
 and used as part of our document generation process.
 
 Here is a modified snippet from the standard library to illustrate
@@ -111,6 +158,9 @@ rule DeployStmts ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule DeployStmt
 
 The `DeployStmt` rule constrains the statements that are legal in a `.troy` deployment module.
@@ -134,7 +184,20 @@ rule DeployStmt ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule DefineFlow
+
+The `DefineFlow` rule defines a flow.
+
+A flow is a runtime artefact that informs tremor how to interconnect and launch
+instances of pipelines and connectors.
+
+A flow can define or use multiple in scope and already define pipelines and
+connectors and interconnect their streams together.
+
+
 
 <img src="./svg/defineflow.svg" alt="DefineFlow" width="809" height="42"/>
 
@@ -147,7 +210,50 @@ rule DefineFlow ::=
 
 
 
+
+```troy
+define flow test
+flow
+  define connector metronome from metronome
+  with
+    config = {
+      "interval": 1
+    }
+  end;
+  define connector exit from exit;
+  define pipeline identity
+  args
+    snot = "badger",
+  pipeline
+    select args.snot from in into out;
+  end;
+  create connector metronome;
+  create connector exit;
+  create pipeline identity;
+  connect /connector/metronome to /pipeline/identity;
+  connect /pipeline/identity to /connector/exit;
+end;
+
+deploy flow test
+```
+
+A flow definition is a runnable or executable streaming program that describes
+the connectivity, the logic and how they are interconnected. A deploy statement
+is responsible for the actual deployment.
+
+
+
 ## Rule DeployFlowStmt
+
+The `DeployFlowStmt` rule defines the content of a command to tremor
+to deploy a flow.
+
+The flows can be re-parameterized through overriding the default
+parameters set in their originating source definitions via a `with`
+clause.
+
+
+
 
 <img src="./svg/deployflowstmt.svg" alt="DeployFlowStmt" width="827" height="75"/>
 
@@ -157,6 +263,36 @@ rule DeployFlowStmt ::=
   | DocComment  'deploy'  'flow' Ident CreationWithEnd 
   ;
 
+```
+
+
+
+
+```troy
+define flow test
+flow
+  define connector metronome from metronome
+  with
+    config = {
+      "interval": 1
+    }
+  end;
+  define connector exit from exit;
+  define pipeline identity
+  pipeline
+    select event from in into out;
+  end;
+  create connector metronome;
+  create connector exit;
+  create pipeline identity;
+  connect /connector/metronome to /pipeline/identity;
+  connect /pipeline/identity to /connector/exit;
+end;
+
+# The `deploy` statements commands tremor to instanciate the flow `test` - the flow in turn
+# will result in a metronome, exit connector, pipeline to be started and interconnected as
+# per the `test` definition above
+deploy flow test
 ```
 
 
@@ -242,6 +378,31 @@ rule DocComment ::=
     ( DocComment_ ) ?  
   ;
 
+```
+
+
+
+### Example
+
+Documentation level comments are used throughout the tremor standard library
+and used as part of our document generation process.
+
+Here is a modified snippet from the standard library to illustrate
+
+```tremor
+## Returns the instance of tremor.
+##
+## Returns a `string`
+intrinsic fn instance() as system::instance;
+...
+```
+
+This is a builtin function implemented in rust and used in a script as follows:
+
+```tremor
+use tremor::system;
+
+system::instance()
 ```
 
 
@@ -360,6 +521,13 @@ rule CreationWithEnd ::=
 
 
 
+
+```tremor
+with x = y end
+```
+
+
+
 ## Rule ConnectorKind
 
 The `ConnectorKind` rule identifies a builtin connector in tremor.
@@ -386,6 +554,11 @@ rule ConnectorKind ::=
 
 
 
+
+The name of a builtin connector implemented in rust provided by the tremor runtime.
+
+
+
 ## Rule FlowStmts
 
 The `FlowStmts` rule defines a mandatory `;` semi-colon delimited sequence of `FlowStmtInner` rules.
@@ -403,6 +576,9 @@ rule FlowStmts ::=
 
 
 
+<!-- Added to avoid `lint` warnings from the lalrpop docgen tool. No epilog content needed for this rule -->
+
+
 ## Rule FlowStmts_
 
 The `FlowStmts_` rule defines a `;` semi-colon delimited sequence of `FlowStmtInner` rules.
@@ -417,6 +593,12 @@ rule FlowStmts_ ::=
   ;
 
 ```
+
+
+
+See `FlowStmts` rule for details.
+
+This rule wraps away a lalrpop macro call for ease of reference in other rules in the grammar source.
 
 
 
@@ -440,6 +622,14 @@ rule FlowStmtInner ::=
 
 
 
+
+* A pipeline or connector definition 
+* A pipeline or connector instance via `create`
+* A `use` statement to import a definition
+* A `connect` statement to interlink instances
+
+
+
 ## Rule CreateKind
 
 The `CreateKind` rule encapsulates the artefact types that can be created in the tremor deploymant language.
@@ -455,6 +645,11 @@ rule CreateKind ::=
   ;
 
 ```
+
+
+
+
+An internal rule that allows connectors and pipelines to be created and used by the `Create` rule.
 
 
 
@@ -476,6 +671,11 @@ rule Define ::=
 
 
 
+
+Within a flow definition, allows pipeline and connectors to be defined.
+
+
+
 ## Rule Create
 
 The `Create` rule creates instances of connectors and pipelines in a flow.
@@ -490,6 +690,21 @@ rule Create ::=
   |  'create' CreateKind Ident CreationWithEnd 
   ;
 
+```
+
+
+
+
+### Create a connector
+
+```troy
+create connector foo from snot::foo end;
+```
+
+### Create a pipeline
+
+```troy
+create pipeline bar from badger::bar end;
 ```
 
 
@@ -513,6 +728,26 @@ rule Connect ::=
 
 
 
+
+### Defines how to interconnect pipeline and connectors
+
+Given
+
+```troy
+create connector ingest;
+create connector egress;
+create pipeline logic;
+
+connect /connector/ingress/out to /pipeline/logic/in;
+connect /pipeline/logic/out to  /connector/egress/in;
+```
+
+Defines how the `ingress`, `egress` and `logic` runtime instances
+are interconnected for data to flow through them in a specified
+order.
+
+
+
 ## Rule DefinePipeline
 
 The `DefinePipeline` rule creates a named pipeline.
@@ -532,6 +767,16 @@ rule DefinePipeline ::=
     DocComment  'define'  'pipeline' Ident (  'from' Ports ) ?  (  'into' Ports ) ?  DefinitionArgs Pipeline 
   ;
 
+```
+
+
+
+
+```troy
+define pipeline identity
+pipeline
+  select event from in into out;
+end;
 ```
 
 
@@ -559,6 +804,28 @@ rule DefineConnector ::=
 
 
 
+
+```troy
+define connector metronome from metronome
+  with
+    config = {
+      "interval": 1
+    }
+end;
+```
+
+Define user defind connector `metronome` from the builtin `metronome` connector
+using a 1 second periodicity interval.
+
+```troy
+define connector exit from exit;
+```
+
+Define user dfeind connector `exit` from the builtin `exit` connector
+with no arguments specified.
+
+
+
 ## Rule ConnectFromConnector
 
 The `ConnectFromConnector` rule defines a route from a connector instance.
@@ -573,6 +840,21 @@ rule ConnectFromConnector ::=
   ;
 
 ```
+
+
+
+
+```tremor
+connector/console/out
+```
+
+Connection from the `console` connector definition via the standard `out` port.
+
+```tremor
+connector/console
+```
+
+The shorthand form where the standard `out` port is implied can also be used.
 
 
 
@@ -593,6 +875,21 @@ rule ConnectToPipeline ::=
 
 
 
+
+```tremor
+pipeline/filter/in
+```
+
+Connection to the `filter` pipeline definition via the standard `in` port.
+
+```tremor
+pipeline/console
+```
+
+The shorthand form where the standard `in` port is implied can also be used.
+
+
+
 ## Rule ConnectFromPipeline
 
 The `ConnectFromPipeline` rule defines route from a pipeline instance.
@@ -607,6 +904,21 @@ rule ConnectFromPipeline ::=
   ;
 
 ```
+
+
+
+
+```tremor
+pipeline/filter/out
+```
+
+Connection from the `filter` pipeline definition via the standard `out` port.
+
+```tremor
+pipeline/console
+```
+
+The shorthand form where the standard `out` port is implied can also be used.
 
 
 
@@ -627,6 +939,21 @@ rule ConnectToConnector ::=
 
 
 
+
+```tremor
+connector/console/in
+```
+
+Connection to the `console` connector definition via the standard `in` port.
+
+```tremor
+connector/console
+```
+
+The shorthand form where the standard `in` port is implied can also be used.
+
+
+
 ## Rule MaybePort
 
 The `MaybePort` rule defines an optional `Port`.
@@ -641,6 +968,15 @@ rule MaybePort ::=
   ;
 
 ```
+
+
+
+
+When interconnecting pipelines and connectors in flow definitions
+default ports can be inferred by the tremor runtime.
+
+When an alternate port is required, the port specification can be
+used to explicitly select from available inbound or outbound ports.
 
 
 
@@ -662,6 +998,13 @@ rule ArgsWithEnd ::=
 
 
 
+
+An internal rule that defines an optional `args` block with and optional `end` token.
+
+This rule is used and shared in other rules as part of their definitions.
+
+
+
 ## Rule DefinitionArgs
 
 The `DefinitionArgs` rule defines an arguments block without an `end` block.
@@ -676,6 +1019,17 @@ rule DefinitionArgs ::=
   ;
 
 ```
+
+
+
+
+An optional argument block
+
+```tremor
+args arg1, arg 2
+```
+
+This is a shared internal rule used in other rules as part of their definition.
 
 
 

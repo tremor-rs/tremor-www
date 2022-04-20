@@ -27,9 +27,10 @@ source of events within tremor (i.e. onramp name).
 
 For example, with udp onramp:
 
-```tremor
-origin::scheme() == "tremor-udp"
-```
+> ```tremor
+> use tremor::system::origin;
+> origin::scheme() == "tremor-udp"
+> ```
 
 Returns `string` or `null`
 
@@ -41,9 +42,10 @@ source host (usually IP) that sent the event.
 For example, with udp onramp and for a test event sent from the same host
 as tremor:
 
-```tremor
-origin::host() # returns "127.0.0.1"
-```
+> ```tremor
+> use tremor::system::origin;
+> origin::host() # returns "127.0.0.1"
+> ```
 
 Returns `string` or `null`
 
@@ -54,9 +56,10 @@ or just the port). Encodes the source port on the host that sent the event.
 
 For example, with udp onramp:
 
-```tremor
-origin::port() # returns an ephemeral port on the sender host (eg: 41371)
-```
+> ```tremor
+> use tremor::system::origin;
+> origin::port() # returns an ephemeral port on the sender host (eg: 41371)
+> ```
 
 Returns `integer` or `null`
 
@@ -72,36 +75,42 @@ origin, in a manner that's easily accessible from tremor-script
 
 For example, with udp onramp receiving events on port 12202:
 
-```tremor
-origin::path() # returns ["12202"]
-```
+> ```tremor
+> use tremor::system::origin;
+> origin::path() # returns ["12202"]
+> ```
+
 
 ### as_uri_string()
 
 Returns the full origin URI as a string, or null value if URI is not set.
 The string is of the following standard form (with port as optional):
 
-`<scheme>://<host>[:<port>]/<path>`
+> `<scheme>://<host>[:<port>]/<path>`
 
 For example, with udp onramp receiving events on port 12202 from the same
 host as tremor:
-```tremor
-origin::as_uri_string() # returns "tremor-udp://127.0.0.1:41371/12202",
-# where 41371 is the ephemeral port on the sending
-# side
-```
+
+> ```tremor
+> use tremor::system::origin;
+> origin::as_uri_string() # returns "tremor-udp://127.0.0.1:41371/12202",
+>                        # where 41371 is the ephemeral port on the sending
+>                        # side
+>```
+
 
 ### as_uri_record()
 
 Returns the full origin URI as a record, or null value if URI is not set.
 For example, with udp onramp receiving events on port 12202 from the same
 host as tremor:
-```tremor
-origin::as_uri_record() == {
-"scheme": "tremor-udp",
-"host":"127.0.0.1",
-"port":41371, # where 41371 is the ephemeral port on the sending side
-"path":["12202"]
-}
-```
+> ```tremor
+> use tremor::system::origin;
+> origin::as_uri_record() == {
+>   "scheme": "tremor-udp",
+>   "host":"127.0.0.1",
+>   "port":41371, # where 41371 is the ephemeral port on the sending side
+>   "path":["12202"]
+> }
+> ```
 

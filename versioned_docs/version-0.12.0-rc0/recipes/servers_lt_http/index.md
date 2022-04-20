@@ -41,7 +41,7 @@ binding:
 
 ### Processing logic
 
-In the `request_processing` pipeline, we are free to process the incoming request using tremor-script/tremor-query, and leveraging the various request and response metadata variables for the [rest onramp](../../connectors/onramps#rest). The event flow within the pipeline is captured below:
+In the `request_processing` pipeline, we are free to process the incoming request using tremor-script/tremor-query, and leveraging the various request and response metadata variables for the [rest onramp](/docs/0.11/artefacts/onramps#rest). The event flow within the pipeline is captured below:
 
 ```trickle
 create script process;
