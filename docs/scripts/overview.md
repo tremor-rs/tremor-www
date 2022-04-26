@@ -360,7 +360,7 @@ Grab the books from the store (the same using key, index and escaped key notatio
 
 ```tremor
 let capture = event.store.book;
-# index and escaped notation can acomodate keys that include 'odd' characters such as space or dots.
+# index and escaped notation can accommodate keys that include 'odd' characters such as whitespaces or dots.
 let capture = event.store["book"];
 let capture = event.store.`book`;
 ```
@@ -823,7 +823,7 @@ Here's a tremor-script example demonstrating the usage of the `state` keyword --
   }
 ```
 
-This will work as part of the [runtime::tremor](../queries/operators#runtimetremor) operator confguration in the legacy pipeline yaml setup, and also as an embedded script in the [trickle definition](../queries/walkthrough#scripts-and-operators) of the pipeline.
+This will work as part of the [runtime::tremor](../tremor-query/operators.md#runtimetremor) operator configuration in the legacy pipeline yaml setup, and also as an embedded script in the [trickle definition](../tremor-query/walkthrough.md#scripts-and-operators) of the pipeline.
 
 A key thing to note is that by design, state is not shared across operator nodes in the pipeline. Therefore, if we have scripts across multiple nodes in the pipeline, the `state` keyword in each script allows access only to the local node-specific state storage, and not the state from any other operator nodes or something global to all the nodes.
 
