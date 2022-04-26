@@ -51,7 +51,7 @@ The current meaning of `performant` as documented here means that `tremor-script
 
 ### Productive
 
-The `tremor-script` parsing tool-chain has been designed with ease-of-debugging and ease-of-development in mind. It has buitin support for syntax-highlighting on the console with errors annotating highlighted sections of badly written
+The `tremor-script` parsing tool-chain has been designed with ease-of-debugging and ease-of-development in mind. It has builtin support for syntax-highlighting on the console with errors annotating highlighted sections of badly written
 scripts to simplify fixing such scripts.
 
 ## Language
@@ -165,7 +165,7 @@ Array grammar:
 
 > ![array grammar](../grammar/diagram/Array.png)
 
-Array literals in `tremor-script` are a comma-delimited set of expressions bracketed by the square brakcets '[' and ']'.
+Array literals in `tremor-script` are a comma-delimited set of expressions bracketed by the square brackets '[' and ']'.
 
 ```tremor
 [ 1, 2, "foobar", 3.456e10, { "some": "json-like-document" }, null ]
@@ -218,12 +218,14 @@ BinaryField grammar:
 > ![field grammar](../grammar/diagram/BinaryField.png)
 
 
-Parts of each field are: `<value>:<size>/<type>` where both `size` and `type` are optional.
+Parts of each field are: `<value>:<size>/<type>` where both `size` and `type` are optional. Without `size` or `type`,
+the field defaults to an unsigned big endian integer with 8 bits (aka 1 byte).
 
 The binary types consists of up to three parts. That is 2 prefixes and 1 main type identifier. Examples: `unsigned-big-integer`, `signed-integer`, `binary`. The types currently supported are:
 
 * `binary` - this can handle both binaries and strings, `size` here refers to the number of bytes
 * `integer` - this can represent integers, `size` here means size in bits. In addition the type can be prefixed with `big` and `little` for indianness and `signed` and `unsigned` for signedness.
+
 
 Some examples would be:
 
@@ -368,7 +370,7 @@ Grab the books from the store (the same using key, index and escaped key notatio
 
 ```tremor
 let capture = event.store.book;
-# index and escaped notation can acomodate keys that include 'odd' characters such as whitespaces or dots.
+# index and escaped notation can accommodate keys that include 'odd' characters such as whitespaces or dots.
 let capture = event.store["book"];
 let capture = event.store.`book`;
 ```
@@ -446,9 +448,9 @@ Emit grammar:
 
 > ![emit grammar](../grammar/diagram/Emit.png)
 
-Emit expressions enable short-circuiting the evaluation of a `tremor-script` when processing is known to be complete and further processing can be avoided. If no argument is supplied, emit` will return the event record. If an argument is supplied, the result of evaluating the expression will be returned. Tremor or other processing tools can process emitted events or data using their default flow-based or stream-based data processing pipelines.
+Emit expressions enable short-circuiting the evaluation of a `tremor-script` when processing is known to be complete and further processing can be avoided. If no argument is supplied, `emit` will return the event record. If an argument is supplied, the result of evaluating the expression will be returned. Tremor or other processing tools can process emitted events or data using their default flow-based or stream-based data processing pipelines.
 
-As the content of the emitted event is user-defined, oeprators can standardise the format of the event emitted on emit from `tremor-script`
+As the content of the emitted event is user-defined, operators can standardise the format of the event emitted on emit from `tremor-script`
 
 :::note
 By default, if no `emit` or `drop` expressions are defined, all expressions in a correctly written tremor-script will be evaluated until completion and the value of the last expression evaluated will be returned as an `emit` message.
@@ -769,7 +771,7 @@ end
 
 > ![merge grammar](../grammar/diagram/Merge.png)
 
-Merge expressions defines a difference against a targetted record and applies that difference to produce a result record. Merge operations in `tremor-script` follow merge-semantics defined in [RFC 7386](https://tools.ietf.org/html/rfc7386).
+Merge expressions defines a difference against a targeted record and applies that difference to produce a result record. Merge operations in `tremor-script` follow merge-semantics defined in [RFC 7386](https://tools.ietf.org/html/rfc7386).
 
 ```tremor
 let event = merge event of {"some": "record"} end
@@ -791,7 +793,7 @@ Patch operation grammar
 
 > ![patch operation grammar](../grammar/diagram/PatchOperation.png)
 
-Patch expressions define a set of record level field operations to be applied to a target record in order to transform a targetted record. Patch allows fields to be: inserted where there was no field before; removed where there was a field before; updated where there was a field before; or inserted or updated regardless of whether or not there was a field before. Patch also allows field level merge operations on records or for the targetted document itself to be merged. Merge operations in patch are syntax sugar in that they are both based on the merge operation.
+Patch expressions define a set of record level field operations to be applied to a target record in order to transform a targeted record. Patch allows fields to be: inserted where there was no field before; removed where there was a field before; updated where there was a field before; or inserted or updated regardless of whether or not there was a field before. Patch also allows field level merge operations on records or for the targeted document itself to be merged. Merge operations in patch are syntax sugar in that they are both based on the merge operation.
 
 Patch follows the semantics of [RFC 6902](https://tools.ietf.org/html/rfc6902) with the explicit exclusion of the `copy` and `move` operations and with the addition of an `upsert` operation the variant supported by `tremor-script`
 
@@ -827,7 +829,7 @@ end
 
 As part of the tremor `pipeline` processing, there are times when it's necessary to track state across events over time (eg: in order to exploit stateful algorithms for session tracking, or building and maintaining application state). For this purpose, a tremor `pipeline` is equipped with operator node-level state management and storage capabilities that persists for the running lifetime of a pipeline deployed into the tremor runtime.
 
-From tremor-script, this shared storage is accessbile via the `state` keyword, which allows for accessing the storage contents via [path](#paths) expressions, akin to how the `event` keyword works (with the key difference being that the state storage is shared across events). On pipeline initialization, the state is initialized as `null` and users are free to set it to arbitrary value over the course of processing.
+From tremor-script, this shared storage is accessible via the `state` keyword, which allows for accessing the storage contents via [path](#paths) expressions, akin to how the `event` keyword works (with the key difference being that the state storage is shared across events). On pipeline initialization, the state is initialized as `null` and users are free to set it to arbitrary value over the course of processing.
 
 Here's a tremor-script example demonstrating the usage of the `state` keyword -- it maintains a counter for the events coming in and emits the count alongside the event:
 
@@ -845,7 +847,7 @@ Here's a tremor-script example demonstrating the usage of the `state` keyword --
   }
 ```
 
-This will work as part of the [runtime::tremor](../tremor-query/operators.md#runtimetremor) operator confguration in the legacy pipeline yaml setup, and also as an embedded script in the [trickle definition](../tremor-query/walkthrough.md#scripts-and-operators) of the pipeline.
+This will work as part of the [runtime::tremor](../tremor-query/operators.md#runtimetremor) operator configuration in the legacy pipeline yaml setup, and also as an embedded script in the [trickle definition](../tremor-query/walkthrough.md#scripts-and-operators) of the pipeline.
 
 A key thing to note is that by design, state is not shared across operator nodes in the pipeline. Therefore, if we have scripts across multiple nodes in the pipeline, the `state` keyword in each script allows access only to the local node-specific state storage, and not the state from any other operator nodes or something global to all the nodes.
 
