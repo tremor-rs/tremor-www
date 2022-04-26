@@ -1,6 +1,6 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
-
+const gitLinks = require('./src/remark/git-links');
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
@@ -27,40 +27,38 @@ const config = {
   //
   plugins: [
     require.resolve('@cmfcmf/docusaurus-search-local'),
-  //  require.resolve('docusaurus-plugin-redoc'),
-    [ '@docusaurus/plugin-content-docs',
+    //  require.resolve('docusaurus-plugin-redoc'),
+    ['@docusaurus/plugin-content-docs',
       /** @type {import('@docusaurus/plugin-content-docs').Options} */
       {
         id: 'rfc',
         path: 'rfc',
         routeBasePath: 'rfc',
-        editUrl: 'https://gitpod.io#https://github.com/tremor-rs/tremor-www/tree/main/'
+        editUrl: 'https://github.com/tremor-rs/tremor-www/tree/main/'
       }
     ],
   ]
 
-,
+  ,
   presets: [
-// TODO Broken in Beta17 of docusaurus v2 for v1.0.0 - use static generation for now
-//    [
-//      'redocusaurus',
-//      /** @type {import('@docusaurus/preset-classic').Options} */
-//      ({
-//        // Plugin Options for loading OpenAPI files
-//        specs: [
-//          {
-//            spec: 'docs/openapi/v0.12.yaml',
-//            route: '/api/',
-//          },
-//        ],
-//        // Theme Options for modifying how redoc renders them
-//        theme: {
-//          // Change with your site colors
-//          primaryColor: '#1890ff',
-//        },
-//      }),
-//    ],
-//
+    [
+      'redocusaurus',
+      /** @type {import('@docusaurus/preset-classic').Options} */
+      ({
+        // Plugin Options for loading OpenAPI files
+        specs: [
+          {
+            spec: 'static/api/v0.12/openapi.yaml',
+            route: '/api/',
+          },
+        ],
+        // Theme Options for modifying how redoc renders them
+        theme: {
+          // Change with your site colors
+          primaryColor: '#1890ff',
+        },
+      }),
+    ],
     [
       'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
@@ -69,8 +67,8 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          remarkPlugins: [require('mdx-mermaid')]
+          editUrl: 'https://github.com/tremor-rs/tremor-www/tree/main/',
+          remarkPlugins: [require('mdx-mermaid'), gitLinks]
         },
         blog: {
           showReadingTime: true,
@@ -89,7 +87,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-//        title: 'Tremor',
+        //        title: 'Tremor',
         logo: {
           alt: 'Tremor Logo',
           src: 'img/tremor-logo.svg',
@@ -102,7 +100,7 @@ const config = {
             docId: 'getting-started/overview',
             position: 'left',
             label: 'Getting Started',
-	  },
+          },
           {
             type: 'dropdown',
             label: 'Community',
@@ -136,22 +134,22 @@ const config = {
             type: 'docsVersionDropdown',
             position: 'left',
           },
-        {
-          href: 'https://chat.tremor.rs',
-          className: 'header-discord-link',
-          position: 'right',
-          'aria-label': 'Community Chat',
-        },
-        {
-          href: 'https://github.com/tremor-rs',
-          className: 'header-github-link',
-          'aria-label': 'GitHub repository',
-          position: 'right',
-        },
-        {
-          type: 'search',
-          position: 'right',
-        },
+          {
+            href: 'https://chat.tremor.rs',
+            className: 'header-discord-link',
+            position: 'right',
+            'aria-label': 'Community Chat',
+          },
+          {
+            href: 'https://github.com/tremor-rs',
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
+            position: 'right',
+          },
+          {
+            type: 'search',
+            position: 'right',
+          },
         ],
       },
       footer: {
@@ -170,8 +168,8 @@ const config = {
               },
             ]
           },
-	  {
-	    title: 'Media',
+          {
+            title: 'Media',
             items: [
               {
                 label: 'YouTube',
