@@ -307,9 +307,9 @@ define generic::counter operator counter;
 
 ## debug::history
 
-!!! note
-
+:::note
     This operator is for debugging purposes only, and should not be used in production deployments.
+:::
 
 This operator generates a history entry in the event metadata underneath the field provided in the `name` config value. Data is pushed to the array as a Striong in the form: `"event: <op>(<event_id>)"`.
 
