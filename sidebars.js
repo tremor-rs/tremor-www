@@ -261,11 +261,8 @@ const sidebars = {
       label: 'Recipes',
     },
     {
-      'Basic': [
-        'recipes/passthrough/index',
-        'recipes/filter/index',
-        'recipes/transform/index',
-        'recipes/validate/index',
+      "Guids": [
+        "guides/basics"
       ]
     },
     {
