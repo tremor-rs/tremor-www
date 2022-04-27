@@ -15,7 +15,7 @@ Runnable examples configuration for each of the steps is available [here](__GIT_
 
 The simple most configuration in tremor is what we call `passthrough` as it takes data from one end passes it through and puts it out the other end.
 
-The `in` and `out` is handle with what we call [connectors](TODO), the pocessing or passing is done by a [pipeline](TODO) and the whole configuration wrapped in a [flow](TODO).
+The `in` and `out` is handle with what we call connectors, the pocessing or passing is done by a pipeline and the whole configuration wrapped in a flow.
 
 ### Flow
 
@@ -30,10 +30,10 @@ end;
 
 ### Connectors
 
-With that lets start filling it, we will use `STDIN` and `STDOUT` for this example to read and write data. For that we have a #[`stdio` connector](TODO) that you could use. But since we know that it's a human reading and writing the text, we will instead use the pre-configured  #[`console` connector](TODO). The `console` connector can be found in the `troy::connectors` module of the standard library
+With that lets start filling it, we will use `STDIN` and `STDOUT` for this example to read and write data. For that we have a #[`stdio` connector](../connectors/stdio) that you could use. But since we know that it's a human reading and writing the text, we will instead use the pre-configured  `console` connector. The `console` connector can be found in the `troy::connectors` module of the standard library
 
 :::note
-The console connector is a configured instance of the `stdio` connector that uses the #[`separate` pre and postprocessor](TODO) to make it line based and the [`string` codec](TODO) to avoid any parsing of the input data.
+The console connector is a configured instance of the `stdio` connector that uses the `separate` pre and postprocessor to make it line based and the [`string` codec](../connectors/codecs/string) to avoid any parsing of the input data.
 :::
 
 ```troy
@@ -162,7 +162,7 @@ We now have a way to passing data in our system, moving it through it and look a
 Our goal will be to make each entry a "setnence" by capitalizing the frist letter and adding a period `.` or questionmark to the end.
 
 :::note
-Tremor has handy utility modules for most data types that provide a number of functions to work with them, the [reference documentation](TODO) gives a overfiew of them.
+Tremor has handy utility modules for most data types that provide a number of functions to work with them, the [reference documentation](../language) gives a overfiew of them.
 :::
 
 ### Defining our own pipeline
@@ -170,7 +170,7 @@ Tremor has handy utility modules for most data types that provide a number of fu
 In the last step we've been using the `troy::pipelines::passthrough` pipeline, it, as the name suggests just passit it through. So the first thing we need to dois replacing this with our own, for simplicities sake we'll start with replacing it with our own pipeline, we will name this `main` as we will extend it to be more then a passthrough.
 
 :::note
-   Pipelines, by default use the ports `in` for input, `out` and `err` for outputs, just as with `connect` thos definitions can be omitted as long as the standard is used. For details on how to define your own ports you can refere to the [reference documentation](TODO).
+   Pipelines, by default use the ports `in` for input, `out` and `err` for outputs, just as with `connect` thos definitions can be omitted as long as the standard is used. For details on how to define your own ports you can refere to the [reference documentation](../language).
 :::
 
 ```troy
@@ -205,7 +205,7 @@ deploy flow main;
 
 ### Transforming in the select body
 
-Now we have our own pipeline in which we will capitalize the text that's passed through the pipeline, [`std::string::capitalize`](TODO) will do that for us, and we can use it right in the select statement we:
+Now we have our own pipeline in which we will capitalize the text that's passed through the pipeline, [`std::string::capitalize`](../library/std/string#capitalizeinput) will do that for us, and we can use it right in the select statement we:
 
 :::note
 In select statements you can do any kind of transformation that's creating new data but you can't do any mutating manipulations. Simplified you can think abouit it that `let` is not allowed.
@@ -337,7 +337,7 @@ Stopping tremor is usually not something you'll want to do on a life server as i
 
 ### Adding the `exit` connector.
 
-To terminate tremor programatically we use the [`exit` connector](TODO), this connector will stop the tremor isntance on every event it receives.
+To terminate tremor programatically we use the [`exit` connector](../connectors), this connector will stop the tremor isntance on every event it receives.
 
 We'll also use a different port on the pipleine for this, the `exit` port, and wire this up to the `exit` connector.
 
