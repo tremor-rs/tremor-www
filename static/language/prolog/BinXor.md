@@ -1,6 +1,6 @@
-The `BinXor` rule defines binary exclusive or operation
+The `BinXor` rule defines the binary exclusive `OR` operation.
 
 |Operator|Description|
 |---|---|
-|`xor`|Binary exlusive or|
+|`XOR`|Binary `exlusive OR`|
 

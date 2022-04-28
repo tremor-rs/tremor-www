@@ -1,6 +1,6 @@
-The `ConnectorKind` rule identifies a builtin connector in tremor.
+The `ConnectorKind` rule identifies a built-in connector in Tremor.
 
-Connectors in tremor are provided by the runtime and builtin. They can be resolved
+Connectors in Tremor are provided by the runtime and are built-in. They can be resolved
 through an identifier. 
 
 ### Examples

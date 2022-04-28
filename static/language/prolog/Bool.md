@@ -1,1 +1,1 @@
-The `Bool` rule defines the syntax of boolean literal in tremor.
+The `Bool` rule defines the syntax of boolean literals in Tremor.

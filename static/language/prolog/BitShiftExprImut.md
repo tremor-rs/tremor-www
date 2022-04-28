@@ -1,4 +1,4 @@
-The `BitShiftExprImut` rule supports bit shift expressions in tremor.
+The `BitShiftExprImut` rule supports bit-shift expressions in Tremor.
 
-Binary bit shift expressions take precedence over bitwise additive expressions.
+Binary bit-shift expressions take precedence over bitwise additiion expressions.
 

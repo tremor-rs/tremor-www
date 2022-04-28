@@ -1,2 +1,2 @@
-The `ComplexExprImut` rule defines complex immutable expression in tremor.
+The `ComplexExprImut` rule defines complex immutable expressions in Tremor.
 

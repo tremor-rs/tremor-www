@@ -1,4 +1,4 @@
-The `BinCmpEq` rule allows binary or comparative operations
+The `BinCmpEq` rule allows binary equality or comparison operations.
 
-Comparitive and Equality operations have the same precedence.
+Comparison and equality operations have the same precedence.
 

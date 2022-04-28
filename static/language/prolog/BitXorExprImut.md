@@ -1,4 +1,4 @@
-The `BitXorExprImut` rule supports bitwise exclusive or expressions in tremor.
+The `BitXorExprImut` rule supports bitwise `exclusive OR` expressions in Tremor.
 
-Binary bitwise exclusive or expressions take precedence over bitwise and expressions.
+Binary bitwise `exclusive OR` expressions take precedence over bitwise `AND` expressions.
 

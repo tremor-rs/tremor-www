@@ -1,6 +1,6 @@
-The `BinBitXor` rule defines binary bitwise exlusive-or operation
+The `BinBitXor` rule defines the binary bitwise `exlusive OR` operation.
 
 |Operator|Description|
 |---|---|
-|`^`|Binary logical `xor` exclusive or|
+|`^`|Binary logical `XOR` (exclusive OR)|
 

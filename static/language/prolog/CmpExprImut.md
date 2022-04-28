@@ -1,4 +1,4 @@
-The `CmpExprImut` rule supports comparative expressions in tremor.
+The `CmpExprImut` rule supports comparison expressions in Tremor.
 
-Binary comparative expressions take precedence over bit shift expressions.
+Binary comparison expressions take precedence over bit-shift expressions.
 
