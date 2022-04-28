@@ -1,6 +1,6 @@
-The `BinOr` rule defines binary or operation
+The `BinOr` rule defines the binary `OR` operation.
 
 |Operator|Description|
 |---|---|
-|`xor`|Binary or|
+|`OR`|Binary `OR`|
 

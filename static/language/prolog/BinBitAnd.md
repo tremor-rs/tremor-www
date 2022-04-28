@@ -1,6 +1,6 @@
-The `BinBitAnd` rule defines binary bitwise and operation
+The `BinBitAnd` rule defines the binary bitwise `AND` operation.
 
 |Operator|Description|
 |---|---|
-|`&`|Binary logical `and`|
+|`&`|Binary logical `AND`|
 

@@ -1,6 +1,6 @@
-The `BinAnd` rule defines binary and operation
+The `BinAnd` rule defines the binary `AND` operation.
 
 |Operator|Description|
 |---|---|
-|`and`|Binary and|
+|`AND`|Binary `AND`|
 
