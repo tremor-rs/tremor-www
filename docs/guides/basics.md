@@ -1,25 +1,25 @@
 # Tremor Basics
 
-This guide will walk you through the tremor basics, it'll be a starting point to learning how to get data into the system, work with this data and get it out again.
+This guide will walk you through the tremor basics. It'll be a starting point to learning how to get data into the system, work with this data and get it out again.
 
-The example is completely synthetic and desiged to teach fundamentals but it can be used as a starting point for more complex systems.
+The example is entirely synthetic and designed to teach fundamentals, but you can use it as a starting point for more complex systems.
 
-We will go through this guide in steps, each building on the previous one but each step being a complete unit in itself - this will allow you to try and test at each step of the way, pause and continue another time.
+We will go through this guide in steps, each building on the previous one but each step being a complete unit in itself - this will allow you to try and test at each step of the way, pause, and continue another time.
 
-At the end we'll have a little tremor application in which you can input text, it will capitalize and punctuate it and exit on command.
+In the end, we'll have a small tremor application in which you can input text. It will capitalize and punctuate it and exit on command.
 
 Runnable examples configuration for each of the steps is available [here](__GIT__/../code/basics).
 
 ## Passthrough
 
 
-The simple most configuration in tremor is what we call `passthrough` as it takes data from one end passes it through and puts it out the other end.
+The simple configuration in tremor is what we call `passthrough` as it takes data from one end, passes it through, and puts it out the other end.
 
-The `in` and `out` is handle with what we call connectors, the pocessing or passing is done by a pipeline and the whole configuration wrapped in a flow.
+We handle the input and output with a `connector, `the processing or passing with a `pipeline`. Then we wrap the whole configuration in a flow.
 
 ### Flow
 
-So lets start from the outside in, and define a flow, we'll call this flow `passthrough` and it'll do nothing to start.
+So let's start from the outside in and define a flow, we'll call this flow `main`, and it'll do nothing to start.
 
 ```troy
 # Our main flow
@@ -30,10 +30,10 @@ end;
 
 ### Connectors
 
-With that lets start filling it, we will use `STDIN` and `STDOUT` for this example to read and write data. For that we have a #[`stdio` connector](../connectors/stdio) that you could use. But since we know that it's a human reading and writing the text, we will instead use the pre-configured  `console` connector. The `console` connector can be found in the `troy::connectors` module of the standard library
+With that, let's start filling it. We will use `STDIN` and `STDOUT` for this example to read and write data. For that we have a #[`stdio` connector](../connectors/stdio) that you could use. But since we know that it's a human reading and writing the text, we will instead use the pre-configured  `console` connector. You can find the `console` connector in the `troy::connectors` module of the standard library.
 
 :::note
-The console connector is a configured instance of the `stdio` connector that uses the `separate` pre and postprocessor to make it line based and the [`string` codec](../connectors/codecs/string) to avoid any parsing of the input data.
+The console connector is a configured instance of the `stdio` connector that uses the `separate` pre and postprocessor to make it line-based and the [`string` codec](../connectors/codecs/string) to avoid any parsing of the input data.
 :::
 
 ```troy
@@ -50,9 +50,9 @@ end;
 
 ### Pipeline
 
-Now we have the connector that lets us recive and send data, next we need a pipeline to pass the data through.
+Now we have the connector that lets us receive and send data. Next, we need a pipeline to pass the data through.
 
-We could write our own pipeline, but since `passthrough` pipelines are somewhat common we already have it defined in the `troy::pipelines` module, so we will be using that.
+We could write a custom pipeline, but since `passthrough` pipelines are somewhat common, we already have it defined in the `troy::pipelines` module, and we will be using that.
 
 :::note
 The definition of `troy::pipelines::passthrough` is just this:
@@ -84,10 +84,10 @@ end;
 
 ### Wiring
 
-We now have all the components we need, a flow to host it all, a connector to read and write data and a pipeline to process (or pass) the data. With that all in place we need to wire those parts up, we can do that with `connect` in the flow.
+We now have all the components we need, a flow to host it all, a connector to read and write data, and a pipeline to process (or pass) the data. With that all in place, we need to wire those parts up. We can do that with `connect` in the flow.
 
 :::note
-   Connect allows connecting to different ports on connectors and pipleins, when omitted the ports default to `/out`  for the source of the connection to `/in` for the target of the connection. We will explore this more in a later step, for now we'll just ignore ports
+   Connect allows connecting to different ports on connectors and pipelines. When omitted, ports default to `/out`  for the connection's source and to `/in` for the connection's target. We will explore this more in a later step. For now, we'll ignore ports.
 :::
 
 ```troy
@@ -115,7 +115,7 @@ end;
 
 ### Deploying the flow
 
-We have already used pre-defined pipelines and connectors, and created instances of them. Flows are not much different, they have a definition and a instanciation phase. While the instanciating of pipelines and connectors is called `create`, for flows it is called `deploy` as it is the step where the theoretical configuration becomes acutal running code.
+We have already used pre-defined pipelines and connectors and created instances of them. Flows are not much different. They have a definition and an instantiation phase. While we call the instantiating of pipelines and connectors `create`, for flows, we use `deploy` as it is the step where the theoretical configuration becomes actual running code.
 
 ```troy
 # Our main flow
@@ -139,7 +139,7 @@ flow
   connect /pipeline/passthrough to /connector/console;
 
 end;
-# Deploy the flow so tremor starts it
+# Deploy the flow, so tremor starts it
 deploy flow main;
 ```
 
@@ -157,20 +157,20 @@ world
 
 ## Transformation
 
-We now have a way to passing data in our system, moving it through it and look at the result. Right now our result is rather simply the same as the input we have, lets change that and make the whole thing a bit more interesting.
+We now have a way to pass data in our system, moving it through it and looking at the result. Our result is relatively simple, the same as the input we have. Let us change that and make the whole thing a bit more interesting.
 
-Our goal will be to make each entry a "setnence" by capitalizing the frist letter and adding a period `.` or questionmark to the end.
+Our goal will be to make each entry a "sentence" by capitalizing the first letter and adding a period `.` or question mark to the end.
 
 :::note
-Tremor has handy utility modules for most data types that provide a number of functions to work with them, the [reference documentation](../language) gives a overfiew of them.
+Tremor has handy utility modules for most data types that provide several functions to work with them, the [reference documentation](../language) gives an overview of them.
 :::
 
-### Defining our own pipeline
+### Defining our pipeline
 
-In the last step we've been using the `troy::pipelines::passthrough` pipeline, it, as the name suggests just passit it through. So the first thing we need to dois replacing this with our own, for simplicities sake we'll start with replacing it with our own pipeline, we will name this `main` as we will extend it to be more then a passthrough.
+We've been using the `troy::pipelines::passthrough` pipeline in the last step. It, as the name suggests, passes it through. So the first thing we need to do is replace this with our own. For simplicities sake, we'll start by replacing it with our pipeline. We will name this `main` as we will extend it to be more than a passthrough.
 
 :::note
-   Pipelines, by default use the ports `in` for input, `out` and `err` for outputs, just as with `connect` thos definitions can be omitted as long as the standard is used. For details on how to define your own ports you can refere to the [reference documentation](../language).
+   Pipelines, by default, use the ports `in` for input, `out` and `err` for outputs. As with `connect`, those definitions can be omitted as long as we use the standard. For details on defining your own ports, you can refer to the [reference documentation](../language).
 :::
 
 ```troy
@@ -180,7 +180,7 @@ flow
   # import the `troy::connectors` module
   use troy::connectors;
 
-  # define our own main pipeline
+  # define our main pipeline
   define pipeline main
   pipeline
     select event from in into out;
@@ -199,16 +199,16 @@ flow
   connect /pipeline/main to /connector/console;
 
 end;
-# Deploy the flow so tremor starts it
+# Deploy the flow, so tremor starts it
 deploy flow main;
 ```
 
 ### Transforming in the select body
 
-Now we have our own pipeline in which we will capitalize the text that's passed through the pipeline, [`std::string::capitalize`](../library/std/string#capitalizeinput) will do that for us, and we can use it right in the select statement we:
+Now we have our pipeline in which we will capitalize the text that's passed through the pipeline, [`std::string::capitalize`](../library/std/string#capitalizeinput) will do that for us, and we can use it right in the select statement we:
 
 :::note
-In select statements you can do any kind of transformation that's creating new data but you can't do any mutating manipulations. Simplified you can think abouit it that `let` is not allowed.
+In select statements, you can do any transformation that's creating new data, but you can't do any mutating manipulations. Simplified, you can think that `let` is not allowed.
 :::
 
 ```troy
@@ -240,22 +240,22 @@ flow
   connect /pipeline/main to /connector/console;
 
 end;
-# Deploy the flow so tremor starts it
+# Deploy the flow, so tremor starts it
 deploy flow main;
 ```
 
 
 ### Transforming in Scripts
 
-Some transformations are a bit more complicated and instead of the select body we want a more elaborate script that makes the logic more redable.
+Some transformations are a bit more complicated, and instead of the select body, we want a more elaborate script that makes the logic more readable.
 
 :::note
-The big advantage scripts give is alowing more complex mutation, chained logic and access to `state`. In this example we'll not touch on all of them.
+The significant advantage of scripts is to allow more complex mutation, chained logic, and access to `state`. In this example, we'll not touch on all of them.
 :::
 
-So our goal will be to check if our setnence already has a tailing punctuation, and if not decide if we add a `.` or a `?`.
+So our goal will be to check if our sentence has punctuation. Otherwise, decide if we add a `.` or a `?`.
 
-Scripts are node in the pipeline and we use `select` statements to connect them, the same way that we use `connect` to connects nodes of a flow
+Scripts are a node in the pipeline, and we use `select` statements to connect them, the same way that we use `connect` to connect nodes of a flow.
 
 ```tremor
 # Our passthrough flow
@@ -264,7 +264,7 @@ flow
   # import the `troy::connectors` module
   use troy::connectors;
 
-  # define our own main pipeline
+  # define our main pipeline
   define pipeline main
   pipeline
     # use the `std::string` module
@@ -291,7 +291,7 @@ flow
     # Create our script
     create script punctuate;
 
-    # Wire our capitailized text to the script
+    # Wire our capitalized text to the script
     select string::capitalize(event) from in into punctuate;
     # Wire our script to the output
     select event from punctuate into out;
@@ -310,7 +310,7 @@ flow
   connect /pipeline/main to /connector/console;
 
 end;
-# Deploy the flow so tremor starts it
+# Deploy the flow, so tremor starts it
 deploy flow main;
 ```
 
@@ -329,22 +329,22 @@ Why?
 
 ## Filter
 
-Aside of transformations filtering is an importan part of what tremor can do to event is filtering and routing. We'll use this feature to allow users to type `exit` and have the application stop.
+Aside from transformations, filtering is an integral part of what tremor can do to an event. We'll use this feature to allow users to type `exit` and have the application stop.
 
 :::note
-Stopping tremor is usually not something you'll want to do on a life server as it might impact other users, but it's a nice feature for a example like this.
+Stopping tremor is usually not something you'll want to do on a life server as it might impact other users, but it's a nice feature for an example like this.
 :::
 
 ### Adding the `exit` connector.
 
-To terminate tremor programatically we use the [`exit` connector](../connectors), this connector will stop the tremor isntance on every event it receives.
+We use the [`exit` connector](../connectors). This connector will stop the tremor instance on every event it receives.
 
-We'll also use a different port on the pipleine for this, the `exit` port, and wire this up to the `exit` connector.
+We'll use a different port on the pipeline, the `exit` port, and wire this up to the `exit` connector.
 
-We however stop short here from actually filtering just yet.
+We, however, stop short here from actually filtering just yet.
 
 :::note
-As mentioned before we can ommit `in` and `out` as ports as that's what tremor defaults to, for `exit` we have to be more specific.
+We can omit `in` and `out` as ports as that's what tremor defaults to. For `exit`, we have to be more specific.
 :::
 
 ```troy
@@ -354,7 +354,7 @@ flow
   # import the `troy::connectors` module
   use troy::connectors;
 
-  # define our own main pipeline
+  # define our main pipeline
   define pipeline main
   pipeline
     # use the `std::string` module
@@ -408,23 +408,23 @@ flow
   connect /pipeline/main/exit to /connector/exit;
 
 end;
-# Deploy the flow so tremor starts it
+# Deploy the flow, so tremor starts it
 deploy flow main;
 ```
 
-### Filtering out exit messages
+### filtering out exit messages
 
 The last thing left to do is filter out messages that read `exit` and forward them to the `exit` port instead of out.
 
-To do that we need to add the `exit` port to the `into` part of the `pipeline` definition so it becomes available.
+We need to add the `exit` port to the `into` part of the `pipeline` definition, so it becomes available.
 
 :::hint
-For pipelines, `into` and `from` can be omitted, if done so it is treated as `into out, err` and `from in`. Replacing one will **not add** to this ports but replace them so if we want `out` and `exit` as ports we have to write `into out, exit`.
+For pipelines, we can omit `into` and `from`. If done, it is treated as `into out, err` and `from in`. Replacing one will **not add** to these ports but replace them, so if we want `out` and `exit` as ports, we have to write `into out, exit`.
 
-`from` and `into` are indepandant, overwriting one does not affect the other.
+`from` and `into` are independent. Overwriting one does not affect the other.
 :::
 
-Once that is done we can add the filter logic. To do that we create a new select statement with a `where event == "exit"` clause that will only forward events that read `exit` and add a `where event != "exit"` to our existing clause, forwarding the rest to the punctuate script.
+Once that is done, we can add the filter logic. To do that, we create a new select statement with a `where event == "exit"` clause that will only forward events that read `exit` and add a `where event != "exit"` to our existing clause, forwarding the rest to the punctuate script.
 
 ```troy
 # Our main flow
@@ -433,9 +433,9 @@ flow
   # import the `troy::connectors` module
   use troy::connectors;
 
-  # define our own main pipeline
+  # define our main pipeline
   define pipeline main
-  # the exit port is not a dafault port so we have to overwrite the built in port selection
+  # the exit port is not a default port, so we have to overwrite the built-in port selection
   into out, exit
   pipeline
     # use the `std::string` module
@@ -492,13 +492,13 @@ flow
   connect /pipeline/main/exit to /connector/exit;
 
 end;
-# Deploy the flow so tremor starts it
+# Deploy the flow, so tremor starts it
 deploy flow main;
 ```
 
 ### Running
 
-That all set we can run our script as before, just this time when entering `exit` tremor will terminate.
+That all set, we can run our script as before, just this time, when entering `exit` tremor will terminate.
 
 ```bash
 $ tremor run transfor.troy
