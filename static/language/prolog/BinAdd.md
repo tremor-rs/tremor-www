@@ -1,9 +1,13 @@
-The `BinAdd` rule defines additive operations
+The `BinAdd` rule defines addition operations.
 
 |Operator|Description|
 |---|---|
 |`+`|Binary addition|
 |`-`|Binary subtraction|
 
-Note that the `+` binary operation is also used for string concatenation.
+:::note 
+
+The `+` binary operation is also used for string concatenation.
+
+:::
 

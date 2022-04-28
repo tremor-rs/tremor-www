@@ -1,2 +1,2 @@
-The `ConnectFromPipeline` rule defines route from a pipeline instance.
+The `ConnectFromPipeline` rule defines a route from a pipeline instance.
 

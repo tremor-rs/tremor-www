@@ -1,4 +1,4 @@
-The `BinMul` rule defines multiplicative operations
+The `BinMul` rule defines multiplication operations.
 
 |Operator|Description|
 |---|---|

@@ -1,4 +1,4 @@
-A `ConfigDirective` is a directive to the tremor runtime.
+A `ConfigDirective` is a directive to the Tremor runtime.
 
 Directives MUST begin on a new line with the `#!config` shebang  config token.
 

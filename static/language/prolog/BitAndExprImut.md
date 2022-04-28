@@ -1,4 +1,4 @@
-The `BitAndExprImut` rule supports bitwise and expressions in tremor.
+The `BitAndExprImut` rule supports bitwise `AND` expressions in Tremor.
 
-Binary bitwise and expressions take precedence over equality expressions.
+Binary bitwise `AND` expressions take precedence over `equality` expressions.
 

@@ -1,4 +1,4 @@
-The `AndExprImut` rule supports logical and expressions in tremor.
+The `AndExprImut` rule supports logical and expressions in Tremor.
 
-Binary logical and expressions take precedence over bitwise or expressions.
+Binary logical `AND` expressions take precedence over bitwise `OR` expressions.
 
