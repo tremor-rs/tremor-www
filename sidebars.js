@@ -43,13 +43,12 @@ const sidebars = {
       id: 'getting-started/overview',
       label: 'Getting Started',
     },
-    'getting-started/about',
     'getting-started/install',
-    'getting-started/connectivity',
+    'guides/overview',
+    'about/overview',
+    'recipes/overview',
+    'reference/connectors/overview',
     'getting-started/tooling',
-    'getting-started/codecs',
-    'getting-started/scripting',
-    'getting-started/specialize'
   ],
 
   connectorsSidebar: [
@@ -261,7 +260,7 @@ const sidebars = {
       label: 'Recipes',
     },
     {
-      "Guids": [
+      "Guides": [
         "guides/basics"
       ]
     },
