@@ -16,11 +16,11 @@ This posts' theme is _open and improved communication_.
 
 Where's the next release of Tremor?!
 
-Tremor's release schedule is becoming a bit more regular. We're releasing [about twice a year](https://github.com/tremor-rs/tremor-runtime/releases), every 6 to eight months. The next release of Tremor should include an exciting new way to write plugins with the [plugin development kit](https://github.com/tremor-rs/tremor-runtime/issues/791), along with other goodies for faster, more [easily understood tremor scripts](https://github.com/tremor-rs/tremor-runtime/pull/1571/files) and plenty of other [performance](https://github.com/tremor-rs/tremor-runtime/pull/1539) and [bug fixes](https://github.com/tremor-rs/tremor-runtime/pull/1537).
+Tremor's release schedule is becoming a bit more regular. We're releasing [about twice a year](https://github.com/tremor-rs/tremor-runtime/releases), every 6 to eight months. The next release of Tremor should include an exciting new way to write plugins with the [plugin development kit](https://github.com/tremor-rs/tremor-runtime/issues/791), along with other goodies for faster, [well understood tremor scripts](https://github.com/tremor-rs/tremor-runtime/pull/1571/files) and plenty of other [performance](https://github.com/tremor-rs/tremor-runtime/pull/1539) and [bug fixes](https://github.com/tremor-rs/tremor-runtime/pull/1537).
 
 Most notable as an update for us all is that Tremor has a [release candidate](https://github.com/tremor-rs/tremor-runtime/releases/tag/v0.12.0-rc.1) live. If we're pleased with it, then a new version of tremor is soon to be released!
 
-Not all of the excitement comes just for downstream consumers in this edition of Tremors. Let's dive into three topics: [CI](#ci), [PDK](#pdk-plugin-development-kit), and [performance](#performance)!
+In this article, Let's dive into three topics: [CI](#ci), [PDK](#pdk-plugin-development-kit), and [performance](#performance)!
 
 ## CI
 
@@ -36,10 +36,16 @@ I won't spend too much time on this point, since the lovely [marioortizmanero](h
 
 ## Performance
 
-Tremor cares [a lot about performance](https://www.tremor.rs/community/development/benchmarks/LogstashBenchmark). As you may already know from [TremorCon 2021's fabulous talks](https://www.youtube.com/watch?v=xsowS5hEKRg&list=PLNTN4J6tdf20vy14FVOazLTdou_8xyvfe&index=4); it was originally created and adopted for performance gains in Wayfair's event processing infrastructure. There are plenty of performance gains to be made in a project as large as Tremor, both inside the project and through dependencies.
+Tremor cares [a lot about performance](https://www.tremor.rs/community/development/benchmarks/LogstashBenchmark). As you may already know from [TremorCon 2021's fabulous talks](https://www.youtube.com/watch?v=xsowS5hEKRg&list=PLNTN4J6tdf20vy14FVOazLTdou_8xyvfe&index=4); it was originally created and adopted for performance gains in Wayfair's event processing infrastructure. There are plenty of performance gains to make in a project as large as Tremor, both inside the project and through dependencies.
 
 One such dependency we depend on [to parse gigabytes of JSON per second](https://simdjson.org/) is [simd_json](https://docs.rs/simd-json/0.3.18/simd_json/index.html). `simd_json` is a port of the simdjson c++ library into rust. It can not only parse from JSON into Rust, but aid the `serde` library that can easily serialize and deserialize Rust data structures. That's pretty handy for an event processing project that will have to marshal plenty of events from disparate sources of all data forms! As you might imagine, a project like `simd_json` comes with a lot of configuration options, and optimizations behind those options.
 
 Further than just the configuration that you might give `serde`, or `simd_json`, is the options you may give to the [rust compiler](https://github.com/simd-lite/simd-json/blob/main/.cargo/config). The compiler, by default, [compiles for the largest compatability.](https://docs.rs/simd-json/latest/simd_json/index.html) For best performance on a specific plaform, we make use of the `target-feature` flag. This will allow us to target specific features available on different platforms and CPUs.
 
 It should be no surprise that we continue this effort within the Tremor team. Know that we also depend on our community, such as a [pull request from scarabsha](https://github.com/tremor-rs/tremor-runtime/pull/1522). Sasha idenfitifed additional target-features for the target `x86_64-unknown-linux-gnu` that speed up the performance of `simd-json`. There's not a benchmark to show exactly how much faster this made json processing, but we appreciate the fact that it will undoubtedly increase performance for some clients of Tremor.
+
+## Thank You
+
+The Tremor project as strong as the community around it. Reading this article, making contributions, and generally being involved in the project makes us more successful. Thank you for reading and contributing! See you next time.
+
+- Gary, and the Tremor team.
