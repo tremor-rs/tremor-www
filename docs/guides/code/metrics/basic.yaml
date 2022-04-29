@@ -32,4 +32,3 @@ services:
       - RUST_LOG=info
     volumes:
       - ./config/tremor-basic:/etc/tremor:ro
-      - ./var/log:/var/log:rw
