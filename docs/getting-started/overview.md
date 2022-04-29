@@ -1,50 +1,85 @@
-# Overview
+# Getting Started
 
-### Requirements
+Welcome to Tremor!
 
-Tremor can be installed in a variety methods such as through a package or compiling it from source code. We recommend following this quickstart guide which will use a Docker Image to get your first instance of Tremor running.
+Allow us to guide you towards a working Tremor installation that should allow you to try tremor on your own and to dive deeper more involved topics.
 
-A running version of [Docker](https://docker.io) on a system with an internet connection is required.
+At first we need to get tremor installed somehow.
 
-### Installation
+## Install Tremor
 
-The simplest way to get Tremor is by downloading the [Docker Image](https://hub.docker.com/r/tremorproject/tremor). You can install the latest version of Tremor by running the following command in terminal:
+Lets install Tremor via [Docker](https://www.docker.com). If you are looking for other ways to install Tremor, visit our detailed [Installation Docs](install).
+
+All you need is a working [Docker](https://www.docker.com) installation.
+
+Pull the image from the docker hub:
 
 ```bash
 docker pull tremorproject/tremor:latest
 ```
 
+Done, now lets configure Tremor to do what we want:
+
 ### Configuration
 
-The Tremor Docker image is configured by mounting a configuration folder to `/etc/tremor`.
+Tremor needs to be told where to get events from, how to handle them and where to send them to.
+This is done by passing it a [Troy](../reference/language/troy) configuration file that describes our event processing logic we wish to deploy to our tremor instance.
 
-The structure is as follows:
+```troy
+define flow main
+flow
+  use troy::pipelines;
+  use troy::connectors;
 
-```text
-/etc/tremor
-  - logger.yaml
-  ` config
-    ` *.yaml
-    ` *.trickle
+  create connector console from connectors::console;
+  create pipeline passthrough from pipelines::passthrough;
+
+  connect /connector/console to /pipeline/passthrough;
+  connect /pipeline/passthrough to /connector/console;
+end;
+deploy flow main;
 ```
 
-* `logger.yaml` A [log4rs](https://docs.rs/log4rs/0.10.0/log4rs/#examples) configuration file.
-* `config/*.trickle` One or more trickle files loaded in lexigraphical order to provide pipelines.
-* `config/*.yaml` One or more YAML files with configurations for Onramps, Offramps and Bindings and Mappings.
+There is a lot going on in that file. Don't worry if not everything makes sense yet.
+We are going over that in a bit. For now all you need to know is that it will tell tremor to echo back each line you type into its stdin.
 
-For details on the files please consult the [documentation](../operations/configuration).
+For now copy and paste the [Troy](../reference/language/troy) above into a file `getting_started.troy` in the current directory.
 
 ### Running Tremor
 
-Once downloaded and configured, run the following command in terminal to start the Tremor Docker Image:
+Lets get real:
 
 ```bash
-docker run -v host/path/to/etc/tremor:/etc/tremor tremor-runtime
+docker run --rm -i -v $PWD:/etc/tremor/config tremorproject/tremor:latest
 ```
 
-### Use Cases
+The docker image is wired up to pick up any [Troy](../reference/language/troy) files in `/etc/tremor/config`,
+so all we need to do is to mount our config at that directory.
 
-The following use case examples come with a full set of configuration files and a `docker-compose.yaml`. To get a use case set up with a single command, inspect the following cases:
+We are going to see a lot of logs in our terminal and when we type something, Tremor will actually echo it back at us:
 
-* [Apache Log](../recipes/logstash/index.md)- storing apache logs in elastic search.
-* [Influx Aggregation](../recipes/influx/index.md)- aggregating metrics for InfluxDB.
+```
+...
+2022-04-29T14:55:03.448253547+00:00 INFO tremor_runtime::connectors - [Connector::console] Connected.
+2022-04-29T14:55:03.448275442+00:00 INFO tremor_runtime::system::flow - [Flow::main] Started.
+Hello world
+Hello world
+```
+
+Congratulations! You just successfully deployed your first Tremor event processing pipeline!
+
+Now it is time to actually find out, what you just did and what else can be done with Tremor.
+
+### Where to go from here
+
+* FIXME!!!
+* Basic Guide
+* Scripting Guide
+* Connectors Reference
+* Recipes
+* Design / Architecture Documents
+
+We did prepare some Recipes on how to achieve specific tasks together with code samples so you can
+
+* [Store Apache httpd logs in Elasticsearch](../recipes/logstash/index.md).
+* [Send pre-aggregated metrics into InfluxDB](../recipes/influx/index.md).
