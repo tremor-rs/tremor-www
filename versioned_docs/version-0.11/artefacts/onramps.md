@@ -114,9 +114,9 @@ Received messages are immediately acknowledged to the protocol stack. This Onram
 
 ### blaster
 
-!!!note
-
+:::note
     This onramp is for benchmarking use, it should not be deployed in a live production system.
+:::
 
 The blaster onramp is built for performance testing, but it can be used for spaced-out replays of events as well. Files to replay can be `xz` compressed. It will keep looping over the file.
 

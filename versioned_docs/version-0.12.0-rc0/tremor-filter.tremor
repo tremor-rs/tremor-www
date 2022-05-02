@@ -1,0 +1,43 @@
+fn raw_block(this) with
+  { "#{this[0]}": this[1] }
+end;
+
+fn para_item(this) with
+  match this of
+    case %{t == "Str" } => { "str": this.c }
+    case %{t == "Space" } => { "space": " " }
+    case %{t == "RawInline" } => { "raw": raw_block(this.c) }
+    default => this
+  end
+end;
+
+fn para_block(this) with
+  { "para":
+    for this of
+      case (i,e) => para_item(e)
+      case (i,otherwise) => otherwise
+    end
+  }
+end;
+
+fn traverse_block(this) with
+  match this of
+    case tremor=%{ t == "CodeBlock", present c } when this.c[0][1][0] == "tremor" => {"tremor": this.c[1] }
+    case para=%{ t == "Para" } => para_block(para.c)
+    case html=%{ t == "RawInline", present c } when this.c[0] == "html" => {"html": this.c[1] }
+    default => "err"
+  end
+end;
+
+
+
+{
+  "pandoc-api-version": event.pandoc-api-version ,
+  "meta": event.meta,
+  "blocks": for event.blocks of
+    case (i,e) when e.t == "CodeBlock" => traverse_block(e)
+    case (i,e) when e.t == "Para" => para_block(e.c)
+    case (i,e) when e.t == "RawInline" => traverse_block(e)
+    case (i,otherwise) => otherwise
+  end
+}

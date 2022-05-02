@@ -72,7 +72,7 @@ WebAssembly might be another way to get and deploy additional code to Tremor wit
 - [libloading Rust Crate for Dynamic Library Loading](https://docs.rs/libloading/0.5.2/libloading/index.html).
 - [Java WebStart](https://en.wikipedia.org/wiki/Java_Web_Start).
 - [Mac OS X Universal Binaries](https://en.wikipedia.org/wiki/Universal_binary).
-- [WebAssembly](https://webassembly.org/) [wasmer WebAssembly Runtime](https://github.com/wasmerio/wasmer), [wasmtime WebAssembly Runtime](wasmtime).
+- [WebAssembly](https://webassembly.org/) [wasmer WebAssembly Runtime](https://github.com/wasmerio/wasmer), [wasmtime WebAssembly Runtime](https://github.com/bytecodealliance/wasmtime).
 
 ## Unresolved Questions
 [unresolved-questions]: #unresolved-questions

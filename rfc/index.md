@@ -59,11 +59,11 @@ the RFC process, it may be:
 For more details on when an RFC is required for the following areas, please see
 the Tremor community's [sub-team] specific guidelines for:
 
- ### - [Language Changes](process/lang_changes)
- ### - [Library Changes](process/libs_changes)
- ### - [API Changes](process/api_changes)
- ### - [Architecture Changes](process/arch_changes)
-### - [Documentation Changes](process/docs_changes)
+ ### - [Language Changes](/rfc/process/lang_changes)
+ ### - [Library Changes](/rfc/process/libs_changes)
+ ### - [API Changes](/rfc/process/api_changes)
+ ### - [Architecture Changes](/rfc/process/arch_changes)
+### - [Documentation Changes](/rfc/process/docs_changes)
 
 ## Before Creating an RFC:
 [Before creating an RFC]: #before-creating-an-rfc
@@ -258,4 +258,4 @@ This process derives from, and is based on, the Rust language community RFC proc
 
 ## RFC Template
 
-This is the [template](process/0000-template/) you should use when making an RFC.
+This is the [template](/rfc/process/template/) you should use when making an RFC.

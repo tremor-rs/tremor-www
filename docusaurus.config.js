@@ -1,203 +1,203 @@
+// @ts-check
+// Note: type annotations allow type checking and IDEs autocompletion
+const gitLinks = require('./src/remark/git-links');
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
-/** @type {import('@docusaurus/types').DocusaurusConfig} */
-module.exports = {
+/** @type {import('@docusaurus/types').Config} */
+const config = {
+
   customFields: {
     bench_url: "https://tremor.licenser.net/bench",
   },
+
+  title: 'Tremor',
+  tagline: 'An early-stage event processing system for unstructured data with rich support for structural pattern-matching, filtering and transformation.',
+  url: 'https://www.tremor.rs/',
+  baseUrl: '/',
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'throw',
+  favicon: 'static/img/favicon.ico',
+  organizationName: 'tremor-rs', // Usually your GitHub org/user name.
+  projectName: 'tremor-rs/tremor-www', // Usually your repo name.
+  staticDirectories: ['static'],
+
+  //
+  // Content plugins - these should *NOT* be deep linked in `/docs`
+  //
   plugins: [
     require.resolve('@cmfcmf/docusaurus-search-local'),
-    require.resolve('docusaurus-plugin-redoc'),
-    [
-      '@docusaurus/plugin-content-docs',
-      /** @type {import('@docusaurus/plugin-content-docs').Options} */
-      {
-        id: 'community',
-        path: 'community',
-        routeBasePath: 'community',
-      },
-    ],
-    [
-      '@docusaurus/plugin-content-docs',
+    //  require.resolve('docusaurus-plugin-redoc'),
+    ['@docusaurus/plugin-content-docs',
       /** @type {import('@docusaurus/plugin-content-docs').Options} */
       {
         id: 'rfc',
         path: 'rfc',
         routeBasePath: 'rfc',
-      },
+        editUrl: 'https://github.com/tremor-rs/tremor-www/tree/main/'
+      }
     ],
-  ],
-  title: 'Tremor',
-  tagline: 'An early-stage event processing system for unstructured data with rich support for structural pattern-matching, filtering and transformation.',
-  url: 'https://www.tremor.rs/',
-  baseUrl: '/',
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
-  favicon: '/favicon.ico',
-  organizationName: 'tremor-rs',
-  projectName: 'tremor-www',
-  themeConfig: {
-    navbar: {
-      logo: {
-        alt: 'Tremor Logo',
-        src: '/img/tremor-logo.svg',
-        href: 'https://www.tremor.rs/',
-        target: '_self',
-      },
-      items: [
-        { to: 'docs/next/getting-started/getting-started', label: 'Getting Started', position: 'left' },
-        {
-          type: 'dropdown',
-          label: 'Community',
-          to: 'community/community',
-          position: 'left',
-          items: [
-            { to: 'community/community', label: 'Overview' },
-            { href: 'https://chat.tremor.rs', label: 'Chat' },
-            { to: 'community/governance', label: 'Governance' },
-            { to: 'community/faqs', label: 'FAQs' },
-            { to: 'rfc/index', label: 'RFCs' },
-            { to: 'community/EventsAndMedia', label: 'Events and Media' },
-          ],
-        },
-        {
-          type: 'doc',
-          docId: 'index',
-          label: 'Docs',
-          position: 'left',
-        },
-        { to: 'blog', label: 'Blog', position: 'left' },
-        {
-          type: 'docsVersionDropdown',
-          position: 'left',
-        },
-        {
-          href: 'https://chat.tremor.rs',
-          className: 'header-discord-link',
-          position: 'right',
-          'aria-label': 'Community Chat',
-        },
-        {
-          href: 'https://github.com/tremor-rs',
-          className: 'header-github-link',
-          'aria-label': 'GitHub repository',
-          position: 'right',
-        },
-        // {
-        //   type: 'localeDropdown',
-        //   position: 'right',
-        // },
-        {
-          type: 'search',
-          position: 'right',
-        },
-      ],
-    },
-    footer: {
-      logo: {
-        alt: 'Tremor Logo',
-        src: '/favicon.ico',
-      },
-      style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Quick Start',
-              to: 'quick-start/',
-            },
-            {
-              label: 'FAQs',
-              to: 'community/faqs',
-            },
-            {
-              label: 'Tremor API',
-              to: 'api/0',
-            },
-            {
-              label: 'Code of Conduct',
-              to: 'community/governance/CodeofConduct',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Discord',
-              href: 'https://chat.tremor.rs/',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/TremorDEBS',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/tremor-rs',
-            },
-            {
-              label: 'Download',
-              href: 'https://github.com/tremor-rs/tremor-runtime/releases',
-            },
-            {
-              html: '<a href="https://www.cncf.io/" rel="noreferrer noopener" aria-label="CNCF"><img src="/img/cncf-color.svg" alt="CNCF" style="width: 70%;" /></a>',
-            },
-            {
-              html: '<a href="https://www.netlify.com" rel="noreferrer noopener" aria-label="Netlify"><img src="/img/netlify-full-logo.svg" alt="Deploys by Netlify" style="width: 40%;" /></a>',
-            },
-          ],
-        },
-      ],
-      copyright: `
-        <br />
-        <strong> © Tremor Authors ${new Date().getFullYear()} | Documentation Distributed under CC-BY-4.0 </strong>
-        <br />
-        <br />
-        © ${new Date().getFullYear()} The Linux Foundation. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage/"> Trademark Usage</a> page.
-      `,
-    },
+  ]
 
-    prism: {
-      theme: lightCodeTheme,
-      darkTheme: darkCodeTheme,
-    },
-  },
+  ,
   presets: [
     [
-      '@docusaurus/preset-classic',
-      {
+      'redocusaurus',
+      /** @type {import('@docusaurus/preset-classic').Options} */
+      ({
+        // Plugin Options for loading OpenAPI files
+        specs: [
+          {
+            spec: 'static/api/v0.12/openapi.yaml',
+            route: '/api/',
+          },
+        ],
+        // Theme Options for modifying how redoc renders them
+        theme: {
+          // Change with your site colors
+          primaryColor: '#1890ff',
+        },
+      }),
+    ],
+    [
+      'classic',
+      /** @type {import('@docusaurus/preset-classic').Options} */
+      ({
+        debug: true,
         docs: {
-          path: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl:
-            'https://github.com/tremor-rs/tremor-www/tree/main',
+          // Please change this to your repo.
+          editUrl: 'https://github.com/tremor-rs/tremor-www/tree/main/',
+          remarkPlugins: [require('mdx-mermaid'), gitLinks]
         },
         blog: {
           showReadingTime: true,
+          // Please change this to your repo.
           editUrl:
-            'https://github.com/tremor-rs/tremor-www/tree/main',
+            'https://github.com/tremor-rs/tremor-www/tree/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
-        },
-      },
+        }
+      })
     ],
-    [
-      'redocusaurus',
-      {
-        specs: [
+  ],
+
+  themeConfig:
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    ({
+      navbar: {
+        //        title: 'Tremor',
+        logo: {
+          alt: 'Tremor Logo',
+          src: 'img/tremor-logo.svg',
+          href: 'https://www.tremor.rs/',
+          target: '_self',
+        },
+        items: [
           {
-            spec: 'openapi.yaml',
+            type: 'doc',
+            docId: 'getting-started/overview',
+            position: 'left',
+            label: 'Getting Started',
+          },
+          {
+            type: 'dropdown',
+            label: 'Community',
+            to: 'docs/community/overview',
+            position: 'left',
+            items: [
+              { to: 'docs/community/overview', label: 'Overview' },
+              { href: 'https://chat.tremor.rs', label: 'Chat' },
+              { to: 'docs/community/governance/overview', label: 'Governance' },
+              { to: 'docs/community/development/overview', label: 'Development' },
+              { to: 'docs/community/faqs', label: 'FAQs' },
+              { to: 'rfc', label: 'RFCs' },
+              { to: 'docs/community/events/overview', label: 'Events and Media' },
+            ],
+          },
+          {
+            type: 'dropdown',
+            label: 'Docs',
+            positition: 'left',
+            items: [
+              { to: 'docs/recipes/overview', label: 'Solution Recipes' },
+              { to: 'docs/connectors', label: 'Connectors Reference' },
+              { to: 'docs/library/overview', label: 'Standard Library' },
+              { to: 'docs/language', label: 'Language Reference' },
+              { href: 'pathname:///api/v0.12/', label: 'API v0.12' },
+              { href: 'pathname:///api/v0.11/', label: 'API v0.11' },
+            ],
+          },
+          { to: 'blog', label: 'Blog', position: 'left' },
+          {
+            type: 'docsVersionDropdown',
+            position: 'left',
+          },
+          {
+            href: 'https://chat.tremor.rs',
+            className: 'header-discord-link',
+            position: 'right',
+            'aria-label': 'Community Chat',
+          },
+          {
+            href: 'https://github.com/tremor-rs',
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
+            position: 'right',
+          },
+          {
+            type: 'search',
+            position: 'right',
           },
         ],
       },
-    ],
-  ],
+      footer: {
+        style: 'dark',
+        links: [
+          {
+            title: 'Social',
+            items: [
+              {
+                label: 'Discord',
+                href: 'https://chat.tremor.rs/',
+              },
+              {
+                label: 'Twitter',
+                href: 'https://twitter.com/TremorDEBS',
+              },
+            ]
+          },
+          {
+            title: 'Media',
+            items: [
+              {
+                label: 'YouTube',
+                href: 'https://www.youtube.com/channel/UCg1hxwEjh9szpYg8SxL0U7Q',
+              },
+            ],
+          },
+          {
+            title: 'More',
+            items: [
+              { label: 'Download', href: 'https://github.com/tremor-rs/tremor-runtime/releases' },
+            ],
+          },
+        ],
+        copyright: `
+          Copyright © ${new Date().getFullYear()}, Tremor Authors | Documentation Distributed under CC-BY-4.0.<br/><br>
+              <p style="font-size: smaller;">Hosted by: <a href="https://www.netlify.com/" rel="noreferrer noopener" aria-label="Netlify"><img src="/img/netlify-full-logo.svg" alt="CNCF" style="width: 3%;" /></a>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              Project of: <a href="https://www.cncf.io/" rel="noreferrer noopener" aria-label="CNCF"><img src="/img/cncf-color.svg" alt="CNCF" style="width: 5%;" /></a></p>
+        <small>© ${new Date().getFullYear()} The Linux Foundation. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage/">Trademark Usage</a> page.</small>
+        `,
+      },
+      prism: {
+        theme: lightCodeTheme,
+        darkTheme: darkCodeTheme,
+        additionalLanguages: ['tremor', 'ebnf']
+      },
+    }),
 };
+
+module.exports = config;
