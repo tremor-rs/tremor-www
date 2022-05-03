@@ -18,13 +18,13 @@ noteworthy restrictions:
 6. Tail recursion is supported, and constrained to a maximum recursion depth. A recursion depth is imposed as tremor-script is designed to operate on infinite streams of data so indefinite blocking/recursion is not supportable by design.
 
 Function Declaration Grammar:
-> ![function clause](../language/svg/fndefn.svg)
+> ![function clause](../reference/language/svg/fndefn.svg)
 
 Lets look at the types of functions we have.
 
 ## Intrinsic Functions
 
-![intrinsic fn](../language/svg/intrinsic.svg)
+![intrinsic fn](../reference/language/svg/intrinsic.svg)
 
 Intrinsic functions represent builtin or pre-defined functions implemented in the rust programming
 language that are a builtin component of the tremor project and are provided out of the box.
@@ -35,9 +35,9 @@ functions.
 
 ## Standard functions
 
-![standard fn](../language/svg/fndefn.svg)
+![standard fn](../reference/language/svg/fndefn.svg)
 
-![fn args](../language/svg/fnargs.svg)
+![fn args](../reference/language/svg/fnargs.svg)
 
 Standard functions are functions that take a given number of arguments, each with
 a name. This function can be tail-recursive. An example would be:
@@ -80,13 +80,13 @@ end
 
 ## Match functions
 
-![match fn](../language/svg/fndefn.svg)
+![match fn](../reference/language/svg/fndefn.svg)
 
-![fn args](../language/svg/fnargs.svg)
+![fn args](../reference/language/svg/fnargs.svg)
 
-![fn case](../language/svg/fncase.svg)
+![fn case](../reference/language/svg/fncase.svg)
 
-![fn default](../language/svg/fncasedefault.svg)
+![fn default](../reference/language/svg/fncasedefault.svg)
 
 Since matching and extracting are a core functionality for tremor matching on
 function arguments is directly supported.

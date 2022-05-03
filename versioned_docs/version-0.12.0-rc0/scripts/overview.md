@@ -46,7 +46,7 @@ The current meaning of `performant` as documented here means that `tremor-script
 
 ### Productive
 
-The `tremor-script` parsing tool-chain has been designed with ease-of-debugging and ease-of-development in mind. It has buitin support for syntax-highlighting on the console with errors annotating highlighted sections of badly written
+The `tremor-script` parsing tool-chain has been designed with ease-of-debugging and ease-of-development in mind. It has builtin support for syntax-highlighting on the console with errors annotating highlighted sections of badly written
 scripts to simplify fixing such scripts.
 
 ## Language
@@ -93,7 +93,7 @@ Integers in `tremor-script` are signed and are limited to 64-bit internal repres
 404
 ```
 
-The stdlib provides useful function for integers in [`std::integer`](../library/std/integer).
+The stdlib provides useful function for integers in [`std::integer`](../reference/library/std/integer).
 
 ```tremor
 use std::integer;
@@ -108,7 +108,7 @@ Floating point numerics in `tremor-script` are signed and are limited to 64-bit 
 1.67-e10
 ```
 
-The stdlib provides useful function for floats in [`std::float`](../library/std/float).
+The stdlib provides useful function for floats in [`std::float`](../reference/library/std/float).
 
 #### Character and Unicode Code-points
 
@@ -120,7 +120,7 @@ The language does not support literal character or Unicode code-points at this t
 "I am a string"
 ```
 
-The standard library provides useful function for string manipulation in [`std::string`](../library/std/string):
+The standard library provides useful function for string manipulation in [`std::string`](../reference/library/std/string):
 
 ```tremor
 use std::string;
@@ -158,15 +158,15 @@ Since Tremor 0.9 Heredocs also support [String Interpolation](#string-interpolat
 
 Array grammar:
 
-> ![array grammar](../language/svg/list.svg)
+> ![array grammar](../reference/language/svg/list.svg)
 
-Array literals in `tremor-script` are a comma-delimited set of expressions bracketed by the square brakcets '[' and ']'.
+Array literals in `tremor-script` are a comma-delimited set of expressions bracketed by the square brackets '[' and ']'.
 
 ```tremor
 [ 1, 2, "foobar", 3.456e10, { "some": "json-like-document" }, null ]
 ```
 
-The standard library provides several useful functions to work with arrays in [`std::array`](../library/std/array):
+The standard library provides several useful functions to work with arrays in [`std::array`](../reference/library/std/array):
 
 ```tremor
 use std::array;
@@ -178,11 +178,11 @@ array::push(["snot"], "badger") == ["snot", "badger"]
 
 Record grammar:
 
-> ![record grammar](../language/svg/record.svg)
+> ![record grammar](../reference/language/svg/record.svg)
 
 Field grammar:
 
-> ![field grammar](../language/svg/field.svg)
+> ![field grammar](../reference/language/svg/field.svg)
 
 Record literals in `tremor-script` are syntactically equivalent to JSON document objects
 
@@ -194,7 +194,7 @@ Record literals in `tremor-script` are syntactically equivalent to JSON document
 }
 ```
 
-Check out the stdlib [`std::record`](../library/std/record) module for some helpful function for working with records.
+Check out the stdlib [`std::record`](../reference/library/std/record) module for some helpful function for working with records.
 
 #### Binary
 
@@ -202,22 +202,24 @@ Binaries are based on the [Erlang bit syntax](https://erlang.org/doc/programming
 
 Binary grammar:
 
-> ![binary literal grammar](../language/svg/bytesliteral.svg)
+> ![binary literal grammar](../reference/language/svg/bytesliteral.svg)
 
 Bytes grammar:
 
-> ![binary segments grammar](../language/svg/bytes.svg)
+> ![binary segments grammar](../reference/language/svg/bytes.svg)
 
 Bytes Part
-> ![field grammar](../language/svg/bytespart.svg)
+> ![field grammar](../reference/language/svg/bytespart.svg)
 
 
-Parts of each field are: `<value>:<size>/<type>` where both `size` and `type` are optional.
+Parts of each field are: `<value>:<size>/<type>` where both `size` and `type` are optional. Without `size` or `type`,
+the field defaults to an unsigned big endian integer with 8 bits (aka 1 byte).
 
 The binary types consists of up to three parts. That is 2 prefixes and 1 main type identifier. Examples: `unsigned-big-integer`, `signed-integer`, `binary`. The types currently supported are:
 
 * `binary` - this can handle both binaries and strings, `size` here refers to the number of bytes
 * `integer` - this can represent integers, `size` here means size in bits. In addition the type can be prefixed with `big` and `little` for indianness and `signed` and `unsigned` for signedness.
+
 
 Some examples would be:
 
@@ -259,9 +261,9 @@ let event = {
 
 See also:
 
- - [`std::binary`](../library/std/binary) for useful function for working with binary data.
- - [`std::string::into_binary`](../library/std/string#into_binarybytes) and [`std::string::from_utf8_lossy`](../library/std/string#from_utf8_lossybytes)
- - [`std::base64`](../library/std/base64) for encoding and decoding binary data to string using base64.
+ - [`std::binary`](../reference/library/std/binary) for useful function for working with binary data.
+ - [`std::string::into_binary`](../reference/library/std/string#into_binarybytes) and [`std::string::from_utf8_lossy`](../reference/library/std/string#from_utf8_lossybytes)
+ - [`std::base64`](../reference/library/std/base64) for encoding and decoding binary data to string using base64.
 
 
 #### Operators
@@ -287,15 +289,15 @@ List of binary and unary operators in `tremor-script`, ordered by precedence (fr
 
 Path grammar:
 
-> ![path grammar](../language/svg/path.svg)
+> ![path grammar](../reference/language/svg/path.svg)
 
 Path Segments grammar:
 
-> ![qualified segment grammar](../language/svg/pathsegments.svg)
+> ![qualified segment grammar](../reference/language/svg/pathsegments.svg)
 
 ArraySegment grammar:
 
-> ![array grammar](../language/svg/selector.svg)
+> ![array grammar](../reference/language/svg/selector.svg)
 
 Path-like structures in `tremor-script` allow referencing local variables, ingested events, event meta-data, script-local state etc. and also indexing into them if they are records or arrays.
 
@@ -358,7 +360,7 @@ Grab the books from the store (the same using key, index and escaped key notatio
 
 ```tremor
 let capture = event.store.book;
-# index and escaped notation can acomodate keys that include 'odd' characters such as space or dots.
+# index and escaped notation can accommodate keys that include 'odd' characters such as whitespaces or dots.
 let capture = event.store["book"];
 let capture = event.store.`book`;
 ```
@@ -389,7 +391,7 @@ Path's in `tremor-script` are themselves expressions in their own right.
 
 Const grammer:
 
-![const grammar](../language/svg/const.svg)
+![const grammar](../reference/language/svg/const.svg)
 
 Const can be used to define immutable, constant values that get evaluated at compile time. This is more performant then `let` as all logic can happen at compile time and is helpful for setting up lookup tables or other never changing data structures.
 
@@ -397,7 +399,7 @@ Const can be used to define immutable, constant values that get evaluated at com
 
 Let grammar:
 
-> ![let grammar](../language/svg/let.svg)
+> ![let grammar](../reference/language/svg/let.svg)
 
 The let expression allows data pointed to by a path to be destructively mutated, and the pointed-to value reassigned. If the path does not yet exist, it will be created in-situ:
 
@@ -434,11 +436,11 @@ drop; # As the first drop always wins, this expression never runs
 
 Emit grammar:
 
-> ![emit grammar](../language/svg/emit.svg)
+> ![emit grammar](../reference/language/svg/emit.svg)
 
-Emit expressions enable short-circuiting the evaluation of a `tremor-script` when processing is known to be complete and further processing can be avoided. If no argument is supplied, emit` will return the event record. If an argument is supplied, the result of evaluating the expression will be returned. Tremor or other processing tools can process emitted events or data using their default flow-based or stream-based data processing pipelines.
+Emit expressions enable short-circuiting the evaluation of a `tremor-script` when processing is known to be complete and further processing can be avoided. If no argument is supplied, `emit` will return the event record. If an argument is supplied, the result of evaluating the expression will be returned. Tremor or other processing tools can process emitted events or data using their default flow-based or stream-based data processing pipelines.
 
-As the content of the emitted event is user-defined, oeprators can standardise the format of the event emitted on emit from `tremor-script`
+As the content of the emitted event is user-defined, operators can standardise the format of the event emitted on emit from `tremor-script`
 
 :::note
 By default, if no `emit` or `drop` expressions are defined, all expressions in a correctly written tremor-script will be evaluated until completion and the value of the last expression evaluated will be returned as an `emit` message.
@@ -477,11 +479,11 @@ emit {
 
 Match grammar:
 
-> ![match grammar](../language/svg/match.svg)
+> ![match grammar](../reference/language/svg/match.svg)
 
 Match case grammar:
 
-> ![case grammar](../language/svg/predicateclause.svg)
+> ![case grammar](../reference/language/svg/predicateclause.svg)
 
 Match expressions enable data to be filtered or queried using case-based reasoning. Match expressions take the form:
 
@@ -592,11 +594,11 @@ A *tuple pattern* matches a *target* value if the *target* is an array and **eac
 If you are looking for a more set like operation look at the [array pattern](#matching-array-patterns).
 :::
 
-> ![tuple case grammar](../language/svg/tuplepattern.svg)
+> ![tuple case grammar](../reference/language/svg/tuplepattern.svg)
 
 Tuple Pattern filter grammar:
 
-> ![tuple filter grammar](../language/svg/tuplepredicatepatterns.svg)
+> ![tuple filter grammar](../reference/language/svg/tuplepredicatepatterns.svg)
 
 In addition to literal array matching, where the case expression tuple literal must exactly match the target of the match expression one for one, tuple patterns enable testing for matching elements within an array and filtering on the basis of matched elements.
 
@@ -620,11 +622,11 @@ If you are looking for a more array like / positional operation look at the [tup
 :::
 
 
-> ![array case grammar](../language/svg/arraypattern.svg)
+> ![array case grammar](../reference/language/svg/arraypattern.svg)
 
 Array Pattern filter grammar:
 
-> ![array filter grammar](../language/svg/arraypredicatepattern.svg)
+> ![array filter grammar](../reference/language/svg/arraypredicatepattern.svg)
 
 In addition to a subset match, where the elements of the pattern must be included in the target of the match expression, array patterns enable testing for matching elements within an array and filtering on the basis of matched elements.
 
@@ -652,11 +654,11 @@ end;
 A record pattern matches a target if the target is a record that contains **at least all declared keys** and the tests for **each of the declared key** match.
 :::
 
-> ![record case grammar](../language/svg/recordpattern.svg)
+> ![record case grammar](../reference/language/svg/recordpattern.svg)
 
 Record Pattern Fields grammar
 
-> ![record pattern field grammar](../language/svg/patternfields.svg)
+> ![record pattern field grammar](../reference/language/svg/patternfields.svg)
 
 Similarly to record literal matching where the case expression record must exactly match the target of the match expression, record patterns enable testing for matching fields or sub-structures within a record and extracting and elementizing data on the basis of matched predicate tests ( via `~=` ).
 
@@ -709,7 +711,7 @@ end;
 
 #### Guard clauses
 
-> ![guard clause grammar](../language/svg/whenclause.svg)
+> ![guard clause grammar](../reference/language/svg/whenclause.svg)
 
 Guard expressions in Match case clauses enable matching data structures to be further filtered based on predicate expressions. For example they can be used to restrict the match to a subset of matching cases where appropriate.
 
@@ -723,10 +725,10 @@ end
 #### Effectors
 
 Effectors grammar:
-> ![effectors grammar](../language/svg/effectors.svg)
+> ![effectors grammar](../reference/language/svg/effectors.svg)
 
 Block:
-> ![block grammar](../language/svg/block.svg)
+> ![block grammar](../reference/language/svg/block.svg)
 
 Effectors are the expressions evaluated when a case pattern and guard succeeded. When we have to use multiple expressions to do some more complex processing, we need to separate those expressions with commas `,`:
 
@@ -743,9 +745,9 @@ end
 
 ### Merge
 
-> ![merge grammar](../language/svg/merge.svg)
+> ![merge grammar](../reference/language/svg/merge.svg)
 
-Merge expressions defines a difference against a targetted record and applies that difference to produce a result record. Merge operations in `tremor-script` follow merge-semantics defined in [RFC 7386](https://tools.ietf.org/html/rfc7386).
+Merge expressions defines a difference against a targeted record and applies that difference to produce a result record. Merge operations in `tremor-script` follow merge-semantics defined in [RFC 7386](https://tools.ietf.org/html/rfc7386).
 
 ```tremor
 let event = merge event of {"some": "record"} end
@@ -761,13 +763,13 @@ let event = merge event of {"some": "record"} end
 
 ### Patch
 
-> ![patch grammar](../language/svg/patch.svg)
+> ![patch grammar](../reference/language/svg/patch.svg)
 
 Patch operation grammar
 
-> ![patch operation grammar](../language/svg/patchoperations.svg)
+> ![patch operation grammar](../reference/language/svg/patchoperations.svg)
 
-Patch expressions define a set of record level field operations to be applied to a target record in order to transform a targetted record. Patch allows fields to be: inserted where there was no field before; removed where there was a field before; updated where there was a field before; or inserted or updated regardless of whether or not there was a field before. Patch also allows field level merge operations on records or for the targetted document itself to be merged. Merge operations in patch are syntax sugar in that they are both based on the merge operation.
+Patch expressions define a set of record level field operations to be applied to a target record in order to transform a targeted record. Patch allows fields to be: inserted where there was no field before; removed where there was a field before; updated where there was a field before; or inserted or updated regardless of whether or not there was a field before. Patch also allows field level merge operations on records or for the targeted document itself to be merged. Merge operations in patch are syntax sugar in that they are both based on the merge operation.
 
 Patch follows the semantics of [RFC 6902](https://tools.ietf.org/html/rfc6902) with the explicit exclusion of the `copy` and `move` operations and with the addition of an `upsert` operation the variant supported by `tremor-script`
 
@@ -779,11 +781,11 @@ Patch follows the semantics of [RFC 6902](https://tools.ietf.org/html/rfc6902) w
 
 ### For comprehensions
 
-> ![for grammar](../language/svg/for.svg)
+> ![for grammar](../reference/language/svg/for.svg)
 
 For Case Clause grammar
 
-> ![for case clause grammar](../language/svg/forcaseclause.svg)
+> ![for case clause grammar](../reference/language/svg/forcaseclause.svg)
 
 For expressions are case-based record or array comprehensions that can iterate over index/element or key/value pairs in record or array literals respectively.
 
@@ -803,7 +805,7 @@ end
 
 As part of the tremor `pipeline` processing, there are times when it's necessary to track state across events over time (eg: in order to exploit stateful algorithms for session tracking, or building and maintaining application state). For this purpose, a tremor `pipeline` is equipped with operator node-level state management and storage capabilities that persists for the running lifetime of a pipeline deployed into the tremor runtime.
 
-From tremor-script, this shared storage is accessbile via the `state` keyword, which allows for accessing the storage contents via [path](#paths) expressions, akin to how the `event` keyword works (with the key difference being that the state storage is shared across events). On pipeline initialization, the state is initialized as `null` and users are free to set it to arbitrary value over the course of processing.
+From tremor-script, this shared storage is accessible via the `state` keyword, which allows for accessing the storage contents via [path](#paths) expressions, akin to how the `event` keyword works (with the key difference being that the state storage is shared across events). On pipeline initialization, the state is initialized as `null` and users are free to set it to arbitrary value over the course of processing.
 
 Here's a tremor-script example demonstrating the usage of the `state` keyword -- it maintains a counter for the events coming in and emits the count alongside the event:
 
@@ -821,18 +823,16 @@ Here's a tremor-script example demonstrating the usage of the `state` keyword --
   }
 ```
 
-This will work as part of the [runtime::tremor](../queries/operators#runtimetremor) operator confguration in the legacy pipeline yaml setup, and also as an embedded script in the [trickle definition](../queries/walkthrough#scripts-and-operators) of the pipeline.
-
 A key thing to note is that by design, state is not shared across operator nodes in the pipeline. Therefore, if we have scripts across multiple nodes in the pipeline, the `state` keyword in each script allows access only to the local node-specific state storage, and not the state from any other operator nodes or something global to all the nodes.
 
 Since the state storage lives for the lifetime of a pipeline, state will not be persisted when the pipeline is undeployed or the main process is shut down.
 
 ## Extractors
 
-> ![test expression grammar](../language/svg/testexpr.svg)
+> ![test expression grammar](../reference/language/svg/testexpr.svg)
 
 TEST_LITERAL Grammar:
-> ![test literal grammar](../language/svg/testliteral.svg)
+> ![test literal grammar](../reference/language/svg/testliteral.svg)
 
 The language has pluggable support for a number of microformats with two basic modes of operation that enable predicate tests ( does a particular value match the expected micro-format ) and elementization ( if a value does match a specific micro-format, then extract and elementize accordingly ).
 
@@ -870,5 +870,5 @@ There is no concept of _injector_ in the `tremor-script` language that is analog
 These rules are referenced in the main tremor-query grammar rules above and are listed here as extended reference.
 
 DocComment Grammar:
-> ![doc comment grammar](../language/svg/doccomment.svg)
+> ![doc comment grammar](../reference/language/svg/doccomment.svg)
 

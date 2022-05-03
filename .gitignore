@@ -27,7 +27,6 @@ docs/scripting/tremor-query/functions/
 docs/recipes/*/var/log/*
 log/
 static/api
-docs/language/
 
 # Local Netlify folder
 .netlify
@@ -36,6 +35,6 @@ docs/language/
 /openapi.yaml
 
 # Generated docs copied from tremor-runtime
-docs/langauge
-docs/library
-static/docs/language/svg
+docs/reference/language
+docs/reference/library
+static/docs/reference/language/svg

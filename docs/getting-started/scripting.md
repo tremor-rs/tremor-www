@@ -42,7 +42,7 @@ script
 end;
 ```
 
-See the full documentation [of the language](../language) and its [standard library](../library/overview) for more information.
+See the full documentation [of the language](../reference/troy) and its [standard library](../reference/library/overview) for more information.
 
 ### Tremor Query
 
@@ -119,4 +119,4 @@ filter {
 
 </div>
 
-The full documentation [of the language](../queries/overview), the [operators](../queries/operators), and [aggregation functions](../queries/functions) can be found in the [language docs](../language) .
+The full documentation [of the language](../queries/overview), the [operators](../queries/operators), and [aggregation functions](../queries/functions) can be found in the [language docs](../reference/language) .

@@ -8,7 +8,7 @@ Metrics are published to the `system::metrics` pipeline every 10 second or if an
 
 To enable monitoring, the `metrics_interval_s` key must be specified as part of onramp, pipeline and offramp config (depending on which metrics you want to capture), followed by the amount of seconds that should pass between emits.
 
-Metrics are formatted following the same structure as the [Influx Codec](../connectors/codecs/influx).
+Metrics are formatted following the same structure as the [Influx Codec](../reference/codecs/influx).
 
 ## Pipeline metrics
 

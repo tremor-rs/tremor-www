@@ -1,24 +1,22 @@
 TREMOR_VSN=main
+LANG_REF_DIR=docs/reference/language
+STDLIB_REF_DIR=docs/reference/library
 
 all: clean tremor-runtime-docs openapi
 
 build_thunk:
-	-mkdir build/docs/language/svg
-	-mkdir build/docs/next/language/svg
-	cp -f docs/language/svg/*.svg build/docs/language/svg      # Saves duplicates in git this way
-	cp -f docs/language/svg/*.svg build/docs/next/language/svg # Saves duplicates in git this way
+	-mkdir build/docs/reference/language/svg
+	-mkdir build/docs/next/reference/language/svg
+	cp -f docs/reference/language/svg/*.svg build/docs/reference/language/svg      # Saves duplicates in git this way
+	cp -f docs/reference/language/svg/*.svg build/docs/next/reference/language/svg # Saves duplicates in git this way
 
 clean_build: reset all
 	-rm -rf ../cache/*
 	npm run build
 
-netlify: clean_build build_thunk
+netlify: clean_build build_thunk openapi
 
 serve: build_thunk
-	-mkdir build/docs/language/svg
-	-mkdir build/docs/next/language/svg
-	cp -f docs/language/svg/*.svg build/docs/language/svg      # Saves duplicates in git this way
-	cp -f docs/language/svg/*.svg build/docs/next/language/svg # Saves duplicates in git this way
 	npm run serve
 
 tremor-runtime:
@@ -36,13 +34,13 @@ alex:
 
 tremor-runtime-docs: tremor-runtime-refresh
 	-cd tremor-runtime && make docs
-	-rm -rf docs/language docs/library
-	cp -rf tremor-runtime/docs/language docs/language
-	cp -rf tremor-runtime/docs/library docs/library
-	cp -rf tremor-runtime/static/docs/library/*.md docs/library
+	-rm -rf $(LANG_REF_DIR) $(STDLIB_REF_DIR)
+	cp -rf tremor-runtime/docs/language $(LANG_REF_DIR)
+	cp -rf tremor-runtime/docs/library $(STDLIB_REF_DIR)
+	cp -rf tremor-runtime/static/docs/library/*.md $(STDLIB_REF_DIR)
 	-rm -rf static/docs/svg
-	-[ ! -d static/docs/language/svg ] && mkdir -p static/docs/language/svg || true
-	cp -rf docs/language/svg static/docs/language/svg
+	-[ ! -d static/$(LANG_REF_DIR)/svg ] && mkdir -p static/$(LANG_REF_DIR)/svg || true
+	cp -rf $(LANG_REF_DIR)/svg static/$(LANG_REF_DIR)
 
 
 openapi: tremor-runtime-refresh
@@ -58,10 +56,10 @@ clean:
 	-rm -rf static/api/v0.11/index.html
 	-rm -rf static/api/v0.12/index.html
 	-rm -rf static/api/v0.12/openapi.yaml
-	-rm -rf docs/library/aggr
-	-rm -rf docs/library/stdlib
-	-rm -rf docs/language
-	-rm -rf static/docs/svg
+	-rm -rf $(STDLIB_REF_DIR)/aggr
+	-rm -rf $(STDLIB_REF_DIR)/stdlib
+	-rm -rf $(LANG_REF_DIR)
+	-rm -rf static/$(LANG_REF_DIR)/svg
 	-rm -rf docs/api
 
 touch_version:
