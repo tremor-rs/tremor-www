@@ -10,8 +10,18 @@ In the end, we'll have a small tremor application in which you can input text. I
 
 Runnable examples configuration for each of the steps is available [here](__GIT__/../code/basics).
 
-## Passthrough
+## Topics
 
+This guide introduces the following new concepts
+
+* flows
+* connectors
+* pipelines
+* scripts
+* select with where
+* `use` for functions, pipelines and connectors
+
+## Passthrough
 
 The simple configuration in tremor is what we call `passthrough` as it takes data from one end, passes it through, and puts it out the other end.
 
