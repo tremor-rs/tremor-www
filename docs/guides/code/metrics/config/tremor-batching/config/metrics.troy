@@ -19,7 +19,7 @@ flow
     # we use the influx codec here as well
     codec = "influx",
     # define the postprocessor, we use separate to seperate events by lines
-    postprocessor = ["separate"],       
+    postprocessors = ["separate"],       
     # configure  the endpoint we're writing to
     config = {
       "url": "http://influxdb:8086/write?db=tremor",
@@ -31,13 +31,16 @@ flow
   # define our metrics pipeline to batch metrics
   define pipeline metrics
   pipeline
+    # use nanos for time
+    use std::time::nanos;
+
     # define our batch operator.
     # A batch will collect up to 3000 events, but never wait more then 5 seconds
     # before emitting.
     define operator batch from generic::batch
     with
       count = 3000,
-      timeout = 5
+      timeout = nanos::from_seconds(5)
     end;
     create operator batch;
 
@@ -50,7 +53,7 @@ flow
 
   # Create the http client
   create connector influx_out;
-
+  
   # Create our pipeline
   create pipeline metrics from metrics;
 
@@ -58,6 +61,19 @@ flow
   connect /connector/upd_in to /pipeline/metrics;
   # Connect the pipeline to the inflix client
   connect /pipeline/metrics to /connector/influx_out;
+
+
+
+  # debugging
+
+  use troy::connectors;
+  use troy::pipelines;
+
+  create connector console from connectors::console;
+  create pipeline passthrough from pipelines::passthrough;
+
+  connect /connector/influx_out to /pipeline/passthrough;
+  connect /pipeline/passthrough to /connector/console;
 
 end;
 
