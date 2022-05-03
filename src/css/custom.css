@@ -16,6 +16,16 @@
   --ifm-color-primary-lightest: #5774c9;
 }
 
+[data-theme='dark'] {
+  --ifm-color-primary: #68c6de;
+  --ifm-color-primary-dark: #4dbcd8;
+  --ifm-color-primary-darker: #40b7d5;
+  --ifm-color-primary-darkest: #299ebb;
+  --ifm-color-primary-light: #83d0e4;
+  --ifm-color-primary-lighter: #90d5e7;
+  --ifm-color-primary-lightest: #b8e4f0;
+}
+
 .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.1);
   display: block;
@@ -82,5 +92,22 @@ html[data-theme='dark'] .apexcharts-tooltip-title {
 }
 
 .apexcharts {
-  hight: 1px;
+  height: 1px;
+}
+
+.table-of-contents__link--active {
+  border-left: 4px solid var(--ifm-link-color);
+  color: var(--ifm-link-color);
+  font-weight: 700;
+  margin-left: -16px;
+  padding-left: 12px;
+}
+
+div[class^='sidebar_']
+  .menu__link.menu__link--active:not(.menu__link--sublist) {
+  background: rgba(33, 96, 253, 0.16);
+  border-radius: 4px 0 0 4px;
+  font-weight: 800;
+  border-right: 2px solid var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
 }
