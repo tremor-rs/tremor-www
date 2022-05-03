@@ -35,35 +35,36 @@ For specific components, their documentation should be consulted for correct usa
 
 Tremor supports the encoding and decoding of the following formats:
 
-* [json](../connectors/codecs#json)
-* [msgpack](../connectors/codecs#msgpack)
-* [influx](../connectors/codecs#influx)
-* [binflux](../connectors/codecs#binflux)- (binary representation of the influx wire protocol).
-* [statsd](../connectors/codecs#statsd)
-* [yaml](../connectors/codecs#yaml)
-* [string](../connectors/codecs#string)- any valid UTF-8 string sequence.
+* [json](../reference/codecs#json)
+* [msgpack](../reference/codecs#msgpack)
+* [influx](../reference/codecs#influx)
+* [binflux](../reference/codecs#binflux)- (binary representation of the influx wire protocol).
+* [statsd](../reference/codecs#statsd)
+* [yaml](../reference/codecs#yaml)
+* [string](../reference/codecs#string)- any valid UTF-8 string sequence.
 
 <h3 class="section-head" id="h-concept"><a href="#h-codecs"></a>Pre- and Postprocessors</h3>
 
 Tremor supports the following preprocessing transformations in `Onramp` configurations:
 
-* [lines](../connectors/preprocessors/#lines)- split by newline.
-* [lines-null](../connectors/preprocessors/#lines-null)- split by null byte.
-* [lines-pipe](../connectors/preprocessors/#lines-pipe)- split by `|`.
-* [base64](../connectors/preprocessors/#base64)- base64 decoding.
-* [decompress](../connectors/preprocessors/#decompress)- auto detecting decompress.
-* [gzip](../connectors/preprocessors/#gzip)- gzip decompress.
-* [zlib](../connectors/preprocessors/#zlib)- zlib decompress.
-* [xz](../connectors/preprocessors/#xz)- xz decompress.
-* [snappy](../connectors/preprocessors/#snappy)- snappy decompress.
-* [lz4](../connectors/preprocessors/#lz4)- zl4 decompress.
-* [gelf-chunking](../connectors/preprocessors/#gelf-chunking)- GELF chunking support.
-* [remove-empty](../connectors/preprocessors/#remove-empty)- remove emtpy (0 len) messages.
-* [length-prefixed](../connectors/preprocessors#length-prefixed)- length prefixed splitting for streams.
+* [lines](../reference/preprocessors/#lines)- split by newline.
+* [lines-null](../reference/preprocessors/#lines-null)- split by null byte.
+* [lines-pipe](../reference/preprocessors/#lines-pipe)- split by `|`.
+* [base64](../reference/preprocessors/#base64)- base64 decoding.
+* [decompress](../reference/preprocessors/#decompress)- auto detecting decompress.
+* [gzip](../reference/preprocessors/#gzip)- gzip decompress.
+* [zlib](../reference/preprocessors/#zlib)- zlib decompress.
+* [xz](../reference/preprocessors/#xz)- xz decompress.
+* [snappy](../reference/preprocessors/#snappy)- snappy decompress.
+* [lz4](../reference/preprocessors/#lz4)- zl4 decompress.
+* [gelf-chunking](../reference/preprocessors/#gelf-chunking)- GELF chunking support.
+* [remove-empty](../reference/preprocessors/#remove-empty)- remove emtpy (0 len) messages.
+* [length-prefixed](../reference/preprocessors#length-prefixed)- length prefixed splitting for streams.
 
 Tremor supports the following postprocessing transformations in `Offramp` configurations:
 
-* [lines](../connectors/postprocessors/#lines)
-* [base64](../connectors/postprocessors/#base64)
-* [length-prefixed](../connectors/postprocessors#length-prefixed)
-* [compression](../connectors/postprocessors/#compression)
+* [separate](../reference/postprocessors/separate)
+* [base64](../reference/postprocessors/base64)
+* [length-prefixed](../reference/postprocessors/length-prefix)
+* [compress](../reference/postprocessors/compress)
+* []

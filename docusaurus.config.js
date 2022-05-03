@@ -122,9 +122,9 @@ const config = {
             positition: 'left',
             items: [
               { to: 'docs/recipes/overview', label: 'Solution Recipes' },
-              { to: 'docs/connectors', label: 'Connectors Reference' },
-              { to: 'docs/library/overview', label: 'Standard Library' },
-              { to: 'docs/language', label: 'Language Reference' },
+              { to: 'docs/reference/connectors', label: 'Connectors Reference' },
+              { to: 'docs/reference/library/overview', label: 'Standard Library' },
+              { to: 'docs/reference/language', label: 'Language Reference' },
               { href: 'pathname:///api/v0.12/', label: 'API v0.12' },
               { href: 'pathname:///api/v0.11/', label: 'API v0.11' },
             ],

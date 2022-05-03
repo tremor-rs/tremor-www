@@ -42,19 +42,6 @@ The following recipes show how to quickly configure and deploy
 common tremor-based applications. These recipes assume no prior
 working knowledge of tremor.
 
-
-## Ingredients
-
-Basic introduction to core features of tremor.
-
-[passthrough](./passthrough/index.md) - Pass through events
-
-[filter](./filter/index.md) - Filter events
-
-[transform](./transform/index.md) - Transform events
-
-[validate](./validate/index.md) - Validate structure of data in events
-
 ## Legacy Observability
 
 Before the rise of CNCF OpenTelemetry, logging, metrics and tracing required

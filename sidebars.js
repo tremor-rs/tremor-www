@@ -47,152 +47,226 @@ const sidebars = {
     'guides/overview',
     'about/overview',
     'recipes/overview',
-    'reference/connectors/overview',
+    'reference/connectors',
     'getting-started/tooling',
   ],
 
   connectorsSidebar: [
     {
       type: 'doc',
-      id: 'connectors',
+      id: 'reference/connectors',
       label: 'Connectors Reference',
     },
+    /*
     {
       'Codecs': [
-        'connectors/codecs',
-        'connectors/codecs/json',
-        'connectors/codecs/yaml',
-        'connectors/codecs/csv',
-        'connectors/codecs/msgpack',
-        'connectors/codecs/string',
-        'connectors/codecs/influx',
-        'connectors/codecs/binflux',
-        'connectors/codecs/statsd',
-        'connectors/codecs/syslog',
+        'reference/codecs',
+        'reference/codecs/json',
+        'reference/codecs/yaml',
+        'reference/codecs/csv',
+        'reference/codecs/msgpack',
+        'reference/codecs/string',
+        'reference/codecs/influx',
+        'reference/codecs/binflux',
+        'reference/codecs/statsd',
+        'reference/codecs/syslog',
       ]
     },
     {
       'Preprocessors': [
-        'connectors/preprocessors',
-        'connectors/preprocessors/base64',
-        'connectors/preprocessors/decompress',
-        'connectors/preprocessors/gelf',
-        'connectors/preprocessors/length-prefix',
-        'connectors/preprocessors/lines',
-        'connectors/preprocessors/remove-empty',
+        'reference/preprocessors',
+        'reference/preprocessors/base64',
+        'reference/preprocessors/decompress',
+        'reference/preprocessors/gelf',
+        'reference/preprocessors/length-prefix',
+        'reference/preprocessors/separate',
+        'reference/preprocessors/remove-empty',
       ]
     },
     {
       'Postprocessors': [
-        'connectors/postprocessors',
-        'connectors/postprocessors/base64',
-        'connectors/postprocessors/compress',
-        'connectors/postprocessors/gelf',
-        'connectors/postprocessors/ingest-timestamp',
-        'connectors/postprocessors/length-prefix',
-        'connectors/postprocessors/lines',
+        'reference/postprocessors',
+        'reference/postprocessors/base64',
+        'reference/postprocessors/compress',
+        'reference/postprocessors/gelf',
+        'reference/postprocessors/ingest-timestamp',
+        'reference/postprocessors/length-prefix',
+        'reference/postprocessors/separate',
       ]
     },
+    {*/
     {
-      'Supported Connectors': [
-        'connectors/file',
-        'connectors/metrics',
-        'connectors/stdio',
-        'connectors/tcp',
-        'connectors/udp',
-        'connectors/kv',
-        'connectors/metronome',
-        'connectors/crononome',
-        'connectors/wal',
-        'connectors/dns',
-        'connectors/discord',
-        'connectors/ws',
-        'connectors/elastic',
-        'connectors/s3',
-        'connectors/kafka',
-        'connectors/unix_socket',
-        'connectors/otel',
-      ]
+      type: 'doc',
+      id: 'reference/connectors/bench',
+      label: 'bench',
     },
     {
-      'Development Connectors': [
-        'connectors/cb',
-        'connectors/bench',
-        'connectors/null',
-      ]
+      type: 'doc',
+      id: 'reference/connectors/cb',
+      label: 'cb',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/crononome',
+      label: 'crononome',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/discord',
+      label: 'discord',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/dns',
+      label: 'dns',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/elastic',
+      label: 'elastic',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/file',
+      label: 'file',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/kafka',
+      label: 'kafka',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/kv',
+      label: 'kv',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/metrics',
+      label: 'metrics',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/metronome',
+      label: 'metronome',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/null',
+      label: 'null',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/otel',
+      label: 'otel',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/s3',
+      label: 's3',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/stdio',
+      label: 'stdio',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/tcp',
+      label: 'tcp',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/udp',
+      label: 'udp',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/unix_socket',
+      label: 'unix_socket',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/wal',
+      label: 'wal',
+    },
+    {
+      type: 'doc',
+      id: 'reference/connectors/ws',
+      label: 'ws',
     },
   ],
   librarySidebar: [
     {
       type: 'doc',
-      id: 'library/overview',
+      id: 'reference/library/overview',
       label: 'Overview',
     },
     {
       'Standard Library': [
         {
           'std': [
-            'library/std',
-            'library/std/array',
-            'library/std/base64',
-            'library/std/binary',
-            'library/std/float',
-            'library/std/integer',
-            'library/std/json',
-            'library/std/math',
-            'library/std/path',
-            'library/std/random',
-            'library/std/range',
-            'library/std/re',
-            'library/std/record',
-            'library/std/string',
-            'library/std/test',
-            'library/std/type',
-            'library/std/url',
-            'library/std/size',
+            'reference/library/std',
+            'reference/library/std/array',
+            'reference/library/std/base64',
+            'reference/library/std/binary',
+            'reference/library/std/float',
+            'reference/library/std/integer',
+            'reference/library/std/json',
+            'reference/library/std/math',
+            'reference/library/std/path',
+            'reference/library/std/random',
+            'reference/library/std/range',
+            'reference/library/std/re',
+            'reference/library/std/record',
+            'reference/library/std/string',
+            'reference/library/std/test',
+            'reference/library/std/type',
+            'reference/library/std/url',
+            'reference/library/std/size',
           ]
         },
         {
           'tremor': [
-            'library/tremor',
-            'library/tremor/chash',
-            'library/tremor/origin',
-            'library/tremor/system',
+            'reference/library/tremor',
+            'reference/library/tremor/chash',
+            'reference/library/tremor/origin',
+            'reference/library/tremor/system',
           ]
         },
         {
           'cncf': [
-            'library/cncf',
-            'library/cncf/otel',
-            'library/cncf/otel/span_id',
-            'library/cncf/otel/trace_id',
+            'reference/library/cncf',
+            'reference/library/cncf/otel',
+            'reference/library/cncf/otel/span_id',
+            'reference/library/cncf/otel/trace_id',
             {
               'logs': [
-                'library/cncf/otel/logs',
-                'library/cncf/otel/logs/severity',
-                'library/cncf/otel/logs/traceflags',
+                'reference/library/cncf/otel/logs',
+                'reference/library/cncf/otel/logs/severity',
+                'reference/library/cncf/otel/logs/traceflags',
               ]
             },
             {
               'metrics': [
-                'library/cncf/otel/metrics',
-                'library/cncf/otel/metrics/temporality',
+                'reference/library/cncf/otel/metrics',
+                'reference/library/cncf/otel/metrics/temporality',
               ]
             },
             {
               'trace': [
-                'library/cncf/otel/trace',
-                'library/cncf/otel/trace/spankind',
-                'library/cncf/otel/trace/status',
+                'reference/library/cncf/otel/trace',
+                'reference/library/cncf/otel/trace/spankind',
+                'reference/library/cncf/otel/trace/status',
               ]
             },
           ]
         },
         {
           'aggr': [
-            'library/aggr',
-            'library/aggr/stats',
-            'library/aggr/win',
+            'reference/library/aggr',
+            'reference/library/aggr/stats',
+            'reference/library/aggr/win',
           ]
         },
       ]
@@ -202,7 +276,7 @@ const sidebars = {
   languageSidebar: [
     {
       type: 'doc',
-      id: 'language',
+      id: 'reference/language',
       label: 'Language Reference',
     },
     {
@@ -244,12 +318,12 @@ const sidebars = {
         },
       ],
       'Reference': [
-        'language/module_system',
-        'language/deploy',
-        'language/query',
-        'language/script',
-        'language/full',
-        'language/EBNF'
+        'reference/language/module_system',
+        'reference/language/deploy',
+        'reference/language/query',
+        'reference/language/script',
+        'reference/language/full',
+        'reference/language/EBNF'
       ],
     },
   ],
@@ -261,7 +335,8 @@ const sidebars = {
     },
     {
       "Guides": [
-        "guides/basics"
+        "guides/basics",
+        "guides/metrics"
       ]
     },
     {
