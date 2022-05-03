@@ -22,16 +22,16 @@ flow
     codec = "influx",
     # configure  the endpoint we're writing to
     config = {
-      "url": "http://influxdb:8086/write?db=tremor",
+      "url": "http://tdengine:6041/influxdb/v1/write?db=tremor&u=root&p=taosdata",
       # We use a custom header to identify that we're tremor
       "headers": {"Client": ["Tremor"]}
     }
   end;
 
-  # Create the UDP server
+  # Create the udp server
   create connector upd_in;
 
-  # Create the HTTP client
+  # Create the http client
   create connector influx_out;
 
   # Create our pipeline

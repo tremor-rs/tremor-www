@@ -1,7 +1,5 @@
 define flow metrics
 flow
-  # import the pipeline module
-  use troy::pipelines;
   # define the udp server
   define connector upd_in from udp_server
   with
@@ -20,6 +18,8 @@ flow
   with
     # we use the influx codec here as well
     codec = "influx",
+    # define the postprocessor, we use separate to seperate events by lines
+    postprocessor = ["separate"],       
     # configure  the endpoint we're writing to
     config = {
       "url": "http://influxdb:8086/write?db=tremor",
@@ -28,19 +28,36 @@ flow
     }
   end;
 
-  # Create the UDP server
+  # define our metrics pipeline to batch metrics
+  define pipeline metrics
+  pipeline
+    # define our batch operator.
+    # A batch will collect up to 3000 events, but never wait more then 5 seconds
+    # before emitting.
+    define operator batch from generic::batch
+    with
+      count = 3000,
+      timeout = 5
+    end;
+    create operator batch;
+
+    select event from in into batch;
+    select event from batch into out;
+  end;
+
+  # Create the udp server
   create connector upd_in;
 
-  # Create the HTTP client
+  # Create the http client
   create connector influx_out;
 
   # Create our pipeline
-  create pipeline passthrough from pipelines::passthrough;
+  create pipeline metrics from metrics;
 
   # Connect the udp server to the pipeline
-  connect /connector/upd_in to /pipeline/passthrough;
+  connect /connector/upd_in to /pipeline/metrics;
   # Connect the pipeline to the inflix client
-  connect /pipeline/passthrough to /connector/influx_out;
+  connect /pipeline/metrics to /connector/influx_out;
 
 end;
 
