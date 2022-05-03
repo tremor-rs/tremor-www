@@ -24,7 +24,8 @@ serve: build_thunk
 tremor-runtime:
 	-git clone https://github.com/tremor-rs/tremor-runtime
 
-tremor-runtime-refresh:
+.PHONY: tremor-runtime-refresh
+tremor-runtime-refresh: tremor-runtime
 	cd tremor-runtime &&\
 	git checkout $(TREMOR_VSN) &&\
 	git pull
@@ -33,7 +34,7 @@ alex:
 	npm install -g alex
 	alex docs
 
-tremor-runtime-docs: tremor-runtime
+tremor-runtime-docs: tremor-runtime-refresh
 	-cd tremor-runtime && make docs
 	-rm -rf docs/language docs/library
 	cp -rf tremor-runtime/docs/language docs/language
@@ -44,7 +45,7 @@ tremor-runtime-docs: tremor-runtime
 	cp -rf docs/language/svg static/docs/language/svg
 
 
-openapi: tremor-runtime
+openapi: tremor-runtime-refresh
 	-mkdir static/api/v0.12
 	npm i -g redoc-cli
 	cp tremor-runtime/static/openapi.yaml static/api/v0.12
