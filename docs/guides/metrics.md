@@ -82,7 +82,7 @@ end;
 
 ### HTTP Client
 
-On the other side we use a [`http_client`](../reference/http.md). Since influxdb does not have a custom transport we are not forced to implement a `influx` connector. Instead we can use the [`influx` codec](../reference/codecs/influx.md) and a http or udp connectors.
+On the other side we use a [`http_client`](../reference/connectors/http.md). Since influxdb does not have a custom transport we are not forced to implement a `influx` connector. Instead we can use the [`influx` codec](../reference/codecs/influx.md) and a http or udp connectors.
 
 :::info
    Connector naming follows a scheme here. Generally, something is named `server` if it accepts connections and `client` if it initiates connections.
@@ -395,7 +395,7 @@ In addition we use the [`aggr::win::first`](../library/aggr/win#first) to get th
 
 ### Normalisation
 
-Last but not least we need to normalize this data basck to something the [influx codec](../connectors/codecs/influx.md) understands.
+Last but not least we need to normalize this data basck to something the [influx codec](../reference/codecs/influx.md) understands.
 
 We can do this with another select statement.
 
