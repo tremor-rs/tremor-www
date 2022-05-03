@@ -46,13 +46,13 @@ The docker-compose file for this is [here](__GIT__/../code/metrics/basic.yaml).
 
 Something new here is that we fully define our connectors instead of using a canned connector that was pre-defined.
 
-For the input, we use a [`udp_server`](../reference/connectors/UDP.MD) connector. In the `with` clause, we can pass in the configuration.
+For the input, we use a [`udp_server`](../reference/connectors/udp.md) connector. In the `with` clause, we can pass in the configuration.
 
 Here are the fields of interest we have not discussed before.
 
-`codec` is an option that can be passed to (nearly) all connectors, and it defines how data that arrives over this connection is being decoded. In our case we use [`influx`](../reference/codecs/influx.MD) to decode the influxdb line protocol.
+`codec` is an option that can be passed to (nearly) all connectors, and it defines how data that arrives over this connection is being decoded. In our case we use [`influx`](../reference/codecs/influx.md) to decode the influxdb line protocol.
 
-`preprocessors`, as well, is an option that can be passed to (nearly) all connectors. Preprocessors are used to perform some kind of processing on the byte stream that the connector provides. In our case, we use [`separate`](../reference/preprocessors/separate.MD). This preprocessor will separate the byte stream with a given character or byte, by default, the `\n` newline.
+`preprocessors`, as well, is an option that can be passed to (nearly) all connectors. Preprocessors are used to perform some kind of processing on the byte stream that the connector provides. In our case, we use [`separate`](../reference/preprocessors/separate.md). This preprocessor will separate the byte stream with a given character or byte, by default, the `\n` newline.
 
 :::note
    Some connectors provide structured output instead of a byte stream. Those connectors can't be given a `codec`, `preprocessors` or `postprocessor` - after all, their output is already well defined.
@@ -368,9 +368,9 @@ To aggregate over a time range we use time based tumbling windows. We can define
 
 Once we have defined the windows we can now use them to agregate our data. We do this in a new select statement. After the `from` section we have a suqare bracket and then the window names. This syntax is what we call tilt frames, basically they're chained dinows that will emit based on conditions.
 
-We use the  [`aggr::stats::hdr`](../library/aggr/stats#hdrnumber-array) fimctopm that creates a histogram from the incoming data and outputs the given set of percentiles.
+We use the  [`aggr::stats::hdr`](../reference/library/aggr/stats#hdrnumber-array) fimctopm that creates a histogram from the incoming data and outputs the given set of percentiles.
 
-In addition we use the [`aggr::win::first`](../library/aggr/win#first) to get the first timestamp.
+In addition we use the [`aggr::win::first`](../reference/library/aggr/win#first) to get the first timestamp.
 
 :::note
    We are using two windows here, a 10s one and a 1min one. The upside of using the tilt framing mechanism here is that we can do this without a loss in precision, as in the 1min window is not an aggregate of six 10s windows but rather an aggregate of the raw data of them without having to duplicate it.
