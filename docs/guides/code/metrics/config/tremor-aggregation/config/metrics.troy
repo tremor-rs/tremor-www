@@ -18,8 +18,8 @@ flow
   with
     # we use the influx codec here as well
     codec = "influx",
-    # define the postprocessor, we use separate to seperate events by lines
-    postprocessor = ["separate"],    
+    # define the postprocessors, we use separate to seperate events by lines
+    postprocessors = ["separate"],
     # configure  the endpoint we're writing to    
     config = {
       "url": "http://influxdb:8086/write?db=tremor",
