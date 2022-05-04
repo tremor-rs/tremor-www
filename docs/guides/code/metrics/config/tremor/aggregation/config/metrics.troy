@@ -57,7 +57,7 @@ flow
     define operator batch from generic::batch
     with
       count = 3000,
-      timeout = 5
+      timeout = nanos::from_seconds(5)
     end;
 
     # create our batch operator
