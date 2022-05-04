@@ -76,6 +76,5 @@ Now it is time to actually find out, what you just did and what else can be done
 * [The Connectors Reference](../reference/connectors) - to see how to get events into and out of Tremor.
 * [Our assorted Recipes](../recipes/overview) - to find out how to achieve specific tasks with Tremor we though are common enough to cover. E.g.:
   * [Store Apache httpd logs in Elasticsearch](../recipes/logstash/index.md).
-  * [Send pre-aggregated metrics into InfluxDB](../recipes/influx/index.md).
 * [Design and Architecture](../about/design) - to see how Tremor works.
 

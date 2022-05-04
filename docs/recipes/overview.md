@@ -49,12 +49,6 @@ a lot of glue to be used to wire together a well-monitored and observable system
 
 [logstash](./logstash/index.md) - Logstash
 
-[influx](./influx/index.md) - Influx
-
-[postgres_timescaledb](./postgres_timescaledb/index.md) - Postgres / Timescale
-
-[grafana](./grafana/index.md) - Grafana
-
 [syslog_udp](./syslog_udp/index.md) - Syslog over UDP
 
 [syslog_udp_dns](./syslog_udp_dns/index.md) - Syslog over UDP with DNS
@@ -118,5 +112,3 @@ delivery of kafka to kafka communications.
 [kafka_gd](./kafka_gd/index.md) - Kafka guaranteed delivery
 
 [redpanda_gd](./redpanda_gd/index.md) - Redpanda guaranteed delivery
-
-[rabbitmq](./amqp_rabbitmq/index.md) - RabbitMQ integration

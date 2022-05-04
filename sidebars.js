@@ -345,7 +345,6 @@ const sidebars = {
         'recipes/redpanda_elastic_correlation/index',
         'recipes/kafka_gd/index',
         'recipes/redpanda_gd/index',
-        'recipes/amqp_rabbitmq/index',
       ]
     },
     {
@@ -365,10 +364,6 @@ const sidebars = {
             'recipes/logstash/index',
           ]
         },
-        // { 'Grafana': [
-        'recipes/grafana/index',
-        // ]},
-
       ]
     },
     {
@@ -376,12 +371,6 @@ const sidebars = {
         'recipes/polling_alerts/index',
         'recipes/quota_service/index',
         'recipes/configurator/index',
-      ]
-    },
-    {
-      'Time Series Database': [
-        'recipes/influx/index',
-        'recipes/postgres_timescaledb/index',
       ]
     },
     {
