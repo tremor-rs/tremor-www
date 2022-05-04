@@ -430,3 +430,118 @@ The chronograf ui can be found at (`http://localhost:8888`)[http://localhost:888
 
 
 ## Tremor metrics
+
+Finally let us talk about how to access tremors own metrics. We choose to allow tremor to process them itself and forward them as required. This avoids a extra step for configuring metrics,  having to implement connectivity, or forcing the users in a specific way of monitoring.
+
+This is done using the [`metrics connector`](../reference/connectors/metrics.md).
+
+### Connectors
+
+To enable metric collection for connectors we need to update their configuration. Namely we add the `metrics_interval_s` option. We choose a interval of 5 seconds to keep the overhead low.
+
+```troy
+  # define the udp server
+  define connector upd_in from udp_server
+  with
+    # define metrics interval
+    metrics_interval_s = 5,
+    # define the codec we use, in this case `influx` for the influx wire protocol
+    codec = "influx",
+    # define the preprocessors, we use separate to seperate events by lines
+    preprocessors = ["separate"],
+    # configure the connector itself, we listen to `0.0.0.0` on port `4242`
+    config = {
+      "url": "0.0.0.0:4242",
+    }
+  end;
+  
+  # define our http client
+  define connector influx_out from http_client
+  with
+    # define metrics interval
+    metrics_interval_s = 5,
+    # we use the influx codec here as well
+    codec = "influx",
+    # define the postprocessors, we use separate to seperate events by lines
+    postprocessors = ["separate"],
+    # configure  the endpoint we're writing to    
+    config = {
+      "url": "http://influxdb:8086/write?db=tremor",
+      # We use a custom header to identify that we're tremor
+      "headers": {"Client": ["Tremor"]}
+    }
+  end;
+```
+
+### Pipeline
+
+The pipeline has to be set up as well. As pipelines don't come with a `with` section it is configured as part of a configuration directive with the sam name.
+
+we choose the same 5 second interval.
+
+```troy
+  define connector metrics from metrics;
+
+  # define our metrics pipeline to batch metrics
+  define pipeline metrics
+  pipeline
+    #!config metrics_interval_s = 5
+  # ...
+```
+
+### Metric Connector & Wiring
+
+So with all our connectors and pipelines configured we just have to wire up the connector to the metrics pipeline. This works since for internal metrics we use the same structire as the [`influx` codec](../reference/codecs/influx.md).
+
+```troy
+define flow metrics
+flow
+  # ...
+
+  # Define our hasher
+  define connector metrics from metrics;
+  # Create the internal metrics collector
+  create connector metrics;
+  # Connect the metrices to the pipeline
+  connect /connector/metrics to /pipeline/metrics;
+  
+  #...
+```
+
+Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/) and start it with `docker-compose -f  internal.yaml up`.
+
+The chronograf ui can be found at (`http://localhost:8888`)[http://localhost:8888].
+
+
+## Other backends
+
+While this example is written using InfluxDB as a backend, it works equally with other backends.
+
+### TDEngine
+
+Inlfux can be quickly be replaced by TDEngine, the only difference is that we need to change the `url` in the `http_client`
+
+```troy
+  # define our http client
+  define connector influx_out from http_client
+  with
+    # define metrics interval
+    metrics_interval_s = 5,
+    # we use the influx codec here as well
+    codec = "influx",
+    # define the postprocessors, we use separate to seperate events by lines
+    postprocessors = ["separate"],
+    # configure  the endpoint we're writing to    
+    config = {
+      "url": "http://tdengine:6041/influxdb/v1/write?db=tremor&u=root&p=taosdata",
+      # We use a custom header to identify that we're tremor
+      "headers": {"Client": ["Tremor"]}
+    }
+  end;
+```
+
+Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/) and start it with `docker-compose -f  tdengine.yaml up`.
+
+The grafana ui can be found at (`http://localhost:3000`)[http://localhost:3000].
+
+Note that you need to login with user `admin` and password `admin`

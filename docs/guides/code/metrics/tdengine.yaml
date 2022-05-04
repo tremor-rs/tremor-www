@@ -5,13 +5,17 @@ services:
     ports:
       - '6030-6049:6030-6049'
       - '6030-6049:6030-6049/udp'
-  # chronograf:
-  #   image: chronograf:1.7
-  #   ports:
-  #     - '8888:8888'
-  #   depends_on:
-  #     - tdengine
-  #   command: chronograf --influxdb-url=http://influxdb:8086
+  grafana:
+    image: grafana/grafana-oss:8.5.2
+    ports:
+      - '3000:3000'
+    environment:
+      - "GF_INSTALL_PLUGINS=https://github.com/taosdata/grafanaplugin/releases/download/v3.1.3/tdengine-datasource-3.1.3.zip;tdengine-datasource"
+    depends_on:
+      - tdengine
+    volumes:
+      - ./config/grafana:/etc/grafana:ro
+
   telegraf:
     image: telegraf:1.22
     depends_on:
@@ -29,4 +33,4 @@ services:
       - RUST_BACKTRACE=1
       - RUST_LOG=info
     volumes:
-      - ./config/tremor-tdengine:/etc/tremor:ro
+      - ./config/tremor/tdengine:/etc/tremor:ro
