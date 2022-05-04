@@ -1,0 +1,7 @@
+datasources:
+  - name: TDengine
+    type: tdengine-datasource
+    url: http://tdengine:6041
+    access: proxy    
+    user: root
+    password: "taosdata"
