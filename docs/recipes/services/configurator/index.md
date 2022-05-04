@@ -1,6 +1,6 @@
 # Configurator
 
-An application built using tremor using the [qos::wal](../../queries/operators#qoswal) operator introduced in 0.9 and the `$correlation` metadata feature introduced in 0.11, allowing for centralized configuration across services and their component nodes.
+An application built using tremor using the qos::wal operator introduced in 0.9 and the `$correlation` metadata feature introduced in 0.11, allowing for centralized configuration across services and their component nodes.
 
 The main task of the Configurator is to distribute config changes to a group of upstream tremor nodes running the [_Quota Service_](../quota_service).
 The config changes do not happen in an atomic or transactional fashion across all upstream nodes, but all valid configuration updates are persisted and retried until they succeed.

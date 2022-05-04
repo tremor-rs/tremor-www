@@ -187,7 +187,7 @@ $ curl http://localhost:8139/stats
 {"requests_processed":7}
 ```
 
-This is utilizing the pipeline [state mechanism](../../scripts/overview#state) under the hood -- a powerful way to build stateful applications.
+This is utilizing the pipeline [state mechanism](../../../scripts/overview#state) under the hood -- a powerful way to build stateful applications.
 
 ### Error handling
 
