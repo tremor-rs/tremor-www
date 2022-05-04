@@ -341,63 +341,55 @@ const sidebars = {
     },
     {
       'Messaging': [
-        'recipes/kafka_elastic_correlation/index',
-        'recipes/redpanda_elastic_correlation/index',
-        'recipes/kafka_gd/index',
-        'recipes/redpanda_gd/index',
+        'recipes/gd/kafka_elastic_correlation/index',
+        'recipes/gd/redpanda_elastic_correlation/index',
+        'recipes/gd/kafka_gd/index',
+        'recipes/gd/redpanda_gd/index',
       ]
     },
     {
       'Observability': [
         {
           'OpenTelemetry': [
-            'recipes/otel_elastic_apm/index',
-            'recipes/otel_passthrough/index',
-            'recipes/otel_zipkin/index',
-            'recipes/otel_jaeger/index',
-            'recipes/otel_prometheus/index',
+            'recipes/otel/otel_elastic_apm/index',
+            'recipes/otel/otel_passthrough/index',
+            'recipes/otel/otel_zipkin/index',
+            'recipes/otel/otel_jaeger/index',
+            'recipes/otel/otel_prometheus/index',
           ]
         },
         {
           'ELK': [
-            'recipes/otel_elastic_apm/index',
-            'recipes/logstash/index',
+            'recipes/otel/otel_elastic_apm/index',
           ]
         },
       ]
     },
     {
       'Design Patterns': [
-        'recipes/polling_alerts/index',
-        'recipes/quota_service/index',
-        'recipes/configurator/index',
-      ]
-    },
-    {
-      'Syslog': [
-        'recipes/syslog_udp/index',
-        'recipes/syslog_udp_dns/index',
+        'recipes/services/quota_service/index',
+        'recipes/services/configurator/index',
       ]
     },
     {
       'HTTP & WebSockets': [
-        'recipes/servers_lt_http/index',
-        'recipes/servers_lt_ws/index',
-        'recipes/proxies_lt_http/index',
-        'recipes/proxies_lt_ws/index',
-        'recipes/bridges_lt_http_ws/index',
-        'recipes/reverse_proxy_load_balancing/index',
+        'recipes/web/servers_lt_http/index',
+        'recipes/web/servers_lt_ws/index',
+        'recipes/web/proxies_lt_http/index',
+        'recipes/web/proxies_lt_ws/index',
+        'recipes/web/bridges_lt_http_ws/index',
+        'recipes/web/reverse_proxy_load_balancing/index',
       ]
     },
     {
       'Guaranteed Delivery': [
-        'recipes/transient_gd/index',
-        'recipes/persistent_gd/index',
+        'recipes/gd/transient_gd/index',
+        'recipes/gd/persistent_gd/index',
       ]
     },
     {
       'Distribution': [
-        'recipes/roundrobin/index',
+        'recipes/web/roundrobin/index',
       ]
     },
   ],
