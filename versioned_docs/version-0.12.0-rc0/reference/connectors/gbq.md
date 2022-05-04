@@ -10,11 +10,11 @@ define connector gbq from gbq
 with
     config = {
         "table_id": "projects/tremor/datasets/test/tables/streaming_test",
-        "connect_timeout": 10,
-        "request_timeout: 10
+        "connect_timeout": 1000000,
+        "request_timeout: 1000000
     }
 ```
 
-The timeouts are in seconds.
+The timeouts are in nanoseconds.
 
 Currently the connector is only a sink - it expects events sent to it to be objects, where the keys match the table field names, and values are the values.
