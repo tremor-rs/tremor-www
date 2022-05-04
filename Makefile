@@ -69,7 +69,7 @@ touch_version:
 	rm -rf versioned_docs/version-0.12.0-rc0
 	npm run docusaurus docs:version 0.12.0-rc0
 
-check_verify: touch_version
+check_verify:
 	npm run build
 
 reset: 
