@@ -1,13 +1,13 @@
 # Metrics
 
-One case in which tremor can be deployed is to work with metrics. Not as a store but as a preprocessor, aggregator, and filter for metrics stores.
+One case you can deploy tremor for is to work with metrics. Not as a store but as a preprocessor, aggregator, and filter for metrics stores.
 
-In this guide, we'll see how to use tremor for this. We'll set up an example where tremor batch, aggregates, and then forwards metrics. In addition we'll take a look at tremors own metrics.
+In this guide, we'll see how to use tremor for this. We'll set up an example where tremor batch, aggregates, and then forwards metrics. In addition, we'll take a look at tremor's metrics.
 
 :::note
-   This example expects that you have some knowledge of tremor or went through the [basics guide](basics). Concepts explained there would not be explained again here.
+   This example expects that you have some knowledge of tremor or went through the [basics guide](basics.md). We won't explain the concepts covered there again here.
 
-   In addition, we use `docker compose` for this guide as it requires additional software, and we want to avoid you having to install and configure a bunch of other services. Some familiarity with this is expected as we will not explain the details of this.
+   In addition, we use `docker compose` for this guide as it requires additional software, and we want to avoid you having to install and configure a bunch of other services. We expect some familiarity with this as we will not explain the details.
 :::
 
 All code for this guide can found [on github](__GIT__/../code/metrics/).
@@ -15,7 +15,7 @@ All code for this guide can found [on github](__GIT__/../code/metrics/).
 
 ## Topics
 
-This guide introduces the following new concepts
+This guide introduces the following new concepts.
 
 * codecs
 * Post- and Preprocessors
@@ -23,7 +23,7 @@ This guide introduces the following new concepts
 * pipeline operators
 * streams
 * aggregation
-* time based windows
+* time-based windows
 * tremors internal metrics
 
 ## Foundation
@@ -44,21 +44,21 @@ The docker-compose file for this is [here](__GIT__/../code/metrics/basic.yaml).
 
 ### UDP Server
 
-Something new here is that we fully define our connectors instead of using a canned connector that was pre-defined.
+Something new here is that we fully define our connectors instead of using a pre-defined canned connector.
 
 For the input, we use a [`udp_server`](../reference/connectors/udp.md) connector. In the `with` clause, we can pass in the configuration.
 
 Here are the fields of interest we have not discussed before.
 
-`codec` is an option that can be passed to (nearly) all connectors, and it defines how data that arrives over this connection is being decoded. In our case we use [`influx`](../reference/codecs/influx.md) to decode the influxdb line protocol.
+`codec` is an option that can be passed to (nearly) all connectors, and it defines how data that arrives over this connection is decoded. In our case we use [`influx`](../reference/codecs/influx.md) to decode the influxdb line protocol.
 
-`preprocessors`, as well, is an option that can be passed to (nearly) all connectors. Preprocessors are used to perform some kind of processing on the byte stream that the connector provides. In our case, we use [`separate`](../reference/preprocessors/separate.md). This preprocessor will separate the byte stream with a given character or byte, by default, the `\n` newline.
+`preprocessors` are also an option that can be passed to (nearly) all connectors. You can use preprocessors to perform some processing on the byte stream that the connector provides. In our case, we use [`separate`](../reference/preprocessors/separate.md). This preprocessor will separate the byte stream with a given character or byte, by default, the `\n` newline.
 
 :::note
-   Some connectors provide structured output instead of a byte stream. Those connectors can't be given a `codec`, `preprocessors` or `postprocessor` - after all, their output is already well defined.
+   Some connectors provide structured output instead of a byte stream. Structured connectors can't use a `codec`, `preprocessors` or `postprocessor` - after all, their output is already well defined.
 ::::
 
-The `config` section holds a configuration that is specific to the connector type selected. In this case, since we use the [`udp_server`](../reference/connectors/udp.md), we only have to specify the `URL` we want to listen on.
+The `config` section holds a specific configuration to the connector type selected. Since we use the [`udp_server`](../reference/connectors/udp.md), we only have to specify the `URL` we want to listen on.
 
 With this, we get:
 
@@ -86,10 +86,10 @@ On the other side we use a [`http_client`](../reference/connectors/http.md). Sin
 
 :::info
    Connector naming follows a scheme here. Generally, something is named `server` if it accepts connections and `client` if it initiates connections.
-   While there is a correlation between clients writing and servers reading, this is incidental and not a rule. A `client` that connects could very well be reading and not a writing connector.
+   While there is a correlation between clients writing and servers reading, this is incidental and not a rule. A `client` connection could be reading and not a writing connector.
 :::
 
-Our connector config here is slightly more elaborate. In addition to the `URL`, defining the target to write to, we also have a `headers` map that defines the HTTP headers. This demonstrates nicely that more complex configurations are possible.
+Our connector config here is slightly more elaborate. In addition to the `URL`, defining the target to write to, we also have a `headers` map that specifies the HTTP headers. This demonstrates nicely that more complex configurations are possible.
 
 ```troy
 define flow metrics
@@ -126,7 +126,7 @@ deploy flow metrics;
 
 ### Pipeline, wiring up and running
 
-As in the basics tutorial, we're going to use the `passthrough` pipeline from the `troy::pipelines` module. If you went through the [basics guide](basics.md), this is the same as before.
+As in the basics tutorial, we will use the `passthrough` pipeline from the `troy::pipelines` module. If you went through the [basics guide](basics.md), this is the same as before.
 
 ```troy
 define flow metrics
@@ -181,33 +181,33 @@ deploy flow metrics;
 
 Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/) and start it with `docker-compose -f  basic.yaml up`.
 
-The chronograf ui can be found at (`http://localhost:8888`)[http://localhost:8888].
+You can find the chronograf UI at (`http://localhost:8888`)[http://localhost:8888].
 
 You can look at 
 
 ## Batching
 
-Tremor processes events one by one, meaning that each metric is considered it's own event. The upside of this is that how events arrive, if it's one event per UDP message or 100 makes no difference. The downside is that InfluxDB requires events to be submitted in batches to maintain performance.
+Tremor processes events one by one, meaning that each metric is considered its event. The upside of this is how events arrive. If it's one event per UDP message or 100 makes no difference. The downside is that InfluxDB requires events to be submitted in batches to maintain performance.
 
-Since InfluxDB isn't the only destination that benefits from events being batched, tremor provides a [batching operator](../queries/operators#genericbatch).
+Since InfluxDB isn't the only destination that benefits from batched events, tremor provides a [batching operator](../queries/operators#genericbatch).
 
 :::note
-   Batching using the [batching operator](../queries/operators#genericbatch) is handled inside of the connector, HTTP for example will combine a batch into a single request, but different connectors might handle this differently.
+   Batching using the [batching operator](../queries/operators#genericbatch) is handled inside the connector. HTTP, for example, will combine a batch into a single request, but different connectors might handle this differently.
 :::
 
 ### Adding the Batch operator
 
-Operators are small pices of logic that are written in rust, they can be put inside of a pipeline to perform certain actions. In our example we use the batch operator.
+Operators are small pieces of logic that are written in rust. You can put them inside of a pipeline to perform specific actions. In our example, we use the batch operator.
 
-Their use is quite similar to what you know already from piepelines and connectors, they first are defined with a set of configuration prameters, then are created to be used.
+Their use is similar to what you already know from pipelines and connectors. You first define operators with a set of configuration parameters, then create them for use.
 
 We then use `select` to wire it up in the pipeline.
 
-For our operator we use a a maximum of `3000` events and a maximum delay of `5s`.
+We use a maximum of `3000` events and a maximum delay of `5s` for our operator.
 
 Note that we select from `in` into `batch` and from `batch` into `out`, wiring up the event chain.
 
-We also need to update our HTTP Client to use a postprocessor, namely the `seperate` one to join batch elements back together with newlines.
+We also need to update our HTTP Client to use a postprocessor, namely the `separate` one, to join batch elements back together with newlines.
 
 ```troy
 define flow metrics
@@ -284,31 +284,31 @@ deploy flow metrics;
 
 Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/) and start it with `docker-compose -f  batching.yaml up`.
 
-The chronograf ui can be found at (`http://localhost:8888`)[http://localhost:8888].
+You can find the chronograf UI at (`http://localhost:8888`)[http://localhost:8888].
 
 ## Aggregation
 
-Let's talk about aggregation. Sometimes it's helpful to aggregate some metrics before they're stored in a database. One reason could be to downsample the input, another could be to create histograms for databases that don't natively support them.
+Let's talk about aggregation. Sometimes it's helpful to aggregate some metrics before they're stored in a database. One reason could be to downsample the input. Another could be to create histograms for databases that don't natively support them.
 
 :::note
-   The techniques used for aggregation aren't specific to metrics, the same methods can be applied to any event stream.
+   The techniques used for aggregation aren't specific to metrics. You can apply the same methods to any event stream.
 :::
 
-The aggregation we're looking for is "The histogram for each metric over a 10s and 1min windo"
+The aggregation we're looking for is "The histogram for each metric over a 10s and 1min window."
 
 
 ### Grouping
 
-To aggregate the metrics we get in a useful we need to group our data by the `"each metric"` from our definition. Since we're using influx data as our input a metric is identified by three fields:
+To aggregate the metrics, we get in a useful we need to group our data by the `"each metric"` from our definition. Since we're using influx data as our input, a metric is identified by three fields:
 
 * The `measurement`
 * The `tags`
 * The `field`
 
-Since influx combines multiple fields in a message we first have to unroll this into each field being a single event.
+Since influx combines multiple fields in a message, we first have to unroll this into each field being a single event.
 
 ::: note
-    We use `create stream` here, streams are just named nodes that have no own function, nor overhead, they serve as a way to chain up selects.
+    We use `create stream` here. Streams are just named nodes that have no own function or overhead. They serve as a way to chain up selects.
 :::
 
 ```troy
@@ -335,17 +335,17 @@ Since influx combines multiple fields in a message we first have to unroll this 
     having type::is_number(event.value);
 ```
 
-What we do here is for `each` `key` in `fields` we create a metric so if our record has two fields we flatten that out and have two events. We then create a set of this field, the tags for the metric and the measurement for the metric. This gives us a unique identifyer for the metric/
+What we do here is for `each` `key` in `fields`, we create a metric, so if our record has two fields, we flatten that out and have two events. We then create a set of this field, the tags for the metric, and the measurement for the metric. This gives us a unique identifier for the metric/
 
 This is needed to not confuse the values for different fields.
 
 :::note
-   We use `group[2]` here, which referes to the the second element of the current group (indexing starts at 0). For a string of the entire group you can access `n+1`( in our example, since we have 3 elements it would be `group[3]`).
+   We use `group[2]` here, which refers to the second element of the current group (indexing starts at 0). For a string of the entire group, you can access `n+1`( in our example, since we have three elements, it would be `group[3]`).
 :::
 
 ### Windowing
 
-To aggregate over a time range we use time based tumbling windows. We can define them the same way we define everything else, a `define` statement. They are however, not creatd, instead they're bound to the select statment they're used in.
+To aggregate over a time range, we use time-based tumbling windows. We can define them the same way we define everything else, a `define` statement. They are, however, not created. Instead, they're bound to the select statement they're used in.
 
 ```troy
     # use nanos for time
@@ -366,18 +366,18 @@ To aggregate over a time range we use time based tumbling windows. We can define
 
 ### Aggregating
 
-Once we have defined the windows we can now use them to agregate our data. We do this in a new select statement. After the `from` section we have a suqare bracket and then the window names. This syntax is what we call tilt frames, basically they're chained dinows that will emit based on conditions.
+Once we have defined the windows, we can now use them to aggregate our data. We do this in a new select statement. After the `from` section, we have a square bracket and the window names. This syntax is what we call tilt frames. They're chained windows that will emit based on conditions.
 
 We use the  [`aggr::stats::hdr`](../reference/library/aggr/stats#hdrnumber-array) fimctopm that creates a histogram from the incoming data and outputs the given set of percentiles.
 
 In addition we use the [`aggr::win::first`](../reference/library/aggr/win#first) to get the first timestamp.
 
 :::note
-   We are using two windows here, a 10s one and a 1min one. The upside of using the tilt framing mechanism here is that we can do this without a loss in precision, as in the 1min window is not an aggregate of six 10s windows but rather an aggregate of the raw data of them without having to duplicate it.
+   We are using two windows here, a 10s one and a 1min one. The upside of using the tilt framing mechanism here is that we can do this without a loss in precision, as the 1min window is not an aggregate of six 10s windows but rather an aggregate of the raw data of them without having to duplicate it.
 :::
 
 ```troy
-    # create a stream for normalisation
+    # create a stream for normalization
     create stream normalize;
 
     select
@@ -426,18 +426,18 @@ into batch;
 
 Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/) and start it with `docker-compose -f  aggregation.yaml up`.
 
-The chronograf ui can be found at (`http://localhost:8888`)[http://localhost:8888].
+You can find the chronograf UI at (`http://localhost:8888`)[http://localhost:8888].
 
 
 ## Tremor metrics
 
-Finally let us talk about how to access tremors own metrics. We choose to allow tremor to process them itself and forward them as required. This avoids a extra step for configuring metrics,  having to implement connectivity, or forcing the users in a specific way of monitoring.
+Finally, let us talk about how to access tremors own metrics. We choose to allow tremor to process them and forward them as required. This avoids an extra step for configuring metrics, implementing connectivity, or forcing the users into a specific way of monitoring.
 
 This is done using the [`metrics connector`](../reference/connectors/metrics.md).
 
 ### Connectors
 
-To enable metric collection for connectors we need to update their configuration. Namely we add the `metrics_interval_s` option. We choose a interval of 5 seconds to keep the overhead low.
+To enable metrics collection for connectors, we need to update their configuration. Namely we add the `metrics_interval_s` option. We choose 5 seconds to keep the overhead low.
 
 ```troy
   # define the udp server
@@ -475,9 +475,9 @@ To enable metric collection for connectors we need to update their configuration
 
 ### Pipeline
 
-The pipeline has to be set up as well. As pipelines don't come with a `with` section it is configured as part of a configuration directive with the sam name.
+The pipeline has to be set up as well. As pipelines don't come with a `with` section, it is configured as part of a configuration directive with the same name.
 
-we choose the same 5 second interval.
+We choose the same 5-second interval.
 
 ```troy
   define connector metrics from metrics;
@@ -491,7 +491,7 @@ we choose the same 5 second interval.
 
 ### Metric Connector & Wiring
 
-So with all our connectors and pipelines configured we just have to wire up the connector to the metrics pipeline. This works since for internal metrics we use the same structire as the [`influx` codec](../reference/codecs/influx.md).
+So with all our connectors and pipelines configured, we have to wire up the connector to the metrics pipeline. This works since, for internal metrics, we use the same structure as the [`influx` codec](../reference/codecs/influx.md).
 
 ```troy
 define flow metrics
@@ -510,7 +510,7 @@ flow
 
 Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/) and start it with `docker-compose -f  internal.yaml up`.
 
-The chronograf ui can be found at (`http://localhost:8888`)[http://localhost:8888].
+You can find the chronograf UI at (`http://localhost:8888`)[http://localhost:8888].
 
 
 ## Other backends
@@ -519,7 +519,7 @@ While this example is written using InfluxDB as a backend, it works equally with
 
 ### TDEngine
 
-Inlfux can be quickly be replaced by TDEngine, the only difference is that we need to change the `url` in the `http_client`
+TDEngine can quickly replace influx. The only difference is that we need to change the `url` in the `http_client`
 
 ```troy
   # define our http client
@@ -542,6 +542,6 @@ Inlfux can be quickly be replaced by TDEngine, the only difference is that we ne
 
 Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/) and start it with `docker-compose -f  tdengine.yaml up`.
 
-The grafana ui can be found at (`http://localhost:3000`)[http://localhost:3000].
+You can find the grafana UI at (`http://localhost:3000`)[http://localhost:3000].
 
-Note that you need to login with user `admin` and password `admin`
+Note that you need to log in with user `admin` and password `admin`
