@@ -72,25 +72,26 @@ Add content here
 These connectors are generally available in releases of tremor built in release
 mode - such as via the packaged release RPMs and Docker images.
 
-|Connector Name|Description|
-|---|---|
-|[File](connectors/file)|Interacting with files on the file system|
-|[Metrics](connectors/metrics)|Interacting with the metrics facility|
-|[Standard IO](connectors/stdio)|Ineracting with standard input, output and error streams on the console|
-|[TCP Client/Server](connectors/tcp)|TCP-based client and server event streaming|
-|[UDP Client/Server](connectors/udp)|UDP-based client and server event streaming|
-|[Key-Value Storage](connectors/kv)|Key-value storage for stateful event processing applications|
-|[Metronome](connectors/metronome)|Periodic scheduled events based on interval time|
-|[Crononome](connectors/crononome)|Periodic scheduled events based on calendar time|
-|[Write Ahead Log](connectors/wal)|Durable write-ahead log for managing event stream QoS|
-|[Domain Name Service](connectors/dns)|Interacting with the domain name system|
-|[Discord API Client](connectors/discord)|Integration with the Discord API, powers the tremor community discord bot|
-|[WebSocket Client/Server](connectors/ws)|WebSocket-based client and server event streaming|
-|[ElasticSearch](connectors/elastic)|Integration with ElasticSearch for bulk batch log uploads|
-|[AWS S3 Reader/Writer](connectors/s3)|Amazon AWS S3 simple storage service file upload and download|
-|[Kafka Producer/Consumer](connectors/kafka)|Integration with Kafka, Confluent and Redpanda brokers|
-|[UNIX Socket Client/Server](connectors/unix_socket)|Unix Socket based client and server event streaming|
-|[OpenTelemetry Client/Server](connectors/otel)|Integration with CNCF OpenTelemetry specification as client or server endpoint|
+| Connector Name                                      |Description|
+|-----------------------------------------------------|---|
+| [File](connectors/file)                             |Interacting with files on the file system|
+| [GBQ](connectors/gbq)                               |Interacting with Google BigQuery |
+| [Metrics](connectors/metrics)                       |Interacting with the metrics facility|
+| [Standard IO](connectors/stdio)                     |Ineracting with standard input, output and error streams on the console|
+| [TCP Client/Server](connectors/tcp)                 |TCP-based client and server event streaming|
+| [UDP Client/Server](connectors/udp)                 |UDP-based client and server event streaming|
+| [Key-Value Storage](connectors/kv)                  |Key-value storage for stateful event processing applications|
+| [Metronome](connectors/metronome)                   |Periodic scheduled events based on interval time|
+| [Crononome](connectors/crononome)                   |Periodic scheduled events based on calendar time|
+| [Write Ahead Log](connectors/wal)                   |Durable write-ahead log for managing event stream QoS|
+| [Domain Name Service](connectors/dns)               |Interacting with the domain name system|
+| [Discord API Client](connectors/discord)            |Integration with the Discord API, powers the tremor community discord bot|
+| [WebSocket Client/Server](connectors/ws)            |WebSocket-based client and server event streaming|
+| [ElasticSearch](connectors/elastic)                 |Integration with ElasticSearch for bulk batch log uploads|
+| [AWS S3 Reader/Writer](connectors/s3)               |Amazon AWS S3 simple storage service file upload and download|
+| [Kafka Producer/Consumer](connectors/kafka)         |Integration with Kafka, Confluent and Redpanda brokers|
+| [UNIX Socket Client/Server](connectors/unix_socket) |Unix Socket based client and server event streaming|
+| [OpenTelemetry Client/Server](connectors/otel)      |Integration with CNCF OpenTelemetry specification as client or server endpoint|
 
 ## Development Only Connectors
 
