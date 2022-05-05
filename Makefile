@@ -5,19 +5,13 @@ STDLIB_REF_DIR=docs/language/stdlib
 
 all: clean tremor-runtime-docs openapi
 
-build_thunk:
-	-mkdir -p build/$(LANG_REF_DIR)/svg
-	-mkdir -p build/$(NEXT_LANG_REF_DIR)/svg
-	cp -f $(LANG_REF_DIR)/svg/*.svg build/$(LANG_REF_DIR)/svg      # Saves duplicates in git this way
-	cp -f $(LANG_REF_DIR)/svg/*.svg build/$(NEXT_LANG_REF_DIR)/svg # Saves duplicates in git this way
-
 clean_build: reset all
 	-rm -rf ../cache/*
 	npm run build
 
-netlify: clean_build build_thunk openapi
+netlify: clean_build openapi
 
-serve: build_thunk
+serve:
 	npm run serve
 
 tremor-runtime:
@@ -39,9 +33,6 @@ tremor-runtime-docs: tremor-runtime-refresh
 	cp -rf tremor-runtime/docs/language $(LANG_REF_DIR)
 	cp -rf tremor-runtime/docs/library $(STDLIB_REF_DIR)
 	cp -rf tremor-runtime/static/docs/library/*.md $(STDLIB_REF_DIR)
-	-rm -rf static/docs/svg
-	-[ ! -d static/$(LANG_REF_DIR)/svg ] && mkdir -p static/$(LANG_REF_DIR)/svg || true
-	cp -rf $(LANG_REF_DIR)/svg static/$(LANG_REF_DIR)
 
 
 openapi: tremor-runtime-refresh
@@ -60,7 +51,6 @@ clean:
 	-rm -rf $(STDLIB_REF_DIR)/aggr
 	-rm -rf $(STDLIB_REF_DIR)/stdlib
 	-rm -rf $(LANG_REF_DIR)
-	-rm -rf static/$(LANG_REF_DIR)/svg
 	-rm -rf docs/api
 
 touch_version:
