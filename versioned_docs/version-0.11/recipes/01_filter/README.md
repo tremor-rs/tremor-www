@@ -17,11 +17,12 @@ select event from in where event.selected into out
 
 ## Command line testing during logic development
 
-Run a the passthrough query against a sample input.json
+Now let us consider this sample input.
 
 ```bash
-$ tremor run -i input.json etc/tremor/config/example.trickle
-{"hello": "world"}
+$ cat inputs.txt 
+{ "hello": "world", "selected": false }
+{ "hello": "again", "selected": true }
 ```
 
 Deploy the solution into a docker environment

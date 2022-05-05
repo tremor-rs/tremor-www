@@ -11,7 +11,7 @@ All other configuration is the same as per the passthrough example, and is elide
 ## Business Logic
 
 ```trickle
-select {                                    # 1. We can inline new json-like document structures
+select {                                     # 1. We can inline new json-like document structures
     "hello": "hi there #{event.hello}",      # 2. Tremor supports flexible string interpolation useful for templating
     "world": event.hello
 } from in where event.selected into out
@@ -22,20 +22,27 @@ select {                                    # 1. We can inline new json-like doc
 Run a the passthrough query against a sample input.json
 
 ```bash
+$ cat input.json 
+{ "hello": "world", "selected": false }
+
+# no output
+$ tremor run -i input.json ./etc/tremor/config/example.trickle
+$
+```
+
+Change the `input.json` and toggle the `selected` field to `true` and run again.
+
+```bash
+$ cat input.json 
+{ "hello": "world", "selected": true }
+
 $ tremor run -i input.json ./etc/tremor/config/example.trickle
 {"hello":"hi there world","world":"world"}
 ```
 
-Change the `input.json` and toggle the `selected` filed to true and run again.
+Deploy the solution into a docker environment - `docker-compose up`.
 
-Deploy the solution into a docker environment
-
-```bash
-$ docker-compose up
->> {"hello":"hi there again","world":"again"}
-```
-
-Inject test messages via [websocat](https://github.com/vi/websocat)
+In a separate terminal, inject test messages via [websocat](https://github.com/vi/websocat)
 
 :::note
 Can be installed via `cargo install websocat` for the lazy/impatient amongst us
@@ -44,6 +51,13 @@ Can be installed via `cargo install websocat` for the lazy/impatient amongst us
 ```bash
 $ cat inputs.txt | websocat ws://localhost:4242
 ...
+```
+
+You should see this message in the terminal where you are running `docker-compose`:
+
+```bash
+...
+>> {"hello":"hi there again","world":"again"}
 ```
 
 ### Discussion
@@ -95,5 +109,5 @@ into batch;
 ```
 
 :::tip
-Not all tremor script ideoms are allowed in the select statement. Most notably we do not allow any mutating operations such as `let` or control flow such as `emit` or `drop`. Those constructs can however still be used inside a `script` block on their own.
+Not all tremor script idioms are allowed in the `select` statement. Most notably we do not allow any mutating operations such as `let` or control flow such as `emit` or `drop`. Those constructs can however still be used inside a `script` block on their own.
 :::
