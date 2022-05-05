@@ -6,8 +6,8 @@ STDLIB_REF_DIR=docs/language/stdlib
 all: clean tremor-runtime-docs openapi
 
 build_thunk:
-	-mkdir build/$(LANG_REF_DIR)/svg
-	-mkdir build/$(NEXT_LANG_REF_DIR)/svg
+	-mkdir -p build/$(LANG_REF_DIR)/svg
+	-mkdir -p build/$(NEXT_LANG_REF_DIR)/svg
 	cp -f $(LANG_REF_DIR)/svg/*.svg build/$(LANG_REF_DIR)/svg      # Saves duplicates in git this way
 	cp -f $(LANG_REF_DIR)/svg/*.svg build/$(NEXT_LANG_REF_DIR)/svg # Saves duplicates in git this way
 
