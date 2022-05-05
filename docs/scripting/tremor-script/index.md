@@ -98,7 +98,7 @@ Integers in `tremor-script` are signed and are limited to 64-bit internal repres
 404
 ```
 
-The stdlib provides useful function for integers in [`std::integer`](stdlib/std/integer.md).
+The stdlib provides useful function for integers in [`std::integer`](stdlib/std/integer).
 
 ```tremor
 use std::integer;
@@ -113,7 +113,7 @@ Floating point numerics in `tremor-script` are signed and are limited to 64-bit 
 1.67-e10
 ```
 
-The stdlib provides useful function for floats in [`std::float`](stdlib/std/float.md).
+The stdlib provides useful function for floats in [`std::float`](stdlib/std/float).
 
 #### Character and Unicode Code-points
 
@@ -125,7 +125,7 @@ The language does not support literal character or Unicode code-points at this t
 "I am a string"
 ```
 
-The standard library provides useful function for string manipulation in [`std::string`](stdlib/std/string.md):
+The standard library provides useful function for string manipulation in [`std::string`](stdlib/std/string):
 
 ```tremor
 use std::string;
@@ -171,7 +171,7 @@ Array literals in `tremor-script` are a comma-delimited set of expressions brack
 [ 1, 2, "foobar", 3.456e10, { "some": "json-like-document" }, null ]
 ```
 
-The standard library provides several useful functions to work with arrays in [`std::array`](stdlib/std/array.md):
+The standard library provides several useful functions to work with arrays in [`std::array`](stdlib/std/array):
 
 ```tremor
 use std::array;
@@ -199,7 +199,7 @@ Record literals in `tremor-script` are syntactically equivalent to JSON document
 }
 ```
 
-Check out the stdlib [`std::record`](stdlib/std/record.md) module for some helpful function for working with records.
+Check out the stdlib [`std::record`](stdlib/std/record) module for some helpful function for working with records.
 
 #### Binary
 
@@ -267,9 +267,9 @@ let event = {
 
 See also:
 
- - [`std::binary`](stdlib/std/binary.md) for useful function for working with binary data.
+ - [`std::binary`](stdlib/std/binary) for useful function for working with binary data.
  - [`std::string::into_binary`](stdlib/std/string.md#into_binarybytes) and [`std::string::from_utf8_lossy`](stdlib/std/string.md#from_utf8_lossybytes)
- - [`std::base64`](stdlib/std/base64.md) for encoding and decoding binary data to string using base64.
+ - [`std::base64`](stdlib/std/base64) for encoding and decoding binary data to string using base64.
 
 
 #### Operators
