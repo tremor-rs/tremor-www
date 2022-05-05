@@ -477,7 +477,7 @@ Google Cloud Storage offramp.
 This offramp can issue basic operations to list buckets and objects and to create, insert and delete objects from the Google Cloud Platform cloud storage service.
 
 :::note
-The offramp is experimental.
+This offramp is experimental.
 :::
 
 This offramp assumes that the environment variable `GOOGLE_APPLICATION_CREDENTIALS` been exported to the execution environment and it has been configured to point to a valid non-expired service account token json file.
@@ -855,7 +855,7 @@ Google Cloud Pubsub - Publisher
 This offramp can issue basic operation of creating a subscription and sending a message to a topic.
 
 :::note
-The offramp is  experimental.
+This offramp is  experimental.
 :::
 This offramp assumes that the environment variable `GOOGLE_APPLICATION_CREDENTIALS` has been exported to the execution environment and it has been configured to point to a valid non-expired service account token json file.
 
@@ -1257,7 +1257,7 @@ conforming to the CNCF OpenTelemetry protocol specification v1. Forwards tremor 
 and `metrics` messages from tremor query pipelines downstream to remote OpenTelemetry endpoints.
 
 :::note
-The offramp is experimental.
+This offramp is experimental.
 :::
 
 Supported configuration options are:

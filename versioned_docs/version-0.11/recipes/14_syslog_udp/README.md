@@ -5,9 +5,9 @@ The `syslog udp` example is demonstrate a number things:
 1. Encoding data in the `syslog` format.
 2. Sending data over `UDP`.
 3. Receiving data over `UDP`.
-4. Decoding `syslog` formated data.
+4. Decoding `syslog` formatted data.
 
-For digestion it is entirely selfcontained inside a singel tremor instance using multiple paralell pipelines, sinks and sources.
+For digestion it is entirely self-contained inside a single tremor instance using multiple parallel pipelines, sinks and sources.
 
 ## Setup
 
@@ -22,7 +22,7 @@ The [sources and sinks](etc/tremor/config/00_ramps.yaml) we use are:
 - The `metronome` source - to generate data in one second intervals.
 - The `udp` sink - to send the data over `UDP`.
 - The `udp` source - to receive data via `UDP`.
-- The `stdout` sink - to display data decoded and re-formated as `JSON`.
+- The `stdout` sink - to display data decoded and re-formatted as `JSON`.
 
 In addition we have two pipelines.
 
@@ -38,11 +38,11 @@ metronome -> producer -> syslog-udp-out
 syslog-udp-in -> consumer -> stdout-output
 ```
 
-Finally the [mapping](./etc/tremor/config/02_mapping.yaml) instanciates the binding with the given name and instance variable to activate the elements of the binding.
+Finally the [mapping](./etc/tremor/config/02_mapping.yaml) instantiates the binding with the given name and instance variable to activate the elements of the binding.
 
 ## Business Logic
 
-The only interesting part to look at is the event rewriting, this uses an example syslog message and adds the `event.id` as a `strucuted_data` field.
+The only interesting part to look at is the event rewriting, this uses an example syslog message and adds the `event.id` as a `structured_data` field.
 
 ```trickle
 select {
