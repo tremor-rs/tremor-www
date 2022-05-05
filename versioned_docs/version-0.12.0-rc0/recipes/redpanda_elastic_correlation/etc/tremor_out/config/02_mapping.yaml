@@ -1,3 +1,0 @@
-mapping:
-  /binding/redpanda_elastic/01:
-    instance: "01"

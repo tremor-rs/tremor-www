@@ -172,7 +172,7 @@ We now have a way to pass data in our system, moving it through it and looking a
 Our goal will be to make each entry a "sentence" by capitalizing the first letter and adding a period `.` or question mark to the end.
 
 :::note
-Tremor has handy utility modules for most data types that provide several functions to work with them, the [reference documentation](../reference/troy) gives an overview of them.
+Tremor has handy utility modules for most data types that provide several functions to work with them, the [reference documentation](../language/troy) gives an overview of them.
 :::
 
 ### Defining our pipeline
@@ -180,7 +180,7 @@ Tremor has handy utility modules for most data types that provide several functi
 We've been using the `troy::pipelines::passthrough` pipeline in the last step. It, as the name suggests, passes it through. So the first thing we need to do is replace this with our own. For simplicities sake, we'll start by replacing it with our pipeline. We will name this `main` as we will extend it to be more than a passthrough.
 
 :::note
-   Pipelines, by default, use the ports `in` for input, `out` and `err` for outputs. As with `connect`, those definitions can be omitted as long as we use the standard. For details on defining your own ports, you can refer to the [reference documentation](../reference/troy).
+   Pipelines, by default, use the ports `in` for input, `out` and `err` for outputs. As with `connect`, those definitions can be omitted as long as we use the standard. For details on defining your own ports, you can refer to the [reference documentation](../language/troy).
 :::
 
 ```troy
@@ -215,7 +215,7 @@ deploy flow main;
 
 ### Transforming in the select body
 
-Now we have our pipeline in which we will capitalize the text that's passed through the pipeline, [`std::string::capitalize`](../reference/library/std/string#capitalizeinput) will do that for us, and we can use it right in the select statement we:
+Now we have our pipeline in which we will capitalize the text that's passed through the pipeline, [`std::string::capitalize`](../language/stdlib/std/string#capitalizeinput) will do that for us, and we can use it right in the select statement we:
 
 :::note
 In select statements, you can do any transformation that's creating new data, but you can't do any mutating manipulations. Simplified, you can think that `let` is not allowed.

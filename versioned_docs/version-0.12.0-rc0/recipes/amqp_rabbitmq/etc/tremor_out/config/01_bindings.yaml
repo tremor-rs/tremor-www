@@ -1,9 +1,0 @@
-binding:
-  - id: rabbit_amqp 
-    links:
-      "/onramp/rabbit-in/{instance}/out":
-        - "/pipeline/ingest/{instance}/in"
-      "/pipeline/ingest/{instance}/err":
-        - "/offramp/system::stderr/{instance}/in"
-      "/pipeline/ingest/{instance}/out":
-        - "/offramp/system::stdout/{instance}/in"

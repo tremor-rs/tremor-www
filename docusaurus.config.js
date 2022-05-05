@@ -35,7 +35,17 @@ const config = {
         path: 'rfc',
         routeBasePath: 'rfc',
         editUrl: 'https://github.com/tremor-rs/tremor-www/tree/main/'
-      }
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      /** @type {import('@docusaurus/plugin-content-docs').Options} */
+      {
+        id: 'community',
+        path: 'community',
+        routeBasePath: 'community',
+        sidebarPath: require.resolve('./sidebarsCommunity.js'),
+      },
     ],
   ]
 
@@ -68,7 +78,16 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl: 'https://github.com/tremor-rs/tremor-www/tree/main/',
-          remarkPlugins: [require('mdx-mermaid'), gitLinks]
+          remarkPlugins: [require('mdx-mermaid'), gitLinks],
+          // this makes `Next` to `0.12`
+          // RELEASE: This needs to be removed whenever we release 0.12
+          lastVersion: 'current',
+          versions: {
+            current: {
+              label: '0.12',
+              path: '0.12',
+            },
+          },
         },
         blog: {
           showReadingTime: true,
@@ -78,7 +97,8 @@ const config = {
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
-        }
+        },
+
       })
     ],
   ],
@@ -87,7 +107,6 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        //        title: 'Tremor',
         logo: {
           alt: 'Tremor Logo',
           src: 'img/tremor-logo.svg',
@@ -104,32 +123,33 @@ const config = {
           {
             type: 'dropdown',
             label: 'Community',
-            to: 'docs/community/overview',
+            to: 'community/overview',
             position: 'left',
             items: [
-              { to: 'docs/community/overview', label: 'Overview' },
+              { to: 'community/overview', label: 'Overview' },
               { href: 'https://chat.tremor.rs', label: 'Chat' },
-              { to: 'docs/community/governance/overview', label: 'Governance' },
-              { to: 'docs/community/development/overview', label: 'Development' },
-              { to: 'docs/community/faqs', label: 'FAQs' },
+              { to: 'community/governance/overview', label: 'Governance' },
+              { to: 'community/development/overview', label: 'Development' },
+              { to: 'community/events/overview', label: 'Events and Media' },
               { to: 'rfc', label: 'RFCs' },
-              { to: 'docs/community/events/overview', label: 'Events and Media' },
             ],
           },
+          { to: 'blog', label: 'Blog', position: 'left' },
           {
             type: 'dropdown',
             label: 'Docs',
             positition: 'left',
             items: [
-              { to: 'docs/recipes/overview', label: 'Solution Recipes' },
-              { to: 'docs/reference/connectors', label: 'Connectors Reference' },
-              { to: 'docs/reference/library/overview', label: 'Standard Library' },
-              { to: 'docs/reference/language', label: 'Language Reference' },
+              // We chose to reference the most recent version here
+              // RELEASE: this needs to change for each major version release (0.12 -> 0.13)
+              { to: 'docs/0.12/recipes/overview', label: 'Solution Recipes' },
+              { to: 'docs/0.12/reference/connectors', label: 'Connectors Reference' },
+              { to: 'docs/0.12/language/stdlib/overview', label: 'Standard Library' },
+              { to: 'docs/0.12/language/reference', label: 'Language Reference' },
               { href: 'pathname:///api/v0.12/', label: 'API v0.12' },
               { href: 'pathname:///api/v0.11/', label: 'API v0.11' },
             ],
           },
-          { to: 'blog', label: 'Blog', position: 'left' },
           {
             type: 'docsVersionDropdown',
             position: 'left',

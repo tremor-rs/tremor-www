@@ -1,14 +1,15 @@
 TREMOR_VSN=main
-LANG_REF_DIR=docs/reference/language
-STDLIB_REF_DIR=docs/reference/library
+LANG_REF_DIR=docs/language/reference
+NEXT_LANG_REF_DIR=docs/next/language/reference
+STDLIB_REF_DIR=docs/language/stdlib
 
 all: clean tremor-runtime-docs openapi
 
 build_thunk:
-	-mkdir build/docs/reference/language/svg
-	-mkdir build/docs/next/reference/language/svg
-	cp -f docs/reference/language/svg/*.svg build/docs/reference/language/svg      # Saves duplicates in git this way
-	cp -f docs/reference/language/svg/*.svg build/docs/next/reference/language/svg # Saves duplicates in git this way
+	-mkdir build/$(LANG_REF_DIR)/svg
+	-mkdir build/$(NEXT_LANG_REF_DIR)/svg
+	cp -f $(LANG_REF_DIR)/svg/*.svg build/$(LANG_REF_DIR)/svg      # Saves duplicates in git this way
+	cp -f $(LANG_REF_DIR)/svg/*.svg build/$(NEXT_LANG_REF_DIR)/svg # Saves duplicates in git this way
 
 clean_build: reset all
 	-rm -rf ../cache/*
@@ -47,9 +48,9 @@ openapi: tremor-runtime-refresh
 	-mkdir static/api/v0.12
 	npm i -g redoc-cli
 	cp tremor-runtime/static/openapi.yaml static/api/v0.12
-	redoc-cli bundle static/api/v0.12/openapi.yaml
+	redoc-cli build static/api/v0.12/openapi.yaml
 	mv redoc-static.html static/api/v0.12/index.html
-	redoc-cli bundle static/api/v0.11/openapi.yaml
+	redoc-cli build static/api/v0.11/openapi.yaml
 	mv redoc-static.html static/api/v0.11/index.html
 
 clean:

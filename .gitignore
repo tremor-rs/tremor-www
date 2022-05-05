@@ -35,6 +35,6 @@ static/api
 /openapi.yaml
 
 # Generated docs copied from tremor-runtime
-docs/reference/language
-docs/reference/library
+docs/language/reference
+docs/reference/stdlib
 static/docs/reference/language/svg
