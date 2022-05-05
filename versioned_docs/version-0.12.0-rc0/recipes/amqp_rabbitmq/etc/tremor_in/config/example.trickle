@@ -1,4 +1,0 @@
-select merge event of
-  { "tremor_in": "snot" }
-end
-from in into out;

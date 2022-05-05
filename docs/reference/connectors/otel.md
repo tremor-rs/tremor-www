@@ -186,5 +186,5 @@ $ tremor server run config.troy | jq
 
 ### Standard Library
 
-The OpenTelemetry connector ships with a [module](../library/cncf/otel) of convenience functions and
+The OpenTelemetry connector ships with a [module](../../language/stdlib/cncf/otel) of convenience functions and
 definitions that make working with, consuming and producing OpenTelemetry event streams easier.
