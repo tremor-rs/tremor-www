@@ -8,7 +8,7 @@ onramp:
       interval: 1000 # 1 second
   - id: syslog-udp-in
     type: udp
-    codec: syslog # The syslog codec to deecode the data coming over UDP
+    codec: syslog # The syslog codec to decode the data coming over UDP
     config:
       host: "127.0.0.1"
       port: 12201
@@ -16,7 +16,7 @@ onramp:
 offramp:
   - id: syslog-udp-out
     type: udp
-    codec: syslog # The syslog codec to enecode the data sent over UDP
+    codec: syslog # The syslog codec to encode the data sent over UDP
     config:
       host: "127.0.0.1"
       port: 12201
