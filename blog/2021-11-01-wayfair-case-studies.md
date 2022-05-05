@@ -62,7 +62,7 @@ originated via Syslog, to those via GELF, or Prometheus.
 
 The YAML-based configuration of the query pipelines quickly became error-prone and cumbersome as the sophistication, complexity and size of
 application logic grew. In addition, the success of our scripting
-language, [tremor-script](/docs/getting-started/scripting),
+language, [tremor-script](docs/0.11/tremor-script/index),
 and its hygienic set of tooling and IDE integration encouraged the addition a
 query language, thus enabling [data flow processing](./2021-11-04-data-flow.md) with Tremor.
 

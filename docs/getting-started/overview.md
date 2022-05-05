@@ -23,7 +23,7 @@ Done, now lets configure Tremor to do what we want:
 ### Configuration
 
 Tremor needs to be told where to get events from, how to handle them and where to send them to.
-This is done by passing it a [Troy](../reference/troy) configuration file that describes our event processing logic we wish to deploy to our tremor instance.
+This is done by passing it a [Troy](../language/troy) configuration file that describes our event processing logic we wish to deploy to our tremor instance.
 
 ```troy
 define flow main
@@ -43,7 +43,7 @@ deploy flow main;
 There is a lot going on in that file. Don't worry if not everything makes sense yet.
 We are going over that in a bit. For now all you need to know is that it will tell tremor to echo back each line you type into its stdin.
 
-For now copy and paste the [Troy](../reference/troy) above into a file `getting_started.troy` in the current directory.
+For now copy and paste the [Troy](../language/troy) above into a file `getting_started.troy` in the current directory.
 
 ### Running Tremor
 
@@ -53,7 +53,7 @@ Lets get real:
 docker run --rm -i -v $PWD:/etc/tremor/config tremorproject/tremor:latest
 ```
 
-The docker image is wired up to pick up any [Troy](../reference/troy) files in `/etc/tremor/config`,
+The docker image is wired up to pick up any [Troy](../language/troy) files in `/etc/tremor/config`,
 so all we need to do is to mount our config at that directory.
 
 We are going to see a lot of logs in our terminal and when we type something, Tremor will actually echo it back at us:

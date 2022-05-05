@@ -76,7 +76,7 @@ Fig 3. Highlevel overview of Property based testing in termor-script
 ### Example thought process
 
 - Here, I will explain about property based testing by going through a step-by-step approach on how a Property based test is written for an operation in termor-script
-- [Patch](/docs/scripts/overview#patch) is a operation in tremor-script that is performed on Expressions(everthing in tremor-script is an expression :p ) which contains multiple record(data-type) level field operations to be applied to a target record in order to transform a targetted record.
+- [Patch](docs/0.11/tremor-script/index#patch) is a operation in tremor-script that is performed on Expressions(everthing in tremor-script is an expression :p ) which contains multiple record(data-type) level field operations to be applied to a target record in order to transform a targetted record.
 - As patch has multiple operations inside it which have to be seperately created in every step, here is where the concept of incremental implementation comes into picture, if one makes sures if the PatchOperation is implemented before, we can take advantage of that here. For example: Merge is a seperate operation on records but it also is one of the patch operation.
 - gen_script.erl: The following code creates the structure needed for a patch operation as shown in Fig 4.
 
@@ -212,7 +212,7 @@ I would like to continue contributing to the project and explore the rust part o
 1. [Introduction to Property Based Testing](https://medium.com/criteo-engineering/introduction-to-property-based-testing-f5236229d237)
 2. [Why isn't functional programming the norm](https://www.youtube.com/watch?v=QyJZzq0v7Z4)
 3. [https://github.com/kurious-diru/learn_rust](https://github.com/kurious-diru/learn_rust)
-4. [/docs/scripts/overview#patch](/docs/scripts/overview#patch)
+4. [Tremor script patch](docs/0.11/tremor-script/index#patch)
 5. Better to use tools: 
     - * cat - bat - [https://github.com/sharkdp/bat](https://github.com/sharkdp/bat)
     - * grep - ripgrep - [https://github.com/BurntSushi/ripgrep](https://github.com/BurntSushi/ripgrep)

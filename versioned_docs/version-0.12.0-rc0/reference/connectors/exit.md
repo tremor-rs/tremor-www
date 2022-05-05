@@ -1,3 +1,0 @@
-# The `exit` Connector
-
-TBD
