@@ -99,7 +99,7 @@ example "Example binding for a HTTP proxy"
     # send the response from upstream for processing
     # (here be linked offramp)
     "/offramp/upstream/{instance}/out":
-      9["/pipeline/response_processing/{instance}/in"]
+      ["/pipeline/response_processing/{instance}/in"]
     # process upstream response and send it back as a response to incoming
     # (here be linked onramp)
     "/pipeline/response_processing/{instance}/out":
@@ -126,6 +126,7 @@ Examples of even more advanced Tremor applications:
 The above linked examples also demonstrate typical error handling needed for applications built on top of linked transports (eg: for HTTP-based applications, how to send a proper error response to the client with an appropriate status code on tremor-internal failures like runtime script errors, or codec errors on malformed input).
 
 example "Example error-handling binding for a HTTP proxy"
+
 ```yaml
 - id: error
   links:
@@ -142,7 +143,7 @@ example "Example error-handling binding for a HTTP proxy"
       ["/onramp/http/{instance}/in"]
     # respond on errors during error processing too
     "/pipeline/internal_error_processing/{instance}/err":
-      ["/onramp/http/{instance
+      ["/onramp/http/{instance}/in"]
 ```
 
 The key here is remembering to link the error ports for all the onramp/offramp/pipeline artefacts involved in the main event-flow, ensuring that the end destination for error events (emitted from the `err` ports) are visible to the client (or user).
