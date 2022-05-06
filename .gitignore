@@ -38,3 +38,4 @@ static/api
 docs/language/reference
 docs/reference/stdlib
 static/docs/reference/language/svg
+.vscode
