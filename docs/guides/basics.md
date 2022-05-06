@@ -87,7 +87,7 @@ flow
   create connector console from connectors::console;
 
   # create an instance of the passthrough pipeline
-  create connector passthrough from pipelines::passthrough;
+  create pipeline passthrough from pipelines::passthrough;
 end;
 ```
 
