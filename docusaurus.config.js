@@ -51,24 +51,24 @@ const config = {
 
   ,
   presets: [
-    [
-      'redocusaurus',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
-        // Plugin Options for loading OpenAPI files
-        specs: [
-          {
-            spec: 'static/api/v0.12/openapi.yaml',
-            route: '/api/',
-          },
-        ],
-        // Theme Options for modifying how redoc renders them
-        theme: {
-          // Change with your site colors
-          primaryColor: '#1890ff',
-        },
-      }),
-    ],
+    // [
+    //   'redocusaurus',
+    //   /** @type {import('@docusaurus/preset-classic').Options} */
+    //   ({
+    //     // Plugin Options for loading OpenAPI files
+    //     specs: [
+    //       {
+    //         spec: 'static/api/v0.12/openapi.yaml',
+    //         route: '/api/',
+    //       },
+    //     ],
+    //     // Theme Options for modifying how redoc renders them
+    //     theme: {
+    //       // Change with your site colors
+    //       primaryColor: '#1890ff',
+    //     },
+    //   }),
+    // ],
     [
       'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
