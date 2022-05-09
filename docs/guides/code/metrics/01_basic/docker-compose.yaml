@@ -31,4 +31,4 @@ services:
       - RUST_BACKTRACE=1
       - RUST_LOG=info
     volumes:
-      - ./config/tremor/basic:/etc/tremor:ro
+      - ./config/tremor:/etc/tremor:ro
