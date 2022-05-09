@@ -1,46 +1,71 @@
 # Tremor Basics
 
-This guide will walk you through the tremor basics. It'll be a starting point to learning how to get data into the system, work with this data and get it out again.
+This guide is a walk through of tremor basics. It is a starting point to learn
+how to stream data into the system, process this data stream, and produce a
+stream of synthetic events based on the processing of the original stream of
+data.
 
-The example is entirely synthetic and designed to teach fundamentals, but you can use it as a starting point for more complex systems.
+The example is illustrative and a construction to introduce fundemanetals, but it
+may be useful as a string point for more complex works.
 
-We will go through this guide in steps, each building on the previous one but each step being a complete unit in itself - this will allow you to try and test at each step of the way, pause, and continue another time.
+This guide has a number of progressive steps, each building on the fundamentals
+introduced in the previous step.
 
-In the end, we'll have a small tremor application in which you can input text. It will capitalize and punctuate it and exit on command.
+After following the steps in this guide, you will have a small but complete and
+runnable tremor application.
 
-Runnable examples configuration for each of the steps is available [here](__GIT__/../code/basics).
+The source for the code in this guide is available in [github](__GIT__/../code/basics).
 
 ## Topics
 
 This guide introduces the following new concepts
 
-* flows
-* connectors
-* pipelines
-* scripts
-* select with where
-* `use` for functions, pipelines and connectors
+* Passthrough
+* Flows
+* Connectors
+* Pipelines
+* Scripts
+* Queries with `select`, and the `with` and `where` clauses
+* Modules and the `use` statement for importing library functions, pipelines and connectors
 
 ## Passthrough
 
-The simple configuration in tremor is what we call `passthrough` as it takes data from one end, passes it through, and puts it out the other end.
+This is a very useful streaming operation that consumes data streams from a a source and
+relays each received event to a destination or target downstream. It distributes each
+received event from the source to the destination.
 
-We handle the input and output with a `connector, `the processing or passing with a `pipeline`. Then we wrap the whole configuration in a flow.
+```trickle
+# Passthrough query
+select event from in into out;
+```
 
+We call this `passthrough` as the data events stream or __pass through__ without modification.
+
+The processing and data sources and destinations are decoupled. These are connected together in [flow](#Flow)
+statements.
 ### Flow
 
-So let's start from the outside in and define a flow, we'll call this flow `main`, and it'll do nothing to start.
+The `flow` statement encapsulates instances of `connector` and `pipeline` that can be interconnected to provide
+a runnable embedded service complete with connectivity.
+
+We begin our study from the outside, and define a flow called `main`.
 
 ```troy
 # Our main flow
 define flow main
+  # ... We define and create connectors and pipelines here
 flow
 end;
 ```
-
 ### Connectors
 
-With that, let's start filling it. We will use `STDIN` and `STDOUT` for this example to read and write data. For that we have a #[`stdio` connector](../reference/connectors/stdio) that you could use. But since we know that it's a human reading and writing the text, we will instead use the pre-configured  `console` connector. You can find the `console` connector in the `troy::connectors` module of the standard library.
+A `connector` is a way to establish streams of data and use them to provide a useful flow.
+
+A very useful set of connectors that ship as a part of tremor are the standard input/output
+or [`stdio`](../reference/connectors/stdio) connectors. These pipe the standard input, output and error streams from the
+console to processors.
+
+We use pre-packaged definitions in this example from the `troy::connectors` module from the standard library.
 
 :::note
 The console connector is a configured instance of the `stdio` connector that uses the `separate` pre and postprocessor to make it line-based and the [`string` codec](../reference/codecs/string) to avoid any parsing of the input data.
@@ -55,24 +80,30 @@ flow
   
   # create an instance of the console connector
   create connector console from connectors::console;
+
+    # ... We have a means to read/write line delimited JSON, but have yet to define any processing logic
 end;
 ```
 
 ### Pipeline
 
-Now we have the connector that lets us receive and send data. Next, we need a pipeline to pass the data through.
+Lastly, we need to define the processing logic for this `main` flow.
 
-We could write a custom pipeline, but since `passthrough` pipelines are somewhat common, we already have it defined in the `troy::pipelines` module, and we will be using that.
 
 :::note
-The definition of `troy::pipelines::passthrough` is just this:
+We could define passthrough ourselves as follows, but it is in common use, so available through the
+standard library in `troy::pipelines` and called `passthrough`:
+
 ```troy
+# File: troy/pipelines.troy
 define pipeline passthrough
 pipeline
     select event from in into out;
 end
 ```
 :::
+
+We use the definition provided by the standard library
 
 ```troy
 # Our main flow
@@ -87,10 +118,11 @@ flow
   create connector console from connectors::console;
 
   # create an instance of the passthrough pipeline
-  create pipeline passthrough from pipelines::passthrough;
+  create connector passthrough from pipelines::passthrough;
+
+  # ... We still `need` to interconnect our `console` and `passthrough` instances
 end;
 ```
-
 
 ### Wiring
 
@@ -422,7 +454,7 @@ end;
 deploy flow main;
 ```
 
-### filtering out exit messages
+### Filtering out exit messages
 
 The last thing left to do is filter out messages that read `exit` and forward them to the `exit` port instead of out.
 
@@ -511,7 +543,7 @@ deploy flow main;
 That all set, we can run our script as before, just this time, when entering `exit` tremor will terminate.
 
 ```bash
-$ tremor run transfor.troy
+$ tremor run transform.troy
 hello
 Hello.
 why
