@@ -44,7 +44,7 @@ graph LR
     D{Chronograf} --- C   
 ```
 
-The docker-compose file for this is [here](__GIT__/../code/metrics/basic.yaml).
+The docker-compose file for this is [here](__GIT__/../code/metrics/01_basic).
 
 
 ### UDP Server
@@ -184,7 +184,7 @@ end;
 deploy flow metrics;
 ```
 
-Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/) and start it with `docker-compose -f  basic.yaml up`.
+Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/01_basic) and start it with `docker-compose up`.
 
 You can find the chronograf UI at (`http://localhost:8888`)[http://localhost:8888].
 
@@ -285,7 +285,7 @@ deploy flow metrics;
 
 ### Running
 
-Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/) and start it with `docker-compose -f  batching.yaml up`.
+Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/02_batching) and start it with `docker-compose up`.
 
 You can find the chronograf UI at (`http://localhost:8888`)[http://localhost:8888].
 
@@ -427,7 +427,7 @@ into batch;
 
 ### Running
 
-Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/) and start it with `docker-compose -f  aggregation.yaml up`.
+Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/03_aggregation) and start it with `docker-compose up`.
 
 You can find the chronograf UI at (`http://localhost:8888`)[http://localhost:8888].
 
@@ -511,7 +511,7 @@ flow
   #...
 ```
 
-Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/) and start it with `docker-compose -f  internal.yaml up`.
+Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/04_interal) and start it with `docker-compose up`.
 
 You can find the chronograf UI at (`http://localhost:8888`)[http://localhost:8888].
 
@@ -554,7 +554,7 @@ specification, but the application is otherwise the same:
   end;
 ```
 
-Now with that set you can grab [the entire config from github](__GIT__/../code/metrics/) and start it with `docker-compose -f  tdengine.yaml up`.
+Now with that set you can grab [the entire config from github](__GIT__/../code/metrics/05_tdengine) and start it with `docker-compose up`.
 
 You can find the grafana UI at (`http://localhost:3000`)[http://localhost:3000].
 
