@@ -8,7 +8,13 @@ At first we need to get tremor installed somehow.
 
 ## Install Tremor
 
-Lets install Tremor via [Docker](https://www.docker.com). If you are looking for other ways to install Tremor, visit our detailed [Installation Docs](install).
+Lets install Tremor via [Docker](https://www.docker.com). 
+
+:::tip
+
+If you are looking for other ways to install Tremor, visit our detailed [Installation Docs](install).
+
+:::
 
 All you need is a working [Docker](https://www.docker.com) installation.
 
