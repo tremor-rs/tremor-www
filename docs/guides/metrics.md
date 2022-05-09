@@ -556,6 +556,6 @@ specification, but the application is otherwise the same:
 
 Now with that set you can grab [the entire config from github](__GIT__/../code/metrics/05_tdengine) and start it with `docker-compose up`.
 
-You can find the grafana UI at (`http://localhost:3000`)[http://localhost:3000].
+You can find the grafana UI at [`http://localhost:3000`](http://localhost:3000).
 
 Note that you need to log in with user `admin` and password `admin`
