@@ -35,8 +35,13 @@ Let us start with the basic deployment:
 * telegraf as an agent to collect some data
 * tremor for aggregation and filtering
 
-```
-telegraf -udp-> tremor -http-> influxdb -> chronograf -> YOU!
+A high level visualization of the application components:
+
+```mermaid
+graph LR
+    A{telegraf UDP} -->|influx line protocol| B(tremor)
+    B -->|Influx API| C{InfluxDB HTTP}
+    D{Chronograf} --- C   
 ```
 
 The docker-compose file for this is [here](__GIT__/../code/metrics/basic.yaml).
@@ -182,8 +187,6 @@ deploy flow metrics;
 Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/) and start it with `docker-compose -f  basic.yaml up`.
 
 You can find the chronograf UI at (`http://localhost:8888`)[http://localhost:8888].
-
-You can look at 
 
 ## Batching
 
@@ -521,6 +524,17 @@ While this example is written using InfluxDB as a backend, it works equally with
 
 TDEngine can quickly replace influx. The only difference is that we need to change the `url` in the `http_client`
 
+A high-level visaulization of TDEngine replacing InfluxDB via the Influx API:
+
+```mermaid
+graph LR
+    A{telegraf UDP} -->|influx line protocol| B(tremor)
+    B -->|Influx API| C{TDEngine}
+```
+
+The connector definition for `TDEngine` has a slightly different endpoint
+specification, but the application is otherwise the same:
+
 ```troy
   # define our http client
   define connector influx_out from http_client
@@ -540,7 +554,7 @@ TDEngine can quickly replace influx. The only difference is that we need to chan
   end;
 ```
 
-Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/) and start it with `docker-compose -f  tdengine.yaml up`.
+Now with that set you can grab [the entire config from github](__GIT__/../code/metrics/) and start it with `docker-compose -f  tdengine.yaml up`.
 
 You can find the grafana UI at (`http://localhost:3000`)[http://localhost:3000].
 
