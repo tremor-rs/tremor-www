@@ -1,3 +1,0 @@
-# Tremor Guides
-
-TBD

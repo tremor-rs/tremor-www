@@ -1,4 +1,4 @@
-# Influx
+# influx
 
 The `influx` codec supports the [influx line protocol](https://docs.influxdata.com/influxdb/v1.7/write_protocols/line_protocol_tutorial/).
 

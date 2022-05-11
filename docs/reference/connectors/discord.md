@@ -1,3 +1,7 @@
+---
+sidebar_label: discord
+---
+
 # The `discord` Connector
 
 The discord connector provides integration with the `discord` service and is

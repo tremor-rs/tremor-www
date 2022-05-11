@@ -1,4 +1,4 @@
-# CIDR
+# cidr
 
 Classless Inter-Domain Routing ( CIDR ) is a method of allocating IP addresses and IP routing paths. CIDR notation is a compact representation of an IP address and its associated routing prefix.
 

@@ -1,4 +1,4 @@
-# Influx
+# influx
 
 Influx extrector matches data from the string that uses the [Influx Line Protocol](https://docs.influxdata.com/influxdb/v1.7/write_protocols/line_protocol_tutorial/). It will fail if the input isn't a valid string.
 

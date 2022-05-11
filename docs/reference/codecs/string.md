@@ -1,4 +1,4 @@
-# String
+# string
 
 The `string` codec marshalls valid UTF-8 encoded data as a tremor string literal value.
 

@@ -1,3 +1,7 @@
+---
+sidebar_label: tcp
+---
+
 # The `tcp` Connector
 
 The `tcp` connector allows TCP-based clients and servers to be integrated with tremor.

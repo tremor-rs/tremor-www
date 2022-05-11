@@ -1,4 +1,4 @@
-# Grok
+# grok
 
 The grok extractor is useful for parsing unstructured data into a structured form. It is based on logstash's grok plugin. Grok uses regular expressions, so any regular expression can be used as a grok pattern.
 

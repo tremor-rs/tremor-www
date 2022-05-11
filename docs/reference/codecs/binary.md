@@ -1,4 +1,4 @@
-# Binary
+# binary
 
 The `binary` codec marshalls raw binary data data as a tremor bytes literal value.
 

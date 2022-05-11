@@ -1,4 +1,4 @@
-# JSON
+# json
 
 The JSON extractor converts the input string into its respective JSON representation conforming to The Javascript Object Notation Data Interchange Format (RFC 8259)
 

@@ -1,3 +1,7 @@
+---
+sidebar_label: cb
+---
+
 # The `cb` Connector
 
 The `cb` connector is for testing circuit breaker internals.

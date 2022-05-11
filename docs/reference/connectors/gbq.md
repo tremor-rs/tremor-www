@@ -1,3 +1,7 @@
+---
+sidebar_label: gbq
+---
+
 # The `gbq` Connector
 
 The GBQ connector integrates [Google BigQuery](https://cloud.google.com/bigquery).

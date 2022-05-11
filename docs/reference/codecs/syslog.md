@@ -1,4 +1,4 @@
-# Syslog
+# syslog
 
 The `syslog` codec supports marshalling the [IETF](https://datatracker.ietf.org/doc/html/rfc5424#section-6) and [BSD](https://www.ietf.org/rfc/rfc3164.txt) syslog formats.
 

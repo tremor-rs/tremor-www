@@ -1,3 +1,7 @@
+---
+sidebar_label: metronome
+---
+
 # The `metronome` Connector
 
 The metronome connector generates a periodic flow of events at a configured interval.

@@ -1,4 +1,4 @@
-# KV
+# kv
 
  Parses a string into a map. It is possible to split based on different characters that represent  either field or key value boundaries.
 

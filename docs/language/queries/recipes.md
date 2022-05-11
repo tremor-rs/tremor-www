@@ -1,4 +1,7 @@
-# Recipes
+---
+sidebar_label: Recipes
+---
+# Tremor Pipeline Recipes
 
 ## Periodic Synthetic Metrics Events
 

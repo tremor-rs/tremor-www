@@ -1,3 +1,7 @@
+---
+sidebar_label: ws
+---
+
 # The `ws` Connector
 
 The `ws` connector provides support for the WebSocket protocol specification.
