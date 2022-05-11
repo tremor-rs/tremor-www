@@ -6,7 +6,7 @@ Operators process events and signals in the context of a pipeline. An operator, 
 
 Operators allow the data processing capabilities of tremor to be extended or specialized without changes to runtime behavior, concurrency, event ordering or other aspects of a running tremor system.
 
-Operators are created in the context of a pipeline and configured as part of `tremor-query` [statements](overview#custom-operator-definitions). An operator MUST have an identifier that is unique for its owning pipeline.
+Operators are created in the context of a pipeline and configured as part of `tremor-query` [statements](../queries#custom-operator-definitions). An operator MUST have an identifier that is unique for its owning pipeline.
 
 Configuration is of the general form:
 
@@ -30,9 +30,9 @@ create operator my_custom_operator;
 
 ## script
 
-An embedded tremor script is created with a special syntax that deviates from the operator creation. For a full reference see the section on [tremor-query embedded-scripts](overview##embedded-script-definitions).
+An embedded tremor script is created with a special syntax that deviates from the operator creation. For a full reference see the section on [tremor-query embedded-scripts](../queries##embedded-script-definitions).
 
-The tremor script runtime allows to modify events or their metadata. To learn more about Tremor Script please see the [related section](../scripts/overview).
+The tremor script runtime allows to modify events or their metadata. To learn more about Tremor Script please see the [related section](../scripting).
 
 The `script` operator allows to modify the events metadata (via `$`), and the script local `state` which persists across single events.
 
