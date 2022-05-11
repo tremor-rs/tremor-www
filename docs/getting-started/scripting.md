@@ -25,9 +25,9 @@ Tremor Script adds an expression language that supports unary, binary, compariso
 
 Features relatively unique to tremor-script are structural pattern matching and the recognition of and ability to extract data from microformats typically embedded in event data.
 
-[Structural pattern matching](../language/scripts/overview#match) allows patterns over arbitrarily nested values to be concisely declared with an intuitive syntax.
+[Structural pattern matching](../language/scripting#match) allows patterns over arbitrarily nested values to be concisely declared with an intuitive syntax.
 
-[Micro-format Extractors](../language/extractors/overview) allows embedded data conforming to orthogonal formats such as regular expressions in Strings, date/time variants to be conditionally transformed to Tremor internal form and for embedded data to be extracted upon matching.
+[Micro-format Extractors](../language/extractors) allows embedded data conforming to orthogonal formats such as regular expressions in Strings, date/time variants to be conditionally transformed to Tremor internal form and for embedded data to be extracted upon matching.
 
 ```tremor
 define script extract                                # define the script that parses our Apache logs
@@ -42,7 +42,7 @@ script
 end;
 ```
 
-See the full documentation [of the language](../language/troy) and its [standard library](../language/stdlib/overview) for more information.
+See the full documentation [of the language](../language/troy) and its [standard library](../language/stdlib) for more information.
 
 ### Tremor Query
 
@@ -119,4 +119,4 @@ filter {
 
 </div>
 
-The full documentation [of the language](../language/queries/overview), the [operators](../language/queries/operators), and [aggregation functions](../language/queries/functions) can be found in the [language docs](../language/reference) .
+The full documentation [of the language](../language/queries), the [operators](../language/queries/operators), and [aggregation functions](../language/stdlib/aggr) can be found in the [language docs](../language/reference) .

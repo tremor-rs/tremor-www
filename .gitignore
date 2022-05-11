@@ -22,8 +22,7 @@ yarn-error.log*
 
 # Generated
 docs/api.md
-docs/scripting/tremor-script/stdlib/
-docs/scripting/tremor-query/functions/
+docs/language/stdlib/
 docs/recipes/*/var/log/*
 log/
 static/api

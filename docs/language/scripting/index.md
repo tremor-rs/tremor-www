@@ -308,9 +308,9 @@ _Normal_ paths are used to referring to local variables created with [let](#let)
 - `event`: Always referring to the currently handled event.
 - `$`: Referring to the event metadata. Values inside the event metadata can only be accessed via a top-level name like: `$udp.port`. Its contents are usually either `null` or a record.
 - `state`: Referring to the script's state, which will persist across the lifetime of a pipeline, but not across tremor reboots. So it can be used as state kept across different events. Default value is `null`.
-- `args`: Referring to a record of arguments passed into the [script definition](../queries/overview#embedded-script-definitions) or [create script](#embedded-script-definitions).
-- `window`: Referring to the name of the [window](../queries/overview#tumbling-windows) this event is emitted from. This is `null` if the event is not handled inside a tremor-query [select](../queries/overview#select-queries) statement with a [window](../queries/overview#tumbling-windows).
-- `group`: Referring to the current group if the event is handled inside a tremor-query [select](../queries/overview#select-queries) statement with a `group by` clause. It will be `null` outside of a `group by` select, if used inside, it will be an array where the first element is the value of the current group, and the second element is the stringified _name_ of the group, derived from the group value.
+- `args`: Referring to a record of arguments passed into the [script definition](../queries#embedded-script-definitions) or [create script](#embedded-script-definitions).
+- `window`: Referring to the name of the [window](../queries#tumbling-windows) this event is emitted from. This is `null` if the event is not handled inside a tremor-query [select](../queries#select-queries) statement with a [window](../queries#tumbling-windows).
+- `group`: Referring to the current group if the event is handled inside a tremor-query [select](../queries#select-queries) statement with a `group by` clause. It will be `null` outside of a `group by` select, if used inside, it will be an array where the first element is the value of the current group, and the second element is the stringified _name_ of the group, derived from the group value.
 
 #### Example
 
