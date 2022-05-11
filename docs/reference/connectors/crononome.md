@@ -1,3 +1,7 @@
+---
+sidebar_label: crononome
+---
+
 # The `crononome` Connector
 
 The crononome connector generates a periodic flow of events at a configured periodicity

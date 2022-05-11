@@ -1,11 +1,11 @@
 ---
-title: Usage Guide
+title: Quick Start
 description: Quick start guide to installing, running and testing Tremor.
 draft: false
 hide_table_of_contents: false
 ---
 
-# Quick Start Guide
+# Quick Start
 
 This page explains how to get Tremor running on a local system for development or testing. There are 2 ways of installing Tremor:
 

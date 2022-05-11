@@ -1,3 +1,7 @@
+---
+sidebar_label: kv
+---
+
 # The `kv` Connector
 
 The `kv` connector provides a key value storate facility for tremor-based

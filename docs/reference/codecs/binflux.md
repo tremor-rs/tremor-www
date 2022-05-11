@@ -1,4 +1,4 @@
-# Binflux
+# binflux
 
 The `binflux` codec is a binary representation of the influx line protocol.
 

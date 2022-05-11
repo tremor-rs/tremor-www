@@ -1,4 +1,4 @@
-# JSON Sorted
+# json-sorted
 
 The `json-sorted` codec supports the Javascript Object Notation format with a consistent sort order.
 

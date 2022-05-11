@@ -1,3 +1,7 @@
+---
+sidebar_label: "null"
+---
+
 # The `null` Connector
 
 The `null` connector is a connector that is used during development.

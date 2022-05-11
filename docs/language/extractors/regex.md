@@ -1,6 +1,6 @@
-# Regex (re)
+# re (regex)
 
-The regex extractor extracts fields from data by parsing a regular expression provided by the user. It accepts a "perl-style regular expression"
+The regex extractor extracts fields from data by parsing a regular expression provided by the user. It accepts a "perl-style regular expression"/
 
 ## Predicate
 

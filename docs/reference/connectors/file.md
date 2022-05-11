@@ -1,3 +1,7 @@
+---
+sidebar_label: file
+---
+
 # The `file` Connector
 
 The file connector enables reading and writing to files accessible via the file system.

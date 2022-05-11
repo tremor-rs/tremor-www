@@ -1,3 +1,3 @@
-# Tremor Guides
+# Guides
 
 TBD

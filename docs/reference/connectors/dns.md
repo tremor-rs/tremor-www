@@ -1,3 +1,7 @@
+---
+sidebar_label: dns
+---
+
 # The `dns` Connector
 
 The dns connector integrates DNS client access into tremor allowing programmatic DNS queries

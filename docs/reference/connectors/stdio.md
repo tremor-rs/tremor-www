@@ -1,3 +1,6 @@
+---
+sidebar_label: stdio
+---
 # The `stdio` Connector
 
 The stdio connector integrates with standard input, output and error

@@ -1,3 +1,7 @@
+---
+sidebar_label: udp
+---
+
 # The `udp` Connector
 
 The `udp` connector allows UDP based datagram clients and servers to be integrated with tremor.

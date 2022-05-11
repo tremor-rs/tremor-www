@@ -1,3 +1,7 @@
+---
+sidebar_label: unix_socket
+---
+
 # The `unix_socket` Connector
 
 The unix_socket:client allows clients and servers based on UNIX sockets to be integrated with tremor.

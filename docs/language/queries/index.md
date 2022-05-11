@@ -1,4 +1,4 @@
-# Querying Overview
+# Tremor Query
 
 The tremor query language, `tremor-query` or **trickle** is an interpreted statement-oriented language designed for continuous online structured queries with support for filtering, extraction, transformation and streaming of structured data in a stream or event-based processing system.
 
