@@ -1,6 +1,6 @@
-# Features Overview
+# Features
 
-In this section we overview the features of the tremor domain specific languages.
+In this section we overview the features of the Tremor domain specific languages.
 
 ## Scripting
 

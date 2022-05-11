@@ -1,4 +1,4 @@
-# Dissect
+# dissect
 
 The Dissect extractor is loosely based on logstash's dissect plugin. It extracts data from strings in form of key-value pairs based on the pattern specified. It supports patterns which makes it lightweight compared to other extractors such as grok or regex.
 

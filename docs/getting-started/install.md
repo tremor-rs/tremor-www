@@ -105,7 +105,7 @@ Install Tremor via [nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/pkgs/t
 $ nix-env -iA nixos.tremor-rs
 ```
 
-::: note
+:::warning
 
 Be aware that the version on nixpkgs might not always be the latest one, due to the version of rustc being available in nixpkgs.
 :::

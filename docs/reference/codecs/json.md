@@ -1,4 +1,4 @@
-# JSON
+# json
 
 The `json` codec supports the Javascript Object Notation format.
 

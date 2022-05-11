@@ -1,4 +1,4 @@
-# Base64
+# base64
 
 The `base64` extractor decodes content encoded with the Base64 binary-to-text encoding scheme into the corresponding string value.
 

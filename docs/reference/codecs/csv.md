@@ -1,4 +1,4 @@
-# CSV
+# csv
 
 The `csv` codec provides marshalling support for the Comma Separated Volume format.
 

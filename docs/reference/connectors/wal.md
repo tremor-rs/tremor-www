@@ -1,3 +1,7 @@
+---
+sidebar_label: wal
+---
+
 # The `wal` Connector
 
 The `wal` connector provides a write-ahead log implementation for use with transactional streams

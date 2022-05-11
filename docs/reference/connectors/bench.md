@@ -1,3 +1,7 @@
+---
+sidebar_label: bench
+---
+
 # The `bench` Connector
 
 The `bench` connector enables controlled micro-benchmarking of tremor-based

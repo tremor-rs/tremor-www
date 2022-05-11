@@ -1,3 +1,7 @@
+---
+sidebar_label: metrics
+---
+
 # The `metrics` Connector
 
 The `metrics` connector collects and forwards system metrics and can be used by user defined

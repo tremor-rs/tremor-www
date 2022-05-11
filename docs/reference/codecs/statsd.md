@@ -1,4 +1,4 @@
-# Statsd
+# statsd
 
 The `statsd` codec supports the [statsd format](https://github.com/statsd/statsd#usage).
 

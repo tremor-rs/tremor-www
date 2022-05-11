@@ -1,3 +1,7 @@
+---
+sidebar_label: otel
+---
+
 # The `otel` Connector
 
 This connector adds support for the [CNCF OpenTelemetry](https://opentelemetry.io/) specification

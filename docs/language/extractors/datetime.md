@@ -1,4 +1,4 @@
-# Datetime
+# datetime
 
 The datetime extractor parses the input into a timestamp. The format of the target needs to be specified as a parameter to the extractor.
 

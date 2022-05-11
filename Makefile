@@ -32,6 +32,7 @@ tremor-runtime-docs: tremor-runtime-refresh
 	-rm -rf $(LANG_REF_DIR) $(STDLIB_REF_DIR)
 	cp -rf tremor-runtime/docs/language $(LANG_REF_DIR)
 	cp -rf tremor-runtime/docs/library $(STDLIB_REF_DIR)
+	cp -r _templates/* docs
 	cp -rf tremor-runtime/static/docs/library/*.md $(STDLIB_REF_DIR)
 
 

@@ -1,4 +1,4 @@
-# Msgpack
+# msgpack
 
 The `msgpack` codec supports the [Msgpack](https://msgpack.org) binary format that.
 

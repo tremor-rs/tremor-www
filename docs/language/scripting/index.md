@@ -1,8 +1,8 @@
-# Scripting Overview
+# Scripts
 
-The scripting language is an interpreted expression-oriented language designed for the filtering, extraction, transformation and streaming of structured data in a stream or event-based processing system.
+Tremors scripting language is an interpreted expression-oriented language designed for the filtering, extraction, transformation and streaming of structured data in a stream or event-based processing system.
 
-At its core, the languagesupports a structured type system equivalent to JSON. It supports integer, floating point, boolean and UTF-8 encoded string literals, literal arrays and associative dictionaries or record types in addition to a `null` marker.
+At its core, the language supports a structured type system equivalent to JSON. It supports integer, floating point, boolean and UTF-8 encoded string literals, literal arrays and associative dictionaries or record types in addition to a `null` marker.
 
 A well-formed JSON document is a legal literal expression.
 

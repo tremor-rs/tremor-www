@@ -1,3 +1,7 @@
+---
+sidebar_label: kafka
+---
+
 # The `kafka` Connector
 
 The `kafka` connector provides integration with the [Apache Kafka](https://kafka.apache.org/) and compatible
