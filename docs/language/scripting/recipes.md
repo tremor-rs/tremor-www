@@ -186,9 +186,9 @@ match present non_existent_var of
 end;
 ```
 
-Note that this is different from the case where a variable is set to `null`, for which we can do [function-based](../stdlib/std/type#is_nullvalue) checks as well as pattern-match with [match](overview#match).
+Note that this is different from the case where a variable is set to `null`, for which we can do [function-based](../stdlib/std/type#is_nullvalue) checks as well as pattern-match with [match](../scripting#match).
 
-Using non-existent variables in contexts other than `present` or `absent` will throw an error terminating the script, so this is useful for guarding against that when needed. This is especially useful when working with meta variables as part of tremor runtime, where -- as part of a pipeline node -- we may need to check if a certain meta variable is set or not (eg: from a previous pipeline node) and act accordingly. For such needs, the approach above can be used. Alternatively, we can also rely on [record patterns](overview#matching-record-patterns) there:
+Using non-existent variables in contexts other than `present` or `absent` will throw an error terminating the script, so this is useful for guarding against that when needed. This is especially useful when working with meta variables as part of tremor runtime, where -- as part of a pipeline node -- we may need to check if a certain meta variable is set or not (eg: from a previous pipeline node) and act accordingly. For such needs, the approach above can be used. Alternatively, we can also rely on [record patterns](../scripting#matching-record-patterns) there:
 
 ```tremor
 # tests for presence of $key

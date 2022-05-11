@@ -14,7 +14,7 @@ An extractor performs two basic operations:
   the microformat specified.
 * If the test passes, the content is extracted and passed to the runtime for processing.
 
-Check out the [extractors overview](extractors/overview) for a walkthrough of the language feature.
+Check out the [extractors overview](extractors) for a walkthrough of the language feature.
 
 ### Can i write user defined functions?
 
@@ -24,5 +24,5 @@ and pattern matching based function signatures that is more similar to erlang
 style functions.
 
 
-Check out the [functions overview](functions/overview) for a walkthrough of the language feature.
+Check out the [functions overview](scripting/functions) for a walkthrough of the language feature.
 

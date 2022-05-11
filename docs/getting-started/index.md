@@ -81,5 +81,5 @@ Now it is time to actually find out, what you just did and what else can be done
 * [The Basics Guide](../guides/basics) - to learn how to handle your Events in Tremor.
 * [The Connectors Reference](../reference/connectors) - to see how to get events into and out of Tremor.
 * [Our assorted Recipes](../recipes/index.md) - to find out how to achieve specific tasks with Tremor we though are common enough to cover. E.g.:
-* [Design and Architecture](../about/design) - to see how Tremor works.
+* [Design and Architecture](../concepts/design) - to see how Tremor works.
 
