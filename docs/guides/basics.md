@@ -1,4 +1,4 @@
-# Tremor Basics
+# Basics
 
 This guide is a walk through of tremor basics. It is a starting point to learn
 how to stream data into the system, process this data stream, and produce a
