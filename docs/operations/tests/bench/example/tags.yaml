@@ -1,0 +1,1 @@
+[ "pipeline", "codec:binary", "passthrough", "example" ]
