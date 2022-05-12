@@ -1,0 +1,24 @@
+use std::test;
+
+fn square(x) with
+  x * x
+end;
+
+test::suite({
+  "name": "square test",
+  "tags": ["square"],
+  "tests": [
+    test::test({
+      "name": "square_2",
+      "test": test::assert("square_2", square(2), 4)
+    }),
+    test::test({
+      "name": "square_4",
+      "test": test::assert("square_4", square(4), 16)
+    }),
+    test::test({
+      "name": "square_10",
+      "test": test::assert("square_10", square(10), 100)
+    }),
+  ]
+});
