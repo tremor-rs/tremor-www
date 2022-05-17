@@ -271,7 +271,7 @@ paths:
         content:
           application/vnd.trickle:
             schema:
-              $ref: '/components/schemas/pipeline'
+              $ref: '#/components/schemas/pipeline'
             examples:
               passthrough:
                 summary: simplest passthrough pipeline
