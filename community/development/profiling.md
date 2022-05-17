@@ -1,3 +1,7 @@
+---
+sidebar_position: 4
+---
+
 # Profiling Tremor
 
 This is a short canned synopsis of profiling tremor.

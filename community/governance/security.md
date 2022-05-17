@@ -1,3 +1,7 @@
+---
+sidebar_position: 5
+---
+
 # Security
 
 The tremor project follows strict coding practices that help to reduce the incidence,

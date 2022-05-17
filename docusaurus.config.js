@@ -126,10 +126,10 @@ const config = {
           {
             type: 'dropdown',
             label: 'Community',
-            to: 'community/overview',
+            to: 'community',
             position: 'left',
             items: [
-              { to: 'community/overview', label: 'Overview' },
+              { to: 'community', label: 'Overview' },
               { href: 'https://chat.tremor.rs', label: 'Chat' },
               { to: 'community/governance/overview', label: 'Governance' },
               { to: 'community/development/overview', label: 'Development' },
