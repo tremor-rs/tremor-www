@@ -27,7 +27,6 @@ const config = {
   //
   plugins: [
     require.resolve('@cmfcmf/docusaurus-search-local'),
-    //  require.resolve('docusaurus-plugin-redoc'),
     ['@docusaurus/plugin-content-docs',
       /** @type {import('@docusaurus/plugin-content-docs').Options} */
       {
@@ -51,24 +50,28 @@ const config = {
 
   ,
   presets: [
-    // [
-    //   'redocusaurus',
-    //   /** @type {import('@docusaurus/preset-classic').Options} */
-    //   ({
-    //     // Plugin Options for loading OpenAPI files
-    //     specs: [
-    //       {
-    //         spec: 'static/api/v0.12/openapi.yaml',
-    //         route: '/api/',
-    //       },
-    //     ],
-    //     // Theme Options for modifying how redoc renders them
-    //     theme: {
-    //       // Change with your site colors
-    //       primaryColor: '#1890ff',
-    //     },
-    //   }),
-    // ],
+    [
+      'redocusaurus',
+      /** @type {import('@docusaurus/preset-classic').Options} */
+      ({
+        // Plugin Options for loading OpenAPI files
+        specs: [
+          {
+            spec: 'static/api/v0.12/openapi.yaml',
+            route: '/api/0.12',
+          },
+          {
+            spec: 'static/api/v0.11/openapi.yaml',
+            route: '/api/0.11',
+          }
+        ],
+        // Theme Options for modifying how redoc renders them
+        theme: {
+          // Change with your site colors
+          primaryColor: '#1890ff',
+        },
+      }),
+    ],
     [
       'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
@@ -84,8 +87,8 @@ const config = {
           lastVersion: 'current',
           versions: {
             current: {
-              label: '0.12',
-              path: '0.12',
+              label: 'edge',
+              path: 'edge',
             },
           },
         },
@@ -139,15 +142,16 @@ const config = {
             type: 'dropdown',
             label: 'Docs',
             positition: 'left',
+            to: 'docs/edge',
             items: [
               // We chose to reference the most recent version here
               // RELEASE: this needs to change for each major version release (0.12 -> 0.13)
-              { to: 'docs/0.12/guides/index', label: 'Guides' },
-              { to: 'docs/0.12/reference/connectors', label: 'Connectors Reference' },
-              { to: 'docs/0.12/language/stdlib', label: 'Standard Library' },
-              { to: 'docs/0.12/language/reference', label: 'Language Reference' },
-              { href: 'pathname:///api/v0.12/', label: 'API v0.12' },
-              { href: 'pathname:///api/v0.11/', label: 'API v0.11' },
+              { to: 'docs/edge/guides', label: 'Guides' },
+              { to: 'docs/edge/reference/connectors', label: 'Connectors Reference' },
+              { to: 'docs/edge/language/stdlib', label: 'Standard Library' },
+              { to: 'docs/edge/language/reference', label: 'Language Reference' },
+              { to: 'api/0.12/', label: 'API v0.12' },
+              { to: 'api/0.11/', label: 'API v0.11' },
             ],
           },
           {
