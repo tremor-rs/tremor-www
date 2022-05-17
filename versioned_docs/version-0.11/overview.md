@@ -28,7 +28,7 @@ Since Tremor v0.4, all internal artefacts and running instances of **onramps**, 
 The Tremor API is built around this URL and the configuration space it enshrines:
 
 | Example URL                  | Description                                                                                                |
-| ---------------------------- | ---------------------------------------------------------------------------------------------------------- |
+|------------------------------|------------------------------------------------------------------------------------------------------------|
 | `tremor://localhost:9898/`   | A local Tremor instance<br />_ Accessible on the local host<br />_ REST API on port 9898 of the local host |
 | `tremor:///`                 | The current Tremor instance or 'self'                                                                      |
 | `tremor:///pipeline`         | A list of pipelines                                                                                        |

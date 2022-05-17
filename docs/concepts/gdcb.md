@@ -7,7 +7,7 @@ different tradeoffs.
 We start with looking at a short comparison.
 
 |         | support                | perf impact    | guarantee                 |
-| ------- | ---------------------- | -------------- | ------------------------- |
+|---------|------------------------|----------------|---------------------------|
 | pre 0.9 | all sources & sinks    | baseline       | if we can                 |
 | 0.9 CB  | most sources & sinks   | virtually none | stop on known disconnect  |
 | 0.9 GD  | select sources & sinks | significant    | guaranteed where possible |

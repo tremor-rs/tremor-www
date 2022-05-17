@@ -15,7 +15,7 @@ The extractor returns true if the predicate passes else returns an error
 Patterns can be of the following types:
 
 | Pattern | Matches                                                                               |
-| ------- | ------------------------------------------------------------------------------------- |
+|---------|---------------------------------------------------------------------------------------|
 | `?`     | Single character                                                                      |
 | `*`     | any (0 or more) sequence or characters                                                |
 | `[…]`   | any character inside the bracket. Supports ranges (e,g. `[0-9]` will match any digit) |

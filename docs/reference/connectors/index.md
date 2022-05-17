@@ -72,36 +72,36 @@ Add content here
 These connectors are generally available in releases of tremor built in release
 mode - such as via the packaged release RPMs and Docker images.
 
-|Connector Name|Description|
-|---|---|
-|[File](file)|Interacting with files on the file system|
-|[Metrics](metrics)|Interacting with the metrics facility|
-|[Standard IO](stdio)|Ineracting with standard input, output and error streams on the console|
-|[TCP Client/Server](tcp)|TCP-based client and server event streaming|
-|[UDP Client/Server](udp)|UDP-based client and server event streaming|
-|[Key-Value Storage](kv)|Key-value storage for stateful event processing applications|
-|[Metronome](metronome)|Periodic scheduled events based on interval time|
-|[Crononome](crononome)|Periodic scheduled events based on calendar time|
-|[Write Ahead Log](wal)|Durable write-ahead log for managing event stream QoS|
-|[Domain Name Service](dns)|Interacting with the domain name system|
-|[Discord API Client](discord)|Integration with the Discord API, powers the tremor community discord bot|
-|[WebSocket Client/Server](ws)|WebSocket-based client and server event streaming|
-|[ElasticSearch](elastic)|Integration with ElasticSearch for bulk batch log uploads|
-|[AWS S3 Reader/Writer](s3)|Amazon AWS S3 simple storage service file upload and download|
-|[Kafka Producer/Consumer](kafka)|Integration with Kafka, Confluent and Redpanda brokers|
-|[UNIX Socket Client/Server](unix_socket)|Unix Socket based client and server event streaming|
-|[OpenTelemetry Client/Server](otel)|Integration with CNCF OpenTelemetry specification as client or server endpoint|
+| Connector Name                           | Description                                                                    |
+|------------------------------------------|--------------------------------------------------------------------------------|
+| [File](file)                             | Interacting with files on the file system                                      |
+| [Metrics](metrics)                       | Interacting with the metrics facility                                          |
+| [Standard IO](stdio)                     | Ineracting with standard input, output and error streams on the console        |
+| [TCP Client/Server](tcp)                 | TCP-based client and server event streaming                                    |
+| [UDP Client/Server](udp)                 | UDP-based client and server event streaming                                    |
+| [Key-Value Storage](kv)                  | Key-value storage for stateful event processing applications                   |
+| [Metronome](metronome)                   | Periodic scheduled events based on interval time                               |
+| [Crononome](crononome)                   | Periodic scheduled events based on calendar time                               |
+| [Write Ahead Log](wal)                   | Durable write-ahead log for managing event stream QoS                          |
+| [Domain Name Service](dns)               | Interacting with the domain name system                                        |
+| [Discord API Client](discord)            | Integration with the Discord API, powers the tremor community discord bot      |
+| [WebSocket Client/Server](ws)            | WebSocket-based client and server event streaming                              |
+| [ElasticSearch](elastic)                 | Integration with ElasticSearch for bulk batch log uploads                      |
+| [AWS S3 Reader/Writer](s3)               | Amazon AWS S3 simple storage service file upload and download                  |
+| [Kafka Producer/Consumer](kafka)         | Integration with Kafka, Confluent and Redpanda brokers                         |
+| [UNIX Socket Client/Server](unix_socket) | Unix Socket based client and server event streaming                            |
+| [OpenTelemetry Client/Server](otel)      | Integration with CNCF OpenTelemetry specification as client or server endpoint |
 
 ## Development Only Connectors
 
 These connectors are generally intended for contributors to tremor and are
 available only during development for debug builds of tremor.
 
-|Connector Name|Description|
-|---|---|
-|[cb](cb)|Explain|
-|[bench](bench)|Explain|
-|[null](null)|Explain|
+| Connector Name | Description |
+|----------------|-------------|
+| [cb](cb)       | Explain     |
+| [bench](bench) | Explain     |
+| [null](null)   | Explain     |
 
 ## Configuration
 

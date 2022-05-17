@@ -28,7 +28,7 @@ In order to run individual benchmarks, issue a command of the form:
 Where:
 
 | variable          | value                                                                               |
-| ----------------- | ----------------------------------------------------------------------------------- |
+|-------------------|-------------------------------------------------------------------------------------|
 | name-of-benchmark | Should be replaced with the basename of the yaml file for that benchmark's pipeline |
 
 For example:

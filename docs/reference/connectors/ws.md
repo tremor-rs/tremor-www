@@ -222,5 +222,4 @@ We typically use the wonderful [`jq`](https://stedolan.github.io/jq/) for this p
 ```bash
 $ export TREMOR_PATH=/path/to/tremor-runtime/tremor-script/lib:/path/to/tremor-runtime/tremor-cli/tests/lib
 $ tremor server run config.troy | jq
-
-
+```
