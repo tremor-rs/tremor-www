@@ -60,11 +60,9 @@ However, in general, deprecation and eventual removal is preferred. It is also t
 
 ## Sundown Policy
 
-The tremor team and community has limited time and resources. Our sundown policy reflects this
-and is structured as follows:
+The tremor team and community has limited time and resources. Our sundown policy reflects this and is structured as follows:
 
 * The latest `MINOR` release is fully supported at the latest `PATCH` level
-* THe penultimate `MINOR` release is fully supported at the latest `PATCH` level for that `MINOR` release
 
 As a general practice - new functionality is scheduled for the **next** `MINOR` release
 
