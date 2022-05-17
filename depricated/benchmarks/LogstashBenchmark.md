@@ -136,7 +136,7 @@ In both cases we ingest, forward and publish an event or `pass it through` the s
 As logstash is configured for a fixed ceiling of events ( 1 million ) for a benchmark run, and tremor is configured for a specific test duration ( as many events as possible in 40 seconds ) we need to baseline the results. We bias in favor of tremor as normative and compute the effective throughput at 40 seconds for each logstash run. So a 63 second run with 8 workes and a batch size of 1 38 seconds run at batch size 256 respectively for logstash is counted as the equivalent 40 seconds run as follows:
 
 | Logstash Default (W2 W128) | Logstash Worst (W1 B1) | Logstash Best (W8 B256) | Tremor (baseline) |
-| -------------------------- | ---------------------- | ----------------------- | ----------------- |
+|----------------------------|------------------------|-------------------------|-------------------|
 | 1033811                    | 466708                 | 1041943                 | 21402853          |
 
 Note that we truncate / floor round the equivalent logstash 40-second results for each selected configuration.
@@ -144,7 +144,7 @@ Note that we truncate / floor round the equivalent logstash 40-second results fo
 Relative to the worst case logstash benchmark run performance:
 
 | Logstash W2 W128 ( default ) | Logstash W8 B1 | Logstash W8 B256 | Tremor ( baseline ) |
-| ---------------------------- | -------------- | ---------------- | ------------------- |
+|------------------------------|----------------|------------------|---------------------|
 | 2.22                         | 1              | 2.23             | 45.86               |
 
 Logstash can itself benefit from at least a 2x improvement, and this is consistent with the default out of the box configuration.

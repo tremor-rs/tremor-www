@@ -23,18 +23,18 @@ purpose.
 ## Configuration
 
 
-| Config Option | Description | Possible Values | Required / Optional | Default Value |
-| ------------- | ----------- | --------------- | ------------------- | ------------- | 
-| source        | The source file to read data from, can be xz compressed | file path | required | |
-| interval      | The interval between single events in nanoseconds. Set to `0` if you want events emitted as fast as possible. | positive integer | optional | `0` |
-| chunk_size    | if provided, the `source` file data will be split into chunks of the given size, instead of split into lines. | positive integer | optional | |
-| iters         | Number of iterations through the whole `source` data to stop after. If not provided (and `stop_after_secs` is also not provided), the connector will iterate over the `source` data infinitely. | positive integer | optional | |
-| base64        | If set to `true`, the `source` data will be `base64` decoded. | boolean | optional | `false` |
-| is_transactional | If set to `true`, events will be emitted as transactional (requiring ack/fail contraflow messages). | boolean | optional | `false` |
-| structured | If set to `true` the benchmark report is output as JSON, if set to `false` it is printed in human-readable form. | boolean | optional | `false` |
-| stop_after_secs | Number of seconds after which the benchmark should be stopped. | positive integer | optional | |
-| significant_figures | Digits of precision for latency HDR histogram results. | positive integer | optional | `2` |
-| warmup_secs | Number of seconds to warm up. Events during this time are not accounted for in the latency measurements. | positive integer | optional | `0` |
+| Config Option       | Description                                                                                                                                                                                     | Possible Values  | Required / Optional | Default Value |
+|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|---------------------|---------------|
+| source              | The source file to read data from, can be xz compressed                                                                                                                                         | file path        | required            |               |
+| interval            | The interval between single events in nanoseconds. Set to `0` if you want events emitted as fast as possible.                                                                                   | positive integer | optional            | `0`           |
+| chunk_size          | if provided, the `source` file data will be split into chunks of the given size, instead of split into lines.                                                                                   | positive integer | optional            |               |
+| iters               | Number of iterations through the whole `source` data to stop after. If not provided (and `stop_after_secs` is also not provided), the connector will iterate over the `source` data infinitely. | positive integer | optional            |               |
+| base64              | If set to `true`, the `source` data will be `base64` decoded.                                                                                                                                   | boolean          | optional            | `false`       |
+| is_transactional    | If set to `true`, events will be emitted as transactional (requiring ack/fail contraflow messages).                                                                                             | boolean          | optional            | `false`       |
+| structured          | If set to `true` the benchmark report is output as JSON, if set to `false` it is printed in human-readable form.                                                                                | boolean          | optional            | `false`       |
+| stop_after_secs     | Number of seconds after which the benchmark should be stopped.                                                                                                                                  | positive integer | optional            |               |
+| significant_figures | Digits of precision for latency HDR histogram results.                                                                                                                                          | positive integer | optional            | `2`           |
+| warmup_secs         | Number of seconds to warm up. Events during this time are not accounted for in the latency measurements.                                                                                        | positive integer | optional            | `0`           |
 
 ### Example
 

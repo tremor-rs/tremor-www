@@ -49,7 +49,7 @@ Onramps are able to act upon both circuit breaker and guaranteed delivery events
 The column `Delivery Acknowledgements` describes when the onramp considers and reports the event delivered to the upstream it is connected to.
 
 | Onramp     | Delivery Acknowledgements                                           |
-| ---------- | ------------------------------------------------------------------- |
+|------------|---------------------------------------------------------------------|
 | amqp       | not supported                                                       |
 | blaster    | not supported                                                       |
 | cb         | not supported                                                       |

@@ -43,7 +43,7 @@ Acknowledgements, Failures or missing Acknowledgements take effect e.g. when usi
 The column `Disconnect events` describes under which circumstances this offramp is not considered functional anymore.
 
 | Offramp   | Disconnect events | Delivery acknowledgements |
-| --------- | ----------------- | ------------------------- |
+|-----------|-------------------|---------------------------|
 | amqp      | never             | always                    |
 | blackhole | never             | always                    |
 | cb        | never             | always                    |
@@ -426,7 +426,7 @@ with `bash` or other shell-based environments, as follows:
 <!--alex ignore illegal-->
 
 | Code | Meaning                                                        |
-| ---- | -------------------------------------------------------------- |
+|------|----------------------------------------------------------------|
 | 0    | Success                                                        |
 | 1    | General errors                                                 |
 | 2    | Misuse of builtins                                             |
