@@ -131,9 +131,9 @@ const config = {
             items: [
               { to: 'community', label: 'Overview' },
               { href: 'https://chat.tremor.rs', label: 'Chat' },
-              { to: 'community/governance/overview', label: 'Governance' },
-              { to: 'community/development/overview', label: 'Development' },
-              { to: 'community/events/overview', label: 'Events and Media' },
+              { to: 'community/governance', label: 'Governance' },
+              { to: 'community/development', label: 'Development' },
+              { to: 'community/events', label: 'Events and Media' },
               { to: 'rfc', label: 'RFCs' },
             ],
           },
