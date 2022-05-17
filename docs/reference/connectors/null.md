@@ -4,6 +4,13 @@ sidebar_label: "null"
 
 # The `null` Connector
 
+::: info
+
+This connector is not intended for production use, but for testing the Tremor runtime itself. To enable it pass `--debug-connectors` to tremor.
+
+:::
+
+
 The `null` connector is a connector that is used during development.
 
 Events sent to its source are discarded on receive.
