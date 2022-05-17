@@ -1,6 +1,7 @@
 ---
 id: investigations
 title: Investigations
+draft: true
 ---
 
 # Investigations

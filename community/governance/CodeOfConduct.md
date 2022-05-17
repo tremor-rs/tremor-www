@@ -1,6 +1,7 @@
 ---
 id: CodeofConduct
 title: Code of Conduct
+sidebar_position: 1
 ---
 
 # The Tremor Code of Conduct

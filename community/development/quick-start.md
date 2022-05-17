@@ -1,8 +1,7 @@
 ---
 title: Quick Start
 description: Quick start guide to installing, running and testing Tremor.
-draft: false
-hide_table_of_contents: false
+sidebar_position: 1
 ---
 
 # Quick Start

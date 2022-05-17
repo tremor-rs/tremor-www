@@ -1,8 +1,7 @@
 ---
 title: Tremor Teams
-draft: false
-description: Teams.
-hide_table-of_contents: false
+description: Teams
+sidebar_position: 3
 ---
 
 # Team

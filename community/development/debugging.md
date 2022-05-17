@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # Debugging Tremor
 
 This is a short canned synopsis of debugging tremor.
