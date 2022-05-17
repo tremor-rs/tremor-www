@@ -1,3 +1,8 @@
+---
+sidebar_position: 2
+draft: true
+---
+
 # Logging
 
-TBD
+**DRAFT** This will be hidden outside of dev **DRAFT**
