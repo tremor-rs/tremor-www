@@ -284,13 +284,13 @@ The assessment was factored into a number of [issues](https://github.com/tremor-
 A great way to contribute to Tremor is by picking one of these tasks and
 contributing with help and support from the team.
 
-### Submit or refresh a tutorial
+### Submit or refresh a guide
 
 
 [submit-or-refresh-a-tutorial]: #submit-or-refresh-a-tutorial
 
 
-[Tutorials](http://localhost:3000/docs/recipes/passthrough/README) are basic working example projects that configure tremor with connectivity and sample logic that a user can follow in a step by step fashion to replicate a working tremor
+Guides are basic working example projects that configure tremor with connectivity and sample logic that a user can follow in a step by step fashion to replicate a working tremor
 use case.
 
 ### Work with existing code

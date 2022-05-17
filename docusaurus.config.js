@@ -142,7 +142,7 @@ const config = {
             items: [
               // We chose to reference the most recent version here
               // RELEASE: this needs to change for each major version release (0.12 -> 0.13)
-              { to: 'docs/0.12/recipes/index', label: 'Solution Recipes' },
+              { to: 'docs/0.12/guides/index', label: 'Guides' },
               { to: 'docs/0.12/reference/connectors', label: 'Connectors Reference' },
               { to: 'docs/0.12/language/stdlib', label: 'Standard Library' },
               { to: 'docs/0.12/language/reference', label: 'Language Reference' },
