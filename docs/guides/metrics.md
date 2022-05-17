@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # Metrics
 
 One case you can deploy tremor for is to work with metrics. Not as a store but as a preprocessor, aggregator, and filter for metrics stores.

@@ -1,3 +1,6 @@
+---
+sidebar_position: 0
+---
 # Basics
 
 This guide is a walk through of tremor basics. It is a starting point to learn
