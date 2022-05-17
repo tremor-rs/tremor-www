@@ -12,18 +12,18 @@ Options that are available to all subcommands.
 
 **Options**
 
-|Name|Switch|Kind|Multiple|Description|
-|----|------|----|--------|-----------|
-|`--help`|`-h`|switch/flag|no|Prints help information|
-|`--instance`|`-i`|switch/flag|no|Instance identifier (default: `tremor`)|
+| Name         | Switch | Kind        | Multiple | Description                             |
+|--------------|--------|-------------|----------|-----------------------------------------|
+| `--help`     | `-h`   | switch/flag | no       | Prints help information                 |
+| `--instance` | `-i`   | switch/flag | no       | Instance identifier (default: `tremor`) |
 
 ## Version
 
 Prints version information.
 
-|Name|Switch|Kind|Multiple|Description|
-|----|------|----|--------|-----------|
-|`--version`|`-V`|switch/flag|no|Prints version information|
+| Name        | Switch | Kind        | Multiple | Description                |
+|-------------|--------|-------------|----------|----------------------------|
+| `--version` | `-V`   | switch/flag | no       | Prints version information |
 
 ```bash
 $ tremor --version
@@ -36,14 +36,14 @@ Set of commands supported by the command line interface.
 
 **Subcommands**
 
-|Command|Description|
-|-------|-----------|
-|[completions](#shell-completions)|Generate shell completions to stdout. Tries to guess the shell if no subcommand is given.|
-|[server](#standalone-server-instance)|Tremor server|
-|[test](#testing-facilities)|Testing facilities|
-|[dbg](#debugging-facilities)|Advanced debugging commands|
-|[run](#interactive-development)|Run tremor script or query files against stdin or a json data archive, the data will be read from STDIN or an archive and written to STDOUT.|
-|[doc](#documentation-generation)|Generates documention from tremor script files|
+| Command                               | Description                                                                                                                                  |
+|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| [completions](#shell-completions)     | Generate shell completions to stdout. Tries to guess the shell if no subcommand is given.                                                    |
+| [server](#standalone-server-instance) | Tremor server                                                                                                                                |
+| [test](#testing-facilities)           | Testing facilities                                                                                                                           |
+| [dbg](#debugging-facilities)          | Advanced debugging commands                                                                                                                  |
+| [run](#interactive-development)       | Run tremor script or query files against stdin or a json data archive, the data will be read from STDIN or an archive and written to STDOUT. |
+| [doc](#documentation-generation)      | Generates documention from tremor script files                                                                                               |
 
 ## Shell Completions
 
@@ -53,14 +53,14 @@ Tries to guess the shell if no subcommand is given.
 
 ### Subcommands
 
-|Command|Description|
-|-------|-----------|
-|[guess](#how-to-explicitly-guess-completion-based-on-active-shell)|Generate completion based on active shell|
-|[bash](#how-to-generate-shell-completions-for-the-bash-shell)|Generate bash shell completions|
-|[zsh](#how-to-generate-shell-completions-for-the-zsh-shell)|Generate zsh shell completions|
-|[elvish](#how-to-generate-shell-completions-for-the-elvish-shell)|Generate elvish shell completions|
-|[fish](#how-to-generate-shell-completions-for-the-fish-shell)|Generate fish shell completions|
-|[powershell](#how-to-generate-shell-completions-for-the-powershell-shell)|Generate powershell shell completions|
+| Command                                                                   | Description                               |
+|---------------------------------------------------------------------------|-------------------------------------------|
+| [guess](#how-to-explicitly-guess-completion-based-on-active-shell)        | Generate completion based on active shell |
+| [bash](#how-to-generate-shell-completions-for-the-bash-shell)             | Generate bash shell completions           |
+| [zsh](#how-to-generate-shell-completions-for-the-zsh-shell)               | Generate zsh shell completions            |
+| [elvish](#how-to-generate-shell-completions-for-the-elvish-shell)         | Generate elvish shell completions         |
+| [fish](#how-to-generate-shell-completions-for-the-fish-shell)             | Generate fish shell completions           |
+| [powershell](#how-to-generate-shell-completions-for-the-powershell-shell) | Generate powershell shell completions     |
 
 ### How to guess the shell completion?
 
@@ -122,9 +122,9 @@ $ tremor completions powershell
 
 Run tremor as a long lived standalone server instance.
 
-|Command|Description|
-|-------|-----------|
-|[server run](#server-run)|Runs the tremor server process|
+| Command                   | Description                    |
+|---------------------------|--------------------------------|
+| [server run](#server-run) | Runs the tremor server process |
 
 ### Options
 
@@ -139,9 +139,9 @@ Run tremor as a long lived standalone server instance.
 
 ### Arguments
 
-|Name|Switch|Kind|Multiple|Description|
-|----|------|----|--------|-----------|
-|artefacts|None|switch/flag|yes|Paths to `.troy` files containing pipelines, onramps, offramps to provision|
+| Name      | Switch | Kind        | Multiple | Description                                                                 |
+|-----------|--------|-------------|----------|-----------------------------------------------------------------------------|
+| artefacts | None   | switch/flag | yes      | Paths to `.troy` files containing pipelines, onramps, offramps to provision |
 
 ### Run tremor with zero deployments
 
@@ -227,14 +227,14 @@ by inclusion or exclusion. By default all tests are run. But tags allow a subset
 
 ### Arguments
 
-|Name|Switch|Kind|Multiple|Description|
-|----|------|----|--------|-----------|
-|MODE|None|switch/flag|no|One of `all`, `bench`, `integration`, or `unit`|
-|PATH|None|switch/flag|no|The root test path|
-|REPORT|None|switch/flag|no|Should generate a test report to specified path|
-|INCLUDES|None|switch/flag|no|Optional tags to filter test executions by|
-|EXCLUDES|None|switch/flag|no|Optional tags to filter test executions by|
-|QUIET|None|switch/flag|no|only print failed tests|
+| Name     | Switch | Kind        | Multiple | Description                                     |
+|----------|--------|-------------|----------|-------------------------------------------------|
+| MODE     | None   | switch/flag | no       | One of `all`, `bench`, `integration`, or `unit` |
+| PATH     | None   | switch/flag | no       | The root test path                              |
+| REPORT   | None   | switch/flag | no       | Should generate a test report to specified path |
+| INCLUDES | None   | switch/flag | no       | Optional tags to filter test executions by      |
+| EXCLUDES | None   | switch/flag | no       | Optional tags to filter test executions by      |
+| QUIET    | None   | switch/flag | no       | only print failed tests                         |
 
 ### How do I write a benchmark?
 
@@ -587,20 +587,20 @@ operators and authors.
 
 ### Options
 
-|Name|Switch|Kind|Multiple|Description|
-|----|------|----|--------|-----------|
-|`--no-banner`|`-b`|switch/flag|no|Do not print the banner ( default: `false` )|
-|`--no-highlight`|`-n`|switch/flag|no|Do not highlight output ( default: `false` |
-|`--raw`|`-r`|switch/flag|no|Do not output any formatting. Disables highlight, banner, line numbers. ( default: `false` )|
+| Name             | Switch | Kind        | Multiple | Description                                                                                  |
+|------------------|--------|-------------|----------|----------------------------------------------------------------------------------------------|
+| `--no-banner`    | `-b`   | switch/flag | no       | Do not print the banner ( default: `false` )                                                 |
+| `--no-highlight` | `-n`   | switch/flag | no       | Do not highlight output ( default: `false`                                                   |
+| `--raw`          | `-r`   | switch/flag | no       | Do not output any formatting. Disables highlight, banner, line numbers. ( default: `false` ) |
 
 ### Sub Commands
 
-|Command|Description|
-|-------|-----------|
-|[dot](#dbg-dot)|prints the .dot representation for a trickle file (you can use `| dot -Tpng -oout.png` to generate a picture)|
-|[ast](#dbg-ast)|prints the AST of the source|
-|[lex](#dbg-lex)|prints lexemes|
-|[src](#dbg-src)|prints source|
+| Command         | Description                                                                                                   |
+|-----------------|---------------------------------------------------------------------------------------------------------------|
+| [dot](#dbg-dot) | prints the .dot representation for a trickle file (you can use `| dot -Tpng -oout.png` to generate a picture) |
+| [ast](#dbg-ast) | prints the AST of the source                                                                                  |
+| [lex](#dbg-lex) | prints lexemes                                                                                                |
+| [src](#dbg-src) | prints source                                                                                                 |
 
 ### dbg **dot**
 
@@ -662,18 +662,18 @@ $ tremor run [<OPTIONS>] <SCRIPT>
 
 ### Options
 
-|Name|Switch|Kind|Multiple|Description|
-|----|------|----|--------|-----------|
-|SCRIPT|None|switch/flag|no|filename to run the data through|
-|`--interactive`|None|switch/flag|no|Should not output to consumed source / produced synthetic data or errors|
-|`--pretty`|None|switch/flag|no|Should not pretty print data [ when in interactive mode ]|
-|`--encoder`|`-d`|switch/flag|no|The codec to use for encoding the data ( default: `json` )|
-|`--decoder`|`-e`|switch/flag|no|The codec to use for decoding the data ( default: `json` )|
-|`--infile`|`-i`|switch/flag|no|input file ( default: `stdin` )|
-|`--outfile`|`-o`|switch/flag|no|output file ( default: `stdout` ) |
-|`--preprocessor`|None|switch/flag|no|preprocessor to pass data through before decoding ( default: `separate` )|
-|`--postprocessor`|None|switch/flag|no|postprocessor to pass data through after encoding ( default: `separate` )|
-|output-port|None|switch/flag|no|selects the port to pull output|
+| Name              | Switch | Kind        | Multiple | Description                                                               |
+|-------------------|--------|-------------|----------|---------------------------------------------------------------------------|
+| SCRIPT            | None   | switch/flag | no       | filename to run the data through                                          |
+| `--interactive`   | None   | switch/flag | no       | Should not output to consumed source / produced synthetic data or errors  |
+| `--pretty`        | None   | switch/flag | no       | Should not pretty print data [ when in interactive mode ]                 |
+| `--encoder`       | `-d`   | switch/flag | no       | The codec to use for encoding the data ( default: `json` )                |
+| `--decoder`       | `-e`   | switch/flag | no       | The codec to use for decoding the data ( default: `json` )                |
+| `--infile`        | `-i`   | switch/flag | no       | input file ( default: `stdin` )                                           |
+| `--outfile`       | `-o`   | switch/flag | no       | output file ( default: `stdout` )                                         |
+| `--preprocessor`  | None   | switch/flag | no       | preprocessor to pass data through before decoding ( default: `separate` ) |
+| `--postprocessor` | None   | switch/flag | no       | postprocessor to pass data through after encoding ( default: `separate` ) |
+| output-port       | None   | switch/flag | no       | selects the port to pull output                                           |
 
 ### How do I interactively test work under development?
 
@@ -727,16 +727,16 @@ $ tremor doc [<DIR>] [<OUTDIR>]
 
 ### Options
 
-|Name|Switch|Kind|Multiple|Description|
-|----|------|----|--------|-----------|
-|`--interactive`|`-i`|switch/flag|no|Generates output to standard output|
+| Name            | Switch | Kind        | Multiple | Description                         |
+|-----------------|--------|-------------|----------|-------------------------------------|
+| `--interactive` | `-i`   | switch/flag | no       | Generates output to standard output |
 
 ### Arguments
 
-|Name|Switch|Kind|Multiple|Description|
-|----|------|----|--------|-----------|
-|DIR|None|switch/flag|no|Directory or source to generate documents for|
-|OUTDIR|None|switch/flag|no|Directory to generate documents into|
+| Name   | Switch | Kind        | Multiple | Description                                   |
+|--------|--------|-------------|----------|-----------------------------------------------|
+| DIR    | None   | switch/flag | no       | Directory or source to generate documents for |
+| OUTDIR | None   | switch/flag | no       | Directory to generate documents into          |
 
 ### Limitations
 
