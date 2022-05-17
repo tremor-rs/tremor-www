@@ -11,6 +11,7 @@ The `http` connector provides integration against the HTTP protocol suite.
 ### Client
 
 ```troy
+  use std::time::nanos;
   # File: config.troy
   define connector `http-out` from http_client
   with
@@ -26,31 +27,31 @@ The `http` connector provides integration against the HTTP protocol suite.
       # Optional authentication method, can be one of
       # * "basic" - basic authentication
       #   ```troy
-      #      "auth" = { "basic": { "username": "snot", "password": "badger" } }
+      #      "auth" = { "basic": { "username": "snot", "password": "badger" } },
       #   ```
       # * "gcp"   - Google Cloud Platform
       #   ```troy
-      #    "auth" = "gcp" # See https://cloud.google.com/docs/authentication/getting-started
+      #    "auth" = "gcp", # See https://cloud.google.com/docs/authentication/getting-started
       #  ```
       # By default, no authentication is used
-      # "auth" = "none"
+      # "auth" = "none",
 
       # HTTP method - defaults to `POST`, case insensitive
-      # "method" = "get"
+      # "method" = "get",
       
       # Concurrency - number of simultaneous in-flight requests ( defaults to 4 )
-      # "concurrency" = 4
+      # "concurrency" = 4,
 
       # Request timeout - default is unset ( do not timeout )
-      # "timeout" = 128000000 # milliseconds
+      # "timeout" = nanos::from_secs(10), # nanoseconds
 
       # Optional default HTTP headers
-      # "headers" = { "key": "value, }
+      # "headers" = { "key": "value", "other-key": ["v1", "v2"] },
 
       # Custom Mime Codec Map, overrides default `codec`
       # "custom_codecs" = {
       #    # key defines the MIME type, value defines codec by name 
-      #    "application/json": "json"
+      #    "application/json": "json",
       #    "application/yaml": "yaml"
       # }
     }
@@ -68,12 +69,12 @@ The `http` connector provides integration against the HTTP protocol suite.
       "url": "http://localhost:8080",
 
       # Optional Transport Level Security configuration
-      # "tls" = { ... }
+      # "tls" = { ... },
 
       # Custom Mime Codec Map, overrides default `codec`
       # "custom_codecs" = {
       #    # key defines the MIME type, value defines codec by name 
-      #    "application/json": "json"
+      #    "application/json": "json",
       #    "application/yaml": "yaml"
       # }
     }
@@ -82,7 +83,7 @@ The `http` connector provides integration against the HTTP protocol suite.
 
 ## HTTP configuration example
 
-This is a relatively simple client server system that replays JSON formatted lines of data from a text file over HTTP to a server. The
+This is a relatively basic client server system that replays JSON formatted lines of data from a text file over HTTP to a server. The
 server receives the JSON events and echo's them back to the HTTP client.
 
 The client and server are implemented as tremor flows.
@@ -99,7 +100,6 @@ graph LR
 ```
 
 ### The complete annotated source
-
 
 ```troy
 define flow server
@@ -125,8 +125,6 @@ flow
     end;
     select { "event": array::sort(aggr::win::collect_flattened(event)), "meta": array::sort(aggr::win::collect_flattened($)) } from in[four] into out;
   end;
-
-  
 
   create pipeline instrument;
   create connector stdio from connectors::console;
@@ -260,12 +258,7 @@ Response metadata allows records the response parameters set against a HTTP requ
 a response is issued against recording the decisions the `http_server` connector makes
 when responding to requests.
 
-The response can be read as follows:
-
-```trickle
-let response = $response;
-...
-```
+The response can be read from the `$response` metadata.
 
 Response metadata takes the following general form:
 
@@ -284,45 +277,3 @@ Response metadata takes the following general form:
 
 Setting the `$correlation` metadata on an outbound request will result in the response
 being tagged with the `$correlation` value set in the corresponding request.
-
-## Notes
-
-### Running as an integration test
-
-This is how we run this test sceanario within our integration test suite.
-
-```bash
-$ export TREMOR_PATH=/path/to/tremor-runtime/tremor-script/lib:/path/to/tremor-runtime/tremor-cli/tests/lib
-$ tremor test integration .
-```
-
-### Running as long running service
-
-The logic can be used as starting point for your own client or service via `tremor server run`.
-
-```bash
-$ export TREMOR_PATH=/path/to/tremor-runtime/tremor-script/lib:/path/to/tremor-runtime/tremor-cli/tests/lib
-$ tremor server run config.troy
-```
-
-### Running as a long running service, with pretty printed JSON output
-
-During development, pretty printing the JSON output on standard output might be useful.
-
-We typically use the wonderful [`jq`](https://stedolan.github.io/jq/) for this purpose
-
-```bash
-$ export TREMOR_PATH=/path/to/tremor-runtime/tremor-script/lib:/path/to/tremor-runtime/tremor-cli/tests/lib
-$ tremor server run config.troy | jq
-```
-
-## Exercises
-
-* Modularise the solution allowing the following combinations
-* Deploy the client and server in separate tremor instances
-* Use HTTP chunked transfer encoding
-* Send request as base64 encoded yaml, with gzip compression
-* Receive response as base64 encoded msgpack, with snappy compression
-* Add compression and decmopression
-
-
