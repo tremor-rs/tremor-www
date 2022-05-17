@@ -1,6 +1,7 @@
 ---
 id: CII
 title: Core Infrastructure Initiative
+sidebar_position: 2
 ---
 
 # CNCF Core Infrastructure Initiative

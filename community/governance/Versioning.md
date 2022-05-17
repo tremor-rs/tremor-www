@@ -1,6 +1,7 @@
 ---
 id: Versioning
 title: Versioning and Sundown Policy
+sidebar_position: 3
 ---
 
 ## Versioning

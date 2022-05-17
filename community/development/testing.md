@@ -1,3 +1,6 @@
+---
+sidebar_position: 2
+---
 # Testing
 
 This is a short canned synopsis of testing in the tremor project.

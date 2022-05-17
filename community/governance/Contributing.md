@@ -1,6 +1,7 @@
 ---
 id: Contributing
 title: Contributing to Tremor
+sidebar_position: 4
 ---
 
 # Contributing to Tremor

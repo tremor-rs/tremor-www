@@ -1,3 +1,7 @@
+---
+sidebar_position: 0
+---
+
 # Community
 
 The Tremor project is an early-stage project, with a small supporting community.
