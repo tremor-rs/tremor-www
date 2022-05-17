@@ -63,7 +63,7 @@ The implementation lends itself to adopt an async-based implementation. A move f
 To put this in numbers here, a comparison of 0.8.0 compared with the async implementation. To do this, we ran the test with three physical cores and 42 threads (24 cores + 24 threads). We then run both 0.8.0 and current with 1, 2, 4, 8, 16, 32, and 64 pipelines and onramps against a single blackhole offramp and the throughput recorded.
 
 | MB/s | 0.8 - 3 | cur - 3 | 0.8 - 48 | cur - 48 |
-| ---: | ------: | ------: | -------: | -------: |
+|-----:|--------:|--------:|---------:|---------:|
 |    1 |   346.3 |   273.8 |    155.4 |    128.6 |
 |    2 |   303.9 |   339.1 |    261.2 |    292.3 |
 |    4 |   210.8 |   342.7 |    175.2 |    234.2 |

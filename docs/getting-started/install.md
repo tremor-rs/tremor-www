@@ -145,7 +145,7 @@ We publish our Releases both to [Docker Hub](https://hub.docker.com/r/tremorproj
 
 
 | Container registry | Image name                        |
-| ------------------ | --------------------------------- |
+|--------------------|-----------------------------------|
 | docker.io          | `tremorproject/tremor`            |
 | ghcr.io            | `tremor-rs/tremor-runtime/tremor` |
 
