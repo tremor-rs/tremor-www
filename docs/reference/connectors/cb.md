@@ -6,7 +6,7 @@ sidebar_label: cb
 
 :::info
 
-This connector is not intended for production use, but for testing the Tremor runtime itself.
+This connector is not intended for production use, but for testing the Tremor runtime itself. To enable it pass `--debug-connectors` to tremor.
 
 :::
 
@@ -28,11 +28,11 @@ It can also be used to test the behaviour of connectors acting as event sinks, c
 
 ## Configuration
 
-| Config Option | Description | Possible Values | Required / Optional | Default Value |
-| ------------- | ----------- | --------------- | ------------------- | ------------- | 
-| path          | Path to the file to load data from. The file will be split into lines and each will form one event. Only required for the source part. | file path | Only required for the source part. | |
-| timeout | Timeout in nanoseconds to wait for circuit breaker messages after all events from the `path` file have been sent. After this timeout is expired the Tremor process will be stopped. | positive integer | optional | 10_000_000_000 (10 seconds) |
-| expect_batched | When set to `true` changes verifcation mode for testing applications involving [batching](../../language/queries/operators.md#generic::batch). That means only not all events are required to be acknowledged, only all batches. | boolean | optional | false |
+| Config Option  | Description                                                                                                                                                                                                                      | Possible Values  | Required / Optional                | Default Value               |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|------------------------------------|-----------------------------|
+| path           | Path to the file to load data from. The file will be split into lines and each will form one event. Only required for the source part.                                                                                           | file path        | Only required for the source part. |                             |
+| timeout        | Timeout in nanoseconds to wait for circuit breaker messages after all events from the `path` file have been sent. After this timeout is expired the Tremor process will be stopped.                                              | positive integer | optional                           | 10_000_000_000 (10 seconds) |
+| expect_batched | When set to `true` changes verifcation mode for testing applications involving [batching](../../language/queries/operators.md#generic::batch). That means only not all events are required to be acknowledged, only all batches. | boolean          | optional                           | false                       |
 
 ### Example
 
@@ -76,12 +76,12 @@ The expected is a JSON document with a string or array beneath the key `"cb"`.
 
 The `"cb"` values can be one of the following (or multiple):
 
-| Value | Description |
-| ----- | ----------- |
-| ack   | Send a runtime-internal message upstream in order to **acknowledge the event**. |
-| fail  | Send a runtime-internal message upstream in order to **fail the event**. |
+| Value           | Description                                                                                                             |
+|-----------------|-------------------------------------------------------------------------------------------------------------------------|
+| ack             | Send a runtime-internal message upstream in order to **acknowledge the event**.                                         |
+| fail            | Send a runtime-internal message upstream in order to **fail the event**.                                                |
 | close / trigger | *Close* or *trigger* the circuit breaker, so that all upstream connectors stop sending events until it is opened again. |
-| open / restore  | *Open* or *restore* the circuit breaker, so that all upstream connectors start sending events again. |
+| open / restore  | *Open* or *restore* the circuit breaker, so that all upstream connectors start sending events again.                    |
 
 :::info
 
@@ -99,9 +99,9 @@ Only 1 value of the pairs `ack` - `fail` and `open` / `restore` and `close` / `t
 
 ## Example usage
 
-|Name|Description|
-|---|---|
-|[Validate dead ends are dropped](https://github.com/tremor-rs/tremor-runtime/tree/main/tremor-cli/tests/integration/cb-drop-dead-ends)|All required circuit breaker events are received and processed correctly|
-|[Validate pipeline to pipeline](https://github.com/tremor-rs/tremor-runtime/tree/main/tremor-cli/tests/integration/cb-pipeline-to-pipeline)|All required circuit breaker events are received and processed correctly|
-|[Validate auto-acknowledged sinks](https://github.com/tremor-rs/tremor-runtime/tree/main/tremor-cli/tests/integration/cb-with-auto-ack-sink)|All required circuit breaker events are received and processed correctly|
+| Name                                                                                                                                         | Description                                                              |
+|----------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| [Validate dead ends are dropped](https://github.com/tremor-rs/tremor-runtime/tree/main/tremor-cli/tests/integration/cb-drop-dead-ends)       | All required circuit breaker events are received and processed correctly |
+| [Validate pipeline to pipeline](https://github.com/tremor-rs/tremor-runtime/tree/main/tremor-cli/tests/integration/cb-pipeline-to-pipeline)  | All required circuit breaker events are received and processed correctly |
+| [Validate auto-acknowledged sinks](https://github.com/tremor-rs/tremor-runtime/tree/main/tremor-cli/tests/integration/cb-with-auto-ack-sink) | All required circuit breaker events are received and processed correctly |
 

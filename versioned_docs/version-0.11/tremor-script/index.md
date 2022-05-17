@@ -270,7 +270,7 @@ See also:
 List of binary and unary operators in `tremor-script`, ordered by precedence (from low to high):
 
 | Symbol       | Name                                                  | Example                                                 | Types                          |
-| ------------ | ----------------------------------------------------- | ------------------------------------------------------- |------------------------------- |
+|--------------|-------------------------------------------------------|---------------------------------------------------------|--------------------------------|
 | or           | Logical OR                                            | `true or false`                                         | bool                           |
 | and          | Logical AND                                           | `true and false`                                        | bool                           |
 | \|           | Bitwise OR                                            | _Bitwise OR has not been implemented yet_               | -                              |
@@ -771,7 +771,7 @@ let event = merge event of {"some": "record"} end
 ```
 
 | Given                | Merge        | Result               | Explanation                          |
-| -------------------- | ------------ | -------------------- | ------------------------------------ |
+|----------------------|--------------|----------------------|--------------------------------------|
 | `{"a":"b"}`          | `{"a":"c"}`  | `{"a":"c"}`          | Insert/Update field 'a'              |
 | `{"a":"b"}`          | `{"b":"c"}`  | `{"a":"b", "b":"c"}` | Insert field 'b'                     |
 | `{"a":"b"}`          | `{"a":null}` | `{}`                 | Erase field 'a'                      |
@@ -791,7 +791,7 @@ Patch expressions define a set of record level field operations to be applied to
 Patch follows the semantics of [RFC 6902](https://tools.ietf.org/html/rfc6902) with the explicit exclusion of the `copy` and `move` operations and with the addition of an `upsert` operation the variant supported by `tremor-script`
 
 | Example                               | Expression                               | Result                      | Explanation                                               |
-| ------------------------------------- | ---------------------------------------- | --------------------------- | --------------------------------------------------------- |
+|---------------------------------------|------------------------------------------|-----------------------------|-----------------------------------------------------------|
 | `let foo = {"foo":"bar"}`             | `patch foo of insert "baz" => "qux" end` | `{"foo":"bar","baz":"qux"}` | Add baz field                                             |
 | `let foo = {"foo":"bar","baz":"qux"}` | `patch foo of erase "foo" end`           | `{"baz":"qux"}`             | Erase foo and add baz field                               |
 | `let foo = {"foo":"bar"}`             | `patch foo of upsert "foo" => null end`  | `{"foo":null}`              | Set foo to null, or reset to null if field already exists |
@@ -874,7 +874,7 @@ Formats can be spread out over multiple lines by adding a `\` as a last characte
 The set of supported micro-formats at the time of writing are as follows:
 
 | Name        | Format                                    | Test mode                                                                    | Return type          | Extraction mode                                                                             |
-| ----------- | ----------------------------------------- | ---------------------------------------------------------------------------- | -------------------- | ------------------------------------------------------------------------------------------- |
+|-------------|-------------------------------------------|------------------------------------------------------------------------------|----------------------|---------------------------------------------------------------------------------------------|
 | **base64**  | Not required                              | Tests if underlying value is a base64 encoded string                         | **string**           | Performs a base64 decode, returning a UTF-8 encoded string                                  |
 | **glob**    | Glob expression                           | Tests if underlying value conforms to the supplied glob pattern              | **string**           | Returns the value that matches the glob ( identity extraction )                             |
 | **re**      | PCRE regular expression with match groups | Tests if underlying value conforms to supplied PCRE format                   | **record**           | Extracts matched named values into a record                                                 |

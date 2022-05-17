@@ -6,7 +6,7 @@ sidebar_label: bench
 
 :::info
 
-This connector is not intended for production use, but for benchmarking Tremor itself, or Tremor with a specific workload.
+This connector is not intended for production use, but for testing the Tremor runtime itself. To enable it pass `--debug-connectors` to tremor.
 
 :::
 

@@ -4,6 +4,13 @@ sidebar_label: exit
 
 # The `exit` Connector
 
+:::info
+
+This connector is not intended for production use, but for testing the Tremor runtime itself. To enable it pass `--debug-connectors` to tremor.
+
+:::
+
+
 The `exit` connector generates is a convenience designed for tremor based systems
 that need to deterministically stop.
 
