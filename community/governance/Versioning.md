@@ -74,8 +74,7 @@ As these are significant changes to tremor and we are a `pre-1.0` project - thes
 version number incrementing upon release.
 
 We generally support:
-* The current latest `MINOR` release line.
-* The most recent `PATCH` from the penultimate `MINOR` release line.
+* The latest `MINOR` release is fully supported at the latest `PATCH` level
 * Bug fixes, security patches and minor enhancements and improvements are released as patch releases.
 * The addition of new connectors, new codecs, new processors and new scripting functions are released as patch releases.
 * Delivery of a project captured by the RFC process results in a `MINOR` release
