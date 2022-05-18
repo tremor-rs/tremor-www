@@ -2,7 +2,7 @@
 
 TL;DR: Codecs are used to describe how to decode data from the wire and encode it back to wire format.
 
-Tremor connects to external systems using [connectors](../connectors). [Connectors](../connectors) use `codecs` to transform the data Tremor receives from connected system participants into a structured value that forms the payload of each and every Tremor event. Tremor supports both binary and JSON-like data. 
+Tremor connects to external systems using [connectors](../connectors). [Connectors](../connectors) use `codecs` to transform the data Tremor receives from connected system participants into a structured value that forms the payload of each and every Tremor event.
 
 Codecs are the means of turning the (mostly binary) data from the wire (e.g. from a TCP connection) into structured values for Tremor events and back into binary wire format.
 Each [connector](../connectors) can be configured with a `codec`.
