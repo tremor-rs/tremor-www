@@ -10,12 +10,11 @@ services:
     ports:
       - '3000:3000'
     environment:
-      - "GF_INSTALL_PLUGINS=https://github.com/taosdata/grafanaplugin/releases/download/v3.1.3/tdengine-datasource-3.1.3.zip;tdengine-datasource"
+      - "GF_INSTALL_PLUGINS=https://github.com/taosdata/grafanaplugin/releases/download/v3.1.7/tdengine-datasource-3.1.7.zip;tdengine-datasource"
     depends_on:
       - tdengine
     volumes:
-      - ./config/grafana:/etc/grafana:ro
-
+      - ./config/grafana/provisioning:/etc/grafana/provisioning:ro
   telegraf:
     image: telegraf:1.22
     depends_on:
