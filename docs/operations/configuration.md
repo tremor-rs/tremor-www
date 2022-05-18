@@ -12,7 +12,7 @@ The tremor runtime is internally structured with multiple types of artifacts:
 
 - Pipeline - Specify to tremor _what_ operations to perform on data ingested ( from any connected upstream source ) and _what_ to contribute or publish downstream ( to any connected downstream target ).
 
-- Deoployments - Definen how pipelines and connectors are deployed together.
+- Deployments - Definen how pipelines and connectors are deployed together.
 
 Each artifact consists of a definition and a instanciation. Definitions can be re-used for multiple instances, as a kind of a template.
 

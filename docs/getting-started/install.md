@@ -1,3 +1,7 @@
+---
+sidebar_position: 0
+---
+
 # Install Tremor
 
 Lets get Tremor installed on your machine!
@@ -112,7 +116,7 @@ Be aware that the version on nixpkgs might not always be the latest one, due to 
 
 ### Pre-compiled Binary
 
-For `x86_64` architectures we do releas a raw `tremor` binary package as `.tar.gz` that is also part of every Release.
+For `x86_64` architectures we do release a raw `tremor` binary package as `.tar.gz` that is also part of every Release.
 
 Go to our [github release page](https://github.com/tremor-rs/tremor-runtime/releases) and chose a version to download:
 
@@ -175,7 +179,7 @@ ghcr.io/tremor-rs/tremor-runtime/tremor:0.12.0-rc.2
 
 ## Build From Source
 
-:::warn
+:::warning
 
 When building Tremor from source, you are pretty much on your own. Good luck!
 

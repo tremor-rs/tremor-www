@@ -2,9 +2,9 @@
 
 Monitoring tremor is done using tremor itself. This has some interesting implications.
 
-Each connector pipeline emits metric, they can be subscribed to from the [metrics connector](../reference/connectors/metrics.md). This allows to both write these messages to a destination system such as InfluxDB, as well as to a message queue such as Kafka.
+Each connector and each pipeline emit metrics, they can be subscribed to using the [metrics connector](../reference/connectors/metrics.md). This allows to both write these messages to a destination system such as InfluxDB, as well as to a message queue such as Kafka.
 
-The rate at which metrics are published can be defined, for pipeliunes with the config directive `#!config metrics_interval_s = <time>`  and for connectors with the argument `metrics_interval_s = <time>` in the `with` part of the connector definition.
+The rate at which metrics are published can be defined for each connector and pipeline.
 
 By default metrics are turned off.
 
@@ -12,7 +12,31 @@ Metrics are formatted following the same structure as the [Influx Codec](../refe
 
 ## Pipeline metrics
 
-Example:
+Configuring metrics for pipelines is done with the config directive:
+
+```
+#!config metrics_interval_s = <seconds>
+```
+
+This directive determines the interval in seconds at which metrics events are emitted from the pipeline into the metrics connector.
+
+Example pipeline definition:
+
+```tremor
+define pipeline with_metrics
+pipeline
+  #!config metrics_interval_s = 5
+  select event from in into out;
+end;
+```
+
+This pipeline will emit a metrics event every 5 seconds.
+
+### Event format
+
+Each pipeline will emit 1 metrics event per interval with a count of the events it received on its input port (Usually `in`).
+
+Example metrics event:
 
 ```json
 {
@@ -28,7 +52,7 @@ Example:
 }
 ```
 
-In influx format:
+In [influx](../reference/codecs/influx.md) format:
 
 ```influx
 events,port=out,direction=output,node=in,pipeline=main count=20 1553077007898214000
@@ -49,6 +73,22 @@ In addition to the general pipeline metrics, some operators do generate their ow
 
 ## Connector metrics
 
+For connectors metrics can be configured with the argument `metrics_interval_s = <time>` in the `with` part of the connector definition.
+
+Example connector definition:
+
+```tremor
+define connector with_metrics from stdio
+with
+  metrics_interval_s = 7,
+  codec = "string",
+  preprocessors = ["separate"],
+  postprocessors = ["separate"]
+end;
+```
+
+This connector will emit 1 metrics event for each port. `in` for received events, `out` for emitted events and `err` for emitted error events (e.g. if a codec failed to decode an event).
+
 ```json
 {
   "measurement": "connector_events",
@@ -61,7 +101,7 @@ In addition to the general pipeline metrics, some operators do generate their ow
 }
 ```
 
-In influx format:
+In [influx](../reference/codecs/influx.md) format:
 
 ```influx
 connector_events,port=out,ramp=example_connector count=42 1576215344378248634
@@ -72,7 +112,7 @@ In this structure `measurement` is always `connector_events` as that is what thi
 The `tags` section explains where this measurement was taken:
 
 - `connector` is the `id` of the connector
-- `port` is one of `in`, `out` and `error` (or any other port used by the connector)
+- `port` is one of `in`, `out` and `err` (or any other port used by the connector)
 
 The example above measures all events that were emitted out by the connector `example_connector`.
 
