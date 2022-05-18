@@ -524,19 +524,19 @@ You can find the chronograf UI at (`http://localhost:8888`)[http://localhost:888
 
 While this example is written using InfluxDB as a backend, it works equally with other backends.
 
-### TDEngine
+### TDengine
 
-TDEngine can quickly replace influx. The only difference is that we need to change the `url` in the `http_client`
+TDengine can quickly replace influx. The only difference is that we need to change the `url` in the `http_client`
 
-A high-level visaulization of TDEngine replacing InfluxDB via the Influx API:
+A high-level visaulization of TDengine replacing InfluxDB via the Influx API:
 
 ```mermaid
 graph LR
     A{telegraf UDP} -->|influx line protocol| B(tremor)
-    B -->|Influx API| C{TDEngine}
+    B -->|Influx API| C{TDengine}
 ```
 
-The connector definition for `TDEngine` has a slightly different endpoint
+The connector definition for `TDengine` has a slightly different endpoint
 specification, but the application is otherwise the same:
 
 ```troy
