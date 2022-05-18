@@ -1,19 +1,41 @@
+---
+sidebar_position: 5
+---
+
 # IDE Integration and tooling
+
+Tremor is configured using its own configuration language called [Troy](../language/troy.md), which actually enables us to give you valueable feedback while writing your code with our [Tremor language server](https://github.com/tremor-rs/tremor-language-server).
 
 ![tremor-vim](/img/tremor/tremor-vim.png)
 
-With the [Tremor language server](https://github.com/tremor-rs/tremor-language-server), Tremor comes with advanced support for editing [Tremor configuration files](../language/scripting) in both Visual Studio Code and VIM.
+## Tremor Language Server
 
-To install the `tremor-language-server`, you require [Rust to be set up](https://rustup.rs) on your system, and then you can run `cargo install tremor-language-server`.
+With the [Tremor language server](https://github.com/tremor-rs/tremor-language-server), Tremor comes with advanced support for editing [Tremor configuration files](../language/scripting) in both Visual Studio Code and VIM and every other editor or IDE that has LSP support.
+
+### Installation
+
+To install the [Tremor language server](https:://github.com/tremor-rs/tremor-language-server) all you need is [Rust](https://www.rust-lang.org/) to be set up on your system. Please use [Rustup.rs](https://rustup.rs) or any other way you prefer.
+
+```console
+cargo install tremor-language-server
+```
+
+This will download and compile the `tremor-language-server` binary and put it on your path. It will usually be put into `$HOME/.cargo/bin/tremor-language-server`.
+
+## IDE / Editor Integration
 
 The VS Code extension is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=tremorproject.tremor-language-features).
 
 The VIM plugin can be [installed from GitHub](https://github.com/tremor-rs/tremor-vim).
 
-### Informative Errors
+## Informative Errors
 
 ![tremor-error](/img/tremor/error.png)
 
 Making errors human-friendly: recently, this realisation has gained popularity in the programming community, with languages like Rust trying to provide helpful error messages beyond a line number and a generic error.
 
 When developing Tremor, those concerns of developer and operator friendliness were front and center from the beginning. Effort went into making errors and warnings informative, and not leaving users with stack traces, or cryptic output.
+
+## Local testing
+
+The tremor binary contains testing tools for testing your Tremor flows and pipelines before they actually go to production. Check out the capabilities of our [cli](../operations/cli.md#testing-facilities) for testing your Troy code.

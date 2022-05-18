@@ -217,11 +217,11 @@ To setup a test folder to contain our tests:
 ```bash
 $ mkdir tests
 $ cd tests
-$ echo '[ "all" ]' >> tags.json
+$ echo '[ "all" ]' >> tags.yaml
 ```
 
 ::note
-The `tags.json` allows a list of tags to be defined to control filtering tests
+The `tags.yaml` allows a list of tags to be defined to control filtering tests
 by inclusion or exclusion. By default all tests are run. But tags allow a subset to be selected.
 ::
 
@@ -245,7 +245,7 @@ contain benchmarks:
 $ cd tests
 $ mkdir bench
 $ cd bench
-$ echo '[ "bench" ]' >> tags.json
+$ echo '[ "bench" ]' >> tags.yaml
 ```
 
 Let us create a benchmark called `example`
@@ -365,7 +365,7 @@ contain integration tests:
 $ cd tests
 $ mkdir integration
 $ cd integration
-$ echo '[ "integration" ]' >> tags.json
+$ echo '[ "integration" ]' >> tags.yaml
 ```
 
 Let us create an integration test called `example2`
@@ -487,7 +487,7 @@ contain unit test suites:
 $ cd tests
 $ mkdir unit
 $ cd unit
-$ echo '[ "unit" ]' >> tags.json
+$ echo '[ "unit" ]' >> tags.yaml
 ```
 
 Let us create a unit test suite called `example3`

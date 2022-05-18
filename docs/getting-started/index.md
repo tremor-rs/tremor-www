@@ -78,6 +78,7 @@ Now it is time to actually find out, what you just did and what else can be done
 
 ### Where to go from here
 
+* [Connect Tremor](connect.md) - to learn how to connect Tremor to the outside world.
 * [The Basics Guide](../guides/basics) - to learn how to handle your Events in Tremor.
 * [The Connectors Reference](../reference/connectors) - to see how to get events into and out of Tremor.
 * [Our assorted Guides](../guides/index.md) - to find out how to achieve specific tasks with Tremor we though are common enough to cover. E.g.:
