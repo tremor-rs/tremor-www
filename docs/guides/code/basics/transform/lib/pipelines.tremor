@@ -1,0 +1,16 @@
+# define our own main pipeline
+define pipeline main
+pipeline
+  # use the `std::string` module
+  use std::string;
+  # use our scripts
+  use lib::scripts;
+
+  # Create our script
+  create script punctuate from scripts::punctuate;
+
+  # Wire our capitailized text to the script
+  select string::capitalize(event) from in into punctuate;
+  # Wire our script to the output
+  select event from punctuate into out;
+end;
