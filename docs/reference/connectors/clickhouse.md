@@ -67,7 +67,7 @@ ClickHouse `String`s values can be created from any Tremor string.
 
 [CDateTime]: https://clickhouse.com/docs/en/sql-reference/data-types/datetime
 
-`DateTime`s can be created from any non-negative Tremor integer. It represents the number of seconds elapsed since January 1st of 1970 at 00:00:00, in UTC timezone.
+`DateTime`s can be created from any non-negative Tremor integer. It represents the number of seconds elapsed since January 1st of 1970 at 00:00:00, in UTC timezone. It is encoded as a 32 bit unsigned integer.
 
 
 ### [`DateTime64`][CDateTime64]
