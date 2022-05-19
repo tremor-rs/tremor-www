@@ -4,7 +4,7 @@
 All the application code here is available from the docs [git repository](__GIT__).
 :::
 
-The `transform` example builds on the [filter example](../01_filter/README.md) and extends the [`example.trickle`](etc/tremor/config/example.trickle) by adding a transformation that modifies the incoming event. The produced event from this query statement has a different structure than the incoming event.
+The `transform` example builds on the [filter example](../01_filter/index.md) and extends the [`example.trickle`](etc/tremor/config/example.trickle) by adding a transformation that modifies the incoming event. The produced event from this query statement has a different structure than the incoming event.
 
 ## Environment
 

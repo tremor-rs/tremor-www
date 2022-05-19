@@ -14,7 +14,7 @@ All the code here is available in the [git repository](https://github.com/tremor
 
 ### Sources and sinks
 
-We configure a rest onramp listening on port 9139, that is meant to be a proxy for our [example HTTP server](../30_servers_lt_http/README.md) (configured as en endpoint in the rest offramp here).
+We configure a rest onramp listening on port 9139, that is meant to be a proxy for our [example HTTP server](../30_servers_lt_http/index.md) (configured as en endpoint in the rest offramp here).
 
 ```yaml
 onramp:
