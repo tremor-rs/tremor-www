@@ -29,9 +29,9 @@ Tremor Script adds an expression language that supports unary, binary, compariso
 
 Features relatively unique to tremor-script are structural pattern matching and the recognition of and ability to extract data from microformats typically embedded in event data.
 
-[Structural pattern matching](../language/scripting#match) allows patterns over arbitrarily nested values to be concisely declared with an intuitive syntax.
+[Structural pattern matching](../language/scripts#match) allows patterns over arbitrarily nested values to be concisely declared with an intuitive syntax.
 
-[Micro-format Extractors](../language/extractors) allows embedded data conforming to orthogonal formats such as regular expressions in Strings, date/time variants to be conditionally transformed to Tremor internal form and for embedded data to be extracted upon matching.
+[Micro-format Extractors](../reference/extractors) allows embedded data conforming to orthogonal formats such as regular expressions in Strings, date/time variants to be conditionally transformed to Tremor internal form and for embedded data to be extracted upon matching.
 
 ```tremor
 define script extract                                # define the script that parses our Apache logs
@@ -46,7 +46,7 @@ script
 end;
 ```
 
-See the full documentation [of the language](../language/troy) and its [standard library](../language/stdlib) for more information.
+See the full documentation [of the language](../language/troy) and its [standard library](../reference/stdlib) for more information.
 
 ### Tremor Query
 
@@ -123,7 +123,7 @@ filter {
 
 </div>
 
-The full documentation [of the language](../language/queries), the [operators](../language/queries/operators), and [aggregation functions](../language/stdlib/aggr) can be found in the [language docs](../language/reference) .
+The full documentation [of the language](../language/pipelines), the [operators](../reference/operators), and [aggregation functions](../reference/stdlib/aggr) can be found in the [language docs](../language/reference) .
 
 ## Specialize
 
@@ -136,12 +136,12 @@ The solution to this is custom operators. Unlike Tremor Script that is interpret
 Currently Tremor supports the following operators:
 
 
-* [runtime::tremor](../language/queries/operators#script)
-* [grouper::bucket](../language/queries/operators#grouperbucket)
-* [generic::backpressure](../language/queries/operators#genericbackpressure)
-* [generic::batch](../language/queries/operators#genericbatch)
+* [runtime::tremor](../reference/operators#script)
+* [grouper::bucket](../reference/operators#grouperbucket)
+* [generic::backpressure](../reference/operators#genericbackpressure)
+* [generic::batch](../reference/operators#genericbatch)
 
 Some debug operators also exist:
 
-* [passthrough](../language/queries/operators#passthrough)- internal use.
-* [debug::history](../language/queries/operators#debughistory)- development.
+* [passthrough](../reference/operators#passthrough)- internal use.
+* [debug::history](../reference/operators#debughistory)- development.

@@ -28,11 +28,11 @@ It can also be used to test the behaviour of connectors acting as event sinks, c
 
 ## Configuration
 
-| Config Option  | Description                                                                                                                                                                                                                      | Possible Values  | Required / Optional                | Default Value               |
-|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|------------------------------------|-----------------------------|
-| path           | Path to the file to load data from. The file will be split into lines and each will form one event. Only required for the source part.                                                                                           | file path        | Only required for the source part. |                             |
-| timeout        | Timeout in nanoseconds to wait for circuit breaker messages after all events from the `path` file have been sent. After this timeout is expired the Tremor process will be stopped.                                              | positive integer | optional                           | 10_000_000_000 (10 seconds) |
-| expect_batched | When set to `true` changes verifcation mode for testing applications involving [batching](../../language/queries/operators.md#generic::batch). That means only not all events are required to be acknowledged, only all batches. | boolean          | optional                           | false                       |
+| Config Option  | Description                                                                                                                                                                                                  | Possible Values  | Required / Optional                | Default Value               |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|------------------------------------|-----------------------------|
+| path           | Path to the file to load data from. The file will be split into lines and each will form one event. Only required for the source part.                                                                       | file path        | Only required for the source part. |                             |
+| timeout        | Timeout in nanoseconds to wait for circuit breaker messages after all events from the `path` file have been sent. After this timeout is expired the Tremor process will be stopped.                          | positive integer | optional                           | 10_000_000_000 (10 seconds) |
+| expect_batched | When set to `true` changes verifcation mode for testing applications involving [batching](../operators.md#generic::batch). That means only not all events are required to be acknowledged, only all batches. | boolean          | optional                           | false                       |
 
 ### Example
 

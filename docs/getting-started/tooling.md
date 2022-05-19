@@ -10,7 +10,7 @@ Tremor is configured using its own configuration language called [Troy](../langu
 
 ## Tremor Language Server
 
-With the [Tremor language server](https://github.com/tremor-rs/tremor-language-server), Tremor comes with advanced support for editing [Tremor configuration files](../language/scripting) in both Visual Studio Code and VIM and every other editor or IDE that has LSP support.
+With the [Tremor language server](https://github.com/tremor-rs/tremor-language-server), Tremor comes with advanced support for editing [Tremor configuration files](../language) in both Visual Studio Code and VIM and every other editor or IDE that has LSP support.
 
 ### Installation
 

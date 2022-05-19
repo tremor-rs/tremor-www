@@ -148,7 +148,7 @@ const config = {
               // RELEASE: this needs to change for each major version release (0.12 -> 0.13)
               { to: 'docs/edge/guides', label: 'Guides' },
               { to: 'docs/edge/reference/connectors', label: 'Connectors Reference' },
-              { to: 'docs/edge/language/stdlib', label: 'Standard Library' },
+              { to: 'docs/edge/reference/stdlib', label: 'Standard Library' },
               { to: 'docs/edge/language/reference', label: 'Language Reference' },
               { to: 'api/0.12/', label: 'API v0.12' },
               { to: 'api/0.11/', label: 'API v0.11' },

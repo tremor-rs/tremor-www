@@ -196,10 +196,10 @@ You can find the chronograf UI at (`http://localhost:8888`)[http://localhost:888
 
 Tremor processes events one by one, meaning that each metric is considered its event. The upside of this is how events arrive. If it's one event per UDP message or 100 makes no difference. The downside is that InfluxDB requires events to be submitted in batches to maintain performance.
 
-Since InfluxDB isn't the only destination that benefits from batched events, tremor provides a [batching operator](../language/queries/operators#genericbatch).
+Since InfluxDB isn't the only destination that benefits from batched events, tremor provides a [batching operator](../reference/operators#genericbatch).
 
 :::note
-   Batching using the [batching operator](../language/queries/operators#genericbatch) is handled inside the connector. HTTP, for example, will combine a batch into a single request, but different connectors might handle this differently.
+   Batching using the [batching operator](../reference/operators#genericbatch) is handled inside the connector. HTTP, for example, will combine a batch into a single request, but different connectors might handle this differently.
 :::
 
 ### Adding the Batch operator
@@ -375,9 +375,9 @@ To aggregate over a time range, we use time-based tumbling windows. We can defin
 
 Once we have defined the windows, we can now use them to aggregate our data. We do this in a new select statement. After the `from` section, we have a square bracket and the window names. This syntax is what we call tilt frames. They're chained windows that will emit based on conditions.
 
-We use the  [`aggr::stats::hdr`](../language/stdlib/aggr/stats#hdrnumber-array) fimctopm that creates a histogram from the incoming data and outputs the given set of percentiles.
+We use the  [`aggr::stats::hdr`](../reference/stdlib/aggr/stats#hdrnumber-array) fimctopm that creates a histogram from the incoming data and outputs the given set of percentiles.
 
-In addition we use the [`aggr::win::first`](../language/stdlib/aggr/win#first) to get the first timestamp.
+In addition we use the [`aggr::win::first`](../reference/stdlib/aggr/win#first) to get the first timestamp.
 
 :::note
    We are using two windows here, a 10s one and a 1min one. The upside of using the tilt framing mechanism here is that we can do this without a loss in precision, as the 1min window is not an aggregate of six 10s windows but rather an aggregate of the raw data of them without having to duplicate it.

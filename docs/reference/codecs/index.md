@@ -77,8 +77,8 @@ end;
 This `my_tcp_client` connector is configured to use 2 postprocessors in a chain. First each event is encoded using the [`json`](./json.md) codec, then the encoded binary data is base64-encoded by the [`base64`](../postprocessors/base64.md) postprocessor and finally each resulting chunk of base64 data is split from the next by inserting a `line delimiter` using the [`separate`](../postprocessors/separate.md) postprocessor.
 
 
-Codecs share similar concepts to [extractors](../../language/extractors), but differ in their application. Codecs are applied to external data as they are ingested by or egressed from a running Tremor process.
-Extractors, on the other hand, are used in [scripts](../../language/scripting) to extract structured from e.g. strings that are already part of a Tremor event.
+Codecs share similar concepts to [extractors](../extractors), but differ in their application. Codecs are applied to external data as they are ingested by or egressed from a running Tremor process.
+Extractors, on the other hand, are used in [scripts](../../language/scripts) to extract structured from e.g. strings that are already part of a Tremor event.
 
 ## Data Format
 
@@ -95,18 +95,18 @@ Tremor's internal data representation is JSON-like. The supported value types ar
 
 ## Supported Codecs
 
-|Codec Name|Description|
-|---|---|
-|[binary](binary)|Raw network endian binary data|
-|[binflux](binflux)|An efficient binary representation of influx data|
-|[csv](csv)|The CSV format as per RFC4180 - constrained to a single line|
-|[influx](influx)|The [influx line protocol](https://docs.influxdata.com/influxdb/v1.7/write_protocols/line_protocol_tutorial/)| 
-|[json](json)|The [JSON](https://json.org) format|
-|[json-sorted](json-sorted)|The [JSON](https://json.org) format|
-|[msgpack](msgpack)|The [Msgpack](https://msgpack.org) binary format|
-|[null](null)|An drop only codec|
-|[statsd](statsd)|The statds format|
-|[string](string)|UTF-8 String format|
-|[syslog](syslog)|The syslog format - IETF and BSD styles|
-|[yaml](yaml)|The YAML format|
+| Codec Name                 | Description                                                                                                   |
+|----------------------------|---------------------------------------------------------------------------------------------------------------|
+| [binary](binary)           | Raw network endian binary data                                                                                |
+| [binflux](binflux)         | An efficient binary representation of influx data                                                             |
+| [csv](csv)                 | The CSV format as per RFC4180 - constrained to a single line                                                  |
+| [influx](influx)           | The [influx line protocol](https://docs.influxdata.com/influxdb/v1.7/write_protocols/line_protocol_tutorial/) |
+| [json](json)               | The [JSON](https://json.org) format                                                                           |
+| [json-sorted](json-sorted) | The [JSON](https://json.org) format                                                                           |
+| [msgpack](msgpack)         | The [Msgpack](https://msgpack.org) binary format                                                              |
+| [null](null)               | An drop only codec                                                                                            |
+| [statsd](statsd)           | The statds format                                                                                             |
+| [string](string)           | UTF-8 String format                                                                                           |
+| [syslog](syslog)           | The syslog format - IETF and BSD styles                                                                       |
+| [yaml](yaml)               | The YAML format                                                                                               |
 
