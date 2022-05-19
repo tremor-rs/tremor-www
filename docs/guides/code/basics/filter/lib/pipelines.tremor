@@ -1,0 +1,24 @@
+# define our own main pipeline
+define pipeline main
+# the exit port is not a dafault port so we have to overwrite the built in port selection
+into out, exit
+pipeline
+  # use the `std::string` module
+  use std::string;
+  # use our scripts
+  use lib::scripts;
+
+
+
+  # Create our script
+  create script punctuate from scripts::punctuate;
+
+  # filter eany event that just is `"exit"` and send it to the exit port
+  select null from in where event == "exit" into exit;
+
+  # Wire our capitailized text to the script
+  select string::capitalize(event) from in where event != "exit" into punctuate;
+
+  # Wire our script to the output
+  select event from punctuate into out;
+end;

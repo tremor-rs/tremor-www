@@ -1,0 +1,17 @@
+# define our script
+define script punctuate
+script
+  # Short circuit if we already end with a punctuation
+  match event of
+    case ~re|[.?!]$| => emit event
+    case _ => null
+  end;
+
+  # Find the right punctuation by looking at the first wird of the last sentence
+  # yes this is a poor heuristic!
+  let punctuation = match event of 
+    case ~ re|.*[.?!]?(Why\|How\|Where\|Who)[^.?!]*$| => "?"
+    case _ => "."
+  end;
+  event + punctuation
+end;

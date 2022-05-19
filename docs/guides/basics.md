@@ -188,11 +188,11 @@ end;
 deploy flow main;
 ```
 
-That's it, you can fetch this file from [git](__GIT__/../code/basics/passthrough.troy) and run it via:
+That's it, you can fetch this file from [git](__GIT__/../code/basics/passthrough/main.troy) and run it via:
 
 
 ```bash
-$ tremor run passthrough.troy
+$ tremor run passthrough/main.troy
 hello
 hello
 world
@@ -214,28 +214,37 @@ Tremor has handy utility modules for most data types that provide several functi
 
 We've been using the `troy::pipelines::passthrough` pipeline in the last step. It, as the name suggests, passes it through. So the first thing we need to do is replace this with our own. For simplicities sake, we'll start by replacing it with our pipeline. We will name this `main` as we will extend it to be more than a passthrough.
 
+To do this we create a new files named `lib/pipelines.tremor` and use this pipeline in our flow.
+
 :::note
    Pipelines, by default, use the ports `in` for input, `out` and `err` for outputs. As with `connect`, those definitions can be omitted as long as we use the standard. For details on defining your own ports, you can refer to the [reference documentation](../language/troy).
 :::
 
 ```troy
+# File: lib/pipelines.tremor
+
+# define our main pipeline
+define pipeline main
+pipeline
+  select event from in into out;
+end;
+```
+
+```troy
+# File: main.troy
 # Our main flow
 define flow main
 flow
   # import the `troy::connectors` module
   use troy::connectors;
-
-  # define our main pipeline
-  define pipeline main
-  pipeline
-    select event from in into out;
-  end;
+  # import the `troy::pipelines` module
+  use lib::pipelines;
 
   # create an instance of the console connector
   create connector console from connectors::console;
 
-  # create an instance of the main pipeline
-  create pipeline main;
+  # create an instance of the passthrough pipeline
+  create pipeline main from pipelines::main;
 
   # connect the console (STDIN) to our pipeline input
   connect /connector/console to /pipeline/main;
@@ -257,38 +266,17 @@ In select statements, you can do any transformation that's creating new data, bu
 :::
 
 ```troy
-# Our main flow
-define flow main
-flow
-  # import the `troy::connectors` module
-  use troy::connectors;
+# File: lib/pipelines.tremor
 
-  # define our own main pipeline
-  define pipeline main
-  pipeline
-    # use the `std::string` module
-    use std::string;
-    # Capitalize the string
-    select string::capitalize(event) from in into out;
-  end;
-
-  # create an instance of the console connector
-  create connector console from connectors::console;
-
-  # create an instance of the main pipeline
-  create pipeline main;
-
-  # connect the console (STDIN) to our pipeline input
-  connect /connector/console to /pipeline/main;
-
-  # then connect the pipeline output to the console (STDOUT)
-  connect /pipeline/main to /connector/console;
-
+# define our own main pipeline
+define pipeline main
+pipeline
+  # use the `std::string` module
+  use std::string;
+  # Capitalize the string
+  select string::capitalize(event) from in into out;
 end;
-# Deploy the flow, so tremor starts it
-deploy flow main;
 ```
-
 
 ### Transforming in Scripts
 
@@ -302,61 +290,49 @@ So our goal will be to check if our sentence has punctuation. Otherwise, decide 
 
 Scripts are a node in the pipeline, and we use `select` statements to connect them, the same way that we use `connect` to connect nodes of a flow.
 
+To do this we, again define a new file `lib/scripts.tremor` 
+
+:::note
+   The script could be inlined in the pipeline and the pipeline in the flow, but the model we use here creates nicer to manage applications.
+:::
+
 ```tremor
-# Our passthrough flow
-define flow main
-flow
-  # import the `troy::connectors` module
-  use troy::connectors;
-
-  # define our main pipeline
-  define pipeline main
-  pipeline
-    # use the `std::string` module
-    use std::string;
-
-    # define our script
-    define script punctuate
-    script
-      # Short circuit if we already end with a punctuation
-      match event of
-        case ~re|[.?!]$| => emit event
-        case _ => null
-      end;
-
-      # Find the right punctuation by looking at the first wird of the last sentence
-      # yes this is a poor heuristic!
-      let punctuation = match event of 
-        case ~ re|.*[.?!]?(Why\|How\|Where\|Who)[^.?!]*$| => "?"
-        case _ => "."
-      end;
-      event + punctuation
-    end;
-
-    # Create our script
-    create script punctuate;
-
-    # Wire our capitalized text to the script
-    select string::capitalize(event) from in into punctuate;
-    # Wire our script to the output
-    select event from punctuate into out;
+# File: lib/pipeline.tremor
+# define our script
+define script punctuate
+script
+  # Short circuit if we already end with a punctuation
+  match event of
+    case ~re|[.?!]$| => emit event
+    case _ => null
   end;
 
-  # create an instance of the console connector
-  create connector console from connectors::console;
-
-  # create an instance of the main pipeline
-  create pipeline main;
-
-  # connect the console (STDIN) to our pipeline input
-  connect /connector/console to /pipeline/main;
-
-  # then connect the pipeline output to the console (STDOUT)
-  connect /pipeline/main to /connector/console;
-
+  # Find the right punctuation by looking at the first wird of the last sentence
+  # yes this is a poor heuristic!
+  let punctuation = match event of 
+    case ~ re|.*[.?!]?(Why\|How\|Where\|Who)[^.?!]*$| => "?"
+    case _ => "."
+  end;
+  event + punctuation
 end;
-# Deploy the flow, so tremor starts it
-deploy flow main;
+```
+
+```tremor
+# File: lib/pipeline.tremor
+define pipeline main
+pipeline
+  # use the `std::string` module
+  use std::string;
+  use lib::scripts;
+
+  # Create our script
+  create script punctuate from scripts::punctuate;
+
+  # Wire our capitalized text to the script
+  select string::capitalize(event) from in into punctuate;
+  # Wire our script to the output
+  select event from punctuate into out;
+end;
 ```
 
 
@@ -365,7 +341,7 @@ deploy flow main;
 Same as before we can test our code, you can fetch the finished file from [git](__GIT__/../code/basics/transform.troy).
 
 ```bash
-$ tremor run transfor.troy
+$ TREMOR_PATH="$TREMOR_PATH:${pwd}/transform" tremor run transfor/main.troy
 hello
 Hello.
 why
@@ -393,44 +369,14 @@ We can omit `in` and `out` as ports as that's what tremor defaults to. For `exit
 :::
 
 ```troy
+# File: main.troy
 # Our main flow
 define flow main
 flow
   # import the `troy::connectors` module
   use troy::connectors;
+  use lib::pipelines;
 
-  # define our main pipeline
-  define pipeline main
-  pipeline
-    # use the `std::string` module
-    use std::string;
-
-    # define our script
-    define script punctuate
-    script
-      # Short circuit if we already end with a punctuation
-      match event of
-        case ~re|[.?!]$| => emit event
-        case _ => null
-      end;
-
-      # Find the right punctuation by looking at the first wird of the last sentence
-      # yes this is a poor heuristic!
-      let punctuation = match event of 
-        case ~ re|.*[.?!]?(Why\|How\|Where\|Who)[^.?!]*$| => "?"
-        case _ => "."
-      end;
-      event + punctuation
-    end;
-
-    # Create our script
-    create script punctuate;
-
-    # Wire our capitailized text to the script
-    select string::capitalize(event) from in into punctuate;
-    # Wire our script to the output
-    select event from punctuate into out;
-  end;
   # Define the exit connector
   define connector exit from exit;
 
@@ -441,7 +387,7 @@ flow
   create connector console from connectors::console;
 
   # create an instance of the passthrough pipeline
-  create pipeline main;
+  create pipeline main from pipelines::main;
 
   # connect the console (STDIN) to our pipeline input
   connect /connector/console to /pipeline/main;
@@ -472,73 +418,26 @@ For pipelines, we can omit `into` and `from`. If done, it is treated as `into ou
 Once that is done, we can add the filter logic. To do that, we create a new select statement with a `where event == "exit"` clause that will only forward events that read `exit` and add a `where event != "exit"` to our existing clause, forwarding the rest to the punctuate script.
 
 ```troy
-# Our main flow
-define flow main
-flow
-  # import the `troy::connectors` module
-  use troy::connectors;
+# File: lib/pipelines.tremor
+define pipeline main
+# the exit port is not a default port, so we have to overwrite the built-in port selection
+into out, exit
+pipeline
+  # use the `std::string` module
+  use std::string;
+  use lib::scripts;
 
-  # define our main pipeline
-  define pipeline main
-  # the exit port is not a default port, so we have to overwrite the built-in port selection
-  into out, exit
-  pipeline
-    # use the `std::string` module
-    use std::string;
+  # Create our script
+  create script punctuate from scripts::punctuate;
 
-    # define our script
-    define script punctuate
-    script
-      # Short circuit if we already end with a punctuation
-      match event of
-        case ~re|[.?!]$| => emit event
-        case _ => null
-      end;
+  # filter eany event that just is `"exit"` and send it to the exit port
+  select {"graceful": false} from in where event == "exit" into exit;
 
-      # Find the right punctuation by looking at the first wird of the last sentence
-      # yes this is a poor heuristic!
-      let punctuation = match event of 
-        case ~ re|.*[.?!]?(Why\|How\|Where\|Who)[^.?!]*$| => "?"
-        case _ => "."
-      end;
-      event + punctuation
-    end;
-
-    # Create our script
-    create script punctuate;
-
-    # filter eany event that just is `"exit"` and send it to the exit port
-    select {"graceful": false} from in where event == "exit" into exit;
-
-    # Wire our capitailized text to the script
-    select string::capitalize(event) from in where event != "exit" into punctuate;
-    # Wire our script to the output
-    select event from punctuate into out;
-  end;
-  # Define the exit connector
-  define connector exit from exit;
-
-  # create the exit connector;
-  create connector exit;
-
-  # create an instance of the console connector
-  create connector console from connectors::console;
-
-  # create an instance of the passthrough pipeline
-  create pipeline main;
-
-  # connect the console (STDIN) to our pipeline input
-  connect /connector/console to /pipeline/main;
-
-  # then connect the pipeline output to the console (STDOUT)
-  connect /pipeline/main to /connector/console;
-
-  # connect the `exit` port of our pipeline to the exit connector
-  connect /pipeline/main/exit to /connector/exit;
-
+  # Wire our capitailized text to the script
+  select string::capitalize(event) from in where event != "exit" into punctuate;
+  # Wire our script to the output
+  select event from punctuate into out;
 end;
-# Deploy the flow, so tremor starts it
-deploy flow main;
 ```
 
 ### Running
@@ -546,7 +445,7 @@ deploy flow main;
 That all set, we can run our script as before, just this time, when entering `exit` tremor will terminate.
 
 ```bash
-$ tremor run transform.troy
+$ TREMOR_PATH="$TREMOR_PATH:${pwd}/filter" tremor run filter/main.troy
 hello
 Hello.
 why
