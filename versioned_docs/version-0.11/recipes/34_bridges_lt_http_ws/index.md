@@ -14,7 +14,7 @@ All the code here is available in the [git repository](https://github.com/tremor
 
 ### Sources and sinks
 
-We configure a rest onramp listening on port 9139, that is meant to be a bridge for our [example websocket server](../31_servers_lt_ws//README.md) (configured as en endpoint in the websocket offramp here).
+We configure a rest onramp listening on port 9139, that is meant to be a bridge for our [example websocket server](../31_servers_lt_ws/index.md) (configured as en endpoint in the websocket offramp here).
 
 ```yaml
 onramp:
@@ -122,7 +122,7 @@ select event from process/err into err;
 
 ## Testing
 
-Assuming you have all the code from the [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/34_bridges_lt_http_ws), run the following to start our application (along with the [tremor websocket server example](../31_servers_lt_ws/README.md) that our application is bridging to):
+Assuming you have all the code from the [git repository](https://github.com/tremor-rs/tremor-www/tree/main/docs/recipes/34_bridges_lt_http_ws), run the following to start our application (along with the [tremor websocket server example](../31_servers_lt_ws/index.md) that our application is bridging to):
 
 ```sh
 docker compose up

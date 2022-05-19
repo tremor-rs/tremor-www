@@ -119,7 +119,7 @@ The example above measures all events that were emitted out by the connector `ex
 Notes:
 
 - Preprocessor and codec level errors count as errors for connector metrics.
-- If your pipeline is using the [batch operator](../language/queries/operators#genericbatch) and connector is receiving events from it, no of events tracked at connector is going to be dictated by the batching config.
+- If your pipeline is using the [batch operator](../reference/operators#genericbatch) and connector is receiving events from it, no of events tracked at connector is going to be dictated by the batching config.
 
 ## Operator level metrics
 
@@ -127,7 +127,7 @@ In addition to the metrics provided by the pipeline itself, some operators can g
 
 The details are documented on a per operator level. Currently the following operators provide custom metrics:
 
-- [grouper::bucket](../language/queries/operators#grouperbucket)
+- [grouper::bucket](../reference/operators#grouperbucket)
 
 ## Example
 

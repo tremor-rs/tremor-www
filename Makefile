@@ -1,7 +1,7 @@
 TREMOR_VSN=main
 LANG_REF_DIR=docs/language/reference
 NEXT_LANG_REF_DIR=docs/next/language/reference
-STDLIB_REF_DIR=docs/language/stdlib
+STDLIB_REF_DIR=docs/reference/stdlib
 
 all: clean tremor-runtime-docs openapi
 
