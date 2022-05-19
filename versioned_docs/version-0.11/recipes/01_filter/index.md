@@ -4,7 +4,7 @@
 All the application code here is available from the docs [git repository](__GIT__).
 :::
 
-The `filter` builds on the [passthrough example](../00_passthrough/README.md) and extends the [`example.trickle`](etc/tremor/config/example.trickle) by adding a filter
+The `filter` builds on the [passthrough example](../00_passthrough/index.md) and extends the [`example.trickle`](etc/tremor/config/example.trickle) by adding a filter
 on the field `selected`. Only if this field is set to true the event will pass.
 
 ## Environment
