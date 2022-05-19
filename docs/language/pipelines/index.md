@@ -1,4 +1,4 @@
-# Tremor Query
+# Pipelines
 
 The tremor query language, `tremor-query` or **trickle** is an interpreted statement-oriented language designed for continuous online structured queries with support for filtering, extraction, transformation and streaming of structured data in a stream or event-based processing system.
 
@@ -68,8 +68,8 @@ This section details the major components of the `tremor-query` language.
 
 ### Tremor-Script
 
-[Comments](../scripting#comments), [Literals](../scripting#literals), [Paths](../scripting#paths) and Expression forms supported in **trickle** are the
-same as in [`tremor-script`](../scripting).
+[Comments](../scripts#comments), [Literals](../scripts#literals), [Paths](../scripts#paths) and Expression forms supported in **trickle** are the
+same as in [`tremor-script`](../scripts).
 
 ### Queries
 
@@ -158,7 +158,7 @@ Configuration Parameters:
 
 #### Windowing Semantics
 
-A select query using one or more windows is generating _new_ synthetic events, aggregated from the events feeded into it. Even if a window only consists of a single event, it needs to be considered a new event. The shape of the new event is determined by the [`select`](#select-queries) _Target Expression_. Those new events will have an empty metadata and the [origin uri](../stdlib/tremor/origin) is pointing to the windowed [`select`](#select-queries) query.
+A select query using one or more windows is generating _new_ synthetic events, aggregated from the events feeded into it. Even if a window only consists of a single event, it needs to be considered a new event. The shape of the new event is determined by the [`select`](#select-queries) _Target Expression_. Those new events will have an empty metadata and the [origin uri](../../reference/stdlib/tremor/origin) is pointing to the windowed [`select`](#select-queries) query.
 
 ##### Grammar
 > ![window definition grammar](../reference/svg/definewindow.svg)
@@ -287,7 +287,7 @@ That means the `event` available to the [`where` clause](#WhereClause) is the un
 select event from in where event.is_interesting into out;
 ```
 
-The _Target Expression_ of a select query is used to describe transformations of the event. To pass through the event without changes, use `select event`, otherwise you can construct arbitrary [literals](../scripting#literals) (numbers, records, arrays, ...), call functions, aggregate functions, reference the event metadata via `$` or other [path expressionss](../scripting#paths). Nearly everything is possible:
+The _Target Expression_ of a select query is used to describe transformations of the event. To pass through the event without changes, use `select event`, otherwise you can construct arbitrary [literals](../scripts#literals) (numbers, records, arrays, ...), call functions, aggregate functions, reference the event metadata via `$` or other [path expressionss](../scripts#paths). Nearly everything is possible:
 
 ```trickle
 use std::string;
@@ -325,7 +325,7 @@ select { "count": aggr::stats::count() } from in[fifteen_secs] into out having e
 In the above operation, we emit a synthetic count every fifteen seconds if at least one event has been witnessed during a 15 second window of time.
 
 Windows emit new events which are an aggregation of the events feeded into them. Those new events will have an empty event metadata (accessible via `$`).
-The same is true for the [origin uri](../stdlib/tremor/origin), which will point to the windowed query, not the origin of any event feeded into the window.
+The same is true for the [origin uri](../../reference/stdlib/tremor/origin), which will point to the windowed query, not the origin of any event feeded into the window.
 
 To drag event metadata across a windowed query, it needs to be selected into the event payload:
 

@@ -6,7 +6,7 @@ All the application code here is available from the docs [git repository](__GIT_
 
 An application built using tremor using the [linked transports](../../operations/linked-transports.md) feature and the [qos::wal](/docs/0.11/tremor-query/operators/#qoswal) operator introduced in 0.9 and the [`$correlation`](/docs/0.11/operations/linked-transports/#correlation) feature introduced in 0.11, allowing for centralized configuration across services and their component nodes.
 
-The main task of the Configurator is to distribute config changes to a group of upstream tremor nodes running the [_Quota Service_](../36_quota_service/README.md).
+The main task of the Configurator is to distribute config changes to a group of upstream tremor nodes running the [_Quota Service_](../36_quota_service/index.md).
 The config changes do not happen in an atomic or transactional fashion across all upstream nodes, but all valid configuration updates are persisted and retried until they succeed.
 The responses are aggregated from all the upstream nodes and bundled into a single event / HTTP response.
 
@@ -26,8 +26,8 @@ docker-compose up
 Following services should be now accessible:
 
 * Configurator: [http://localhost:9139](http://localhost:9139)
-* [Quota Service](../36_quota_service/README.md) Node 1: [http://localhost:8139](http://localhost:8139)
-* [Quota Service](../36_quota_service/README.md) Node 2: [http://localhost:8140](http://localhost:8140)
+* [Quota Service](../36_quota_service/index.md) Node 1: [http://localhost:8139](http://localhost:8139)
+* [Quota Service](../36_quota_service/index.md) Node 2: [http://localhost:8140](http://localhost:8140)
 
 ## Using the Configurator
 

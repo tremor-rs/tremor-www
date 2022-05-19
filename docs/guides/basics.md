@@ -259,7 +259,7 @@ deploy flow main;
 
 ### Transforming in the select body
 
-Now we have our pipeline in which we will capitalize the text that's passed through the pipeline, [`std::string::capitalize`](../language/stdlib/std/string#capitalizeinput) will do that for us, and we can use it right in the select statement we:
+Now we have our pipeline in which we will capitalize the text that's passed through the pipeline, [`std::string::capitalize`](../reference/stdlib/std/string#capitalizeinput) will do that for us, and we can use it right in the select statement we:
 
 :::note
 In select statements, you can do any transformation that's creating new data, but you can't do any mutating manipulations. Simplified, you can think that `let` is not allowed.

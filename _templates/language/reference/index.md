@@ -1,4 +1,4 @@
-# Tremor Language Reference
+# Language Reference
 
 Tremor contains a number of related domain specific languages that are
 designed to simplify development and operations of event based production

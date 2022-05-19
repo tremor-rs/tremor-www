@@ -87,7 +87,7 @@ expect to see output from the tool as follows:
 ## Scripts and Operators
 
 Here's the logic for an entire backpressure algorithm that could be introduced as
-a proxy between two systems, implemented by using a builtin operator called [`qos::backpressure`](operators.md#qosbackpressure):
+a proxy between two systems, implemented by using a builtin operator called [`qos::backpressure`](../../reference/operators.md#qosbackpressure):
 
 ```trickle
 define qos::backpressure operator bp

@@ -127,4 +127,4 @@ x-powered-by: Tremor
 "badger"
 ```
 
-All the [testing examples](../30_servers_lt_http/README.md#testing) for the example HTTP server should work from here as well, with the port `8139` there swapped to our proxy application port `9139`.
+All the [testing examples](../30_servers_lt_http/index.md#testing) for the example HTTP server should work from here as well, with the port `8139` there swapped to our proxy application port `9139`.

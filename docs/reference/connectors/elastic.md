@@ -9,7 +9,7 @@ The `elastic` connector integrates ElasticSearch and compatible endpoints with t
 Tested with ElasticSearch `v6` and `v7` and OpenSearch `v1.3.1`
 
 Events will be sent to the connected ElasticSearch compatible cluster via the [ES Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html)
-using the `index` action.  It is recommended to batch events sent to this sink using the [generic::batch operator](../../language/queries/operators#genericbatch) to reduce the overhead introduced by the [ES Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html).
+using the `index` action.  It is recommended to batch events sent to this sink using the [generic::batch operator](../operators.md#genericbatch) to reduce the overhead introduced by the [ES Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html).
 
 NOTE: The configuration options `codec` and `postprocessors` are not used, as elastic will always serialize event payloads as JSON.
 
