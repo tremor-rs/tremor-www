@@ -187,7 +187,7 @@ Deployments can load queries, can load scripts and can load other deployments.
 graph LR
     A[troy] -->|Uses| D(module system)
     B[trickle] --> |Uses| D
-    C[tremor] --> |Uses| D
+    C[script] --> |Uses| D
     A[troy] -->|Embeds| B
     B[trickle] --> |Embeds| C
 ```
