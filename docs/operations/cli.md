@@ -44,6 +44,7 @@ Set of commands supported by the command line interface.
 | [dbg](#debugging-facilities)          | Advanced debugging commands                                                                                                                  |
 | [run](#interactive-development)       | Run tremor script or query files against stdin or a json data archive, the data will be read from STDIN or an archive and written to STDOUT. |
 | [doc](#documentation-generation)      | Generates documention from tremor script files                                                                                               |
+| [new](#template)                      | Generates a project template                                                                                                                 |
 
 ## Shell Completions
 
@@ -747,3 +748,18 @@ The tool does not traverse `.trickle` files at this time.
 ```bash
 $ tremor doc /path/to/tremor/lib /tmp/docs
 ```
+
+## Template
+
+This command generates a new project template that can be used as a starting point.
+
+```bash
+$ tremor new <NAME>
+```
+
+### Arguments
+
+| Name | Switch | Kind        | Multiple | Description         |
+|------|--------|-------------|----------|---------------------|
+| NAME | None   | switch/flag | no       | Name of the project |
+
