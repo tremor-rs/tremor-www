@@ -204,6 +204,7 @@ const config = {
           {
             title: 'More',
             items: [
+              { label: 'Code of Conduct', href: '/community/CodeofConduct' },
               { label: 'Download', href: 'https://github.com/tremor-rs/tremor-runtime/releases' },
             ],
           },
