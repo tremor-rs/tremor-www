@@ -7,15 +7,15 @@ const sidebars = {
       dirName: '.'
     },
     {
-      "type": "link",
-      "label": "Benchmarks",
-      "href": "/benchmarks"
+      type: "link",
+      label: "Benchmarks",
+      href: "/benchmarks"
     },
     {
-      "type": "link",
-      "label": "API",
-      "href": "api"
-    },
+      type: 'doc',
+      label: 'Api',
+      id: 'api/index'
+    }
   ],
 };
 
