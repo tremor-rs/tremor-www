@@ -18,14 +18,18 @@ Install valgrind via homebrew
 brew install valgrind
 ```
 
-### Dependent utilities
-
 The Google Performance Toolkit, gprof2dot, qcachegrind are also required / useful.
 
 ```bash
 brew install gprof2dot
 brew install gperftools
 brew install qcachegrind
+```
+
+### Setup on Ubuntu
+
+```bash
+sudo apt install valgrind kcachegrind
 ```
 
 ### Basic profiling via tremor
@@ -35,10 +39,10 @@ This is good enough for initial high-level exploration.
 For example, run a tremor pipeline against recorded data in data.json
 
 ```bash
-valgrind --tool=callgrind target/debug/tremor run tests/configs/ut.combine3-op.yaml data.json
+valgrind --tool=callgrind target/debug/tremor run example.troy
 ```
 
-Analysing results via google perf toolkit and graphviz for static call flow diagrams
+Analysing results via google perf toolkit and graphviz for static call flow diagrams (osx only)
 
 ```bash
 gprof2dot -f callgrind callgrind.out.93972 > pipe.dot
@@ -48,14 +52,14 @@ dot -Tpng pipe.dot -o pipe.png && open pipe.png
 Interactive analysis via QCachegrind / KCachegrind
 
 ```bash
-qcachegrind callgrind.out.93972
+kcachegrind
 ```
 
 The profiling ( sampling ) frequency is tunable and _SHOULD_ be tuned for each run, eg:
 
 ```bash
 RUST_BACKTRACE=1 PROFILEFREQUENCY=1000 valgrind --tool=callgrind \
-    target/release/tremor run examples/config-spike5.tremor data.json
+    target/release/tremor run example.troy
 ```
 
 :::note
@@ -70,7 +74,7 @@ Install rust [flamegraph](https://github.com/flamegraph-rs/flamegraph#systems-pe
 cargo install flamegraph
 ```
 
-Perform a benchmark run with flamegraph support ( on Mac OS X ):
+Perform a benchmark run with flamegraph support:
 
 ```bash
 flamegraph target/release/tremor server run -f bench/real-workflow-througput-json.yaml bench/link.yaml
