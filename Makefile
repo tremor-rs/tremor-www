@@ -40,13 +40,10 @@ openapi: tremor-runtime-refresh
 	cp tremor-runtime/static/openapi.yaml static/api/edge
 
 clean:
-	-rm -rf static/api/v0.11/index.html
-	-rm -rf static/api/v0.12/index.html
-	-rm -rf static/api/v0.12/openapi.yaml
+	-rm -rf static/api/edge/openapi.yaml
 	-rm -rf $(STDLIB_REF_DIR)/aggr
 	-rm -rf $(STDLIB_REF_DIR)/stdlib
 	-rm -rf $(LANG_REF_DIR)
-	-rm -rf docs/api
 
 touch_version:
 	cat versions.json | jq '.[1:]' > out
@@ -61,5 +58,5 @@ check_verify:
 reset: 
 	-npm run clear
 	-rm -rf tremor-runtime
-	-rm -rf /node_modules package-lock.json yarn.lock
+	-rm -rf /node_modules
 	npm install
