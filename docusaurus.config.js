@@ -57,12 +57,12 @@ const config = {
         // Plugin Options for loading OpenAPI files
         specs: [
           {
-            spec: 'static/api/v0.12/openapi.yaml',
-            route: '/api/0.12',
+            spec: 'static/api/edge/openapi.yaml',
+            route: '/docs/edge/api',
           },
           {
             spec: 'static/api/v0.11/openapi.yaml',
-            route: '/api/0.11',
+            route: '/docs/0.11/api',
           }
         ],
         // Theme Options for modifying how redoc renders them
@@ -150,8 +150,8 @@ const config = {
               { to: 'docs/edge/reference/connectors', label: 'Connectors Reference' },
               { to: 'docs/edge/reference/stdlib', label: 'Standard Library' },
               { to: 'docs/edge/language/reference', label: 'Language Reference' },
-              { to: 'api/0.12/', label: 'API v0.12' },
-              { to: 'api/0.11/', label: 'API v0.11' },
+              { to: 'docs/edge/api', label: 'API edge' },
+              { to: 'docs/0.11/api', label: 'API v0.11' },
             ],
           },
           {
