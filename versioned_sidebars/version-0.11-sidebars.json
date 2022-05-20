@@ -8,11 +8,6 @@
       "type": "link",
       "label": "Benchmarks",
       "href": "/benchmarks"
-    },
-    {
-      "type": "link",
-      "label": "API",
-      "href": "api"
     }
   ]
 }
