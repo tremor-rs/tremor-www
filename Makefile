@@ -36,13 +36,8 @@ tremor-runtime-docs: tremor-runtime-refresh
 
 
 openapi: tremor-runtime-refresh
-	-mkdir static/api/v0.12
-	npm i -g redoc-cli
-	cp tremor-runtime/static/openapi.yaml static/api/v0.12
-	redoc-cli build static/api/v0.12/openapi.yaml
-	mv redoc-static.html static/api/v0.12/index.html
-	redoc-cli build static/api/v0.11/openapi.yaml
-	mv redoc-static.html static/api/v0.11/index.html
+	-mkdir static/api/edge
+	cp tremor-runtime/static/openapi.yaml static/api/edge
 
 clean:
 	-rm -rf static/api/v0.11/index.html
