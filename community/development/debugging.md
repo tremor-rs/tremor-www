@@ -16,49 +16,47 @@ Alternately, rust integration with IntelliJ CLION also offers interactive breakp
 
 rust-lldb ships with rust so no added tooling is required.
 
-### Preparing tremor for debugging
+### Run and use the Debugger
+
+Preparing tremor for debugging:
 
 ```bash
 $ rust-lldb target/debug/tremor
-(lldb) command script import "/Users/dennis/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/etc/lldb_rust_formatters.py"
+(lldb) command script import "/.../.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/etc/lldb_rust_formatters.py"
 (lldb) type summary add --no-value --python-function lldb_rust_formatters.print_val -x ".*" --category Rust
 (lldb) type category enable Rust
 (lldb) target create "target/debug/tremor"
 Current executable set to 'target/debug/tremor' (x86_64).
-(lldb)
-```
-
-### Run tremor under the debugger
-
-```bash
 (lldb) run
+...
 ```
 
-### Run to breakpoint for malloc related issues
+You can:
 
-```bash
-(lldb) br set -n malloc_error_break
-(lldb) run
-```
+- Run tremor under the debugger:
+    ```bash
+    (lldb) run
+    ```
 
-### Take a backtrace ( stacktrace ) upon hitting a breakpoint
+- Run to breakpoint for malloc related issues:
+    ```bash
+    (lldb) br set -n malloc_error_break
+    (lldb) run
+    ```
 
-```bash
-(lldb) bt
-```
+- Take a backtrace ( stacktrace ) upon hitting a breakpoint:
+    ```bash
+    (lldb) bt
+    ```
 
-### List breakpoints
+- List breakpoints:
+    ```bash
+    (lldb) br l
+    ```
 
-```bash
-(lldb) br l
-```
-
-### Quit lldb
-
-```bash
-(lldb) quit
-```
-
-## References
+- Quit lldb
+    ```bash
+    (lldb) quit
+    ```
 
 For a more detailed synopsis check out lldb project documentation or the [lldb cheatsheet](https://www.nesono.com/sites/default/files/lldb%20cheat%20sheet.pdf).
