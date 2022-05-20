@@ -129,15 +129,15 @@ const config = {
             to: 'community',
             position: 'left',
             items: [
-              { to: 'community', label: 'Overview' },
-              { href: 'https://chat.tremor.rs', label: 'Chat' },
-              { to: 'community/governance', label: 'Governance' },
-              { to: 'community/development', label: 'Development' },
-              { to: 'community/events', label: 'Events and Media' },
+              { to: 'community/CodeOfConduct', label: 'Code of Conduct' },
+              { to: 'community/development', label: 'Contribute' },
               { to: 'rfc', label: 'RFCs' },
+              { to: 'community/events', label: 'Events and Media' },
+              { href: 'https://chat.tremor.rs', label: 'Chat' },
             ],
           },
           { to: 'blog', label: 'Blog', position: 'left' },
+
           {
             type: 'dropdown',
             label: 'Docs',
@@ -146,12 +146,9 @@ const config = {
             items: [
               // We chose to reference the most recent version here
               // RELEASE: this needs to change for each major version release (0.12 -> 0.13)
-              { to: 'docs/edge/guides', label: 'Guides' },
-              { to: 'docs/edge/reference/connectors', label: 'Connectors Reference' },
-              { to: 'docs/edge/reference/stdlib', label: 'Standard Library' },
-              { to: 'docs/edge/language/reference', label: 'Language Reference' },
-              { to: 'docs/edge/api', label: 'API edge' },
-              { to: 'docs/0.11/api', label: 'API v0.11' },
+              { type: 'doc', docId: 'guides/index', label: 'Guides' },
+              { type: 'doc', docId: 'reference/index', label: 'Reference Documentation' },
+              { type: 'doc', docId: 'api/index', label: 'API' },
             ],
           },
           {
@@ -204,7 +201,7 @@ const config = {
           {
             title: 'More',
             items: [
-              { label: 'Code of Conduct', href: '/community/CodeofConduct' },
+              { label: 'Code of Conduct', to: 'community/CodeofConduct' },
               { label: 'Download', href: 'https://github.com/tremor-rs/tremor-runtime/releases' },
             ],
           },
