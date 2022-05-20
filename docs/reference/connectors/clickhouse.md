@@ -54,14 +54,22 @@ Any type which is not documented in the following sections is considered as unsu
 
 ClickHouse `String`s values can be created from any Tremor string.
 
-### [`UInt64`, `UInt64`][CNumerals]
+### [`UInt8`, `UInt16`, `UInt32`, `UInt64`, `Int8`, `Int16`, Int32`, `Int64`][CNumerals]
 
 [CNumerals]: https://clickhouse.com/docs/en/sql-reference/data-types/int-uint
 
-`Int64`s can be created from any Tremor integer which is not greater than 2^63 - 1 (9223372036854775807).
+The following table shows the valid ranges where each numerical type can be created:
 
-`UInt64`s can be created from any non-negative Tremor number.
-
+| Type     | Lower Bound (inclusive) | Upper Bound (inclusive) |
+| -------- | ----------------------- | ----------------------- |
+| `UInt8`  | 0                       | 255                     |
+| `UInt16` | 0                       | 65535                   |
+| `UInt32` | 0                       | 4294967295              |
+| `UInt64` | 0                       | 18446744073709551615    |
+| `Int8`   | - 128                   | 127                     |
+| `Int16`  | - 32768                 | 32767                   |
+| `Int32`  | - 2147483648            | 2147483647              |
+| `Int64`  | - 9223372036854775808   | 9223372036854775807     |
 
 ### [`DateTime`][CDateTime]
 
