@@ -1,2 +1,2 @@
-The `Float` rule literal specifes the syntax of IEEE float literals in tremor.
+The `Float` rule literal specifies the syntax of IEEE float literals in Tremor.
 

@@ -1,4 +1,4 @@
-The `BinOp` rule is a [LALRPOP](http://lalrpop.github.io/lalrpop/) convenience that allows defining a [macro rule](http://lalrpop.github.io/lalrpop/tutorial/006_macros.html) template for a common sub rule sequence.
+The `BinOp` rule is a [LALRPOP](http://lalrpop.github.io/lalrpop/) convenience that allows defining a [macro rule](http://lalrpop.github.io/lalrpop/tutorial/006_macros.html) template for a common subrule sequence.
 
 The `BinOp` macro rule definition in Tremor DSLs allows binary operations to be defined tersely.
 
@@ -8,9 +8,13 @@ The `BinOp` macro rule definition in Tremor DSLs allows binary operations to be 
 |Operation|The operation to be performeed|
 |Next|The current rule permissible for the RHS of the expression|
 
+:::info
+
 The macro imposes rule precedence where the left-hand-side expression takes
 higher precedence over the right-hand-side expression when interpreted
 by Tremor.
+
+:::
 
 ### Considerations
 

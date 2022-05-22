@@ -1,4 +1,8 @@
-The `EqExprImut` rule supports equality expressions in tremor.
+The `EqExprImut` rule supports equality expressions in Tremor.
 
-Binary equality expressions take precedence over comparitive expressions.
+:::tip
+
+Binary equality expressions take precedence over comparison expressions.
+
+:::
 
