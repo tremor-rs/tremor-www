@@ -1,10 +1,16 @@
-The `DocComment` rule specifies documentation comments in tremor.
+The `DocComment` rule specifies documentation comments in Tremor.
 
-Documentation comments are optional.
+:::info About Documentation Comments
 
-A documentation comment begins with a `##` double-hash and they are line delimited.
+- Documentation comments are optional.
 
-Muliple successive comments are coalesced together to form a complete comment.
+- Begin with a double-hash (`##`).
 
-The content of a documentation comment is markdown syntax.
+- Are line-delimited.
+
+- Multiple successive comments are coalesced together to form a complete comment.
+
+- The content of a documentation comment is in Markdown syntax.
+
+:::
 

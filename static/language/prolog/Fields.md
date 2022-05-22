@@ -1,2 +1,2 @@
-The `Fields` rule defines a set of comma delimited `Field` rules.
+The `Fields` rule defines a comma-delimited set of `Field` rules.
 

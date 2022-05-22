@@ -1,4 +1,4 @@
-The `EventPath` rule defines path operations for streaming events in tremor.
+The `EventPath` rule defines path operations for streaming events in Tremor.
 
-Allows the current streaming `event` to be dereferenced via path operations.
+It allows the current streaming `event` to be dereferenced via path operations.
 
