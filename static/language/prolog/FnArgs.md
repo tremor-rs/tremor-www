@@ -1,2 +1,2 @@
-The `FnArgs` rule defines `,` comma delimited arguments to a tremor function.
+The `FnArgs` rule defines comma (`,` ) delimited arguments to a Tremor function.
 
