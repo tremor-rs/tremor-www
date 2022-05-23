@@ -1,5 +1,5 @@
 ---
-sidebar_label: elastic
+sidebar_label: clickhouse
 ---
 
 # The `clickhouse` Connector
@@ -21,6 +21,8 @@ This connector is a sink-only connector.
       "url": "localhost",
 
       # The database to write data to
+      #
+      # This field is not mandatory.
       "database": "tremor_testing",
 
       # The table to write data to
@@ -54,7 +56,7 @@ Any type which is not documented in the following sections is considered as unsu
 
 ClickHouse `String`s values can be created from any Tremor string.
 
-### [`UInt8`, `UInt16`, `UInt32`, `UInt64`, `Int8`, `Int16`, Int32`, `Int64`][CNumerals]
+### Integers ([`UInt8`, `UInt16`, `UInt32`, `UInt64`, `Int8`, `Int16`, Int32`, `Int64`][CNumerals])
 
 [CNumerals]: https://clickhouse.com/docs/en/sql-reference/data-types/int-uint
 
@@ -76,6 +78,10 @@ The following table shows the valid ranges where each numerical type can be crea
 [CDateTime]: https://clickhouse.com/docs/en/sql-reference/data-types/datetime
 
 `DateTime`s can be created from any non-negative Tremor integer. It represents the number of seconds elapsed since January 1st of 1970 at 00:00:00, in UTC timezone. It is encoded as a 32 bit unsigned integer.
+
+Storing a `DateTime` in 32-bit format is likely to lead to a [Year 2038 problem][year-2038] problem. It is advised to use `DateTime64(0)`, as described below.
+
+[year-2038]: https://en.wikipedia.org/wiki/Year_2038_problem
 
 
 ### [`DateTime64`][CDateTime64]
