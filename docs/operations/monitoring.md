@@ -10,7 +10,13 @@ By default metrics are turned off.
 
 Metrics are formatted following the same structure as the [Influx Codec](../reference/codecs/influx.md).
 
-## Pipeline metrics
+## Metrics
+
+Tremor allows collecting it's own metrics and processing them, this enables us to send metrics to any system tremor can connect to and not force our users into a specific ecosystem. 
+
+An example can be found in the [metrics guide](../guides/metrics.md#tremor-metrics)
+
+### Pipeline metrics
 
 Configuring metrics for pipelines is done with the config directive:
 
@@ -31,8 +37,6 @@ end;
 ```
 
 This pipeline will emit a metrics event every 5 seconds.
-
-### Event format
 
 Each pipeline will emit 1 metrics event per interval with a count of the events it received on its input port (Usually `in`).
 
@@ -71,7 +75,7 @@ The example above measures all events that left the `in` of pipeline `main`.
 
 In addition to the general pipeline metrics, some operators do generate their own metrics, for details please check on the documentation for the operator in question.
 
-## Connector metrics
+### Connector metrics
 
 For connectors metrics can be configured with the argument `metrics_interval_s = <time>` in the `with` part of the connector definition.
 
@@ -121,14 +125,44 @@ Notes:
 - Preprocessor and codec level errors count as errors for connector metrics.
 - If your pipeline is using the [batch operator](../reference/operators#genericbatch) and connector is receiving events from it, no of events tracked at connector is going to be dictated by the batching config.
 
-## Operator level metrics
+### Operator level metrics
 
 In addition to the metrics provided by the pipeline itself, some operators can generate additional metrics.
 
 The details are documented on a per operator level. Currently the following operators provide custom metrics:
 
-- [grouper::bucket](../reference/operators#grouperbucket)
+- [grouper::bucket](../reference/operators/bucket.md)
 
-## Example
+## Logging
 
-And example can be found in the [metrics guide](../guides/metrics.md#tremor-metrics)
+Tremor uses the [log4rs](https://docs.rs/log4rs) this allows a rather flexible configuration that can be changed without restarting tremor. An alternative is setting `RUST_LOG` for global lgo levels as provided by [env_logger](https://docs.rs/env_logger).
+
+The log4rs config yaml is passed in over the `-l` arugment. An example would be:
+
+```yaml
+refresh_rate: 30 seconds
+
+appenders:
+  stdout:
+    kind: console
+
+root:
+  level: warn
+  appenders:
+    - stdout
+
+loggers:
+  tremor_runtime:
+    level: debug
+    appenders:
+      - stdout
+    additive: false
+  tremor:
+    level: debug
+    appenders:
+      - stdout
+    additive: false
+```
+
+More about the format can be found [in the documentation](https://docs.rs/log4rs/latest/log4rs/).
+

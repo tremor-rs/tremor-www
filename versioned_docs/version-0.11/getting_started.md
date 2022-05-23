@@ -28,7 +28,7 @@ The structure is as follows:
     ` *.trickle
 ```
 
-* `logger.yaml` A [log4rs](https://docs.rs/log4rs/0.10.0/log4rs/#examples) configuration file.
+* `logger.yaml` A [log4rs](https://docs.rs/log4rs/#examples) configuration file.
 * `config/*.trickle` One or more trickle files loaded in lexigraphical order to provide pipelines.
 * `config/*.yaml` One or more YAML files with configurations for Onramps, Offramps and Bindings and Mappings.
 

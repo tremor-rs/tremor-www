@@ -24,7 +24,7 @@ When using the tremor docker image configuration is loaded from the folder `/etc
 
 The following files are looked for:
 
-- `/etc/tremor/logger.yaml` a [log4rs](https://docs.rs/log4rs/*/log4rs/) configuration file to control logging in tremor.
+- `/etc/tremor/logger.yaml` a [log4rs](https://docs.rs/log4rs) configuration file to control logging in tremor.
 - `/etc/tremor/config/` : All `*.troy` files in this directory and its subdirectories will be loaded and run.
 
 By default tremor is looking into `/usr/local/share/tremor` for custom modules and libraries that can be included in other files via `use`.  See [modules](../language/reference/module_system). To adapt the places tremor is looking for your modules, append to the `TREMOR_PATH` environment variable:
