@@ -236,7 +236,6 @@ See also:
 ## Operators
 
 
-
 List of binary and unary operators in Tremor, ordered by precedence (from low to high):
 
 | Symbol       | Name                                                  | Example                                                 | Types                          |
@@ -257,7 +256,7 @@ List of binary and unary operators in Tremor, ordered by precedence (from low to
 
 :::warning
 
-These should not be confused with the higher level [Operators](../reference/operators.md) that are part of a [Pipeline](./pipelines).
+These should not be confused with the higher level [Operators](../reference/operators/index.md) that are part of a [Pipeline](./pipelines).
 
 :::
 

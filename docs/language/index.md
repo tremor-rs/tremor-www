@@ -130,11 +130,11 @@ This is the basic structure of a Pipeline. The basic concepts you need to unders
 
 ### Operators
 
-Operators are the nodes in a Pipeline graph, connected by [Select] statements. Similar to [Pipelines], Operators have ports for connecting them to other operators or pipeline input/output ports. The default ports are `in` for input and `out` for output and `err` for erroneous output. Some Operators have custom ports. To find out which, check the [Documentation](../reference/operators.md).
+Operators are the nodes in a Pipeline graph, connected by [Select] statements. Similar to [Pipelines], Operators have ports for connecting them to other operators or pipeline input/output ports. The default ports are `in` for input and `out` for output and `err` for erroneous output. Some Operators have custom ports. To find out which, check the [Documentation](../reference/operators/index.md).
 
 They can keep internal state between events flowing through them, which makes them quite powerful.
 
-Tremor provides a list of builtin [Operators]. E.g. for [`generic::batch`](../reference/operators.md#genericbatch) for batching up events or [`qos::backpressure`](../reference/operators.md#qosbackpressure) for applying backpressure towards upstream systems if a downstream system fails or takes to long to handle events.
+Tremor provides a list of builtin [Operators]. E.g. for [`generic::batch`](../reference/operators/batch.md) for batching up events or [`qos::backpressure`](../reference/operators/backpressure.md) for applying backpressure towards upstream systems if a downstream system fails or takes to long to handle events.
 
 If you want to create your own custom operator, you can use a [Script], which is handled in the next section.
 
@@ -302,5 +302,5 @@ You can refer to arguments within the body of the entity having arguments define
 [Script]: ../language/scripts
 [Standard Library]: ../reference/stdlib
 [Select]: ../language/pipelines/index.md#select-queries
-[Operators]: ../reference/operators.md
+[Operators]: ../reference/operators/index.md
 [Connect]: ../language/reference/deploy.md#rule-connec
