@@ -12,10 +12,11 @@ Options that are available to all subcommands.
 
 **Options**
 
-| Name         | Switch | Kind        | Multiple | Description                             |
-|--------------|--------|-------------|----------|-----------------------------------------|
-| `--help`     | `-h`   | switch/flag | no       | Prints help information                 |
-| `--instance` | `-i`   | switch/flag | no       | Instance identifier (default: `tremor`) |
+| Name              | Switch | Kind              | Multiple | Description                                                                                |
+|-------------------|--------|-------------------|----------|--------------------------------------------------------------------------------------------|
+| `--help`          | `-h`   | switch/flag       | no       | Prints help information                                                                    |
+| `--instance`      | `-i`   | switch/flag       | no       | Instance identifier (default: `tremor`)                                                    |
+| `--logger-config` | `-l`   | `<LOGGER_CONFIG>` | no       | Configuration file for [Log4RS](https://docs.rs/log4rs/latest/log4rs/) ( default: `none` ) |
 
 ## Version
 
@@ -133,7 +134,6 @@ Run tremor as a long lived standalone server instance.
 |----|------|----|--------|-----------|
 |`--api-host`|-a|`<API_HOST>`|The `host:port` to listen for the API ( default: `0.0.0.0:9898` )|
 |`--debug-connectors`|`-d`|`boolean`|Loads the debug connectors ( default: `false` )|
-|`--logger-config`|`-l`|`<LOGGER_CONFIG>`|Configuration file for [Log4RS](https://docs.rs/log4rs/latest/log4rs/) ( default: `none` )|
 |`--no-api`|`-n`|`boolean`|Optionally disable API ( default: `false` )|
 |`--pid`|-|`<PID>`|Path to file to store captured process id if set ( default: `none` )|
 |`--recursion-limit`|`-r`|`<RECURSION_LIMIT>`|Function tail-recursion stack depth limit ( default: `1024` )|
