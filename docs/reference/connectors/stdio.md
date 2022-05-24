@@ -1,5 +1,6 @@
 ---
-sidebar_label: stdio
+sidebar_label: stdio (Standard IO)
+sidebar_position: 1
 ---
 # The `stdio` Connector
 

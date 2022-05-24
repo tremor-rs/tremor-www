@@ -1,5 +1,6 @@
 ---
 sidebar_label: tcp
+sidebar_position: 1
 ---
 
 # The `tcp` Connector

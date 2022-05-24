@@ -1,5 +1,6 @@
 ---
 sidebar_label: kafka
+sidebar_position: 1
 ---
 
 # The `kafka` Connector

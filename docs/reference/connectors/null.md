@@ -1,5 +1,6 @@
 ---
-sidebar_label: "null"
+sidebar_label: "null (No messages)"
+sidebar_position: 100
 ---
 
 # The `null` Connector

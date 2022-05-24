@@ -1,5 +1,6 @@
 ---
-sidebar_label: wal
+sidebar_label: wal (Write Ahead Log)
+sidebar_position: 1
 ---
 
 # The `wal` Connector

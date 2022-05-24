@@ -1,5 +1,6 @@
 ---
 sidebar_label: http
+sidebar_position: 1
 ---
 
 # The `http` Connector

@@ -1,5 +1,6 @@
 ---
-sidebar_label: crononome
+sidebar_label: crononome (Scheduled messages)
+sidebar_position: 1
 ---
 
 # The `crononome` Connector
