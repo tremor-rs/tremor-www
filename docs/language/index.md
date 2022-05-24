@@ -265,7 +265,7 @@ end;
 
 In this example we put the actual [Flow] definition in a separate file `my_flows.tremor` and [`use`](../language/reference/deploy.md#rule-use)d it in our main Troy file.
 
-Even more interestingly, within our `my_flows.tremor` file, we made good use of predefined [Connectors] and [Pipelines] within the [Standard Library] modules [`tremor::pipelines`](../reference/stdlib/troy/pipelines.md) and [`tremor::connectors`](../reference/stdlib/troy/connectors.md). All standard library modules are available for `use` by default.
+Even more interestingly, within our `my_flows.tremor` file, we made good use of predefined [Connectors] and [Pipelines] within the [Standard Library] modules [`tremor::pipelines`](../reference/stdlib/tremor/pipelines.md) and [`tremor::connectors`](../reference/stdlib/tremor/connectors.md). All standard library modules are available for `use` by default.
 
 It is also important to note that you can use `use` statements on all levels of your code. In the top level, in a [Flow] definition, a [Pipeline] definition or a [Script] operator definition. A `use` statement on an outer scope, say inside a [Flow] definition, like above, will not be available on an inner scope, say a [Pipeline] definition. `use` statements only make the definition of modules available in the current scope.
 
