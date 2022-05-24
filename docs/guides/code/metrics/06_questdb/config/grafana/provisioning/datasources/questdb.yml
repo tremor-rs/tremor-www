@@ -1,3 +1,5 @@
+apiVersion: 1
+
 datasources:
   - name: QuestDB
     access: proxy
@@ -13,12 +15,14 @@ datasources:
       tlsConfigurationMethod: file-path
       tlsSkipVerify: true
     orgId: 1
-    password: ''
+    user: admin
+    secureJsonData:
+      password: quest
     readOnly: false
     type: postgres
     typeLogoUrl: public/app/plugins/datasource/postgres/img/postgresql_logo.svg
     typeName: PostgreSQL
     uid: YALf4aX7z
     url: questdb:8812
-    user: admin
+    version: 1
 
