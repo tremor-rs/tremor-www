@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # IDE Integration and tooling
 
-Tremor is configured using its own configuration language called [Troy](../language/troy.md), which actually enables us to give you valueable feedback while writing your code with our [Tremor language server](https://github.com/tremor-rs/tremor-language-server).
+Tremor is configured using its own configuration language called [Troy](../language), which actually enables us to give you valueable feedback while writing your code with our [Tremor language server](https://github.com/tremor-rs/tremor-language-server).
 
 ![tremor-vim](/img/tremor/tremor-vim.png)
 

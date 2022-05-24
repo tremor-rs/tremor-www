@@ -1,6 +1,6 @@
-# User defined Functions
+# Functions
 
-Tremor-script provides access to a growing number of functions that allow
+Tremor provides access to a growing number of functions that allow
 advanced data manipulation or access to additional information.
 
 Functions are namespaced to make identification easier.
@@ -17,30 +17,16 @@ noteworthy restrictions:
 5. Functions can call other functions but they have to be a priori defined. The order of definitions is significant.
 6. Tail recursion is supported, and constrained to a maximum recursion depth. A recursion depth is imposed as tremor-script is designed to operate on infinite streams of data so indefinite blocking/recursion is not supportable by design.
 
-Function Declaration Grammar:
-> ![function clause](../reference/svg/fndefn.svg)
-
 Lets look at the types of functions we have.
-
-## Intrinsic Functions
-
-![intrinsic fn](../reference/svg/intrinsic.svg)
-
-Intrinsic functions represent builtin or pre-defined functions implemented in the rust programming
-language that are a builtin component of the tremor project and are provided out of the box.
-
-The function reference in this documentation set, for example, is generated from the documentation
-provided in the standard library. The standard library is primarily composed of intrinsic or bulitin
-functions.
 
 ## Standard functions
 
-![standard fn](../reference/svg/fndefn.svg)
+[Grammar](./reference/script.md#rule-fndefn)
 
-![fn args](../reference/svg/fnargs.svg)
+Standard functions are the common user-defined functions. They take a given number of arguments, each with
+a name.
 
-Standard functions are functions that take a given number of arguments, each with
-a name. This function can be tail-recursive. An example would be:
+Example:
 
 ```tremor
 ## This function adds two values together
@@ -51,16 +37,20 @@ end
 
 ### Variable arguments
 
-It is possible to use variable arguments by appending a final `...` ellipsis in a standard
+It is possible to use a variable number arguments by appending a final `...` ellipsis in a standard
 function definition. The anonymous arguments will be provided via the `args` keyword.
 
 ### Recursion
 
-Tail-recursion is provided for fixed arity ( number of arguments ) tandard functions.
+Standard functions with a fixed arity, that is, without variable arguments, can be tail-recursive.
 
 Tremor imposes a restriction in recursion depth. As tremor is an event processing system
 it is not desirable to have long running functions that block events from being processed
 through the system.
+
+A function can recurse and call itself using the [`recur` statement](./reference/script.md#rule-recur).
+
+Example:
 
 ```tremor
 use std::array;
@@ -68,7 +58,9 @@ use std::array;
 fn sum_(e, es) with
   let l = array::len(es);
   match l of
-    case l when l > 0 => let a = es[0], recur(e + es[0], es[1:l])
+    case l when l > 0 => 
+      let a = es[0];
+      recur(e + es[0], es[1:l])
     default => e
   end
 end;
@@ -80,13 +72,7 @@ end
 
 ## Match functions
 
-![match fn](../reference/svg/fndefn.svg)
-
-![fn args](../reference/svg/fnargs.svg)
-
-![fn case](../reference/svg/fncase.svg)
-
-![fn default](../reference/svg/fncasedefault.svg)
+[Grammar](./reference/script.md#rule-fndefn)
 
 Since matching and extracting are a core functionality for tremor matching on
 function arguments is directly supported.
@@ -107,3 +93,23 @@ fn fib(n) with
   fib_(0, 1, n)
 end;
 ```
+
+## Intrinsic Functions
+
+
+[Grammar](./reference/script.md#rule-intrinsic)
+
+:::note
+
+Intrinsic functions cannot be user-defined.
+
+:::
+
+Intrinsic functions represent builtin or pre-defined functions implemented in the rust programming
+language that are a builtin component of the tremor project and are provided out of the box.
+
+The [Standard library] documentation, for example, is generated from the documentation
+provided in the [Tremor Standard library](https://github.com/tremor-rs/tremor-runtime/tree/main/tremor-script/lib). The [Standard library] is primarily composed of intrinsic or bulitin
+functions.
+
+[Standard library]: ../reference/stdlib

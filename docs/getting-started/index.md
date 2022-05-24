@@ -15,7 +15,7 @@ Install the right package for your operatoring system. For more detailed informa
 ### Configuration
 
 Tremor needs to be told where to get events from, how to handle them and where to send them to.
-This is done by passing it a [Troy](../language/troy) configuration file that describes our event processing logic we wish to deploy to our tremor instance.
+This is done by passing it a [Troy] configuration file that describes our event processing logic we wish to deploy to our tremor instance.
 
 The easiest way to get started is running `tremor new <project>`, for the sake of this we'll call our project `getstarted`
 
@@ -42,7 +42,7 @@ You can look at the files to see what's going on but for now we'll just run it.
 This will load the `main` troy and also tell tremor where to look for libraries to include. Remember there is a `getstarted/lib` folder.
 
 :::info
-`TREMOR_PATH` is an environment variable that tells tremor where to look for libraries, if you installed tremor via a package the standard library will automatically be put in a place where trmeor looks, if not you might have to define `TREMOR_PATH` yourself.
+[`TREMOR_PATH`] is an environment variable that tells tremor where to look for libraries, if you installed tremor via a package the standard library will automatically be put in a place where Tremor looks, if not you might have to define [`TREMOR_PATH`] yourself.
 :::
 
 We are going to see a lot of logs in our terminal and when we type something, Tremor will actually echo it back at us:
@@ -64,4 +64,8 @@ Now it is time to actually find out, what you just did and what else can be done
 The next best place to go from here is to our [guides](../guides/index.md), especially [The Basics Guide](../guides/basics), this will teach you how to build applications with tremor and teach you the various concepts.
 
 
-[The Connectors Reference](../reference/connectors), along with the other reference material will help you see some if the build in functionality.
+[The Connectors Reference](../reference/connectors), along with the other reference material will help you see some of the build in functionality.
+
+
+[Troy]: ../language
+[`TREMOR_PATH`]: ../language/index.md#tremorpath

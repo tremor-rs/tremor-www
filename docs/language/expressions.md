@@ -1,4 +1,10 @@
+---
+sidebar_position: 8
+---
+
 # Expressions
+
+This section will give you an overview over all the expressions available in Tremor, be it [Select] statements, [Script] or [Connector] definitions.
 
 ## Comments
 
@@ -30,7 +36,7 @@ Module doc comments are used for producing documentation for Module files in Tre
 
 ## Literals
 
-Literal in Tremor are equivalent to their sibling types supported by the JSON format.
+Literal in Tremor are equivalent to their sibling types supported by the JSON format. In fact, any well-formed JSON document is a valid Tremor literal.
 
 ### Null
 
@@ -235,7 +241,10 @@ See also:
 
 ## Operators
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 25493ca8 (Rework language parts)
 List of binary and unary operators in Tremor, ordered by precedence (from low to high):
 
 | Symbol       | Name                                                  | Example                                                 | Types                          |
@@ -284,8 +293,8 @@ _Normal_ paths are used to referring to local variables created with [let](#let)
 - `$`: Referring to the event metadata. Values inside the event metadata can only be accessed via a top-level name like: `$udp.port`. Its contents are usually either `null` or a record.
 - `state`: Referring to the script's state, which will persist across the lifetime of a pipeline, but not across tremor reboots. So it can be used as state kept across different events. Default value is `null`.
 - `args`: Referring to a record of arguments passed into the [script definition](./pipelines#embedded-script-definitions) or [create script](#embedded-script-definitions).
-- `window`: Referring to the name of the [window](./pipelines#tumbling-windows) this event is emitted from. This is `null` if the event is not handled inside a tremor-query [select](./pipelines#select-queries) statement with a [window](./pipelines#tumbling-windows).
-- `group`: Referring to the current group if the event is handled inside a tremor-query [select](./pipelines#select-queries) statement with a `group by` clause. It will be `null` outside of a `group by` select, if used inside, it will be an array where the first element is the value of the current group, and the second element is the stringified _name_ of the group, derived from the group value.
+- `window`: Referring to the name of the [window](./pipelines#tumbling-windows) this event is emitted from. This is `null` if the event is not handled inside a [select](./pipelines#select-queries) statement with a [window](./pipelines#tumbling-windows).
+- `group`: Referring to the current group if the event is handled inside a [select](./pipelines#select-queries) statement with a `group by` clause. It will be `null` outside of a `group by` select, if used inside, it will be an array where the first element is the value of the current group, and the second element is the stringified _name_ of the group, derived from the group value.
 
 ### Example
 
@@ -830,3 +839,5 @@ Formats can be spread out over multiple lines by adding a `\` as a last characte
 The set of supported micro-formats at the time of writing is available in the [Extractors Reference](../reference/extractors)
 
 [Script]: ../language/scripts
+[Select]: ../language/pipelines.md#select-queries
+[Connector]: ../reference/connectors
