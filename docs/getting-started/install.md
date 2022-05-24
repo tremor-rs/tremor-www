@@ -63,7 +63,7 @@ Tremor `.rpm` packages are part of every release.
 Go to our [github release page](https://github.com/tremor-rs/tremor-runtime/releases) and chose a version to download:
 
 ```console
-$ wget https://github.com/tremor-rs/tremor-runtime/releases/download/v0.12.0-rc.2/tremor-0.12.0-0.rc.2.x86_64.rpm
+$ wget https://github.com/tremor-rs/tremor-runtime/releases/download/v0.12.0/tremor-0.12.0-0.x86_64.rpm
 ```
 
 Install the package (e.g. with `dnf` on Fedora):
