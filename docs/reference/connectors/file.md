@@ -1,5 +1,6 @@
 ---
 sidebar_label: file
+sidebar_position: 1
 ---
 
 # The `file` Connector

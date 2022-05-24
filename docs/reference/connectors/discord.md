@@ -1,5 +1,6 @@
 ---
 sidebar_label: discord
+sidebar_position: 1
 ---
 
 # The `discord` Connector

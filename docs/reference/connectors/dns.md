@@ -1,5 +1,6 @@
 ---
-sidebar_label: dns
+sidebar_label: dns (DNS Lookup)
+sidebar_position: 1
 ---
 
 # The `dns` Connector

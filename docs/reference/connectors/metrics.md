@@ -1,5 +1,6 @@
 ---
-sidebar_label: metrics
+sidebar_label: metrics (Tremor metrics)
+sidebar_position: 1
 ---
 
 # The `metrics` Connector

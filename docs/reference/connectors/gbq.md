@@ -1,5 +1,6 @@
 ---
-sidebar_label: gbq
+sidebar_label: gbq (Google Big Query)
+sidebar_position: 1
 ---
 
 # The `gbq` Connector

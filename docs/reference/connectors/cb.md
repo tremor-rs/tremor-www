@@ -1,5 +1,6 @@
 ---
-sidebar_label: cb
+sidebar_label: cb (Circuit Breaker)
+sidebar_position: 101
 ---
 
 # The `cb` Connector

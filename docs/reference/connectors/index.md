@@ -67,30 +67,34 @@ Check the [postprocessor guide](../postprocessors) to see the supported codecs.
 Add content here
 
 
-## Supported Connectors
+## Connector Types
 
-These connectors are generally available in releases of tremor built in release
-mode - such as via the packaged release RPMs and Docker images.
 
-| Connector Name                           | Description                                                                    |
-|------------------------------------------|--------------------------------------------------------------------------------|
-| [File](file)                             | Interacting with files on the file system                                      |
-| [Metrics](metrics)                       | Interacting with the metrics facility                                          |
-| [Standard IO](stdio)                     | Ineracting with standard input, output and error streams on the console        |
-| [TCP Client/Server](tcp)                 | TCP-based client and server event streaming                                    |
-| [UDP Client/Server](udp)                 | UDP-based client and server event streaming                                    |
-| [Key-Value Storage](kv)                  | Key-value storage for stateful event processing applications                   |
-| [Metronome](metronome)                   | Periodic scheduled events based on interval time                               |
-| [Crononome](crononome)                   | Periodic scheduled events based on calendar time                               |
-| [Write Ahead Log](wal)                   | Durable write-ahead log for managing event stream QoS                          |
-| [Domain Name Service](dns)               | Interacting with the domain name system                                        |
-| [Discord API Client](discord)            | Integration with the Discord API, powers the tremor community discord bot      |
-| [WebSocket Client/Server](ws)            | WebSocket-based client and server event streaming                              |
-| [ElasticSearch](elastic)                 | Integration with ElasticSearch for bulk batch log uploads                      |
-| [AWS S3 Reader/Writer](s3)               | Amazon AWS S3 simple storage service file upload and download                  |
-| [Kafka Producer/Consumer](kafka)         | Integration with Kafka, Confluent and Redpanda brokers                         |
-| [UNIX Socket Client/Server](unix_socket) | Unix Socket based client and server event streaming                            |
-| [OpenTelemetry Client/Server](otel)      | Integration with CNCF OpenTelemetry specification as client or server endpoint |
+Connectors can be grouped in a number of categories that rouglhy provide the same pattern with different implementations.
+
+### Client & Server
+
+This are connectors that handle the kind of connections that usually are used for implementing, as the category suggests, clients and servers. [TCP](tcp), [HTTP](http), but also [WebSockets](ws) or [UNIX Sockets](unix_socket) fall into this categort.
+
+They all provide matching pairs of `_client` and `_server` implementations where the `_client` is the side that initiates a contact, while the `_server` is the side that awaits to be contacted.
+
+### Reader & Writer
+
+This set of connectors deals with connections that rougly resamble files access. [File](file) is the obvious one, but others like [AWS S3](s3) follow this model.
+
+They generally have a `reader` and a `writer` side.
+
+### Consumer & Producer
+
+This set of connectos connects to different messaging systems where there are two unidirecional connectiosn. One to `produce` new messages, and one to `consume` new messages.
+
+The most prominent example here is [Kafka Producer/Consumer](kafka).
+
+They generally have a `_producer` and `_consumer` implementaiton.
+
+### Unique
+
+Some connectors don't fall into the above categories or are one sided. The [Discord](discord) or [DNS](dns) connector is a client but there is no server. The [KV](kv) or [Google Big Query](gbq) connector is a database connector, and connectors like the [WAL](wal) are different again.
 
 ## Development Only Connectors
 
@@ -102,6 +106,7 @@ available only during development for debug builds of tremor.
 | [cb](cb)       | Explain     |
 | [bench](bench) | Explain     |
 | [null](null)   | Explain     |
+| [exit](exit)   | Allow terminating the runtime |
 
 ## Configuration
 

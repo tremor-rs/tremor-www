@@ -1,5 +1,6 @@
 ---
-sidebar_label: bench
+sidebar_label: bench (Benchmarking)
+sidebar_position: 100
 ---
 
 # The `bench` Connector

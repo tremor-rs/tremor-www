@@ -1,5 +1,6 @@
 ---
-sidebar_label: elastic
+sidebar_label: elastic (Elastic Search)
+sidebar_position: 1
 ---
 
 # The `elastic` Connector

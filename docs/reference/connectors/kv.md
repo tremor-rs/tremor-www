@@ -1,5 +1,6 @@
 ---
-sidebar_label: kv
+sidebar_label: kv (Key/Value Store)
+sidebar_position: 1
 ---
 
 # The `kv` Connector
