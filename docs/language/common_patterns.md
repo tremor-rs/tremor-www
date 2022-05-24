@@ -192,7 +192,7 @@ end
 
 :::note
 
-Also consider the [`qos::percentile` operator](../reference/operators.md#qospercentile) for this kind of task.
+Also consider the [`qos::percentile` operator](../reference/operators/percentile.md) for this kind of task.
 
 :::
 

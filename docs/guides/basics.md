@@ -112,11 +112,7 @@ We use the definition provided by the standard library
 # Our main flow
 define flow main
 flow
-<<<<<<< HEAD
   # import the `tremor::connectors` module
-=======
-  # import the `module
->>>>>>> 2bad7ed8 (Update troy:: to tremor::)
   use tremor::connectors;
   # import the `tremor::pipelines` module
   use tremor::pipelines;

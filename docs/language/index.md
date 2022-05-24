@@ -337,6 +337,6 @@ You can refer to arguments within the body of the entity having arguments define
 [Script]: ../language/scripts.md
 [Standard Library]: ../reference/stdlib
 [Select]: ../language/pipelines.md#select-queries
-[Operators]: ../reference/operators.md
+[Operators]: ../reference/operators
 [Connect]: ../language/reference/deploy.md#rule-connec
 [Codec]: ../reference/codecs

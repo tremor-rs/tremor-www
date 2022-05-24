@@ -29,10 +29,10 @@ It can also be used to test the behaviour of connectors acting as event sinks, c
 
 ## Configuration
 
-| Config Option  | Description                                                                                                                                                                                                  | Possible Values  | Required / Optional                | Default Value               |
-|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|------------------------------------|-----------------------------|
-| path           | Path to the file to load data from. The file will be split into lines and each will form one event. Only required for the source part.                                                                       | file path        | Only required for the source part. |                             |
-| timeout        | Timeout in nanoseconds to wait for circuit breaker messages after all events from the `path` file have been sent. After this timeout is expired the Tremor process will be stopped.                          | positive integer | optional                           | 10_000_000_000 (10 seconds) |
+| Config Option  | Description                                                                                                                                                                                         | Possible Values  | Required / Optional                | Default Value               |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|------------------------------------|-----------------------------|
+| path           | Path to the file to load data from. The file will be split into lines and each will form one event. Only required for the source part.                                                              | file path        | Only required for the source part. |                             |
+| timeout        | Timeout in nanoseconds to wait for circuit breaker messages after all events from the `path` file have been sent. After this timeout is expired the Tremor process will be stopped.                 | positive integer | optional                           | 10_000_000_000 (10 seconds) |
 | expect_batched | When set to `true` changes verifcation mode for testing applications involving [batching](../operators/batch.md). That means only not all events are required to be acknowledged, only all batches. | boolean          | optional                           | false                       |
 
 ### Example
@@ -43,7 +43,6 @@ flow
   use tremor::pipelines;
   use std::time::nanos;
 
-<<<<<<< HEAD
   define connector my_cb from cb
   with
     codec = "json",		# Events are line delimited JSON
@@ -51,30 +50,6 @@ flow
       "path": "in.json",	# File from which to replay events
       "timeout": nanos::from_seconds(1)
     }
-=======
-  define flow cb_example
-  flow
-    use tremor::pipelines;
-    use std::time::nanos;
-
-    define connector my_cb from cb
-    with
-      codec = "json",		# Events are line delimited JSON
-      config = {
-        "path": "in.json",	# File from which to replay events
-        "timeout": nanos::from_seconds(1)
-      }
-    end;
-    create connector my_cb;
-
-    create pipeline passthrough from pipelines::passthrough;
-
-    # connect both the `out` and the `in` port of the connector 
-    # via a simple passthrough pipeline.
-    # (The ports can also be omitted for brevity)
-    connect /connector/my_cb/out to /pipeline/passthrough/in;
-    connect /pipeline/passthrough/out to /connector/my_cb/in;
->>>>>>> 2bad7ed8 (Update troy:: to tremor::)
   end;
   create connector my_cb;
 
