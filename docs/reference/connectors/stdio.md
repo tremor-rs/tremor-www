@@ -13,7 +13,7 @@ system through the connected pipelines in tremor flow definitions accordingly
 
 ## Configuration
 
-```troy
+```tremor
 define connector console from stdio;
 
 create connector console from console;

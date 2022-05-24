@@ -24,18 +24,17 @@ merge with in-memory state in the current solution.
 One or many `cron` like specifications for the event schedule and a user defined data
 payload.
 
-```troy
-  # File: config.troy
-  define connector crononome from crononome
-  with
-    config = {
-      "entries": [{
-        "name": "test",                # A symbolic name for this schedule
-        "expr": "* * * * * *",         # A cron schedule
-        "payload": {"snot": "badger"}  # A user configurable payload value
-      }]
-    }
-  end;
+```tremor title="config.troy"
+define connector crononome from crononome
+with
+  config = {
+    "entries": [{
+      "name": "test",                # A symbolic name for this schedule
+      "expr": "* * * * * *",         # A cron schedule
+      "payload": {"snot": "badger"}  # A user configurable payload value
+    }]
+  }
+end;
 ```
 
 ## Illustrative example
@@ -55,7 +54,7 @@ graph LR
 
 The application source for this example:
 
-```troy
+```tremor
 
 
 define flow main

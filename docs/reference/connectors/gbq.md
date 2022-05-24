@@ -9,7 +9,7 @@ The GBQ connector integrates [Google BigQuery](https://cloud.google.com/bigquery
 
 ## Configuration
 
-```troy
+```tremor
 define connector gbq from gbq
 with
     config = {

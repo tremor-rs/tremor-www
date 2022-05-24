@@ -18,7 +18,7 @@ merge with in-memory state in the current solution.
 
 An `interval` in milliseconds is required to use the metronome
 
-```troy
+```tremor
   define connector every_second from metronome
   with
      config = {"interval": 1000}
@@ -42,7 +42,7 @@ graph LR
 
 The application source for this example:
 
-```troy
+```tremor
 define flow main
 flow
   use troy::connectors;

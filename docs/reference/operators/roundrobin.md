@@ -12,7 +12,7 @@ This operator preserves event metadata.
 
 **Example**:
 
-```trickle
+```tremor
 define qos::roundrobin operator roundrobin
 with
   outputs = ["round", "robin", "outputs"]

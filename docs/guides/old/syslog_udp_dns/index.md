@@ -36,8 +36,7 @@ The `dns` pipeline does two things. First it moves the event itself into the `$c
 Storing data in `$correlation` will mean this data has to be kept in memory until the event is processed, depending on throughput and pending requests this can be a significant memory cost.
 :::
 
-```trickle
-# dns.trickle
+```tremor title="dns.trickle"
 define script dns
 script
  let $correlation = event;
@@ -55,7 +54,6 @@ select event from dns into out;
 
 In addition the `consumer` pipeline got slightly more complicated. We use `merge` to replace the lookup response from the `dns` sink with it's correlation (the orriginal event) and merge merge it by inserting the IP we looked up into the event. In result we now have the original event with the added `ip` field containing the IP correlating to the hostname.
 
-```trickle
-# consumer.trickle
+```tremor title="consumer.trickle"
 select merge $correlation of {"ip": event[0].A} end from in into out
 ```

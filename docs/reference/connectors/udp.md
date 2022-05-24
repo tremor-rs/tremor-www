@@ -10,29 +10,27 @@ The `udp` connector allows UDP based datagram clients and servers to be integrat
 
 ### Client
 
-```troy
-  # File: config.troy
-  define connector `udp-out` from udp_client
-  with
-    codec = "yaml",
-    postprocessors = ["base64"],
-    config = {
-      "url": "localhost:4242",
-    }
-  end;
+```tremor title="config.troy"
+define connector `udp-out` from udp_client
+with
+  codec = "yaml",
+  postprocessors = ["base64"],
+  config = {
+    "url": "localhost:4242",
+  }
+end;
 ```
 
 ### Server
 
-```troy
-  # File: config.troy
-  define connector `udp-in` from udp_server
-  with
-    codec = "string",
-    config = { 
-      "url": "localhost:4242",
-    }
-  end;
+```tremor title="config.troy"
+define connector `udp-in` from udp_server
+with
+  codec = "string",
+  config = { 
+    "url": "localhost:4242",
+  }
+end;
 ```
 
 ## UDP configuration example
@@ -70,9 +68,7 @@ graph LR
 
 In deployable form
 
-```troy
-# File : config.troy
-
+```tremor title="config.troy"
 define flow main
 flow
   use troy::connectors;
@@ -124,9 +120,7 @@ graph LR
 ```
 
 
-```troy
-# File: config.troy
-
+```tremor title="config.troy"
 define flow main
 flow
   use troy::connectors;

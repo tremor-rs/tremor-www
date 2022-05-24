@@ -20,7 +20,7 @@ If not found, the storage directory will be auto-created, or an error will be pr
 
 ## Configuration
 
-```troy
+```tremor
 define my_kv from kv
 with
   "dir" = "state",
@@ -85,7 +85,7 @@ let event = null;
 Assuming the `$kv` metadata and event are as above, the following query connected to
 an instance of the kv connector should suffice:
 
-```troy
+```tremor
 select event from in into out;
 ```
 

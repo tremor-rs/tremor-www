@@ -1,3 +1,7 @@
+---
+sidebar_position: 99
+---
+
 # Tremor cli v0.11
 
 Tremor cli - Command Line Interface

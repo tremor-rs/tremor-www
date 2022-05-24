@@ -123,7 +123,7 @@ We may also wish to override the conditions under which a file is created, appen
 to or overwritten when tremor is started. We can modify the write mode by setting the
 `mode` accordingly.
 
-```troy
+```tremor
 define connector write_file from file
 args
     file = "out.log"

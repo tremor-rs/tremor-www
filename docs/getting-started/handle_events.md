@@ -98,7 +98,7 @@ pipeline:
 
 In trickle script, the configuration becomes a query description based on a `select` statement to transform the data, and a `having` clause to filter events we do not wish to keep.
 
-```trickle
+```tremor
 select
   match {"message": event} of
     case r = %{ message ~= grok|%{IPORHOST:clientip}·%{USER:ident}·%{USER:auth}·[%{HTTPDATE:timestamp}]·"%{WORD:verb}·%{DATA:request}·HTTP/%{NUMBER:httpversion}"·%{NUMBER:response:int}·(?:-\|%{NUMBER:bytes:int})·%{QS:referrer}·%{QS:agent}| } => r.message

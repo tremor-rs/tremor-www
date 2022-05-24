@@ -10,7 +10,7 @@ Operators are created in the context of a pipeline and configured as part of `tr
 
 Configuration is of the general form:
 
-```trickle
+```tremor
 define module::operator_name operator my_custom_operator
 with
   param1 = "foo",

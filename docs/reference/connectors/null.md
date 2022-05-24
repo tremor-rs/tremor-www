@@ -21,8 +21,7 @@ Events sent to its sink are discarded on receive.
 
 There is no specific configuration required for this connector
 
-```troy
-  # File example.troy
+```tremor title="example.troy"
   define connector nil from `null`;
 ```
 
@@ -32,8 +31,7 @@ Although designed for tests written in the rust programming language
 rather than the integration test framework, it could be used in an
 integration test as follows:
 
-```troy
-# File: config.troy
+```tremor title="config.troy"
 define flow main
 flow
   use integration;

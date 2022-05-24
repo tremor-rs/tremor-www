@@ -26,8 +26,7 @@ The following metadata variables can be specified on a per event basis:
 
 ## Configuration
 
-```troy
-  # File: config.troy
+```tremor title="config.troy"
   define connector elastic from elastic
   with
     config = {
@@ -49,7 +48,7 @@ The following metadata variables can be specified on a per event basis:
 
 ## A batch upload service to elasticsearch
 
-```troy
+```tremor
 define flow main
 flow
   use std::time::nanos;

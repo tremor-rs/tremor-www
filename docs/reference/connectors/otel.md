@@ -17,44 +17,42 @@ both depending on use case.
 
 Configurating as a client to a local or remote OpenTelemetry service:
 
-```troy
-  # File: example.troy
-  define connector my_otel from otel_client
-  with
-    config = {
-      "url": "127.0.0.1:4317",  # Connect to localhost via gRPC to port 4317
-    },
-    reconnect = {
-      "retry": {
-        "interval_ms": 100, # Retry on disconnect every 100ms
-        "growth_rate": 2,   # Double interval for each attempt
-        "max_retries": 3,   # Try no more than 3 times to reconnect
+```tremor title="example.troy"
+define connector my_otel from otel_client
+with
+  config = {
+    "url": "127.0.0.1:4317",  # Connect to localhost via gRPC to port 4317
+  },
+  reconnect = {
+    "retry": {
+      "interval_ms": 100, # Retry on disconnect every 100ms
+      "growth_rate": 2,   # Double interval for each attempt
+      "max_retries": 3,   # Try no more than 3 times to reconnect
 
-        # Enable trace event support ( default: true )
-        # "trace": false,
+      # Enable trace event support ( default: true )
+      # "trace": false,
 
-        # Enable metrics event support ( default: true )
-        # "metrics": false,
+      # Enable metrics event support ( default: true )
+      # "metrics": false,
 
-        # Enable logs event support ( default: true )
-       # "logs": false,
-      }
+      # Enable logs event support ( default: true )
+      # "logs": false,
     }
-  end;
+  }
+end;
 ```
 
 ### How do I configure the connector as an OpenTelemetry service?
 
 Configurating as a server exposing an OpenTelemetry service to local or remote clients:
 
-```troy
-  # File: example.troy
-  define connector my_otelfrom otel_server
-  with
-    config = {
-      "url": "127.0.0.1:4317",	# Expose an OpenTelemetry gRPC endpoint on localhost port 4317
-    }
-  end;
+```tremor title="example.troy"
+define connector my_otelfrom otel_server
+with
+  config = {
+    "url": "127.0.0.1:4317",	# Expose an OpenTelemetry gRPC endpoint on localhost port 4317
+  }
+end;
 ```
 
 ## Full example - An OpenTelemetry Echo service
@@ -65,9 +63,7 @@ tests.
 
 The entire echo application is as follows:
 
-```troy
-# File: config.troy
-
+```tremor title="config.troy"
 # Encapsulation of the server side logic - our otel o11y `echo` service
 define flow server
 flow

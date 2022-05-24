@@ -11,7 +11,7 @@ logic to expand on the set of metrics collected.
 
 We use the standard definition of the metrics connector from the standard library
 
-```troy
+```tremor
 use troy::connectors;
 
 create connector metrics from connectors::metrics;
@@ -52,9 +52,7 @@ Where:
 
 Capture and redirect system metrics and redirect to standard output
 
-```troy
-# File: capture.troy
-#
+```tremor title="capture.troy"
 define flow main
 flow
   use integration;

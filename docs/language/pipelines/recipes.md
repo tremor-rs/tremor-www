@@ -7,7 +7,7 @@ sidebar_label: Recipes
 
 Periodically, produce basic statistics and percentiles / quartiles from a stream of ingested events, for a particular value in the inbound event stream.
 
-```trickle
+```tremor
 # Every 10 seconds
 create tumbling window `10secs`
  with

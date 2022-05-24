@@ -37,7 +37,7 @@ This is a very useful streaming operation that consumes data streams from a a so
 relays each received event to a destination or target downstream. It distributes each
 received event from the source to the destination.
 
-```trickle
+```tremor
 # Passthrough query
 select event from in into out;
 ```
@@ -46,6 +46,7 @@ We call this `passthrough` as the data events stream or __pass through__ without
 
 The processing and data sources and destinations are decoupled. These are connected together in [flow](#Flow)
 statements.
+
 ### Flow
 
 The `flow` statement encapsulates instances of `connector` and `pipeline` that can be interconnected to provide
@@ -53,7 +54,7 @@ a runnable embedded service complete with connectivity.
 
 We begin our study from the outside, and define a flow called `main`.
 
-```troy
+```tremor
 # Our main flow
 define flow main
   # ... We define and create connectors and pipelines here
@@ -74,7 +75,7 @@ We use pre-packaged definitions in this example from the `troy::connectors` modu
 The console connector is a configured instance of the `stdio` connector that uses the `separate` pre and postprocessor to make it line-based and the [`string` codec](../reference/codecs/string) to avoid any parsing of the input data.
 :::
 
-```troy
+```tremor
 # Our main flow
 define flow main
 flow
@@ -97,8 +98,7 @@ Lastly, we need to define the processing logic for this `main` flow.
 We could define passthrough ourselves as follows, but it is in common use, so available through the
 standard library in `troy::pipelines` and called `passthrough`:
 
-```troy
-# File: troy/pipelines.troy
+```tremor title="troy/pipelines.troy"
 define pipeline passthrough
 pipeline
     select event from in into out;
@@ -108,7 +108,7 @@ end
 
 We use the definition provided by the standard library
 
-```troy
+```tremor
 # Our main flow
 define flow main
 flow
@@ -135,7 +135,7 @@ We now have all the components we need, a flow to host it all, a connector to re
    Connect allows connecting to different ports on connectors and pipelines. When omitted, ports default to `/out`  for the connection's source and to `/in` for the connection's target. We will explore this more in a later step. For now, we'll ignore ports.
 :::
 
-```troy
+```tremor
 # Our main flow
 define flow main
 flow
@@ -162,7 +162,7 @@ end;
 
 We have already used pre-defined pipelines and connectors and created instances of them. Flows are not much different. They have a definition and an instantiation phase. While we call the instantiating of pipelines and connectors `create`, for flows, we use `deploy` as it is the step where the theoretical configuration becomes actual running code.
 
-```troy
+```tremor
 # Our main flow
 define flow main
 flow
@@ -220,8 +220,7 @@ To do this we create a new files named `lib/pipelines.tremor` and use this pipel
    Pipelines, by default, use the ports `in` for input, `out` and `err` for outputs. As with `connect`, those definitions can be omitted as long as we use the standard. For details on defining your own ports, you can refer to the [reference documentation](../language/troy).
 :::
 
-```troy
-# File: lib/pipelines.tremor
+```tremor title="lib/pipelines.tremor"
 
 # define our main pipeline
 define pipeline main
@@ -230,8 +229,7 @@ pipeline
 end;
 ```
 
-```troy
-# File: main.troy
+```tremor title="main.troy"
 # Our main flow
 define flow main
 flow
@@ -265,9 +263,7 @@ Now we have our pipeline in which we will capitalize the text that's passed thro
 In select statements, you can do any transformation that's creating new data, but you can't do any mutating manipulations. Simplified, you can think that `let` is not allowed.
 :::
 
-```troy
-# File: lib/pipelines.tremor
-
+```tremor title="lib/pipelines.tremor"
 # define our own main pipeline
 define pipeline main
 pipeline
@@ -296,8 +292,7 @@ To do this we, again define a new file `lib/scripts.tremor`
    The script could be inlined in the pipeline and the pipeline in the flow, but the model we use here creates nicer to manage applications.
 :::
 
-```tremor
-# File: lib/pipeline.tremor
+```tremor title="lib/pipeline.tremor"
 # define our script
 define script punctuate
 script
@@ -317,8 +312,7 @@ script
 end;
 ```
 
-```tremor
-# File: lib/pipeline.tremor
+```tremor title="lib/pipeline.tremor"
 define pipeline main
 pipeline
   # use the `std::string` module
@@ -368,8 +362,7 @@ We, however, stop short here from actually filtering just yet.
 We can omit `in` and `out` as ports as that's what tremor defaults to. For `exit`, we have to be more specific.
 :::
 
-```troy
-# File: main.troy
+```tremor title="main.troy"
 # Our main flow
 define flow main
 flow
@@ -417,8 +410,7 @@ For pipelines, we can omit `into` and `from`. If done, it is treated as `into ou
 
 Once that is done, we can add the filter logic. To do that, we create a new select statement with a `where event == "exit"` clause that will only forward events that read `exit` and add a `where event != "exit"` to our existing clause, forwarding the rest to the punctuate script.
 
-```troy
-# File: lib/pipelines.tremor
+```tremor title="lib/pipelines.tremor"
 define pipeline main
 # the exit port is not a default port, so we have to overwrite the built-in port selection
 into out, exit

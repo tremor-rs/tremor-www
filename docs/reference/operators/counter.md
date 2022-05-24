@@ -12,6 +12,6 @@ This operator preserves event metadata.
 
 **Example**:
 
-```trickle
+```tremor
 define generic::counter operator counter;
 ```

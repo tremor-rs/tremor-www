@@ -10,45 +10,43 @@ The `tcp` connector allows TCP-based clients and servers to be integrated with t
 
 ### Client
 
-```troy
-  # File: config.troy
-  define connector `tcp-out` from tcp_client
-  with
-    codec = "yaml",
-    postprocessors = ["base64"],
-    config = {
-      "url": "localhost:4242",
+```tremor title="config.troy"
+define connector `tcp-out` from tcp_client
+with
+  codec = "yaml",
+  postprocessors = ["base64"],
+  config = {
+    "url": "localhost:4242",
 
-      # Optional Transport Level Security configuration
-      # "tls" = { ... },
+    # Optional Transport Level Security configuration
+    # "tls" = { ... },
 
-      # Optional tuning of the Nagle algorithm ( default: true )
-      # - By default no delay is preferred
-      # "no_delay" = false,
+    # Optional tuning of the Nagle algorithm ( default: true )
+    # - By default no delay is preferred
+    # "no_delay" = false,
 
-      # Data buffer size ( default: 8K, limits maximum message size )
-      # "buf_size" = "16K",
-    }
-  end;
+    # Data buffer size ( default: 8K, limits maximum message size )
+    # "buf_size" = "16K",
+  }
+end;
 ```
 
 ### Server
 
-```troy
-  # File: config.troy
-  define connector `tcp-in` from tcp_server
-  with
-    codec = "string",
-    config = { 
-      "url": "localhost:4242",
+```tremor title="config.troy"
+define connector `tcp-in` from tcp_server
+with
+  codec = "string",
+  config = { 
+    "url": "localhost:4242",
 
-      # Optional Transport Level Security configuration
-      # "tls" = { ... }
+    # Optional Transport Level Security configuration
+    # "tls" = { ... }
 
-      # Data buffer size ( default: 8K, limits maximum message size )
-      # "buf_size" = "16K",
-    }
-  end;
+    # Data buffer size ( default: 8K, limits maximum message size )
+    # "buf_size" = "16K",
+  }
+end;
 ```
 
 ## TCP configuration example
@@ -86,9 +84,7 @@ graph LR
 
 In deployable form
 
-```troy
-# File : config.troy
-
+```tremor title="config.troy"
 define flow main
 flow
   use troy::connectors;
@@ -140,9 +136,7 @@ graph LR
 ```
 
 
-```troy
-# File: config.troy
-
+```tremor title="config.troy"
 define flow server
 flow
   use integration;

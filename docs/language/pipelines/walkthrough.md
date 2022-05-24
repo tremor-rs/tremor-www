@@ -14,7 +14,7 @@ the tremor runtime.
 
 The most basic query possible in trickle is
 
-```trickle
+```tremor
 select event from in into out; # A basic passthrough query pipeline
 ```
 
@@ -50,7 +50,7 @@ The logical inverse of branching is to unify or union streams together, this ope
 is also supported via the select operation and is demonstrated below. We combine
 the `evens` and `odds` streams into the standard output stream
 
-```trickle
+```tremor
 # create private intermediate internal streams
 create stream evens;
 create stream odds;
@@ -89,7 +89,7 @@ expect to see output from the tool as follows:
 Here's the logic for an entire backpressure algorithm that could be introduced as
 a proxy between two systems, implemented by using a builtin operator called [`qos::backpressure`](../../reference/operators/backpressure.md):
 
-```trickle
+```tremor
 define qos::backpressure operator bp
 with
     timeout = 10000,

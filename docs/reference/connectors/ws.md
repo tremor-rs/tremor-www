@@ -16,24 +16,23 @@ Text and binary frames can be used.
 
 An annotated example of a non-tls plain WS cient configuration leveraging defaults.
 
-```troy
-  # File: config.troy
-  define my_wsc out from ws_client
-  with
-    postprocessors = ["lines"],
-    codec = "json",
-    config = {
-      # Connect to port 4242 on the loopback device
-      "url": "ws://127.0.0.1:4242/"
+```tremor title="config.troy"
+define my_wsc out from ws_client
+with
+  postprocessors = ["lines"],
+  codec = "json",
+  config = {
+    # Connect to port 4242 on the loopback device
+    "url": "ws://127.0.0.1:4242/"
 
-      # Optional Transport Level Security configuration
-      # "tls" = { ... }
+    # Optional Transport Level Security configuration
+    # "tls" = { ... }
 
-      # Optional tuning of the Nagle algorithm ( default: true )
-      # - By default no delay is preferred
-      # "no_delay" = false
-    }
-  end;
+    # Optional tuning of the Nagle algorithm ( default: true )
+    # - By default no delay is preferred
+    # "no_delay" = false
+  }
+end;
 ```
 
 ### Secure Client
@@ -41,74 +40,71 @@ An annotated example of a non-tls plain WS cient configuration leveraging defaul
 An annotated example of a secure WS client configuration with
 reconnection quality of service configured.
 
-```troy
-  # File: config.troy
-  define connector ws_client from ws_client
-  with
-    postprocessors = ["lines"],
-    codec = "json",
-    config = {
-      # Listen on all interfaces on TCP port 65535
-      "url": "wss://0.0.0.0:65535",
+```tremor title="config.troy"
+define connector ws_client from ws_client
+with
+  postprocessors = ["lines"],
+  codec = "json",
+  config = {
+    # Listen on all interfaces on TCP port 65535
+    "url": "wss://0.0.0.0:65535",
 
-      # Prefer delay and enable the TCP Nagle algorithm
-      "no_delay": false,
+    # Prefer delay and enable the TCP Nagle algorithm
+    "no_delay": false,
 
-      # Enable SSL/TLS
-      "tls": {
-        # CA certificate
-        "cafile": "./before/localhost.cert",
-        # Domain
-        "domain": "localhost",
-      }
-    },
-    # Reconnect starting at half a second, backoff by doubling, maximum of 3 tries before circuit breaking
-    reconnect = {
-      "retry": {
-        "interval_ms": 500,
-        "growth_rate": 2,
-        "max_retries": 3,
-      }
+    # Enable SSL/TLS
+    "tls": {
+      # CA certificate
+      "cafile": "./before/localhost.cert",
+      # Domain
+      "domain": "localhost",
     }
-  end;
+  },
+  # Reconnect starting at half a second, backoff by doubling, maximum of 3 tries before circuit breaking
+  reconnect = {
+    "retry": {
+      "interval_ms": 500,
+      "growth_rate": 2,
+      "max_retries": 3,
+    }
+  }
+end;
 ```
 
 ### Insecure Server
 
 An annotated example of a tls plain WS cient configuration leveraging defaults..
 
-```troy
-  # File: config.troy
-  define connector in from ws_server
-  with
-    preprocessors = [{"name": "lines", "config":{"buffered": false}}],
-    codec = "json",
-    config = {
-      "url": "127.0.0.1:4242",
-    }
-  end;
+```tremor title="config.troy"
+define connector in from ws_server
+with
+  preprocessors = [{"name": "lines", "config":{"buffered": false}}],
+  codec = "json",
+  config = {
+    "url": "127.0.0.1:4242",
+  }
+end;
 ```
 
 ### Secure Server
 
 An annotated example of a secure WS server configuration.
 
-```troy
-  # File: config.troy
-  define connector ws_server from ws_server
-  with
-    preprocessors = ["lines"],
-    codec = "json",
-    config = {
-      "url": "0.0.0.0:65535",
-      "tls": {
-        # Security certificate for this service endpoint
-        "cert": "./before/localhost.cert",
-        # Security key
-        "key": "./before/localhost.key",
-      }
+```tremor title="config.troy"
+define connector ws_server from ws_server
+with
+  preprocessors = ["lines"],
+  codec = "json",
+  config = {
+    "url": "0.0.0.0:65535",
+    "tls": {
+      # Security certificate for this service endpoint
+      "cert": "./before/localhost.cert",
+      # Security key
+      "key": "./before/localhost.key",
     }
-  end;
+  }
+end;
 ```
 
 
@@ -117,8 +113,7 @@ An annotated example of a secure WS server configuration.
 Single or multiple JSON lines of data can be transferred from client to
 server with the server echoing the client message back to the client
 
-```troy
-# File: config.troy
+```tremor title="config.troy"
 define flow main
 flow
   use integration;

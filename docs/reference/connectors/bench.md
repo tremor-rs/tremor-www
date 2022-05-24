@@ -38,18 +38,17 @@ purpose.
 
 ### Example
 
-```troy
-  # File: example.troy
-  use std::time::nanos;
-  define connector bench from bench
-  with
-    codec = "json",   	                  # Decode each line as a JSON document
-    config = {
-      "source": "in.json",                # Take the source data from `in.json` and turn each line into an event
-      "interval": nanos::from_millis(1),  # Wait for 1ms between each event
-      "iters": 1,                         # Iterate only once through the data in `in.json`
-    }
-  end;
+```tremor title="example.troy"
+use std::time::nanos;
+define connector bench from bench
+with
+  codec = "json",   	                  # Decode each line as a JSON document
+  config = {
+    "source": "in.json",                # Take the source data from `in.json` and turn each line into an event
+    "interval": nanos::from_millis(1),  # Wait for 1ms between each event
+    "iters": 1,                         # Iterate only once through the data in `in.json`
+  }
+end;
 ```
 
 ## Operation
@@ -79,8 +78,7 @@ A complete benchmark will define the `bench` connector as in the
 configuration example above with a system under test defined in a deployment file. A full
 example is provided for illustration.
 
-```troy
-# File: config.troy
+```tremor title="config.troy"
 define flow main
 flow
   use troy::connectors;
