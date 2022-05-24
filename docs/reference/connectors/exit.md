@@ -46,8 +46,8 @@ The application source for this example:
 ```tremor title="stopper.troy"
 define flow stopper
 flow
-  use troy::connectors; # Use predefined console and exit connector definitions
-  use troy::pipelines;  # Use predefined passthrough pipeline definition
+  use tremor::connectors; # Use predefined console and exit connector definitions
+  use tremor::pipelines;  # Use predefined passthrough pipeline definition
 
   create connector console from connectors::console;
   create connector stop from connectors::exit;

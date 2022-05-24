@@ -1,7 +1,7 @@
 define flow metrics
 flow
   # import the pipeline module
-  use troy::pipelines;
+  use tremor::pipelines;
   # define the udp server
   define connector upd_in from udp_server
   with

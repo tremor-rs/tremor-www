@@ -1,8 +1,8 @@
 # Our main flow
 define flow main
 flow
-  # import the `troy::connectors` module
-  use troy::connectors;
+  # import the `tremor::connectors` module
+  use tremor::connectors;
   use lib::pipelines;
 
 

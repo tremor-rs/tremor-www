@@ -103,8 +103,8 @@ graph LR
 define flow server
 flow
   use integration;
-  use troy::pipelines;
-  use troy::connectors;
+  use tremor::pipelines;
+  use tremor::connectors;
 
   define connector http_server from http_server
   with
@@ -142,8 +142,8 @@ end;
 define flow client
 flow
   use integration;
-  use troy::pipelines;
-  use troy::connectors;
+  use tremor::pipelines;
+  use tremor::connectors;
 
   define connector http_client from http_client
   with

@@ -55,11 +55,9 @@ graph LR
 The application source for this example:
 
 ```tremor
-
-
 define flow main
 flow
-  use troy::connectors;
+  use tremor::connectors;
   use integration;
   define connector crononome from crononome
   with

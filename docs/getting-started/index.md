@@ -34,8 +34,8 @@ This is done by passing it a [Troy](../language/troy) configuration file that de
 ```tremor
 define flow main
 flow
-  use troy::pipelines;
-  use troy::connectors;
+  use tremor::pipelines;
+  use tremor::connectors;
 
   create connector console from connectors::console;
   create pipeline passthrough from pipelines::passthrough;
