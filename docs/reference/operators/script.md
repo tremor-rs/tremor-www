@@ -14,7 +14,7 @@ The `script` operator allows to modify the events metadata (via `$`), and the sc
 
 **Examples**:
 
-```trickle
+```tremor
 # definition
 define script rt
 script
@@ -22,7 +22,7 @@ script
 end;
 ```
 
-```trickle
+```tremor
 define script add
 script
   emit + 1

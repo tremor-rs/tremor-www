@@ -193,9 +193,8 @@ One special case are [Flows]. They are not created, but [Deploy]ed. This is beca
 
 ### Example
 
-In file `main.troy`:
 
-```tremor
+```tremor title="main.troy"
 # importing the module `my_flows` from `my_flows.tremor`
 # making its definitions available in this file
 use my_flows;
@@ -204,9 +203,7 @@ use my_flows;
 deploy flow cool_flow_01 from my_flows::cool_flow;
 ```
 
-In file `my_flows.tremor`:
-
-```tremor
+```tremor title="my_flows.tremor"
 
 define flow cool_flow
 flow

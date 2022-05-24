@@ -20,52 +20,51 @@ required of the resulting system.
 
 Example configuration as a consumer.
 
-```troy
-    # File: config.troy
-    define connector consumer from kafka_consumer
-    with
-        # Enables metrics at a 1 second interval
-        metrics_interval_s = 1,
+```tremor title="config.troy"
+define connector consumer from kafka_consumer
+with
+    # Enables metrics at a 1 second interval
+    metrics_interval_s = 1,
 
-        # Reconnection logic
-        reconnect = {
-                "retry": {
-                    "interval_ms": 3000,
-                    "max_retries": 10
-                }
-            },
-
-        # Data body content is JSON formatted
-        codec = "json",
-
-	# Kafka specific consumer configuration
-        config = {
-		# required - List of broker bootstrap servers
-                "brokers": [
-                    "127.0.0.1:9092"
-                ],
-
-		# required - Consumer group id
-                "group_id": "test1",
-
-		# required - list of subscription topics to register with
-                "topics": [
-                    "tremor_test"
-                ],
-
-		# optional - Whether or not to retry failed attempts
-                # When true - resets the offset to a failed message for retry
-                #  - Warning: where persistent failure is expected, this will lead to persistent errors
-                # When false - Only commits offset for a successful acknowledgement
-                "retry_failed_events": false,
-
-		# optional - librdkafka configuration settings ( indicative illustrative example )
-                "rdkafka_options": {
-                    "enable.auto.commit": "false",
-                    "auto.offset.reset": "beginning",
-                }
+    # Reconnection logic
+    reconnect = {
+            "retry": {
+                "interval_ms": 3000,
+                "max_retries": 10
             }
-    end;
+        },
+
+    # Data body content is JSON formatted
+    codec = "json",
+
+    # Kafka specific consumer configuration
+    config = {
+    # required - List of broker bootstrap servers
+            "brokers": [
+                "127.0.0.1:9092"
+            ],
+
+    # required - Consumer group id
+            "group_id": "test1",
+
+    # required - list of subscription topics to register with
+            "topics": [
+                "tremor_test"
+            ],
+
+    # optional - Whether or not to retry failed attempts
+            # When true - resets the offset to a failed message for retry
+            #  - Warning: where persistent failure is expected, this will lead to persistent errors
+            # When false - Only commits offset for a successful acknowledgement
+            "retry_failed_events": false,
+
+    # optional - librdkafka configuration settings ( indicative illustrative example )
+            "rdkafka_options": {
+                "enable.auto.commit": "false",
+                "auto.offset.reset": "beginning",
+            }
+        }
+end;
 ```
 
 
@@ -73,7 +72,7 @@ Example configuration as a consumer.
 
 Example configuration as a producer.
 
-```troy
+```tremor
     define connector producer from kafka_producer
     with
         # Enables metrics at a 1 second interval
@@ -128,9 +127,7 @@ graph LR
 The actual logic is a little more verbose. However, the basic structure will be similar for
 other Kafka `consumer` and `producer` configurations and can be modularised.
 
-```troy
-# File: config.troy
-
+```tremor title="config.troy"
 # Kafka producer flow
 define flow kafka_produce
 flow

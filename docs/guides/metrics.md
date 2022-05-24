@@ -71,7 +71,7 @@ The `config` section holds a specific configuration to the connector type select
 
 With this, we get:
 
-```troy
+```tremor
 define flow metrics
 flow
   # define the udp server
@@ -100,7 +100,7 @@ On the other side we use a [`http_client`](../reference/connectors/http.md). Sin
 
 Our connector config here is slightly more elaborate. In addition to the `URL`, defining the target to write to, we also have a `headers` map that specifies the HTTP headers. This demonstrates nicely that more complex configurations are possible.
 
-```troy
+```tremor
 define flow metrics
 flow
   # define the udp server
@@ -137,7 +137,7 @@ deploy flow metrics;
 
 As in the basics tutorial, we will use the `passthrough` pipeline from the `troy::pipelines` module. If you went through the [basics guide](basics.md), this is the same as before.
 
-```troy
+```tremor
 define flow metrics
 flow
   # import the pipeline module
@@ -216,7 +216,7 @@ Note that we select from `in` into `batch` and from `batch` into `out`, wiring u
 
 We also need to update our HTTP Client to use a postprocessor, namely the `separate` one, to join batch elements back together with newlines.
 
-```troy
+```tremor
 define flow metrics
 flow
 
@@ -318,7 +318,7 @@ Since influx combines multiple fields in a message, we first have to unroll this
     We use `create stream` here. Streams are just named nodes that have no own function or overhead. They serve as a way to chain up selects.
 :::
 
-```troy
+```tremor
     # use types for checking if values are a number
     use std::type;
 
@@ -354,7 +354,7 @@ This is needed to not confuse the values for different fields.
 
 To aggregate over a time range, we use time-based tumbling windows. We can define them the same way we define everything else, a `define` statement. They are, however, not created. Instead, they're bound to the select statement they're used in.
 
-```troy
+```tremor
     # use nanos for time
     use std::time::nanos;
 
@@ -383,7 +383,7 @@ In addition we use the [`aggr::win::first`](../reference/stdlib/aggr/win#first) 
    We are using two windows here, a 10s one and a 1min one. The upside of using the tilt framing mechanism here is that we can do this without a loss in precision, as the 1min window is not an aggregate of six 10s windows but rather an aggregate of the raw data of them without having to duplicate it.
 :::
 
-```troy
+```tremor
     # create a stream for normalization
     create stream normalize;
 
@@ -406,7 +406,7 @@ Last but not least we need to normalize this data basck to something the [influx
 
 We can do this with another select statement.
 
-```troy
+```tremor
 select {
   "measurement":  event.measurement,
   "tags":  event.tags,
@@ -446,7 +446,7 @@ This is done using the [`metrics connector`](../reference/connectors/metrics.md)
 
 To enable metrics collection for connectors, we need to update their configuration. Namely we add the `metrics_interval_s` option. We choose 5 seconds to keep the overhead low.
 
-```troy
+```tremor
   # define the udp server
   define connector upd_in from udp_server
   with
@@ -486,7 +486,7 @@ The pipeline has to be set up as well. As pipelines don't come with a `with` sec
 
 We choose the same 5-second interval.
 
-```troy
+```tremor
   define connector metrics from metrics;
 
   # define our metrics pipeline to batch metrics
@@ -500,7 +500,7 @@ We choose the same 5-second interval.
 
 So with all our connectors and pipelines configured, we have to wire up the connector to the metrics pipeline. This works since, for internal metrics, we use the same structure as the [`influx` codec](../reference/codecs/influx.md).
 
-```troy
+```tremor
 define flow metrics
 flow
   # ...
@@ -539,7 +539,7 @@ graph LR
 The connector definition for `TDengine` has a slightly different endpoint
 specification, but the application is otherwise the same:
 
-```troy
+```tremor
   # define our http client
   define connector influx_out from http_client
   with

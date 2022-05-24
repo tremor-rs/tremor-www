@@ -13,7 +13,7 @@ user event it sees.
 
 ## Configuration
 
-```troy
+```tremor
 define connector my_wal from wal
 with
   "config": {
@@ -49,7 +49,7 @@ the flow accordingly.
 
 The reconfigured flow for the `server` definition now looks as follows:
 
-```troy
+```tremor
 define flow server
 flow
   use integration;

@@ -21,7 +21,7 @@ This operator manipulates a section of the event metadata.
 
 **Example**:
 
-```trickle
+```tremor
 define debug::history operator history with
   op = "my-checkpoint",
   name = "event_history"

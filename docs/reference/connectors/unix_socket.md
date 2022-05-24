@@ -12,61 +12,56 @@ A UNIX socket based line delimited JSON client
 
 ### Client
 
-```troy
-  # File: config.troy
-
-  define connector client from unix_socket_client
-  with
-    postprocessors = ["lines"],
-    preprocessors = ["lines"],
-    codec = "json",
-    config = {
-      # required - Path to socket file for this client
-      "path": "/tmp/unix-socket.sock",
-      # required - Size of buffer for data IO
-      "buf_size": 1024,
-    },
-    # Configure basic reconnection QoS for clients - max 3 retries starting with 100ms reconnect attempt interval
-    reconnect = {
-      "retry": {
-        "interval_ms": 100,
-        "growth_rate": 2,
-        "max_retries": 3,
-      }
+```tremor title="config.troy"
+define connector client from unix_socket_client
+with
+  postprocessors = ["lines"],
+  preprocessors = ["lines"],
+  codec = "json",
+  config = {
+    # required - Path to socket file for this client
+    "path": "/tmp/unix-socket.sock",
+    # required - Size of buffer for data IO
+    "buf_size": 1024,
+  },
+  # Configure basic reconnection QoS for clients - max 3 retries starting with 100ms reconnect attempt interval
+  reconnect = {
+    "retry": {
+      "interval_ms": 100,
+      "growth_rate": 2,
+      "max_retries": 3,
     }
-  end;
+  }
+end;
 ```
 
 ### Server
 
 A UNIX socket based line delimited JSON server
 
-```troy
-  # File: config.troy
-  define connector server from unix_socket_server
-  with
-    # Server produces/consumes line delimited JSON data
-    preprocessors = ["lines"],
-    postprocessors = ["lines"],
-    codec = "json",
+```tremor title="config.troy"
+define connector server from unix_socket_server
+with
+  # Server produces/consumes line delimited JSON data
+  preprocessors = ["lines"],
+  postprocessors = ["lines"],
+  codec = "json",
 
-    # UNIX socket specific configuration
-    config = {
-      # required - Path to socket file for this server
-      "path": "/tmp/unix-socket.sock",
-      # required - Permissions are read/write for the user running the server only
-      "permissions": "=600",
-      # required - Use a 1K buffer - this should be tuned based on data value space requirements
-      "buf_size": 1024,
-    }
-  end;
+  # UNIX socket specific configuration
+  config = {
+    # required - Path to socket file for this server
+    "path": "/tmp/unix-socket.sock",
+    # required - Permissions are read/write for the user running the server only
+    "permissions": "=600",
+    # required - Use a 1K buffer - this should be tuned based on data value space requirements
+    "buf_size": 1024,
+  }
+end;
 ```
 
 ## How do i?
 
-```troy
-# File: config.troy
-
+```tremor title="config.troy"
 # Encapsulate a UNIX socket based server
 define flow server
 flow

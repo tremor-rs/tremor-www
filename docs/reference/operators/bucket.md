@@ -21,7 +21,7 @@ This operator preserves event metadata.
 
 **Example**:
 
-```trickle
+```tremor
 define grouper::bucket operator group;
 ```
 

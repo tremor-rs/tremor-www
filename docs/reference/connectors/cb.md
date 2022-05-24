@@ -36,34 +36,32 @@ It can also be used to test the behaviour of connectors acting as event sinks, c
 
 ### Example
 
-```troy
-  # File: cb_example.troy
+```tremor title="cb_example.troy"
+define flow cb_example
+flow
+  use troy::pipelines;
+  use std::time::nanos;
 
-  define flow cb_example
-  flow
-    use troy::pipelines;
-    use std::time::nanos;
-
-    define connector my_cb from cb
-    with
-      codec = "json",		# Events are line delimited JSON
-      config = {
-        "path": "in.json",	# File from which to replay events
-        "timeout": nanos::from_seconds(1)
-      }
-    end;
-    create connector my_cb;
-
-    create pipeline passthrough from pipelines::passthrough;
-
-    # connect both the `out` and the `in` port of the connector 
-    # via a simple passthrough pipeline.
-    # (The ports can also be omitted for brevity)
-    connect /connector/my_cb/out to /pipeline/passthrough/in;
-    connect /pipeline/passthrough/out to /connector/my_cb/in;
+  define connector my_cb from cb
+  with
+    codec = "json",		# Events are line delimited JSON
+    config = {
+      "path": "in.json",	# File from which to replay events
+      "timeout": nanos::from_seconds(1)
+    }
   end;
+  create connector my_cb;
 
-  deploy flow cb_example;
+  create pipeline passthrough from pipelines::passthrough;
+
+  # connect both the `out` and the `in` port of the connector 
+  # via a simple passthrough pipeline.
+  # (The ports can also be omitted for brevity)
+  connect /connector/my_cb/out to /pipeline/passthrough/in;
+  connect /pipeline/passthrough/out to /connector/my_cb/in;
+end;
+
+deploy flow cb_example;
 ```
 
 ## Expected Data Format

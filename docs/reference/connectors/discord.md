@@ -15,7 +15,7 @@ a custom bot based on tremor
 
 ## Configuration
 
-```troy
+```tremor
   define connector discord from discord
   with
     config = {
