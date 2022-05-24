@@ -30,4 +30,4 @@ The VIM plugin can be [installed from GitHub](https://github.com/tremor-rs/tremo
 
 ## Local testing
 
-The tremor binary contains testing tools for testing your Tremor flows and pipelines before they actually go to production. Check out the capabilities of our [cli](../operations/cli.md#testing-facilities) for testing your Troy code.
+The tremor binary contains testing tools for testing your Tremor flows and pipelines before they actually go to production. Check out the capabilities of our [cli](../reference/cli.md#testing-facilities) for testing your Troy code.
