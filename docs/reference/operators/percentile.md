@@ -22,7 +22,7 @@ This operator preserves event metadata.
 
 **Example**:
 
-```trickle
+```tremor
 define qos::percentile operator as perc
 with
   timeout = 100,

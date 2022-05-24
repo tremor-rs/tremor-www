@@ -103,7 +103,7 @@ Stream definitions in `tremor-query` allow private intermediate streams to be na
 
 ##### Example
 
-```trickle
+```tremor
 create stream passthrough;
 select event from in into passthrough; # select default public 'in' stream into passthrough
 select event from passthrough into out; # select passthrough into default public 'out' stream
@@ -170,7 +170,7 @@ See also [Additional Grammar Rules](#additional-grammar-rules).
 
 For example a 15 second tumbling window based on the event ingest timestamp can be defined as follows
 
-```trickle
+```tremor
 define tumbling window fifteen_secs
 with
     interval = core::datetime::with_seconds(15),
@@ -179,7 +179,7 @@ end;
 
 The same window can be defined using a timestamp that is extracted from the message instead of the ingest time:
 
-```trickle
+```tremor
 define tumbling window fifteen_secs
 with
     interval = core::datetime::with_seconds(15),
@@ -190,7 +190,7 @@ end;
 
 A tumbling window based on number of events that will discard windows when 2 hours have been passed:
 
-```trickle
+```tremor
 define tumbling window with_size
 with
     size = 1000,
@@ -216,7 +216,7 @@ See also [Additional Grammar Rules](#additional-grammar-rules).
 
 ##### Example
 
-```trickle
+```tremor
 # create a bucketing operator
 define grouper::bucket operator kfc;
 
@@ -245,7 +245,7 @@ See also [Additional Grammar Rules](#additional-grammar-rules).
 
 ##### Example
 
-```trickle
+```tremor
 define grouper::bucket operator kfc;
 
 define script categorize
@@ -274,7 +274,7 @@ The select query is a builtin operation that is the workhorse of the `tremor-que
 
 An example select operation configured to pass through data from a pipeline's default `in` stream to a pipeline's default `out` stream:
 
-```trickle
+```tremor
 select event from in into out;
 ```
 
@@ -283,13 +283,13 @@ The
 Select operations can filter ingested data with the specification of a [`where` clause](#WhereClause). The clause forms a predicate check on the inbound events before any further processing takes place.
 That means the `event` available to the [`where` clause](#WhereClause) is the unprocessed inbound event from the input stream (`in` in this case):
 
-```trickle
+```tremor
 select event from in where event.is_interesting into out;
 ```
 
 The _Target Expression_ of a select query is used to describe transformations of the event. To pass through the event without changes, use `select event`, otherwise you can construct arbitrary [literals](../scripts#literals) (numbers, records, arrays, ...), call functions, aggregate functions, reference the event metadata via `$` or other [path expressionss](../scripts#paths). Nearly everything is possible:
 
-```trickle
+```tremor
 use std::string;
 use tremor::system;
 
@@ -307,13 +307,13 @@ from in into out;
 Select operations can filter data being forwarded to other operators with the specification of a [`having` clause](#HavingClause). The clause forms a predicate check on outbound synthetic events after any other processing has taken place.
 That means the `event` available to the [`having` clause](#HavingClause) is the result of evaluating the `select` target clause (the expression between `select` and `from`).
 
-```trickle
+```tremor
 select event from in into out having event.is_interesting;
 ```
 
 Select operations can be windowed by **applying** a [window](#window-definitions) to the inbound data stream.
 
-```trickle
+```tremor
 define tumbling window fifteen_secs
 with
     interval = datetime::with_seconds(15),
@@ -329,7 +329,7 @@ The same is true for the [origin uri](../../reference/stdlib/tremor/origin), whi
 
 To drag event metadata across a windowed query, it needs to be selected into the event payload:
 
-```trickle
+```tremor
 define tumbling window take_two
 with
     size = 2,
@@ -347,7 +347,7 @@ into out;
 
 Select operations can be grouped through defining a [`group by` clause](#GroupByClause).
 
-```trickle
+```tremor
 define tumbling window fifteen_secs
 with
     interval = datetime::with_seconds(15),
@@ -371,7 +371,7 @@ In windowed queries any event related data can only be referenced in those two c
 
 Here is an example of good and bad references:
 
-```trickle
+```tremor
 define tumbling window my_window
 with
   size = 12

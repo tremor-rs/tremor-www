@@ -44,7 +44,7 @@ Finally the [mapping](./etc/tremor/config/02_mapping.yaml) instantiates the bind
 
 The only interesting part to look at is the event rewriting, this uses an example syslog message and adds the `event.id` as a `structured_data` field.
 
-```trickle
+```tremor
 select {
   "severity": "notice",
   "facility": "local4",

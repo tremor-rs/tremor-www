@@ -14,7 +14,7 @@ No codecs, configuration, or processors are supported.
 
 ## Configuration
 
-```troy
+```tremor
 define connector my_dns from dns;
 ```
 

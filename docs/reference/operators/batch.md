@@ -15,7 +15,7 @@ Supported configuration options are:
 
 **Example**:
 
-```trickle
+```tremor
 define generic::batch operator batch with
   count = 300
 end;

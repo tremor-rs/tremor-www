@@ -20,7 +20,7 @@ field to `read` or write based by setting the mode to one of:
 
 An example file reader
 
-```troy
+```tremor
   define connector in_file from file
   with 
     codec = "json"
@@ -42,7 +42,7 @@ Other useful `codec` options might be `base64`, `string` or `influx`.
 
 An example file writer
 
-```troy
+```tremor
   define connector out_file from file
   with 
     codec = "json-sorted", # Json sorted creates a consistent field order in record types
@@ -68,7 +68,7 @@ graph LR
 
 For this use case we need a file reader and writer
 
-```troy
+```tremor
 define flow main
 flow  
   use troy::connectors;
@@ -114,7 +114,7 @@ deploy flow main;
 For example we can read a line delimited JSON file and write it as base64 encoded YAML
 by changing our copy example above to use a different file writer configuration:
 
-```troy
+```tremor
   define connector out_file from file
   with 
     codec = "yaml", 

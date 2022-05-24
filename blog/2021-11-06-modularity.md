@@ -58,9 +58,7 @@ mechanisms to support modularity.
 In a nutshell - this added support for user defined constants and user
 defined functions.
 
-```tremor
-# File: my_mod.tremor
-
+```tremor title="my_mod.tremor"
 # Tail recursive implementation of fibonacci
 #
 fn fib_(a, b, n) of
@@ -75,8 +73,7 @@ end;
 
 The module can be loaded via the module path and used in other script or query sources:  
 
-```trickle   
-# File: fib.trickle  
+```trickle title="fib.trickle"
 # A streaming fibonacci service*
 
 define script fibber

@@ -260,7 +260,7 @@ $ echo '[ "pipeline", "codec::binary", "passthrough", "example" ]' >> tags.yaml
 
 Create a deployment file `config.troy` that encapsulates our benchmark logic:
 
-```troy
+```tremor
 define flow main
 flow
   # Our pipeline under test
@@ -380,7 +380,7 @@ $ echo '[ "integration", "structured", "metronome", "example2" ]' >> tags.yaml
 
 Create a deployment file `config.troy` that encapsulates our integration test logic:
 
-```troy
+```tremor
 define flow main
 flow
   define connector exit from exit;

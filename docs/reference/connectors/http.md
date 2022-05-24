@@ -10,75 +10,73 @@ The `http` connector provides integration against the HTTP protocol suite.
 
 ### Client
 
-```troy
+```tremor title="config.troy"
+define connector `http-out` from http_client
+with
   use std::time::nanos;
-  # File: config.troy
-  define connector `http-out` from http_client
-  with
-    codec = "json",  # Defaults to HTTP codec
-    config = {
-      # Target URL for this HTTP client
-      "url": "http://host:80",
+  codec = "json",  # Defaults to HTTP codec
+  config = {
+    # Target URL for this HTTP client
+    "url": "http://host:80",
 
-      # Optional Transport Level Security configuration
-      # If url schme in `url` is `https` then TLS configuration is required
-      # "tls" = { ... },
+    # Optional Transport Level Security configuration
+    # If url schme in `url` is `https` then TLS configuration is required
+    # "tls" = { ... },
 
-      # Optional authentication method, can be one of
-      # * "basic" - basic authentication
-      #   ```troy
-      #      "auth" = { "basic": { "username": "snot", "password": "badger" } },
-      #   ```
-      # * "gcp"   - Google Cloud Platform
-      #   ```troy
-      #    "auth" = "gcp", # See https://cloud.google.com/docs/authentication/getting-started
-      #  ```
-      # By default, no authentication is used
-      # "auth" = "none",
+    # Optional authentication method, can be one of
+    # * "basic" - basic authentication
+    #   ```tremor
+    #      "auth" = { "basic": { "username": "snot", "password": "badger" } },
+    #   ```
+    # * "gcp"   - Google Cloud Platform
+    #   ```tremor
+    #    "auth" = "gcp", # See https://cloud.google.com/docs/authentication/getting-started
+    #  ```
+    # By default, no authentication is used
+    # "auth" = "none",
 
-      # HTTP method - defaults to `POST`, case insensitive
-      # "method" = "get",
-      
-      # Concurrency - number of simultaneous in-flight requests ( defaults to 4 )
-      # "concurrency" = 4,
+    # HTTP method - defaults to `POST`, case insensitive
+    # "method" = "get",
+    
+    # Concurrency - number of simultaneous in-flight requests ( defaults to 4 )
+    # "concurrency" = 4,
 
-      # Request timeout - default is unset ( do not timeout )
-      # "timeout" = nanos::from_secs(10), # nanoseconds
+    # Request timeout - default is unset ( do not timeout )
+    # "timeout" = nanos::from_secs(10), # nanoseconds
 
-      # Optional default HTTP headers
-      # "headers" = { "key": "value", "other-key": ["v1", "v2"] },
+    # Optional default HTTP headers
+    # "headers" = { "key": "value", "other-key": ["v1", "v2"] },
 
-      # Custom Mime Codec Map, overrides default `codec`
-      # "custom_codecs" = {
-      #    # key defines the MIME type, value defines codec by name 
-      #    "application/json": "json",
-      #    "application/yaml": "yaml"
-      # }
-    }
-  end;
+    # Custom Mime Codec Map, overrides default `codec`
+    # "custom_codecs" = {
+    #    # key defines the MIME type, value defines codec by name 
+    #    "application/json": "json",
+    #    "application/yaml": "yaml"
+    # }
+  }
+end;
 ```
 
 ### Server
 
-```troy
-  # File: config.troy
-  define connector `http-in` from http_server
-  with
-    codec = "json",
-    config = { 
-      "url": "http://localhost:8080",
+```tremor title="config.troy"
+define connector `http-in` from http_server
+with
+  codec = "json",
+  config = { 
+    "url": "http://localhost:8080",
 
-      # Optional Transport Level Security configuration
-      # "tls" = { ... },
+    # Optional Transport Level Security configuration
+    # "tls" = { ... },
 
-      # Custom Mime Codec Map, overrides default `codec`
-      # "custom_codecs" = {
-      #    # key defines the MIME type, value defines codec by name 
-      #    "application/json": "json",
-      #    "application/yaml": "yaml"
-      # }
-    }
-  end;
+    # Custom Mime Codec Map, overrides default `codec`
+    # "custom_codecs" = {
+    #    # key defines the MIME type, value defines codec by name 
+    #    "application/json": "json",
+    #    "application/yaml": "yaml"
+    # }
+  }
+end;
 ```
 
 ## HTTP configuration example
@@ -101,7 +99,7 @@ graph LR
 
 ### The complete annotated source
 
-```troy
+```tremor
 define flow server
 flow
   use integration;
@@ -222,7 +220,7 @@ Request metadata allows the HTTP method, headers and other other request paramet
 
 Request metadata can be set for an event
 
-```trickle
+```tremor
 let $request = ...
 ```
 

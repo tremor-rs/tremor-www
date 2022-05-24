@@ -12,7 +12,7 @@ Where GELF messages are compressed, say over UDP, and the chunks are themselves 
 use decompression processors to transform the raw stream to the tremor value system by leveraging
 processors in tremor in concert with the `json` codec.
 
-```troy
+```tremor
 define connector example from udp_client
 with
   codec = "json",
@@ -29,7 +29,7 @@ end;
 
 The same methodology with a tcp backed endpoint where we're listening as a server:
 
-```troy
+```tremor
 define connector example from tcp_server
 with
   codec = "json",

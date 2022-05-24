@@ -31,7 +31,7 @@ Done, now lets configure Tremor to do what we want:
 Tremor needs to be told where to get events from, how to handle them and where to send them to.
 This is done by passing it a [Troy](../language/troy) configuration file that describes our event processing logic we wish to deploy to our tremor instance.
 
-```troy
+```tremor
 define flow main
 flow
   use troy::pipelines;

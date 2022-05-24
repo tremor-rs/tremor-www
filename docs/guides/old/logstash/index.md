@@ -16,7 +16,7 @@ In the [`example.trickle`](etc/tremor/config/example.trickle) we define scripts 
 
 ## Business Logic
 
-```trickle
+```tremor
 define script extract                                                          # define the script that parses our apache logs
 script
   match {"raw": event} of                                                      # we use the dissect extractor to parse the apache log
@@ -30,7 +30,7 @@ end;
 
 ```
 
-```trickle
+```tremor
 define script categorize                                                       # define the script that classifies the logs
 with
   user_error_index = "errors",                                                 # we use "with" here to default some configuration for

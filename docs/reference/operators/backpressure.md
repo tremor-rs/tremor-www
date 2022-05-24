@@ -23,7 +23,7 @@ This operator preserves event metadata.
 
 **Example**:
 
-```trickle
+```tremor
 define qos::backpressure operator bp
 with
   timeout = 100,

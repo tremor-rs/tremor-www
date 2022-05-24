@@ -23,7 +23,7 @@ command to halt the tremor server process.
 
 The connector needs no configuration
 
-```troy
+```tremor
   define connector stop from exit;
 ```
 
@@ -43,8 +43,7 @@ graph LR
 
 The application source for this example:
 
-```troy
-# File: stopper.troy
+```tremor title="stopper.troy"
 define flow stopper
 flow
   use troy::connectors; # Use predefined console and exit connector definitions
