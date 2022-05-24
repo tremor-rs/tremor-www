@@ -1,6 +1,6 @@
 # Language
 
-Tremor provides a scripting language for defining and deploying [Event Flows].
+Tremor provides a scripting language for defining and deploying event flows.
 It is called [Troy] - The Tremor Deployment language.
 With [Troy] you define [Flows] that represent your Tremor Application, your Flow of events: [Connectors] providing connectivity to the outside world, [Pipelines] representing the actual stream processing and event handling and the Connections of those, forming a complete and self-contained Tremor Application.
 
@@ -288,7 +288,6 @@ You can refer to arguments within the body of the entity having arguments define
 [YAML]: https://yaml.org/
 [Troy]: troy.md
 [Deploy]: troy.md#deploy
-[Event Flows]: ../getting-started/event_flow.md
 [Connectors]: ../reference/connectors
 [Connector]: ../reference/connectors
 [Flows]: troy.md#flow
