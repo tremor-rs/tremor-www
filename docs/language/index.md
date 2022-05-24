@@ -2,15 +2,20 @@
 
 Tremor provides a scripting language for defining and deploying event flows.
 It is called [Troy] - The Tremor Deployment language.
-With [Troy] you define [Flows] that represent your Tremor Application, your Flow of events: [Connectors] providing connectivity to the outside world, [Pipelines] representing the actual stream processing and event handling and the Connections of those, forming a complete and self-contained Tremor Application.
 
-[Troy] is used on every level of event processing, starting from the plumbing that provides connectivity to the outside world in the form of a [Flow], ranging over [Pipelines] and [Scripts] for expressing complex event routing, filtering, event introspection and transformation, towards the final step of deploying your application and bringing it to production via [Deploy].
+* [Connectors] providing connectivity to the outside world, 
+* [Pipelines] representing the actual stream processing and event handling 
+* and the Connections of both, forming a complete and self-contained Flow of Events.
+
+Troy is used on every level of event processing, starting from the plumbing that provides connectivity to the outside world in the form of a [Flow], ranging over [Pipelines] and [Scripts] for expressing complex event routing, filtering, event introspection and transformation, towards the final step of deploying your application and bringing it to production via [Deploy].
 
 ## Flows
 
 A Flow encapsulates your event flow: the definition of where events should come from, how you want to handle, route, slice and dice them and where to they are sent out: The physical routing, or as we call it, the plumbing. This is where you get your hands dirty and greasy. It is also the unit of Deployment in Tremor. You bring a whole Flow live by [Deploy]ing it. Any Tremor server can host many Flows in parallel. You can deploy multiple versions of your Flow to increase parallelism (e.g. have multiple consumers consumer from your kafka topic and send the events downstream after normalizing them to a common format).
 
 Flows are self-contained, sealed units and cannot communicate with each other. Thus users usually want to encapsulate their application in a single Flow and put unrelated event flows in separate [Flows].
+
+### Definition
 
 As all other entities in Tremor, [Flows] need to be defined:
 
@@ -55,6 +60,8 @@ Here we have all the bits and pieces that comprise a full fledged Tremor Applica
  * We define the final event flow by using the [`connect`](../language/reference/deploy.md#rule-connect) statements to route events from our connector `conny` through our passthrough pipeline `pippi` and back to our `udp_server` connector. We essentially formed a UDP echo server.
 
 This definition will also make the [Flow] with the id `flowy_mc_flowface` available for [Deploy]ing it in order to bring it to live and let the events flow through it.
+
+### Deploy
 
 :::note
 
@@ -162,9 +169,42 @@ create script my_script;
 
 This script inspects the event and derives a value depending on the type and shape of the event. It then emits a transformed value containing the original event and the derived value as the outgoing event.
 
-Scripts give users the most control over how to inspect, filter and transform an event. With their [state](../language/scripts/index.md#state) mechanism, they can also work on streams of events (e.g. for creating aggregates or implementing state machines).
+Scripts give users the most control over how to inspect, filter and transform an event. With their [state](../language/expressions.md#state) mechanism, they can also work on streams of events (e.g. for creating aggregates or implementing state machines).
 
 So, if you want to implement some complex ETL logic on your event streams, if you want to manipulate event metadata or implement other more complex logic than is expressable in a [Select] statement, a [Script] should be your tool of choice.
+
+## Events
+
+So what exactly is this event thing that is routed from [Connectors] through pipelines and processed in and emitted from scripts?
+
+An event is a discrete unit of an event stream. An incoming raw data stream is separated into distinct byte chunks either by the [Connector] itself (e.g. in the case of UDP, each packet will be treated as distinct unit) or by [Preprocessors](../reference/preprocessors) configured on the input [Connector]. Then the configured [Codec] is decoding the byte chunk into the structured event payload.
+
+Each event consists of:
+
+ * payload (accessible via the reserved [`event` path](./expressions.md#reserved-paths)
+ * event metadata, initially added by the [Connector] this event originated at, accessible via the reserved [`$` path](./expressions.md#reserved-paths) modifiable by [Scripts] 
+ * an event id, for uniquely identifying the event inside the system
+ * an [ingestion timestamp](../reference/stdlib/tremor/system.md#ingestns) in nanosecond resolution
+ * an [`origin_uri`](../reference/stdlib/tremor/origin.md) for identifying the event origin (e.g. a TCP connection peer)
+
+## Type system
+
+All values in Tremor, be it event payload, metadata, local variables, state or anything else, everything is a part of the Tremor type system. The type system is roughly modelled to support all values that can be represented as JSON, with some extensions.
+
+Tremor is dynamically typed, that means variables do not have a static type determined at compile time. But they can have any possible type. Treating values as different types than they actually are will lead to errors. E.g. accessing a nested field on a value that is actually a string.
+
+Possible types for tremor values are:
+
+* [`null`](./expressions.md#null) - represents a JSON `null`, an otherwise undefined value
+* [booleans](./expressions.md#boolean) - `true` and `false`
+* [integers](./expressions.md#integer-numerics) - integers
+* [floats](./expressions.md#floating-point-numerics) - floating point numbers
+* [strings](./expressions.md#utf-8-encoded-strings) - UTF-8 encoded strings
+* [arrays](./expressions.md#arrays) - arrays of arbitrarily typed values, also different types
+* [records](./expressions.md#records) - mappings from string names to arbitrarily typed values
+* [binary](./expressions.md#binary) - raw binary data
+
+To check for the type of a value, use either a function in the [`std::type` module](../reference/stdlib/std/type.md) or some of the modules for handling specific types, like integers: [std::integer](../reference/stdlib/std/integer) inside a [match](./expressions.md#match).
 
 ## Define and Create
 
@@ -189,7 +229,7 @@ One special case are [Flows]. They are not created, but [Deploy]ed. This is beca
 
 ## Modules
 
-[Troy] is built to enable modularization. Instead of cramming all your applications code into a huge single file, you can extract your preconfigured [Connector] definitions or even a full-grown [Flow] (or anything you can define in Troy) into separate files and simply [`use`](../language/reference/deploy.md#rule-use) in your applications main [Troy] file.
+Troy is built to enable modularization. Instead of cramming all your applications code into a huge single file, you can extract your preconfigured [Connector] definitions or even a full-grown [Flow] (or anything you can define in Troy) into separate files and simply [`use`](../language/reference/deploy.md#rule-use) in your applications main Troy file.
 
 ### Example
 
@@ -223,7 +263,7 @@ flow
 end;
 ```
 
-In this example we put the actual [Flow] definition in a separate file `my_flows.tremor` and [`use`](../language/reference/deploy.md#rule-use)d it in our main [Troy] file.
+In this example we put the actual [Flow] definition in a separate file `my_flows.tremor` and [`use`](../language/reference/deploy.md#rule-use)d it in our main Troy file.
 
 Even more interestingly, within our `my_flows.tremor` file, we made good use of predefined [Connectors] and [Pipelines] within the [Standard Library] modules [`tremor::pipelines`](../reference/stdlib/troy/pipelines.md) and [`tremor::connectors`](../reference/stdlib/troy/connectors.md). All standard library modules are available for `use` by default.
 
@@ -286,17 +326,17 @@ You can refer to arguments within the body of the entity having arguments define
 
 
 [YAML]: https://yaml.org/
-[Troy]: troy.md
-[Deploy]: troy.md#deploy
+[Deploy]: #deploy
 [Connectors]: ../reference/connectors
 [Connector]: ../reference/connectors
-[Flows]: troy.md#flow
-[Flow]: troy.md#flow
-[Pipelines]: ../language/pipelines
-[Pipeline]: ../language/pipelines
-[Scripts]: ../language/scripts
-[Script]: ../language/scripts
+[Flows]: #flows
+[Flow]: #flows
+[Pipelines]: ../language/pipelines.md
+[Pipeline]: ../language/pipelines.md
+[Scripts]: ../language/scripts.md
+[Script]: ../language/scripts.md
 [Standard Library]: ../reference/stdlib
-[Select]: ../language/pipelines/index.md#select-queries
-[Operators]: ../reference/operators/index.md
+[Select]: ../language/pipelines.md#select-queries
+[Operators]: ../reference/operators.md
 [Connect]: ../language/reference/deploy.md#rule-connec
+[Codec]: ../reference/codecs

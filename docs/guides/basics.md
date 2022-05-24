@@ -207,7 +207,7 @@ We now have a way to pass data in our system, moving it through it and looking a
 Our goal will be to make each entry a "sentence" by capitalizing the first letter and adding a period `.` or question mark to the end.
 
 :::note
-Tremor has handy utility modules for most data types that provide several functions to work with them, the [reference documentation](../language/troy) gives an overview of them.
+Tremor has handy utility modules for most data types that provide several functions to work with them, the [reference documentation] gives an overview of them.
 :::
 
 ### Defining our pipeline
@@ -217,7 +217,7 @@ We've been using the `tremor::pipelines::passthrough` pipeline in the last step.
 To do this we create a new files named `lib/pipelines.tremor` and use this pipeline in our flow.
 
 :::note
-   Pipelines, by default, use the ports `in` for input, `out` and `err` for outputs. As with `connect`, those definitions can be omitted as long as we use the standard. For details on defining your own ports, you can refer to the [reference documentation](../language/troy).
+   Pipelines, by default, use the ports `in` for input, `out` and `err` for outputs. As with `connect`, those definitions can be omitted as long as we use the standard. For details on defining your own ports, you can refer to the [reference documentation].
 :::
 
 ```tremor title="lib/pipelines.tremor"
@@ -444,3 +444,5 @@ why
 Why?
 exit
 ```
+
+[reference documentation]: ../language

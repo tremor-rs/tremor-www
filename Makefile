@@ -36,7 +36,7 @@ tremor-runtime-docs: tremor-runtime-refresh
 
 
 openapi: tremor-runtime-refresh
-	-mkdir static/api/edge
+	-mkdir -p static/api/edge
 	cp tremor-runtime/static/openapi.yaml static/api/edge
 
 clean:

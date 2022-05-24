@@ -78,7 +78,7 @@ This `my_tcp_client` connector is configured to use 2 postprocessors in a chain.
 
 
 Codecs share similar concepts to [extractors](../extractors), but differ in their application. Codecs are applied to external data as they are ingested by or egressed from a running Tremor process.
-Extractors, on the other hand, are used in [scripts](../../language/scripts) to extract structured from e.g. strings that are already part of a Tremor event.
+Extractors, on the other hand, are used in [scripts](../../language/scripts.md) to extract structured from e.g. strings that are already part of a Tremor event.
 
 ## Data Format
 

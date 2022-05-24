@@ -112,6 +112,10 @@ available only during development for debug builds of tremor.
 
 Connectors are configured via the deployment syntax in a tremor `.troy` file.
 
+TBD
+
+## Examples
+
 ### Writing to a local file on the file system
 
 To write received events in tremor to the local file system we can use

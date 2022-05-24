@@ -1,4 +1,4 @@
-# Language Reference
+# Grammar
 
 Tremor contains a number of related domain specific languages that are
 designed to simplify development and operations of event based production
@@ -165,12 +165,12 @@ The module system is itself defined as a [tremor-module](module_system) DSL.
 
 The primary domain specific languages are:
 
-|Guide|Description|Extension|
-|---|---|---|
-|[tremor-module[](module_system)| - The tremor module system.|`none`|
-|[tremor-deploy](deploy)| - The tremor deployment language.|troy|
-|[tremor-query](query)| - The tremor query language.|trickle|
-|[tremor-script](script)| - the tremor scripting language.|script|
+| Guide                           | Description                       | Extension |
+|---------------------------------|-----------------------------------|-----------|
+| [tremor-module[](module_system) | - The tremor module system.       | `none`    |
+| [tremor-deploy](deploy)         | - The tremor deployment language. | troy      |
+| [tremor-query](query)           | - The tremor query language.      | trickle   |
+| [tremor-script](script)         | - the tremor scripting language.  | script    |
 
 ## Module system
 
