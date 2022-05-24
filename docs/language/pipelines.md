@@ -177,7 +177,7 @@ Operators form the nodes in the [Flow] graph. They process events in various for
 
 Operators need to be created from a definition using the `create` statement before they can be referenced in [Select] statements and thus be part of the Pipeline graph. This additional step allows us to provide [Arguments](./index.md#arguments) for operators to customize definitions upon creation.
 
-See the [Operator Reference](../reference/operators.md) for a list of all supported operators.
+See the [Operator Reference](../reference/operators) for a list of all supported operators.
 
 #### Grammar
 

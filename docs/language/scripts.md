@@ -150,7 +150,7 @@ select event from foo/err into err;
 ```
 
 [Pipeline]: ./pipelines.md
-[Operators]: ../reference/operators.md
+[Operators]: ../reference/operators
 [Select]: ./pipelines.md#select-queries
 [`emit`]: ./reference/script.md#rule-emit
 [expression]: ./expressions.md

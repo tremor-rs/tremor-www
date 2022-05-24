@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 8
 ---
 
 # Expressions
@@ -241,10 +241,6 @@ See also:
 
 ## Operators
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 25493ca8 (Rework language parts)
 List of binary and unary operators in Tremor, ordered by precedence (from low to high):
 
 | Symbol       | Name                                                  | Example                                                 | Types                          |

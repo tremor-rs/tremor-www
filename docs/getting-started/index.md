@@ -17,15 +17,7 @@ Install the right package for your operatoring system. For more detailed informa
 Tremor needs to be told where to get events from, how to handle them and where to send them to.
 This is done by passing it a [Troy] configuration file that describes our event processing logic we wish to deploy to our tremor instance.
 
-<<<<<<< HEAD
 The easiest way to get started is running `tremor new <project>`, for the sake of this we'll call our project `getstarted`
-=======
-```troy
-define flow main
-flow
-  use tremor::pipelines;
-  use tremor::connectors;
->>>>>>> 2bad7ed8 (Update troy:: to tremor::)
 
 ```bash
 ❯ tremor new getstarted
