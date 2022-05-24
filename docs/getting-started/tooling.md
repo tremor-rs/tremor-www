@@ -28,14 +28,6 @@ The VS Code extension is available on the [Visual Studio Marketplace](https://ma
 
 The VIM plugin can be [installed from GitHub](https://github.com/tremor-rs/tremor-vim).
 
-## Informative Errors
-
-![tremor-error](/img/tremor/error.png)
-
-Making errors human-friendly: recently, this realisation has gained popularity in the programming community, with languages like Rust trying to provide helpful error messages beyond a line number and a generic error.
-
-When developing Tremor, those concerns of developer and operator friendliness were front and center from the beginning. Effort went into making errors and warnings informative, and not leaving users with stack traces, or cryptic output.
-
 ## Local testing
 
 The tremor binary contains testing tools for testing your Tremor flows and pipelines before they actually go to production. Check out the capabilities of our [cli](../operations/cli.md#testing-facilities) for testing your Troy code.
