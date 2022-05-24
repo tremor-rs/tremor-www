@@ -563,3 +563,62 @@ Now with that set you can grab [the entire config from github](__GIT__/../code/m
 You can find the grafana UI at [`http://localhost:3000`](http://localhost:3000).
 
 Note that you need to log in with user `admin` and password `admin`
+
+### QuestDB
+
+QuestDB can also replace influx. There are a few differences however as Quest has
+constraints on column names and does not support the HTTP protocol for Influx Line
+Protocol. We can choose UDP based or TCP based distribution for QuestDB.
+
+A high-level visaulization of QuestDB replacing InfluxDB via the Influx API:
+
+```mermaid
+graph LR
+    A{telegraf UDP} -->|influx line protocol over UDP| B(tremor)
+    B -->|Influx Line Protocol over TCP| C{QuestDB}
+```
+
+The connector definition for `QuestDB` has a slightly different endpoint
+specification and uses the TCP protocol for connectivity, but the
+configuration is otherwise the same:
+
+```troy
+  # define our http client
+  define connector influx_out from tcp_client
+  with
+    # define metrics interval
+    metrics_interval_s = 5,
+    # we use the influx codec here as well
+    codec = "influx",
+    # define the postprocessors, we use separate to seperate events by lines
+    postprocessors = ["separate"],
+    config = {
+      "url": "questdb:9009",
+    },
+  end;
+```
+
+We also need to replace some column names to conform to quest db constraints, we do this
+through the `re::replace_all` regular expression from tremor's standard library for convenience.
+
+```troy
+    # We change the structure of our event to be easier digestible for aggregation
+    select {
+        "measurement": re::replace_all("[ :\\./]", event.measurement, "_"), # QuestDB limitations
+        "tags": event.tags,
+        "field": group[2],
+        "value": event.fields[group[2]],
+        "timestamp": event.timestamp,
+    }
+    from in
+    group by set(event.measurement, event.tags, each(record::keys(event.fields)))
+    into aggregate
+    having type::is_number(event.value);
+```
+
+Now with that set you can grab [the entire config from github](__GIT__/../code/metrics/06_questdb) and start it with `docker-compose up`.
+
+You can find the grafana UI at [`http://localhost:3000`](http://localhost:3000).
+You can find the QuestDB Console UI at [`http://localhost:9000`](http://localhost:9000).
+
+Note that you need to log in with user `admin` and password `admin` in the Grafana UI.
