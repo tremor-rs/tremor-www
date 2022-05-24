@@ -135,13 +135,13 @@ deploy flow metrics;
 
 ### Pipeline, wiring up and running
 
-As in the basics tutorial, we will use the `passthrough` pipeline from the `troy::pipelines` module. If you went through the [basics guide](basics.md), this is the same as before.
+As in the basics tutorial, we will use the `passthrough` pipeline from the `tremor::pipelines` module. If you went through the [basics guide](basics.md), this is the same as before.
 
 ```tremor
 define flow metrics
 flow
   # import the pipeline module
-  use troy::pipelines;
+  use tremor::pipelines;
   # define the udp server
   define connector upd_in from udp_server
   with

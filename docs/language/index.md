@@ -20,7 +20,7 @@ args
     url = "localhost:12345"
 flow
     # import some predefined pipelines
-    use troy::pipelines;
+    use tremor::pipelines;
     
     # lets define a connector and parameterize it by the url
     define connector conny from udp_server
@@ -208,10 +208,10 @@ deploy flow cool_flow_01 from my_flows::cool_flow;
 define flow cool_flow
 flow
     # make the `pipelines` module within the `troy` namespace available.
-    use troy::pipelines;
+    use tremor::pipelines;
 
     # make the `connectors` module within the `troy` namespace available.
-    use troy::connectors;
+    use tremor::connectors;
 
     # refer to the definition of `console` inside the `connectors` module
     create connector my_console from connectors::console;
@@ -225,7 +225,7 @@ end;
 
 In this example we put the actual [Flow] definition in a separate file `my_flows.tremor` and [`use`](../language/reference/deploy.md#rule-use)d it in our main [Troy] file.
 
-Even more interestingly, within our `my_flows.tremor` file, we made good use of predefined [Connectors] and [Pipelines] within the [Standard Library] modules [`troy::pipelines`](../reference/stdlib/troy/pipelines.md) and [`troy::connectors`](../reference/stdlib/troy/connectors.md). All standard library modules are available for `use` by default.
+Even more interestingly, within our `my_flows.tremor` file, we made good use of predefined [Connectors] and [Pipelines] within the [Standard Library] modules [`tremor::pipelines`](../reference/stdlib/troy/pipelines.md) and [`tremor::connectors`](../reference/stdlib/troy/connectors.md). All standard library modules are available for `use` by default.
 
 It is also important to note that you can use `use` statements on all levels of your code. In the top level, in a [Flow] definition, a [Pipeline] definition or a [Script] operator definition. A `use` statement on an outer scope, say inside a [Flow] definition, like above, will not be available on an inner scope, say a [Pipeline] definition. `use` statements only make the definition of modules available in the current scope.
 

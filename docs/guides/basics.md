@@ -69,7 +69,7 @@ A very useful set of connectors that ship as a part of tremor are the standard i
 or [`stdio`](../reference/connectors/stdio) connectors. These pipe the standard input, output and error streams from the
 console to processors.
 
-We use pre-packaged definitions in this example from the `troy::connectors` module from the standard library.
+We use pre-packaged definitions in this example from the `tremor::connectors` module from the standard library.
 
 :::note
 The console connector is a configured instance of the `stdio` connector that uses the `separate` pre and postprocessor to make it line-based and the [`string` codec](../reference/codecs/string) to avoid any parsing of the input data.
@@ -79,8 +79,8 @@ The console connector is a configured instance of the `stdio` connector that use
 # Our main flow
 define flow main
 flow
-  # import the `troy::connectors` module
-  use troy::connectors;
+  # import the `tremor::connectors` module
+  use tremor::connectors;
   
   # create an instance of the console connector
   create connector console from connectors::console;
@@ -96,7 +96,7 @@ Lastly, we need to define the processing logic for this `main` flow.
 
 :::note
 We could define passthrough ourselves as follows, but it is in common use, so available through the
-standard library in `troy::pipelines` and called `passthrough`:
+standard library in `tremor::pipelines` and called `passthrough`:
 
 ```tremor title="troy/pipelines.troy"
 define pipeline passthrough
@@ -112,10 +112,10 @@ We use the definition provided by the standard library
 # Our main flow
 define flow main
 flow
-  # import the `troy::connectors` module
-  use troy::connectors;
-  # import the `troy::pipelines` module
-  use troy::pipelines;
+  # import the `tremor::connectors` module
+  use tremor::connectors;
+  # import the `tremor::pipelines` module
+  use tremor::pipelines;
 
   # create an instance of the console connector
   create connector console from connectors::console;
@@ -139,10 +139,10 @@ We now have all the components we need, a flow to host it all, a connector to re
 # Our main flow
 define flow main
 flow
-  # import the `troy::connectors` module
-  use troy::connectors;
-  # import the `troy::pipelines` module
-  use troy::pipelines;
+  # import the `tremor::connectors` module
+  use tremor::connectors;
+  # import the `tremor::pipelines` module
+  use tremor::pipelines;
 
   # create an instance of the console connector
   create connector console from connectors::console;
@@ -166,10 +166,10 @@ We have already used pre-defined pipelines and connectors and created instances 
 # Our main flow
 define flow main
 flow
-  # import the `troy::connectors` module
-  use troy::connectors;
-  # import the `troy::pipelines` module
-  use troy::pipelines;
+  # import the `tremor::connectors` module
+  use tremor::connectors;
+  # import the `tremor::pipelines` module
+  use tremor::pipelines;
 
   # create an instance of the console connector
   create connector console from connectors::console;
@@ -212,7 +212,7 @@ Tremor has handy utility modules for most data types that provide several functi
 
 ### Defining our pipeline
 
-We've been using the `troy::pipelines::passthrough` pipeline in the last step. It, as the name suggests, passes it through. So the first thing we need to do is replace this with our own. For simplicities sake, we'll start by replacing it with our pipeline. We will name this `main` as we will extend it to be more than a passthrough.
+We've been using the `tremor::pipelines::passthrough` pipeline in the last step. It, as the name suggests, passes it through. So the first thing we need to do is replace this with our own. For simplicities sake, we'll start by replacing it with our pipeline. We will name this `main` as we will extend it to be more than a passthrough.
 
 To do this we create a new files named `lib/pipelines.tremor` and use this pipeline in our flow.
 
@@ -233,9 +233,9 @@ end;
 # Our main flow
 define flow main
 flow
-  # import the `troy::connectors` module
-  use troy::connectors;
-  # import the `troy::pipelines` module
+  # import the `tremor::connectors` module
+  use tremor::connectors;
+  # import the `tremor::pipelines` module
   use lib::pipelines;
 
   # create an instance of the console connector
@@ -366,8 +366,8 @@ We can omit `in` and `out` as ports as that's what tremor defaults to. For `exit
 # Our main flow
 define flow main
 flow
-  # import the `troy::connectors` module
-  use troy::connectors;
+  # import the `tremor::connectors` module
+  use tremor::connectors;
   use lib::pipelines;
 
   # Define the exit connector

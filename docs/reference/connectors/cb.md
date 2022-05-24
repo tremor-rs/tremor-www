@@ -39,7 +39,7 @@ It can also be used to test the behaviour of connectors acting as event sinks, c
 ```tremor title="cb_example.troy"
 define flow cb_example
 flow
-  use troy::pipelines;
+  use tremor::pipelines;
   use std::time::nanos;
 
   define connector my_cb from cb

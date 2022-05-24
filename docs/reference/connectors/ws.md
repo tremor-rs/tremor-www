@@ -117,8 +117,8 @@ server with the server echoing the client message back to the client
 define flow main
 flow
   use integration;
-  use troy::pipelines;
-  use troy::connectors;
+  use tremor::pipelines;
+  use tremor::connectors;
 
   define connector ws_client from ws_client
   with

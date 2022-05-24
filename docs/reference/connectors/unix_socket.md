@@ -66,8 +66,8 @@ end;
 define flow server
 flow
   use integration;
-  use troy::pipelines;
-  use troy::connectors;
+  use tremor::pipelines;
+  use tremor::connectors;
 
   define connector server from unix_socket_server
   with
@@ -115,8 +115,8 @@ end;
 define flow client
 flow
   use integration;
-  use troy::pipelines;
-  use troy::connectors;
+  use tremor::pipelines;
+  use tremor::connectors;
   use std::time::nanos;
 
   define connector client from unix_socket_client

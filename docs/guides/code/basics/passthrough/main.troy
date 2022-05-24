@@ -1,10 +1,10 @@
 # Our passthrough flow
 define flow main
 flow
-  # import the `troy::connectors` module
-  use troy::connectors;
-  # import the `troy::pipelines` module
-  use troy::pipelines;
+  # import the `tremor::connectors` module
+  use tremor::connectors;
+  # import the `tremor::pipelines` module
+  use tremor::pipelines;
 
   # create an instance of the console connector
   create connector console from connectors::console;

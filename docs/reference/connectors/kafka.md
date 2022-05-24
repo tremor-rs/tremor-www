@@ -132,8 +132,8 @@ other Kafka `consumer` and `producer` configurations and can be modularised.
 define flow kafka_produce
 flow
 
-    use troy::connectors;
-    use troy::pipelines;
+    use tremor::connectors;
+    use tremor::pipelines;
     use integration;
 
     # Producer Kafka connector
@@ -216,8 +216,8 @@ end;
 # Kafka consumer flow
 define flow kafka_consume
 flow
-    use troy::connectors;
-    use troy::pipelines;
+    use tremor::connectors;
+    use tremor::pipelines;
     use integration;
 
     # Consumer Kafka connector

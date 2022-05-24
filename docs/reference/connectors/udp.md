@@ -71,7 +71,7 @@ In deployable form
 ```tremor title="config.troy"
 define flow main
 flow
-  use troy::connectors;
+  use tremor::connectors;
   use integration;
 
 
@@ -123,7 +123,7 @@ graph LR
 ```tremor title="config.troy"
 define flow main
 flow
-  use troy::connectors;
+  use tremor::connectors;
   use integration;
   
   # Encapsulate a UDP server that processes datagrams as strings
