@@ -43,6 +43,7 @@ flow
   use tremor::pipelines;
   use std::time::nanos;
 
+<<<<<<< HEAD
   define connector my_cb from cb
   with
     codec = "json",		# Events are line delimited JSON
@@ -50,6 +51,30 @@ flow
       "path": "in.json",	# File from which to replay events
       "timeout": nanos::from_seconds(1)
     }
+=======
+  define flow cb_example
+  flow
+    use tremor::pipelines;
+    use std::time::nanos;
+
+    define connector my_cb from cb
+    with
+      codec = "json",		# Events are line delimited JSON
+      config = {
+        "path": "in.json",	# File from which to replay events
+        "timeout": nanos::from_seconds(1)
+      }
+    end;
+    create connector my_cb;
+
+    create pipeline passthrough from pipelines::passthrough;
+
+    # connect both the `out` and the `in` port of the connector 
+    # via a simple passthrough pipeline.
+    # (The ports can also be omitted for brevity)
+    connect /connector/my_cb/out to /pipeline/passthrough/in;
+    connect /pipeline/passthrough/out to /connector/my_cb/in;
+>>>>>>> 2bad7ed8 (Update troy:: to tremor::)
   end;
   create connector my_cb;
 

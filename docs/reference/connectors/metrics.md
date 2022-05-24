@@ -12,7 +12,11 @@ logic to expand on the set of metrics collected.
 
 We use the standard definition of the metrics connector from the standard library
 
+<<<<<<< HEAD
 ```tremor
+=======
+```troy
+>>>>>>> 2bad7ed8 (Update troy:: to tremor::)
 use tremor::connectors;
 
 create connector metrics from connectors::metrics;

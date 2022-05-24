@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # Functions
 
 Tremor provides access to a growing number of functions that allow
