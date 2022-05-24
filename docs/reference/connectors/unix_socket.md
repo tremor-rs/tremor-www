@@ -1,5 +1,6 @@
 ---
 sidebar_label: unix_socket
+sidebar_position: 1
 ---
 
 # The `unix_socket` Connector

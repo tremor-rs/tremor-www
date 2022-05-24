@@ -1,5 +1,6 @@
 ---
-sidebar_label: ws
+sidebar_label: ws (Web Sockets)
+sidebar_position: 1
 ---
 
 # The `ws` Connector

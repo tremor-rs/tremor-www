@@ -1,5 +1,7 @@
 ---
-sidebar_label: otel
+sidebar_label: otel (Open Telemetry)
+sidebar_position: 1
+
 ---
 
 # The `otel` Connector

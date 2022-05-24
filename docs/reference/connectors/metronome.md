@@ -1,5 +1,6 @@
 ---
-sidebar_label: metronome
+sidebar_label: metronome (Periodic messages)
+sidebar_position: 1
 ---
 
 # The `metronome` Connector

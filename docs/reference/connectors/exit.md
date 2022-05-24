@@ -1,5 +1,6 @@
 ---
 sidebar_label: exit
+sidebar_position: 102
 ---
 
 # The `exit` Connector
