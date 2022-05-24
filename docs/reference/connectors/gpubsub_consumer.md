@@ -27,12 +27,12 @@ end;
 ## Metadata
 The connector will set the `$pubsub_connector` metadata variable, which is a dictionary of the messages metadata.
 
-| field        | type                    | description                                                                                 |
-|--------------|-------------------------|---------------------------------------------------------------------------------------------|
-| message_id   | String                  | The ID of the message, as provided by PubSub                                                |
-| ordering_key | String                  | The ordering key of the message                                                             |
-| publish_time | u64                     | The time when the message was published (as nanoseconds since 1st January 1970 00:00:00 UTC |
-| attributes   | HashMap<String, String> | The attributes attached to the message                                                      |
+| field        | type                      | description                                                                                 |
+|--------------|---------------------------|---------------------------------------------------------------------------------------------|
+| message_id   | string                    | The ID of the message, as provided by PubSub                                                |
+| ordering_key | string                    | The ordering key of the message                                                             |
+| publish_time | integer                   | The time when the message was published (as nanoseconds since 1st January 1970 00:00:00 UTC |
+| attributes   | record with string values | The attributes attached to the message                                                      |
 
 ## Payload structure
 The raw payload will be passed as is to the codec
