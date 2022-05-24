@@ -1,6 +1,6 @@
 define flow metrics
 flow
-  use troy::pipelines;
+  use tremor::pipelines;
 
   define connector console from stdio
   with
