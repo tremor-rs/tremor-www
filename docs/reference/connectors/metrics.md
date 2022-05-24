@@ -12,7 +12,7 @@ logic to expand on the set of metrics collected.
 We use the standard definition of the metrics connector from the standard library
 
 ```tremor
-use troy::connectors;
+use tremor::connectors;
 
 create connector metrics from connectors::metrics;
 
@@ -57,7 +57,7 @@ define flow main
 flow
   use integration;
   use std::time::nanos;
-  use troy::connectors;
+  use tremor::connectors;
 
   # connector definitions
   define connector in from metronome

@@ -71,7 +71,7 @@ For this use case we need a file reader and writer
 ```tremor
 define flow main
 flow  
-  use troy::connectors;
+  use tremor::connectors;
   use integration;
 
   # we could use the connectors in integration but this is the file integration test

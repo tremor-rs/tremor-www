@@ -66,8 +66,8 @@ flow
 
   # debugging
 
-  use troy::connectors;
-  use troy::pipelines;
+  use tremor::connectors;
+  use tremor::pipelines;
 
   create connector console from connectors::console;
   create pipeline passthrough from pipelines::passthrough;

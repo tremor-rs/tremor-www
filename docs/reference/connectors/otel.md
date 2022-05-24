@@ -68,8 +68,8 @@ The entire echo application is as follows:
 define flow server
 flow
   use integration;
-  use troy::pipelines;
-  use troy::connectors;
+  use tremor::pipelines;
+  use tremor::connectors;
 
   # Expose an otel service on localhost port 4317
   define connector otel_server from otel_server
@@ -122,7 +122,7 @@ end;
 define flow client
 flow
   use integration;
-  use troy::pipelines;
+  use tremor::pipelines;
 
   define connector otel_client from otel_client
   with

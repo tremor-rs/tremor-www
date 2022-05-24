@@ -45,7 +45,7 @@ The application source for this example:
 ```tremor
 define flow main
 flow
-  use troy::connectors;
+  use tremor::connectors;
   use integration;
 
   # Define our periodic source of events

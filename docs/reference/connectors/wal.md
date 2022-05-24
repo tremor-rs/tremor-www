@@ -53,8 +53,8 @@ The reconfigured flow for the `server` definition now looks as follows:
 define flow server
 flow
   use integration;
-  use troy::pipelines;
-  use troy::connectors;
+  use tremor::pipelines;
+  use tremor::connectors;
 
   define connector tcp_server from tcp_server
   with

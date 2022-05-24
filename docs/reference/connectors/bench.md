@@ -81,7 +81,7 @@ example is provided for illustration.
 ```tremor title="config.troy"
 define flow main
 flow
-  use troy::connectors;
+  use tremor::connectors;
 
   define connector bench from bench
   with
