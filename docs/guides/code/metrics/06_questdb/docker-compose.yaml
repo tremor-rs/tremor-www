@@ -14,7 +14,7 @@ services:
     depends_on:
       - questdb
     volumes:
-      - ./config/grafana:/etc/grafana:ro
+      - ./config/grafana/provisioning:/etc/grafana/provisioning:ro
 
   telegraf:
     image: telegraf:1.22
