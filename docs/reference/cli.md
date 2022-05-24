@@ -598,14 +598,14 @@ operators and authors.
 
 | Command         | Description                                                                                                   |
 |-----------------|---------------------------------------------------------------------------------------------------------------|
-| [dot](#dbg-dot) | prints the .dot representation for a trickle file (you can use `| dot -Tpng -oout.png` to generate a picture) |
+| [dot](#dbg-dot) | prints the .dot representation for a query (you can use `| dot -Tpng -oout.png` to generate a picture) |
 | [ast](#dbg-ast) | prints the AST of the source                                                                                  |
 | [lex](#dbg-lex) | prints lexemes                                                                                                |
 | [src](#dbg-src) | prints source                                                                                                 |
 
 ### dbg **dot**
 
-Generates a [GraphViz](https://graphviz.org/) `.dot` graph representation for a trickle file.
+Generates a [GraphViz](https://graphviz.org/) `.dot` graph representation for a query.
 
 ### How to generate a GraphViz `.dot` file on standard output
 
@@ -616,11 +616,11 @@ $ tremor dbg dot [<SCRIPT>]
 ### How to generate a GraphViz `.dot` file as PNG
 
 ```bash
-$ tremor dbg dot foo.trickle | dot -Tpng -o foo.trickle.png
+$ tremor dbg dot foo.troy | dot -Tpng -o foo.troy.png
 ```
 ### dbg **ast**
 
-Generate the Abstract syntax Tree ( AST ) of a valid tremor `.trickle` source
+Generate the Abstract syntax Tree ( AST ) of a valid tremor source files
 
 ```bash
 $ tremor dbg ast [<SCRIPT>]
@@ -652,10 +652,7 @@ $ tremor dbg src [<SCRIPT>]
 
 Run tremor script or query files against stdin or a json data archive, the data will be read from STDIN or an archive and written to STDOUT.
 
-This command supports limited execution of `troy` files but we recommend using `tremor server run` instead.
-
-This command can be very useful for interactive testing and debugging of `trickle` and `troy` source files
-during development.
+This command supports execution of `troy` files but we recommend using `tremor server run` instead.
 
 ```bash
 $ tremor run [<OPTIONS>] <SCRIPT>
@@ -739,9 +736,6 @@ $ tremor doc [<DIR>] [<OUTDIR>]
 | DIR    | None   | switch/flag | no       | Directory or source to generate documents for |
 | OUTDIR | None   | switch/flag | no       | Directory to generate documents into          |
 
-### Limitations
-
-The tool does not traverse `.trickle` files at this time.
 
 ### Generating documents for the standard library
 
