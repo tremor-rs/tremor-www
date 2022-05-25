@@ -8,7 +8,7 @@ A key feature of the [Select] queries are aggregations. These are supported with
 
 An example clock-driven tumbling window:
 
-```
+```troy
 use std::time::nanos;
 
 define window `15secs` from tumbling
