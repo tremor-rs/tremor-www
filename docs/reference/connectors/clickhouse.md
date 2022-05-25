@@ -2,6 +2,14 @@
 sidebar_label: clickhouse
 ---
 
+> ClickHouse is an open-source [column-oriented DBMS][co-dbms] (columnar database management system) for [online analytical processing][olap] (OLAP) that allows users to generate analytical reports using SQL queries in real-time.
+
+Source: [Wikipedia][wikipedia-ch].
+
+[co-dbms]: https://en.wikipedia.org/wiki/Column-oriented_DBMS
+[olap]: https://en.wikipedia.org/wiki/Online_analytical_processing
+[wikipedia-ch]: https://en.wikipedia.org/wiki/ClickHouse
+
 # The `clickhouse` Connector
 
 The `clickhouse` collector aims integrate the [ClickHouse] database in Tremor. It has been tested with ClickHouse `v22.3-lts`.
