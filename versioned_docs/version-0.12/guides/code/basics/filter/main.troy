@@ -1,0 +1,32 @@
+# Our main flow
+define flow main
+flow
+  # import the `tremor::connectors` module
+  use tremor::connectors;
+  use lib::pipelines;
+
+
+  # Define the exit connector
+  define connector exit from exit;
+
+  # create the exit connector;
+  create connector exit;
+
+  # create an instance of the console connector
+  create connector console from connectors::console;
+
+  # create an instance of the passthrough pipeline
+  create pipeline main from pipelines::main;
+
+  # connect the console (STDIN) to our pipeline input
+  connect /connector/console to /pipeline/main;
+
+  # then connect the pipeline output to the console (STDOUT)
+  connect /pipeline/main to /connector/console;
+
+  # connect the `exit` port of our pipeline to the exit connector
+  connect /pipeline/main/exit to /connector/exit;
+
+end;
+# Deploy the flow so tremor starts it
+deploy flow main;

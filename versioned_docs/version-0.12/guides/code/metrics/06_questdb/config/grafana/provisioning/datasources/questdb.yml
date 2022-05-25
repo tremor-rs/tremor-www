@@ -1,0 +1,28 @@
+apiVersion: 1
+
+datasources:
+  - name: QuestDB
+    access: proxy
+    basicAuth: false
+    database: qdb
+    id: 1
+    isDefault: true
+    jsonData:
+      postgresVersion: 903
+      sslmode: disable
+      tlsAuth: false
+      tlsAuthWithCACert: false
+      tlsConfigurationMethod: file-path
+      tlsSkipVerify: true
+    orgId: 1
+    user: admin
+    secureJsonData:
+      password: quest
+    readOnly: false
+    type: postgres
+    typeLogoUrl: public/app/plugins/datasource/postgres/img/postgresql_logo.svg
+    typeName: PostgreSQL
+    uid: YALf4aX7z
+    url: questdb:8812
+    version: 1
+

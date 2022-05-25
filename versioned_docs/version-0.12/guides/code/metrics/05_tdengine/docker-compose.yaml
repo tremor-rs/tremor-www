@@ -1,0 +1,35 @@
+version: '2.0'
+services:
+  tdengine:
+    image: tdengine/tdengine:2.4.0.18
+    ports:
+      - '6030-6049:6030-6049'
+      - '6030-6049:6030-6049/udp'
+  grafana:
+    image: grafana/grafana-oss:8.5.2
+    ports:
+      - '3000:3000'
+    environment:
+      - "GF_INSTALL_PLUGINS=https://github.com/taosdata/grafanaplugin/releases/download/v3.1.7/tdengine-datasource-3.1.7.zip;tdengine-datasource"
+    depends_on:
+      - tdengine
+    volumes:
+      - ./config/grafana/provisioning:/etc/grafana/provisioning:ro
+  telegraf:
+    image: telegraf:1.22
+    depends_on:
+      - tdengine
+      - tremor
+    volumes:
+      - ./config/telegraf:/etc/telegraf:ro
+  tremor:
+    image: tremorproject/tremor:edge
+    depends_on:
+      - tdengine
+    ports:
+      - 4242:4242
+    environment:
+      - RUST_BACKTRACE=1
+      - RUST_LOG=info
+    volumes:
+      - ./config/tremor:/etc/tremor:ro

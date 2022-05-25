@@ -1,0 +1,137 @@
+define flow metrics
+flow
+  # define the udp server
+  define connector upd_in from udp_server
+  with
+    # define the codec we use, in this case `influx` for the influx wire protocol
+    codec = "influx",
+    # define the preprocessors, we use separate to seperate events by lines
+    preprocessors = ["separate"],
+    # configure the connector itself, we listen to `0.0.0.0` on port `4242`
+    config = {
+      "url": "0.0.0.0:4242",
+    }
+  end;
+  
+  # define our http client
+  define connector influx_out from http_client
+  with
+    # we use the influx codec here as well
+    codec = "influx",
+    # define the postprocessors, we use separate to seperate events by lines
+    postprocessors = ["separate"],
+    # configure  the endpoint we're writing to    
+    config = {
+      "url": "http://influxdb:8086/write?db=tremor",
+      # We use a custom header to identify that we're tremor
+      "headers": {"Client": ["Tremor"]}
+    }
+  end;
+
+  # define our metrics pipeline to batch metrics
+  define pipeline metrics
+  pipeline
+    # use types for checking if values are a number
+    use std::type;
+    # use record for exploding keys
+    use std::record;
+    # use nanos for time
+    use std::time::nanos;
+
+    # define a 10 second window
+    define window `10secs` from tumbling
+    with
+      interval = nanos::from_seconds(10)
+    end;
+
+    # define a 1 minute window
+    define window `1min` from tumbling
+    with
+      interval = nanos::from_minutes(1)
+    end;
+
+
+    # define our batch operator.
+    # A batch will collect up to 3000 events, but never wait more then 5 seconds
+    # before emitting.
+    define operator batch from generic::batch
+    with
+      count = 3000,
+      timeout = nanos::from_seconds(5)
+    end;
+
+    # create our batch operator
+    create operator batch;
+
+    # create our pre-aggregation stream
+    create stream aggregate;
+
+    # We change the structure of our event to be easier digestible for aggregation
+    select {
+        "measurement": event.measurement,
+        "tags": event.tags,
+        "field": group[2],
+        "value": event.fields[group[2]],
+        "timestamp": event.timestamp,
+    }
+    from in
+    group by set(event.measurement, event.tags, each(record::keys(event.fields)))
+    into aggregate
+    having type::is_number(event.value);
+ 
+    # create a stream for normalisation
+    create stream normalize;
+
+    select
+    {
+        "measurement": event.measurement,
+        "tags": patch event.tags of insert "window" => window end,
+        "stats": aggr::stats::hdr(event.value, [ "0.5", "0.9", "0.99", "0.999" ]),
+        "field": event.field,
+        "timestamp": aggr::win::first(event.timestamp), # we can't use min since it's a float
+    }
+    from aggregate[`10secs`, `1min`]
+    group by set(event.measurement, event.tags, event.field)
+    into normalize;
+
+    select {
+      "measurement":  event.measurement,
+      "tags":  event.tags,
+      "fields":  {
+        "count_#{event.field}":  event.stats.count,
+        "min_#{event.field}":  event.stats.min,
+        "max_#{event.field}":  event.stats.max,
+        "mean_#{event.field}":  event.stats.mean,
+        "stdev_#{event.field}":  event.stats.stdev,
+        "var_#{event.field}":  event.stats.var,
+        "p50_#{event.field}":  event.stats.percentiles["0.5"],
+        "p90_#{event.field}":  event.stats.percentiles["0.9"],
+        "p99_#{event.field}":  event.stats.percentiles["0.99"],
+        "p99.9_#{event.field}":  event.stats.percentiles["0.999"]
+      },
+      "timestamp": event.timestamp,
+    }
+    from normalize
+    into batch;
+
+    select event from batch into out;
+  end;
+
+  # Create the udp server
+  create connector upd_in;
+
+  # Create the http client
+  create connector influx_out;
+
+  # Create our pipeline
+  create pipeline metrics from metrics;
+
+  # Connect the udp server to the pipeline
+  connect /connector/upd_in to /pipeline/metrics;
+  # Connect the pipeline to the inflix client
+  connect /pipeline/metrics to /connector/influx_out;
+
+end;
+
+# start our 
+deploy flow metrics;

@@ -1,0 +1,48 @@
+define flow metrics
+flow
+  # import the pipeline module
+  use tremor::pipelines;
+  # define the udp server
+  define connector upd_in from udp_server
+  with
+    # define the codec we use, in this case `influx` for the influx wire protocol
+    codec = "influx",
+    # define the preprocessors, we use separate to seperate events by lines
+    preprocessors = ["separate"],
+    # configure the connector itself, we listen to `0.0.0.0` on port `4242`
+    config = {
+      "url": "0.0.0.0:4242",
+    }
+  end;
+  
+  # define our http client
+  define connector influx_out from http_client
+  with
+    # we use the influx codec here as well
+    codec = "influx",
+    # configure  the endpoint we're writing to
+    config = {
+      "url": "http://influxdb:8086/write?db=tremor",
+      # We use a custom header to identify that we're tremor
+      "headers": {"Client": ["Tremor"]}
+    }
+  end;
+
+  # Create the UDP server
+  create connector upd_in;
+
+  # Create the HTTP client
+  create connector influx_out;
+
+  # Create our pipeline
+  create pipeline passthrough from pipelines::passthrough;
+
+  # Connect the udp server to the pipeline
+  connect /connector/upd_in to /pipeline/passthrough;
+  # Connect the pipeline to the inflix client
+  connect /pipeline/passthrough to /connector/influx_out;
+
+end;
+
+# start our 
+deploy flow metrics;
