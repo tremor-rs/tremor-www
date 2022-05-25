@@ -222,5 +222,63 @@ end;
 
 Since `$` gives a record with all the meta variable name-value mapping, this works nicely.
 
+### Branching
+
+Branching data into multiple streams is performed via [Select] operations
+
+Branch data into 3 different output stream ports:
+
+```tremor
+select event from in into out/a;
+select event from in into out/b;
+select event from in into out/c;
+```
+
+```mermaid
+graph LR
+```
+
+Branch data into 3 different intermediate [Streams]:
+
+```tremor
+create stream a;
+create stream b;
+create stream c;
+
+select event from in into a;
+select event from in into b;
+select event from in into c;
+```
+
+### Combining
+
+Multiple data streams can also be combined via [Select] operations.
+
+Combine 3 data streams into a single output stream:
+
+```tremor
+...
+
+select event from a into out;
+select event from b into out;
+select event from c into out;
+```
+
+Combine 3 data stream ports from 1 or many streams into a single output stream
+
+```tremor
+...
+# select events from port `1` on stream `a`
+select event from a/1 into out;
+
+# select events from port `2` on stream `a`
+select event from a/2 into out;
+
+# select event from default port `out` on stream `b`
+select event from b into out;
+```
+
+[Streams]: ./pipelines.md#stream-definitions
+[Select]: ./pipelines.md#select-queries
 [Scripts]: ./scripts.md
 [`merge`]: ./expressions.md#merge
