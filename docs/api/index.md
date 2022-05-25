@@ -1,1 +1,1 @@
-Tremor exposes an versioned http API. You can look at the details in the [explorer](./explorer).
+Tremor exposes a versioned http API. You can look at the details in the [explorer](./explorer).
