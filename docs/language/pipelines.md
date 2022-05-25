@@ -27,6 +27,8 @@ As all other entities in Tremor, pipelines need to be defined and created. They 
 * `out` as output port for regular events
 * `err` for events signalling a processing error
 
+The task of every pipeline is to route events from one of its input ports to one of its output ports (or to filter out and drop events explicitly).
+
 Example:
 
 ```tremor
@@ -39,9 +41,30 @@ from
 into
   out, err, exhaust
 pipeline
-  # simples pipeline ever
-  select event from in into out;
+  select event from in1 where event.ok == true into out;
+  select 
+    event 
+  from 
+    in1 
+  where 
+    match event of 
+      case %{ absent ok, error == args.required_argument } => true
+      default => true
+    end
+  into 
+    err;
+
+  select event from in2 into exhaust;
 end;
+```
+
+This pipeline can be represented as a graph like this:
+
+```mermaid
+flowchart LR
+IN1([in1]) -->|event.ok == true| OUT([out])
+IN1 -->|match event of ...| ERR([err])
+IN2([in2]) -->|select| EXHAUST([exhaust])
 ```
 
 Pipelines can be created inside a [Flow](../language/index.md#flows) using a [Create statement](#create-statements).
@@ -76,6 +99,11 @@ Statements can be one of:
 
 Stream definitions in Pipelines allow private intermediate streams to be named so that they can be used as the source or sinks in other continuous queries. At runtime they are represented as a passthrough operator that will be optimized out if possible, so there is nearly no runtime overhead in defining and using streams.
 
+Streams have ports. Selecting `into` a stream will implicitly select it to the `in` port of the stream.
+Selecting `from` a stream will implicitly select it from the `out` port of the stream. It is possible to reference a port on the stream explicitly by using the following syntax: `stream/port`.
+
+Streams can be used for graph algorithms, like [branching, joining and interleaving](./common_patterns.md#branching).
+
 #### Grammar
 
 #### Example
@@ -83,8 +111,12 @@ Stream definitions in Pipelines allow private intermediate streams to be named s
 ```trickle
 create stream passthrough;
 
-select event from in into passthrough; # select default public 'in' stream into passthrough
-select event from passthrough into out; # select passthrough into default public 'out' stream
+select event from in into passthrough; # select default public 'in' port into passthrough
+select event from passthrough into out; # select passthrough into default public 'out' port
+
+# specifying the port explicitly
+select event from in into passthrough/in;
+select event from passthrough/err into err;
 ```
 
 ### Window Definitions
@@ -144,30 +176,24 @@ Configuration Parameters:
 For example a 15 second tumbling window based on the event ingest timestamp can be defined as follows
 
 ```trickle
-define tumbling window fifteen_secs
+use std::time::nanos;
+
+define window fifteen_secs from tumbling
 with
-    interval = core::datetime::with_seconds(15),
+    interval = nanos::from_seconds(15),
 end;
 ```
 
 The same window can be defined using a timestamp that is extracted from the message instead of the ingest time:
 
 ```trickle
-define tumbling window fifteen_secs
+use std::time::nanos;
+
+define window fifteen_secs from tumbling 
 with
-    interval = core::datetime::with_seconds(15),
+    interval = nanos::from_seconds(15),
 script
     event.timestamp
-end;
-```
-
-A tumbling window based on number of events that will discard windows when 2 hours have been passed:
-
-```trickle
-define tumbling window with_size
-with
-    size = 1000,
-    eviction_period = core::datetime::with_hours(2)
 end;
 ```
 
@@ -331,46 +357,44 @@ The only exception is the [Window](#window-definitions), which don't need to be 
 Select Grammar:
 > ![select grammar](./reference/svg/operatorselect.svg)
 
-The select query is a builtin operation that is the workhorse of Tremor pipelines. A select query describes from where to where an event should be routed (and under which conditions) and how it is transformed along the way.
+The select query is a builtin operation that is the workhorse of Tremor pipelines. A select query describes from where to where an event should be routed (and under which conditions) and how it is transformed along the way. it is connecting two nodes of the pipeline graph, and it can do a lot more.
 
-An example select operation configured to pass through data from a pipeline's default `in` stream to a pipeline's default `out` stream:
+An example select operation configured to pass through data from a pipeline's default `in` port to a pipeline's default `out` port:
 
 ```trickle
 select event from in into out;
 ```
 
-Select operations can filter ingested data with the specification of a [`where` clause](#WhereClause). The clause forms a predicate check on the inbound events before any further processing takes place.
-That means the `event` available to the [`where` clause](#WhereClause) is the unprocessed inbound event from the input stream (`in` in this case):
+### Execution Order
+
+Events flow through a [Select] query in a certain order. Lets travel with an event step by step and learn what happens at which step.
+
+This is the general overview:
+
+```mermaid
+flowchart LR
+
+FROM([from]) --> WHERE(where) --> GROUP_BY(group by) --> WINDOW(window) --> TARGET(select) --> HAVING(having) --> INTO([into])
+```
+
+#### From clause
+
+Events are coming in from the input port, operator or stream specified in the required `from` clause.
+
+#### Where clause
+
+Select operations can optionally filter ingested data with the specification of a [`where` clause](#where-clause). The clause forms a predicate check on the inbound events before any further processing takes place.
+That means the `event` available to the [`where` clause](#where-clause) is the unprocessed inbound event from the input port (`in` in this case):
 
 ```trickle
 select event from in where event.is_interesting into out;
 ```
 
-The _Target Expression_ of a select query is used to describe transformations of the event. To pass through the event without changes, use `select event`, otherwise you can construct arbitrary [literals](./scripts#literals) (numbers, records, arrays, ...), call functions, aggregate functions, reference the event metadata via `$` or other [path expressions](./scripts#paths). Nearly everything is possible:
+The where clause expression is required to return a boolean value.
 
-```trickle
-use std::string;
-use tremor::system;
+#### Group By and Windows
 
-select
-  {
-      "accumulated": [event.first, "middle", event.last],
-      "metadata": $meta.nested[0].deep,
-      "shouted": "#{ string::uppercase(event.message) }!",
-      "now": system::nanotime(),
-      "awesome": true
-  }
-from in into out;
-```
-
-Select operations can filter data being forwarded to other operators with the specification of a `having` clause. The clause forms a predicate check on outbound synthetic events after any other processing has taken place.
-That means the `event` available to the `having` clause is the result of evaluating the `select` target clause (the expression between `select` and `from`).
-
-```trickle
-select event from in into out having event.is_interesting;
-```
-
-Select operations can be windowed by **applying** a [Window] to the inbound data stream.
+Select operations can be windowed by **applying** a [Window] by specifying the window names in brackets after the input stream, operator or port specified in the [`from` clause](#from-clause).
 
 ```trickle
 define window fifteen_secs from tumbling
@@ -388,6 +412,7 @@ having
   event.count > 0;
 ```
 
+
 In the above operation, we emit a synthetic count every fifteen seconds if at least one event has been witnessed during a 15 second window of time.
 
 Windows emit new events which are an aggregation of the events feeded into them. Those new events will have an empty event metadata (accessible via `$`).
@@ -399,7 +424,6 @@ To drag event metadata across a windowed query, it needs to be selected into the
 define window take_two from tumbling
 with
     size = 2,
-    eviction_period = core::datetime::with_seconds(5)
 end;
 
 select
@@ -413,12 +437,18 @@ into
   out;
 ```
 
-Select operations can be grouped through defining a [`group by` clause](#GroupByClause).
+It is possible to specify multiple windows, separated by comma. Those windows then form a tilt-frame. The first window will both emit a synthetic event when the window closes to flow further through the [Select] query and also merge the current window state into the next window. If the second window is based on `size` and emits when it received 2 events, it will emit a synthetic event when it received 2 events from the previous window, not when the whole [Select] query received two events. See our docs about [Aggregation](../concepts/aggregation.md) for more details.
+
+##### Group By
+
+Select operations can be grouped through defining a `group by` clause.
 
 ```trickle
-define tumbling window fifteen_secs
+use std::time::nanos;
+
+define window fifteen_secs from tumbling
 with
-    interval = datetime::with_seconds(15),
+    interval = nanos::from_seconds(15),
 end;
 
 select 
@@ -437,7 +467,9 @@ In the above operation, we partition the input events into groups defined by a r
 
 The current implementation of `select` allows [set-based](#SetBasedGroup) and [each-based](#EachBasedGroup) grouping. These can be composed concatenatively. However `cube` and `rollup` based grouping dimensions are not currently supported.
 
-In windowed queries any event related data can only be referenced in those two cases:
+Using the `group by` clause in [Select] queries without a window will not aggregate any events but simply execute the [Target expression](#target-expression) with the current event and emit immediately. The special [`group` path](./expressions.md#reserved-paths) will be available.
+
+In windowed queries any event related data (`event`, `$`, ...) can only be referenced in those two cases:
 
 * it is used as an argument to an aggregate function
 * it is used as expression in the `group by` clause
@@ -465,167 +497,57 @@ into
   out;
 ```
 
-### Branching
+#### Target Expression
 
-Branching data into multiple streams is performed via [Select] operations
+The _Target Expression_ of a select query is what comes right after the `select` keyword. It is used to describe transformations of the event. To pass through the event without changes, use `select event`, otherwise you can construct arbitrary [literals](./scripts#literals) (numbers, records, arrays, ...), call functions, aggregate functions, reference the event metadata via `$` or other [path expressions](./scripts#paths). Nearly everything is possible:
 
-Branch data into 3 different output stream ports:
+```trickle
+use std::string;
+use tremor::system;
 
-```tremor
-select event from in into out/a;
-select event from in into out/b;
-select event from in into out/c;
+select
+  {
+      "accumulated": [event.first, "middle", event.last],
+      "metadata": $meta.nested[0].deep,
+      "shouted": "#{ string::uppercase(event.message) }!",
+      "now": system::nanotime(),
+      "awesome": true
+  }
+from in into out;
 ```
 
-```mermaid
-graph LR
+
+#### Having 
+
+Select operations can filter data being forwarded to other operators with the specification of a `having` clause. The clause forms a predicate check on outbound synthetic events after any other processing has taken place.
+That means the `event` available to the `having` clause is the result of evaluating the `select` target clause (the expression between `select` and `from`).
+
+```trickle
+select event from in into out having event.is_interesting;
 ```
 
-Branch data into 3 different intermediate [Streams]:
+#### Into
 
-```tremor
-create stream a;
-create stream b;
-create stream c;
+Finally the required `into` clause determines where to send the resulting event generated in the [Target expression](#select). It can specify a stream (with port), an operator (with port) or a pipeline output port.
 
-select event from in into a;
-select event from in into b;
-select event from in into c;
+Examples:
+
+```trickle
+# ... 
+create operator my_operator;
+
+# selecting into an operator (its `in` port)
+select event from in into my_operator/in;
+
+# selecting into a stream
+create stream river;
+
+# selecting into the `spring` port of the `river` stream
+select event from my_operator/out into river/spring;
+
+# selecting into a pipeline output port
+select event from in into out;
 ```
-
-### Combining
-
-Multiple data streams can also be combined via [Select] operations.
-
-Combine 3 data streams into a single output stream
-
-```tremor
-...
-
-select event from a into out;
-select event from b into out;
-select event from c into out;
-```
-
-Combine 3 data stream ports from 1 or many streams into a single output stream
-
-```tremor
-...
-
-select event from a/1 into out;
-select event from a/2 into out;
-select event from b into out;
-```
-
-### Aggregations
-
-A key feature of the [Select] queries are aggregations. These are supported with:
-
-- Windows - A window is a range of events, clock or data time. There can be many different types of windows.
-- Aggregate functions - An aggregate function is a function that runs in the context of a window of events, emitting results intermittently
-- Tilt Frames - A tilt frame is a chain of compatible windows with **decreasing** resolution used to reduce memory pressure and preserve relative accuracy of windowed aggregate functions
-
-An example clock-driven tumbling window:
-
-```
-define tumbling window `15secs`
-with
-   interval = core::datetime::with_seconds(15),
-end;
-
-select {
-    "count": aggr::stats::count(), # Aggregate 'count' function
-    "min": aggr::stats::min(event.value),
-    "max": aggr::stats::max(event.value),
-    "mean": aggr::stats::mean(event.value),
-    "stdev": aggr::stats::stdev(event.value),
-    "var": aggr::stats::var(event.value),
-}
-from in[`15secs`] # We apply the window nominally to streams
-into out;
-```
-
-To use a window we need to define the window specifications, such as a 15 second clock-based
-tumbling window called `15secs` as above. We can then create instances of these windows at runtime by
-applying those windows to streams. This is done in the `from` clause of a `select` statement.
-
-Wherever windows are applied, aggregate functions can be used. In the above example, we are calculating
-the minimum, maximum, average, standard deviation and variance of a `value` numeric field in data streaming
-into the query via the standard input stream.
-
-The query language is not constrained to clock-driven window definitions. Windows can also be
-data-driven or fully programmatic.
-
-A more complete example:
-
-```tremor
-select {
-    "measurement": event.measurement,
-    "tags": patch event.tags of insert "window" => window end,
-    "stats": aggr::stats::hdr(event.fields[group[2]], [ "0.5", "0.9", "0.99", "0.999" ]),
-    "class": group[2],
-    "timestamp": aggr::win::first(event.timestamp),
-}
-from in[`10secs`, `1min`, `10min`, `1h`]
-where event.measurement == "udp_lb_test"
-   or event.measurement == "kafka-proxy.endpoints"
-   or event.measurement == "burrow_group"
-   or event.measurement == "burrow_partition"
-   or event.measurement == "burrow_topic"
-group by set(event.measurement, event.tags, each(record::keys(event.fields)))
-into normalize;
-```
-
-In the above example we use a single aggregate function called `aggr::stats::hdr` which uses a high dynamic range
-or HDR Histogram to compute quantile estimates and basic statistics against a number of dynamic grouping fields
-set by the `group` clause. A group clause effectively partitions our operation by the group expressions provided
-by the trickle query programmer. In the example, we're using the field names of the nested 'fields' record on inbound
-events to compose a component of a group that is also qualified by tags and a measurement name. The field component
-is used as a numeric input to the histogram aggregate function.
-
-In the `from` clause, we are using a tilt frame, or a succession of window resolutions over which this aggregate
-function is producing results. So a `10secs` window is emitting on a 10-second repeating basis into a `1min` frame.
-So 6 times per second the state of the 10 second window is merged into the `1min` frame. This merge process is
-performed for each frame in the tilt frame.
-
-The advantage of tilt-frames is that as the target expression is **the same** for each frame, we can _merge_ across
-each frame without amplifying error - in short, we get the **effect** of summarisation without loss of accuracy.
-
-#### Windowing
-
-Assuming a periodic event delivered every 2 seconds into tremor.
-
-![tumbling-event-windows.png](./pipelines/tumbling-event-windows.png)
-
-A size based window of size 2 would emit a synthetic output event every 2 events.
-So the lifespan of a size based window is 2 events, repeated and non-overlapping for tumbling style windows.
-In the illustration above events `1` and `2` in the first window `w0` produce a single synthetic or derivate event `a`
-Events `3` and `4` in the second window `w1` produce a single synthetic or derivate event `b`
-As there is no 6th event in the example illustration, we will _never_ get another synthetic output event
-
-Contrast this with the 10 second or clock-based tumbling window. In the first window `w0`s lifetime we capture
-all events in the illustration.
-
-#### Tilt Frames
-
-Assuming a continuous flow of events into tremor...
-
-![tilt-frame-mechanics.png](./pipelines/tilt-frame-mechanics.png)
-
-All the synthetic outputs of successive 5 minute windows that fit into a 15 minute interval are **merged**
-into the 15 minute window. All the outputs of successive 15 minute intervals that fit into a 1 hour interval
-are **merged** into the 1 hour window. By chaining and merging, tremor can optimise ( reduce ) the amount
-of memory required across the chain when compared to multiple independent windows `select` expressions.
-In the case of aggregate functions like ` aggr::stats::hdr`` or `aggr::stats::dds``` the savings are significant.
-
-If we imagine 1M events per second, that is 300M events every 5 minutes. 900M every 15, 3.6B every hour.
-
-By using tilt frames we can maximally minimize internal memory consumption, whilst reducing the volume of
-incremental computation ( per event, per frame ), and further whilst preserving relative accuracy for
-merge-capable aggregate functions.
-
-The converged statistics under merge exhibit the same relative accuracy at a fraction of the computational
-and memory overhead without the using the tilt-frame mechanism.
 
 ## Config Directives
 
