@@ -8,6 +8,7 @@ Think about Tremor as an event- or stream-processing engine. It receives input d
 How events come into your Tremor system, how they flow through it, how they change shape and leave it again, all this is encoded in a [Flow] written in Tremors own configuration language [Troy]. A Troy file can contain one or many [Flow Definitions](language#flow) and commands to `deploy` them. When Tremor starts, it reads the Troy files provided on the command line and actually deploys and starts those [Flows] in order to let events flow.
 
 
+
 ## What is Tremor?
 
 Tremor is an event processing engine designed for high-density deployment in mission-critical 24x7x365 environments.

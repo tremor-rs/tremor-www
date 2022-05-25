@@ -14,7 +14,7 @@ Generally, tremor does not batch for inbound events. There are cases where the c
 
 ### Transparent unbatching
 
-Some connectors use batching as a way of transport optimization, where the server sends many events in a single network package to reduce cost. The [kafka](../reference/connectors/Kafka.md) connector would be an example of this. Here the batching behavior is transparent to tremors and users. Each event in the batch will be treated as if the batch didn't exist.
+Some connectors use batching as a way of transport optimization, where the server sends many events in a single network package to reduce cost. The [kafka](../reference/connectors/kafka.md) connector would be an example of this. Here the batching behavior is transparent to tremors and users. Each event in the batch will be treated as if the batch didn't exist.
 
 ### Userland unbatching
 
@@ -36,7 +36,7 @@ It generates a new event from several existing events, combining them so that th
 
 ### windows and aggregates
 
-You can find more details on how aggregation is implemented in tremor in the [aggregation section](./tbd-aggregation.md) of the concepts. 
+You can find more details on how aggregation is implemented in tremor in the [aggregation section](./aggregation.md) of the concepts. 
 
 What windows and aggregates allow is to combine multiple events into a single event given user land logic. This means batches can be pretty cheap and fairly flexibly created. However, since the shape of these batches is opaque to the engine, the resulting event isn't considered a "batched" event. It's regarded as a regular event, so connectors will treat it like any other event.
 
@@ -60,9 +60,9 @@ When an event arrives as a batched event, meaning it was generated using the [ba
 
 So, for example, the [elastic](../reference/connectors/elastic.md) connector that receives a batched event will combine all included events into a batched request. We can do this since, for this specialty connector, tremor can be aware of the application layer contract.
 
-On the other hand, in a system like [kafka](../reference/connectors/Kafka.md), a batched event will be unrolled, and each included event will be sent as its own message.
+On the other hand, in a system like [kafka](../reference/connectors/kafka.md), a batched event will be unrolled, and each included event will be sent as its own message.
 
-Connectors like [http](../reference/connectors/HTTP.md) form the middle ground. For batched events, they will concatenate the encoded events and send them in one message. This behavior can be influenced by [postprocessors](../reference/postprocessors/index.md) that allow modifying the data before it's being concatenated. An excellent example of this would be the [separate](../reference/postprocessors/separate.md) postprocessors that insert a separator between each batch event.
+Connectors like [http](../reference/connectors/http.md) form the middle ground. For batched events, they will concatenate the encoded events and send them in one message. This behavior can be influenced by [postprocessors](../reference/postprocessors/index.md) that allow modifying the data before it's being concatenated. An excellent example of this would be the [separate](../reference/postprocessors/separate.md) postprocessors that insert a separator between each batch event.
 
 ### userland batched events
 
