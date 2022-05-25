@@ -1,0 +1,449 @@
+openapi: '3.0.3'
+info:
+  title: Tremor Api
+  description: 'REST API for tremor'
+  version: '12.0'
+  license:
+    name: "Apache 2.0"
+    url: "https://www.apache.org/licenses/LICENSE-2.0.html"
+  
+servers:
+  - url: http://localhost:9898/
+    description: The default ( development ) endpoint on a local ( development ) host
+
+paths:
+  /v1/version:
+    get:
+      summary: Get's the current version of the tremor server
+      description: |
+
+        This endpoint returns version information for the current
+        version of tremor. Versioning policy follows [Semantic Versioning](https://semver.org/)
+
+      tags: [ version ]
+      operationId: get_version
+      responses:
+        '200':
+          description: The current version of tremor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/version'
+            
+  /v1/status:
+    get:
+      summary: Get's the current runtime status
+      description: |
+      
+        This endpoint returns the runtime status of the tremor server.
+        It returns a summary of the status of all deployed flows and
+        contains a flag `all_running` to check if all flows are alive and well.
+        
+      tags: [ status ]
+      operationId: get_runtime_status
+      responses:
+        '200':
+          description: The current status of the tremor runtime if all flows are in "running" state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtime_status'
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/runtime_status'
+        '503':
+          description: The current status of the tremor runtime otherwise
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtime_status'
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/runtime_status'
+  /v1/flows:
+    get:
+      summary: Get information on all flows in the tremor runtime.
+      description: |
+        
+        Get information on all flows in the tremor runtime.
+        It returns an array with 1 item for each flow with information on name,
+        current status and connectors.
+        
+      tags: [ flows ]
+      operationId: get_flows
+      responses:
+        '200':
+          description: List of flow informations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/flows'
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/flows'
+  /v1/flows/{flow-id}:
+    parameters:
+      - name: flow-id
+        in: path
+        required: true
+        description: The unique id of the flow in the runtime
+        schema:
+          type: string
+    get:
+      summary: Get information
+      tags: [ flows ]
+      operationId: get_flow
+      responses:
+        '200':
+          description: Get flow informations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/flow'
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/flow'
+        '404':
+          description: The flow 'flow-id' wasnt found. It is thus not deployed in the runtime.
+    patch:
+      summary: change the status of a flow
+      tags: [ flows ]
+      operationId: patch_flow_status
+      requestBody:
+        description: Intended status description
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/patch_status'
+          application/yaml:
+            schema:
+              $ref: '#/components/schemas/patch_status'
+        required: true
+      responses:
+        '200':
+          description: The new status of the flow after applying the patch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/flow'
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/flow'
+        '400':
+          description: Error during patch operation, due to invalid status transition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/error'
+
+        '404':
+          description: The flow 'flow-id' wasnt found. It is thus not deployed in the runtime.
+  /v1/flows/{flow-id}/connectors:
+    parameters:
+      - name: flow-id
+        in: path
+        required: true
+        description: The unique id of the flow in the runtime
+        schema:
+          type: string
+    get:
+      summary: Get detailed information on all connectors in the flow identified by 'flow-id'
+      tags:
+        - flows
+        - connectors
+      operationId: get_flow_connectors
+      responses:
+        '200':
+          description: A list of connector information items for all connectors created with in flow 'flow-id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connectors'
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/connectors'
+        '404':
+          description: The flow 'flow-id' wasnt found. It is thus not deployed in the runtime.
+  /v1/flows/{flow-id}/connectors/{connector-id}:
+    parameters:
+      - name: flow-id
+        in: path
+        required: true
+        description: The unique id of the flow in the runtime
+        schema:
+          type: string
+      - name: connector-id
+        in: path
+        required: true
+        description: The unique id of the connector within the flow
+        schema:
+          type: string
+    get:
+      summary: Get detailed information on the connector 'connector-id' in the flow 'flow-id'.
+      tags:
+        - flows
+        - connectors
+      operationId: get_flow_connector
+      responses:
+        '200':
+          description: Connector information for 'connector-id' within flow 'flow-id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connector'
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/connector'
+        '404':
+          description: The flow 'flow-id' or the connector 'connector-id' within flow `flow-id' wasnt found. It is thus not deployed in the
+    patch:
+      summary: change the status of a connector
+      tags:
+        - flows
+        - connectors
+      operationId: patch_flow_connector_status
+      requestBody:
+        description: Intended status description
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/patch_status'
+          application/yaml:
+            schema:
+              $ref: '#/components/schemas/patch_status'
+        required: true
+      responses:
+        '200':
+          description: The new status of the connector after the patch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connector'
+            application/yaml:
+                schema:
+                  $ref: '#/components/schemas/connector'
+        '400':
+          description: Error during patch operation, due to invalid status transition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: The flow 'flow-id' or the connector 'connector-id' within flow `flow-id' wasnt found. It is thus not deployed in the
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+            application/yaml:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  
+components:
+  schemas:
+    version:
+      description: Version information
+      type: object
+      properties:
+        version:
+          type: string
+          description: The semantic version code
+        debug:
+          type: boolean
+          description: True if this is a debug build
+      required:
+        - version
+      additionalProperties: false
+      example:
+        version: "0.11.4"
+        debug: true
+    
+    runtime_status:
+      description: Runtime status information
+      type: object
+      properties:
+        all_running:
+          type: boolean
+          description: flag that is true if all flows are currently in a running state
+        num_flows:
+          type: number
+          description: number of deployed flows
+        flows:
+          type: object
+          properties:
+            initializing:
+              type: number
+              description: The number of flows in initializing state, not yet running
+            running:
+              type: number
+              description: The number of flows in running state
+            paused:
+              type: number
+              description: The number of flows in paused state
+            draining:
+              type: number
+              description: The number of flows in draining state
+            stopped:
+              type: number
+              description: The number of flows in stopped state
+            failed:
+              type: number
+              description: The number of flows in failed state
+          additionalProperties: false
+      required:
+        - all_running
+        - num_flows
+        - flows
+      additionalProperties: false
+      example:
+        all_running: false
+        num_flows: 2
+        flows:
+          initializing: 1
+          failed: 1
+          
+    status:
+      description: runtime status of a flow or connector instance
+      type: string
+      enum:
+       - initializing
+       - running
+       - paused
+       - draining
+       - stopped
+       - failed
+    
+    flows:
+      description: List of information on deployed flows
+      type: array
+      items:
+        $ref: '#/components/schemas/flow'
+        
+    flow:
+      description: Information on a deployed flow
+      type: object
+      properties:
+        alias:
+          description: Alias of the flow
+          type: string
+        status:
+          $ref: '#/components/schemas/status'
+        connectors:
+          description: aliases of connectors in the flow
+          type: array
+          items:
+            description: alias of a connector
+            type: string
+      additionalProperties: false
+      required:
+        - alias
+        - status
+        - connectors
+      example:
+        alias: kafka
+        status: initializing
+        connectors:
+          - consumer1
+          - metrics
+          - out
+          
+    patch_status:
+      description: encodes the intended status to switch to
+      type: object
+      properties:
+        status:
+          description: Valid statusses flows and connectors can be switched to
+          type: string
+          enum:
+            - running
+            - paused
+      additionalProperties: false
+      required: 
+        - status
+      example:
+        status: paused
+
+    connectors:
+      description: List of information on connectors
+      type: array
+      items:
+        $ref: '#/components/schemas/connector'
+        
+    connector:
+      description: Information on a single connector, including current runtime status and connected pipelines
+      type: object
+      properties:
+        alias:
+          type: string
+        status:
+          $ref: '#/components/schemas/status'
+        connectivity:
+          description: denoting whether this connector is connected to its external system
+          type: string
+          enum:
+            - connected
+            - disconnected
+        pipelines:
+          type: object
+          additionalProperties:
+            description: A map of connector port to the connected pipeline id and port.
+            type: array
+            items:
+              description: |
+                
+                The id (or alias) of a connected pipeline and the pipeline-port with which they are connected to this connector.
+                
+              type: object
+              properties:
+                alias:
+                  description: Pipeline id (or alias)
+                  type: string
+                port:
+                  description: Name of the port with the pipeline is connected to this connector.
+                  type: string
+            example:
+              out:
+                - alias: "event_handling_pipeline"
+                  port: in
+                - alias: "aggregation_pipeline"
+                  port: in
+              err:
+                - alias: "error_handling_pipeline"
+                  port: in
+      additionalProperties: false
+      required:
+        - alias
+        - status
+        - connectivity
+        - pipelines
+      example:
+        alias: foo
+        status: running
+        connectivity: connected
+        pipelines:
+          out:
+            - alias: pass
+              port: in
+    error:
+      description: Error Payload
+      type: object
+      properties:
+        code:
+          type: number
+          description: Same as HTTP Status code
+        error:
+          type: string
+          description: Human-readable error message
+      additionalProperties: false
+      required:
+        - code
+        - error
+      example:
+        code: 400
+        error: "Cannot patch status of connector non_existent_file in flow flow_02 from failed to running"       

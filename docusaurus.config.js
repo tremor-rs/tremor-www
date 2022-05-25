@@ -58,12 +58,12 @@ const config = {
         specs: [
           {
             spec: 'static/api/edge/openapi.yaml',
-            route: '/docs/edge/api',
+            route: '/docs/next/api',
           },
           {
-            spec: 'static/api/v0.11/openapi.yaml',
-            route: '/docs/0.11/api',
-          }
+            spec: 'static/api/v0.12/openapi.yaml',
+            route: '/docs/0.12/api',
+          },
         ],
         // Theme Options for modifying how redoc renders them
         theme: {
@@ -141,7 +141,7 @@ const config = {
             type: 'dropdown',
             label: 'Docs',
             positition: 'left',
-            to: 'docs/edge',
+            to: 'docs/next',
             items: [
               // We chose to reference the most recent version here
               // RELEASE: this needs to change for each major version release (0.12 -> 0.13)
