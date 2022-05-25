@@ -146,8 +146,26 @@ A ClickHouse `IPv6` can be created from any [RFC 5952][rfc-5952]-compliant strin
 
 ### Nullable
 
-TODO
+Any column type can be marked as nullable. It allows to make optional the key-value pair for the events that are sent through the sink.
+
+A column whose type is a nullable `UInt8` can be declared as follows:
+
+```json
+{
+    "name": "column_name",
+    "type": { "Nullable": "UInt8" }
+}
+```
 
 ### Array
 
-TODO
+Arrays can store any number of elements.
+
+A column whose type is an array of `UInt8` can be declared as follows:
+
+```json
+{
+    "name": "column_name",
+    "type": { "Array": "UInt8" }
+}
+```
