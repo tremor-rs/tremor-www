@@ -1,12 +1,17 @@
 ---
 sidebar_position: 0
 ---
+
 # Tremor
 
 Think about Tremor as an event- or stream-processing engine. It receives input data from various [Connectors], turns the data into streams of structured events with the help of [Preprocessors](reference/preprocessors) and [Codecs]. Those events are then handled by one or more [Pipelines](language/pipelines), which can inspect, mutate and route the event and implement arbitrarily complex application logic. Events are either dropped (e.g. for rate-limiting or traffic-shaping) or sent to downstream systems via various [Connectors]. Before actually leaving the system, those streams of structured events need to be serialized using [Codecs] and [Postprocessors](reference/postprocessors).
 
 How events come into your Tremor system, how they flow through it, how they change shape and leave it again, all this is encoded in a [Flow] written in Tremors own configuration language [Troy]. A Troy file can contain one or many [Flow Definitions](language#flow) and commands to `deploy` them. When Tremor starts, it reads the Troy files provided on the command line and actually deploys and starts those [Flows] in order to let events flow.
 
+#### [**Get Started with Tremor**](./getting-started/index.md)
+#### [**Check out our Guides**](./guides/index.md)
+#### [**Consult the Reference documentation**](./reference/index.md)
+#### [**Learn about Tremors own Configuration Language**](./language/index.md)
 
 
 ## What is Tremor?
