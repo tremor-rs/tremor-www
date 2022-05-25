@@ -1,0 +1,6 @@
+status: 0
+name: example2
+asserts:
+  - source: out.log
+    contains:
+      - "\"triggered\""

@@ -1,0 +1,15 @@
+define flow main
+flow
+
+  define connector elastic from elastic
+  with
+    config = {
+      "nodes": ["http://elastic:9200/"],
+      "concurrency": 10,
+      "include_payload_in_response": true
+    }
+  end;
+  
+end;
+
+deploy flow main;

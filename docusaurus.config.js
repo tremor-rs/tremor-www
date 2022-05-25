@@ -82,15 +82,14 @@ const config = {
           // Please change this to your repo.
           editUrl: 'https://github.com/tremor-rs/tremor-www/tree/main/',
           remarkPlugins: [require('mdx-mermaid'), gitLinks],
-          // this makes `Next` to `0.12`
-          // RELEASE: This needs to be removed whenever we release 0.12
-          lastVersion: 'current',
-          versions: {
-            current: {
-              label: 'edge',
-              path: 'edge',
-            },
-          },
+          lastVersion: '0.12',
+          // this will introduce a version called 'edge' but always select it
+          // versions: {
+          //   current: {
+          //     label: 'edge',
+          //     path: 'edge',
+          //   },
+          // },
         },
         blog: {
           showReadingTime: true,

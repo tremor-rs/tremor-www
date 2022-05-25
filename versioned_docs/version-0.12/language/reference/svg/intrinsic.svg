@@ -1,0 +1,352 @@
+<svg class="railroad" viewBox="0 0 1119 190" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+
+svg.railroad {
+  background-color: rgba(238, 238, 238, .91);
+  background-size: 15px 15px;
+  background-image: linear-gradient(to right, rgba(25, 25, 225, .65) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(25, 25, 225, .65) 1px, transparent 1px);
+}
+
+svg.railroad path {
+  stroke-width: 3px;
+  stroke: black;
+  fill: transparent;
+}
+
+svg.railroad .debug {
+  stroke-width: 1px;
+  stroke: red;
+}
+
+svg.railroad text {
+  font: 14px monospace;
+  text-anchor: middle;
+}
+
+svg.railroad .nonterminal text {
+  font-weight: bold;
+}
+
+svg.railroad text.comment {
+  font: italic 12px monospace;
+}
+
+svg.railroad rect {
+  stroke-width: 3px;
+  stroke: black;
+  fill:rgba(0, 0, 90, 0%);
+}
+
+svg.railroad .terminal rect {
+  fill: aquamarine;  
+}
+
+svg.railroad .nonterminal rect {
+  fill: orange;  
+}
+
+svg.railroad g.labeledbox &gt; rect {
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  stroke-width: 1.5px;
+  stroke: grey;
+  stroke-dasharray: 5px;
+  fill:rgba(150, 150, 150, 25%);
+}
+
+</style>
+<g class="sequence">
+<path d=" M 10 34 a 5 5 0 0 1 5 -5 a 5 5 0 0 1 5 5 a 5 5 0 0 1 -5 5 a 5 5 0 0 1 -5 -5 m 10 0 h 5"/>
+<g class="choice">
+<path d=" M 35 34 h 24 m 702 0 h 318 m -156 0 l -5 -5 m 0 10 l 5 -5 m 156 0"/>
+<g class="sequence">
+<g class="optional">
+<path d=" M 59 34 h 24 m -24 0 a 12 12 0 0 0 12 -12 v 0 a 12 12 0 0 1 12 -12 h 100 m -47 0 l -5 -5 m 0 10 l 5 -5 m 47 0 a 12 12 0 0 1 12 12 v 0 a 12 12 0 0 0 12 12 h -24"/>
+<g class="sequence">
+<g class="sequence">
+<g class="nonterminal">
+<rect height="22" width="100" x="83" y="23"/>
+<text x="133" y="39">
+DocComment</text>
+</g>
+</g>
+</g>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="108" x="217" y="23"/>
+<text x="271" y="39">
+&quot;intrinsic&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="335" y="23"/>
+<text x="361" y="39">
+&quot;fn&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="397" y="23"/>
+<text x="427" y="39">
+Ident</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="44" x="467" y="23"/>
+<text x="489" y="39">
+&quot;(&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="44" x="521" y="23"/>
+<text x="543" y="39">
+&quot;)&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="575" y="23"/>
+<text x="601" y="39">
+&quot;as&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="124" x="637" y="23"/>
+<text x="699" y="39">
+ModularTarget</text>
+</g>
+<path d=" M 207 34 h 10"/>
+<path d=" M 325 34 h 10"/>
+<path d=" M 387 34 h 10"/>
+<path d=" M 457 34 h 10"/>
+<path d=" M 511 34 h 10"/>
+<path d=" M 565 34 h 10"/>
+<path d=" M 627 34 h 10"/>
+</g>
+<path d=" M 35 34 a 12 12 0 0 1 12 12 v 9 m 1020 0 v -9 a 12 12 0 0 1 12 -12"/>
+<path d=" M 47 67 v 33 m 1020 0 v -33"/>
+<path d=" M 47 112 v 33 m 1020 0 v -33"/>
+<path d=" M 47 55 v 12 a 12 12 0 0 0 12 12 m 780 0 h 216 m -105 0 l -5 -5 m 0 10 l 5 -5 m 105 0 a 12 12 0 0 0 12 -12 v -12"/>
+<g class="sequence">
+<g class="optional">
+<path d=" M 59 79 h 24 m -24 0 a 12 12 0 0 0 12 -12 v 0 a 12 12 0 0 1 12 -12 h 100 m -47 0 l -5 -5 m 0 10 l 5 -5 m 47 0 a 12 12 0 0 1 12 12 v 0 a 12 12 0 0 0 12 12 h -24"/>
+<g class="sequence">
+<g class="sequence">
+<g class="nonterminal">
+<rect height="22" width="100" x="83" y="68"/>
+<text x="133" y="84">
+DocComment</text>
+</g>
+</g>
+</g>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="108" x="217" y="68"/>
+<text x="271" y="84">
+&quot;intrinsic&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="335" y="68"/>
+<text x="361" y="84">
+&quot;fn&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="397" y="68"/>
+<text x="427" y="84">
+Ident</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="44" x="467" y="68"/>
+<text x="489" y="84">
+&quot;(&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="68" x="521" y="68"/>
+<text x="555" y="84">
+FnArgs</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="44" x="599" y="68"/>
+<text x="621" y="84">
+&quot;)&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="653" y="68"/>
+<text x="679" y="84">
+&quot;as&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="124" x="715" y="68"/>
+<text x="777" y="84">
+ModularTarget</text>
+</g>
+<path d=" M 207 79 h 10"/>
+<path d=" M 325 79 h 10"/>
+<path d=" M 387 79 h 10"/>
+<path d=" M 457 79 h 10"/>
+<path d=" M 511 79 h 10"/>
+<path d=" M 589 79 h 10"/>
+<path d=" M 643 79 h 10"/>
+<path d=" M 705 79 h 10"/>
+</g>
+<path d=" M 47 100 v 12 a 12 12 0 0 0 12 12 m 996 0 h 0 a 12 12 0 0 0 12 -12 v -12"/>
+<g class="sequence">
+<g class="optional">
+<path d=" M 59 124 h 24 m -24 0 a 12 12 0 0 0 12 -12 v 0 a 12 12 0 0 1 12 -12 h 100 m -47 0 l -5 -5 m 0 10 l 5 -5 m 47 0 a 12 12 0 0 1 12 12 v 0 a 12 12 0 0 0 12 12 h -24"/>
+<g class="sequence">
+<g class="sequence">
+<g class="nonterminal">
+<rect height="22" width="100" x="83" y="113"/>
+<text x="133" y="129">
+DocComment</text>
+</g>
+</g>
+</g>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="108" x="217" y="113"/>
+<text x="271" y="129">
+&quot;intrinsic&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="335" y="113"/>
+<text x="361" y="129">
+&quot;fn&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="397" y="113"/>
+<text x="427" y="129">
+Ident</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="44" x="467" y="113"/>
+<text x="489" y="129">
+&quot;(&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="68" x="521" y="113"/>
+<text x="555" y="129">
+FnArgs</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="44" x="599" y="113"/>
+<text x="621" y="129">
+&quot;,&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="44" x="653" y="113"/>
+<text x="675" y="129">
+&quot;.&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="44" x="707" y="113"/>
+<text x="729" y="129">
+&quot;.&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="44" x="761" y="113"/>
+<text x="783" y="129">
+&quot;.&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="44" x="815" y="113"/>
+<text x="837" y="129">
+&quot;)&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="869" y="113"/>
+<text x="895" y="129">
+&quot;as&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="124" x="931" y="113"/>
+<text x="993" y="129">
+ModularTarget</text>
+</g>
+<path d=" M 207 124 h 10"/>
+<path d=" M 325 124 h 10"/>
+<path d=" M 387 124 h 10"/>
+<path d=" M 457 124 h 10"/>
+<path d=" M 511 124 h 10"/>
+<path d=" M 589 124 h 10"/>
+<path d=" M 643 124 h 10"/>
+<path d=" M 697 124 h 10"/>
+<path d=" M 751 124 h 10"/>
+<path d=" M 805 124 h 10"/>
+<path d=" M 859 124 h 10"/>
+<path d=" M 921 124 h 10"/>
+</g>
+<path d=" M 47 145 v 12 a 12 12 0 0 0 12 12 m 864 0 h 132 m -63 0 l -5 -5 m 0 10 l 5 -5 m 63 0 a 12 12 0 0 0 12 -12 v -12"/>
+<g class="sequence">
+<g class="optional">
+<path d=" M 59 169 h 24 m -24 0 a 12 12 0 0 0 12 -12 v 0 a 12 12 0 0 1 12 -12 h 100 m -47 0 l -5 -5 m 0 10 l 5 -5 m 47 0 a 12 12 0 0 1 12 12 v 0 a 12 12 0 0 0 12 12 h -24"/>
+<g class="sequence">
+<g class="sequence">
+<g class="nonterminal">
+<rect height="22" width="100" x="83" y="158"/>
+<text x="133" y="174">
+DocComment</text>
+</g>
+</g>
+</g>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="108" x="217" y="158"/>
+<text x="271" y="174">
+&quot;intrinsic&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="335" y="158"/>
+<text x="361" y="174">
+&quot;fn&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="60" x="397" y="158"/>
+<text x="427" y="174">
+Ident</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="44" x="467" y="158"/>
+<text x="489" y="174">
+&quot;(&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="44" x="521" y="158"/>
+<text x="543" y="174">
+&quot;.&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="44" x="575" y="158"/>
+<text x="597" y="174">
+&quot;.&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="44" x="629" y="158"/>
+<text x="651" y="174">
+&quot;.&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="44" x="683" y="158"/>
+<text x="705" y="174">
+&quot;)&quot;</text>
+</g>
+<g class="terminal">
+<rect height="22" rx="10" ry="10" width="52" x="737" y="158"/>
+<text x="763" y="174">
+&quot;as&quot;</text>
+</g>
+<g class="nonterminal">
+<rect height="22" width="124" x="799" y="158"/>
+<text x="861" y="174">
+ModularTarget</text>
+</g>
+<path d=" M 207 169 h 10"/>
+<path d=" M 325 169 h 10"/>
+<path d=" M 387 169 h 10"/>
+<path d=" M 457 169 h 10"/>
+<path d=" M 511 169 h 10"/>
+<path d=" M 565 169 h 10"/>
+<path d=" M 619 169 h 10"/>
+<path d=" M 673 169 h 10"/>
+<path d=" M 727 169 h 10"/>
+<path d=" M 789 169 h 10"/>
+</g>
+</g>
+<path d=" M 1089 34 h 20 m -10 -10 v 20 m 10 -20 v 20"/>
+<path d=" M 25 34 h 10"/>
+<path d=" M 1079 34 h 10"/>
+</g>
+</svg>

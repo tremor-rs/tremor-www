@@ -1,0 +1,23 @@
+# Our passthrough flow
+define flow main
+flow
+  # import the `tremor::connectors` module
+  use tremor::connectors;
+  # import the `tremor::pipelines` module
+  use tremor::pipelines;
+
+  # create an instance of the console connector
+  create connector console from connectors::console;
+
+  # create an instance of the passthrough pipeline
+  create pipeline passthrough from pipelines::passthrough;
+
+  # connect the console (STDIN) to our pipeline input
+  connect /connector/console to /pipeline/passthrough;
+
+  # then connect the pipeline output to the console (STDOUT)
+  connect /pipeline/passthrough to /connector/console;
+
+end;
+# Deploy the flow so tremor starts it
+deploy flow main;

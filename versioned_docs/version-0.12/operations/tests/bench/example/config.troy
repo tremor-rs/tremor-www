@@ -1,0 +1,35 @@
+define flow main
+flow
+  # Our pipeline under test
+  define pipeline passthrough
+  pipeline
+    select event from in into out;
+  end;
+
+  # Benchmark conditions with replayed data
+  define connector bench from bench
+  args
+    codec = "json",
+    file = "data.json.xz",
+    base64 = false,
+  with
+    codec = args.codec,
+    config = {
+      "base64": args.base64,
+      "source":  "./#{args.file}",
+      "warmup_secs": 5,
+      "stop_after_secs": 25,
+      "significant_figures": 2,
+    }
+  end;
+
+  create connector bench from bench
+  with
+    codec = "binary",
+  end;
+  create pipeline main from passthrough;
+
+  connect /connector/bench to /pipeline/main;
+  connect /pipeline/main to /connector/bench;
+end;
+deploy flow main;

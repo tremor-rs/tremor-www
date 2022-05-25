@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  questdb:
+    image: questdb/questdb
+    ports:
+      - '9000:9000'
+      - '9009:9009'
+      - '8812:8812'
+      - '9003:9003'
+  grafana:
+    image: grafana/grafana-oss:8.5.2
+    ports:
+      - '3000:3000'
+    depends_on:
+      - questdb
+    volumes:
+      - ./config/grafana/provisioning:/etc/grafana/provisioning:ro
+
+  telegraf:
+    image: telegraf:1.22
+    depends_on:
+      - questdb
+      - tremor
+    volumes:
+      - ./config/telegraf:/etc/telegraf:ro
+  tremor:
+    image: tremorproject/tremor:edge
+    depends_on:
+      - questdb
+    ports:
+      - 4242:4242
+    environment:
+      - RUST_BACKTRACE=1
+      - RUST_LOG=info
+    volumes:
+      - ./config/tremor:/etc/tremor:ro

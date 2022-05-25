@@ -1,0 +1,34 @@
+version: '2.0'
+services:
+  influxdb:
+    image: influxdb:1.8
+    ports:
+      - '8086:8086'
+      - '8083:8083'
+    environment:
+      INFLUXDB_DB: 'tremor'
+  chronograf:
+    image: chronograf:1.8
+    ports:
+      - '8888:8888'
+    depends_on:
+      - influxdb
+    command: chronograf --influxdb-url=http://influxdb:8086
+  telegraf:
+    image: telegraf:1.22
+    depends_on:
+      - influxdb
+      - tremor
+    volumes:
+      - ./config/telegraf:/etc/telegraf:ro
+  tremor:
+    image: tremorproject/tremor:edge
+    depends_on:
+      - influxdb
+    ports:
+      - 4242:4242
+    environment:
+      - RUST_BACKTRACE=1
+      - RUST_LOG=info
+    volumes:
+      - ./config/tremor:/etc/tremor:ro

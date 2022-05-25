@@ -1,0 +1,7 @@
+
+# time
+
+ Time related utilities
+
+ Tremor is internally representing time usually as nanoseconds.
+ Conversion utilities from and to nanoseconds are available in the `nanos` module
