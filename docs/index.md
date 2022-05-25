@@ -7,64 +7,6 @@ Think about Tremor as an event- or stream-processing engine. It receives input d
 
 How events come into your Tremor system, how they flow through it, how they change shape and leave it again, all this is encoded in a [Flow] written in Tremors own configuration language [Troy]. A Troy file can contain one or many [Flow Definitions](language#flow) and commands to `deploy` them. When Tremor starts, it reads the Troy files provided on the command line and actually deploys and starts those [Flows] in order to let events flow.
 
-You can investigate what [Flows] are currently deployed on your Tremor system by using our [API].
-
-```console
-$ curl -s localhost:9898/v1/status | jq .
-{
-  "all_running": true,
-  "num_flows": 1,
-  "flows": {
-    "running": 1
-  }
-}
-```
-
-```console
-$ curl -s localhost:9898/v1/flows | jq .
-[
-  {
-    "alias": "lines",
-    "status": "running",
-    "connectors": [
-      "read_file",
-      "console"
-    ]
-  }
-]
-```
-
-```console
-$ curl -s localhost:9898/v1/flows/lines/connectors | jq .
-[
-  {
-    "alias": "read_file",
-    "status": "running",
-    "connectivity": "connected",
-    "pipelines": {
-      "out": [
-        {
-          "alias": "passthrough",
-          "port": "in"
-        }
-      ]
-    }
-  },
-  {
-    "alias": "console",
-    "status": "running",
-    "connectivity": "connected",
-    "pipelines": {
-      "in": [
-        {
-          "alias": "passthrough",
-          "port": "out"
-        }
-      ]
-    }
-  }
-]
-```
 
 ## What is Tremor?
 

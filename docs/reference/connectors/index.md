@@ -64,13 +64,44 @@ Check the [postprocessor guide](../postprocessors) to see the supported codecs.
 
 ### Quality of Service
 
-Add content here
+Connectors are built so they maintain a usable connection to the system they connect to. This can be a remote server, a remote cluster, a local socket or file or a std stream.
+When a connector encounters an error that hints at a broken connection, it attempts to re-establish the connectivity.
+If configured, it will wait and retry if it doesn't succeed on its first attempt.
+
+The following connector will attempt at maximum 10 reconnects before it goes into a failing state. Between each retry it will wait for the given `interval_ms` which grows by the `growth_rate` multiplied by a random value between 0 and 1. 
+So the formula boils down to:
+
+```
+wait_interval = wait_interval * (growth_rate * random(0, 1))
+
+```
+
+Example:
+
+```tremor
+define connector my_http from http_client
+with
+    reconnect = {
+        "retry": {
+            interval_ms: 1000,
+            growth_rate: 2.0,
+            max_retries: 10,
+            randomized: true
+        }
+    },
+    config = {
+        "url": "http://localhost:80/api"
+    }
+end;
+```
+
+Some connectors provide transactional events, that will only be considered handled if a downstream connector handled it successfully. The runtimes Contraflow mechanism is used for propagating event acknowledgment or failure notification back to the originating connector. E.g. in case of [Kafka](./kafka.md#consumer) a successful acknowledgement of an event will commit the offset of the message that contained the successfully handled event.
 
 
 ## Connector Types
 
 
-Connectors can be grouped in a number of categories that rouglhy provide the same pattern with different implementations.
+Connectors can be grouped in a number of categories that roughly provide the same pattern with different implementations.
 
 ### Client & Server
 
@@ -101,18 +132,60 @@ Some connectors don't fall into the above categories or are one sided. The [Disc
 These connectors are generally intended for contributors to tremor and are
 available only during development for debug builds of tremor.
 
-| Connector Name | Description |
-|----------------|-------------|
-| [cb](cb)       | Explain     |
-| [bench](bench) | Explain     |
-| [null](null)   | Explain     |
+| Connector Name | Description                   |
+|----------------|-------------------------------|
+| [cb](cb)       | Explain                       |
+| [bench](bench) | Explain                       |
+| [null](null)   | Explain                       |
 | [exit](exit)   | Allow terminating the runtime |
 
 ## Configuration
 
-Connectors are configured via the deployment syntax in a tremor `.troy` file.
+Connectors are configured via the deployment syntax in a Tremor `.troy` file.
+As all other entities in Tremor, connectors need to be defined and created to be usable for forming an event flow.
 
-TBD
+Configuration is done in the Connector Definition. Every Connector has a set of specific configuration values, that need to be provided with the `config` option. All other options are common for all Connectors.
+
+| Option             | Description                                                                                               | Type                                                        | Required                  | Default Value                                  |
+|--------------------|-----------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|---------------------------|------------------------------------------------|
+| codec              | The [Codec] to apply to incoming raw data and outgoing events.                                            | [Codec] name as a string or [Codec] configuration as object | Depends on the Connector. |                                                |
+| metrics_interval_s | The interval in seconds in which to emit metrics events to the [metrics connector](./metrics.md)          | Integer                                                     | optional                  | If omitted, no metrics events will be emitted. |
+| postprocessors     | A list of [Postprocessors] to be executed on the encoded outgoing event data in the order specified here. | A list of [Postprocessor] names or configuration objects    | optional                  |                                                |
+| preprocessors      | A list of [Preprocessors] to be executed on the raw incoming data in the order specified.                 | A list of [Preprocessor] names or configuration objects     | optional                  |                                                |
+| reconnect          | A Reconnect configuration, defining how often and at which intervals to reconnect on connection loss      | See [Reconnect config](#reconnect-config)                   | optional                  | "none"                                         |
+
+### Reconnect config
+
+#### none
+
+Only attempt to reconnect once if an established connection fails. Do not retry. This the the **Default** `reconnect` configuration, if not explicitly specified.
+
+#### retry
+
+| Option      | Description                                                                           | Type                  | Required | Default Value                                                                                    |
+|-------------|---------------------------------------------------------------------------------------|-----------------------|----------|--------------------------------------------------------------------------------------------------|
+| interval_ms | Interval to wait between retries in milliseconds                                      | Unsigned Integer      | yes      |                                                                                                  |
+| max_retries | The maximum number of retries to execute                                              | Unsigned Integer      | no       | If not specified, the Tremor runtime will retry until the connection could be established again. |
+| growth_rate | The growth rate, by which the actual wait interval of the last attempt is multiplied. | Floating point number | no       | 1.5                                                                                              |
+| randomized  | Whether or not to multiply the growth rate by a random float between 0.0 and 1.0 to introduce randomized wait intervals between retries | boolean               | no       | true |                                                                                             |
+
+### Example
+
+```tremor
+define connector my_file from file
+with
+    config = {
+        "mode": "read",
+        "path": "/var/log/syslog"
+    },
+    reconnect = {
+        "retry": {
+            "interval_ms": 100,
+            "max_retries": 10,
+            "growth_rate": 2.0
+        }
+    }
+```
 
 ## Examples
 
@@ -145,4 +218,8 @@ with
     postprocessors = ["lines"]  # Ensure entire JSON documents are one per line ( UNIX-style ) in the serialized file
 end;
 
-##
+[Codec]: ../codecs/index.md
+[Postprocessors]: ../postprocessors/index.md
+[Postprocessor]: ../postprocessors/index.md
+[Preprocessors]: ../preprocessors/index.md
+[Preprocessor]: ../preprocessors/index.md
