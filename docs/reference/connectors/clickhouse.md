@@ -20,6 +20,9 @@ This connector is a sink-only connector.
       # The hostname of the database node
       "url": "localhost",
 
+      # Compression
+      "compression": "lz4",
+
       # The database to write data to
       #
       # This field is not mandatory.
@@ -50,6 +53,10 @@ Specifying a compression method is optional. This setting currently supports [`l
 
 [`lz4]: https://en.wikipedia.org/wiki/LZ4_(compression_algorithm)
 
+
+### Database
+
+Specifying a database is optional. If no database name is supplied, then the `default` database is used.
 
 ## Value conversion
 
