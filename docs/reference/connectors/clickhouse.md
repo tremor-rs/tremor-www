@@ -44,6 +44,13 @@ This connector is a sink-only connector.
   end;
 ```
 
+### Compression
+
+Specifying a compression method is optional. This setting currently supports [`lz4`] and `none` (no compression). If no value is specified, then no compression is performed.
+
+[`lz4]: https://en.wikipedia.org/wiki/LZ4_(compression_algorithm)
+
+
 ## Value conversion
 
 The following sections show how Tremor values are transformed into ClickHouse values. As numerous casts can be performed, the conversions are grouped by output type.
