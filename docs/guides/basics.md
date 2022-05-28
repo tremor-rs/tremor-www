@@ -412,17 +412,17 @@ Once that is done, we can add the filter logic. To do that, we create a new sele
 
 ```tremor title="lib/pipelines.tremor"
 define pipeline main
-# the exit port is not a default port, so we have to overwrite the built-in port selection
+# The exit port is not a default port, so we have to overwrite the built-in port selection
 into out, exit
 pipeline
-  # use the `std::string` module
+  # Use the `std::string` module
   use std::string;
   use lib::scripts;
 
   # Create our script
   create script punctuate from scripts::punctuate;
 
-  # filter eany event that just is `"exit"` and send it to the exit port
+  # Filter any event that just is `"exit"` and send it to the exit port
   select {"graceful": false} from in where event == "exit" into exit;
 
   # Wire our capitailized text to the script
