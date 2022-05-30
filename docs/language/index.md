@@ -42,7 +42,7 @@ flow
     create pipeline pippi from pipelines::passthrough;
     
     # create a connector instance and pass through the url argument from the flow definition
-    create connector conny from connectors::console
+    create connector conny
     with
         url = args.url
     end;
