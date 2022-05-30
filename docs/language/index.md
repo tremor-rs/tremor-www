@@ -28,7 +28,7 @@ flow
     use tremor::pipelines;
     
     # lets define a connector and parameterize it by the url
-    define connector conny from udp_server
+    define connector my_udp from udp_server
     args
         url
     with
@@ -39,17 +39,17 @@ flow
     end;
 
     # create an instance from the pipeline definitions imported above
-    create pipeline pippi from pipelines::passthrough;
+    create pipeline passthrough from pipelines::passthrough;
     
     # create a connector instance and pass through the url argument from the flow definition
-    create connector conny
+    create connector my_udp
     with
         url = args.url
     end;
 
-    # let the events flow from conny through pippi and then back to conny
-    connect /connector/conny to /pipeline/pippi;
-    connect /pipeline/pippi to /connector/conny;
+    # let the events flow from conny through passthrough and then back to my_udp
+    connect /connector/my_udp to /pipeline/passthrough;
+    connect /pipeline/passthrough to /connector/my_udp;
 end;
 ```
 
