@@ -58,7 +58,7 @@ const config = {
         specs: [
           {
             spec: 'static/api/edge/openapi.yaml',
-            route: '/docs/next/api',
+            route: '/docs/edge/api',
           },
           {
             spec: 'static/api/v0.12/openapi.yaml',
@@ -84,12 +84,22 @@ const config = {
           remarkPlugins: [require('mdx-mermaid'), gitLinks],
           lastVersion: '0.12',
           // this will introduce a version called 'edge' but always select it
-          // versions: {
-          //   current: {
-          //     label: 'edge',
-          //     path: 'edge',
-          //   },
-          // },
+          versions: {
+            'current': {
+              label: 'edge',
+              path: 'edge',
+
+            },
+            '0.12': {
+              label: '0.12',
+              path: '0.12',
+            },
+            '0.11': {
+              label: '0.11',
+              path: '0.11',
+              banner: 'unmaintained',
+            },
+          },
         },
         blog: {
           showReadingTime: true,
@@ -141,7 +151,7 @@ const config = {
             type: 'dropdown',
             label: 'Docs',
             positition: 'left',
-            to: 'docs/next',
+            to: 'docs/0.12',
             items: [
               // We chose to reference the most recent version here
               // RELEASE: this needs to change for each major version release (0.12 -> 0.13)
