@@ -61,6 +61,7 @@ export default function Home() {
                     This allows comparing and tracking the performance progression of tremor over
                     time. Clicking on a node will show the related commit hash.
                 </p>
+                <p><b>Note:</b>Entries with 0 eps/mbps indicate failed benchmark runs.</p>
                 <div>{charList}</div>
             </main>
         </Layout>
