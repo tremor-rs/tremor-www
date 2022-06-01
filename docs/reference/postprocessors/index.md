@@ -6,12 +6,12 @@ Online codecs and postprocessors can be chained to perform multiple operations i
 
 ## Supported Postprocessors
 
-|PostprocessorName|Description|
-|---|---|
-|[base64](base64)|Base64 Encoding|
-|[compress](compress)|Compression Algorithms|
-|[gelf](gelf)|GELF format|
-|[ingest-timestamp](ingest-timestamp)|Ingest timestamp|
-|[length-prefix](length-prefix)|Length prefixed data|
-|[sepatate](separate)|Insert a separator between single event bytes|
-
+| PostprocessorName                              | Description                                                                       |
+|------------------------------------------------|-----------------------------------------------------------------------------------|
+| [base64](base64)                               | Base64 Encoding                                                                   |
+| [compress](compress)                           | Compression Algorithms                                                            |
+| [gelf-chunking](gelf-chunking)                 | [Graylog Extended Log Format (GELF)](https://docs.graylog.org/docs/gelf) chunking |
+| [ingest-ns](ingest-ns)                         | Prepend the ingest timestamp                                                      |
+| [length-prefixed](length-prefixed)             | Length prefixed data                                                              |
+| [sepatate](separate)                           | Insert a separator between single event bytes                                     |
+| [textual-length-prefix](textual-length-prefix) | Textual length prefixed data                                                      |

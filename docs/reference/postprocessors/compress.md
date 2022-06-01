@@ -1,8 +1,4 @@
-### base64
-
-Encodes raw data into base64 encoded bytes.
-
-### compression
+# compress
 
 Compresses event data.
 
@@ -10,11 +6,14 @@ Unlike decompression processors, the compression algorithm must be selected. The
 
 Supported formats:
 
-- gzip - GZip compression
-- zlib - ZLib compression
-- xz - Xz2 level 9 compression
-- snappy - Snappy compression
-- lz4 - Lz level 4 compression
+| Name   | Algorithm / Format                                         |
+|--------|------------------------------------------------------------|
+| gzip   | GZip                                                       |
+| zlib   | ZLib                                                       |
+| xz     | Xz2 level 9                                                |
+| snappy | Snappy                                                     |
+| lz4    | Lz level 4 compression                                     |
+| zstd   | [Zstandard](https://datatracker.ietf.org/doc/html/rfc8878) |
 
-### zstd
- 
+Example configuration:
+
