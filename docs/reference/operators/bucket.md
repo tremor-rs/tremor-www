@@ -22,7 +22,7 @@ This operator preserves event metadata.
 **Example**:
 
 ```tremor
-define grouper::bucket operator group;
+define operator group from grouper::bucket;
 ```
 
 **Metrics**:

@@ -11,11 +11,17 @@ Operators are created in the context of a pipeline and configured as part of `tr
 Configuration is of the general form:
 
 ```tremor
-define module::operator_name operator my_custom_operator
+define operator my_custom_operator from module::operator_name
+args
+  required_argument,
+  optional_argument = 42
 with
   param1 = "foo",
-  param2 = [1, 2, 3]
+  param2 = [1, args.required_argument, args.optional_argument]
 end;
+
+# create - short form
+create operator my_custom_operator;
 
 # create - full form
 create operator my_custom_operator_instance from my_custom_operator
@@ -24,6 +30,4 @@ with
   param2 = [true, false, {}]
 end;
 
-# create - short form
-create operator my_custom_operator;
 ```

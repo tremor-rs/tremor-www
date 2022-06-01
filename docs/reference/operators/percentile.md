@@ -23,7 +23,7 @@ This operator preserves event metadata.
 **Example**:
 
 ```tremor
-define qos::percentile operator as perc
+define operator perc from qos::percentile
 with
   timeout = 100,
   step_down = 0.1 # 10%
