@@ -22,7 +22,8 @@ This operator manipulates a section of the event metadata.
 **Example**:
 
 ```tremor
-define debug::history operator history with
+define operator history from debug::history
+with
   op = "my-checkpoint",
   name = "event_history"
 end;

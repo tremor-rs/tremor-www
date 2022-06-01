@@ -24,7 +24,7 @@ This operator preserves event metadata.
 **Example**:
 
 ```tremor
-define qos::backpressure operator bp
+define operator bp from qos::backpressure
 with
   timeout = 100,
   method = "discard"
