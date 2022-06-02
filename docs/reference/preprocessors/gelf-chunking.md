@@ -1,12 +1,8 @@
-## gelf-chunking
+# gelf-chunking
 
 Reassembles messages that were split apart using the [GELF chunking protocol](https://docs.graylog.org/en/3.0/pages/gelf.html#chunking).
 
-## gelf-chunking-tcp
-
-Reassembles messages that were split apart using the [GELF chunking protocol](https://docs.graylog.org/en/3.0/pages/gelf.html#chunking).
-
-## How do I handle cmopressed GELF?
+## How do I handle compressed GELF?
 
 Where GELF messages are compressed, say over UDP, and the chunks are themselves compressed we can
 use decompression processors to transform the raw stream to the tremor value system by leveraging

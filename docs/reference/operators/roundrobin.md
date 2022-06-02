@@ -13,7 +13,7 @@ This operator preserves event metadata.
 **Example**:
 
 ```tremor
-define qos::roundrobin operator roundrobin
+define operator roundrobin from qos::roundrobin
 with
   outputs = ["round", "robin", "outputs"]
 end;

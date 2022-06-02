@@ -13,5 +13,5 @@ This operator preserves event metadata.
 **Example**:
 
 ```tremor
-define generic::counter operator counter;
+define operator counter from generic::counter;
 ```
