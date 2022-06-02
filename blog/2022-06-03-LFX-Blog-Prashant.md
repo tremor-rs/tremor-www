@@ -16,7 +16,7 @@ My name's Prashant (Also known as Pimmy on the internet), a 2nd-year university 
 
 ## The Problem
 
-We all hate manual tasks, don't we? No seriously if anyone loves doing things on their own, it's totally fine. Ofcourse not everything can be automated. But in this case, it was something more tedious. Here's a flowchart for basic explaination: 
+We all hate manual tasks, don't we? No seriously if anyone loves doing things on their own, it's totally fine. Of course not everything can be automated. But in this case, it was something more tedious. Here's a flowchart for basic explanation: 
 
 ![Flow](https://user-images.githubusercontent.com/23097199/171433037-99f4d443-7b84-4dc0-b026-972831108889.png)
 
