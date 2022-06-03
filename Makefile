@@ -6,7 +6,7 @@ STDLIB_REF_DIR=docs/reference/stdlib
 all: clean tremor-runtime-docs openapi
 
 clean_build: reset all
-	-rm -rf ../cache/*
+	# -rm -rf ../cache/*
 	npm run build
 
 netlify: clean_build openapi
@@ -58,5 +58,5 @@ check_verify:
 reset: 
 	-npm run clear
 	-rm -rf tremor-runtime
-	-rm -rf /node_modules
+	-rm -rf node_modules
 	npm install
