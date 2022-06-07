@@ -5,16 +5,20 @@ sidebar_position: 1
 
 # The `elastic` Connector
 
-The `elastic` connector integrates ElasticSearch and compatible endpoints with tremor.
+The `elastic` connector integrates ElasticSearch and compatible systems with tremor.
 
 Tested with ElasticSearch `v6` and `v7` and OpenSearch `v1.3.1`
 
 Events will be sent to the connected ElasticSearch compatible cluster via the [ES Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html)
-using the `index` action.  It is recommended to batch events sent to this sink using the [generic::batch operator](../operators/batch.md) to reduce the overhead introduced by the [ES Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html).
+using the `index` action by default.  It is recommended to batch events sent to this sink using the [`generic::batch` operator](../operators/batch.md) to reduce the overhead introduced by the [ES Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html).
 
-NOTE: The configuration options `codec` and `postprocessors` are not used, as elastic will always serialize event payloads as JSON.
+:::note
 
-If the number of parallel requests surpass `concurrency`, an error event will be emitted to the `err` port, which can be used for appropriate error handling.
+The configuration options `codec` and `postprocessors` are not used, as elastic will always serialize event payloads as JSON.
+
+:::
+
+If the number of parallel requests surpass `concurrency`, the connector will trigger the [circuit breaker](../../concepts/runtime_capabilities.md#the-circuit-breaker-mechanism) in order to stop events from flowing in. It will restore it again when it regains capacity.
 
 The following metadata variables can be specified on a per event basis:
 
@@ -23,26 +27,41 @@ The following metadata variables can be specified on a per event basis:
 - `$elastic["_id"]`   - The document id for elastic (optional).
 - `$elastic.pipeline` - The ElasticSearch pipeline to use (optional).
 - `$elastic.action` - The [bulk action](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html) to perform, one of `delete`, `create`, `update` or `index`. If no `action` is provided it defaults to `index`. `delete` and `update` require `$elastic._id` to be set or elastic search will have error.
+- `$elastic.raw_paylod` - By default, if the `update` action is used, the event payload is considered as the partial document for update, by wrapping it inside the `doc` field. Setting this field to `true` will take the event payload as is. This allows to specify [`script`](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html#update-api-example), [`doc_as_upsert`](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html#doc_as_upsert) and more fields.
 
 
 ## Configuration
+
+| Option                      | Description                                                                                                                   | Type                                                       | Required | Default value                       |
+|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|----------|-------------------------------------|
+| nodes                       | List of URLs to elasticsearch cluster nodes                                                                                   | array of strings                                           | yes      |                                     |
+| index                       | Elasticsearch index to operate on. Can be overwritten by event metadata `$elastic["_index"]`                                  | string                                                     | no       |                                     |
+| concurrency                 | The maximum number of in-flight requests                                                                                      | unsigned integer                                           | no       | 4                                   |
+| include_payload_in_response | Whether or not to include the whole event payload in ES success and error responses emitted via `out` and `err` ports         | boolean                                                    | no       | false                               |
+| headers                     | HTTP headers to add to each request to elasticsearch                                                                          | record with string values                                  | no       |                                     |
+| auth                        | Authorization method to use for each HTTP request. See [`auth` config](./common_configuration.md#auth).                       | See [`auth` config](./common_configuration.md#auth).       | no       |                                     |
+| tls                         | Enable TLS encrypted traffic to elasticsearch. Specify a custom CA certificate chain or make use of client-side certificates. | See[`tls` client config](./common_configuration.md#client) | no       |                                     |
+| timeout                     | HTTP request timeout in nanoseconds                                                                                           | unsigned integer                                           | no       | By default no timeout is specified. |
+
+
+### Example
 
 ```tremor title="config.troy"
   define connector elastic from elastic
   with
     config = {
-      # Configure one or many downstream nodes
       "nodes": ["http://127.0.0.1:9200/"],
-
-      # Number of in flight events to elastic
       "concurrency": 10,
-
       # When true, attaches request payload to response event
       "include_payload_in_response": true
-
-      # Optional index to write events to, can be overridden in metadata
-      # via `$elastic["_index"] ( default: not set )
-      # index = "snot"
+      index = "snot",
+      # authenticate using an elasticsearch api key
+      auth = {
+        "elastic_api_key": {
+          "id": "ZSHpKIEBc6SDIeISiRsT",
+          "api_key": "1lqrzNhRSUWmzuQqy333yw"
+        }
+      }
     }
   end;
 ```
@@ -163,9 +182,3 @@ end;
 
 deploy flow main;
 ```
-
-## Notes
-
-For use with [`OpenSearch`](https://opensearch.org/) currently authentication with
-basic authentication and credentials is not supported.
-
