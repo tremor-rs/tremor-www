@@ -54,7 +54,7 @@ The following metadata variables can be specified on a per event basis:
       "concurrency": 10,
       # When true, attaches request payload to response event
       "include_payload_in_response": true
-      index = "snot",
+      index = "my_index",
       # authenticate using an elasticsearch api key
       auth = {
         "elastic_api_key": {
