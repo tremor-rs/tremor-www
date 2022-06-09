@@ -12,7 +12,7 @@ This operator preserves event metadata.
 
 **Configuration options**:
 
-- `timeout` - Maximum allowed 'write' time in milliseconds.
+- `timeout` - Maximum allowed 'write' time in nanoseconds.
 - `steps` - Array of values to delay when a we detect backpressure. (default: `[50, 100, 250, 500, 1000, 5000, 10000]`)
 - `method` - Either `discard` or `pause` to define how backpressure is handled (default: `discard`)
 
@@ -24,9 +24,11 @@ This operator preserves event metadata.
 **Example**:
 
 ```tremor
+use std::time::nanos;
+
 define operator bp from qos::backpressure
 with
-  timeout = 100,
+  timeout = nanos::from_millis(100),
   method = "discard"
 end;
 ```
