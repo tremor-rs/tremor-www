@@ -1,5 +1,5 @@
 ---
-sidebar_label: gpubsub_producer
+sidebar_label: gpubsub_producer (Google Pub/Sub)
 sidebar_position: 1
 ---
 
@@ -28,7 +28,10 @@ flow
     with
         codec = "json",
         config = {
-            "topic": "projects/xxx/topics/test-topic-a"
+            "topic": "projects/xxx/topics/test-topic-a", # required - the identifier of the topic
+            "connect_timeout": 100000000, # optional - connection timeout (nanoseconds) - defaults to 10s
+            "request_timeout": 100000000, # optional - timeout for each request (nanoseconds) - defaults to 1s 
+            "endpoint":  "https://us-east1-pubsub.googleapis.com" # optional - the endpoint for the PubSub API, defaults to https://pubsub.googleapis.com
         }
     end;
 
