@@ -22,6 +22,14 @@ Returns the number of bytes in a given number of pebibytes
 > ```
 
 
+### MiB(size)
+
+Returns the number of bytes in a given number of mebibytes
+
+> ```tremor
+> size::MiB(10)
+> ```
+
 ### EiB(size)
 
 Returns the number of bytes in a given number of exbibytes
@@ -48,11 +56,3 @@ Returns the number of bytes in a given number of gibibytes
 > size::GiB(10)
 > ```
 
-
-### MiB(size)
-
-Returns the number of bytes in a given number of mebibytes
-
-> ```tremor
-> size::MiB(10)
-> ```

@@ -14,6 +14,35 @@
  we will always get the same value for an event.
 ## Functions
 
+### string(length)
+
+Generates a random string of given length with ASCII letters and numbers:
+`a`-`z`, `A`-`Z` and `0`-`9`. The argument must be an `integer` greater than
+or equal to zero -- otherwise the function errors out.
+
+> ```tremor
+> random::string(16) # 16 alphanumeric characters. eg: "QuSFjpW8PBNewRml"
+> random::string(0)  # ""
+> ```
+
+Returns an `string`
+
+### float()
+
+Generates a random float, with the functionality changing based on the
+number of arguments passed.
+
+
+> ```tremor
+> random::float(0.0, 100.0) # >= 0.0 and < 100.0
+> random::float(-1.0, 1.0)  # >= -1.0 and < 1.0
+> random::float(-3.0, -2.0) # >= -3.0 and < -2.0
+> random::float(100.0) # same as random::float(0.0, 100.0)
+> random::float() -> float
+> ```
+
+Returns a `float`
+
 ### bool()
 
 Generates a random boolean.
@@ -37,32 +66,3 @@ number of arguments passed.
 > ```
 
 Returns an `integer`
-
-### float()
-
-Generates a random float, with the functionality changing based on the
-number of arguments passed.
-
-
-> ```tremor
-> random::float(0.0, 100.0) # >= 0.0 and < 100.0
-> random::float(-1.0, 1.0)  # >= -1.0 and < 1.0
-> random::float(-3.0, -2.0) # >= -3.0 and < -2.0
-> random::float(100.0) # same as random::float(0.0, 100.0)
-> random::float() -> float
-> ```
-
-Returns a `float`
-
-### string(length)
-
-Generates a random string of given length with ASCII letters and numbers:
-`a`-`z`, `A`-`Z` and `0`-`9`. The argument must be an `integer` greater than
-or equal to zero -- otherwise the function errors out.
-
-> ```tremor
-> random::string(16) # 16 alphanumeric characters. eg: "QuSFjpW8PBNewRml"
-> random::string(0)  # ""
-> ```
-
-Returns an `string`

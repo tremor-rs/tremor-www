@@ -4,15 +4,37 @@
  The record module contains functions to work with records.
 ## Functions
 
-### extract(record, array)
+### contains(record, key)
 
-`Extract`s a given set of field from an record, removing all others.
+Returns if an record contains a given key.
+
+Returns a `bool`
+
+### keys(record)
+
+Returns an array of record keys.
 
 > ```tremor
-> record::extract({"a": 1, "b": 2, "c": 3}, ["a", "c"]) == {"a": 1, "c": 3}
+> record::keys({"a": 1, "b": 2}) == ["a", "b"]
 > ```
 
-Returns a `record`
+Returns a `[string]`
+
+### is_empty(record)
+
+Returns if an record is empty.
+
+Returns a `bool`
+
+### values(record)
+
+Returns an array of record values.
+
+> ```tremor
+> record::values({"a": 1, "b": 2}) == [1, 2]
+> ```
+
+Returns a `[any]`
 
 ### len(record)
 
@@ -33,34 +55,25 @@ element being a string.
 
 Returns a `record`
 
-### is_empty(record)
+### extract(record, array)
 
-Returns if an record is empty.
-
-Returns a `bool`
-
-### values(record)
-
-Returns an array of record values.
+`Extract`s a given set of field from an record, removing all others.
 
 > ```tremor
-> record::values({"a": 1, "b": 2}) == [1, 2]
-> ```
-
-Returns a `[any]`
-
-### rename(target, changes)
-
-Renames the keys in the record target based on the key value pairs in the
-record changes where the key is the current name and the value is the new
-name.
-
-> ```tremor
-> record::rename({"a": 1, "b": 2, "c": 4}, {"a": "A", "b": "B"})
->   == {"A": 1, "B": 2, "c": 4}
+> record::extract({"a": 1, "b": 2, "c": 3}, ["a", "c"]) == {"a": 1, "c": 3}
 > ```
 
 Returns a `record`
+
+### to_array(record)
+
+Turns the record into an array of key value pairs.
+
+> ```tremor
+> record::to_array({"a": 1, "b": 2}) == [["a", 1], ["b", 2]]
+> ```
+
+Returns a `[(string, any)]`
 
 ### combine(left, right)
 
@@ -74,28 +87,15 @@ existing values in left with those provided in right
 
 Returns a `record`
 
-### contains(record, key)
+### rename(target, changes)
 
-Returns if an record contains a given key.
-
-Returns a `bool`
-
-### keys(record)
-
-Returns an array of record keys.
+Renames the keys in the record target based on the key value pairs in the
+record changes where the key is the current name and the value is the new
+name.
 
 > ```tremor
-> record::keys({"a": 1, "b": 2}) == ["a", "b"]
+> record::rename({"a": 1, "b": 2, "c": 4}, {"a": "A", "b": "B"})
+>   == {"A": 1, "B": 2, "c": 4}
 > ```
 
-Returns a `[string]`
-
-### to_array(record)
-
-Turns the record into an array of key value pairs.
-
-> ```tremor
-> record::to_array({"a": 1, "b": 2}) == [["a", 1], ["b", 2]]
-> ```
-
-Returns a `[(string, any)]`
+Returns a `record`

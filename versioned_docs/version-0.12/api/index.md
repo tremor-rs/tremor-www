@@ -1,1 +1,1 @@
-Tremor exposes a versioned http API. This file is not viible.
+Tremor exposes a versioned http API. This file should not be visible.

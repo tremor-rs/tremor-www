@@ -1,5 +1,5 @@
 ---
-sidebar_label: gpubsub_consumer
+sidebar_label: gpubsub_consumer (Google Pub/Sub)
 sidebar_position: 1
 ---
 

@@ -6,14 +6,6 @@
 
 ## Constants
 
-### unspecified
-
-*type*: U64
-
-> Unspecified. Do NOT use as default.
-> Implementations MAY assume SpanKind to be `INTERNAL` when receiving `UNSPECIFIED`.
-
-
 ### producer
 
 *type*: U64
@@ -24,12 +16,12 @@ Indicates that the span describes a producer sending a message to a broker.
 > by the broker while the logical processing of the message might span a much longer time.
 
 
-### server
+### unspecified
 
 *type*: U64
 
-> Indicates that the span covers server-side handling of an RPC or other
-> remote network request.
+> Unspecified. Do NOT use as default.
+> Implementations MAY assume SpanKind to be `INTERNAL` when receiving `UNSPECIFIED`.
 
 
 ### internal
@@ -38,6 +30,14 @@ Indicates that the span describes a producer sending a message to a broker.
 
 > Indicates that the span represents an internal operation within an application,
 > as opposed to an operation happening at the boundaries. Default value.
+
+
+### server
+
+*type*: U64
+
+> Indicates that the span covers server-side handling of an RPC or other
+> remote network request.
 
 
 ### consumer

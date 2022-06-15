@@ -25,12 +25,6 @@ inserting the capture named foo.
 
 Returns a `string`
 
-### is_match(regex, input)
-
-Returns if the regex machines input.
-
-Returns a `bool`
-
 ### split(regex, input)
 
 Splits the input string using the provided regular expression regex as
@@ -41,3 +35,9 @@ separator.
 > ```
 
 Returns a `[string]`
+
+### is_match(regex, input)
+
+Returns if the regex machines input.
+
+Returns a `bool`

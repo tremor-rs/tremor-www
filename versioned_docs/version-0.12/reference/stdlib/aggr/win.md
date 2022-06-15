@@ -14,15 +14,15 @@ In the case of tilt frames, flattens out any tilt frame sub-arrays
 
 Returns a `[anything]`
 
-### last()
-
-Capture and return the last event that hits a window upon/after opening.
-
-Returns `anything`
-
 ### first()
 
 Capture and return the first event that hits a window upon/after opening.
+
+Returns `anything`
+
+### last()
+
+Capture and return the last event that hits a window upon/after opening.
 
 Returns `anything`
 

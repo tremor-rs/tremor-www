@@ -5,24 +5,18 @@
  tremor runtime system.
 ## Functions
 
-### ingest_ns()
+### instance()
 
-Returns the ingest time into tremor of the current event.
-
-> ```tremor
-> use tremor::system;
-> let ingest_ns = system::ingest_ns();
-> ```
-
-Returns an `int`
-
-### version()
-
-Returns the tremor version as a string
+Returns the instance name of this tremor process.
 
 > ```tremor
 > use tremor::system;
-> let version = system::version();
+> match system::instance() of
+>   case "tremor" => "default"
+>   # Instance names can be customized by users
+>   # TREMOR_PATH=/path/to/lib tremor -i "bob" ...
+>   default => "changed by user"
+> end
 > ```
 
 Returns a `string`
@@ -38,6 +32,17 @@ Returns the name of the host where tremor is running.
 
 Returns a `string`
 
+### ingest_ns()
+
+Returns the ingest time into tremor of the current event.
+
+> ```tremor
+> use tremor::system;
+> let ingest_ns = system::ingest_ns();
+> ```
+
+Returns an `int`
+
 ### nanotime()
 
 Returns the current time in epoch nanoseconds
@@ -50,18 +55,13 @@ Returns the current time in epoch nanoseconds
 
 Returns an `int`
 
-### instance()
+### version()
 
-Returns the instance name of this tremor process.
+Returns the tremor version as a string
 
 > ```tremor
 > use tremor::system;
-> match system::instance() of
->   case "tremor" => "default"
->   # Instance names can be customized by users
->   # TREMOR_PATH=/path/to/lib tremor -i "bob" ...
->   default => "changed by user"
-> end
+> let version = system::version();
 > ```
 
 Returns a `string`

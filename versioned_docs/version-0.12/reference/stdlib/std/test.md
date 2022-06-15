@@ -4,6 +4,18 @@
  The `test` module is used for writing tremor unit tests.
 ## Functions
 
+### suite()
+
+The `suite` function is an entrypoint into tremor's
+integrated unit testing framework
+
+
+### test()
+
+The `test` function is an entrypoint into tremor's
+integrated unit testing framework
+
+
 ### assert(name, expected, got)
 
 Runs an assertion for a test, ensures that `expected` and `got` are the
@@ -17,15 +29,3 @@ same. If not errors.
 > ```
 
 Returns an `bool`.
-
-### test()
-
-The `test` function is an entrypoint into tremor's
-integrated unit testing framework
-
-
-### suite()
-
-The `suite` function is an entrypoint into tremor's
-integrated unit testing framework
-

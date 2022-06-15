@@ -20,15 +20,44 @@ The configuration options `codec` and `postprocessors` are not used, as elastic 
 
 If the number of parallel requests surpass `concurrency`, the connector will trigger the [circuit breaker](../../concepts/runtime_capabilities.md#the-circuit-breaker-mechanism) in order to stop events from flowing in. It will restore it again when it regains capacity.
 
-The following metadata variables can be specified on a per event basis:
+The following metadata variables can be specified on a per event basis as fields under the `elastic` namespace:
 
-- `$elastic["_index"]` - The index to write to (required).
-- `$elastic["_type"]` - The document type for elastic (optional), deprecated in ES 7.
-- `$elastic["_id"]`   - The document id for elastic (optional).
-- `$elastic.pipeline` - The ElasticSearch pipeline to use (optional).
-- `$elastic.action` - The [bulk action](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html) to perform, one of `delete`, `create`, `update` or `index`. If no `action` is provided it defaults to `index`. `delete` and `update` require `$elastic._id` to be set or elastic search will have error.
-- `$elastic.raw_paylod` - By default, if the `update` action is used, the event payload is considered as the partial document for update, by wrapping it inside the `doc` field. Setting this field to `true` will take the event payload as is. This allows to specify [`script`](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html#update-api-example), [`doc_as_upsert`](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html#doc_as_upsert) and more fields.
+| Variable          | Description                                                                                                                                                                                                                                                                                  | Type                               | Required                                                      | Default value                                          |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------|---------------------------------------------------------------|--------------------------------------------------------|
+| action            | The [bulk action] to perform, one of `delete`, `create`, `update` or `index`. `delete` and `update` require `$elastic._id` to be set or elastic search will have error.                                                                                                                      | String                             | no                                                            | `index`                                                |
+| _index            | The index to write to.                                                                                                                                                                                                                                                                       | String                             | not if specified in connector [configuration](#configuration) | `index` from connector [configuration](#configuration) |
+| _type             | The document type for elastic, deprecated in ES 7.                                                                                                                                                                                                                                           | String                             | no                                                            | `_doc`                                                 |
+| _id               | The document id for elastic. If not provided ES generates an id.                                                                                                                                                                                                                             | String                             | no                                                            |                                                        |
+| pipeline          | The elasticsearch pipeline to use.                                                                                                                                                                                                                                                           | String                             | no                                                            |                                                        |
+| raw_payload       | By default, if the `update` action is used, the event payload is considered as the partial document for update, by wrapping it inside the `doc` field. Setting this field to `true` will take the event payload as is. This allows to specify [`script`], [`doc_as_upsert`] and more fields. | bool                               | no                                                            | false                                                  |
+| routing           | Routing information for elasticsearch. See their docs on [bulk routing]                                                                                                                                                                                                                      | String                             | no                                                            |                                                        |
+| timeout           | Timeout to wait for operations within elasticsearch (index creation, mapping updates, waiting for active shards)                                                                                                                                                                             | [elasticsearch time unit]          | no                                                            | `1m` (one minute)                                      |
+| refresh           | Refresh the affected shards and make this operation visible to search                                                                                                                                                                                                                        | `true`, `false`, `"wait_for"`      | no                                                            | `false`                                                |
+| version           | Set a custom version manually. See [bulk versioning].                                                                                                                                                                                                                                        | unsigned integer                   | no                                                            |                                                        |
+| version_type      | See [bulk versioning].                                                                                                                                                                                                                                                                       | See [elasticsearch version types]. | no                                                            |                                                        |
+| retry_on_conflict | The number of retries to execute in case of a version conflict.                                                                                                                                                                                                                              | unsigned integer                   | no                                                            | `0`                                                    |
+| if_primary_term   | See [optimistic concurrency control]                                                                                                                                                                                                                                                         | unsigned integer                   | no                                                            |                                                        |
+| if_seq_no         | See [optimistic concurrency control]                                                                                                                                                                                                                                                         | unsigned integer                   | no                                                            |                                                        |
 
+
+The following example shows a way how to specify the necessary metadata for elasticsearch:
+
+```tremor
+define script prepare_for_elastic
+args
+  index
+script
+  let $elastic = {
+    "action": "update",
+    "_id": event["_id"],
+    "_index": args.index,
+    "retry_on_conflict": 3,
+    "refresh": true,
+    "timeout": "30s"
+  };
+  emit event["payload"];
+end;
+```
 
 ## Configuration
 
@@ -182,3 +211,12 @@ end;
 
 deploy flow main;
 ```
+
+[bulk action]: https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+[bulk routing]: https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html#bulk-routing
+[`script`]: https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html#update-api-example
+[`doc_as_upsert`]: https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html#doc_as_upsert
+[elasticsearch time unit]: https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#time-units
+[bulk versioning]: https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html#bulk-versioning
+[elasticsearch version types]: https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-index_.html#index-version-types
+[optimistic concurrency control]: https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html#bulk-optimistic-concurrency-control
