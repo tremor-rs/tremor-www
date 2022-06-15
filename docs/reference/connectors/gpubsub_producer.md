@@ -3,7 +3,7 @@ sidebar_label: gpubsub_producer (Google Pub/Sub)
 sidebar_position: 1
 ---
 
-# The `gpubsub_consumer` Connector
+# The `gpubsub_producer` Connector
 
 This connector allows producing to a Google PubSub queue.
 
