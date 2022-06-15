@@ -5,6 +5,27 @@
  This can be used to achieve consistent routing over multiple outputs.
 ## Functions
 
+### jump(key, slot_count)
+
+Hashes an input key (string) and determine its placement in a slot list.
+
+For example It can be used to pick a routing destination using an array of
+hosts:
+
+> ```tremor
+> use tremor::chash;
+>  let hosts = ["host1", "host2", "host3", "host4", "host5"];
+> {
+>  "key1": hosts[chash::jump("key1", array::len(hosts))],
+>  "key1_again": hosts[chash::jump("key1", array::len(hosts))],
+>  "key2": hosts[chash::jump("key2", array::len(hosts))],
+>  "key3": hosts[chash::jump("key3", array::len(hosts))],
+>  "key4": hosts[chash::jump("key4", array::len(hosts))],
+> }
+> ```
+
+Returns an `integer`.
+
 ### jump_with_keys(k1, k2, key, slot_count)
 
 The same as chash::jump but uses the integers k1 and k2 to initialise the
@@ -46,24 +67,3 @@ byte level not only on the logical level
 > }
 
 Returns an `string`
-
-### jump(key, slot_count)
-
-Hashes an input key (string) and determine its placement in a slot list.
-
-For example It can be used to pick a routing destination using an array of
-hosts:
-
-> ```tremor
-> use tremor::chash;
->  let hosts = ["host1", "host2", "host3", "host4", "host5"];
-> {
->  "key1": hosts[chash::jump("key1", array::len(hosts))],
->  "key1_again": hosts[chash::jump("key1", array::len(hosts))],
->  "key2": hosts[chash::jump("key2", array::len(hosts))],
->  "key3": hosts[chash::jump("key3", array::len(hosts))],
->  "key4": hosts[chash::jump("key4", array::len(hosts))],
-> }
-> ```
-
-Returns an `integer`.

@@ -14,29 +14,21 @@
  For example Fixed, 10 bytes indicate that the size doesn't grow and is in the order of two digit bytes. We try to give pessimistic estimates where possible.
 ## Functions
 
-### var(number)
+### mean(number)
 
-Calculates the sample variance of event values in the current windowed operation.
+Calculates the stastical mean of the event values in the current windowed operation.
 
 * size: Fixed, 100 bytes
 
 Returns a `float`
 
-### max(number)
+### stdev(number)
 
-Determines the largest event value in the current windowed operation.
+Calculates the sample standard deviation of event values in the current windowed operation.
 
-* size: Fixed, 10 bytes
+* size: Fixed, 100 bytes
 
-Returns a `number`
-
-### sum(number)
-
-Determines the arithmetic sum of event values in the current windowed operation.
-
-* size: Fixed, 10 bytes
-
-Returns a `number`
+Returns a `float`
 
 ### dds(number, array)
 
@@ -52,6 +44,38 @@ size: Fixed, 10 Kilo Bytes (estimate based on [this paper](https://arxiv.org/pdf
 >  ```
 
 Returns a `record` (all values are floats)
+
+### max(number)
+
+Determines the largest event value in the current windowed operation.
+
+* size: Fixed, 10 bytes
+
+Returns a `number`
+
+### var(number)
+
+Calculates the sample variance of event values in the current windowed operation.
+
+* size: Fixed, 100 bytes
+
+Returns a `float`
+
+### sum(number)
+
+Determines the arithmetic sum of event values in the current windowed operation.
+
+* size: Fixed, 10 bytes
+
+Returns a `number`
+
+### count()
+
+Counts the number of events aggregated in the current windowed operation.
+
+* size: Fixed, 10 bytes
+
+Returns a `integer`
 
 ### hdr(number, array)
 
@@ -73,14 +97,6 @@ more correctly with [this formula](https://github.com/HdrHistogram/HdrHistogram#
 Returns a `record` (all values are integers)
 
 
-### count()
-
-Counts the number of events aggregated in the current windowed operation.
-
-* size: Fixed, 10 bytes
-
-Returns a `integer`
-
 ### min(number)
 
 Determines the smallest event value in the current windowed operation.
@@ -88,19 +104,3 @@ Determines the smallest event value in the current windowed operation.
 * size: Fixed, 10 bytes
 
 Returns a `number`
-
-### mean(number)
-
-Calculates the stastical mean of the event values in the current windowed operation.
-
-* size: Fixed, 100 bytes
-
-Returns a `float`
-
-### stdev(number)
-
-Calculates the sample standard deviation of event values in the current windowed operation.
-
-* size: Fixed, 100 bytes
-
-Returns a `float`

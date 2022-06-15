@@ -236,6 +236,7 @@ select event from in into out/c;
 
 ```mermaid
 graph LR
+  A -->|branch| B & C & D
 ```
 
 Branch data into 3 different intermediate [Streams]:

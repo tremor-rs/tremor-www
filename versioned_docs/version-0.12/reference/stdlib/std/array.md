@@ -4,36 +4,15 @@
  The array module contains functions to work for arrays.
 ## Functions
 
-### coalesce(array)
+### sort(left, right)
 
-Returns the array for null values removed.
-
-> ```tremor
-> array::coalesce([1, null, 2, null, 3]) = [1, 2, 3]
-> ```
-
-Returns an `array`.
-
-### flatten(array)
-
-Flattens a nested array recursively.
+Sorts an array
 
 > ```tremor
-> array::flatten([[1, 2, 3], ["a", "b", "c"]]) = [1, 2, 3, "a", "b", "c"]
+> array::concatenate([3, 2, 3, 1, 4]) == [1, 2, 3, 3, 4]
 > ```
 
-Returns an `array`.
-
-### join(array, string)
-
-Joins the elements of an array (turing them into Strings) for a given
-separator.
-
-> ```tremor
-> array:join(["this", "is", "a", "cake"], " ") => "this is a cake"
-> ```
-
-Returns a `string`.
+Returns an `array`
 
 ### zip(left, right)
 
@@ -51,17 +30,31 @@ array.
 
 Returns an `array`.
 
-### unzip(array)
+### flatten(array)
 
-Unzips an array of tuples into an array of two arrays.
-
-**Note**: array's elements need to be arrays of two elements.
+Flattens a nested array recursively.
 
 > ```tremor
-> array::unzip([[1, "a"], [2, "b"], [3, "c"]]) ==  [[1, 2, 3], ["a", "b", "c"]]
+> array::flatten([[1, 2, 3], ["a", "b", "c"]]) = [1, 2, 3, "a", "b", "c"]
 > ```
 
 Returns an `array`.
+
+### coalesce(array)
+
+Returns the array for null values removed.
+
+> ```tremor
+> array::coalesce([1, null, 2, null, 3]) = [1, 2, 3]
+> ```
+
+Returns an `array`.
+
+### contains(array, element)
+
+Returns if `array` contains an `element`.
+
+Returns an `bool`.
 
 ### concatenate(left, right)
 
@@ -74,17 +67,29 @@ i.e. it can contain duplicates depending on the input arrays.
 
 Returns an `array`
 
+### len(array)
+
+Returns the length of `array`.
+
+Returns an `integer`.
+
+### unzip(array)
+
+Unzips an array of tuples into an array of two arrays.
+
+**Note**: array's elements need to be arrays of two elements.
+
+> ```tremor
+> array::unzip([[1, "a"], [2, "b"], [3, "c"]]) ==  [[1, 2, 3], ["a", "b", "c"]]
+> ```
+
+Returns an `array`.
+
 ### push(array, element)
 
 Adds an `element` to the end of `array`.
 
 Returns an `array`.
-
-### contains(array, element)
-
-Returns if `array` contains an `element`.
-
-Returns an `bool`.
 
 ### is_empty(array)
 
@@ -92,18 +97,13 @@ Returns if `array` is empty.
 
 Returns an `bool`.
 
-### len(array)
+### join(array, string)
 
-Returns the length of `array`.
-
-Returns an `integer`.
-
-### sort(left, right)
-
-Sorts an array
+Joins the elements of an array (turing them into Strings) for a given
+separator.
 
 > ```tremor
-> array::concatenate([3, 2, 3, 1, 4]) == [1, 2, 3, 3, 4]
+> array:join(["this", "is", "a", "cake"], " ") => "this is a cake"
 > ```
 
-Returns an `array`
+Returns a `string`.

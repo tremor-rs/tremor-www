@@ -4,29 +4,11 @@
  Represents deprecated status codes
 ## Constants
 
-### aborted
+### cancelled
 
 *type*: U64
 
-Deprecated status - Aborted
-
-### unauthenticated
-
-*type*: U64
-
-Deprecated status - Unauthenticated
-
-### already_exists
-
-*type*: U64
-
-Deprecated status - Already exists
-
-### ok
-
-*type*: U64
-
-Deprecated status - Ok
+Deprecated status - Cancelled
 
 ### unvailable
 
@@ -34,17 +16,41 @@ Deprecated status - Ok
 
 Deprecated status - Unavailable
 
-### internal_error
+### aborted
 
 *type*: U64
 
-Deprecated status - Internal error
+Deprecated status - Aborted
 
-### data_loss
+### resource_exhausted
 
 *type*: U64
 
-Deprecated status - Data loss
+Deprecated status - Resource exhausted
+
+### failed_precondition
+
+*type*: U64
+
+Deprecated status - Failed precodition
+
+### deadline_exceeded
+
+*type*: U64
+
+Deprecated status - Deadline exceeded
+
+### unauthenticated
+
+*type*: U64
+
+Deprecated status - Unauthenticated
+
+### unimplemented
+
+*type*: U64
+
+Deprecated status - Unimplemented
 
 ### out_of_range
 
@@ -52,11 +58,29 @@ Deprecated status - Data loss
 
 Deprecated status - Out of range
 
-### resource_exhausted
+### data_loss
 
 *type*: U64
 
-Deprecated status - Resource exhausted
+Deprecated status - Data loss
+
+### permission_denied
+
+*type*: U64
+
+Deprecated status - Permission denied
+
+### already_exists
+
+*type*: U64
+
+Deprecated status - Already exists
+
+### not_found
+
+*type*: U64
+
+Deprecated status - Not found
 
 ### invalid_argument
 
@@ -70,38 +94,14 @@ Deprecated status - Invalid argument
 
 Deprecated status - Unknown error
 
-### deadline_exceeded
+### internal_error
 
 *type*: U64
 
-Deprecated status - Deadline exceeded
+Deprecated status - Internal error
 
-### unimplemented
-
-*type*: U64
-
-Deprecated status - Unimplemented
-
-### permission_denied
+### ok
 
 *type*: U64
 
-Deprecated status - Permission denied
-
-### failed_precondition
-
-*type*: U64
-
-Deprecated status - Failed precodition
-
-### not_found
-
-*type*: U64
-
-Deprecated status - Not found
-
-### cancelled
-
-*type*: U64
-
-Deprecated status - Cancelled
+Deprecated status - Ok

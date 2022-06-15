@@ -11,7 +11,7 @@ This operator preserves event metadata.
 
 **Configuration options**:
 
-- `timeout` - Maximum allowed 'write' time in milliseconds.
+- `timeout` - Maximum allowed 'write' time in nanoseconds.
 - `step_down` - What additional percentile should be dropped in the case of a timeout (default 5%: `0.05`)
 - `step_up` - What percentile should be recovered in case of a good event. (default: 0.1%: `0.001`)
 
@@ -23,9 +23,11 @@ This operator preserves event metadata.
 **Example**:
 
 ```tremor
-define qos::percentile operator as perc
+use std::time::nanos;
+
+define operator perc from qos::percentile
 with
-  timeout = 100,
+  timeout = nanos::from_millis(100),
   step_down = 0.1 # 10%
 end;
 ```

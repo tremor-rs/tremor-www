@@ -6,12 +6,13 @@ Online codecs, preprocessors can be chained to perform multiple operations in su
 
 ## Supported Preprocessors
 
-|Codec Name|Description|
-|---|---|
-|[base64](base64)|Base64 decoding|
-|[decompress](decompress)|Decompression algorithms|
-|[gelf](gelf)|GELF format|
-|[length-prefix](length-prefix)|Length prefixed data|
-|[separate](separate)|Split input by separator (e.g. linebreak)|
-|[remove-empty](remove-empty)|Remove or coalesce out empty events|
+| Codec Name                                     | Description                               |
+|------------------------------------------------|-------------------------------------------|
+| [base64](base64)                               | Base64 decoding                           |
+| [decompress](decompress)                       | Decompression algorithms                  |
+| [gelf-chunking](gelf-chunking)                 | GELF format UDP chunking                  |
+| [length-prefixed](length-prefixed)             | Length prefixed data                      |
+| [remove-empty](remove-empty)                   | Remove or coalesce out empty events       |
+| [separate](separate)                           | Split input by separator (e.g. linebreak) |
+| [textual-length-prefix](textual-length-prefix) | Textual length prefixed data              |
 

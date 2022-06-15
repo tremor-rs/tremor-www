@@ -18,17 +18,11 @@
  * [trace](trace/index.md) - OpenTelemetry trace event utilities
 ## Functions
 
-### gen_trace_id_array()
+### gen_trace_id_bytes()
 
 Generate a random trace id using the binary representation
 
-Returns a `array` of `int`
-
-### gen_span_id_string()
-
-Generate a random span id using the hex string representation
-
-Returns a `string`
+Returns a `binary`
 
 ### gen_span_id_bytes()
 
@@ -42,14 +36,20 @@ Generate a random span id using the int array representation
 
 Returns a `array` of `int`
 
+### gen_span_id_string()
+
+Generate a random span id using the hex string representation
+
+Returns a `string`
+
+### gen_trace_id_array()
+
+Generate a random trace id using the binary representation
+
+Returns a `array` of `int`
+
 ### gen_trace_id_string()
 
 Generate a random trace id using the hex string representation
 
 Returns a `string`
-
-### gen_trace_id_bytes()
-
-Generate a random trace id using the binary representation
-
-Returns a `binary`

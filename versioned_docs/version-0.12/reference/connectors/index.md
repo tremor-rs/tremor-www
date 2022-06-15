@@ -156,11 +156,15 @@ Configuration is done in the Connector Definition. Every Connector has a set of 
 
 ### Reconnect config
 
+By default Connectors will attempt to re-establish a failed connection, so that connectivity is preserved in the face of small recoverable glitches. But the connectors machinery inside the runtime also supports more involved retry strategies, because sometimes it makes sense to just wait out a small downtime.
+
 #### none
 
 Only attempt to reconnect once if an established connection fails. Do not retry. This the the **Default** `reconnect` configuration, if not explicitly specified.
 
 #### retry
+
+Attempt to reconnect when a previous attempt failed. The retries an be limited to `max_retries`, by default tremor will retry infinitely. An interval can be configured between retries, that can grow by a fixed rate or a randomized rate for implementing exponential random backoff.
 
 | Option      | Description                                                                           | Type                  | Required | Default Value                                                                                    |
 |-------------|---------------------------------------------------------------------------------------|-----------------------|----------|--------------------------------------------------------------------------------------------------|
@@ -172,12 +176,13 @@ Only attempt to reconnect once if an established connection fails. Do not retry.
 ### Example
 
 ```tremor
-define connector my_file from file
+define connector my_file from tcp_client
 with
     config = {
-        "mode": "read",
-        "path": "/var/log/syslog"
+        "url": "http://example.org
     },
+    codec = "json",
+    postprocessors = ["gzip"]
     reconnect = {
         "retry": {
             "interval_ms": 100,
@@ -185,7 +190,16 @@ with
             "growth_rate": 2.0
         }
     }
+end;
 ```
+
+This example configuration will attempt a maximum of 10 retries (if reconnect attempts fail), after waiting for an initial 100ms which is growing by a randomized rate of 2.0, so that wait times increase but not all instances will retry at the exact same time to avoid a thundering herd problem.
+
+:::note
+
+Use the `retry` reconnect config with care! Too many retries can hurt downstream systems and hurt the overall systems liveness in case of errors.
+
+:::
 
 ## Examples
 

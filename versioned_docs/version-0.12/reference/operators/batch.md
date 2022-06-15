@@ -16,7 +16,8 @@ Supported configuration options are:
 **Example**:
 
 ```tremor
-define generic::batch operator batch with
+define operator batch from generic::batch
+with
   count = 300
 end;
 ```

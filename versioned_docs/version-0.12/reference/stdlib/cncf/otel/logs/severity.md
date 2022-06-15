@@ -6,35 +6,11 @@
 
 ## Constants
 
-### unspecified
+### trace2
 
 *type*: U64
 
-The severity wasn't specified
-
-### trace3
-
-*type*: U64
-
-Trace - level 3
-
-### trace4
-
-*type*: U64
-
-Trace - level 4
-
-### warn
-
-*type*: U64
-
-Warning - default level
-
-### error2
-
-*type*: U64
-
-Non-fatal ( recoverable ) Error - level 2
+Trace - level 2
 
 ### warn3
 
@@ -42,11 +18,11 @@ Non-fatal ( recoverable ) Error - level 2
 
 Warning - level 3
 
-### fatal
+### warn4
 
 *type*: U64
 
-Fatal ( recoverable ) Error - default level
+Warning - level 4
 
 ### info
 
@@ -54,53 +30,11 @@ Fatal ( recoverable ) Error - default level
 
 Informational - default level
 
-### fatal2
-
-*type*: U64
-
-Fatal ( recoverable ) Error - level 2
-
-### debug2
-
-*type*: U64
-
-Debug - level 2
-
 ### info3
 
 *type*: U64
 
 Informational - level 3
-
-### error4
-
-*type*: U64
-
-Non-fatal ( recoverable ) Error - level 4
-
-### warn2
-
-*type*: U64
-
-Warning - level 2
-
-### warn4
-
-*type*: U64
-
-Warning - level 4
-
-### error3
-
-*type*: U64
-
-Non-fatal ( recoverable ) Error - level 3
-
-### trace
-
-*type*: U64
-
-Trace - default level
 
 ### info2
 
@@ -108,11 +42,11 @@ Trace - default level
 
 Informational - level 2
 
-### debug
+### unspecified
 
 *type*: U64
 
-Debug - default level
+The severity wasn't specified
 
 ### info4
 
@@ -120,23 +54,11 @@ Debug - default level
 
 Informational - level 4
 
-### error
+### warn
 
 *type*: U64
 
-Non-fatal ( recoverable ) Error - default level
-
-### fatal3
-
-*type*: U64
-
-Fatal ( recoverable ) Error - level 3
-
-### trace2
-
-*type*: U64
-
-Trace - level 2
+Warning - default level
 
 ### debug3
 
@@ -144,24 +66,102 @@ Trace - level 2
 
 Debug - level 3
 
+### error
+
+*type*: U64
+
+Non-fatal ( recoverable ) Error - default level
+
+### error2
+
+*type*: U64
+
+Non-fatal ( recoverable ) Error - level 2
+
+### warn2
+
+*type*: U64
+
+Warning - level 2
+
+### trace
+
+*type*: U64
+
+Trace - default level
+
+### error3
+
+*type*: U64
+
+Non-fatal ( recoverable ) Error - level 3
+
+### fatal
+
+*type*: U64
+
+Fatal ( recoverable ) Error - default level
+
+### fatal2
+
+*type*: U64
+
+Fatal ( recoverable ) Error - level 2
+
+### fatal3
+
+*type*: U64
+
+Fatal ( recoverable ) Error - level 3
+
 ### fatal4
 
 *type*: U64
 
 Fatal ( recoverable ) Error - level 4
 
+### debug2
+
+*type*: U64
+
+Debug - level 2
+
 ### debug4
 
 *type*: U64
 
 Debug - level 4
+
+### trace4
+
+*type*: U64
+
+Trace - level 4
+
+### debug
+
+*type*: U64
+
+Debug - default level
+
+### error4
+
+*type*: U64
+
+Non-fatal ( recoverable ) Error - level 4
+
+### trace3
+
+*type*: U64
+
+Trace - level 3
 ## Functions
 
-### indicates_error(severity_number)
+### make_default()
 
-Given a `severity_number` is it indicative of a non-fatal or fatal error
+Returns the default severity_number
 
-Returns a `bool`
+The default severity_number
 
 ### to_string(severity_number)
 
@@ -169,8 +169,8 @@ Given a `severity_number` returns its normative string representation
 
 Returns a `string`
 
-### make_default()
+### indicates_error(severity_number)
 
-Returns the default severity_number
+Given a `severity_number` is it indicative of a non-fatal or fatal error
 
-The default severity_number
+Returns a `bool`

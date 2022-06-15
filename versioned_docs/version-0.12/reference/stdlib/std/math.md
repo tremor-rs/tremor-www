@@ -4,13 +4,12 @@
  The math module contains functions for common mathematical operations.
 ## Functions
 
-### trunc(n)
+### ceil(n)
 
-Returns the `integer` part of `n`.
+Returns the largest `integer` value greater than or equal to n.
 
 > ```tremor
-> math::trunc(41.4) == 41
-> math::trunc(41.5) == 41
+> math::ceil(41.1) == 42
 > ```
 
 Returns an `integer`
@@ -26,12 +25,12 @@ Returns the `integer` nearest to.
 
 Returns an `integer`
 
-### min(n1, n2)
+### max(n1, n2)
 
-Returns the minimum of two numbers.
+Returns the maximum of two numbers.
 
 > ```tremor
-> math::min(41, 42) == 41
+> math::max(41, 42) == 42
 > ```
 
 Returns a `number` (`integer` or `float`)
@@ -46,22 +45,23 @@ Returns the smallest integer value less than or equal to n.
 
 Returns an `integer`
 
-### max(n1, n2)
+### trunc(n)
 
-Returns the maximum of two numbers.
-
-> ```tremor
-> math::max(41, 42) == 42
-> ```
-
-Returns a `number` (`integer` or `float`)
-
-### ceil(n)
-
-Returns the largest `integer` value greater than or equal to n.
+Returns the `integer` part of `n`.
 
 > ```tremor
-> math::ceil(41.1) == 42
+> math::trunc(41.4) == 41
+> math::trunc(41.5) == 41
 > ```
 
 Returns an `integer`
+
+### min(n1, n2)
+
+Returns the minimum of two numbers.
+
+> ```tremor
+> math::min(41, 42) == 41
+> ```
+
+Returns a `number` (`integer` or `float`)

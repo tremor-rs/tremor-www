@@ -190,7 +190,7 @@ deploy flow metrics;
 
 Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/01_basic) and start it with `docker-compose up`.
 
-You can find the chronograf UI at (`http://localhost:8888`)[http://localhost:8888].
+You can find the chronograf UI at [`http://localhost:8888`](http://localhost:8888).
 
 ## Batching
 
@@ -291,7 +291,7 @@ deploy flow metrics;
 
 Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/02_batching) and start it with `docker-compose up`.
 
-You can find the chronograf UI at (`http://localhost:8888`)[http://localhost:8888].
+You can find the chronograf UI at [`http://localhost:8888`](http://localhost:8888).
 
 ## Aggregation
 
@@ -433,7 +433,7 @@ into batch;
 
 Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/03_aggregation) and start it with `docker-compose up`.
 
-You can find the chronograf UI at (`http://localhost:8888`)[http://localhost:8888].
+You can find the chronograf UI at [`http://localhost:8888`](http://localhost:8888).
 
 
 ## Tremor metrics
@@ -517,7 +517,7 @@ flow
 
 Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/04_interal) and start it with `docker-compose up`.
 
-You can find the chronograf UI at (`http://localhost:8888`)[http://localhost:8888].
+You can find the chronograf UI at [`http://localhost:8888`](http://localhost:8888).
 
 
 ## Other backends
