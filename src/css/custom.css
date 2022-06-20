@@ -84,7 +84,7 @@ html[data-theme='dark'] .apexcharts-text {
 }
 
 html[data-theme='dark'] .apexcharts-tooltip {
-  background-color:  rgba(0, 0, 0, 0.3);
+  background-color:  #2c2c2c;
 }
 
 html[data-theme='dark'] .apexcharts-tooltip-title {
@@ -94,6 +94,7 @@ html[data-theme='dark'] .apexcharts-tooltip-title {
 .apexcharts {
   height: 1px;
 }
+
 
 .table-of-contents__link--active {
   border-left: 4px solid var(--ifm-link-color);
