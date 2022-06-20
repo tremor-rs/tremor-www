@@ -6,21 +6,21 @@ sidebar_position: 0
 
 # Contributing to Tremor
 
-Thank you for your interest in contributing to the Tremor project!
+Thanks for your interest in contributing to the Tremor project!!
 
 There are many ways to contribute, and we appreciate all of them.
 
-We have tried to list some task or activity based on differnt types of contributios, no matter if you are a user, a developper, a writer or designer.
+We have tried to list some tasks or activities based on different types of contributions, irrespective of if you are a user, a developer, a writer, or a designer.
 
-First of all, we would like to thank you for spending time on the project and contemplating contributing! If you need any guidance or support making your contribution; our community is ready to assist and can be reached directly via our [chat](https://chat.tremor.rs) or through our issue tracking system.
+We would like to thank you for spending time on the project and contemplating contributing! If you need any guidance or support making your contribution, our community is ready to assist you and can be reached directly via our [chat](https://chat.tremor.rs) or through our issue tracking-system.
 
-## Contributing as a user
+## Contributing as a User
 
-As a user, evne without writing code there are a number of ways to contribute to tremor.
+As a user, even without writing code there are a number of ways to contribute to tremor.
 
 ### Feature Requests
 
-To request a change to the way that Tremor works, or a addition to what it is capable, please file an [Enhancement request](https://github.com/tremor-rs/tremor-runtime/issues/new?&labels=enhancement&template=enhancement_request.md). Depending on the size, complexity or impact you may be asked to provide a [RFC](/rfc) for the request.
+Please file an [Enhancement request](https://github.com/tremor-rs/tremor-runtime/issues/new?&labels=enhancement&template=enhancement_request.md) to request a change to the way that Tremor works, or an addition to what it is capable of. Depending on the size, complexity or impact you may be asked to provide a [RFC](/rfc) for the request.
 
 ### Bug Reports
 
@@ -33,7 +33,7 @@ Before reporting a bug, please [search existing issues](https://github.com/tremo
 
 Similarly, to help others who encountered the bug find your issue, consider filing an issue with a descriptive title, which contains information that might be unique to it. This can be the language or compiler feature used, the conditions that trigger the bug, or part of the error message if there is any. An example could be: **"impossible case reached" on match expression in tremor scripting language**.
 
-To open an issue is as follow [this link](https://github.com/tremor-rs/tremor-runtime/issues/new?labels=bug&template=bug_report.md) and filling out the fields.
+To open an issue is as follow [this link](https://github.com/tremor-rs/tremor-runtime/issues/new?labels=bug&template=bug_report.md) and fill out the fields.
 
 Here's a template that you can use to file a bug, though it's not necessary to use it exactly:
 
@@ -55,7 +55,7 @@ Here's a template that you can use to file a bug, though it's not necessary to u
     Backtrace:
 ```
 
-All three components are important: what you did, what you expected, what happened instead. Please include the output of `tremor --version`, which includes important information about what platform you're on, what version of Rust you're using, etc.
+All three components are important: what you did, what you expected,and what happened instead. Please include the output of `tremor --version`, which includes important information about what platform you're on, what version of Rust you're using, etc.
 
 Sometimes, a backtrace is helpful, and so including that is nice. To get a backtrace, set the `RUST_BACKTRACE` environment variable to a value other than `0`. The easiest way to do this is to invoke `tremor` like this:
 
@@ -63,7 +63,7 @@ Sometimes, a backtrace is helpful, and so including that is nice. To get a backt
 $ RUST_BACKTRACE=1 tremor ...
 ```
 
-## Contributing as a developer
+## Contributing as a Developer
 
 ### The Build System
 
@@ -141,7 +141,7 @@ Participate in the [RFC process](/rfc).
 
 ## Contributing as a Technical Writer
 
-As a technical writer, we have begun to document work on an information architecture, and have migrated from multiple sub domains - each with individually maintained sets of content using different documentation and static website frameworks to a single consolidated experience.
+As a technical writer, we have begun to document work on an information architecture, and have migrated from multiple subdomains - each with individually maintained sets of content using different documentation and static website frameworks to a single consolidated experience.
 
 We generally produce documentation as [markdown](https://www.markdownguide.org/basic-syntax/) and we use the [docusaurus](https://docusaurus.io/) framework for quickly building an optimized web experience.
 
@@ -149,19 +149,19 @@ This migration is still an ongoing work in progress - if you are a technical wri
 
 ### Work with existing documentation tasks
 
-You can look at the current [open issues](https://github.com/tremor-rs/tremor-www/issues) for tasks to pick up in the world of documentation. Some of these tasks are based on a technical writer [assessment](https://github.com/cncf/techdocs/blob/main/assessments/0004-tremor.md) conducted by Celeste Horgan of the CNCF by request of the Tremor project maintainers, others have been generated organically from community.
+You can look at the current [open issues](https://github.com/tremor-rs/tremor-www/issues) for tasks to pick up in the world of documentation. Some of these tasks are based on a technical writer [assessment](https://github.com/cncf/techdocs/blob/main/assessments/0004-tremor.md) conducted by Celeste Horgan of the CNCF by request of the Tremor project maintainers, others have been generated organically from the community.
 
 A great way to contribute to Tremor is by picking one of these tasks and contributing with help and support from the team.
 
 ### Submit or refresh a guide
 
-Guides are a combination of tutorials and working examples of different ways tremor can be used. They aim to teach a certain concept of tremor and at the same time lead the user trough configuring a example usecase where those concepts could be used.
+Guides are a combination of tutorials and working examples of different ways tremor can be used. They aim to teach a certain concept of tremor and at the same time lead the user through configuring an example usecase where those concepts could be used.
 
 ### Work with existing code
 
 Sometimes we discover the need to extend, enhance or improve documentation based on user feedback, or based on issues reported in the primary rust-based tremor codebase.
 
-To find issues that related to documentation tasks, issues in the primary or other tremor code repositories can be [searched](https://github.com/tremor-rs/tremor-runtime/issues?q=is%3Aopen%20is%3Aissue%20label%3Adocumentation).
+To find issues that related to documentation tasks, issues in the primary or other tremor code repositories, [search here](https://github.com/tremor-rs/tremor-runtime/issues?q=is%3Aopen%20is%3Aissue%20label%3Adocumentation) .
 
 Contributions are always welcome and can be made directly in [this](https://github.com/tremor-rs/tremor-www) repository.
 
@@ -169,8 +169,8 @@ Contributions are always welcome and can be made directly in [this](https://gith
 
 All significant changes, modifications, enhancements and new features to the project, regardless of the originator or contributor must follow the documented [RFC process](https://www.tremor.rs/rfc/index).
 
-As such, all significant new features should be accompanies with new reference documentation, guides, tutorials, quick starts and other content in addition to the code-level comments and the submitted RFC itself.
+As such, all significant new features should be accompanied by new reference documentation, guides, tutorials, quick starts, and other content in addition to the code-level comments and the submitted RFC itself.
 
 This type of content follows a slightly different process as it typically involves a great commitment of time and effort by the primary originator and by the tremor maintainers and community.
 
-For significant contributions we recommend reaching to and chatting with the community via our community [chat](https://chat.tremor.rs) to get started.
+For significant contributions, we recommend reaching out to and chatting with the community via our community [chat](https://chat.tremor.rs) to get started.
