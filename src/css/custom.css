@@ -83,6 +83,10 @@ html[data-theme='dark'] .apexcharts-text {
   fill: white;
 }
 
+html[data-theme='dark'] .apexcharts-legend-text{
+  color: white !important;
+}
+
 html[data-theme='dark'] .apexcharts-tooltip {
   background-color:  #2c2c2c;
 }
