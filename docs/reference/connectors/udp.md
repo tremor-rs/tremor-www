@@ -10,7 +10,7 @@ The `udp` connector allows UDP based datagram clients and servers to be integrat
 The `udp` client, by default binds to `0.0.0.0:0` allowing to send to all interfaces of the system running tremor and picking a random port. This can be overwritten adding `"bind": "<ip>:<port>"` to the `config`.
 
 :::warn
-If you are hardening a installation it might make sense to limit the interfaces a udp client can send to by specifying the `"bind"` config.
+If you are hardening an installation it might make sense to limit the interfaces a udp client can send to by specifying the `"bind"` config.
 :::
 
 ## Configuration
