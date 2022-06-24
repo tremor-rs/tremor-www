@@ -4,11 +4,11 @@
  The binary module handles interacting with the binary/bytes type
 ## Functions
 
-### from_bytes(input)
+### into_bytes(input)
 
-Turns an `array` of bytes into a `binary`
+Turns a `binary` into an `array` of bytes
 
-Returns a `binary`
+Returns an `array`
 
 ### len(input)
 
@@ -16,8 +16,8 @@ Returns the number of bytes in a`binary`
 
 Returns a `integer`
 
-### into_bytes(input)
+### from_bytes(input)
 
-Turns a `binary` into an `array` of bytes
+Turns an `array` of bytes into a `binary`
 
-Returns an `array`
+Returns a `binary`

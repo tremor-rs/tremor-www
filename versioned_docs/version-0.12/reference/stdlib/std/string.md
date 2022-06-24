@@ -4,10 +4,10 @@
  The string module contains functions that primarily work with strings.
 ## Functions
 
-### capitalize(input)
+### split(input, separator)
 
-Turns the first character in the input string to upper case. This does not
-ignore leading non letters!
+Splits the input string at every occurrence of the separator string and turns
+the result in an array.
 
 Returns a `string`
 
@@ -30,11 +30,11 @@ Turns all characters in the input string to lower case, based on the Unicode `Lo
 
 Returns a `string`
 
-### from_utf8_lossy(bytes)
+### contains(input, string)
 
-Turns a `binary` into a utf8 string, potentally discarding invalid codepoints
+Returns if the input string contains another string or not.
 
-Returns a `string`
+Returns a `bool`
 
 ### format(format)
 
@@ -65,22 +65,28 @@ this will output:
 
 Returns a `string`
 
+### trim_start(input)
+
+Trims whitespaces at the start of the input string. All codepoints with the unicode property `White_Space` are considered whitespace here.
+
+Returns a `string`
+
+### capitalize(input)
+
+Turns the first character in the input string to upper case. This does not
+ignore leading non letters!
+
+Returns a `string`
+
+### from_utf8_lossy(bytes)
+
+Turns a `binary` into a utf8 string, potentally discarding invalid codepoints
+
+Returns a `string`
+
 ### substr(input, start, end)
 
 Get all codepoints from index start to end-1.
-
-Returns a `string`
-
-### split(input, separator)
-
-Splits the input string at every occurrence of the separator string and turns
-the result in an array.
-
-Returns a `string`
-
-### trim(input)
-
-Trims whitespaces both at the start and end of the input string. All codepoints with the unicode property `White_Space` are considered whitespace here.
 
 Returns a `string`
 
@@ -91,27 +97,15 @@ bytes!).
 
 Returns an `integer`
 
-### trim_end(input)
-
-Trims whitespaces at the end of the input string. All codepoints with the unicode property `White_Space` are considered whitespace here.
-
-Returns a `string`
-
-### contains(input, string)
-
-Returns if the input string contains another string or not.
-
-Returns a `bool`
-
-### into_binary(bytes)
-
-Turns a `string` into it's binary representation
-
-Returns a `binary`
-
 ### uppercase(input)
 
 Turns all characters in the input string to upper case, based on the Unicode `Uppercase` property
+
+Returns a `string`
+
+### trim(input)
+
+Trims whitespaces both at the start and end of the input string. All codepoints with the unicode property `White_Space` are considered whitespace here.
 
 Returns a `string`
 
@@ -121,8 +115,14 @@ Replaces all occurrences of from in Input to to.
 
 Returns a `string`
 
-### trim_start(input)
+### into_binary(bytes)
 
-Trims whitespaces at the start of the input string. All codepoints with the unicode property `White_Space` are considered whitespace here.
+Turns a `string` into it's binary representation
+
+Returns a `binary`
+
+### trim_end(input)
+
+Trims whitespaces at the end of the input string. All codepoints with the unicode property `White_Space` are considered whitespace here.
 
 Returns a `string`

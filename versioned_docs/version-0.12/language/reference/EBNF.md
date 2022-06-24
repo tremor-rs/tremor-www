@@ -1,6 +1,6 @@
 ## EBNF Grammar
 
-This EBNF grammar was generated from: "/home/heinz/tremor-www/tremor-runtime/tremor-script/src/grammar.lalrpop"
+This EBNF grammar was generated from: "/home/mat/dev/tremor/tremor-www/tremor-runtime/tremor-script/src/grammar.lalrpop"
 
 ```ebnf
 

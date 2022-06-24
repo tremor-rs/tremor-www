@@ -6,29 +6,42 @@ Unlike decompression processors, the compression algorithm must be selected. Opt
 
 Supported formats:
 
-| Name   | Algorithm / Format                                         |
-|--------|------------------------------------------------------------|
-| gzip   | GZip                                                       |
-| zlib   | ZLib                                                       |
-| xz     | Xz2 level 9 (default)                                                |
-| snappy | Snappy                                                     |
-| lz4    | Lz level 4 compression (default)                                     |
+| Name   | Algorithm / Format                                                               |
+|--------|----------------------------------------------------------------------------------|
+| gzip   | GZip                                                                             |
+| zlib   | ZLib                                                                             |
+| xz     | Xz2 level 9 (default)                                                            |
+| snappy | Snappy                                                                           |
+| lz4    | Lz level 4 compression (default)                                                 |
 | zstd   | [Zstandard](https://datatracker.ietf.org/doc/html/rfc8878) (defaults to level 0) |
 
 Example configuration:
 
-Xz compression example with compression level.
+Xz compression example with compression level:
 
-`{
-  "algotithm":"xz2",
-  "level": 3
-}`
+```tremor
+postprocessors = [
+  {
+    "name": "compress",
+    "config": {
+      "algotithm":"xz2",
+      "level": 3
+    }
+  }
+]
+```
 
-Xz compression example without compression level defaults to level 9.
+Xz compression example without compression level defaults to level 9:
 
-`{
-  "algorithm":"xz2"
-}
-`
+```tremor
+postprocessors = [
+  {
+    "name": "compress",
+    "config": {
+      "algorithm":"xz2"
+    }
+  }
+]
+```
 
 Xz compression when wrong compression level is specified gives an `Err`.

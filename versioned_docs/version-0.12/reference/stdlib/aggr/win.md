@@ -6,6 +6,12 @@
  from a window are chained across multiple window frames in sequence.
 ## Functions
 
+### first()
+
+Capture and return the first event that hits a window upon/after opening.
+
+Returns `anything`
+
 ### collect_flattened()
 
 Captures all events in a window into an array of events.
@@ -13,18 +19,6 @@ Captures all events in a window into an array of events.
 In the case of tilt frames, flattens out any tilt frame sub-arrays
 
 Returns a `[anything]`
-
-### first()
-
-Capture and return the first event that hits a window upon/after opening.
-
-Returns `anything`
-
-### last()
-
-Capture and return the last event that hits a window upon/after opening.
-
-Returns `anything`
 
 ### collect_nested()
 
@@ -35,3 +29,9 @@ frame of 3 windows, the inner-most leaf array contains events, and higher levels
 arrays.
 
 Returns a `[..[..[anything]..]..]`
+
+### last()
+
+Capture and return the last event that hits a window upon/after opening.
+
+Returns `anything`
