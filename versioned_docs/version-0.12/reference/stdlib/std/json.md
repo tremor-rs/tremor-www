@@ -4,6 +4,16 @@
  The json module contains functions that work with son structures.
 ## Functions
 
+### encode(any)
+
+Encodes a data structure into a json string using minimal encoding.
+
+> ```tremor
+> json::encode([1, 2, 3, 4]) = "[1,2,3,4]"
+> ```
+
+Returns a `string`
+
 ### encode_pretty(any)
 
 Encodes a data structure into a prettified json string.
@@ -34,13 +44,3 @@ Decodes a string containing a JSON structure.
 > ```
 
 Returns any type
-
-### encode(any)
-
-Encodes a data structure into a json string using minimal encoding.
-
-> ```tremor
-> json::encode([1, 2, 3, 4]) = "[1,2,3,4]"
-> ```
-
-Returns a `string`

@@ -4,43 +4,18 @@
  The record module contains functions to work with records.
 ## Functions
 
-### contains(record, key)
+### rename(target, changes)
 
-Returns if an record contains a given key.
-
-Returns a `bool`
-
-### keys(record)
-
-Returns an array of record keys.
+Renames the keys in the record target based on the key value pairs in the
+record changes where the key is the current name and the value is the new
+name.
 
 > ```tremor
-> record::keys({"a": 1, "b": 2}) == ["a", "b"]
+> record::rename({"a": 1, "b": 2, "c": 4}, {"a": "A", "b": "B"})
+>   == {"A": 1, "B": 2, "c": 4}
 > ```
 
-Returns a `[string]`
-
-### is_empty(record)
-
-Returns if an record is empty.
-
-Returns a `bool`
-
-### values(record)
-
-Returns an array of record values.
-
-> ```tremor
-> record::values({"a": 1, "b": 2}) == [1, 2]
-> ```
-
-Returns a `[any]`
-
-### len(record)
-
-Returns the length of an record (number of key value pairs).
-
-Returns an `integer`
+Returns a `record`
 
 ### from_array(array)
 
@@ -55,25 +30,15 @@ element being a string.
 
 Returns a `record`
 
-### extract(record, array)
+### values(record)
 
-`Extract`s a given set of field from an record, removing all others.
-
-> ```tremor
-> record::extract({"a": 1, "b": 2, "c": 3}, ["a", "c"]) == {"a": 1, "c": 3}
-> ```
-
-Returns a `record`
-
-### to_array(record)
-
-Turns the record into an array of key value pairs.
+Returns an array of record values.
 
 > ```tremor
-> record::to_array({"a": 1, "b": 2}) == [["a", 1], ["b", 2]]
+> record::values({"a": 1, "b": 2}) == [1, 2]
 > ```
 
-Returns a `[(string, any)]`
+Returns a `[any]`
 
 ### combine(left, right)
 
@@ -87,15 +52,50 @@ existing values in left with those provided in right
 
 Returns a `record`
 
-### rename(target, changes)
+### contains(record, key)
 
-Renames the keys in the record target based on the key value pairs in the
-record changes where the key is the current name and the value is the new
-name.
+Returns if an record contains a given key.
+
+Returns a `bool`
+
+### len(record)
+
+Returns the length of an record (number of key value pairs).
+
+Returns an `integer`
+
+### extract(record, array)
+
+`Extract`s a given set of field from an record, removing all others.
 
 > ```tremor
-> record::rename({"a": 1, "b": 2, "c": 4}, {"a": "A", "b": "B"})
->   == {"A": 1, "B": 2, "c": 4}
+> record::extract({"a": 1, "b": 2, "c": 3}, ["a", "c"]) == {"a": 1, "c": 3}
 > ```
 
 Returns a `record`
+
+### keys(record)
+
+Returns an array of record keys.
+
+> ```tremor
+> record::keys({"a": 1, "b": 2}) == ["a", "b"]
+> ```
+
+Returns a `[string]`
+
+### to_array(record)
+
+Turns the record into an array of key value pairs.
+
+> ```tremor
+> record::to_array({"a": 1, "b": 2}) == [["a", 1], ["b", 2]]
+> ```
+
+Returns a `[(string, any)]`
+
+### is_empty(record)
+
+Returns if an record is empty.
+
+Returns a `bool`

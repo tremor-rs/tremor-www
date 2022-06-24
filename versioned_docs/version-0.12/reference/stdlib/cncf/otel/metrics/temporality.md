@@ -15,6 +15,36 @@
  > which they are aggregated.
 ## Constants
 
+### delta
+
+*type*: U64
+
+> `DELTA` is an `AggregationTemporality` for a metric aggregator which reports
+> changes since last report time. Successive metrics contain aggregation of
+> values from continuous and non-overlapping intervals.
+
+> The values for a `DELTA` metric are based only on the time interval
+> associated with one measurement cycle. There is no dependency on
+> previous measurements like is the case for `CUMULATIVE` metrics.
+
+> For example, consider a system measuring the number of requests that
+> it receives and reports the sum of these requests every second as a
+> `DELTA` metric:
+
+>   1. The system starts receiving at time=t_0.
+>   2. A request is received, the system measures 1 request.
+>   3. A request is received, the system measures 1 request.
+>   4. A request is received, the system measures 1 request.
+>   5. The 1 second collection cycle ends. A metric is exported for the
+>      number of requests received over the interval of time t_0 to
+>      t_0+1 with a value of 3.
+>   6. A request is received, the system measures 1 request.
+>   7. A request is received, the system measures 1 request.
+>   8. The 1 second collection cycle ends. A metric is exported for the
+>      number of requests received over the interval of time t_0+1 to
+>      t_0+2 with a value of 2.
+
+
 ### cumulative
 
 *type*: U64
@@ -63,34 +93,4 @@
 The default `AggregationTemparality` - it must not be used
 conforming implementation will set the temporality to one
 of the valid enumeration values.
-
-
-### delta
-
-*type*: U64
-
-> `DELTA` is an `AggregationTemporality` for a metric aggregator which reports
-> changes since last report time. Successive metrics contain aggregation of
-> values from continuous and non-overlapping intervals.
-
-> The values for a `DELTA` metric are based only on the time interval
-> associated with one measurement cycle. There is no dependency on
-> previous measurements like is the case for `CUMULATIVE` metrics.
-
-> For example, consider a system measuring the number of requests that
-> it receives and reports the sum of these requests every second as a
-> `DELTA` metric:
-
->   1. The system starts receiving at time=t_0.
->   2. A request is received, the system measures 1 request.
->   3. A request is received, the system measures 1 request.
->   4. A request is received, the system measures 1 request.
->   5. The 1 second collection cycle ends. A metric is exported for the
->      number of requests received over the interval of time t_0 to
->      t_0+1 with a value of 3.
->   6. A request is received, the system measures 1 request.
->   7. A request is received, the system measures 1 request.
->   8. The 1 second collection cycle ends. A metric is exported for the
->      number of requests received over the interval of time t_0+1 to
->      t_0+2 with a value of 2.
 

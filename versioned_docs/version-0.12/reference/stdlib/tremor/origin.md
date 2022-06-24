@@ -39,6 +39,20 @@ host as tremor:
 >```
 
 
+### port()
+
+Returns the origin URI port, or null value if not set (either the whole URI
+or just the port). Encodes the source port on the host that sent the event.
+
+For example, with udp onramp:
+
+> ```tremor
+> use tremor::system::origin;
+> origin::port() # returns an ephemeral port on the sender host (eg: 41371)
+> ```
+
+Returns `integer` or `null`
+
 ### host()
 
 Returns the origin URI host, or null value if URI is not set. Encodes the
@@ -72,6 +86,20 @@ For example, with udp onramp receiving events on port 12202:
 > ```
 
 
+### scheme()
+
+Returns the origin URI scheme, or null value if URI is not set. Encodes the
+source of events within tremor (i.e. onramp name).
+
+For example, with udp onramp:
+
+> ```tremor
+> use tremor::system::origin;
+> origin::scheme() == "tremor-udp"
+> ```
+
+Returns `string` or `null`
+
 ### as_uri_record()
 
 Returns the full origin URI as a record, or null value if URI is not set.
@@ -87,31 +115,3 @@ host as tremor:
 > }
 > ```
 
-
-### port()
-
-Returns the origin URI port, or null value if not set (either the whole URI
-or just the port). Encodes the source port on the host that sent the event.
-
-For example, with udp onramp:
-
-> ```tremor
-> use tremor::system::origin;
-> origin::port() # returns an ephemeral port on the sender host (eg: 41371)
-> ```
-
-Returns `integer` or `null`
-
-### scheme()
-
-Returns the origin URI scheme, or null value if URI is not set. Encodes the
-source of events within tremor (i.e. onramp name).
-
-For example, with udp onramp:
-
-> ```tremor
-> use tremor::system::origin;
-> origin::scheme() == "tremor-udp"
-> ```
-
-Returns `string` or `null`

@@ -5,21 +5,27 @@
  that if applicable literal regular expressions are faster.
 ## Functions
 
-### replace_all(regex, input, to)
+### is_match(regex, input)
 
-Replaces all occurrences of regex in the input string with to.
+Returns if the regex machines input.
 
-References to match groups can be done using `$` as either numbered
-references like `$1` inserting the first capture or named using `$foo`
-inserting the capture named foo.
-
-Returns a `string`
+Returns a `bool`
 
 ### replace(regex, input, to)
 
 Replaces the first occurrence of regex in the input string with to.
 
 References to match groups can be done using `$`` as either numbered
+references like `$1` inserting the first capture or named using `$foo`
+inserting the capture named foo.
+
+Returns a `string`
+
+### replace_all(regex, input, to)
+
+Replaces all occurrences of regex in the input string with to.
+
+References to match groups can be done using `$` as either numbered
 references like `$1` inserting the first capture or named using `$foo`
 inserting the capture named foo.
 
@@ -35,9 +41,3 @@ separator.
 > ```
 
 Returns a `[string]`
-
-### is_match(regex, input)
-
-Returns if the regex machines input.
-
-Returns a `bool`

@@ -14,69 +14,6 @@
  For example Fixed, 10 bytes indicate that the size doesn't grow and is in the order of two digit bytes. We try to give pessimistic estimates where possible.
 ## Functions
 
-### mean(number)
-
-Calculates the stastical mean of the event values in the current windowed operation.
-
-* size: Fixed, 100 bytes
-
-Returns a `float`
-
-### stdev(number)
-
-Calculates the sample standard deviation of event values in the current windowed operation.
-
-* size: Fixed, 100 bytes
-
-Returns a `float`
-
-### dds(number, array)
-
-Uses a Distributed data-stream Sketch ( DDS ([paper](http://www.vldb.org/pvldb/vol12/p2195-masson.pdf)) Histogram to calculate count, min, max, mean
-and quartiles with quartile relative-error accurate over the range of points in the histogram.
-The DDS histogram trades off accuracy ( to a very low error and guaranteed low relative error )
-and unlike HDR histograms does not need bounds specified.
-
-size: Fixed, 10 Kilo Bytes (estimate based on [this paper](https://arxiv.org/pdf/1908.10693.pdf))
-
-> ```tremor
-> aggr::stats::hdr(event.value, ["0.5","0.75","0.9","0.99","0.999"])
->  ```
-
-Returns a `record` (all values are floats)
-
-### max(number)
-
-Determines the largest event value in the current windowed operation.
-
-* size: Fixed, 10 bytes
-
-Returns a `number`
-
-### var(number)
-
-Calculates the sample variance of event values in the current windowed operation.
-
-* size: Fixed, 100 bytes
-
-Returns a `float`
-
-### sum(number)
-
-Determines the arithmetic sum of event values in the current windowed operation.
-
-* size: Fixed, 10 bytes
-
-Returns a `number`
-
-### count()
-
-Counts the number of events aggregated in the current windowed operation.
-
-* size: Fixed, 10 bytes
-
-Returns a `integer`
-
 ### hdr(number, array)
 
 Uses a High Dynamic Range ( HDR ) Histogram to calculate all basic statistics against the event
@@ -97,9 +34,72 @@ more correctly with [this formula](https://github.com/HdrHistogram/HdrHistogram#
 Returns a `record` (all values are integers)
 
 
+### mean(number)
+
+Calculates the stastical mean of the event values in the current windowed operation.
+
+* size: Fixed, 100 bytes
+
+Returns a `float`
+
+### var(number)
+
+Calculates the sample variance of event values in the current windowed operation.
+
+* size: Fixed, 100 bytes
+
+Returns a `float`
+
+### dds(number, array)
+
+Uses a Distributed data-stream Sketch ( DDS ([paper](http://www.vldb.org/pvldb/vol12/p2195-masson.pdf)) Histogram to calculate count, min, max, mean
+and quartiles with quartile relative-error accurate over the range of points in the histogram.
+The DDS histogram trades off accuracy ( to a very low error and guaranteed low relative error )
+and unlike HDR histograms does not need bounds specified.
+
+size: Fixed, 10 Kilo Bytes (estimate based on [this paper](https://arxiv.org/pdf/1908.10693.pdf))
+
+> ```tremor
+> aggr::stats::hdr(event.value, ["0.5","0.75","0.9","0.99","0.999"])
+>  ```
+
+Returns a `record` (all values are floats)
+
+### sum(number)
+
+Determines the arithmetic sum of event values in the current windowed operation.
+
+* size: Fixed, 10 bytes
+
+Returns a `number`
+
+### stdev(number)
+
+Calculates the sample standard deviation of event values in the current windowed operation.
+
+* size: Fixed, 100 bytes
+
+Returns a `float`
+
+### count()
+
+Counts the number of events aggregated in the current windowed operation.
+
+* size: Fixed, 10 bytes
+
+Returns a `integer`
+
 ### min(number)
 
 Determines the smallest event value in the current windowed operation.
+
+* size: Fixed, 10 bytes
+
+Returns a `number`
+
+### max(number)
+
+Determines the largest event value in the current windowed operation.
 
 * size: Fixed, 10 bytes
 
