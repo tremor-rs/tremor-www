@@ -10,7 +10,7 @@ script
   # Find the right punctuation by looking at the first wird of the last sentence
   # yes this is a poor heuristic!
   let punctuation = match event of 
-    case ~ re|.*[.?!]?(Why\|How\|Where\|Who)[^.?!]*$| => "?"
+    case ~ re|.*[.?!]?(Why\|How\|Where\|Who\|When)[^.?!]*$| => "?"
     case _ => "."
   end;
   event + punctuation
