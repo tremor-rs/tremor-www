@@ -335,7 +335,7 @@ end;
 Same as before we can test our code, you can fetch the finished file from [git](__GIT__/../code/basics/transform.troy).
 
 ```bash
-$ TREMOR_PATH="$TREMOR_PATH:${pwd}/transform" tremor run transfor/main.troy
+$ TREMOR_PATH="$TREMOR_PATH:${PWD}/transform" tremor run transform/main.troy
 hello
 Hello.
 why
@@ -437,7 +437,7 @@ end;
 That all set, we can run our script as before, just this time, when entering `exit` tremor will terminate.
 
 ```bash
-$ TREMOR_PATH="$TREMOR_PATH:${pwd}/filter" tremor run filter/main.troy
+$ TREMOR_PATH="$TREMOR_PATH:${PWD}/filter" tremor run filter/main.troy
 hello
 Hello.
 why
