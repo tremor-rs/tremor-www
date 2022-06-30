@@ -727,19 +727,29 @@ end
 
 > ![merge grammar](./reference/svg/merge.svg)
 
-Merge expressions defines a difference against a targeted record and applies that difference to produce a result record. Merge operations in Tremor follow merge-semantics defined in [RFC 7386](https://tools.ietf.org/html/rfc7386).
+Merge expressions define a difference against a targeted record and applies that difference to produce a result record. Merge will result in an error if any of the operands are not records.
+
+### Merge rules
+
+The table below is read with each row replacing the variables in the following statement:
 
 ```tremor
-let event = merge event of {"some": "record"} end
+let result = merge given of merge end;
 ```
 
-| Given                | Merge        | Result               | Explanation                          |
+| given                | merge        | result               | Explanation                          |
 |----------------------|--------------|----------------------|--------------------------------------|
 | `{"a":"b"}`          | `{"a":"c"}`  | `{"a":"c"}`          | Insert/Update field 'a'              |
 | `{"a":"b"}`          | `{"b":"c"}`  | `{"a":"b", "b":"c"}` | Insert field 'b'                     |
-| `{"a":"b"}`          | `{"a":null}` | `{}`                 | Erase field 'a'                      |
-| `{"a":"b","b":"c"}`  | `{"a":null}` | `{"b":"c"}`          | Erase field 'a'                      |
+| `{"a":"b","b":"c"}`  | `{"a":null}` | `{"a":null,"b":"c"}` | Set field 'a' to 'null'              |
 | `{"a": [{"b":"c"}]}` | `{"a": [1]}` | `{"a": [1]}`         | Replace field 'a' with literal array |
+
+
+Example:
+
+```tremor
+let event = merge event of {"some": "record"} end;
+```
 
 ## Patch
 
