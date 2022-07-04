@@ -55,10 +55,10 @@ export default function Home() {
                     Tremor Benchmarks
                 </h1>
                 <p>
-                    Here you can track "live" benchmarks of the tremor runtime for every PR that is
+                    Here you can track "live" benchmarks of the Tremor runtime for every PR that is
                     merged into the main branch. The benchmarks are run on the same machine to allow
-                    them to be compared easiley.<br />
-                    This allows comparing and tracking the performance progression of tremor over
+                    them to be compared easily.<br />
+                    This allows comparing and tracking the performance progression of Tremor over
                     time. Clicking on a node will show the related commit hash.
                 </p>
                 <p><b>Note:</b>Entries with 0 eps/mbps indicate failed benchmark runs.</p>
