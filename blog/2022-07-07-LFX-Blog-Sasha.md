@@ -58,7 +58,7 @@ I found two Rust crates that could help us send requests to a ClickHouse databas
 
 Once I got every ClickHouse detail right, I started playing with the Tremor side. There were multiple connectors already implemented in Tremor. I picked the simplest ones and started copying parts of it and quickly got something working.
 
-The only challenge I encountered is that Tremor defines its own `Value` type, representing a value whose type is not really known at runtime, and uses it *a lot*. It was a bit disconcerting doing such things in Rust, as I felt I was writing dynamically-typed code in a statically-typed language, but I managed to get through it.
+The only challenge I encountered is that Tremor defines its own `Value` type, representing a value whose type is not really known at compile time, and uses it *a lot*. It was a bit disconcerting doing such things in Rust, as I felt I was writing dynamically-typed code in a statically-typed language, but I managed to get through it.
 
 
 ## Converting Tremor values to ClickHouse values
