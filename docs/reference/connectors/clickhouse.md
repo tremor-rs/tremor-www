@@ -59,7 +59,7 @@ This connector is a sink-only connector.
 
 Specifying a compression method is optional. This setting currently supports [`lz4`] and `none` (no compression). If no value is specified, then no compression is performed.
 
-[`lz4]: https://en.wikipedia.org/wiki/LZ4_(compression_algorithm)
+[`lz4`]: https://en.wikipedia.org/wiki/LZ4_(compression_algorithm)
 
 
 ### Database
