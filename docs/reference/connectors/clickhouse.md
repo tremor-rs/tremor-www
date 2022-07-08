@@ -89,7 +89,7 @@ The following Tremor values represent a valid ClickHouse string:
 ```
 
 
-### Integers ([`UInt8`, `UInt16`, `UInt32`, `UInt64`, `Int8`, `Int16`, Int32`, `Int64`][CNumerals])
+### Integers ([`UInt8`, `UInt16`, `UInt32`, `UInt64`, `Int8`, `Int16`, `Int32`, `Int64`][CNumerals])
 
 [CNumerals]: https://clickhouse.com/docs/en/sql-reference/data-types/int-uint
 
