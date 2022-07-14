@@ -13,11 +13,12 @@ allows json logs to be published to Cloud Logging.
 ## Configuration
 
 ```tremor
+use std::time::nanos;
 define connector gcl_writer from gcl_writer
 with
     config = {
-        "connect_timeout": 1000000, # defaults to 1 second
-        "request_timeout: 1000000   # defaults to 10 seconds
+        "connect_timeout": nanos::from_seconds(1), # defaults to 1 second
+        "request_timeout: nanos::from-seconds(10),# defaults to 10 seconds
     }
 ```
 
@@ -121,6 +122,7 @@ graph LR
 ```troy
 define flow main
 flow
+  use std::time::nanos;
   use tremor::connectors;
   use tremor::system;
   use integration;
@@ -131,7 +133,7 @@ flow
   # milliseconds
   define connector metronome from metronome
   with
-    config = {"interval": 500}
+    config = {"interval": nanos::from_millis(500)}
   end;
 
   # Our connection to the GCP cloud logging service
@@ -153,10 +155,10 @@ flow
       # "dry_run": false,
 
       # 500ms connection timeout
-      "connect_timeout": 500000000,
+      "connect_timeout": nanos::from_millis(500),
 
       # 1s request timeout
-      "request_timeout": 1000000000,
+      "request_timeout": nanos::from_seconds(1),
 
       # Use `debug` log severity by default
       "default_severity": gcl::severity::DEBUG,
@@ -172,6 +174,7 @@ flow
   pipeline
     define script add_metadata_overrides
     script
+        use std::time::nanos;
         use google::cloud::logging as gcl;
 
         # Example of setting metadata for each log event
@@ -189,7 +192,7 @@ flow
            "remote_ip": "164.90.232.184",
            "server_ip": "localhost",
            "referer": "https://www.tremo.rs",
-           "latency": 1000000000,
+           "latency": nanos::from_millis(10),
          },
           "labels": {
             "tremor-override": "crash-overrun",
