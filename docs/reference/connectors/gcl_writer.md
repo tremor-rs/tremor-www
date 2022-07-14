@@ -18,7 +18,7 @@ define connector gcl_writer from gcl_writer
 with
     config = {
         "connect_timeout": nanos::from_seconds(1), # defaults to 1 second
-        "request_timeout: nanos::from-seconds(10),# defaults to 10 seconds
+        "request_timeout: nanos::from_seconds(10),# defaults to 10 seconds
     }
 end
 ```
