@@ -43,8 +43,8 @@ Tremor values are mapped to Google Bigquery schema types according to the follow
 
 | Google Bigquery type (gRPC type) | Tremor Value | Format                                                    |
 |----------------------------------|--------------|-----------------------------------------------------------|
-| Numeric                          | String       | `X.Y` (no thousands separator, `.` as decimal point)      |
-| Bignumeric                       | String       | `X.Y` (no thousands separator, `.` as decimal point)      |
+| Numeric                          | String       | `"X.Y"` (no thousands separator, `.` as decimal point)      |
+| Bignumeric                       | String       | `"X.Y"` (no thousands separator, `.` as decimal point)      |
 | Int64                            | Int          |                                                           |
 | Double                           | Double       |                                                           |
 | Bool                             | Bool         |                                                           |
