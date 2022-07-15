@@ -40,22 +40,22 @@ and the values need to correspond to the table schema values.
 
 Tremor values are mapped to Google Bigquery schema types according to the following value mapping. You need to provide the tremor value type on the right to feed a column of the left side.
 
-| Google Bigquery type (gRPC type) | Tremor Value |
-|----------------------------------|--------------|
-| Numeric                          | String       |
-| Bignumeric                       | String       |
-| Int64                            | Int          |
-| Double                           | Double       |
-| Bool                             | Bool         |
-| Bytes                            | Bytes        |
-| String                           | String       |
-| Date                             | String       |
-| Time                             | String       |
-| Datetime                         | String       |
-| Geography                        | String       |
-| Interval                         | String       |
-| Timestamp                        | String       |
-| Struct                           | Record       |
+| Google Bigquery type (gRPC type) | Tremor Value | Format                                                    |
+|----------------------------------|--------------|-----------------------------------------------------------|
+| Numeric                          | String       | `X.Y` (no thousands separator, `.` as decimal point)      |
+| Bignumeric                       | String       | `X.Y` (no thousands separator, `.` as decimal point)      |
+| Int64                            | Int          |                                                           |
+| Double                           | Double       |                                                           |
+| Bool                             | Bool         |                                                           |
+| Bytes                            | Bytes        |                                                           |
+| String                           | String       |                                                           |
+| Date                             | String       | `YYYY-[M]M-[D]D`                                          |
+| Time                             | String       | `[H]H:[M]M:[S]S[.DDDDDD&#124;.F]`                         |
+| Datetime                         | String       | `YYYY-[M]M-[D]D[( &#124;T)[H]H:[M]M:[S]S[.F]]`            |
+| Geography                        | String       | [OGC Simple Features](https://www.ogc.org/standards/sfa)  |
+| Interval                         | String       | `[sign]Y-M [sign]D [sign]H:M:S[.F]`                       |
+| Timestamp                        | String       | `YYYY-[M]M-[D]D[( &#124;T)[H]H:[M]M:[S]S[.F]][time zone]` |
+| Struct                           | Record       |                                                           |
 
 
 
