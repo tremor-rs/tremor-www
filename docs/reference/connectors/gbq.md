@@ -43,8 +43,20 @@ Tremor values are mapped to Google Bigquery schema types according to the follow
 | Google Bigquery type (gRPC type) | Tremor Value |
 |----------------------------------|--------------|
 | Numeric                          | String       |
+| Bignumeric                       | String       |
+| Int64                            | Int          |
+| Double                           | Double       |
+| Bool                             | Bool         |
+| Bytes                            | Bytes        |
+| String                           | String       |
+| Date                             | String       |
+| Time                             | String       |
+| Datetime                         | String       |
+| Geography                        | String       |
+| Interval                         | String       |
+| Timestamp                        | String       |
+| Struct                           | Object       |
 
-FIXME
 
 
 ### Example
