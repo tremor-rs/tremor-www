@@ -55,7 +55,7 @@ Tremor values are mapped to Google Bigquery schema types according to the follow
 | Geography                        | String       |
 | Interval                         | String       |
 | Timestamp                        | String       |
-| Struct                           | Object       |
+| Struct                           | Record       |
 
 
 
