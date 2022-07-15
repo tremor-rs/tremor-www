@@ -20,6 +20,7 @@ with
         "connect_timeout": nanos::from_seconds(10),
         "request_timeout: nanos::from_seconds(10)
     }
+end;
 ```
 
 The timeouts are in nanoseconds.
