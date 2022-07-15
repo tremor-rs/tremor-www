@@ -142,12 +142,12 @@ flow
   with
     config = {
       # Default log_name
-      "log_name": "projects/wf-gcp-us-tremor-sbx/logs/test-gcl",
+      "log_name": "projects/my-project-id/logs/test-gcl",
       # If connecting external from GCP, use a global resource
       "resource": { 
         "type": "global",
         "labels": {
-          "project_id": "wf-gcp-us-tremor-sbx"
+          "project_id": "my-project-id"
         }
       },
       # This is not a test
@@ -180,7 +180,7 @@ flow
 
         # Example of setting metadata for each log event
         let $gcl_writer = {
-          # "log_name": "projects/wf-gcp-us-tremor-sbx/logs/test-gcl2",
+          # "log_name": "projects/my-project-id/logs/test-gcl2",
           "log_severity": gcl::severity::INFO,
           "insert_id": "x" + gcl::gen_trace_id_string(),
          "http_request": {
