@@ -29,7 +29,7 @@ The timeouts are in nanoseconds.
 |-----------------|------------------------------------------------------------------------------------------------------------------|
 | table_id        | The identifier of the table in the format: `projects/{project-name}/datasets/{dataset-name}/tables/{table-name}` |
 | connect_timeout | The timeout in **nanoseconds** for connecting to the Google API                                                      |
-| request_timeout | The timeout in nanoseconds for each request to the Google API. A timeout hit will fail the event.                |
+| request_timeout | The timeout in **nanoseconds** for each request to the Google API. A timeout hit will fail the event.                |
 
 ## Metadata
 There is no metadata needed for this connector.
