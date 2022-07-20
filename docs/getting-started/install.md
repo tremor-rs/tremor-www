@@ -145,8 +145,7 @@ Reward yourself with a cake, because you just installed Tremor on your machine! 
 
 ## Docker
 
-We publish our Releases both to [Docker Hub](https://hub.docker.com/r/tremorproject/tremor)
-
+We publish our Releases both to [Docker Hub](https://hub.docker.com/r/tremorproject/tremor) and [Github Container Registry](https://github.com/tremor-rs/tremor-runtime/pkgs/container/tremor-runtime%2Ftremor)
 
 | Container registry | Image name                        |
 | ------------------ | --------------------------------- |
