@@ -21,7 +21,7 @@ $ wget https://github.com/tremor-rs/tremor-runtime/releases/download/v0.12.0-rc.
 Install required dependencies:
 
 ```console
-$ sudo apt install libatomic1
+$ sudo apt install libatomic1 pkg-config libssl-dev
 ```
 
 Install Tremor with `dpkg`:
@@ -149,7 +149,7 @@ We publish our Releases both to [Docker Hub](https://hub.docker.com/r/tremorproj
 
 
 | Container registry | Image name                        |
-|--------------------|-----------------------------------|
+| ------------------ | --------------------------------- |
 | docker.io          | `tremorproject/tremor`            |
 | ghcr.io            | `tremor-rs/tremor-runtime/tremor` |
 
