@@ -43,7 +43,7 @@ brew install cmake
 ### Ubuntu
 
 ```bash
-sudo apt install libssl-dev libclang-dev cmake
+sudo apt install libssl-dev libclang-dev cmake pkg-config
 ```
 
 ## Running Tremor
