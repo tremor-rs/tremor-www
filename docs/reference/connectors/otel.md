@@ -24,21 +24,24 @@ define connector my_otel from otel_client
 with
   config = {
     "url": "127.0.0.1:4317",  # Connect to localhost via gRPC to port 4317
+
+    # Enable trace event support ( default: true )
+    # "trace": false,
+
+    # Enable metrics event support ( default: true )
+    # "metrics": false,
+
+    # Enable logs event support ( default: true )
+    # "logs": false,
+
+    # Enables compression on payloads. ( supported: gzip ; default: none )
+    # "compression" : gzip,
   },
   reconnect = {
     "retry": {
       "interval_ms": 100, # Retry on disconnect every 100ms
       "growth_rate": 2,   # Double interval for each attempt
       "max_retries": 3,   # Try no more than 3 times to reconnect
-
-      # Enable trace event support ( default: true )
-      # "trace": false,
-
-      # Enable metrics event support ( default: true )
-      # "metrics": false,
-
-      # Enable logs event support ( default: true )
-      # "logs": false,
     }
   }
 end;
