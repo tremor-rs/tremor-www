@@ -14,7 +14,10 @@ Alternatively, if tremor is running inside Google Cloud, the authentication will
 ## Appender
 
 For this connector, while the (name, bucket name) pair does not change, the consecutive events will be appended to the same file.
+
+:::warn
 This connector is not transactional - if one of the events fails to be processed, subsequent events will still be tried, which may result in some data missing from the file in case of a catastrophic failure.
+:::
 
 ### Metadata
 Two metadata fields are required for the connector to work - `name` (will be used as the object name) and `bucket` (the name of the bucket where the object will be placed).
