@@ -24,7 +24,7 @@ If not found, the storage directory will be auto-created, or an error will be pr
 ```tremor
 define my_kv from kv
 with
-  "dir" = "state",
+  "path" = "state",
 end;
 ```
 
@@ -98,7 +98,6 @@ The `$correlation` metadata key can be set so that a request and response from t
 ```tremor
 let $correlation = "some-correlating-unique-data";
 ```
-
 
 ## Conditioning
 

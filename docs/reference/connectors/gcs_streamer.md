@@ -1,5 +1,5 @@
 ---
-sidebar_label: gcs_appender (Google Cloud storage)
+sidebar_label: gcs_streamer (Google Cloud storage)
 sidebar_position: 1
 ---
 
@@ -11,7 +11,7 @@ This connector provides the ability to write into Google Cloud Storage.
 This connector will use credentials stored in a JSON file pointed to by the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
 Alternatively, if tremor is running inside Google Cloud, the authentication will automatically use the credentials of the machine it is running on.
 
-## Appender
+## Streamer
 
 For this connector, while the (name, bucket name) pair does not change, the consecutive events will be appended to the same file.
 
@@ -27,7 +27,7 @@ All of the configuration options are optional.
 
 | name            | description                                                                                      | default                                           |
 |-----------------|--------------------------------------------------------------------------------------------------|---------------------------------------------------|
-| endpoint        | The HTTP(s) endpoint to which the requests will be made                                          | https://storage.googleapis.com/upload/storage/v1  |
+| url             | The HTTP(s) endpoint to which the requests will be made                                          | https://storage.googleapis.com/upload/storage/v1  |
 | connect_timeout | The timeout for the connection (in nanoseconds)                                                  | 10 000 000 000 (10 seconds)                       |
 | buffer_size     | The size of a single request body, in bytes (must be divisible by 256kiB, as required by Google) | 8388608 (8MiB, the minimum recommended by Google) |
 
