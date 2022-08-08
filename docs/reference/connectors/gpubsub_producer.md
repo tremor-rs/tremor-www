@@ -33,7 +33,7 @@ flow
             "topic": "projects/xxx/topics/test-topic-a", # required - the identifier of the topic
             "connect_timeout": std::time::nanos::from_seconds(1), # optional - connection timeout (nanoseconds) - defaults to 10s
             "request_timeout": std::time::nanos::from_seconds(10), # optional - timeout for each request (nanoseconds) - defaults to 1s 
-            "endpoint":  "https://us-east1-pubsub.googleapis.com" # optional - the endpoint for the PubSub API, defaults to https://pubsub.googleapis.com
+            "url":  "https://us-east1-pubsub.googleapis.com" # optional - the endpoint for the PubSub API, defaults to https://pubsub.googleapis.com
         }
     end;
 
@@ -54,7 +54,7 @@ deploy flow gbqtest;
 | topic           | yes       | The identifier of the topic, in the format of `projects/PROJECT_NAME/topics/TOPIC_NAME` |
 | connect_timeout | no        | Connection timeout in nanoseconds                                                       |
 | request_timeout | no        | Request timeout in nanoseconds                                                          |
-| endpoint        | no        | The endpoint for the PubSub API                                                         |
+| url             | no        | The endpoint for the PubSub API                                                         |
 
 ## Metadata
 The connector will use the `$gpubsub_producer` metadata variable, which can be used to set the `ordering_key`.

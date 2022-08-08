@@ -19,7 +19,7 @@ define connector my_wal from wal
 with
   "config": {
     # required - directory where WAL storage is configured
-    "dir" = "state",
+    "path" = "state",
 
     # Maximum chunk size in bytes
     "chunk_size" = 1024,
@@ -74,7 +74,7 @@ flow
   define connector my_wal from wal
   with
     config = {
-      "dir": "server_state",
+      "path": "server_state",
       "chunk_size":  1024,
       "max_chunks": 100,
     }

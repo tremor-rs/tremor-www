@@ -15,9 +15,6 @@ required of the resulting system.
 
 ## Consumer
 
-
-
-
 To consume from kafka, one needs to define a connector from `kafka_consumer`. 
 
 ### Configuration
