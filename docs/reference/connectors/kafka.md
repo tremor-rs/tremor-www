@@ -8,8 +8,8 @@ sidebar_position: 1
 The Kafka connectors [`kafka_consumer`](#consumer) and [`kafka_producer`](#producer) provide integration with [Apache Kafka](https://kafka.apache.org/) and compatible
 products such as [Confluent Kafka](https://www.confluent.io/) and [Redpanda](https://redpanda.com/). Consuming from Kafka and producing to Kafka are handled by two separate connectors.
 
-Both Kafka connectors in Tremor are built on top of [librdkafka](https://github.com/edenhill/librdkafka) version 1.8.0 and expose the full complement
-of [configuration settings](https://github.com/edenhill/librdkafka/blob/v1.8.0/CONFIGURATION.md). Care __SHOULD__ be
+Both Kafka connectors in Tremor are built on top of [librdkafka] version 1.8.2 and expose the full complement
+of [configuration settings](https://github.com/edenhill/librdkafka/blob/v1.8.2/CONFIGURATION.md). Care __SHOULD__ be
 taken when configuring `kafka` with tremor to ensure that the configuration settings make sense given the logic
 required of the resulting system.
 
@@ -21,19 +21,126 @@ To consume from kafka, one needs to define a connector from `kafka_consumer`.
 
 It supports the following configuration options:
 
-| Option              | Description                                                                                                                                                                                                                                                   | Type                           | Required | Default Value                                                                                         |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|----------|-------------------------------------------------------------------------------------------------------|
-| group_id            | The consumer group id to register with to the kafka cluster. Corresponds to the librdkafka `group.id` setting.                                                                                                                                                | string                         | yes      |                                                                                                       |
-| topics              | The topics to consumer from.                                                                                                                                                                                                                                  | list of strings                | yes      |                                                                                                       |
-| brokers             | URLs to the cluster bootstrap servers to connect to. Corresponds to the librdkafka `bootstrap.servers` setting.                                                                                                                                               | list of strings                | yes      |                                                                                                       |
-| rdkafka_options     | librdkafka configuration. For possible options consult the [librdkafka configuration docs](https://github.com/edenhill/librdkafka/blob/v1.8.0/CONFIGURATION.md).                                                                                              | json record with string values | no       | By default, only `group.id`, `client.id` and `bootstrap.servers` is set, but can be overwritten here. |
-| retry_failed_events | If set to `true` this connector will reset the consumer offset to the offset of a message corresponding to a failed event, so it will effectively retry this kafka message. Only takes effect if `enable.auto.commit` is set to `false` in `rdkafka_options`. | boolean                        | no       | `false`                                                                                               |
+| Option   | Description                                                                                                                                                         | Type            | Required | Default Value   |
+|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|----------|-----------------|
+| group_id | The consumer group id to register with to the kafka cluster. Corresponds to the librdkafka `group.id` setting.                                                      | string          | yes      |                 |
+| topics   | The topics to consumer from.                                                                                                                                        | list of strings | yes      |                 |
+| brokers  | URLs to the cluster bootstrap servers to connect to. Corresponds to the librdkafka `bootstrap.servers` setting.                                                     | list of strings | yes      |                 |
+| mode     | Determines the working mode of the connector. The following modes are supported: `performance` (Default), `transactional` and `custom`. See below for more details. | See below.      | yes      | `"performance"` |
 
-For detailed semantics on how the consumer behaves with which settings, please consult the [librdkafka documentation](https://github.com/edenhill/librdkafka/blob/v1.8.0/CONFIGURATION.md).
+
+#### Mode
+
+
+##### Performance
+
+The mode describes how the connector will consume from kafka. Using the mode `"performance"`, this connector will automatically store all offsets of messages it receives and commit them to the broker every 5 secons. This mode has the lowest overhead and is best suited for performance-sensitive applications where a single missed message or a failed message isn ot a big deal. This is the default mode.
+
+This mode essentially sets the following [librdkafka configuration options]:
+
+Example:
+
+```tremor
+define connector perf_consumer from kafka_consumer
+with
+    codec = "json",
+    config = {
+        "brokers": [
+            "localhost:9092"
+        ],
+        "group_id": "my_consumer_group",
+        "topics": [
+            "my_topic"
+        ],
+        "mode": "performance"
+    }
+end;
+```
+
+##### Transactional
+
+The mode `"transactional"` is for workloads where each and every kafka message needs to be handled successfully in order to make progress. In this mode, the offset for every message
+is only stored once it has been handled successfully by a downstream connector. The setting `commit_interval` of the mode determines how often the offsets are committed to the kafka cluster.
+The default is 5 seconds. If this setting is set to `0`, the connector will immediately commit every single event offset directly to the kafka cluster. This will lead to lots of traffic towards the group-coordinator, and should be avoided for high volume loads. This is the safest setting though.
+
+Failed events will be replayed. If an event fails the partition offset of the event is reset, so the consumer will start consuming again from that point. This can lead to consuming kafka messages more than once, but it guarantees at-least-once delivery in the face of failing events.
+
+Example:
+
+```tremor
+use std::time::nanos;
+
+define connector transactional_consumer from kafka_consumer
+with
+    codec = "json",
+    config = {
+        "brokers": [
+            "localhost:9092"
+        ],
+        "group_id": "my_consumer_group",
+        "topics": [
+            "my_topic"
+        ],
+        "mode": {
+            "transactional": {
+                # this setting can be ommitted and defaults to 5 seconds
+                # if set to `0`, the connector commits offsets immediately
+                "commit_interval": nanos::from_seconds(1)
+            }
+        }
+    }
+end;
+```
+
+##### Custom
+
+The mode `custom` allows custom configuration of the connector and the underlying `librdkafka`. It contains two settings: 
+
+* `rdkafka_options`: librdkafka configuration options. For possible options consult the [librdkafka configuration options]. The options `group.id`, `client.id` and `bootstrap.servers` are set from the connector config and cannot be overwritten.
+* `retry_failed_events`: If set to `true` this connector will behave as in `transactional` mode and reset the offset for every failed kafka message, effectively retrying it. Default: `false`
+
+In order to customize your settings, it might be useful to know how the different modes can be achieved using the `custom` mode and adapting it to your needs.
+[Transactional](#transactional) mode translates to the following `rdkafka_options`:
+
+```js
+{
+    "mode": {
+        "custom": {
+            "rdkafka_options": {
+                "enable.auto.commit": true,
+                "enable.auto.offset.store": false,
+                "auto.commit.interval.ms": 5000
+            },
+            "retry_failed_events": true
+        }
+    }
+}
+```
+
+[Performance](#performance) mode translates to the following `rdkafka_options`:
+
+```js
+{
+    "mode": {
+        "custom": {
+            "rdkafka_options": {
+                "enable.auto.commit": true,
+                "enable.auto.offset.store": true,
+                "auto.commit.interval.ms": 5000
+            },
+            "retry_failed_events": false
+        }
+    }
+}
+```
+
+For detailed semantics on how the consumer behaves with which settings, please consult the [librdkafka configuration options].
 
 Example configuration for `kafka_consumer`:
 
 ```tremor title="config.troy"
+use std::time::nanos;
+
 define connector consumer from kafka_consumer
 with
     metrics_interval_s = 1,
@@ -56,20 +163,26 @@ with
         "topics": [
             "tremor_test"
         ],
-        # Whether or not to retry failed attempts
-        # When true - resets the offset to a failed message for retry
-        #  - Warning: where persistent failure is expected, this will lead to persistent errors
-        # When false - Only commits offset for a successful acknowledgement
-        "retry_failed_events": false,
+        "mode": {
+            "custom": {
+                # Whether or not to retry failed attempts
+                # When true - resets the offset to a failed message for retry
+                #  - Warning: where persistent failure is expected, this will lead to persistent errors
+                # When false - Only commits offset for a successful acknowledgement
+                "retry_failed_events": false,
 
-        # librdkafka configuration settings ( indicative illustrative example )
-        "rdkafka_options": {
-            "enable.auto.commit": "false",      # this will only commit a message offset if the event has been handled successfully
-            "auto.commit.interval.ms": "5000",  # this will auto-commit the current offset every 5s
-            "enable.auto.offset.store": "true", 
-            "enable.partition.eof": "false",    # do not send an EOF if a partition becomes empty
-            "auto.offset.reset": "beginning",   # always start consuming from the beginning of all partitions
+                # librdkafka configuration settings ( indicative illustrative example )
+                "rdkafka_options": {
+                    "enable.auto.commit": "false",      # this will only commit a message offset if the event has been handled successfully
+                    "auto.commit.interval.ms": 5000,    # this will auto-commit the current offset every 5s
+                    "enable.auto.offset.store": true, 
+                    "debug": "consumer"                 # enable librdkafka debug logging of the consumer
+                    "enable.partition.eof": false,      # do not send an EOF if a partition becomes empty
+                    "auto.offset.reset": "beginning",   # always start consuming from the beginning of all partitions
+                }
+            }
         }
+        
     }
 end;
 ```
@@ -359,3 +472,5 @@ deploy flow kafka_consume;
 * Set `$kafka_producer.timestamp` metadata to alter timestamp metadata
 * Set `$kafka_producer.partition` metadata to alter kafka partition metadata
 
+[librdkafka configuration options]: https://github.com/edenhill/librdkafka/blob/v1.8.2/CONFIGURATION.md
+[librkafka]: https://github.com/edenhill/librdkafka
