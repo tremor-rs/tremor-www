@@ -13,7 +13,7 @@ Alternatively, if tremor is running inside Google Cloud, the authentication will
 
 ## Streamer
 
-For this connector, while the (name, bucket name) pair does not change, the consecutive events will be appended to the same file.
+For this connector, while the (name, bucket name) pair does not change, the consecutive events will be appended to the same file. Events will only be acknowledged once their upload is finished and guaranteed to be stored in GCS.
 
 :::warn
 This connector is not transactional - if one of the events fails to be processed, subsequent events will still be tried, which may result in some data missing from the file in case of a catastrophic failure.
