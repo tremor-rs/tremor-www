@@ -25,14 +25,14 @@ It can also be used to test the behaviour of connectors acting as event sinks, c
 ## Ports
 
 - `in`: This Connector is expecting events that trigger certain Circuit Breaker and/or Event acknowledge/fail behaviour. See [Expected Input Data](#expected-input-data).
-- `out`: When configured with [`path`](#configuration) this connector will emit events on the `out` port.
+- `out`: When configured with [`paths`](#configuration) this connector will emit events on the `out` port.
 
 ## Configuration
 
 | Config Option  | Description                                                                                                                                                                                         | Possible Values  | Required / Optional                | Default Value               |
 |----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|------------------------------------|-----------------------------|
-| path           | Path to the file to load data from. The file will be split into lines and each will form one event. Only required for the source part.                                                              | file path        | Only required for the source part. |                             |
-| timeout        | Timeout in nanoseconds to wait for circuit breaker messages after all events from the `path` file have been sent. After this timeout is expired the Tremor process will be stopped.                 | positive integer | optional                           | 10_000_000_000 (10 seconds) |
+| paths          | A list of paths to files to load data from. Each file will be split into lines and each line will form one event. Only required for the source part.                                                | array of strings | Only required for the source part. |                             |
+| timeout        | Timeout in nanoseconds to wait for circuit breaker messages after all events from the `paths` files have been sent. After this timeout is expired the Tremor process will be stopped.               | positive integer | optional                           | 10_000_000_000 (10 seconds) |
 | expect_batched | When set to `true` changes verifcation mode for testing applications involving [batching](../operators/batch.md). That means only not all events are required to be acknowledged, only all batches. | boolean          | optional                           | false                       |
 
 ### Example
@@ -47,7 +47,7 @@ flow
   with
     codec = "json",		# Events are line delimited JSON
     config = {
-      "path": "in.json",	# File from which to replay events
+      "paths": ["in.json"],	# Files from which to replay events
       "timeout": nanos::from_seconds(1)
     }
   end;
