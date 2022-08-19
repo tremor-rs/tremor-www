@@ -103,21 +103,23 @@ Both the [`elastic` connector](../reference/connectors/elastic.md) and the [`htt
 
 ### Garuanteed Delivery
 
-Tremor uses the contraflow mechanism to implement **Event delivery acknowledgements**. In a nutshell it works like this:
+Tremor uses the contraflow mechanism to implement **Event delivery acknowledgments**. In a nutshell, it works like this:
 
-* When a connector receives an event and handles it successfully without error (e.g. sends it off via TCP) and event delivery acknowledgement is sent backwards via contraflow, if required, which is flagged in each event, usually by the originating connector.
-* When a connector fails to handle an event a delivery failure message is sent backwards via contraflow, if required.
+* When a connector receives an event and handles it successfully without error (e.g., sends it off via TCP) and event delivery acknowledgment is sent backward via contraflow, if required, which is flagged in each event, usually by the originating connector.
+* When a connector fails to handle an event, a delivery failure message is sent backward via contraflow, if required.
 * Pipeline operators and connectors emitting events can handle those messages to implement guaranteed delivery.
 
-An event acknowledgement contraflow message is only handled by the connector (or operator) that did send the event. E.g. a [`kafka_consumer` connector](../reference/connectors/kafka.md#consumer) will commit the offset of the event upon receiving an event acknowledgment.
+An event acknowledgment contraflow message is only handled by the connector (or operator) that did send the event. E.g. a [`kafka_consumer` connector](../reference/connectors/kafka.md#consumer) will commit the offset of the event upon receiving an event acknowledgment.
 
-This has the effect that we have 1 contraflow event flowing backwards for each event reaching its destination. The forward traffic volume will be mirrored by the contraflow volume, just that the contraflow itself is not leaving the system but is handled internally by [Operators] and [Connectors].
+This means that we have one contraflow event flowing backward for each event reaching its destination. The forward traffic volume will be mirrored by the contraflow volume, just that the contraflow itself is not leaving the system but is handled internally by [Operators] and [Connectors].
 
-Not all connectors support event acknowledgements, as their nature doesn't support the notion of marking parts of a data stream as successfully handled. For example [UDP](../reference/connectors/udp.md) cannot support this feature. 
+Not all connectors support event delivery guarantees, as their nature doesn't support the notion of marking parts of a data stream as successfully handled. Those connectors will acknowledge every event that reaches them. For example [UDP](../reference/connectors/udp.md) falls into this category. Other connectors only acknowledge successful transmission, such as [TCP](../reference/connectors/tcp.md) but not successful reception. Yet others only acknowledge successful reception but not necessarily successful processing of the downstream system, such as [Websockets](../reference/connectors/ws.md).
 
-Connectors like [`kafka_consumer`](../reference/connectors/kafka.md#consumer) [`wal`](../reference/connectors/wal.md) support event delivery acknowledgements and are well suited for implementing workloads that can guarantee **at-least-once* delivery.
+Connectors like [`kafka_consumer`](../reference/connectors/kafka.md#consumer) [`wal`](../reference/connectors/wal.md) support event delivery and processing acknowledgements and are well suited for implementing workloads that can guarantee *at-least-once* delivery. This guarantee can, however, only hold if all participants honor the same guarantee. In other words, putting a `wal` connector between a `udp` source and an `http` sink will not give the system an end-to-end guarantee of at-least-once delivery. It will only guarantee that any event successfully received by the `udp` source will be seen by the `http` sink at least once, and if the `http` sink asks for a replay, the `wal` connector will provide it.
 
-For the circuit breaker mechanism a successful event acknowledgement is used a signal for the circuit breaker to close as the downstream system seems to be back to normal.
+For the circuit breaker mechanism, a successful event acknowledgment is used as a signal for the circuit breaker to close as the downstream system seems to be back to normal.
+
+Please note that contraflow events, be it circuit breaker or GD events, do not traverse over connectors. In other words, two pipelines connected by a connector will not see each other's contraflow events.
 
 ## Pause / Resume
 
