@@ -175,7 +175,7 @@ graph LR
 
 **Source**: The `http_server` connector will acknowledge successful delivery of the message to its upstream system but does not support replays. Events that did fail inside tremor trigger a `500 Internal Server Error` HTTP response.
 
-**Intermidiary**: This setup uses a [`wal` connector](../connectors/wal.md) as an intermediary, effectively splitting the system into two pipelines. One pipeline being `http_server` to `wal` the other being `wal` to `kafka_producer`.
+**Intermidiary**: This setup uses a [`wal` connector](../reference/connectors/wal.md) as an intermediary, effectively splitting the system into two pipelines. One pipeline being `http_server` to `wal` the other being `wal` to `kafka_producer`.
 
 **Sink**: Depending on its setting, `kafka_producer` acknowledges successful storage of the message and will fail an event if it can't store it.
 
