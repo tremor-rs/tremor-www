@@ -121,7 +121,13 @@ For the circuit breaker mechanism, a successful event acknowledgment is used as 
 
 Please note that contraflow events, be it circuit breaker or GD events, do not traverse over connectors. In other words, two pipelines connected by a connector will not see each other's contraflow events.
 
-### Example 1: from kafka_consumer to  udp_client
+### Example 1: from kafka_consumer to udp_client
+
+```mermaid
+graph LR
+    A{kafka_consumer} -->|send| B(pipeline)
+    B -->|send| C{udp_client}
+```
 
 **Source**: The `kafka_consumer` connector, when used with `transactional` mode supports guaranteed delivery. A failure on a message after the latest acknowledged offset will revert to that message and replay all data since then.
 
@@ -131,6 +137,12 @@ Please note that contraflow events, be it circuit breaker or GD events, do not t
 
 ### Example 2: from udp_server to kafka_producer
 
+```mermaid
+graph LR
+    A{udp_server} -->|send| B(pipeline)
+    B -->|send| C{kafka_producer}
+```
+
 **Source**: UDP as transport protocol offers no guarantees or order, the upstream system sending the messages does not know if it arrived or is handled. Thus the `udp_server` simply cannot make any guarantees, or mark any packets as delivered or not.
 
 **Sink**: Depending on its setting, the `kafka_producer` connector acknowledges successful production of the event and will fail an event if it can't produce it to the configured topic.
@@ -139,6 +151,12 @@ Please note that contraflow events, be it circuit breaker or GD events, do not t
 
 ### Example 3: from http_server to kafka_producer
 
+```mermaid
+graph LR
+    A{http_server} -->|send| B(pipeline)
+    B -->|send| C{kafka_producer}
+```
+
 **Source**: The `http_server` connector will acknowledge successful delivery of the message to its upstream system but does not support replays. Events that did fail inside tremor trigger a `500 Internal Server Error` HTTP response.
 
 **Sink**: Depending on its setting, `kafka_producer` acknowledges successful storage of the message and will fail an event if it can't store it.
@@ -146,6 +164,14 @@ Please note that contraflow events, be it circuit breaker or GD events, do not t
 **Result**: Events that are delivered to tremor will be delivered to Kafka. If the `kafka_producer` fails to persist the message, an error is sent back to the upstream system as a 500 response to the HTTP request. How the upstream system handles this failure is up to the service.
 
 ### Example 4: from http_server via wal connector to kafka_producer
+
+```mermaid
+graph LR
+    A{http_server} -->|send| B(pipeline http_wal)
+    B -->|send| C{wal}
+    C -> |send| D(pipeline wal_kafka)
+    D -->|send| E{kafka_producer}
+```
 
 **Source**: The `http_server` connector will acknowledge successful delivery of the message to its upstream system but does not support replays. Events that did fail inside tremor trigger a `500 Internal Server Error` HTTP response.
 
