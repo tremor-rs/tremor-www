@@ -7,7 +7,7 @@ This operator batches both the event payload and event metadata into a single bu
 Supported configuration options are:
 
 - `count` - Elements per batch
-- `timeout` - Maximum delay between the first element of a batch and the last element of a batch.
+- `timeout` - Maximum delay between the first element of a batch and the last element of a batch, in nanoseconds.
 
 **Outputs**:
 
@@ -15,9 +15,14 @@ Supported configuration options are:
 
 **Example**:
 
+The following operator will batch up to `300` events into one, if they arrive within 1 second. Otherwise, after 1 second, it will emit the amount of events it batched up within the past second.
+
 ```tremor
+use std::nanos;
+
 define operator batch from generic::batch
 with
-  count = 300
+  count = 300,
+  timeout = nanos::from_seconds(1)
 end;
 ```
