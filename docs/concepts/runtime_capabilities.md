@@ -103,7 +103,7 @@ Both the [`elastic` connector](../reference/connectors/elastic.md) and the [`htt
 
 ### Garuanteed Delivery
 
-Tremor uses the contraflow mechanism to implement **Event delivery acknowledgments**. In a nutshell, it works like this:
+Tremor uses the contraflow mechanism to implement **Event delivery acknowledgements**. In a nutshell, it works like this:
 
 * When a connector receives an event and handles it successfully without error (e.g., sends it off via TCP) and event delivery acknowledgment is sent backward via contraflow, if required, which is flagged in each event, usually by the originating connector.
 * When a connector fails to handle an event, a delivery failure message is sent backward via contraflow, if required.
