@@ -181,7 +181,7 @@ graph LR
 
 **Result 1 (http -> wal)**: The wal connector, as long as it doesn't run full, will always acknowledge messages it stores, so all data that is successfully sent to the HTTP endpoint, no matter the state of the downstream system, will be acknowledged. This frees the HTTP API from having to consider retries.
 
-**Result 2 (wal -> kafka)**: The [`wal` connector](../connectors/wal.md) acts pretty similar to the `kafka_consumer`. Whenever an event is marked as failed, it will replay all events since that one. So failure in the `kafka_producer` producing events will lead to a re-transmission from the `wal` - this happens in a transparent matter from the point of view of the `http_server` connector.
+**Result 2 (wal -> kafka)**: The [`wal` connector](../reference/connectors/wal.md) acts pretty similar to the `kafka_consumer`. Whenever an event is marked as failed, it will replay all events since that one. So failure in the `kafka_producer` producing events will lead to a re-transmission from the `wal` - this happens in a transparent matter from the point of view of the `http_server` connector.
 
 ## Pause / Resume
 
