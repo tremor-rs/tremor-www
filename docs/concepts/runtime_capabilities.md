@@ -105,7 +105,7 @@ Both the [`elastic` connector](../reference/connectors/elastic.md) and the [`htt
 
 Tremor uses the contraflow mechanism to implement **Event delivery acknowledgements**. In a nutshell, it works like this:
 
-* When a connector receives an event and handles it successfully without error (e.g., sends it off via TCP) and event delivery acknowledgment is sent backward via contraflow, if required, which is flagged in each event, usually by the originating connector.
+* When a connector receives an event and handles it successfully without error (e.g., sends it off via TCP) and event delivery acknowledgement is sent backward via contraflow, if required, which is flagged in each event, usually by the originating connector.
 * When a connector fails to handle an event, a delivery failure message is sent backward via contraflow, if required.
 * Pipeline operators and connectors emitting events can handle those messages to implement guaranteed delivery.
 
@@ -113,7 +113,7 @@ An event acknowledgment contraflow message is only handled by the connector (or 
 
 This means that we have one contraflow event flowing backward for each event reaching its destination. The forward traffic volume will be mirrored by the contraflow volume, just that the contraflow itself is not leaving the system but is handled internally by [Operators] and [Connectors].
 
-Not all connectors support event delivery guarantees, as their nature doesn't support the notion of marking parts of a data stream as successfully handled. Those connectors will acknowledge every event that reaches them. For example [UDP](../reference/connectors/udp.md) falls into this category. Other connectors only acknowledge successful transmission, such as [TCP](../reference/connectors/tcp.md) but not successful reception. Yet others only acknowledge successful reception but not necessarily successful processing of the downstream system, such as [Websockets](../reference/connectors/ws.md).
+Not all connectors support event delivery guarantees, as their nature doesn't support the notion of marking parts of a data stream as successfully handled. Those connectors will acknowledge every event that reaches them. For example [the `udp_client` connector](../reference/connectors/udp.md) falls into this category. Other connectors only acknowledge successful transmission, such as [the `tcp_client` connector](../reference/connectors/tcp.md) but not successful reception. Yet others only acknowledge successful reception but not necessarily successful processing of the downstream system, such as [the `ws_client` connector](../reference/connectors/ws.md).
 
 Connectors like [`kafka_consumer`](../reference/connectors/kafka.md#consumer) [`wal`](../reference/connectors/wal.md) support event delivery and processing acknowledgements and are well suited for implementing workloads that can guarantee *at-least-once* delivery. This guarantee can, however, only hold if all participants honor the same guarantee.
 
@@ -121,41 +121,41 @@ For the circuit breaker mechanism, a successful event acknowledgment is used as 
 
 Please note that contraflow events, be it circuit breaker or GD events, do not traverse over connectors. In other words, two pipelines connected by a connector will not see each other's contraflow events.
 
-### Example 1: kafka source & udp sink
+### Example 1: from kafka_consumer to  udp_client
 
-**Source**: The kafka source supports guaranteed delivery. A failure on a message after the latest acknowledged offset will revert to that message and replay all data since then.
+**Source**: The `kafka_consumer` connector, when used with `transactional` mode supports guaranteed delivery. A failure on a message after the latest acknowledged offset will revert to that message and replay all data since then.
 
-**Sink**: The udp sink has no delivery guarantee any message reaching it will be automatically delivered
+**Sink**: The `udp_client` connector offers no delivery guarantee. Any message reaching it will trigger an acknowledgment automatically.
 
 **Result**: All messages read from Kafa will be automatically acknowledged.
 
-### Example 2: udp source & kafka sink
+### Example 2: from udp_server to kafka_producer
 
-**Source**: Upd as transport has no guarantees, the upstream system sending the messages does not know if it arrives or is handled.
+**Source**: UDP as transport protocol offers no guarantees or order, the upstream system sending the messages does not know if it arrived or is handled. Thus the `udp_server` simply cannot make any guarantees, or mark any packets as delivered or not.
 
-**Sink**: Depending on its setting, Kafka acknowledges successful storage of the message and will fail an event if it can't store it.
+**Sink**: Depending on its setting, the `kafka_producer` connector acknowledges successful production of the event and will fail an event if it can't produce it to the configured topic.
 
-**Result**: The upstream system has no guarantees its messages reach somewhere. If a message is delivered to tremor it will make a best effort attempt to deliver it, but if Kafka fails to persist the event, a replay can't happen due to UDP's limitation.
+**Result**: The upstream system has no guarantees if its messages arrived anywhere. If a message is delivered to tremor it will make a best effort attempt to deliver it, but if Kafka fails to persist the event, a replay can't happen due to UDP's limitations.
 
-### Example 3: http source & kafka sink
+### Example 3: from http_server to kafka_producer
 
-**Source**: The WebSocket source will acknowledge successful delivery of the message to its upstream system but does not support replays or other methods of dealing with failures.
+**Source**: The `http_server` connector will acknowledge successful delivery of the message to its upstream system but does not support replays. Events that did fail inside tremor trigger a `500 Internal Server Error` HTTP response.
 
-**Sink**: Depending on its setting, Kafka acknowledges successful storage of the message and will fail an event if it can't store it.
+**Sink**: Depending on its setting, `kafka_producer` acknowledges successful storage of the message and will fail an event if it can't store it.
 
-**Result**: Messages that are delivered to tremor will be delivered to Kafka. If Kafka fails to persist the message, an error is sent back to the upstream system as a response to the HTTP request. How the upstream system handles this failure is up to the service.
+**Result**: Events that are delivered to tremor will be delivered to Kafka. If the `kafka_producer` fails to persist the message, an error is sent back to the upstream system as a 500 response to the HTTP request. How the upstream system handles this failure is up to the service.
 
-### Example 4: http source & wal connector & kafka sink
+### Example 4: from http_server via wal connector to kafka_producer
 
-**Source**: The WebSocket source will acknowledge successful delivery of the message to its upstream system but does not in itself support replays or other methods of dealing with failures.
+**Source**: The `http_server` connector will acknowledge successful delivery of the message to its upstream system but does not support replays. Events that did fail inside tremor trigger a `500 Internal Server Error` HTTP response.
 
-**Intermidiary**: This setup uses a wal connector as an intermediary, effectively splitting the system into two pipelines. One pipelein being http to wal the other being wal to kafka.
+**Intermidiary**: This setup uses a [`wal` connector](../connectors/wal.md) as an intermediary, effectively splitting the system into two pipelines. One pipeline being `http_server` to `wal` the other being `wal` to `kafka_producer`.
 
-**Sink**: Depending on its setting, Kafka acknowledges successful storage of the message, and will fail an event if it can't store it.
+**Sink**: Depending on its setting, `kafka_producer` acknowledges successful storage of the message and will fail an event if it can't store it.
 
-**Result 1 (http -> wal)**: The wal connector, as long as it doesn't run full, will always acknowledge messages it stores, so all data is successfully sent to the HTTP endpoint, no matter the state of the downstream system, will be acknowledged. This frees the HTTP API form from having to consider retries.
+**Result 1 (http -> wal)**: The wal connector, as long as it doesn't run full, will always acknowledge messages it stores, so all data that is successfully sent to the HTTP endpoint, no matter the state of the downstream system, will be acknowledged. This frees the HTTP API from having to consider retries.
 
-**Result 2 (wal -> kafka)**: The wal connector acts pretty similar to Kafka when looking at its source nature. It will replay all messages since a failed event that wasn't acknowledged before. So failure in Kafka for storing messages will lead to a re-transmission from the wal - this happens in a transparent matter from the point of view of the HTTP connector.
+**Result 2 (wal -> kafka)**: The [`wal` connector](../connectors/wal.md) acts pretty similar to the `kafka_consumer`. Whenever an event is marked as failed, it will replay all events since that one. So failure in the `kafka_producer` producing events will lead to a re-transmission from the `wal` - this happens in a transparent matter from the point of view of the `http_server` connector.
 
 ## Pause / Resume
 
