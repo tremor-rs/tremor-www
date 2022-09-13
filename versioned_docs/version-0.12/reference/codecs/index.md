@@ -100,6 +100,7 @@ Tremor's internal data representation is JSON-like. The supported value types ar
 | [binary](binary)           | Raw network endian binary data                                                                                |
 | [binflux](binflux)         | An efficient binary representation of influx data                                                             |
 | [csv](csv)                 | The CSV format as per RFC4180 - constrained to a single line                                                  |
+| [dogstatsd](dogstatsd)     | The [DogStatsD protocol](https://docs.datadoghq.com/developers/dogstatsd/datagram_shell/?tab=metrics) |
 | [influx](influx)           | The [influx line protocol](https://docs.influxdata.com/influxdb/v1.7/write_protocols/line_protocol_tutorial/) |
 | [json](json)               | The [JSON](https://json.org) format                                                                           |
 | [json-sorted](json-sorted) | The [JSON](https://json.org) format                                                                           |
