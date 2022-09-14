@@ -1,6 +1,6 @@
 # dogstatsd
 
-The `dogstatsd` codec supports the [Datadog DogStatsD v1.2 protocol](https://docs.datadoghq.com/developers/dogstatsd/datagram_shell?tab=metrics).
+The `dogstatsd` codec supports the [Datadog DogStatsD v1.2 protocol](https://docs.datadoghq.com/developers/dogstatsd/datagram_shell).
 
 The format is similar the `statsd` format, but also includes events and service checks.
 
