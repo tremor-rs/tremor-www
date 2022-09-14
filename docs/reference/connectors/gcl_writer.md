@@ -37,7 +37,7 @@ The timeouts are in nanoseconds.
 | labels           | This setting sets a default set of labels that can be overriden on a per event basis through metadata                                                                                                                                                                                                                                              |
 | connect_timeout  | The timeout in nanoseconds for connecting to the Google API                                                                                                                                                                                                                                                                                        |
 | request_timeout  | The timeout in nanoseconds for each request to the Google API                                                                                                                                                                                                                                                                                      |
-| concurrency | The number of simultaneous in-flight requests ( defaults to 4 ) ||
+| concurrency | The number of simultaneous in-flight requests ( defaults to 4 ) |
 
 ## Metadata
 
