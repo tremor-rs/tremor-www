@@ -4,7 +4,7 @@ The `dogstatsd` codec supports the [Datadog DogStatsD v1.2 protocol](https://doc
 
 The format is similar to the `statsd` format, but also includes events and service checks.
 
-The codec translates a single `dogstatsd` measurement line into a structured event.
+The codec translates a single `dogstatsd` measurement line into a structured event and vice versa.
 
 ## Examples
 
