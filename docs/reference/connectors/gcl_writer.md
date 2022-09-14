@@ -19,6 +19,8 @@ with
     config = {
         "connect_timeout": nanos::from_seconds(1), # defaults to 1 second
         "request_timeout: nanos::from_seconds(10),# defaults to 10 seconds
+        # Concurrency - number of simultaneous in-flight requests ( defaults to 4 )
+        # "concurrency" = 4,
     }
 end
 ```
@@ -35,6 +37,7 @@ The timeouts are in nanoseconds.
 | labels           | This setting sets a default set of labels that can be overriden on a per event basis through metadata                                                                                                                                                                                                                                              |
 | connect_timeout  | The timeout in nanoseconds for connecting to the Google API                                                                                                                                                                                                                                                                                        |
 | request_timeout  | The timeout in nanoseconds for each request to the Google API                                                                                                                                                                                                                                                                                      |
+| concurrency | The number of simultaneous in-flight requests ( defaults to 4 ) ||
 
 ## Metadata
 
