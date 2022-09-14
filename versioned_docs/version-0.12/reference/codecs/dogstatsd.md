@@ -2,7 +2,7 @@
 
 The `dogstatsd` codec supports the [Datadog DogStatsD v1.2 protocol](https://docs.datadoghq.com/developers/dogstatsd/datagram_shell).
 
-The format is similar the `statsd` format, but also includes events and service checks.
+The format is similar to the `statsd` format, but also includes events and service checks.
 
 The codec translates a single `dogstatsd` measurement line into a structured event.
 
