@@ -23,7 +23,7 @@ The equivalent representation as a tremor value:
   "metric": {
     "type": "c",
     "metric": "datadog.metric",
-    "value": 7,
+    "values": [7],
     "sample_rate": 0.1,
     "tags": ["example_tag:example_value"]
   }
