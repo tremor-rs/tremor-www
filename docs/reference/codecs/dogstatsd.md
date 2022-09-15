@@ -1,10 +1,10 @@
 # dogstatsd
 
-The `dogstatsd` codec supports the [Datadog DogStatsD v1.2 protocol](https://docs.datadoghq.com/developers/dogstatsd/datagram_shell?tab=metrics).
+The `dogstatsd` codec supports the [Datadog DogStatsD v1.2 protocol](https://docs.datadoghq.com/developers/dogstatsd/datagram_shell).
 
-The format is similar the `statsd` format, but also includes events and service checks.
+The format is similar to the `statsd` format, but also includes events and service checks.
 
-The codec translates a single `dogstatsd` measurement line into a structured event.
+The codec translates a single `dogstatsd` measurement line into a structured event and vice versa.
 
 ## Examples
 
@@ -23,7 +23,7 @@ The equivalent representation as a tremor value:
   "metric": {
     "type": "c",
     "metric": "datadog.metric",
-    "value": 7,
+    "values": [7],
     "sample_rate": 0.1,
     "tags": ["example_tag:example_value"]
   }
