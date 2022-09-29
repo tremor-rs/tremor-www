@@ -8,7 +8,9 @@ draft: false
 description: "Carol’s Tremor Mentorship Report"
 ---
 
-# Introduction
+# Hygienic error handling and validation for pipelines
+
+## Introduction
 
 Hello, my name's Carol Geng, a current sophomore pursuing a Bachelor's degree in Computer Science at Texas A&M University. Over Summer 2022, I have contributed to Tremor as part of the LFX Mentorship Program with my mentors Heinz Gies and Matthias Wahl, and this blog will show how valuable and enjoyable the experience was.
 
