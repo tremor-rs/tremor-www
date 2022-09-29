@@ -36,7 +36,37 @@ To do a lot of this, I learned the process of error logging. I defined each erro
 
 ## Error Handling
 
-Error handling was the main focus of the project. As my mentor suggested, I focused on one error at a time from the error logs. First, I focused on the worst case- a case where nothing was printed and the program ran as if everything was normal, except there was no output. This error focused on the fact that the output did not exist, so to fix the error, I wrote a separate function that checked whether the output existed, then connected it to the `ConnectInput` structs while sending an error statement and a status report to the system. This process introduced me to focusing on small incremental steps rather than solving the problem as a whole and allowed me to not get overwhelmed. Additionally, `outputs` had to be added to the `Executable Graph` struct, which led me to implementing outputs in related functions and building a hashmap for the representation of its graph. With that, the basic problem of catching the errors was solved for that error problem.
+Error handling was the main focus of the project. As my mentor suggested, I focused on one error at a time from the error logs. First, I focused on the worst case- a case where nothing was printed and the program ran as if everything was normal, except there was no output. 
+
+###### pipeline_out_error.troy
+```
+# Our main flow
+define flow main
+flow
+  # import the `tremor::connectors` module
+  use tremor::connectors;
+  use lib::pipelines;
+
+  # create an instance of the console connector
+  create connector console from connectors::console;
+
+  # create an instance of the passthrough pipeline
+  create pipeline main from pipelines::main;
+
+  # connect the console (STDIN) to our pipeline input
+  connect /connector/console/out to /pipeline/main;
+
+  # then connect the pipeline output to the console (STDOUT)
+
+  # no doesn't exist, bad error
+  connect /pipeline/main/no to /connector/console/in;
+
+end;
+# Deploy the flow so tremor starts it
+deploy flow main;
+```
+
+This error focused on the fact that the output did not exist, so to fix the error, I wrote a separate function that checked whether the output existed, then connected it to the `ConnectInput` structs while sending an error statement and a status report to the system. This process introduced me to focusing on small incremental steps rather than solving the problem as a whole and allowed me to not get overwhelmed. Additionally, `outputs` had to be added to the `Executable Graph` struct, which led me to implementing outputs in related functions and building a hashmap for the representation of its graph. With that, the basic problem of catching the errors was solved for that error problem.
 
 After that led to defining what the error was, which involved adding a `port` struct to both `ConnectInput` and `ConnectOutput` to connect inputs. This port struct wasn’t needed before but with changes that were made later on, `port` proved to be very useful in defining what the port was to be able to be used in other code. Because this field was added to the struct, changes then had to be made to all the functions that used this struct and a port had to be defined in those functions.
 
