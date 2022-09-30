@@ -1,23 +1,26 @@
 ---
-sidebar_label: gbq (Google Big Query)
+sidebar_label: gbq_writer (Google Big Query)
 sidebar_position: 1
 ---
 
-# The `gbq` Connector
+# The `gbq_writer` Connector
 
-The GBQ connector integrates [Google BigQuery](https://cloud.google.com/bigquery).
+The `gbq_writer` makes it possible to write events to [Google BigQuery](https://cloud.google.com/bigquery) by using its [gRPC] based [storage API v1].
 
 
 ## Configuration
 
 ```tremor
-define connector gbq from gbq
+use std::time::nanos;
+
+define connector gbq from gbq_writer
 with
     config = {
         "table_id": "projects/tremor/datasets/test/tables/streaming_test",
-        "connect_timeout": 1000000,
-        "request_timeout: 1000000
+        "connect_timeout": nanos::from_seconds(10),
+        "request_timeout: nanos::from_seconds(10)
     }
+end;
 ```
 
 The timeouts are in nanoseconds.
@@ -25,15 +28,37 @@ The timeouts are in nanoseconds.
 | option          | description                                                                                                      |
 |-----------------|------------------------------------------------------------------------------------------------------------------|
 | table_id        | The identifier of the table in the format: `projects/{project-name}/datasets/{dataset-name}/tables/{table-name}` |
-| connect_timeout | The timeout in nanoseconds for connecting to the Google API                                                      |
-| request_timeout | The timeout in nanoseconds for each request to the Google API                                                    |
+| connect_timeout | The timeout in **nanoseconds** for connecting to the Google API                                                      |
+| request_timeout | The timeout in **nanoseconds** for each request to the Google API. A timeout hit will fail the event.                |
 
 ## Metadata
 There is no metadata needed for this connector.
 
 ## Payload structure
 
-Currently the connector is only a sink - it expects events sent to it to be objects, where the keys match the table field names, and values are the values.
+The event payload sent to the `gbq_writer` connector needs to be a [`record`](../../language/expressions.md#records) with field names being the table column names
+and the values need to correspond to the table schema values.
+
+Tremor values are mapped to Google Bigquery schema types according to the following value mapping. You need to provide the tremor value type on the right to feed a column of the left side.
+
+| Google Bigquery type (gRPC type) | Tremor Value | Format                                                      | Examples                                                |
+|----------------------------------|--------------|-------------------------------------------------------------|---------------------------------------------------------|
+| Numeric                          | string       | `"X.Y"` (no thousands separator, `.` as decimal point)      | `"0.123"`, `"123.0"`, `"1.234"`                         |
+| Bignumeric                       | string       | `"X.Y"` (no thousands separator, `.` as decimal point)      | `"0.123"`, `"123.0"`, `"1.234"`                         |
+| Int64                            | integer      |                                                             | `1234`                                                  |
+| Double                           | float        |                                                             | `1.234`                                                 |
+| Bool                             | bool         |                                                             | `true`, `false`                                         |
+| Bytes                            | binary       |                                                             |                                                         |
+| String                           | string       |                                                             | `""`, `"badger"                                         |
+| Date                             | string       | `"YYYY-[M]M-[D]D"`                                          | `"2015-1-14"`, `2022-09-13`                             |
+| Time                             | string       | `"[H]H:[M]M:[S]S[.DDDDDD&#124;.F]"`                         | `"0:1:2"`, `"00:01:02"`, `"00:00:00.000123"`            |
+| Datetime                         | string       | `"YYYY-[M]M-[D]D[( &#124;T)[H]H:[M]M:[S]S[.F]]"`            | `"2015-06-13T00:01:02"`, `"2015-06-13T00:01:02.000001"` |
+| Geography                        | string       | [OGC Simple Features](https://www.ogc.org/standards/sfa)    |                                                         |
+| Interval                         | string       | `"[sign]Y-M [sign]D [sign]H:M:S[.F]"`                       | `+10-0 +D00:01:02`                                      |
+| Timestamp                        | string       | `"YYYY-[M]M-[D]D[( &#124;T)[H]H:[M]M:[S]S[.F]][time zone]"` | `"2015-06-13T00:01:02.000001Z"`                         |
+| Struct                           | record       |                                                             | `{"a": 123, "b": "c"}`                                  |
+
+
 
 ### Example
 
@@ -56,3 +81,6 @@ An example event payload would be:
   "name": "Tremor"
 }
 ```
+
+[gRPC]: https://grpc.io/
+[storage API]: https://cloud.google.com/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1

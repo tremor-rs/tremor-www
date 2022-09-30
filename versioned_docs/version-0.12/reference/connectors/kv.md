@@ -24,7 +24,7 @@ If not found, the storage directory will be auto-created, or an error will be pr
 ```tremor
 define my_kv from kv
 with
-  "dir" = "state",
+  "path" = "state",
 end;
 ```
 

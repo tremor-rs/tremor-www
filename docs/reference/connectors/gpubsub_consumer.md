@@ -19,7 +19,7 @@ with
         "connect_timeout": 100000000, # optional - Connection timeout in nanoseconds, defaults to 1 second 
         "ack_deadline": 100000000, # optional - ACK deadline in nanoseconds, defaults to 10 seconds. PubSub will resend the message if it's not ACKed within this time
         "subscription_id": "projects/my_project/subscriptions/test-subscription-a", # required - ID of the subscription to use
-        "endpoint": "https://us-east1-pubsub.googleapis.com" # optional - the endpoint for the PubSub API, defaults to https://pubsub.googleapis.com
+        "url": "https://us-east1-pubsub.googleapis.com" # optional - the endpoint for the PubSub API, defaults to https://pubsub.googleapis.com
     }
 end;
 ```

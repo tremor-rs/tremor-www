@@ -21,7 +21,7 @@ $ wget https://github.com/tremor-rs/tremor-runtime/releases/download/v0.12.0-rc.
 Install required dependencies:
 
 ```console
-$ sudo apt install libatomic1
+$ sudo apt install libatomic1 pkg-config libssl-dev
 ```
 
 Install Tremor with `dpkg`:
@@ -145,11 +145,10 @@ Reward yourself with a cake, because you just installed Tremor on your machine! 
 
 ## Docker
 
-We publish our Releases both to [Docker Hub](https://hub.docker.com/r/tremorproject/tremor)
-
+We publish our Releases both to [Docker Hub](https://hub.docker.com/r/tremorproject/tremor) and [Github Container Registry](https://github.com/tremor-rs/tremor-runtime/pkgs/container/tremor-runtime%2Ftremor)
 
 | Container registry | Image name                        |
-|--------------------|-----------------------------------|
+| ------------------ | --------------------------------- |
 | docker.io          | `tremorproject/tremor`            |
 | ghcr.io            | `tremor-rs/tremor-runtime/tremor` |
 
@@ -187,8 +186,9 @@ When building Tremor from source, you are pretty much on your own. Good luck!
 
 ### Requirements
 
-* Rust toolchain 1.60.0 - Install via [Rustup](https://rustup.rs/) or any other way you prefer
+* Rust toolchain 1.62.0 - Install via [Rustup](https://rustup.rs/) or any other way you prefer
 * CMake (Minimum supported version 3.2)
+* A C/C++-compiler supporting at least 'ISO C++ 2020 DIS' standard, [clang](https://clang.llvm.org/) (as least version 10) is recommended.
 * libclang (E.g. via ubuntu package: `libclang-dev`)
 * The tremor sources obtained from our [Repository](https://github.com/tremor-rs/tremor-runtime)
 
