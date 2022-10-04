@@ -99,7 +99,7 @@ All the synthetic outputs of successive 5 minute windows that fit into a 15 minu
 into the 15 minute window. All the outputs of successive 15 minute intervals that fit into a 1 hour interval
 are **merged** into the 1 hour window. By chaining and merging, tremor can optimise ( reduce ) the amount
 of memory required across the chain when compared to multiple independent windows `select` expressions.
-In the case of aggregate functions like ` aggr::stats::hdr`` or `aggr::stats::dds``` the savings are significant.
+In the case of aggregate functions like ` aggr::stats::hdr` or `aggr::stats::dds` the savings are significant.
 
 If we imagine 1M events per second, that is 300M events every 5 minutes. 900M every 15, 3.6B every hour.
 
