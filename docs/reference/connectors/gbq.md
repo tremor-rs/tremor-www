@@ -33,7 +33,14 @@ The timeouts are in nanoseconds.
 | request_size_limit | Size limit (in bytes) for a single AppendRowsRequest. Defaults to the quota documented by Google (10MB)          |
 
 ## Metadata
-The `table_id` field can be set, to send an event to a table other than the one globally configured.
+The `$gbq_writer.table_id` field can be set, to send an event to a table other than the one globally configured. A new writestream will be opened per distinct `table_id`.
+
+Example of setting the `table_id` metadata in a script:
+
+```tremor
+let $gbq_writer = {
+  "table_id": "projects/my_project/datasets/my_dataset/tables/my_table"
+};
 
 ## Payload structure
 
