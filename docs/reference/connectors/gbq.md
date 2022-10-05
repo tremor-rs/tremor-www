@@ -33,7 +33,7 @@ The timeouts are in nanoseconds.
 | request_size_limit | Size limit (in bytes) for a single AppendRowsRequest. Defaults to the quota documented by Google (10MB)          |
 
 ## Metadata
-There is no metadata needed for this connector.
+The `table_id` field can be set, to send an event to a table other than the one globally configured.
 
 ## Payload structure
 
