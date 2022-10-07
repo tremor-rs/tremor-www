@@ -2,9 +2,9 @@
 
 The `statsd` codec supports the [statsd format](https://github.com/statsd/statsd#usage).
 
-The format is similar the `influx` line protoco` line protocoll.
+The format is similar to the `influx` line protocol.
 
-The codec translates a single `statsd` measurement line into a structured event
+The codec translates a single `statsd` measurement line into a structured event.
 
 ## Example
 
