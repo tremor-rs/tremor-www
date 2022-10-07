@@ -4,7 +4,7 @@ The `csv` codec provides marshalling support for the Comma Separated Volume form
 
 The codec expects a single line of [RFC-4180](https://datatracker.ietf.org/doc/html/rfc4180) CSV format data.
 
-If there iss more than a single line in the message, the lines after the first will be discarded unless
+If there is more than a single line in the message, the lines after the first will be discarded unless
 a `lines` preprocessor is used during deserialization.
 
 ## Example
