@@ -369,11 +369,11 @@ Path's in Tremor are themselves expressions in their own right.
 
 ## Const
 
-Const grammer:
+Const grammar:
 
 ![const grammar](./reference/svg/const.svg)
 
-Const can be used to define immutable, constant values that get evaluated at compile time. This is more performant then `let` as all logic can happen at compile time and is helpful for setting up lookup tables or other never changing data structures.
+Const can be used to define immutable, constant values that get evaluated at compile time. This is more performant than `let` as all logic can happen at compile time and is helpful for setting up lookup tables or other never changing data structures.
 
 ## Let
 
