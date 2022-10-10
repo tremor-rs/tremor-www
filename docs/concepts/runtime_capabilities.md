@@ -8,11 +8,11 @@ The hot path is the way your events take from the input connector through all pi
 
 E.g. for turning JSON encoded data into events, we keep the raw event bytes around and reference that data directly for our JSON strings (with a few exceptions). This avoids one copy of the incoming data.
 
-We preallocate all the dataßstructures we need for bookkeeping and shuffling events around and try to keep the actual event flwo mechanics as simple as possible. At best we only move some pointers.
+We preallocate all the datastructures we need for bookkeeping and shuffling events around and try to keep the actual event flow mechanics as simple as possible. At best we only move some pointers.
 
 #### Execute each entity of the runtime on their own task
 
-As our runtime is built upon async Rust, our unit of concurrency is a [Task], which can be scheduled on an executor thread. When and where this task is executed is a decided by the underlying executor. We run every entity, that is [Pipelines] and [Connectors], on their own task. All entities communicate via channels (Multi-producer-multi-consumer queues) and this is also the way events take. This decouples event receiving from event handling and sending and allows for smoother spreading of load to multiple CPUs in parallel, especially in the case of multiple [Flows] being deployed to a Tremor instance in parallel.
+As our runtime is built upon async Rust, our unit of concurrency is a [Task], which can be scheduled on an executor thread. When and where this task is executed is decided by the underlying executor. We run every entity, that is [Pipelines] and [Connectors], on their own task. All entities communicate via channels (Multi-producer-multi-consumer queues) and this is also the way events take. This decouples event receiving from event handling and sending and allows for smoother spreading of load to multiple CPUs in parallel, especially in the case of multiple [Flows] being deployed to a Tremor instance in parallel.
 
 This has the nice effect, that you can vertically scale high event volumes by pumping them through multiple parallel flows:
 
