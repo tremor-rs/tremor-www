@@ -14,7 +14,7 @@ The tremor runtime is internally structured with multiple types of artifacts:
 
 - Deployments - Definen how pipelines and connectors are deployed together.
 
-Each artifact consists of a definition and a instanciation. Definitions can be re-used for multiple instances, as a kind of a template.
+Each artifact consists of a definition and an instantiation. Definitions can be re-used for multiple instances, as a kind of template.
 
 Live connectors and pipelines in tremor are in a runnable state. They consume typically network bandwidth and some compute in the case of connectors. They consume compute time in the case of pipelines.
 
