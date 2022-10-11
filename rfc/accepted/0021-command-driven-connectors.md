@@ -49,8 +49,8 @@ flow
   
   connect /connector/file_list/out to /pipeline/main/in;
   
-  # This is the magic - we send the commands here, note the "data" port
-  connect /pipeline/main/out to /connector/file_connector/data;
+  # This is the magic - we send the commands here, note the "control" port
+  connect /pipeline/main/out to /connector/file_connector/control;
   
   connect /connector/file_connector/data to /pipeline/main/out;
 end;
