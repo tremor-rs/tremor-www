@@ -59,25 +59,22 @@ end;
 ## Reference-level Explanation
 [reference-level-explanation]: #reference-level-explanation
 
-This is the technical portion of the RFC. Explain the design in sufficient detail that:
-
-- Its interaction with other features is clear.
-- It is reasonably clear how the feature would be implemented.
-- Corner cases are dissected by example.
-
-The section should return to the examples given in the previous section, and explain more fully how the detailed proposal makes those examples work.
+Each command driven connector implements at least two ports - `data` and `control`.
+`control` is an input port, through which the commands are sent.
+Currently only reads are supported, so `data` is an output port.
+Each message in the `data` port is a single event, with metadata containing the original command.
+The commands are standardised as far as it is practical, so the connectors can be swapped without adjusting the rest of the system.
 
 ## Drawbacks
 [drawbacks]: #drawbacks
 
-Why should we *not* do this?
+This raises the complexity of Tremor.
 
 ## Rationale and Alternatives
 [rationale-and-alternatives]: #rationale-and-alternatives
 
-- Why is this design the best in the space of possible designs?
-- What other designs have been considered, and what is the rationale for not choosing them?
-- What is the impact of not doing this?
+There are no known alternatives that provide the same benefits.
+Currently, for example the S3 reader connector, will read all files in the bucket, once, which has limited use.
 
 ## Prior Art
 [prior-art]: #prior-art
@@ -99,9 +96,9 @@ Please also take into consideration that Tremor sometimes intentionally diverges
 ## Unresolved Questions
 [unresolved-questions]: #unresolved-questions
 
-- What parts of the design do you expect to resolve through the RFC process before this gets merged?
-- What parts of the design do you expect to resolve through the implementation of this feature before stabilization?
-- What related issues do you consider out of scope for this RFC that could be addressed in the future independently of the solution that comes out of this RFC?
+- How do we enforce uniformity of commands across connectors?
+- How would writes work?
+- Are multiple events per command allowed in the output?
 
 ## Future Possibilities
 [future-possibilities]: #future-possibilities
