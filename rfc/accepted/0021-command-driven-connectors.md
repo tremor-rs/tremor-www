@@ -8,7 +8,7 @@
 ## Summary
 [summary]: #summary
 
-This RFC adds support for connectors that don't do anything by themselves, but instead are driven by commands sent to them.
+This RFC introduces a control plane for connectors to allow controlling their behavior and actions via events.
 
 ## Motivation
 [motivation]: #motivation
