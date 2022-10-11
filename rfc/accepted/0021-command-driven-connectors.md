@@ -18,15 +18,43 @@ There are many connectors, where, especially on the read side, there's no obviou
 ## Guide-level Explanation
 [guide-level-explanation]: #guide-level-explanation
 
-Explain the proposal as if it was already included in Tremor and you were teaching it to another Tremor user. That generally means:
+Command-driven connectors define at least two ports - one for data and one for commands.
+As an example, let's look at a connector that reads files:
 
-- Introducing new named concepts.
-- Explaining the feature largely in terms of examples.
-- Explaining how stakeholders should *think* about the feature, and how it should impact the way they use Tremor. It should explain the impact as concretely as possible.
-- If applicable, provide sample error messages, deprecation warnings, or migration guidance.
-- If applicable, describe the differences between teaching this to existing Tremor stakeholders and new Tremor programmers.
-
-For implementation-oriented RFCs (e.g. for language internals), this section should focus on how language contributors should think about the change, and give examples of its concrete impact. For policy RFCs, this section should provide an example-driven introduction to the policy, and explain its impact in concrete terms.
+```tremor
+define flow main
+flow
+  define connector file_connector from file
+    with 
+      codec="string",
+      config = {"command_driven": true}
+  end;
+  
+  define connector file_list from file
+    with 
+    codec = "json",
+    config = {
+      "path": "in.json",
+      "mode": "read", 
+    },
+  end;
+  
+  create pipeline main
+  pipeline
+    select { "command": "read", "path": event.path } from in into out;
+  end;
+  
+  create connector file_connector from file_connector;
+  create connector file_list from file_list;
+  
+  connect /connector/file_list/out to /pipeline/main/in;
+  
+  # This is the magic - we send the commands here, note the "commands" port
+  connect /pipeline/main/out to /connector/file_connector/commands;
+  
+  connect /connector/file_connector/data to /pipeline/main/out;
+end;
+```
 
 ## Reference-level Explanation
 [reference-level-explanation]: #reference-level-explanation
@@ -86,3 +114,9 @@ If you have tried and cannot think of any future possibilities, you may state th
 
 Note that having something written down in the future-possibilities section is not a reason to accept the current or a future RFC; such notes should be in the section on motivation or rationale in this or subsequent RFCs.
 The section merely provides additional information.
+
+
+## notes
+- separate channels - one for commands, one for data
+- traits (not necessarily rust traits) for the behaviours that a connector can implement
+  - e.g. KV store - "read key", "stream read key", filesystem - "create directory", "delete directory"
