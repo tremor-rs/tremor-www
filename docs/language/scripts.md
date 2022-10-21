@@ -4,9 +4,11 @@ sidebar_position: 1
 
 # Scripts
 
-Tremor scripts are user-defined pipeline [Operators]. They also have the standard ports `in`, `out` and `err` and are part of the [Pipeline] graph. Events are routed into and out of scripts using the [Select] statement inside a [Pipeline].
+Tremor scripts are user-defined pipeline [Operators]. They also have the standard ports `in`, `out` and `err` and are part of the [Pipeline] graph in addition `select from <port>` allow specifying scripts for additional ports. Events are routed into and out of scripts using the [Select] statement inside a [Pipeline].
 
 Scripts need to be defined using the [Script definition statement](./reference/full.md#rule-definescript) and created by using the [Script create statement](./reference/full.md#rule-createscript). They can have [Arguments](./index.md#arguments) that can be provided upon creation.
+
+The `state` section allows defining an initial, shared, stated for all script blocks.
 
 Example:
 
@@ -14,8 +16,15 @@ Example:
 define script add
 args
     summand
+state
+    # initialize the summand from args
+    state = arts.summand
+script from cfg
+    # update the summand to a new value
+    let state = event;
+    drop
 script
-    emit event + args.summand
+    emit event + state
 end;
 
 create script add_one from add
@@ -27,9 +36,20 @@ end;
 
 ## Execution
 
-Scripts are executed and evaluated for each event [Select]ed into its `in` port. They are interpreted statement by statement, at each execution step the [event], the script state and the local variable stack can be manipulated.
+Scripts are executed and evaluated for each event [Select]ed into its `in` port. They are interpreted statement by statement, at each execution step the [event], the script `state` and the local variable stack can be manipulated.
 
 During execution, the payload of the current event is available via the special `event` [path](./expressions.md#paths). As on each other level inside the Tremor runtime [events] can be arbitrarily structured values, closely resembling JSON, but with some extensions. See the section on Tremors [Type System](./index.md#type-system).
+
+
+### state
+
+The script state, accessed through the `state` keyword, is a shared, mutable, state that persists across events. It can be initialized with the `state` section in the script definition.
+
+Multiple script sections access the same state allowing to seperate configuration logic from data processing logic.
+
+`state` is persisted over multiple events but not over restarts of the pipeline or engine.
+
+The `state` section in the script definition is executed once when the script is created, it needs to be constant and serves as the inital value for the scripts `state`.
 
 ### Local variables
 
@@ -52,8 +72,6 @@ let event.new_field = "snot";
 ```
 
 Local variables are scoped to the current script or function context. There is no variable shadowing.
-
-
 
 ### Emitting events
 

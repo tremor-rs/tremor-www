@@ -32,14 +32,16 @@ end;
 ```tremor
 define script add
 state
-  0
+    state = 1
+script from cfg
+    # update the summand to a new value
+    let state = event;
+    drop
 script
-  let state = state + event
-  emit state
+    emit event + state
 end;
 
-create script add;
-
 select event from in into add;
+select event from cfg into add/cfg;
 select event from add into out;
 ```
