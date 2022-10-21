@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Scripts
 
-Tremor scripts are user-defined pipeline [Operators]. They also have the standard ports `in`, `out` and `err` and are part of the [Pipeline] graph in addition `select from <port>` allow specifying scripts for additional ports. Events are routed into and out of scripts using the [Select] statement inside a [Pipeline].
+Tremor scripts are user-defined pipeline [Operators]. They also have the standard ports `in`, `out` and `err` and are part of the [Pipeline] graph in addition `script from <port>` allow specifying scripts for additional ports. Events are routed into and out of scripts using the [Select] statement inside a [Pipeline].
 
 Scripts need to be defined using the [Script definition statement](./reference/full.md#rule-definescript) and created by using the [Script create statement](./reference/full.md#rule-createscript). They can have [Arguments](./index.md#arguments) that can be provided upon creation.
 
@@ -18,7 +18,7 @@ args
     summand
 state
     # initialize the summand from args
-    state = arts.summand
+    args.summand
 script from cfg
     # update the summand to a new value
     let state = event;
@@ -45,7 +45,7 @@ During execution, the payload of the current event is available via the special 
 
 The script state, accessed through the `state` keyword, is a shared, mutable, state that persists across events. It can be initialized with the `state` section in the script definition.
 
-Multiple script sections access the same state allowing to seperate configuration logic from data processing logic.
+Multiple script sections access the same state allowing to separate configuration logic from data processing logic.
 
 `state` is persisted over multiple events but not over restarts of the pipeline or engine.
 
