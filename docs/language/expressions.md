@@ -771,24 +771,83 @@ Patch follows the semantics of [RFC 6902](https://tools.ietf.org/html/rfc6902) w
 
 ## For comprehensions
 
+For comprehensions can be used to iterate over the index/element pairs of arrays or the key/value pairs of records.
+
 > ![for grammar](./reference/svg/for.svg)
 
 For Case Clause grammar
 
 > ![for case clause grammar](./reference/svg/forcaseclause.svg)
 
-For expressions are case-based record or array comprehensions that can iterate over index/element or key/value pairs in record or array literals respectively.
+Inside a for comprehension can be many case clauses with optional `when` guards, filtering out unwanted elements or key/value pairs or applying different operation on different elements.
 
-Given our book store example from above:
+The return type of a for comprehension is an array of the values returned from matching case clauses. Elements that were not matched will be filtered out. A `for` comprehension can be used to perform `map` and `filter` operations.
+
+Examples:
 
 ```tremor
-let wishlist = for store.book of
+# iterating over the `store.book` array
+let wishlist_nested = for store.book of
   case (i,e) =>
-    for e of of
+    # iterating over the key/value pairs of a book record
+    for e of
+      # filtering and returning only the title and isbn of the pricey books
       case (k,v) when k == "price" and v > 20.00 => { "title": e.title, "isbn": e.isbn }
-      default => {}
     end
-end
+end;
+
+use std::array;
+# the wishlist_nested will be an array of arrays - we need to flatten it
+let wishlist = array::flatten(wishlist_nested);
+```
+
+```tremor
+# perform a filter and map operation
+let by_two = for [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] of
+  case (index, element) when element % 2 == 0 => element / 2 # divide evens by two
+  case (index, element)                       => element * 2 # multiply odds by two
+end;
+# result: [0, 2, 1, 6, 2, 10, 3, 14, 4, 18]
+```
+
+```tremor
+use std::path;
+
+# count occurrences of tags inside the event
+# Here we don't use the implicit return type of the for-comprehension 
+# but do a manual accumulation
+let acc = {};
+for event.tags of
+  case (index, element) =>
+    let acc[element] = path::try_default(acc, ["element"], 0) + 1;
+end;
+```
+
+## Present and Absent
+
+The `present` expression can be used to evaluate if a given path exists. This can be understood as a test if a certain field in a record or an element or a whole sub-range in an array exists. The `present` expression will evaluate to `true` of the given path exists, and to `false` if it doesn't.
+
+This expression should not be confused with the `present` [Match](#matching-record-patterns) pattern inside record patterns to only match a field inside the current record exists.
+
+The `absent` expression is the inverse of `present` in that it evaluates to `true` if a path cannot be resolved, that is if a local variable, a field in a record or an element or range in an array does not exist, and to `false` otherwise.
+
+Check out our [Patterns section](./common_patterns.md#check-if-a-variable-is-presentabsent) on how to use the `present` expression.
+
+Examples:
+
+```tremor
+# check if an event has an allowed category field (string)
+match present state.allowed_categories[event.category] of
+  case true => emit event
+  default => drop
+end;
+```
+
+```tremor
+# filter out event tags from a denylist
+let event.tags = for event.tags of
+  case (index, element) when absent state.denylist[element] => element
+end;
 ```
 
 ## State
