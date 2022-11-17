@@ -20,7 +20,7 @@ An annotated example of a non-tls plain WS cient configuration leveraging defaul
 ```tremor title="config.troy"
 define my_wsc out from ws_client
 with
-  postprocessors = ["lines"],
+  postprocessors = ["separate"],
   codec = "json",
   config = {
     # Connect to port 4242 on the loopback device
@@ -44,7 +44,7 @@ reconnection quality of service configured.
 ```tremor title="config.troy"
 define connector ws_client from ws_client
 with
-  postprocessors = ["lines"],
+  postprocessors = ["separate"],
   codec = "json",
   config = {
     # Listen on all interfaces on TCP port 65535
@@ -79,7 +79,7 @@ An annotated example of a tls plain WS cient configuration leveraging defaults..
 ```tremor title="config.troy"
 define connector in from ws_server
 with
-  preprocessors = [{"name": "lines", "config":{"buffered": false}}],
+  preprocessors = [{"name": "separate", "config":{"buffered": false}}],
   codec = "json",
   config = {
     "url": "127.0.0.1:4242",
@@ -94,7 +94,7 @@ An annotated example of a secure WS server configuration.
 ```tremor title="config.troy"
 define connector ws_server from ws_server
 with
-  preprocessors = ["lines"],
+  preprocessors = ["separate"],
   codec = "json",
   config = {
     "url": "0.0.0.0:65535",
@@ -123,7 +123,7 @@ flow
 
   define connector ws_client from ws_client
   with
-    postprocessors = ["lines"],
+    postprocessors = ["separate"],
     codec = "json",
     config = {
       "url": "wss://0.0.0.0:65535",
@@ -144,7 +144,7 @@ flow
 
   define connector ws_server from ws_server
   with
-    preprocessors = ["lines"],
+    preprocessors = ["separate"],
     codec = "json",
     config = {
       "url": "0.0.0.0:65535",

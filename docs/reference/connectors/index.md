@@ -229,7 +229,7 @@ with
         "path": args.file,	# Use the file argument from the arguments specification for the target file path
         "mode": "truncate"	# Truncate the file, or create a new file when the connector starts
     },
-    postprocessors = ["lines"]  # Ensure entire JSON documents are one per line ( UNIX-style ) in the serialized file
+    postprocessors = ["separate"]  # Ensure entire JSON documents are one per line ( UNIX-style ) in the serialized file
 end;
 
 [Codec]: ../codecs/index.md
