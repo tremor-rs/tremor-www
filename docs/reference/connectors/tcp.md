@@ -80,12 +80,12 @@ It will emit events for the data it receives on that connection on the `out` por
 
 ### Configuration
 
-| Option | Description                  | Type   | Required | Default value |
-|--------|------------------------------|--------|----------|---------------|
-| url    | Host and port to connect to. | string | yes      |               |
-| tls | Optional Transport Level Security configuration. See [TLS configuration](./common_configuration.md#client). | record or boolean | No TLS configured. |
-| buf_size       | TCP receive buffer size. This should be greater than or equal to the expected maximum packet size.          | positive integer | no       | 8192                                                                         |
-| socket_options | See [TCP socket options](./common_configuration.md#tcp-socket-options).                                     | record           | no       | See [TCP socket options defaults](./common_configuration#tcp-socket-options) |
+| Option         | Description                                                                                                 | Type              | Required | Default value                                                                |
+|----------------|-------------------------------------------------------------------------------------------------------------|-------------------|----------|------------------------------------------------------------------------------|
+| url            | Host and port to connect to.                                                                                | string            | yes      |                                                                              |
+| tls            | Optional Transport Level Security configuration. See [TLS configuration](./common_configuration.md#client). | record or boolean | no       | No TLS configured.                                                           |
+| buf_size       | TCP receive buffer size. This should be greater than or equal to the expected maximum packet size.          | positive integer  | no       | 8192                                                                         |
+| socket_options | See [TCP socket options](./common_configuration.md#tcp-socket-options).                                     | record            | no       | See [TCP socket options defaults](./common_configuration#tcp-socket-options) |
 
 
 Example:
