@@ -198,13 +198,15 @@ Used by the [TCP](./tcp.md) and [UDP](./udp.md) connectors.
 
 ### UDP Socket Options
 
-| Option         | Description                                                                                        | Type             | Required | Default value                                                                |
-|----------------|----------------------------------------------------------------------------------------------------|------------------|----------|------------------------------------------------------------------------------|
-| SO_REUSEPORT | Allows multiple sockets to be bound to the same port. Packets will be distributed across all receiving sockets. | boolean | no | false
+| Option       | Description                                                                                                                                       | Type    | Required | Default value |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------|---------|----------|---------------|
+| SO_REUSEADDR | Allow reuse of local addresses during binding of a socket. This allows to quickly re-bind an address if the underlying socket is still lingering. | boolean | no       | true          |
+| SO_REUSEPORT | Allows multiple sockets to be bound to the same port. Packets will be distributed across all receiving sockets.                                   | boolean | no       | false         |
 
 ### TCP Socket Options
 
-| Option       | Description                                                                                                     | Type    | Required | Default value |
-|--------------|-----------------------------------------------------------------------------------------------------------------|---------|----------|---------------|
-| SO_REUSEPORT | Allows multiple sockets to be bound to the same port. Packets will be distributed across all receiving sockets. | boolean | no       | false         |
-| TCP_NODELAY  | If set to `true`, this disables [Nagle's Algorithm](https://en.wikipedia.org/wiki/Nagle%27s_algorithm).         | boolean | no       | true          |
+| Option       | Description                                                                                                                                       | Type    | Required | Default value |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------|---------|----------|---------------|
+| SO_REUSEADDR | Allow reuse of local addresses during binding of a socket. This allows to quickly re-bind an address if the underlying socket is still lingering. | boolean | no       | true          |
+| SO_REUSEPORT | Allows multiple sockets to be bound to the same port. Packets will be distributed across all receiving sockets.                                   | boolean | no       | false         |
+| TCP_NODELAY  | If set to `true`, this disables [Nagle's Algorithm](https://en.wikipedia.org/wiki/Nagle%27s_algorithm).                                           | boolean | no       | true          |
