@@ -33,6 +33,7 @@ end;
 | PostprocessorName                              | Description                                                                       |
 |------------------------------------------------|-----------------------------------------------------------------------------------|
 | [base64](base64)                               | Base64 Encoding                                                                   |
+| [chunk](chunk)                                 | Produce chunks up to a configurable size in bytes                                 |
 | [compress](compress)                           | Compression Algorithms                                                            |
 | [gelf-chunking](gelf-chunking)                 | [Graylog Extended Log Format (GELF)](https://docs.graylog.org/docs/gelf) chunking |
 | [ingest-ns](ingest-ns)                         | Prepend the ingest timestamp                                                      |
