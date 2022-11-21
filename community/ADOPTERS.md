@@ -42,7 +42,7 @@ to the community, we would **love** to publish your experiences here.
 
 <Tabs>
   <TabItem value="update-issue" label="Update Issue"> Please update <a href= "#"> this issue </a>, and your information will be included. </TabItem>
-  <TabItem value="pull-request" label="Pull Request"> You're also welcome to send in a pull request if you'd prefer to update the <a href="https://github.com/tremor-rs/tremor-www/blob/main/community/ADOPTERS.md"> <code> ADOPTERS.md </code> file </a> by yourself </TabItem>
+  <TabItem value="pull-request" label="Pull Request"> You're also welcome to send in a pull request if you'd prefer to update the <a href="https://github.com/tremor-rs/tremor-www/blob/main/community/ADOPTERS.md"> <code> ADOPTERS.md </code> </a> file by yourself </TabItem>
 </Tabs>
 
 :::
