@@ -92,7 +92,7 @@ For a "default" mapping the entry `*/*` as a mime type can be configured and wil
 
 ### Example
 
-Define a connector that can handle incorrect mime types from thge server by overwriting the `application/octet-stream` mime type to use the `csv` codec.
+Define a connector that can handle incorrect mime types from the server by overwriting the `application/octet-stream` mime type to use the `csv` codec.
 
 ```tremor title="config.troy"
  use tremor::http;
