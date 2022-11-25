@@ -88,7 +88,7 @@ By default tremor supplies a  mapping of mime-type to it's codecs as part of the
 
 Once the `mime_mapping` config option is defined it will completely replace the default mappings. To combine the two the `tremor::http::mime_to_codec` constant can be uased as a baseline.
 
-For a "default" mapping the entrey `*/*` as a mime type can be configured and will be used for any mime type not otherwise defined.
+For a "default" mapping the entry `*/*` as a mime type can be configured and will be used for any mime type not otherwise defined.
 
 ## Metadata
 
