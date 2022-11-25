@@ -90,6 +90,33 @@ Once the `mime_mapping` config option is defined it will completely replace the 
 
 For a "default" mapping the entry `*/*` as a mime type can be configured and will be used for any mime type not otherwise defined.
 
+### Example
+
+Define a connector that can handle incorrect mime types from thge server by overwriting the `application/octet-stream` mime type to use the `csv` codec.
+
+```tremor title="config.troy"
+ use tremor::http;
+ use std::record;
+ define connector `http_in` from http_client
+  with
+    preprocessors = ["separate"],
+    config = {
+      "url": "https://www.cer-rec.gc.ca/open/imports-exports/crude-oil-exports-by-type-monthly.csv",
+      "method": "get",
+      "tls": true,
+      "custom_codecs": record::combine(
+        # support all the default codecs
+        http::mime_to_codec,
+        {
+          # but use csv for `application/octet-stream`
+          "application/octet-stream": "csv"
+          # also use csv for unknown mime types
+          "*/*": "csv"
+      })
+    }
+  end;
+```
+
 ## Metadata
 
 The `http` connector supports metadata allowing request and response
@@ -161,24 +188,3 @@ Response metadata takes the following general form:
 
 Setting the `$correlation` metadata on an outbound request will result in the response
 being tagged with the `$correlation` value set in the corresponding request.
-
-
-## Example implementation
-
-This is a relatively basic client server system that replays JSON formatted lines of data from a text file over HTTP to a server. The
-server receives the JSON events and echo's them back to the HTTP client.
-
-The client and server are implemented as tremor flows.
-
-A high level summary of the overall flow:
-
-```mermaid
-graph LR
-    A[JSON File] -->|read line by line| B(HTTP Client)
-    B -->|send json request| C{HTTP Server}
-    C{HTTP Server} -->|receive json request| D(select event from in into out)
-    D -->|echo json response| B{HTTP Client}
-    B -->|log response| E[Log File]
-```
-
-The complete source and a runnable example can be found in the [http integration test](https://github.com/tremor-rs/tremor-runtime/blob/main/tremor-cli/tests/integration/http/config.troy)
