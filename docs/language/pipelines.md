@@ -169,7 +169,17 @@ Configuration Parameters:
 
 - `interval`: Time interval in nanoseconds after which the window closes.
 
+##### Windows Based on State
 
+The most flexible windows are code or state based windows. Instead of being fixed on the timestamp
+or a message cout it allows to express the window logic of closing and emitting in tremor-script.
+
+This requires two parts:
+
+1) the `state` section of the window defines the inital state, this is the same as `state` for the script operator.
+2) the `script from tick` section defines the logic that is executed on the periodic ticks to ensure windows that don't get new events can be closed and emitted.
+
+The result of the script and tick script can emit a `array` of two elements. The first element defines if the widow should emit. The second one if the value should be included in this window (before emitting) or included in the ne
 
 #### Examples
 
@@ -182,6 +192,29 @@ define window fifteen_secs from tumbling
 with
     interval = nanos::from_seconds(15),
 end;
+```
+
+the same as state window would read:
+
+```trickle
+use std::time::nanos;
+use tremor::system;
+
+define window fifteen_secs from tumbling
+state
+  null
+script
+  match state of
+      null =>
+        let state = system::nanotime();
+        false
+      s when state - system::nanotime() > nanos::from_seconds(15) =>
+        let state = system::nanotime();
+        true
+      _ =>
+        false
+  end
+end
 ```
 
 The same window can be defined using a timestamp that is extracted from the message instead of the ingest time:
