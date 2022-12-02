@@ -171,15 +171,15 @@ Configuration Parameters:
 
 ##### Windows Based on State
 
-The most flexible windows are code or state based windows. Instead of being fixed on the timestamp
-or a message cout it allows to express the window logic of closing and emitting in tremor-script.
+The most flexible windows are code- or state-based windows. Instead of being fixed on the timestamp
+or a message count, it allows to express the window logic of closing and emitting in tremor-script.
 
 This requires two parts:
 
 1) the `state` section of the window defines the inital state, this is the same as `state` for the script operator.
-2) the `script from tick` section defines the logic that is executed on the periodic ticks to ensure windows that don't get new events can be closed and emitted.
+2) the `script from tick` section defines the logic that is executed on periodic ticks to ensure windows that don't get new events can be closed and emitted.
 
-The result of the script and tick script can emit a `array` of two elements. The first element defines if the widow should emit. The second one if the value should be included in this window (before emitting) or included in the ne
+The result of the script and tick script can emit either a boolean value or an `array` of two elements. The first element defines if the widow should emit its accumulated data. The second one defines if the current value should be included in this window (before emitting) or included in the next emit.
 
 #### Examples
 
@@ -194,7 +194,7 @@ with
 end;
 ```
 
-the same as state window would read:
+the above window as state window would be implemented as follows:
 
 ```trickle
 use std::time::nanos;
