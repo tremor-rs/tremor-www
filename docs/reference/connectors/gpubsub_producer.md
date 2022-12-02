@@ -15,6 +15,7 @@ The credentials must be provided in a JSON file. The path to the JSON file shoul
 define flow gbqtest
 flow
     use std;
+    use std::time::nanos;
     
     define pipeline passthrough
     pipeline
@@ -23,7 +24,7 @@ flow
 
     define connector metro from metronome
     with
-        config = {"interval": 1000}
+        config = {"interval": nanos::from_seconds(1) }
     end;
 
     define connector gpub from gpubsub_producer
@@ -59,9 +60,9 @@ deploy flow gbqtest;
 ## Metadata
 The connector will use the `$gpubsub_producer` metadata variable, which can be used to set the `ordering_key`.
 
-| field        | type                      | description                                                                                 |
-|--------------|---------------------------|---------------------------------------------------------------------------------------------|
-| ordering_key | string                    | The ordering key of the message                                                             |
+| field        | type   | description                     |
+|--------------|--------|---------------------------------|
+| ordering_key | string | The ordering key of the message |
 
 ## Payload structure
 The raw payload will be passed as is to the codec
