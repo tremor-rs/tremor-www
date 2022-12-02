@@ -383,12 +383,14 @@ Create a deployment file `config.troy` that encapsulates our integration test lo
 ```tremor
 define flow main
 flow
+  use std::time::nanos;
+
   define connector exit from exit;
 
   # Connector under test
   define connector metronome from metronome
   with
-    config = {"interval": 500}
+    config = {"interval": nanos::from_millis(500) }
   end;
  
   define connector write_file from file
@@ -596,12 +598,12 @@ operators and authors.
 
 ### Sub Commands
 
-| Command         | Description                                                                                                   |
-|-----------------|---------------------------------------------------------------------------------------------------------------|
+| Command         | Description                                                                                            |
+|-----------------|--------------------------------------------------------------------------------------------------------|
 | [dot](#dbg-dot) | prints the .dot representation for a query (you can use `| dot -Tpng -oout.png` to generate a picture) |
-| [ast](#dbg-ast) | prints the AST of the source                                                                                  |
-| [lex](#dbg-lex) | prints lexemes                                                                                                |
-| [src](#dbg-src) | prints source                                                                                                 |
+| [ast](#dbg-ast) | prints the AST of the source                                                                           |
+| [lex](#dbg-lex) | prints lexemes                                                                                         |
+| [src](#dbg-src) | prints source                                                                                          |
 
 ### dbg **dot**
 

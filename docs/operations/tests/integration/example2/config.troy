@@ -1,11 +1,13 @@
 define flow main
 flow
+  use std::time::nanos;
+
   define connector exit from exit;
 
   # Connector under test
   define connector metronome from metronome
   with
-    config = {"interval": 500}
+    config = {"interval": nanos::from_millis(500) }
   end;
  
   define connector write_file from file

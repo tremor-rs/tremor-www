@@ -59,7 +59,7 @@ flow
 
     define connector metronome from metronome
     with
-        config = {"interval": 10}
+        config = {"interval": nanos::from_millis(10)}
     end;
 
     define connector output from gcs_streamer

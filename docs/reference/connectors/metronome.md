@@ -17,12 +17,13 @@ merge with in-memory state in the current solution.
 
 ## Configuration
 
-An `interval` in milliseconds is required to use the metronome
+An `interval` in nanoseconds is required to use the metronome
 
 ```tremor
+  use std::time::nanos;
   define connector every_second from metronome
   with
-     config = {"interval": 1000}
+     config = {"interval": nanos::from_seconds(1) }
   end;
 ```
 
@@ -48,11 +49,12 @@ define flow main
 flow
   use tremor::connectors;
   use integration;
+  use std::time::nanos;
 
   # Define our periodic source of events
   define connector every_second from metronome
   with
-    config = {"interval": 1000}
+    config = {"interval": nanos::from_seconds(1) }
   end;
  
   # Triggered for every periodic event from our metronome 
