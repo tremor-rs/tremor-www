@@ -19,6 +19,13 @@ At its core, Pipelines are defined using [Operators] and [Scripts] (a highly cus
 
 The [Select] queries in a Pipeline consume and produce unstructured data. The Pipeline runtime does not impose schema based constraints on data flowing through the system, although accessing data that is not present produces runtime errors and thus a schema can by dynamically enforced by user-defined pipeline code.
 
+
+## Periodic ticks
+
+Some parts of the runtime are triggered by periodic ticks send through the pipeline. This prevents the pipeline to beomce completely inactive when no events arrive for a longer period of time. A number of operators and windows make use of this mechanism to perform periodic tasks such as emitting windows that have a given timeframe.
+
+The current tick frequency is **100 milliseconds**.
+
 ## Definitions
 
 As all other entities in Tremor, pipelines need to be defined and created. They can have [Arguments] and they can specify their input and output ports. [Connectors] and other Pipelines can be connected to those ports only. The default ports are:
@@ -169,7 +176,35 @@ Configuration Parameters:
 
 - `interval`: Time interval in nanoseconds after which the window closes.
 
+##### Windows Based on State
 
+The most flexible windows are code- or state-based windows. Instead of being fixed on the timestamp
+or a message count, it allows to express the window logic of windowing behaviour in tremor-script.
+
+This adds the following parts:
+
+###### The `state` section
+
+The `state` section of the window defines the inital state, this is the same as `state` for the script operator. `state` is shared between events arriving and can be read and written to in both the `script` and `script from tick` sections.
+
+###### The `script` section
+
+This is is the `script` that is executed for each event deciding if it is included in the window and if the window is emitted. It has full access to the current event to inspect it's content as well as the event's ingest time via `tremor::system::ingest_ns()` to implemented windows based on time.
+
+It returns an two element array of the form `[bool, bool]` where the first element indicates if the event is included in the window and the second element indicates if the window should be emitted. The forms `[true, true]` and `[false, _]` can be abbriviatred as `true` or `false` respectively. Returns can be replaced with constants from [`tremor::windows`](../reference/stdlib/tremor/windows.md).
+
+| constant           | return                   | effect                                                              |
+|--------------------|--------------------------|---------------------------------------------------------------------|
+| `EMIT_AND_INCLUDE` | `[true, true]` or `true` | include the event in the current window and emit the window         |
+| `EMIT_AND_EXCLUDE` | `[true, false]`          | emit the window and include the event in the **next** window        |
+| `DONT_EMIT`        | `[false, _]` or `false`  | do not emit the window, the event is included in the current window |
+
+
+####### The `script from tick` section
+
+The `script from tick` section defines the logic that is executed on [periodic ticks](#periodic-ticks) to ensure windows that don't get new events can be  emitted. This function has access to `tremor::system::ingest_ns()`. It however does not have access to the current event since there is none.
+
+As a return the same values as for the `script` section can be used, however the **include** part is ignored since there is no event to include.
 
 #### Examples
 
@@ -184,6 +219,41 @@ with
 end;
 ```
 
+The above window as state window would be implemented as follows:
+
+```trickle
+use std::time::nanos;
+use tremor::system;
+use tremor::windows;
+
+define window fifteen_secs from tumbling
+state
+  null
+script from tick
+  match state of
+      null =>
+        let state = system::ingest_ns();
+        windows::DONT_EMIT
+      s when system::ingest_ns() - state > nanos::from_seconds(15) =>
+        let state = system::ingest_ns();
+        windows::EMIT_AND_EXCLUDE
+      _ =>
+        windows::DONT_EMIT
+  end
+script
+  match state of
+      null =>
+        let state = system::ingest_ns();
+        windows::DONT_EMIT
+      s when system::ingest_ns() - state > nanos::from_seconds(15) =>
+        let state = system::ingest_ns();
+        windows::EMIT_AND_EXCLUDE
+      _ =>
+        windows::DONT_EMIT
+  end
+end;
+```
+
 The same window can be defined using a timestamp that is extracted from the message instead of the ingest time:
 
 ```trickle
@@ -194,6 +264,30 @@ with
     interval = nanos::from_seconds(15),
 script
     event.timestamp
+end;
+```
+
+The above window as state window would be implemented as follows, note that the tick section is no longer present as time based windows with a script do not emit on ticks as there is no guarantee that the tick system time aligns with the computed timestamps.
+
+```trickle
+use std::time::nanos;
+use tremor::system;
+use tremor::windows;
+
+define window fifteen_secs from tumbling
+state
+  null
+script
+  match state of
+      null =>
+        let state = event.timestamp;
+        windows::DONT_EMIT
+      s when event.timestamp - state > nanos::from_seconds(15) =>
+        let state = event.timestamp;
+        windows::EMIT_AND_EXCLUDE
+      _ =>
+        windows::DONT_EMIT
+  end
 end;
 ```
 
@@ -515,8 +609,6 @@ select
   }
 from in into out;
 ```
-
-
 #### Having 
 
 Select operations can filter data being forwarded to other operators with the specification of a `having` clause. The clause forms a predicate check on outbound synthetic events after any other processing has taken place.

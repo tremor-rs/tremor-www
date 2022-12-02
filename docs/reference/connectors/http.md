@@ -15,44 +15,44 @@ The `http` connector provides integration against the HTTP protocol suite.
 define connector `http-out` from http_client
 with
   use std::time::nanos;
-  codec = "json",  # Defaults to HTTP codec
   config = {
     # Target URL for this HTTP client
     "url": "http://host:80",
 
     # Optional Transport Level Security configuration
     # If url schme in `url` is `https` then TLS configuration is required
-    # "tls" = { ... },
+    # "tls": { ... },
 
     # Optional authentication method, can be one of
     # * "basic" - basic authentication
     #   ```tremor
-    #      "auth" = { "basic": { "username": "snot", "password": "badger" } },
+    #      "auth": { "basic": { "username": "snot", "password": "badger" } },
     #   ```
     # * "gcp"   - Google Cloud Platform
     #   ```tremor
-    #    "auth" = "gcp", # See https://cloud.google.com/docs/authentication/getting-started
+    #    "auth": "gcp", # See https://cloud.google.com/docs/authentication/getting-started
     #  ```
     # By default, no authentication is used
-    # "auth" = "none",
+    # "auth": "none",
 
     # HTTP method - defaults to `POST`, case insensitive
-    # "method" = "get",
+    # "method": "get",
     
     # Concurrency - number of simultaneous in-flight requests ( defaults to 4 )
-    # "concurrency" = 4,
+    # "concurrency": 4,
 
     # Request timeout - default is unset ( do not timeout )
-    # "timeout" = nanos::from_secs(10), # nanoseconds
+    # "timeout": nanos::from_secs(10), # nanoseconds
 
     # Optional default HTTP headers
-    # "headers" = { "key": "value", "other-key": ["v1", "v2"] },
+    # "headers": { "key": "value", "other-key": ["v1", "v2"] },
 
     # Custom Mime Codec Map, overrides default `codec`
-    # "custom_codecs" = {
+    # "mime_mapping": {
     #    # key defines the MIME type, value defines codec by name 
     #    "application/json": "json",
     #    "application/yaml": "yaml"
+    #    "*/*": "json"               # default codec
     # }
   }
 end;
@@ -63,146 +63,58 @@ end;
 ```tremor title="config.troy"
 define connector `http-in` from http_server
 with
-  codec = "json",
   config = { 
     "url": "http://localhost:8080",
 
     # Optional Transport Level Security configuration
-    # "tls" = { ... },
+    # "tls": { ... },
 
     # Custom Mime Codec Map, overrides default `codec`
-    # "custom_codecs" = {
+    # "mime_mapping": {
     #    # key defines the MIME type, value defines codec by name 
     #    "application/json": "json",
     #    "application/yaml": "yaml"
+    #    "*/*": "json"               # default codec
     # }
   }
 end;
 ```
 
-## HTTP configuration example
+## Codecs
 
-This is a relatively basic client server system that replays JSON formatted lines of data from a text file over HTTP to a server. The
-server receives the JSON events and echo's them back to the HTTP client.
+The HTTP connectors are somewhast special as they handle the encoding and decoding based on the content-type header not by a single defined codec.
 
-The client and server are implemented as tremor flows.
+By default tremor supplies a  mapping of mime-type to it's codecs as part of the base implementation. However it is possible to overwrite this with the `mime_mapping` option.
 
-A high level summary of the overall flow:
+Once the `mime_mapping` config option is defined it will completely replace the default mappings. To combine the two the `tremor::http::mime_to_codec` constant can be uased as a baseline.
 
-```mermaid
-graph LR
-    A[JSON File] -->|read line by line| B(HTTP Client)
-    B -->|send json request| C{HTTP Server}
-    C{HTTP Server} -->|receive json request| D(select event from in into out)
-    D -->|echo json response| B{HTTP Client}
-    B -->|log response| E[Log File]
-```
+For a "default" mapping the entry `*/*` as a mime type can be configured and will be used for any mime type not otherwise defined.
 
-### The complete annotated source
+### Example
 
-```tremor
-define flow server
-flow
-  use integration;
-  use tremor::pipelines;
-  use tremor::connectors;
+Define a connector that can handle incorrect mime types from the server by overwriting the `application/octet-stream` mime type to use the `csv` codec.
 
-  define connector http_server from http_server
+```tremor title="config.troy"
+ use tremor::http;
+ use std::record;
+ define connector `http_in` from http_client
   with
-    codec = "json-sorted",
+    preprocessors = ["separate"],
     config = {
-      "url": "http://localhost:65535/",
+      "url": "https://www.cer-rec.gc.ca/open/imports-exports/crude-oil-exports-by-type-monthly.csv",
+      "method": "get",
+      "tls": true,
+      "custom_codecs": record::combine(
+        # support all the default codecs
+        http::mime_to_codec,
+        {
+          # but use csv for `application/octet-stream`
+          "application/octet-stream": "csv"
+          # also use csv for unknown mime types
+          "*/*": "csv"
+      })
     }
   end;
-
-  define pipeline instrument
-  pipeline
-    use std::array;
-    define window four from tumbling
-    with
-      size = 4
-    end;
-    select { "event": array::sort(aggr::win::collect_flattened(event)), "meta": array::sort(aggr::win::collect_flattened($)) } from in[four] into out;
-  end;
-
-  create pipeline instrument;
-  create connector stdio from connectors::console;
-  create connector http_server from http_server;
-
-  create pipeline echo from pipelines::passthrough;
-
-  # Echo http server: <http:req> -> server -> server_side -> <http:resp>
-  connect /connector/http_server to /pipeline/echo;
-  connect /pipeline/echo to /connector/http_server;
-  connect /pipeline/echo to /connector/stdio;
-
-  connect /connector/http_server to /pipeline/instrument;
-  connect /pipeline/instrument to /connector/stdio;
-end;
-
-define flow client
-flow
-  use integration;
-  use tremor::pipelines;
-  use tremor::connectors;
-
-  define connector http_client from http_client
-  with
-    codec = "json-sorted",
-    config = {
-      "url": "http://localhost:65535/",
-      "headers": {
-        "Client": "Tremor"
-      }
-    },
-    reconnect = {
-      "retry": {
-        "interval_ms": 100,
-        "growth_rate": 2,
-        "max_retries": 3,
-      }
-    }
-  end;
-
-  define pipeline collect
-  into out, exit
-  pipeline
-    use std::array;
-    use std::time::nanos;
-    define window four from tumbling
-    with
-      size = 4
-    end;
-    select array::sort(aggr::win::collect_flattened(event)) from in[four] into out;
-    select { "delay": nanos::from_seconds(1) } from in where event == "exit" into exit;
-  end;
-  create pipeline collect;
-
-  create connector data_in from integration::read_file;
-  create connector data_out from integration::write_file;
-  create connector exit from integration::exit;
-  create connector stdio from connectors::console;
-  create connector http_client from http_client;
-  create connector exit from connectors::exit;
-
-  create pipeline replay from pipelines::passthrough;
-  create pipeline debug from pipelines::passthrough;
-  
-
-  # Replay recorded events over http to server
-  connect /connector/data_in to /pipeline/replay;
-  connect /pipeline/replay to /connector/http_client;
-  connect /connector/http_client/out to /pipeline/collect;
-  connect /connector/http_client/err to /pipeline/debug;
-
-  connect /pipeline/collect to /connector/data_out;
-  connect /pipeline/debug to /connector/stdio;
-  # Terminate at end via `exit` event
-  connect /pipeline/collect/exit to /connector/exit;
-end;
-
-deploy flow server;
-deploy flow client;
 ```
 
 ## Metadata
