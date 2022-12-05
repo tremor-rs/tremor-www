@@ -377,7 +377,7 @@ Const can be used to define immutable, constant values that get evaluated at com
 
 :::warning
 
-Constants, by convention are ALL_UPPERCASE to distinguish them from variables. While it is allowed to derivate from this convention, it is not recommended and you will be yelled at by the compiler.
+Constants, by convention are ALL_UPPERCASE to distinguish them from variables. While it is allowed to deviate from this convention, it is not recommended and you will be yelled at by the compiler.
 
 :::
 
