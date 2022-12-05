@@ -20,7 +20,7 @@ Doc comments are used for producing documentation for entities in Tremor. They c
 
 ```tremor
 ## I am a doc-comment, documenting the const below
-const FALSE = true;
+const NOT_TRUE = true;
 ```
 
 ### Module Doc Comments
@@ -374,6 +374,12 @@ Const grammer:
 ![const grammar](./reference/svg/const.svg)
 
 Const can be used to define immutable, constant values that get evaluated at compile time. This is more performant then `let` as all logic can happen at compile time and is helpful for setting up lookup tables or other never changing data structures.
+
+:::warning
+
+Constants, by convention are ALL_UPPERCASE to distinguish them from variables. While it is allowed to derivate from this convention, it is not recommended and you will be yelled at by the compiler.
+
+:::
 
 ## Let
 
