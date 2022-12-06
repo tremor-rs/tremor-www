@@ -24,7 +24,7 @@ script
             => r.raw                                                           # this first case is hit if the log includes an execution time (cost) for the request
     case r = %{ raw ~= dissect|%{ip} %{} %{} [%{timestamp}] "%{method} %{path} %{proto}" %{code:int} %{}\\n| }
             => r.raw
-    default => emit => "bad"
+    case _ => emit => "bad"
   end
 end;
 
@@ -46,7 +46,7 @@ script
       => args.user_error_index
     case e = %{present code} when e.code >= 500 and e.code < 600
       => args.server_error_index                                              # 500 to 500 (exclusive) are server side errors
-    default => args.other_index                                               # if we get any other code we use a default index
+    case _ => args.other_index                                               # if we get any other code we use a default index
   end;
   event                                                                       # emit the event with it's new metadata
 end;

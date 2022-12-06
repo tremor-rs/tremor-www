@@ -14,7 +14,7 @@ If the event is a unstructured / raw message parsing it can be tricky since we c
 
 let event =  match {"message": event} of
   case r = %{ message ~= dissect|%{first} %{last}| } => r.message
-  default => drop
+  case _ => drop
 end;
 # event = {"first" : "John", "last": "Doe"}
 ```
@@ -58,7 +58,7 @@ let event = merge event of
       let r = r.message;
       let r.message = null;
       r
-    default => {}
+    case _ => {}
   end;
 end;
 # event = %{"first": "John", "last": "Doe"}
@@ -76,7 +76,7 @@ let event = merge event of
       let r = r.message;
       let r.message = null;
       r
-    default => {}
+    case _ => {}
   end;
 end;
 # event = %{"message": "John Doe"}
@@ -103,7 +103,7 @@ By default the [Script] operator forwards all events that are not dropped to the
 match event.importance of
   case "high" => emit # this is the same as emit event => "out"
   case "medium" => emit event => "divert"
-  default => drop # deletes the event
+  case _ => drop # deletes the event
 end
 ```
 
@@ -114,7 +114,7 @@ When the result of a match statement isn't needed - as in we use it purely for i
 ```tremor
 match event of
   case %{ tags ~= ["high-priority"]} => let event.importance = "high"
-  default => null
+  case _ => null
 end
 ```
 
@@ -154,7 +154,7 @@ pipeline
     match event of
       case %{key == "blue"} => emit event => "blue"
       case %{key == "green"} => emit event => "green"
-      default => drop
+      case _ => drop
     end
   end;
   create script split_script;
@@ -174,7 +174,7 @@ We generate a random number in a range and based on the outcome, we decide wheth
 # drop 50% of the events
 match random::integer(0, 100) < 50 of
   case true => drop
-  default => null
+  case _ => null
 end
 ```
 
@@ -186,7 +186,7 @@ match event of
   case %{key == "blue"} when random_number < 25 => drop   # drop 25% of blue events
   case %{key == "yellow"} when random_number < 75 => drop # drop 75% of yellow events
   case %{key == "red"} => drop                            # drop 100% of red events
-  default => null                                         # drop 0% of other events
+  case _ => null                                         # drop 0% of other events
 end
 ```
 
@@ -204,7 +204,7 @@ To check if a variable is present, we can rely on the [`present` keyword](./refe
 # matches default case
 match present non_existent_var of
   case true => "is present"
-  default => "not present"
+  case _ => "not present"
 end;
 ```
 
@@ -216,7 +216,7 @@ Using non-existent variables in contexts other than `present` or `absent` will t
 # tests for presence of $key
 match $ of
   case %{present key} => "present"
-  default => "not present"
+  case _ => "not present"
 end;
 ```
 

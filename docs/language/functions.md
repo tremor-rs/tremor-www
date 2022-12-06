@@ -65,7 +65,7 @@ fn sum_(e, es) with
     case l when l > 0 => 
       let a = es[0];
       recur(e + es[0], es[1:l])
-    default => e
+    case _ => e
   end
 end;
 
@@ -89,7 +89,7 @@ argument will be replaced by the result of the extraction.
 ## calculates the fibonaci sequence
 fn fib_(a, b, n) of
   case (a, b, n) when n > 0 => recur(b, a + b, n - 1)
-  default => a
+  case _ => a
 end;
 
 ## calculates the fibonaci sequence

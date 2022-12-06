@@ -56,7 +56,7 @@ pipeline
   where 
     match event of 
       case %{ absent ok, error == args.required_argument } => true
-      default => true
+      case _ => true
     end
   into 
     err;
