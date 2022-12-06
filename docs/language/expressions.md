@@ -477,7 +477,7 @@ Match expressions enable data to be filtered or queried using case-based reasoni
 match <target> of
 case <case-expr> [ <guard> ] => <block>
 ...
-default => <block>
+case _ => <block>
 end
 ```
 
@@ -498,7 +498,7 @@ match store.book of
     let msg = "store.book is an array-like data-structure",
     msg
   case %{} => "store.book is a record-like data-structure"
-  default => "store.book is a scalar data-type"
+  case _ => "store.book is a scalar data-type"
 end
 ```
 
@@ -507,7 +507,7 @@ Find all fiction books in the store:
 ```tremor
 let found = match store.book of
   case fiction = %[ %{ category ~= "fiction" } ] => fiction
-  default => []
+  case _ => []
 end;
 emit found;
 ```
@@ -519,7 +519,7 @@ The simplest form of case expression in match expressions is matching a literal 
 ```tremor
 let example = match 12 of
   case 12 => "matched"
-  default => drop "not possible"
+  case _ => drop "not possible"
 end;
 ```
 
@@ -528,7 +528,7 @@ let a = "this is a";
 let b = " string";
 let example = match a + b of
   case "this is a string" => "matched"
-  default => drop "not possible"
+  case _ => drop "not possible"
 end;
 ```
 
@@ -536,7 +536,7 @@ end;
 let a = [ 1, "this is a string", { "record-field": "field-value" } ];
 match a of
   case a => a
-  default => drop "not possible"
+  case _ => drop "not possible"
 end;
 ```
 
@@ -547,7 +547,7 @@ It is also possible to perform predicate based matching
 ```tremor
 match "this is not base64 encoded" of
   case ~ base64|| => "surprisingly, this is legal base64 data"
-  default => drop "as suspected, this is not base64 encoded"
+  case _ => drop "as suspected, this is not base64 encoded"
 end;
 ```
 
@@ -568,7 +568,7 @@ let sneaky_json = "
 
 match sneaky_json of
   case json = ~ json|| => json
-  default => drop "this is not the json we were looking for"
+  case _ => drop "this is not the json we were looking for"
 end;
 ```
 
@@ -595,7 +595,7 @@ match a of
   case %( 0 ) => "is a zero"
   case %( 0, .. ) => "starts with a zero"
   case %( _, 1, .. ) => "has 1 one at index 1"
-  default => "does not contain zero's"
+  case _ => "does not contain zero's"
 end;
 ```
 
@@ -620,7 +620,7 @@ In addition to a subset match, where the elements of the pattern must be include
 let a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 match a of
   case %[ 0 ] => "contains zero's"
-  default => "does not contain zero's"
+  case _ => "does not contain zero's"
 end;
 ```
 
@@ -630,7 +630,7 @@ Predicate matching against supported micro-formats is also supported in array pa
 let a = [ "snot", "snot badger", "snot snot", "badger badger", "badger" ];
 match a of
   case got = %[ ~re|^(P<hit>snot.*)$| ] => got
-  default => "not snotty at all"
+  case _ => "not snotty at all"
 end;
 ```
 
@@ -653,7 +653,7 @@ We can check for the presence of fields:
 ```tremor
 match { "superhero": "superman", "human": "clark kent" } of
   case %{ present superhero, present human } => "ok"
-  default => "not possible"
+  case _ => "not possible"
 end
 ```
 
@@ -662,7 +662,7 @@ We can check for the absence of fields:
 ```tremor
 match { "superhero": "superman", "human": "clark kent" } of
   case %{ absent superhero, absent human } => "not possible"
-  default => "ok"
+  case _ => "ok"
 end
 ```
 
@@ -672,7 +672,7 @@ We can test the values of fields that are present:
 match { "superhero": "superman", "human": "clark kent" } of
   case %{ superhero == "superman" } => "we are saved! \o/"
   case %{ superhero != "superman" } => "we may be saved! \o/"
-  default => "call 911"
+  case _ => "call 911"
 end;
 ```
 
@@ -682,7 +682,7 @@ We can test for records within records:
 match { "superhero": { "name": "superman" } } of
   case %{ superhero ~= %{ present name } } => "superman is super"
   case %{ superhero ~= %{ absent name } } => "anonymous superhero is anonymous"
-  default => "something bad happened"
+  case _ => "something bad happened"
 end;
 ```
 
@@ -691,7 +691,7 @@ We can also test for records within arrays within records tersely through nested
 ```tremor
 match { "superhero": [ { "name": "batman" }, { "name": "robin" } ] } of
   case id = %{ superhero ~= %[ %{ name ~= re|^(?P<kind>bat.*)$|} ] } => id
-  default => "something bad happened"
+  case _ => "something bad happened"
 end;
 ```
 
@@ -704,7 +704,7 @@ Guard expressions in Match case clauses enable matching data structures to be fu
 ```tremor
 match event of
   case record = %{} when record.log_level == "ERROR" => "error"
-  default => "non-error"
+  case _ => "non-error"
 end
 ```
 
@@ -725,7 +725,7 @@ match event of
     let foo_content = record["foo"],
     let replaced = string::replace(foo_content, "foo", "bar"),
     let record["foo"] = replaced
-  default => null
+  case _ => null
 end
 ```
 
@@ -845,7 +845,7 @@ Examples:
 # check if an event has an allowed category field (string)
 match present state.allowed_categories[event.category] of
   case true => emit event
-  default => drop
+  case _ => drop
 end;
 ```
 
@@ -870,7 +870,7 @@ script
   match type::is_null(state) of
     case true =>
       let state = {"count": 1}
-    default =>
+    case _ =>
       let state.count = state.count + 1
   end;
 

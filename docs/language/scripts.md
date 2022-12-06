@@ -112,7 +112,7 @@ The following example will emit an error message if a required field is missing 
 match event of
   case %{ absent required_field } =>
     emit "'required_field' is missing" => "err"
-  default => null
+  case _ => null
 end;
 
 do_something(event.required_field)
@@ -129,7 +129,7 @@ Example:
 ```tremor
 match event of
   %{ action = "drop" } => drop;
-  default => 
+  case _ => 
     # do something else
 end;
 ```
