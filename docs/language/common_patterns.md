@@ -24,9 +24,8 @@ end;
 In order to append to an array we can use the [`array::push`](../reference/stdlib/std/array#pusharray-element) function
 
 ```tremor
-use std::array;
 # event = {"key": "value", "tags": ["tag1"]}
-let event.tags = array::push(event.tags, "tag2");
+let event.tags = event.tags, + ["tag2"];
 # event = {"key": "value", "tags": ["tag1", "tag2"]}
 ```
 
@@ -128,12 +127,12 @@ use std::type;
 match event of
   case %{field ~= %{}} => emit "event.field is a record"
   case %{field ~= %[]} => emit "event.field is a array"
-  case %{} when type::is_record(event.field) => emit "event.field is a record"
-  case %{} when type::is_array(event.field) => emit "event.field is a array"
-  case %{} when type::is_number(event.field) => emit "event.field is a number (float or integer)"
-  case %{} when type::is_integer(event.field) => emit "event.field is an integer"
-  case %{} when type::is_float(event.field) => emit "event.field is a float"
-  case %{} when type::is_null(event.field) => emit "event.field is null (but set)"
+  case %{present field} when type::is_record(event.field) => emit "event.field is a record"
+  case %{present field} when type::is_array(event.field) => emit "event.field is a array"
+  case %{present field} when type::is_number(event.field) => emit "event.field is a number (float or integer)"
+  case %{present field} when type::is_integer(event.field) => emit "event.field is an integer"
+  case %{present field} when type::is_float(event.field) => emit "event.field is a float"
+  case %{present field} when type::is_null(event.field) => emit "event.field is null (but set)"
   case %{absent field} => emit "event.field is not set"
   # ...
 end
