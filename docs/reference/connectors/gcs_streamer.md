@@ -54,8 +54,7 @@ All of the configuration options are optional.
 ```tremor title="config.troy"
 define flow main
 flow
-    use std::size;
-    use std::time::nanos;
+    use std::{size, time::nanos};
 
     define connector metronome from metronome
     with
@@ -76,7 +75,6 @@ flow
     pipeline
         define script add_meta
         script
-            use std;
             use std::string;
 
             let file_id = event.id - (event.id % 4);

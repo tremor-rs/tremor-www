@@ -14,7 +14,6 @@ The credentials must be provided in a JSON file. The path to the JSON file shoul
 ```tremor title="config.troy"
 define flow gbqtest
 flow
-    use std;
     use std::time::nanos;
     
     define pipeline passthrough
@@ -32,8 +31,8 @@ flow
         codec = "json",
         config = {
             "topic": "projects/xxx/topics/test-topic-a", # required - the identifier of the topic
-            "connect_timeout": std::time::nanos::from_seconds(1), # optional - connection timeout (nanoseconds) - defaults to 10s
-            "request_timeout": std::time::nanos::from_seconds(10), # optional - timeout for each request (nanoseconds) - defaults to 1s 
+            "connect_timeout": nanos::from_seconds(1), # optional - connection timeout (nanoseconds) - defaults to 10s
+            "request_timeout": nanos::from_seconds(10), # optional - timeout for each request (nanoseconds) - defaults to 1s 
             "url":  "https://us-east1-pubsub.googleapis.com" # optional - the endpoint for the PubSub API, defaults to https://pubsub.googleapis.com
         }
     end;
