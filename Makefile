@@ -2,6 +2,7 @@ TREMOR_VSN=main
 REF_DIR=docs/reference
 LANG_REF_DIR=docs/language/reference
 NEXT_LANG_REF_DIR=docs/next/language/reference
+REF_DOCS=codecs extractors operators postprocessors preprocessors scripts stdlib
 
 all: clean tremor-runtime-docs openapi
 
@@ -29,10 +30,11 @@ alex:
 
 tremor-runtime-docs: tremor-runtime-refresh
 	-cd tremor-runtime && make docs
-	-rm -rf $(LANG_REF_DIR) $(REF_DIR)/{codecs,extractors,operators,postprocessors,preprocessors,scripts,stdlib}
-	cp -rf tremor-runtime/docs/language $(LANG_REF_DIR)
-	cp -rf tremor-runtime/docs/{codecs,extractors,operators,postprocessors,preprocessors,scripts,stdlib} $(REF_DIR)
-	cp -r _templates/* docs
+	-rm -rf $(LANG_REF_DIR)
+	-for doc in $(REF_DOCS); do rm -rf $(REF_DIR)/$$doc; done;
+	-cp -r tremor-runtime/docs/language $(LANG_REF_DIR)
+	-for doc in $(REF_DOCS); do cp -r tremor-runtime/docs/$$doc $(REF_DIR); done
+	-cp -r _templates/* docs
 
 
 openapi: tremor-runtime-refresh
@@ -41,7 +43,7 @@ openapi: tremor-runtime-refresh
 
 clean:
 	-rm -rf static/api/edge/openapi.yaml
-	-rm -rf $(REF_DIR)/{codecs,extractors,operators,postprocessors,preprocessors,scripts,stdlib}
+	-for doc in $(REF_DOCS); do rm -rf $(REF_DIR)/$$doc; done;
 	-rm -rf $(LANG_REF_DIR)
 
 touch_version:
