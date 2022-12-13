@@ -7,7 +7,6 @@ REF_DOCS=codecs extractors operators postprocessors preprocessors scripts stdlib
 all: clean tremor-runtime-docs openapi
 
 clean_build: reset all
-	# -rm -rf ../cache/*
 	npm run build
 
 netlify: clean_build openapi
