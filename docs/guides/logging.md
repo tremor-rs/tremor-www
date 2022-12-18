@@ -1,8 +1,167 @@
 ---
 sidebar_position: 2
-draft: true
 ---
-
 # Logging
+We can use system logging to collect logs from other systems. In this guide, we'll see how to use tremor for this.
 
-**DRAFT** This will be hidden outside of dev **DRAFT**
+:::note
+   This example expects that you have some knowledge of tremor or went through the [`basics guide`](basics.md) and [`logging connector`](../reference/connectors/logging.md). We won't explain the concepts covered there again here.
+:::
+
+## Connector
+
+In this tutorial, we will use the connector [`file connector`](../reference/connectors/file.md) from the `tremor::connectors` module.
+
+```tremor
+define flow logging_flow
+flow
+	use tremor::connectors;
+
+define connector read_file from file
+args
+	file = "in"
+with
+	codec = "json-sorted",
+	preprocessors = ["separate"],
+	config = {
+			"path": args.file,
+			"mode": "read"
+	},
+end;
+
+define connector write_file from file
+args
+	file = "out"
+with
+	codec = "json-sorted",
+	postprocessors = ["separate"],
+	config = {
+			"path": args.file,
+			"mode": "truncate"
+	},
+end;
+```
+
+## Pipeline
+
+To redirect logs between systems, Tremor defines its [`own functions`](../reference/stdlib/tremor/logging.md):
+* `logging::info`
+* `logging::trace`
+* `logging::debug`
+* `logging::warn`
+* `logging::error`  
+
+```tremor
+use tremor::pipelines;
+define pipeline logging_pipeline
+into
+	out, err, exit
+pipeline
+	use tremor::logging;
+	use std::string;
+	select match event of
+		case ~re|^[A-Za-z0-9 ]{1,32}+$| => event
+			# If string is alphanumeric+spaces with a length between 1 and 32 chars => keep the line
+		case ~re|^[A-Za-z0-9 ]{33,}$| => [string::substr(event, 0, 32+1), logging::info("String is longer than 32 characters and will be truncated")][0]
+			# If string is alphanumeric+spaces but has a length superior to 32 characters => info + truncate string
+		case ~re|^.*$| => logging::warn("[Malformed or empty string: \"{}\"]", event).`args` # Will output the warn message
+			# If string is anything else => warning + warning message
+		default => ["", logging::error("Not even a string")][0]
+			# If data is not a string => error
+	end
+	from in into out;
+end;
+```
+
+These functions accept var-args and use two kind of formatting **positional formatting** and **named formatting**.  
+
+### Formatting examples
+
+| module + func  | message            | 2nd arg                      | 3rd arg | ...) => formatted string            |
+|----------------|--------------------|------------------------------|---------|-------------------------------------|
+| logging::info( | "hello {id}{pct}", | {"pct": "!", "id": "world"}  |         |    ) => "hello world!"              |
+| logging::info( | "hello {}{}",      | ["world", "!"]               |         |    ) => "hello world!"              |
+| logging::info( | "hello {}",        | "world"                      |         |    ) => "hello world"               |
+| logging::info( | "hello {}{}",      | "world",                     | "!"     |    ) => "hello world!"              |
+| logging::info( | "hello {}{}",      | "world"                      |         |    ) => error: too few args given   |
+| logging::info( | "hello {id}{pct}", | "world",                     | "!"     |    ) => error: named + positional are ambiguous when used simultaneously |
+| logging::info( | "hello {}{}",      | {"pct": "!", "id": "world"}  |         |    ) => error: named + positional are ambiguous when used simultaneously |
+| logging::info( | "hello {}",        | {"pct": "!", "id": "world"}, | ""      |    ) => "hello {pct: !, id: world}" |
+| logging::info( | "hello {}",        | ["world"],                   | ""      |    ) => "hello [world]"             |
+
+### Formatting priority rules
+
+1. The first argument is mandatory, and is of type **string**
+2. Number of arguments
+	* **1 arg** (including **string** message):  
+	No formatting: it must not need any formatting argument
+
+	* **2 args** (including **string** message), then second's type defines the behavior:
+	  - **Dictionnary** | **Hashmap** | **Tremor Object**:  
+	Named formatting: keys of hashmap being used if necessary* (see last point) to map the named spots to format the values, in the **string** message
+	  - **Array** | **List** | **Tremor List**:  
+	Positional formatting: arguments listed within the array are using in the same order to map the unamed spots to format in the **string** message.
+	  - **Anything other** (e.g. **string**, **numbers**, etc.):  
+	Positional formatting: with at most one argument required to be plugged in the **string** message
+
+	* **3+ args** (including **string** message) a.k.a var-args:  
+	Positional formatting
+
+3. Edge-case rules  
+	In case of unmatching number of argument needed and provided:
+	- Ignored trailing args if too many args provided, either via var-args or not (#args provided > #args needed)
+	- Error if not enough args provided (#args provided < #args needed)
+
+4. Forbidden cases
+
+	* **Positional formatting** and **named formatting** are ambiguous when used together, so is will not be allowed as so:
+		- If format spots are named, then **positional formatting** is not allowed (either from var-args or containers: array/list)
+		- If format spots are not named, then **named formatting** is not allowed (from a container: dictionnary/hashmap/object)
+
+
+## Filter
+
+```tremor
+define pipeline filter_logs
+into
+	out, err, exit
+pipeline
+	select match event of
+		case %{origin == "Tremor"} => event # Filtering out system logs
+	end
+	from in into flat_line;
+	select event
+	from flat_line into out;
+end;
+```
+
+## Logging connector & Wiring
+So with all our connectors and pipelines configured, we have to wire up the connector to the metrics pipeline.
+
+```tremor
+# Create logging connectors
+define connector logging from logs;
+create connector logging;
+
+# Create read/write file connectors
+create connector reader from read_file;
+create connector writer from write_file;
+
+# Create exit connectors
+create connector exit from connectors::exit;
+
+# Create pipelines
+create pipeline logging_pipeline;
+create pipeline filter_logs;
+
+# Connections
+connect /connector/reader to /pipeline/logging_pipeline;
+connect /pipeline/logging_pipeline to /connector/exit;
+
+connect /connector/logging to /pipeline/filter_logs;
+connect /pipeline/filter_logs to /connector/writer;
+end;
+```
+# Logging for Opentelemetry
+
+The logging connector can also be used with the [`otel connector`](../reference/connectors/otel.md)
