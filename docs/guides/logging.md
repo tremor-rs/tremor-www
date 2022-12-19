@@ -162,6 +162,131 @@ connect /connector/logging to /pipeline/filter_logs;
 connect /pipeline/filter_logs to /connector/writer;
 end;
 ```
-# Logging for Opentelemetry
+## Integration
+
+### OpenTelemetry
 
 The logging connector can also be used with the [`otel connector`](../reference/connectors/otel.md)
+
+```tremor
+#
+define flow logging_flow
+flow
+  use integration;
+  use tremor::pipelines;
+	use tremor::connectors;
+
+	define connector write_file from file
+		args
+			file = "in.json"
+		with
+			codec = "json-sorted",
+			postprocessors = ["separate"],
+			config = {
+					"path": args.file,
+					"mode": "truncate"
+			},
+	end;
+
+	define pipeline logging_pipeline
+		into
+			out, err, exit
+		pipeline
+			use tremor::logging;
+			select match event of
+						case %{level == "TRACE" } => {"logs":[{"resource":{"attributes":{},"dropped_attributes_count":8},"schema_url":"schema_url","instrumentation_library_logs":[{"instrumentation_library":{"name":"name","version":"v0.1.2"},"schema_url":"schema_url","logs":[{"severity_number":4,"flags":128,"span_id":"6161616161616161","trace_id":"61616161616161616161616161616161","dropped_attributes_count":100,"time_unix_nano":0,"severity_text":event.level,"name":"test","attributes":{},"body":event.`args`}]}]}]}
+						case %{level == "DEBUG" } => {"logs":[{"resource":{"attributes":{},"dropped_attributes_count":8},"schema_url":"schema_url","instrumentation_library_logs":[{"instrumentation_library":{"name":"name","version":"v0.1.2"},"schema_url":"schema_url","logs":[{"severity_number":8,"flags":128,"span_id":"6161616161616161","trace_id":"61616161616161616161616161616161","dropped_attributes_count":100,"time_unix_nano":0,"severity_text":event.level,"name":"test","attributes":{},"body":event.`args`}]}]}]}
+						case %{level == "INFO"  } => {"logs":[{"resource":{"attributes":{},"dropped_attributes_count":8},"schema_url":"schema_url","instrumentation_library_logs":[{"instrumentation_library":{"name":"name","version":"v0.1.2"},"schema_url":"schema_url","logs":[{"severity_number":12,"flags":128,"span_id":"6161616161616161","trace_id":"61616161616161616161616161616161","dropped_attributes_count":100,"time_unix_nano":0,"severity_text":event.level,"name":"test","attributes":{},"body":event.`args`}]}]}]}
+						case %{level == "WARN"  } => {"logs":[{"resource":{"attributes":{},"dropped_attributes_count":8},"schema_url":"schema_url","instrumentation_library_logs":[{"instrumentation_library":{"name":"name","version":"v0.1.2"},"schema_url":"schema_url","logs":[{"severity_number":16,"flags":128,"span_id":"6161616161616161","trace_id":"61616161616161616161616161616161","dropped_attributes_count":100,"time_unix_nano":0,"severity_text":event.level,"name":"test","attributes":{},"body":event.`args`}]}]}]}
+						case %{level == "ERROR" } => {"logs":[{"resource":{"attributes":{},"dropped_attributes_count":8},"schema_url":"schema_url","instrumentation_library_logs":[{"instrumentation_library":{"name":"name","version":"v0.1.2"},"schema_url":"schema_url","logs":[{"severity_number":20,"flags":128,"span_id":"6161616161616161","trace_id":"61616161616161616161616161616161","dropped_attributes_count":100,"time_unix_nano":0,"severity_text":event.level,"name":"test","attributes":{},"body":event.`args`}]}]}]}
+						case _ => "exit"
+					end
+			from in into out;
+			select event
+			from in into exit;
+		end;
+
+	# Instances of connectors to run for this flow
+	create connector writer from write_file;
+	create connector exit from connectors::exit;
+	define connector logging from logs;
+	create connector logging;
+
+	# Instance of pipeline logging to run for this flow
+	create pipeline logging_pipeline;
+
+	#Connections
+	connect /connector/logging to /pipeline/logging_pipeline;
+  connect /pipeline/logging_pipeline to /connector/writer;
+
+end;
+
+define flow server
+flow
+  use integration;
+  use tremor::pipelines;
+  use tremor::connectors;
+
+  define connector otel_server from otel_server
+  with
+    config = {
+      "url": "127.0.0.1:4317",
+    }
+  end;
+	
+	# Instances of connectors to run for this flow
+  create connector data_out from integration::write_file;
+  create connector otels from otel_server;
+	create connector exit from integration::exit;
+  create connector stdio from connectors::console;
+
+  # create pipeline passthrough;
+  create pipeline passthrough from pipelines::passthrough;
+
+  # Connections
+  connect /connector/otels to /pipeline/passthrough;
+  connect /pipeline/passthrough to /connector/stdio;
+  connect /pipeline/passthrough to /connector/data_out;
+	connect /pipeline/passthrough to /connector/exit;
+end;
+
+define flow client
+flow
+  use integration;
+  use tremor::pipelines;
+		use tremor::connectors;
+
+  define connector otel_client from otel_client
+  with
+    config = {
+      "url": "127.0.0.1:4317",
+    },
+    reconnect = {
+      "retry": {
+        "interval_ms": 100,
+        "growth_rate": 2,
+        "max_retries": 3,
+      }
+    }
+  end;
+
+  # Instances of connectors to run for this flow
+  create connector data_in from integration::read_file;
+  create connector otelc from otel_client;
+  create pipeline replay from pipelines::passthrough;
+  
+  # Replay recorded events over otel client to server
+  connect /connector/data_in to /pipeline/replay;
+	connect /pipeline/replay to /connector/otelc;
+end;
+
+deploy flow logging_flow;
+deploy flow server;
+deploy flow client;
+
+```
+
+### ElasticSearch
+
+The logging connector can also be used with the [`elastic connector`](../reference/connectors/elastic.md)
+

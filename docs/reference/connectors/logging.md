@@ -38,8 +38,8 @@ Where:
 | level			| string                    | The type of log                                                             |
 | args			| string                    | The informations message                                                    |
 | origin		| string	                | There are two types of origin `Tremor = user logs` and `Rust = system logs` |
-| file,path,line| string					| 										                                      |
-| line			| int						|                                          									  |
+| file,path		| string					| file and path										                          |
+| line			| int						| line                                  									  |
 
 
 
@@ -69,4 +69,11 @@ flow
 end;
 
 deploy flow logging_flow;
+```
+### Running as service
+The logic can be used as starting point for your own client or service via `tremor -p server run`.
+
+```bash
+$ export TREMOR_PATH=/path/to/tremor-runtime/tremor-script/lib:/path/to/tremor-runtime/tremor-cli/tests/lib
+$ tremor server run config.troy
 ```
