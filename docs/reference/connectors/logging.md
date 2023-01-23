@@ -12,8 +12,7 @@ The `logging` connector collects and forwards of various kind of logs, which can
 We use the standard definition of the logging connector of the standard library and the passthrough
 
 ```tremor
-use tremor::pipelines;
-use tremor::connectors;
+use tremor::{connectors, pipelines};
 
 create connector logging from connectors::logs;
 ...
@@ -50,8 +49,7 @@ Capture and redirect system logs and redirect to standard output
 ```tremor
 define flow logging_flow
 flow
-	use tremor::pipelines;
-	use tremor::connectors;
+	use tremor::{connectors, pipelines};
 
 	# define and create logging connectors
 	define connector logging from logs;

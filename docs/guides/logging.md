@@ -173,8 +173,7 @@ The logging connector can also be used with the [`otel connector`](../reference/
 define flow logging_flow
 flow
   use integration;
-  use tremor::pipelines;
-	use tremor::connectors;
+  use tremor::{connectors, pipelines};
 
 	define connector write_file from file
 		args
@@ -217,66 +216,64 @@ flow
 
 	#Connections
 	connect /connector/logging to /pipeline/logging_pipeline;
-  connect /pipeline/logging_pipeline to /connector/writer;
+	connect /pipeline/logging_pipeline to /connector/writer;
 
 end;
 
 define flow server
 flow
-  use integration;
-  use tremor::pipelines;
-  use tremor::connectors;
+	use integration;
+	use tremor::{connectors, pipelines};
 
-  define connector otel_server from otel_server
-  with
-    config = {
-      "url": "127.0.0.1:4317",
-    }
-  end;
-	
+	define connector otel_server from otel_server
+	with
+	config = {
+		"url": "127.0.0.1:4317",
+	}
+	end;
+  
 	# Instances of connectors to run for this flow
-  create connector data_out from integration::write_file;
-  create connector otels from otel_server;
+	create connector data_out from integration::write_file;
+	create connector otels from otel_server;
 	create connector exit from integration::exit;
-  create connector stdio from connectors::console;
+	create connector stdio from connectors::console;
 
-  # create pipeline passthrough;
-  create pipeline passthrough from pipelines::passthrough;
+	# create pipeline passthrough;
+	create pipeline passthrough from pipelines::passthrough;
 
-  # Connections
-  connect /connector/otels to /pipeline/passthrough;
-  connect /pipeline/passthrough to /connector/stdio;
-  connect /pipeline/passthrough to /connector/data_out;
+	# Connections
+	connect /connector/otels to /pipeline/passthrough;
+	connect /pipeline/passthrough to /connector/stdio;
+	connect /pipeline/passthrough to /connector/data_out;
 	connect /pipeline/passthrough to /connector/exit;
 end;
 
 define flow client
 flow
-  use integration;
-  use tremor::pipelines;
-		use tremor::connectors;
+	use integration;
+	use tremor::{connectors, pipelines};
 
-  define connector otel_client from otel_client
-  with
-    config = {
-      "url": "127.0.0.1:4317",
-    },
-    reconnect = {
-      "retry": {
-        "interval_ms": 100,
-        "growth_rate": 2,
-        "max_retries": 3,
-      }
-    }
-  end;
+	define connector otel_client from otel_client
+	with
+	config = {
+		"url": "127.0.0.1:4317",
+	},
+	reconnect = {
+		"retry": {
+		"interval_ms": 100,
+		"growth_rate": 2,
+		"max_retries": 3,
+		}
+	}
+	end;
 
-  # Instances of connectors to run for this flow
-  create connector data_in from integration::read_file;
-  create connector otelc from otel_client;
-  create pipeline replay from pipelines::passthrough;
-  
-  # Replay recorded events over otel client to server
-  connect /connector/data_in to /pipeline/replay;
+	# Instances of connectors to run for this flow
+	create connector data_in from integration::read_file;
+	create connector otelc from otel_client;
+	create pipeline replay from pipelines::passthrough;
+
+	# Replay recorded events over otel client to server
+	connect /connector/data_in to /pipeline/replay;
 	connect /pipeline/replay to /connector/otelc;
 end;
 
@@ -290,3 +287,135 @@ deploy flow client;
 
 The logging connector can also be used with the [`elastic connector`](../reference/connectors/elastic.md)
 
+```tremor 
+#
+define flow main
+flow
+	use std::time::nanos;
+	use integration;
+	use tremor::{connectors, pipelines};
+
+	define pipeline main
+	pipeline
+	define script process_batch_item
+	script
+		# setting required metadata for elastic
+		let $elastic = {
+		"_index": "1",
+		"action": event.action
+		};
+		let $correlation = event.snot;
+		match event of
+		case %{present doc_id} => let $elastic["_id"] = event.doc_id
+		case _ => null
+		end;
+		event
+	end;
+	create script process_batch_item;
+
+	define operator batch from generic::batch with
+		count = 6
+	end;
+	create operator batch;
+
+
+	select event from in into process_batch_item;
+	select event from process_batch_item into batch;
+	select event from batch into out;
+
+	select event from process_batch_item/err into err;
+	end;
+
+	define pipeline logging_pipeline
+		into
+			out, err, exit
+		pipeline
+			use tremor::logging;
+			select match event of
+						case %{level == "TRACE" } => {"snot": "badger", "action": "update", "doc_id": "badger"}
+						case %{level == "DEBUG" } => {"snot": "badger", "action": "null", "doc_id": "badger"}
+						case %{level == "INFO"  } => {"snot": "badger", "action": "update", "doc_id": "badger"}
+						case %{level == "WARN"  } => {"snot": "badger", "action": "null", "doc_id": "badger"}
+						case %{level == "ERROR" } => {"snot": "badger", "action": "delete", "doc_id": "badger"}
+						case _ => "exit"
+					end
+			from in into out;
+			select event
+			from in into exit;
+		end;
+
+	define pipeline response_handling
+	pipeline
+	select {
+		"action": $elastic.action,
+		"success": $elastic.success,
+		"payload": event.payload,
+		"index": $elastic["_index"],
+		"correlation": $correlation
+	}
+	from in where $elastic.success into out;
+
+	select {
+		"action": $elastic.action,
+		"payload": event.payload,
+		"success": $elastic.success,
+		"index": $elastic["_index"],
+		"correlation": $correlation
+	}
+	from in where not $elastic.success into err;  
+	end;
+
+	define connector elastic from elastic
+	with
+	config = {
+		"nodes": ["http://127.0.0.1:9200/"],
+		"include_payload_in_response": true
+	}
+	end;
+
+	define connector input from cb
+	with
+	config =  {
+		"paths": ["in1.json", "in2.json"],
+		"timeout": nanos::from_seconds(5),
+		"expect_batched": true,
+
+	}
+	end;
+
+	# Instances of connectors to run for this flow
+	create connector errfile from integration::write_file
+	with
+	file = "err.log"
+	end;
+	create connector okfile from integration::write_file
+	with
+	file = "ok.log"
+	end;
+	create connector exit from integration::exit;
+	create connector stdio from connectors::console;
+	create connector elastic;
+	define connector logging from logs;
+	create connector logging;
+
+	# Instance of pipeline to run for this flow
+	create pipeline main;
+	create pipeline response_handling;
+	create pipeline logging_pipeline;
+
+	# Connections
+	connect /connector/logging to /pipeline/logging_pipeline;
+	connect /pipeline/logging_pipeline to /pipeline/main/in;
+	connect /pipeline/main/out to /connector/elastic/in;
+	connect /connector/elastic/out to /pipeline/response_handling/in;
+	connect /pipeline/response_handling/out to /connector/okfile/in;
+	connect /pipeline/response_handling/out to /connector/stdio/in;
+	connect /pipeline/response_handling/exit to /connector/exit/in;
+	connect /connector/elastic/err to /pipeline/response_handling/in;
+	connect /pipeline/response_handling/err to /connector/errfile/in;
+	connect /pipeline/response_handling/err to /connector/stdio/in;
+end;
+
+deploy flow main;
+
+```
