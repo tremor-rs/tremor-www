@@ -17,6 +17,7 @@ Options that are available to all subcommands.
 | `--help`          | `-h`   | switch/flag       | no       | Prints help information                                                                    |
 | `--instance`      | `-i`   | switch/flag       | no       | Instance identifier (default: `tremor`)                                                    |
 | `--logger-config` | `-l`   | `<LOGGER_CONFIG>` | no       | Configuration file for [Log4RS](https://docs.rs/log4rs/latest/log4rs/) ( default: `none` ) |
+| `--pluggable-logging` | `-p`   | `<>` | no       | Configuration for pluggable-logging|
 
 ## Version
 
