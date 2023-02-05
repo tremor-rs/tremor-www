@@ -8,7 +8,7 @@ how to stream data into the system, process this data stream, and produce a
 stream of synthetic events based on the processing of the original stream of
 data.
 
-The example is illustrative and a construction to introduce fundamentals, but it
+The example is illustrative and a construction to introduce fundemanetals, but it
 may be useful as a string point for more complex works.
 
 This guide has a number of progressive steps, each building on the fundamentals

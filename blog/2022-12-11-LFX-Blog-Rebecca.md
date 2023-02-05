@@ -2,6 +2,7 @@
 title: Support for the Pluggable Logging in Tremor
 author: Rebecca ABLI
 author_title: Tremor 2022 Summer Mentee
+author_url: https://github.com/znwar
 tags: ["cncf", "mentorship", "pluggable-logging"]
 draft: false
 description: "Rebecca's Mentorship experience"

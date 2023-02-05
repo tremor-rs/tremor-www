@@ -61,10 +61,10 @@ Now it is time to actually find out, what you just did and what else can be done
 
 ### Where to go from here
 
-The next best place to go from here is to our [guides](../guides/index.md), especially [The Basics Guide](../guides/basics.md), this will teach you how to build applications with tremor and teach you the various concepts.
+The next best place to go from here is to our [guides](../guides/index.md), especially [The Basics Guide](../guides/basics), this will teach you how to build applications with tremor and teach you the various concepts.
 
 
-[The Connectors Reference](../reference/connectors/index.md), along with the other reference material will help you see some of the build in functionality.
+[The Connectors Reference](../reference/connectors), along with the other reference material will help you see some of the build in functionality.
 
 
 [Troy]: ../language
