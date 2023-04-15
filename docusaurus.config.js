@@ -88,16 +88,18 @@ const config = {
             'current': {
               label: 'edge',
               path: 'edge',
+              badge: true,
 
             },
             '0.12': {
               label: '0.12',
               path: '0.12',
+              badge: true,
             },
             '0.11': {
               label: '0.11',
               path: '0.11',
-              banner: 'unmaintained',
+              badge: true,
             },
           },
         },
