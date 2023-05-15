@@ -2,7 +2,7 @@ TREMOR_VSN=main
 REF_DIR=docs/reference
 LANG_REF_DIR=docs/language/reference
 NEXT_LANG_REF_DIR=docs/next/language/reference
-REF_DOCS=codecs extractors operators postprocessors preprocessors scripts stdlib
+REF_DOCS=codecs extractors operators postprocessors preprocessors scripts stdlib connectors
 
 all: clean tremor-runtime-refresh tremor-runtime-docs openapi
 
