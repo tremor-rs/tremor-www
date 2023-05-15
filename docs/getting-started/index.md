@@ -10,7 +10,7 @@ At first we need to get tremor installed somehow.
 
 To install tremor grab a the latest package from [our releases](https://github.com/tremor-rs/tremor-runtime/releases), you can find an `rpm`, `deb` as well as a `tar`-ball there.
 
-Install the right package for your operatoring system. For more detailed information you can look at the [installation](install) section.
+Install the right package for your operating system. For more detailed information you can look at the [installation](install) section.
 
 ### Configuration
 
