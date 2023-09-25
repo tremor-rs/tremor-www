@@ -243,20 +243,22 @@ See also:
 
 List of binary and unary operators in Tremor, ordered by precedence (from low to high):
 
-| Symbol       | Name                                                  | Example                                                 | Types                          |
-|--------------|-------------------------------------------------------|---------------------------------------------------------|--------------------------------|
-| or           | Logical OR                                            | `true or false`                                         | bool                           |
-| and          | Logical AND                                           | `true and false`                                        | bool                           |
-| \|           | Bitwise OR                                            | _Bitwise OR has not been implemented yet_               | -                              |
-| ^            | Bitwise XOR                                           | `42 ^ 42, true ^ true`                                  | integer, bool                  |
-| &            | Bitwise AND                                           | `42 & 0, true & false`                                  | integer, bool                  |
-| ==, !=       | Equality, Inequality                                  | `"snot" != "badger"`                                    | all                            |
-| <, <=, >, >= | Comparison Operators                                  | `42 > 0`                                                | integer, float, string, binary |
-| <<, >>, >>>  | Bitwise shift -- Left, Right(signed), Right(unsigned) | `42 >> 2`                                               | integer                        |
-| +, -         | Addition, Subtraction                                 | `42 + 0`                                                | integer, float, string         |
-| \*, /, %     | Multiplication, Division, Modulus                     | `42 * 1`                                                | integer, float (no modulo)     |
-| +, -         | Unary Plus, Unary Minus                               | `+42`                                                   | integer, float, string         |
-| not , !      | Unary Logical NOT, Unary Bitwise NOT                  | `not false`, _Bitwise NOT has not been implemented yet_ | bool                           |
+| Symbol       | Name                                          | Example                                                 | Types                          | Fold Support |
+|--------------|-----------------------------------------------|---------------------------------------------------------|--------------------------------|--------------|
+| or           | Logical OR                                    | `true or false`                                         | bool                           | no           |
+| and          | Logical AND                                   | `true and false`                                        | bool                           | no           |
+| \|           | Bitwise OR                                    | _Bitwise OR has not been implemented yet_               | -                              | no           |
+| ^            | Bitwise XOR                                   | `42 ^ 42, true ^ true`                                  | integer, bool                  | yes          |
+| &            | Bitwise AND                                   | `42 & 0, true & false`                                  | integer, bool                  | yes          |
+| ==, !=       | Equality, Inequality                          | `"snot" != "badger"`                                    | all                            | no           |
+| <, <=, >, >= | Comparison Operators                          | `42 > 0`                                                | integer, float, string, binary | no           |
+| <<, >>, >>>  | Bitwise shift: Left, Right(signed & unsigned) | `42 >> 2`                                               | integer                        | no           |
+| +            | Addition                                      | `42 + 0`                                                | all                            | yes          |
+| -            | Subtraction                                   | `42 - 0`                                                | integer, float, string         | yes          |
+| \*, /        | Multiplication, Division                      | `42 * 1`                                                | integer, float                 | yes          |
+| %            | Modulus                                       | `42 % 2`                                                | integer                        | yes          |
+| +, -         | Unary Plus, Unary Minus                       | `-42`                                                   | integer, float                 | no           |
+| not , !      | Unary Logical NOT, Unary Bitwise NOT          | `not false`, _Bitwise NOT has not been implemented yet_ | bool                           | no           |
 
 
 :::warning
