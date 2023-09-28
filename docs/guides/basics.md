@@ -292,7 +292,7 @@ To do this we, again define a new file `lib/scripts.tremor`
    The script could be inlined in the pipeline and the pipeline in the flow, but the model we use here creates nicer to manage applications.
 :::
 
-```tremor title="lib/pipeline.tremor"
+```tremor title="lib/scripts.tremor"
 # define our script
 define script punctuate
 script
