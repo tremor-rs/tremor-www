@@ -69,6 +69,22 @@ The flow arguments, defined via the `args` clause, can be provided via the API w
 
 This metadata file is automatically created to contain details on the application, its flows, its dependencies, and the files in the archive. It is not meant to be manually modified or created.
 
+The content of the `app.json` is an implementation detail and **not** a defined interface, it may change at any time without prior notice. It should **not** be edited manually, and no expectations should be had on the content. This extends to it's encoding as JSON and the file itself.
+
+Fort the sake of completeness the initial `app.json` includes the following structure:
+
+```json
+{
+    "name": "example",  # name of the application
+    "sha256": "...",    # sha256 hash of the files in the archive
+    "flows": {          # a list of all the flows defined in the main main.troy
+        "main": {       # name of the flow
+            "args": {}  # arguments of the flow and their default values or `null`
+        }
+    }
+}
+```
+
 #### included libraries
 
 Those libraries are automatically combined in the archive and indexed in the `app.json`. When deployed, they will replace the libraries installed on the node. This means when deploying an application, no node local files are consulted.
