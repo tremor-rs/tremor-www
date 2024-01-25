@@ -57,8 +57,8 @@ We begin our study from the outside, and define a flow called `main`.
 ```tremor
 # Our main flow
 define flow main
-  # ... We define and create connectors and pipelines here
 flow
+  # ... We define and create connectors and pipelines here
 end;
 ```
 ### Connectors
