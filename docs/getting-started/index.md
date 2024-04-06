@@ -2,7 +2,7 @@
 
 Welcome to Tremor!
 
-Allow us to guide you towards a working Tremor installation that should allow you to try tremor on your own and to dive deeper more involved topics.
+Allow us to guide you towards a working Tremor installation that should allow you to try tremor on your own and to dive deeper into more involved topics.
 
 At first we need to get tremor installed somehow.
 
