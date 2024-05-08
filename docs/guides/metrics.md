@@ -23,7 +23,7 @@ This guide introduces the following new concepts.
 
 * codecs
 * Post- and Preprocessors
-* Connector configuraiton
+* Connector configuration
 * pipeline operators
 * streams
 * aggregation
@@ -188,7 +188,7 @@ end;
 deploy flow metrics;
 ```
 
-Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/01_basic) and start it with `docker-compose up`.
+Now with that set you can grab [the entire config from github](__GIT__/../code/metrics/01_basic) and start it with `docker-compose up`.
 
 You can find the chronograf UI at [`http://localhost:8888`](http://localhost:8888).
 
@@ -289,7 +289,7 @@ deploy flow metrics;
 
 ### Running
 
-Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/02_batching) and start it with `docker-compose up`.
+Now with that set you can grab [the entire config from github](__GIT__/../code/metrics/02_batching) and start it with `docker-compose up`.
 
 You can find the chronograf UI at [`http://localhost:8888`](http://localhost:8888).
 
@@ -375,7 +375,7 @@ To aggregate over a time range, we use time-based tumbling windows. We can defin
 
 Once we have defined the windows, we can now use them to aggregate our data. We do this in a new select statement. After the `from` section, we have a square bracket and the window names. This syntax is what we call tilt frames. They're chained windows that will emit based on conditions.
 
-We use the  [`aggr::stats::hdr`](../reference/stdlib/aggr/stats#hdrnumber-array) fimctopm that creates a histogram from the incoming data and outputs the given set of percentiles.
+We use the  [`aggr::stats::hdr`](../reference/stdlib/aggr/stats#hdrnumber-array) function that creates a histogram from the incoming data and outputs the given set of percentiles.
 
 In addition we use the [`aggr::win::first`](../reference/stdlib/aggr/win#first) to get the first timestamp.
 
@@ -431,7 +431,7 @@ into batch;
 
 ### Running
 
-Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/03_aggregation) and start it with `docker-compose up`.
+Now with that set you can grab [the entire config from github](__GIT__/../code/metrics/03_aggregation) and start it with `docker-compose up`.
 
 You can find the chronograf UI at [`http://localhost:8888`](http://localhost:8888).
 
@@ -509,13 +509,13 @@ flow
   define connector metrics from metrics;
   # Create the internal metrics collector
   create connector metrics;
-  # Connect the metrices to the pipeline
+  # Connect the metrics to the pipeline
   connect /connector/metrics to /pipeline/metrics;
   
   #...
 ```
 
-Now with taht set you can grab [the entire config from github](__GIT__/../code/metrics/04_interal) and start it with `docker-compose up`.
+Now with that set you can grab [the entire config from github](__GIT__/../code/metrics/04_interal) and start it with `docker-compose up`.
 
 You can find the chronograf UI at [`http://localhost:8888`](http://localhost:8888).
 
@@ -528,7 +528,7 @@ While this example is written using InfluxDB as a backend, it works equally with
 
 TDengine can quickly replace influx. The only difference is that we need to change the `url` in the `http_client`
 
-A high-level visaulization of TDengine replacing InfluxDB via the Influx API:
+A high-level visualization of TDengine replacing InfluxDB via the Influx API:
 
 ```mermaid
 graph LR
@@ -570,7 +570,7 @@ QuestDB can also replace influx. There are a few differences however as Quest ha
 constraints on column names and does not support the HTTP protocol for Influx Line
 Protocol. We can choose UDP based or TCP based distribution for QuestDB.
 
-A high-level visaulization of QuestDB replacing InfluxDB via the Influx API:
+A high-level visualization of QuestDB replacing InfluxDB via the Influx API:
 
 ```mermaid
 graph LR
