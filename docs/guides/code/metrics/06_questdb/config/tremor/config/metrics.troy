@@ -157,7 +157,7 @@ flow
   create connector console from console;
   create pipeline debug from pipelines::passthrough;
 
-  # Connect the metrices to the pipeline
+  # Connect the metrics to the pipeline
   connect /connector/metrics to /pipeline/metrics;
   # Connect the udp server to the pipeline
   connect /connector/upd_in to /pipeline/metrics;
