@@ -81,7 +81,7 @@ Packet processors take the bytes provided by the codec and transform them as a w
                    └────────────────────────┘
 ```
 
-Pure packet processors take package data as an input and return package-shaped data as an output. An example would be a base64 encoded msgpack event.
+Pure packet processors take package data as an input and return package-shaped data as an output. An example would be the `base64` processor.
 
 #### 'framing' packet processors
 
@@ -93,7 +93,7 @@ Pure packet processors take package data as an input and return package-shaped d
                   └─────────────────────────┘
 ```
 
-Framing packet processors take package data and return new package data, but with framing information, their output can either be treated as streaming or packet data. These packet processors are required for transitioning from one model to another, but they only work in the outbound direction—they have an analougus 'framing' stream processor on the inbound side. An example here would be the `separate` processor delemiting evens by newlines or the `length-prefix` processor.
+Framing packet processors take package data and return new package data, but with framing information, their output can either be treated as streaming or packet data. These packet processors are required for transitioning from one model to another, but they only work in the outbound direction—they have an analougus 'framing' stream processor on the inbound side. An example here would be the `separate` processor delemiting events by newlines or the `length-prefix` processor.
 
 ### stream processors
 
@@ -122,7 +122,7 @@ Stream processors have no notion of events. They operate on a stream of bytes an
                    └─────────────────────────┘
 ```
 
-Framing stream processors take streaming data and subdivide it into framed package data. The result can be treated as packet data or subdivided as stream data. This stream processor is required to transition from one model to another. Still, they only work in the inbound direction - they have an analogous 'framing' packet processor on the outbound side. An example here would be the `separate` processor splitting a stream into evens delimited by newlines, or the `length-prefix` processor that reads the length of the framed event and extracts as many bytes.
+Framing stream processors take streaming data and subdivide it into framed package data. The result can be treated as packet data or subdivided as stream data. This stream processor is required to transition from one model to another. Still, they only work in the inbound direction - they have an analogous 'framing' packet processor on the outbound side. An example here would be the `separate` processor splitting a stream into events delimited by newlines, or the `length-prefix` processor that reads the length of the framed event and extracts as many bytes.
 
 ### changes to codecs
 
