@@ -15,19 +15,19 @@ Tremor `.deb` packages are part of every release.
 Go to our [github release page](https://github.com/tremor-rs/tremor-runtime/releases) and chose a version to download:
 
 ```console
-$ wget https://github.com/tremor-rs/tremor-runtime/releases/download/v0.12.0-rc.2/tremor_0.12.0-rc.2_amd64.deb
+$ wget https://github.com/tremor-rs/tremor-runtime/releases/download/v0.12.4/tremor_0.12.4_amd64.deb
 ```
 
 Install required dependencies:
 
 ```console
-$ sudo apt install libatomic1
+$ sudo apt install libatomic1 pkg-config libssl-dev
 ```
 
 Install Tremor with `dpkg`:
 
 ```
-$ sudo dpkg -i tremor_0.12.0-rc.2_amd64.deb
+$ sudo dpkg -i tremor_0.12.4_amd64.deb
 ```
 
 Start tremor via systemd:
@@ -41,7 +41,7 @@ Check the logs:
 ```
 $ sudo journalctl -u tremor
 ...
-Mai 06 11:55:41 hostname tremor[1051339]: tremor version: 0.12.0-rc.2
+Mai 06 11:55:41 hostname tremor[1051339]: tremor version: 0.12.4
 Mai 06 11:55:41 hostname tremor[1051339]: tremor instance: tremor
 Mai 06 11:55:41 hostname tremor[1051339]: rd_kafka version: 0x000002ff, 1.8.2
 Mai 06 11:55:41 hostname tremor[1051339]: allocator: snmalloc
@@ -63,13 +63,13 @@ Tremor `.rpm` packages are part of every release.
 Go to our [github release page](https://github.com/tremor-rs/tremor-runtime/releases) and chose a version to download:
 
 ```console
-$ wget https://github.com/tremor-rs/tremor-runtime/releases/download/v0.12.0/tremor-0.12.0-0.x86_64.rpm
+$ wget https://github.com/tremor-rs/tremor-runtime/releases/download/v0.12.4/tremor-0.12.4-1.x86_64.rpm
 ```
 
 Install the package (e.g. with `dnf` on Fedora):
 
 ```console
-$ sudo dnf install tremor-0.12.0-0.rc.2.x86_64.rpm
+$ sudo dnf install tremor-0.12.4-1.x86_64.rpm
 ```
 
 `dnf` should resolve all required dependencies. If you don't have a tool at hand to do that for you,
@@ -88,7 +88,7 @@ Check the logs:
 ```
 $ sudo journalctl -u tremor
 ...
-Mai 06 11:59:12 hostname tremor[1051339]: tremor version: 0.12.0-rc.2
+Mai 06 11:59:12 hostname tremor[1051339]: tremor version: 0.12.4
 Mai 06 11:59:12 hostname tremor[1051339]: tremor instance: tremor
 Mai 06 11:59:12 hostname tremor[1051339]: rd_kafka version: 0x000002ff, 1.8.2
 Mai 06 11:59:12 hostname tremor[1051339]: allocator: snmalloc
@@ -121,20 +121,20 @@ For `x86_64` architectures we do release a raw `tremor` binary package as `.tar.
 Go to our [github release page](https://github.com/tremor-rs/tremor-runtime/releases) and chose a version to download:
 
 ```console
-$ wget https://github.com/tremor-rs/tremor-runtime/releases/download/v0.12.0-rc.2/tremor-0.12.0-rc.2-x86_64-unknown-linux-gnu.tar.gz
+$ wget https://github.com/tremor-rs/tremor-runtime/releases/download/v0.12.4/tremor-0.12.4-x86_64-unknown-linux-gnu.tar.gz
 ```
 
 Extract the package to wherever you want (and your access rights allow):
 
 ```console
-$ tar xzf tremor-0.12.0-rc.2-x86_64-unknown-linux-gnu.tar.gz
+$ tar xzf tremor-0.12.4-x86_64-unknown-linux-gnu.tar.gz
 ```
 
 Start tremor from your extracted package:
 
 ```console
-$ tremor-0.12.0-rc.2-x86_64-unknown-linux-gnu/bin/tremor server run
-tremor version: 0.12.0-rc.2
+$ tremor-0.12.4-x86_64-unknown-linux-gnu/bin/tremor server run
+tremor version: 0.12.4
 tremor instance: tremor
 rd_kafka version: 0x000002ff, 1.8.2
 allocator: snmalloc
@@ -145,8 +145,7 @@ Reward yourself with a cake, because you just installed Tremor on your machine! 
 
 ## Docker
 
-We publish our Releases both to [Docker Hub](https://hub.docker.com/r/tremorproject/tremor)
-
+We publish our Releases both to [Docker Hub](https://hub.docker.com/r/tremorproject/tremor) and [Github Container Registry](https://github.com/tremor-rs/tremor-runtime/pkgs/container/tremor-runtime%2Ftremor)
 
 | Container registry | Image name                        |
 |--------------------|-----------------------------------|
@@ -158,11 +157,11 @@ We publish our Releases both to [Docker Hub](https://hub.docker.com/r/tremorproj
 Pull our image from [Docker Hub](https://hub.docker.com/r/tremorproject/tremor):
 
 ```console
-$ docker pull tremorproject/tremor:0.12.0-rc.2
+$ docker pull tremorproject/tremor:0.12.4
 ...
 Digest: sha256:54bae6b1f64c030086bbc1b083daedc8c5d1725093e76b1571744e1fa26505be
-Status: Downloaded newer image for tremorproject/tremor:0.12.0-rc.2
-docker.io/tremorproject/tremor:0.12.0-rc.2
+Status: Downloaded newer image for tremorproject/tremor:0.12.4
+docker.io/tremorproject/tremor:0.12.4
 ```
 
 ### Github Packages
@@ -170,11 +169,11 @@ docker.io/tremorproject/tremor:0.12.0-rc.2
 Pull our image from the [Github Packages Container Registry](https://ghcr.io):
 
 ```console
-$ docker pull ghcr.io/tremor-rs/tremor-runtime/tremor:0.12.0-rc.2
+$ docker pull ghcr.io/tremor-rs/tremor-runtime/tremor:0.12.4
 ...
 Digest: sha256:54bae6b1f64c030086bbc1b083daedc8c5d1725093e76b1571744e1fa26505be
-Status: Downloaded newer image for ghcr.io/tremor-rs/tremor-runtime/tremor:0.12.0-rc.2
-ghcr.io/tremor-rs/tremor-runtime/tremor:0.12.0-rc.2
+Status: Downloaded newer image for ghcr.io/tremor-rs/tremor-runtime/tremor:0.12.4
+ghcr.io/tremor-rs/tremor-runtime/tremor:0.12.4
 ```
 
 ## Build From Source
