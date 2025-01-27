@@ -157,11 +157,11 @@ We publish our Releases both to [Docker Hub](https://hub.docker.com/r/tremorproj
 Pull our image from [Docker Hub](https://hub.docker.com/r/tremorproject/tremor):
 
 ```console
-$ docker pull tremorproject/tremor:0.12.0-rc.2
+$ docker pull tremorproject/tremor:0.12.4
 ...
 Digest: sha256:54bae6b1f64c030086bbc1b083daedc8c5d1725093e76b1571744e1fa26505be
-Status: Downloaded newer image for tremorproject/tremor:0.12.0-rc.2
-docker.io/tremorproject/tremor:0.12.0-rc.2
+Status: Downloaded newer image for tremorproject/tremor:0.12.4
+docker.io/tremorproject/tremor:0.12.4
 ```
 
 ### Github Packages
@@ -169,11 +169,11 @@ docker.io/tremorproject/tremor:0.12.0-rc.2
 Pull our image from the [Github Packages Container Registry](https://ghcr.io):
 
 ```console
-$ docker pull ghcr.io/tremor-rs/tremor-runtime/tremor:0.12.0-rc.2
+$ docker pull ghcr.io/tremor-rs/tremor-runtime/tremor:0.12.4
 ...
 Digest: sha256:54bae6b1f64c030086bbc1b083daedc8c5d1725093e76b1571744e1fa26505be
-Status: Downloaded newer image for ghcr.io/tremor-rs/tremor-runtime/tremor:0.12.0-rc.2
-ghcr.io/tremor-rs/tremor-runtime/tremor:0.12.0-rc.2
+Status: Downloaded newer image for ghcr.io/tremor-rs/tremor-runtime/tremor:0.12.4
+ghcr.io/tremor-rs/tremor-runtime/tremor:0.12.4
 ```
 
 ## Build From Source
