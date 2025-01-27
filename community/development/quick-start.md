@@ -30,7 +30,7 @@ For building Tremor on macOS, you also need to install xcode and the commandline
 
 ### Windows
 
-We recommand using WSL2.
+For Windows, please use WSL and follow the Linux distribution installation steps
 
 ## Additional Libraries
 
