@@ -114,6 +114,10 @@ $ nix-env -iA nixos.tremor-rs
 Be aware that the version on nixpkgs might not always be the latest one, due to the version of rustc being available in nixpkgs.
 :::
 
+### Windows
+
+For Windows, please use WSL and follow the appropriate installation instructions described above for your specific Linux distribution.
+
 ### Pre-compiled Binary
 
 For `x86_64` architectures we do release a raw `tremor` binary package as `.tar.gz` that is also part of every Release.
