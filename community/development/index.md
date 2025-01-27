@@ -20,10 +20,9 @@ As a user, even without writing code there are a number of ways to contribute to
 
 ### Feature Requests
 
-Please file an [Enhancement request](https://github.com/tremor-rs/tremor-runtime/issues/new?&labels=enhancement&template=enhancement_request.md) to request a change to the way that Tremor works, or an addition to what it is capable of. Depending on the size, complexity or impact you may be asked to provide a [RFC](/rfc) for the request.
+Please file an [Enhancement request](https://github.com/tremor-rs/tremor-runtime/issues/new?&labels=enhancement&template=enhancement_request.md) to request a change to the way that Tremor works, or an addition to what it is capable of. Depending on the size, complexity or impact you may be asked to provide an [RFC](/rfc) for the request.
 
 ### Bug Reports
-
 
 While bugs are unfortunate, they're a reality in software. We can't fix what we don't know about, so please report liberally. If you're not sure if something is a bug or not, feel free to file a bug anyway.
 
@@ -67,7 +66,7 @@ $ RUST_BACKTRACE=1 tremor ...
 
 ### The Build System
 
-For info on how to configure and build the project, please see [the tremor build guide](./quick-start). This guide contains info for contributions to the project and the standard facilities. It also lists some
+For info on how to configure and build the project, please see [the tremor build guide](https://www.tremor.rs/community/development/quick-start). This guide contains info for contributions to the project and the standard facilities. It also lists some
 really useful commands to the build system, which could save you a lot of time.
 
 ### Pull Requests
